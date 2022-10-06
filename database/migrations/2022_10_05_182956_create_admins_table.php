@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('nim');
             $table->string('email');
-            $table->char('position_id', 5);
+            $table->integer('position_id');
             $table->string('position');
             $table->char('department_id', 5);
             $table->string('department');
