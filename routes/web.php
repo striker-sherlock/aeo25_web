@@ -1,9 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +31,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+
+//Sponsors
+
+Route::resource('sponsors', SponsorController::class);
+Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
