@@ -35,3 +35,4 @@ Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('d
 //Sponsors
 
 Route::resource('sponsors', SponsorController::class);
+Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
