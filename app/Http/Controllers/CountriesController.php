@@ -28,7 +28,7 @@ class CountriesController extends Controller
 
         ]);
         
-        Campus::create([
+        Countries::create([
             'created_by'=>"qwerty",
             'name'=>$request->name,
         ]);
@@ -56,7 +56,7 @@ class CountriesController extends Controller
             'name'=>'required|string',
         ]);
         
-        $campus->update([
+        $country->update([
             'updated_by'=>"asdefg",
             'name'=>$request->name,
         ]);
