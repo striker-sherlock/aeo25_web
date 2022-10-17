@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MediaPartnerController;
-use App\Models\MediaPartner;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\MediaPartnerController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,14 +31,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
 });
 
-//Dashboard
-Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+
+
+//Sponsors
+
+Route::resource('sponsors', SponsorController::class);
+Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
 
 //Media Partner
 Route::resource('media-partners', MediaPartnerController::class)->except('show');
 Route::get('media-partners/{media_partner}/update-visibility',[MediaPartnerController::class,'updateVisibility'])->name('media-partners.update-visibility');
 Route::get('/media-partners/manage', [MediaPartnerController::class, 'manage'])->name('media-partners.manage');
-Route::get('/campaigns/manage', [CampaignController::class, 'manage'])->name('campaigns.manage');
-
 
 
