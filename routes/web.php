@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MediaPartnerController;
+use App\Models\MediaPartner;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +31,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+
+//Media Partner
+Route::resource('media-partners', MediaPartnerController::class)->except('show');
+Route::get('media-partners/{media_partner}/update-visibility',[MediaPartnerController::class,'updateVisibility'])->name('media-partners.update-visibility');
+Route::get('/media-partners/manage', [MediaPartnerController::class, 'manage'])->name('media-partners.manage');
+Route::get('/campaigns/manage', [CampaignController::class, 'manage'])->name('campaigns.manage');
+
+
+
