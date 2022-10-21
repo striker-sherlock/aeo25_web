@@ -20,13 +20,6 @@ class MediaPartnerController extends Controller
         return view('media-partners.create');
     }
 
-    public function manage()
-    {
-        return view('media-partners.manage', [
-            'media_partners' => MediaPartner::All(),
-        ]);
-    }
-
 
     public function store(Request $request)
     {
@@ -35,9 +28,16 @@ class MediaPartnerController extends Controller
             'logo' => 'required|image|max:1999|mimes:jpg,png,jpeg',
         ]);
 
+              //proses rename file 
+              $name = $request->name;
+              $newName = str_replace(' ', '-', $name);
+              $newName = preg_replace('/[^A-Za-z0-9\-]/', '', $newName);
+              $newName = str_replace('-', '_', $newName);
+              $current = time();
+
         if ($request->hasFile('logo')) {
             $extension = $request->file('logo')->getClientOriginalExtension();
-            $file_name = $request->name . '.' . $extension;
+            $file_name =$newName. '_'. $current. '_logo.' .$extension;
             $path = $request->file('logo')->storeAs('public/logo/media-partner', $file_name);
         };
 
@@ -48,7 +48,7 @@ class MediaPartnerController extends Controller
             'is_showed' => true
         ]);
 
-        return redirect()->route('media-partners.manage');
+        return redirect()->route('media-partners.index')->with('success', 'Data Successfully Inserted');
     }
 
 
@@ -78,7 +78,7 @@ class MediaPartnerController extends Controller
             'updated_by' => 'admin'
         ]);
 
-        return redirect()->route('media-partners.manage');
+        return redirect()->route('media-partners.index')->with('success', 'Data Successfully Updated');
     }
 
 
@@ -86,7 +86,7 @@ class MediaPartnerController extends Controller
     public function destroy(MediaPartner $mediaPartner)
     {
         $mediaPartner->delete();
-        return redirect()->back();
+        return redirect()->route('media-partners.index')->with('Success', 'Data Successfully Deleted');
     }
 
     public function updateVisibility(MediaPartner $mediaPartner)
@@ -97,6 +97,8 @@ class MediaPartnerController extends Controller
             'updated_by' => "admin",
         ]);
 
-        return redirect()->route('media-partners.manage');
+        return redirect()->route('media-partners.index');
     }
+
+  
 }

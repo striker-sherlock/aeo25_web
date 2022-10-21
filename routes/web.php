@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MediaPartnerController;
 
 /*
@@ -41,6 +42,8 @@ Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, '
 //Media Partner
 Route::resource('media-partners', MediaPartnerController::class)->except('show');
 Route::get('media-partners/{media_partner}/update-visibility',[MediaPartnerController::class,'updateVisibility'])->name('media-partners.update-visibility');
-Route::get('/media-partners/manage', [MediaPartnerController::class, 'manage'])->name('media-partners.manage');
+
+//Inventory
+Route::resource('inventories', InventoryController::class)->except('show');
 
 
