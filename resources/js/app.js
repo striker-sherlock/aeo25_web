@@ -3,17 +3,10 @@ import "../sass/app.scss";
 import * as bootstrap from "bootstrap";
 
 
-require("datatables.net-bs4/js/dataTables.bootstrap4");
 
-//Data tables
-$(document).ready(function(){
-    $("#dataTables").DataTable();
-})
+const burgerButton = document.querySelector('.burgerButton');
+const sidebar = document.querySelector('#sidebar');
 
-$(document).ready(function(){
-    $("#trashed").DataTable();
-})
-
-$(document).ready(function(){
-    $(".dataTables").DataTable();
+burgerButton.addEventListener('click',function(){
+    sidebar.classList.toggle('switch')
 })

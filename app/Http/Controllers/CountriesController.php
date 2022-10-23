@@ -25,7 +25,6 @@ class CountriesController extends Controller
     {
         $request->validate([
             'name'=>'required|string',
-
         ]);
         
         Countries::create([

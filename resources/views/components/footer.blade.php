@@ -59,8 +59,6 @@
                         </div>
                     </section>
                 </div>
-
-
             </div>
         </section>
 {{-- LOGO SECTION --}}

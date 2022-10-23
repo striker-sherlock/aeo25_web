@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\FlightRegistrationController;
+use App\Http\Controllers\FlightTicketController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -34,3 +37,20 @@ Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('d
 
 //Countries
 Route::resource('countries', CountriesController::class);
+
+//Sponsors
+Route::resource('sponsors', SponsorController::class);
+Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
+
+//Flight Registrations
+Route::controller(FlightRegistrationController::class)->prefix('flight-registrations')->name('flight-registrations.')->group(function() {
+    Route::post('{flightRegistrations}/store', 'store')->name('store');
+});
+Route::resource('flight-registrations', FlightRegistrationController::class);
+
+//Flight Tickets
+Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name('flight-tickets.')->group(function() {
+    Route::get('{flightTickets}/restore', 'restore')->name('restore');
+    Route::delete('{flightTickets}/delete', 'delete')->name('delete');
+});
+Route::resource('flight-tickets', FlightTicketController::class);
