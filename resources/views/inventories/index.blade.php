@@ -8,7 +8,7 @@
                         <i class="fa fa-plus" aria-hidden="true"></i> Add New Item
                     </a>
 
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="inventoryTable">
                     <thead class="table-info">
                       <tr>
                         <th class="align-middle text-center">ID</th>

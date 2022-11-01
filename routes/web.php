@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\InstitutionContactController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MediaPartnerController;
 
@@ -35,7 +36,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
 //Sponsors
-
 Route::resource('sponsors', SponsorController::class);
 Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
 
@@ -46,4 +46,6 @@ Route::get('media-partners/{media_partner}/update-visibility',[MediaPartnerContr
 //Inventory
 Route::resource('inventories', InventoryController::class)->except('show');
 
+// Insititution Contact
+Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy']);
 

@@ -9,6 +9,8 @@ import "bootstrap";
 import $ from 'jquery'
 window.$ = $;
 
+import 'datatables.net'
+
 
 
 
