@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\SlotRegistrationController;
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,8 @@ use App\Http\Controllers\SlotRegistrationController;
 Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::resource('faqs', FaqController::class);
+Route::resource('lost-and-found', LostAndFoundController::class);
 
 //Route Admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -45,3 +47,4 @@ Route::post('/slot-registrations/reject', [SlotRegistrationController::class, 'r
 
 
 Route::get('/slot-registrations/cancel/{competitionSlot}', [SlotRegistrationController::class, 'cancel'])->name('slot-registrations.cancel');
+Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');

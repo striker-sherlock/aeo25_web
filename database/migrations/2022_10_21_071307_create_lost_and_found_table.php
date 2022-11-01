@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sponsors', function (Blueprint $table) {
+        Schema::create('lost_and_found', function (Blueprint $table) {
             $table->string('created_by');
             $table->timestamp('created_at')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->id();
-            $table->string('name');
-            $table->string('logo');
-            $table->boolean('is_showed') -> default(1);
+            $table->string('item_name');
+            $table->string('found_in');
+            $table->string('picture');
+            $table->boolean('is_claimed');
+            $table->string('claimed_by')->nullable();
         });
     }
 
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sponsors');
+        Schema::dropIfExists('lost_and_found');
     }
 };
