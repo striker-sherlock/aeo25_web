@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SlotRegistrationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +18,7 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -33,6 +34,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 
 //Sponsors
-
 Route::resource('sponsors', SponsorController::class);
 Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
+
+//slot registration
+Route::resource('slot-registrations',SlotRegistrationController::class);
+Route::get('/slot-registrations/confirm/{competitionSlot}', [SlotRegistrationController::class, 'confirm'])->name('slot-registrations.confirm');
+
+Route::post('/slot-registrations/reject', [SlotRegistrationController::class, 'reject'])->name('slot-registrations.reject');
+
+
+Route::get('/slot-registrations/cancel/{competitionSlot}', [SlotRegistrationController::class, 'cancel'])->name('slot-registrations.cancel');

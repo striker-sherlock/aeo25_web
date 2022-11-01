@@ -29,6 +29,7 @@ class User extends Authenticatable
         'institution_type',
         'institution_logo',
         'password',
+        'created_by',
     ];
 
     /**

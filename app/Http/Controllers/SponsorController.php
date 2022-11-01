@@ -22,6 +22,7 @@ class SponsorController extends Controller
 
     public function updateVisibility(Sponsors $sponsor){
         $sponsor->update([
+            'updated_by' => 'admin',
             'is_showed' =>  !$sponsor->is_showed
         ]);
         return redirect()->route('sponsors.index');
@@ -44,24 +45,32 @@ class SponsorController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'nama' => 'required|string',
             'logo' => 'required|image|mimes:jpg,jpeg,png|max:1999',
             'is_showed' => 'required'
         ]);
 
-        if ($request->hasFile('logo')){
-            $extension  =$request->file("logo")->getClientOriginalExtension();
-            $fileName = $request->nama.'.'.$extension;
+        // ubah nama file 
+
+        $sponsor= $request->nama;
+        $fileName = str_replace(' ', '-', $sponsor);
+        $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
+        $fileName = str_replace('-', '_', $fileName);
+        $current = time();
+
+        if($request->hasFile('logo')){
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            $file_name = $fileName.'_'.$current.'.'.$extension;
             $path = $request->file("logo")->storeAs("public/sponsor/logo",$fileName);
         }
+        
 
         Sponsors::create([
             // 'created_by' => Auth::user()->name,
             'created_by' => 'Admin',
             'name' => $request->nama,
-            'logo' => $fileName,
+            'logo' => $file_name,
             'is_showed' => $request->is_showed,
         ]);
 
@@ -107,18 +116,27 @@ class SponsorController extends Controller
             'is_showed' => 'required'
         ]);
     
+        
+        
+ 
         if ($request->hasFile('logo_new')){
-            $extension  =$request->file("logo_new")->getClientOriginalExtension();
-            $fileName = $request->nama.'.'.$extension;
-            $path = $request->file("logo_new")->storeAs("public/sponsor/logo",$fileName);
+            $sponsor= $request->nama;
+            $fileName = str_replace(' ', '-', $sponsor);
+            $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
+            $fileName = str_replace('-', '_', $fileName);
+            $current = time();
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            $file_name = $fileName.'_'.$current.'.'.$extension;
+            $path = $request->file("logo")->storeAs("public/sponsor/logo",$fileName);
         }
         else{
-            $fileName = $request->logo_old;
+            $file_name = $request->logo_old;
         }
 
         $sponsor->update([
+            'updated_by' => 'admin',
             'name' => $request->nama,
-            'logo' => $fileName,
+            'logo' => $file_name,
             'is_showed' => $request->is_showed,
         ]);
         return redirect()->route('sponsors.index');

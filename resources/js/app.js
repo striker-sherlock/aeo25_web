@@ -10,3 +10,5 @@ const sidebar = document.querySelector('#sidebar');
 burgerButton.addEventListener('click',function(){
     sidebar.classList.toggle('switch')
 })
+
+ 

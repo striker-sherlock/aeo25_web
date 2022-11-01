@@ -1,4 +1,4 @@
-
+{{-- 
 <nav>
     <div class="sidebar switch" id="sidebar">
         <div class="sidebar-content p-3">
@@ -90,4 +90,4 @@
     </div>
 </nav>
 
-
+ --}}
