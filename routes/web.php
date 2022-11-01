@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\LostAndFoundController;
+use App\Http\Controllers\InstitutionContactController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\MediaPartnerController;
 use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,5 +31,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
 });
 
-//Dashboard
-Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+
+
+//Sponsors
+Route::resource('sponsors', SponsorController::class);
+Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
+
+//Media Partner
+Route::resource('media-partners', MediaPartnerController::class)->except('show');
+Route::get('media-partners/{media_partner}/update-visibility',[MediaPartnerController::class,'updateVisibility'])->name('media-partners.update-visibility');
+
+//Inventory
+Route::resource('inventories', InventoryController::class)->except('show');
+
+// Insititution Contact
+Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy']);
+
