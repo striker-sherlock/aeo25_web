@@ -10,7 +10,7 @@
                   <h6> Edit Item</h6>
                   <form method="POST" action="{{ route('inventories.update', $inventory->id) }}" enctype="multipart/form-data">   
                       @csrf
-                      <div class="mb-3">
+                      <div class="mb-3"> 
                         <label for="item_name" class="">Item Name</label>
                         <input type="text" class="form-control" value="{{ $inventory->item_name }}" name="item_name" >
                       </div>

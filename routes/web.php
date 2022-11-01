@@ -1,14 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SponsorController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\InstitutionContactController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\MediaPartnerController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +21,8 @@ use App\Http\Controllers\MediaPartnerController;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::resource('faqs', FaqController::class);
+Route::resource('lost-and-found', LostAndFoundController::class);
 
 //Route Admin
 Route::prefix('admin')->name('admin.')->group(function () {
