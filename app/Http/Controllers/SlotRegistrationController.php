@@ -12,11 +12,9 @@ use Illuminate\Support\Facades\Mail;
 
 class SlotRegistrationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index()
     {
         //data table jangan lupa

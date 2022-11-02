@@ -47,7 +47,7 @@
                     @foreach ($pending as $competition)
                         <tr>
                             <th>{{$competition->competition->name}}</th>
-                            <th>{{$competition->user->institution_name}}</th>
+                            {{-- <th>{{$competition->user->institution_name}}</th> --}}
                             <th>{{$competition->user->pic_name}}</th>
                             <th>{{$competition->user->pic_phone_number}}</th>
                             <th>{{$competition->created_at}}</th>

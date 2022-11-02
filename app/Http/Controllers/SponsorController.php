@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sponsors;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +15,7 @@ class SponsorController extends Controller
     public function index()
     {
         return view('sponsors.index',[
-            'sponsors' => Sponsors::all(),
+            'sponsors' => Sponsor::all(),
         ]);
     }
 
@@ -65,7 +65,7 @@ class SponsorController extends Controller
         }
         
 
-        Sponsors::create([
+        Sponsor::create([
             // 'created_by' => Auth::user()->name,
             'created_by' => 'Admin',
             'name' => $request->nama,
@@ -93,7 +93,7 @@ class SponsorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit( Sponsors $sponsor)
+    public function edit( Sponsor $sponsor)
     {
         return view('sponsors.edit',[ 
             'sponsor' => $sponsor
@@ -148,7 +148,7 @@ class SponsorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sponsors $sponsor)
+    public function destroy(Sponsor $sponsor)
     {
         $sponsor->delete();
         return redirect()->route('sponsors.index');
