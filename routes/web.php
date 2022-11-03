@@ -2,9 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\InstitutionContactController;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\MediaPartnerController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\FlightRegistrationController;
+use App\Http\Controllers\FlightTicketController;
+use App\Http\Controllers\FacilitiesController;
+use App\Http\Controllers\AccomodationsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -31,19 +35,31 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
 });
 
+//Countries
+Route::resource('countries', CountriesController::class);
 
+//Countries
+Route::resource('countries', CountriesController::class);
 
 //Sponsors
 Route::resource('sponsors', SponsorController::class);
 Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
 
-//Media Partner
-Route::resource('media-partners', MediaPartnerController::class)->except('show');
-Route::get('media-partners/{media_partner}/update-visibility',[MediaPartnerController::class,'updateVisibility'])->name('media-partners.update-visibility');
+//Flight Registrations
+Route::controller(FlightRegistrationController::class)->prefix('flight-registrations')->name('flight-registrations.')->group(function() {
+    Route::post('{flightRegistrations}/store', 'store')->name('store');
+});
+Route::resource('flight-registrations', FlightRegistrationController::class);
 
-//Inventory
-Route::resource('inventories', InventoryController::class)->except('show');
+//Flight Tickets
+Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name('flight-tickets.')->group(function() {
+    Route::get('{flightTickets}/restore', 'restore')->name('restore');
+    Route::delete('{flightTickets}/delete', 'delete')->name('delete');
+});
+Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy']]);
 
-// Insititution Contact
-Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy']);
+//Facilities
+Route::resource('facilities', FacilitiesController::class);
 
+//Accomodations
+Route::resource('accomodations', AccomodationsController::class);
