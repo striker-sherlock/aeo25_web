@@ -7,6 +7,8 @@ use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FlightRegistrationController;
 use App\Http\Controllers\FlightTicketController;
+use App\Http\Controllers\FacilitiesController;
+use App\Http\Controllers\AccomodationsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -53,4 +55,10 @@ Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name
     Route::get('{flightTickets}/restore', 'restore')->name('restore');
     Route::delete('{flightTickets}/delete', 'delete')->name('delete');
 });
-Route::resource('flight-tickets', FlightTicketController::class);
+Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy']]);
+
+//Facilities
+Route::resource('facilities', FacilitiesController::class);
+
+//Facilities
+Route::resource('accomodations', AccomodationsController::class);

@@ -43,9 +43,17 @@ class FlightTicketController extends Controller
         if($files = $request->file('ticket_proof_new')){
             $i = 1;
             foreach($files as $file){
+                $flight_airline = $request->airline_name;
+                $flight_schedule = $request->flight_time;
+                $flight_type = $request->type;
                 $extension = strtolower($file->getClientOriginalExtension());
-                $file_name = 'new_'.$i.'.'.$extension;
-                $upload_path = 'public/images/flight-registrations';
+                $newName = $flight_type.'_'.$flight_airline.'_'.$flight_schedule;
+                $newName = str_replace(' ', '-', $newName);
+                $newName = str_replace('/[^A-Za-z0-9\-]/', '', $newName);
+                $newName = str_replace('-', '_', $newName);
+                $current = time();
+                $file_name = $newName.'_'.$current.'_'.$i.'.'.$extension;
+                $upload_path = 'public/images/flight-tickets';
                 // $image_url = $upload_path.$file_name;
                 $file->move($upload_path, $file_name);
                 $ticket_proof_new[] = $file_name;

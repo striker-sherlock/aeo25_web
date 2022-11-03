@@ -3,8 +3,8 @@
         <div class="card border-0 overflow-hidden shadow rounded-20 mb-5" style="border-radius:20px">
             <div class="card-header bg-secondary"></div>
             <div class="card-body my-3">
-              <h1>Edit Flight Registration</h1>
-                <form action="{{route('flight-registrations.update', $flight->id)}}" method="POST" enctype="multipart/form-data">
+              <h1>Edit Flight Ticket</h1>
+                <form action="{{route('flight-tickets.update', $flight->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('UPDATE')
                     <div class="form-group mb-3">

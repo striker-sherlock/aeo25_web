@@ -25,9 +25,11 @@
                           </a>
                           <form method="POST" action="{{ route('countries.destroy', $country->id) }}">
                             @method('DELETE')
-                            <button class = "btn btn-sm btn-danger" onclick="return confirm('confirm')" title="Delete">
-                              <i class="fa fa-close"></i>
-                            </button>
+                            <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{ $country->id }}">
+                              <button class = "btn btn-sm btn-danger" title="Delete">
+                                <i class="fa fa-close"></i>
+                              </button>
+                            </a>
                             @csrf
                           </form>
                         </td>
@@ -39,4 +41,37 @@
       </div>
   </div>
 </div>
+@foreach ($countries as $country)
+    <div class="modal fade p-5" id="modal{{$country->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content rounded-20 border-0 shadow p-5">
+                <div class="modal-headers mb-4">
+                <span class="fa-stack fa-4x d-block mx-auto" >
+                    <i class="fas fa-circle fa-stack-2x text-danger"></i>
+                    <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
+                </span>
+                </div>
+                <div class="body mb-3">
+                <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$country->name}}</span>" </h1>
+                </div>
+                <div class="footer">
+                    <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-secondary w-100"  data-bs-dismiss="modal">Back</button>
+                    </div>
+                    <div class="col">
+                        <form method="POST" action="{{route('countries.destroy',$country->id)}}">
+                        <input type="hidden" name="_method" value = "DELETE">
+                            <button class="btn btn-danger rounded w-100" title="delete">
+                            Delete
+                            </button>
+                        @csrf
+                        </form>
+                    </div>
+                    </div>  
+                </div>
+            </div>
+        </div>  
+    </div>  
+    @endforeach
 </x-admin>
