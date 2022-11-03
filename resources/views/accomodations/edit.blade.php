@@ -19,7 +19,8 @@
 
                   <div class="form-group mb-3">
                     <label for="picture" class="col-form-label">Picture <span class="text-danger">*</span></label>
-                    <input type="file" class="form-control" id="picture" name="picture" required accept="image/png, image/jpeg, image/jpg">
+                    <input type="text" class="form-control" name="picture_old" value="{{ $accomodation->picture }}" hidden>
+                    <input type="file" class="form-control" id="picture_new" name="picture_new" required accept="image/png, image/jpeg, image/jpg">
                     <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg max: 3MB</small>
                   </div>
 
