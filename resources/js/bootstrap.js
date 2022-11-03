@@ -6,6 +6,12 @@ window.Popper = Popper;
 
 import "bootstrap";
 
+import $ from "jquery";
+window.$ = $;
+
+import DataTable from "datatables.net";
+window.DataTable = DataTable;
+DataTable($);
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
