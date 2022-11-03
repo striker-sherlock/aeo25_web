@@ -25,7 +25,8 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Route::resource('faqs', FaqController::class);
+Route::resource('lost-and-found', LostAndFoundController::class);
 
 //Route Admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -34,8 +35,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
 });
 
-//Dashboard
-Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+//Countries
+Route::resource('countries', CountriesController::class);
 
 //Countries
 Route::resource('countries', CountriesController::class);
@@ -60,5 +61,5 @@ Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['inde
 //Facilities
 Route::resource('facilities', FacilitiesController::class);
 
-//Facilities
+//Accomodations
 Route::resource('accomodations', AccomodationsController::class);

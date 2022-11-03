@@ -4,7 +4,7 @@
             <div class="card-header bg-secondary"></div>
             <div class="card-body my-3">
                 <h1>Sponsors List</h1>
-                <a href="{{route('sponsors.create')}}" class="btn btn-success rounded btn-sm my-3">Add New Sponsor</a>
+                <a href="{{route('sponsors.create')}}" class="btn btn-outline rounded btn-sm my-3">Add New Sponsor</a>
                 <table class="table table-striped table-bordered">
                     <thead class="text-center">
                       <tr>

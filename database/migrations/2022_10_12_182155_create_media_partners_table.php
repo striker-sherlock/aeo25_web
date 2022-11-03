@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sponsors', function (Blueprint $table) {
+        Schema::create('media_partners', function (Blueprint $table) {
+          
+            $table->id();
             $table->string('created_by');
             $table->timestamp('created_at')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->id();
             $table->string('name');
             $table->string('logo');
-            $table->boolean('is_showed') -> default(1);
+            $table->string('is_showed')->default(true);
+       
+            
         });
     }
 
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sponsors');
+        Schema::dropIfExists('media_partners');
     }
 };

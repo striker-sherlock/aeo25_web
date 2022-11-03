@@ -22,22 +22,12 @@ class SponsorController extends Controller
         ]);
         return redirect()->route('sponsors.index');
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         return view('sponsors.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // dd($request->all());
@@ -64,23 +54,11 @@ class SponsorController extends Controller
         return redirect()->route('sponsors.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit( Sponsors $sponsor)
     {
         return view('sponsors.edit',[ 
@@ -88,13 +66,6 @@ class SponsorController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Sponsors $sponsor){
         $request->validate([
             'nama' => 'required|string',
@@ -118,15 +89,8 @@ class SponsorController extends Controller
             'is_showed' => $request->is_showed,
         ]);
         return redirect()->route('sponsors.index');
-
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Sponsors $sponsor)
     {
         $sponsor->delete();
