@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 class SponsorController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        // $this->middleware('auth');
+        // $this->middleware('IsAdmin');
     }
 
     public function index()
@@ -51,7 +52,6 @@ class SponsorController extends Controller
         ]);
 
         // ubah nama file 
-
         $sponsor= $request->nama;
         $fileName = str_replace(' ', '-', $sponsor);
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);

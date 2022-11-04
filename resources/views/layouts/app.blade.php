@@ -12,6 +12,8 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <script src="{{ mix('js/app.js') }}"></script>
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])

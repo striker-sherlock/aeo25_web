@@ -1,12 +1,8 @@
 @component('mail::message')
-# Introduction
+ Hello,
+{!!$reason!!}
 
-The body of your message.
-
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
 
 Thanks,<br>
-{{ config('app.name') }}
+The 2023 Asian English Olympics
 @endcomponent

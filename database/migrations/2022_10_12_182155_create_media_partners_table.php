@@ -13,17 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('competition_slot_details ', function (Blueprint $table) {
+        Schema::create('media_partners', function (Blueprint $table) {
+          
+            $table->id();
             $table->string('created_by');
-            $table->timestamp('created_at');
+            $table->timestamp('created_at')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->id();
-            $table->integer('pic_id');
-            $table->string('competition_id');
-            $table->integer('quantity');
-            $table->integer('payment_id');
-            $table->integer('is_confirmed');
+            $table->string('name');
+            $table->string('logo');
+            $table->string('is_showed')->default(true);
+       
+            
         });
     }
 
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('competition_slots');
+        Schema::dropIfExists('media_partners');
     }
 };

@@ -13,4 +13,6 @@ class PaymentProvider extends Model
     protected $primaryKey = 'id';
     protected $timestamp = true;
     protected $guarded = [];
+
+    public function 
 }

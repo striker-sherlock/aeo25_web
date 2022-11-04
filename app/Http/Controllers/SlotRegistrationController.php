@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Mail\ConfirmedSlotMail;
 use App\Models\CompetitionSlot;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 class SlotRegistrationController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->only(['create']);
     }
     public function index()
     {
@@ -55,16 +56,12 @@ class SlotRegistrationController extends Controller
         for ($i= 0; $i < $len; $i++){
             if ($request->quantity[$i] != '0'){
                 CompetitionSlot::create([
-                    // 'created_by' => Auth::user()->name,
-                    // 'pic_id' => Auth::user()->id,
+                    'created_by' => Auth::user()->pic_name,
+                    'pic_id' => Auth::user()->id,
                     'created_at' => Carbon::now(),
-                    'pic_id' => 1,
-                    'created_by' => '[competition-slot]-PIC',
                     'competition_id' => $request->compet_id[$i],
                     'quantity' => $request->quantity[$i],
                     'is_confirmed' => 0,
-                    'payment_id' => 1,
-                   
                 ]);
             }
         }

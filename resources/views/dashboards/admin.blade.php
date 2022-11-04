@@ -1,29 +1,9 @@
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Admin Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
-<x-admin>
+ <x-admin>
     {{-- <section id="admin-dashboard"> --}}
         <div class="container">
             <div class="header">
-                <h2 class="fw-bold ">Welcome back, Geren </h2>
-                <h5 class="text-muted">Position and Division</h5>
+                <h2 class="fw-bold ">Welcome back, {{Auth::guard('admin')->user()->name}} </h2>
+                <h5 class="text-muted">{{Auth::guard('admin')->user()->position}} of {{Auth::guard('admin')->user()->department}} </h5>
                 <hr>
             </div>
             <div class="info">

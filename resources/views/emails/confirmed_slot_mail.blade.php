@@ -1,12 +1,10 @@
 @component('mail::message')
-# Introduction
+CONGRATUALATIONS
 
-The body of your message.
+{{$body}}
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+ 
 
 Thanks,<br>
-{{ config('app.name') }}
+The 2023 Asian English Olympics
 @endcomponent

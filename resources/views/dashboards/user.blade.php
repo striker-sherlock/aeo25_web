@@ -21,7 +21,7 @@
             <div class="col">
                 <x-card>
                     <h4 class="">Unpaid Slots</h4>
-                    <a href=" " class="btn btn-outline-success rounded-pill btn-sm">Make Payment</a>
+                    <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-success rounded-pill btn-sm">Make Payment</a>
                     <h1 class="display-2 fw-bold">2</h1>
                     
                      

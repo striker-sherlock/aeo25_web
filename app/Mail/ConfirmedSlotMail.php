@@ -16,9 +16,9 @@ class ConfirmedSlotMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($confirmedMail)
     {
-        //
+        $this->confirmedMail= $confirmedMail;
     }
 
     /**
@@ -30,8 +30,9 @@ class ConfirmedSlotMail extends Mailable
     {
         return $this->markdown('emails.confirmed_slot_mail')
         ->with([
-            // 'subject' => $this->confirmedMail['subject'],
-            // 'body' => $this->confirmedMail['body'],
-        ]);
+            'name' => $this->confirmedMail['name'],
+            'body' => $this->confirmedMail['body'],
+            'url' => $this->confirmedMail['url'],
+        ])->subject($this->confirmedMail['subject']);
     }
 }

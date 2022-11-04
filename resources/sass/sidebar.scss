@@ -31,24 +31,18 @@
         -o-transition: all 0.3s ease;
         transition: all 0.3s ease;
     }
-    
-    // .page-wrapper {
-    //     height: 100vh;
-    // }
-    /* !Override .sidebar-wrapper { left: -18rem } */
-    .page-wrapper.toggled .sidebar-wrapper {
+ 
+    .page-wrapper .toggled .sidebar-wrapper {
         left: 0rem;
     }
     
     @media screen and (min-width: 992px) {
-        .page-wrapper.toggled .page-content{
+        .page-wrapper .toggled .page-content{
             padding-left: 256px;
-            // opacity: 0.3;
         }
     
-        .footer-wrapper.toggled .footer-content{
+        .footer-wrapper .toggled .footer-content{
             padding-left: 256px;
-            // transition: 0.2s;
         }
     }
     

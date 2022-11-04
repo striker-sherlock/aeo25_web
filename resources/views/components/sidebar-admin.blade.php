@@ -485,26 +485,7 @@
                         </li>
                     @endif
                 @endif
-                {{-- <li class="side-item">
-                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="#">
-                        <span class="fa-stack fa-sm ms-n1">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-list-ul fa-stack-1x text-dark-silver"></i>
-                        </span>
-                        <span class="ms-2">Company Contact</span>
-                    </a>
-                </li> --}}
-                {{-- <li class="side-item">
-                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="#">
-                        <span class="fa-stack fa-sm ms-n1">
-                            <i class="fas fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-list-ul fa-stack-1x text-dark-silver"></i>
-                        </span>
-                        <span class="ms-2">MedPar Contact</span>
-                    </a>
-                </li> --}}
+               
                 @if ((Auth::guard('admin')->user()->div_init == "MIT" && Auth::guard('admin')->user()->level < 5) || Auth::guard('admin')->user()->div_init == "MITR" || Auth::guard('admin')->user()->div_init == "SC")
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Website Configuration</span>

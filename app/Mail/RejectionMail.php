@@ -34,6 +34,6 @@ class RejectionMail extends Mailable
         ->with([
             'name' => $this->rejectMail['name'],
             'reason' => $this->rejectMail['reason'],
-        ]) -> subject($this->sprejectMail['subject']);
+        ]) -> subject($this->rejectMail['subject']);
     }
 }
