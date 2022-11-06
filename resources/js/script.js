@@ -4,6 +4,8 @@ $(document).ready(function () {
     var myModal = new bootstrap.Modal(document.getElementById('alert'));
     myModal.show();
 
+    $(".modal").modal("show");
+
     // Insert Datatables
     $('InstitutionContactTable').dataTable({
         processing: true,

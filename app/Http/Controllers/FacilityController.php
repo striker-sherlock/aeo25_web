@@ -1,19 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Facilities;
+
+use App\Models\AccommodationFacility;
+use App\Models\Facility;
 use Illuminate\Http\Request;
 
-class FacilitiesController extends Controller
+class FacilityController extends Controller
 {
-
     public function index()
     {
         return view('facilities.index', [
-            'facilities' => Facilities::all()
+            'facilities' => Facility::all()
         ]);
     }
-
 
     public function create()
     {
@@ -26,7 +26,7 @@ class FacilitiesController extends Controller
             'name'=>'required|string',
         ]);
         
-        Facilities::create([
+        Facility::create([
             'created_by'=>"qwerty",
             'name'=>$request->name,
         ]);
@@ -38,14 +38,14 @@ class FacilitiesController extends Controller
         //
     }
 
-    public function edit(Facilities $facility)
+    public function edit(Facility $facility)
     {
         return view('facilities.edit', [
             'facility' => $facility,
         ]);
     }
 
-    public function update(Request $request, Facilities $facility)
+    public function update(Request $request, Facility $facility)
     {
         $request->validate([
             'name'=>'required|string',
@@ -58,10 +58,15 @@ class FacilitiesController extends Controller
         return redirect()->route('facilities.index');// ->with('success','Succesfuly Added');
     }
 
-
-    public function destroy(Facilities $facility)
+    public function destroy(Facility $facility)
     {
+        $accommodationFacilities = AccommodationFacility::where('facility_id', $facility->id)->get();
+
+        foreach ($accommodationFacilities as $accommFacility) {
+            $accommFacility->delete(); //! Delete semua accommodation facility yg facilitynya mau di delete
+        }
+
         $facility->delete();
-        return redirect()->back();//->with('success','Succesfuly Deleted');    }
+        return redirect()->back();//->with('success','Succesfuly Deleted');
     }
 }
