@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Accomodation extends Model
+class Accommodation extends Model
 {
     use HasFactory;
-    protected $table = 'accomodations';
+
+    protected $table = 'accommodations';
     protected $primaryKey = 'id';
     protected $timestamp = 'true';
     protected $guarded = [];
-    
-    public function accomodationFacility(){
-        return $this->hasMany(AccomodationFacility::class);
+
+    public function facilities ()
+    {
+        return $this->hasMany(AccommodationFacility::class);
     }
 }

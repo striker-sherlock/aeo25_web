@@ -6,33 +6,22 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('accomodations', function (Blueprint $table) {
-            $table->id();
+        Schema::create('accommodation_facilities', function (Blueprint $table) {
             $table->string('created_by')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->string('room_type');
-            $table->string('picture');
-            $table->integer('max_guests');
-
+            $table->id();
+            $table->integer('accommodation_id');
+            $table->integer('facility_id');
+            $table->boolean('is_available');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('accomodations');
+        Schema::dropIfExists('accommodation_facilities');
     }
 };

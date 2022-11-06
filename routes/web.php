@@ -7,24 +7,13 @@ use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FlightRegistrationController;
 use App\Http\Controllers\FlightTicketController;
-use App\Http\Controllers\FacilitiesController;
-use App\Http\Controllers\AccomodationsController;
+use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InstitutionContactController;
 use App\Http\Controllers\EnvironmentController;
 
 use Illuminate\Support\Facades\Auth;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Auth::routes();
 
@@ -63,15 +52,15 @@ Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name
 Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy']]);
 
 //Facilities
-Route::resource('facilities', FacilitiesController::class);
+Route::resource('facilities', FacilityController::class);
 
-//Accomodations
-Route::resource('accomodations', AccomodationsController::class);
+//Accommodation
+Route::resource('accommodations', AccommodationController::class);
 
 //Inventory
 Route::resource('inventories', InventoryController::class)->except('show');
 
-// Insititution Contact
+// Institution Contact
 Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy']);
 
 // Environments

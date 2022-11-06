@@ -121,11 +121,3 @@
         </div>
     </div>
 @endif
-
-<script>
-    $('.modal').modal({
-        backdrop: 'static', 
-        keyboard: false
-    })
-</script>
-
