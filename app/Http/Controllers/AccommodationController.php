@@ -70,7 +70,8 @@ class AccommodationController extends Controller
     {
         return view('accommodations.edit', [
             'accommodation' => $accommodation,
-            'accommodationFacilities' => AccommodationFacility::where('accommodation_id', $accommodation->id)->orderBy('is_available', 'DESC')->get()
+            'accommodationFacilities' => AccommodationFacility::where('accommodation_id', $accommodation->id)->orderBy('is_available', 'DESC')->get(),
+            'facilities' => Facility::orderBy('name')->get()
         ]);
     }
 
@@ -104,14 +105,24 @@ class AccommodationController extends Controller
             'picture' => $fileName,
         ]);
 
-        $accommodationFacilities = AccommodationFacility::where('accommodation_id', $accommodation->id)->get();
-
-        foreach($accommodationFacilities as $accommFacility){
-            $accommFacility->update([
-                'updated_by' => 'admin',
-                'is_available' => (request($accommFacility->facility_id) ? 1 : 0)
-            ]);
+        if($accommodation->facilities->count() > 0) {
+            foreach($accommodation->facilities as $accommFacility){
+                $accommFacility->update([
+                    'updated_by' => 'admin',
+                    'is_available' => (request($accommFacility->facility_id) ? 1 : 0)
+                ]);
+            }
+        }else {
+            foreach (Facility::all() as $facility) {
+                AccommodationFacility::create([
+                    'created_by' => "admin",
+                    'accommodation_id' => $accommodation->id,
+                    'facility_id' => $facility->id,
+                    'is_available' => (request($facility->id) ? 1 : 0)
+                ]);
+            }
         }
+
 
         return redirect()->route('accommodations.index');// ->with('success','Succesfuly Added');
     }

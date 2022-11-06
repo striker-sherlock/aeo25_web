@@ -23,7 +23,7 @@
                             <td>{{$accommodation->max_guests}}</td>
                             <td class="d-flex justify-content-center">
                               <div class="btn-toolbar flex-nowrap justify-content-center" role="toolbar">
-                                <button type="button" class ="btn btn-sm btn-info text-white me-2" data-bs-target="#viewFacility-{{ $accommodation->id }}" data-bs-toggle="modal" title="View Facilities">
+                                <button type="button" class ="btn btn-sm btn-info text-white me-2 {{ ($accommodation->facilities->count() > 0) ? '' : 'disabled' }}" data-bs-target="#viewFacility-{{ $accommodation->id }}" data-bs-toggle="modal" title="View Facilities">
                                   <i class="fa fa-eye"></i>
                                 </button>
                                 <a class ="btn btn-sm btn-primary me-2" href="{{ route('accommodations.edit', $accommodation->id) }}" title="Edit">

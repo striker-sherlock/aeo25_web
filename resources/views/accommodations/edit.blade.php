@@ -21,26 +21,44 @@
                     <input type="file" class="form-control" id="picture_new" name="picture_new" accept="image/png, image/jpeg, image/jpg">
                     <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg max: 3MB</small>
                   </div>
-                  @foreach ($accommodationFacilities as $accommFacility)
-                    <div class="my-3">
-                      <div class="form-check my-2">
-                        </label>
-                        <input class="form-check-input" type="checkbox"
-                            value="1" name="{{ $accommFacility->facility_id }}"
-                            id="{{ $accommFacility->id }}" {{ ($accommFacility->is_available) ? 'checked' : '' }}>
-                        <label class="form-check-label" for="{{ $accommFacility->id }}">
-                            {{ $accommFacility->facility->name }}
-                        </label>
+                  @if ($accommodationFacilities->count() > 0)
+                    @foreach ($accommodationFacilities as $accommFacility)
+                      <div class="my-3">
+                        <div class="form-check my-2">
+                          </label>
+                          <input class="form-check-input" type="checkbox"
+                              value="1" name="{{ $accommFacility->facility_id }}"
+                              id="{{ $accommFacility->id }}" {{ ($accommFacility->is_available) ? 'checked' : '' }}>
+                          <label class="form-check-label" for="{{ $accommFacility->id }}">
+                              {{ $accommFacility->facility->name }}
+                          </label>
+                        </div>
                       </div>
-                    </div>
-                  @endforeach
+                    @endforeach
+                  @else
+                    @if ($facilities->count() > 0)
+                      @foreach ($facilities as $facility)
+                        <div class="my-3">
+                          <div class="form-check my-2">
+                            </label>
+                            <input class="form-check-input" type="checkbox"
+                                value="1" name="{{ $facility->id }}"
+                                id="{{ $facility->id }}" {{ old($facility->id) == 1 ? 'checked' : '' }}>
+                            <label class="form-check-label" for="{{ $facility->id }}">
+                                {{ $facility->name }}
+                            </label>
+                          </div>
+                        </div>
+                      @endforeach
+                    @endif
+                  @endif
                   <div class="row my-4">
                     <div class="col">
                       <a href="{{ route("accommodations.index") }}" class="btn btn-outline-secondary btn-rounded mb-3 w-100">Back</a>
                     </div>
                     <div class="col">
                       @method('PUT')
-                      <button type="submit" class="btn btn-outline-primary btn-rounded w-100 ">Create</button>
+                      <button type="submit" class="btn btn-outline-primary btn-rounded w-100 ">Update</button>
                     </div>
                   </div>
               </form>
