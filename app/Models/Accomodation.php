@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Accomodations extends Model
+class Accomodation extends Model
 {
     use HasFactory;
     protected $table = 'accomodations';
@@ -13,7 +13,7 @@ class Accomodations extends Model
     protected $timestamp = 'true';
     protected $guarded = [];
     
-    public function accomodationsFacilities(){
-        return $this->belongsTo(AccomodationsFacilities::class);
+    public function accomodationFacility(){
+        return $this->hasMany(AccomodationFacility::class);
     }
 }

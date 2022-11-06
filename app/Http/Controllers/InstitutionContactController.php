@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 
 class InstitutionContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('institution-contacts.index', [
@@ -20,11 +15,7 @@ class InstitutionContactController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         return view('institution-contacts.create', [
@@ -32,12 +23,6 @@ class InstitutionContactController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validateInstitutionContact($request);
@@ -70,13 +55,6 @@ class InstitutionContactController extends Controller
         return view('institution-contacts.edit', ['institution_contact' => $institutionContact]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, InstitutionContact  $institutionContact)
     {
         $this->validateInstitutionContact($request);

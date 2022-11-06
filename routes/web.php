@@ -9,6 +9,10 @@ use App\Http\Controllers\FlightRegistrationController;
 use App\Http\Controllers\FlightTicketController;
 use App\Http\Controllers\FacilitiesController;
 use App\Http\Controllers\AccomodationsController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\InstitutionContactController;
+use App\Http\Controllers\EnvironmentController;
+
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -63,3 +67,13 @@ Route::resource('facilities', FacilitiesController::class);
 
 //Accomodations
 Route::resource('accomodations', AccomodationsController::class);
+
+//Inventory
+Route::resource('inventories', InventoryController::class)->except('show');
+
+// Insititution Contact
+Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy']);
+
+// Environments
+Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
+Route::resource('environments', EnvironmentController::class);

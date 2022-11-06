@@ -5,7 +5,10 @@ use App\Models\Countries;
 use Illuminate\Http\Request;
 
 class CountriesController extends Controller
-{
+    {
+    // public function __construct(){
+    //     $this->middleware('IsShowed:ENV001')->only(['index']);
+    // }
 
     public function index()
     {

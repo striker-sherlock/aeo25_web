@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Accomodations;
+use App\Models\Accomodation;
 use Illuminate\Http\Request;
 
 class AccomodationsController extends Controller
@@ -10,7 +10,7 @@ class AccomodationsController extends Controller
     public function index()
     {
         return view('accomodations.index', [
-            'accomodations' =>Accomodations::all()
+            'accomodations' =>Accomodation::all()
         ]);
     }
 
@@ -21,11 +21,11 @@ class AccomodationsController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $request->validate([
             'room_type'=>'required|string',
             'max_guests'=>'required|integer',
-            'picture'=>'required|string',
+            'picture'=>'required|image',
         ]);
         
         $name = $request->room_type;
@@ -40,7 +40,7 @@ class AccomodationsController extends Controller
             $path = $request->file('picture')->storeAs('public/images/accomodations', $file_name);
         }
 
-        Accomodations::create([
+        Accomodation::create([
             'created_by'=>"qwerty",
             'room_type'=>$request->room_type,
             'max_guests'=>$request->max_guests,
@@ -54,19 +54,19 @@ class AccomodationsController extends Controller
         
     }
 
-    public function edit(Accomodations $accomodation)
+    public function edit(Accomodation $accomodation)
     {
         return view('accomodations.edit', [
             'accomodation' => $accomodation,
         ]);
     }
 
-    public function update(Request $request, Accomodations $accomodation)
+    public function update(Request $request, Accomodation $accomodation)
     {
         $request->validate([
             'room_type'=>'required|string',
             'max_guests'=>'required|int',
-            'picture_new'=>'required|string',
+            'picture_new'=>'required|image',
         ]);
         
         $name = $request->room_type;
@@ -93,7 +93,7 @@ class AccomodationsController extends Controller
         return redirect()->route('accomodations.index');// ->with('success','Succesfuly Added');
     }
 
-    public function destroy(Accomodations $accomodation)
+    public function destroy(Accomodation $accomodation)
     {
         $accomodation->delete();
         return redirect()->back();
