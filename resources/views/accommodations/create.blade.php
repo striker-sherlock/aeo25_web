@@ -21,19 +21,21 @@
                   </div>
                   <label for="check_facilities" class="mb-2">Put a check mark on the facilities that <b>will be included</b> in the room. <span class="text-danger">*</span>
                   </label>
-                  @foreach ($facilities as $facility)
-                    <div class="my-3">
-                      <div class="form-check my-2">
-                        </label>
-                        <input class="form-check-input" type="checkbox"
-                            value="1" name="{{ $facility->id }}"
-                            id="{{ $facility->id }}" {{ old($facility->id) == 1 ? 'checked' : '' }}>
-                        <label class="form-check-label" for="{{ $facility->id }}">
-                            {{ $facility->name }}
-                        </label>
+                  @if ($facilities->count() > 0)
+                    @foreach ($facilities as $facility)
+                      <div class="my-3">
+                        <div class="form-check my-2">
+                          </label>
+                          <input class="form-check-input" type="checkbox"
+                              value="1" name="{{ $facility->id }}"
+                              id="{{ $facility->id }}" {{ old($facility->id) == 1 ? 'checked' : '' }}>
+                          <label class="form-check-label" for="{{ $facility->id }}">
+                              {{ $facility->name }}
+                          </label>
+                        </div>
                       </div>
-                    </div>
-                  @endforeach
+                    @endforeach
+                  @endif
                   <div class="row my-4">
                     <div class="col">
                       <a href="{{ route("accommodations.index") }}" class="btn btn-outline-secondary btn-rounded mb-3 w-100">Back</a>
