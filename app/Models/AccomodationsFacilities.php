@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Accomodations;
-use App\Models\Facilities;
+use App\Models\Accomodation;
+use App\Models\Facility;
 
-class AccomodationsFacilities extends Model
+class AccomodationFacility extends Model
 {
     use HasFactory;
     protected $table = 'accomodations_facilities';
@@ -15,11 +15,11 @@ class AccomodationsFacilities extends Model
     protected $timestamp = 'true';
     protected $guarded = [];
 
-    public function accomodations(){
-        return $this->hasMany(Accomodations::class);
+    public function accomodation(){
+        return $this->belongsTo(Accomodation::class);
     }
 
-    public function facilities(){
-        return $this->hasMany(Facilities::class);
+    public function facility(){
+        return $this->belongsTo(Facility::class);
     }
 }

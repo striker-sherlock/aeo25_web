@@ -11,6 +11,10 @@ import "datatables.net";
 import DataTable from "datatables.net";
 window.DataTable = DataTable;
 DataTable($);
+
+$(document).ready(function(){
+    $('#dataTables').DataTable();
+});
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

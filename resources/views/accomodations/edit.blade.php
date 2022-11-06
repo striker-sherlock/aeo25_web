@@ -4,12 +4,12 @@
           <div class="card-header bg-secondary"></div>
           <div class="card-body my-3">
             <h1>Edit Accomodation</h1>
-              <form action="{{ route('accomodations.update', $accomodation->id) }}" method="POST" enctype="multipart/form-data">
+              <form method="POST" action="{{ route('accomodations.update', $accomodation->id) }}" enctype="multipart/form-data">
                 @csrf
-                {{-- @method('UPDATE') --}}
+                @method('UPDATE')
                 <div class="form-group mb-3">
                     <label class="col-form-label" for="room_type">Room Type<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="room_type" id="room_type" placeholder="Enter Type" value="{{ $accomodation->name }}">
+                    <input type="text" class="form-control" name="room_type" id="room_type" placeholder="Enter Type" value="{{ $accomodation->room_type }}">
                   </div>
 
                   <div class="form-group mb-3">
@@ -29,10 +29,11 @@
                       <a href="{{ route("accomodations.index") }}" class="btn btn-outline-secondary btn-rounded mb-3 w-100">Back</a>
                     </div>
                     <div class="col">
+                      @method('PUT')
                       <button type="submit" class="btn btn-outline-primary btn-rounded w-100 ">Create</button>
                     </div>
                   </div>
-                  </div>
+                </div>
               </form>
   </x-admin>
   

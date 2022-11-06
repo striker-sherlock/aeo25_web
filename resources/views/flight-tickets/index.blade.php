@@ -5,9 +5,10 @@
         <a href="{{ route('flight-registrations.create') }}" class="btn btn-primary btn-rounded mb-3">Create Flight Registration</a>
           <div class="table-responsive py-2">
             <table class="table table-sm table-striped table-bordered no-footer" id="dataTables">
-              <thead class="thead-light">
+              <thead class="table-info">
                 <tr>
                   <th class="align-middle text-center">ID</th>
+                  <th class="align-middle text-center">Type</th>
                   <th class="align-middle text-center">Airline Name</th>
                   <th class="align-middle text-center">Flight Time</th>
                   <th class="align-middle text-center">Action</th>
@@ -17,6 +18,7 @@
                   @foreach ($flights as $flight)
                     <tr class="align-middle text-center">
                       <td>{{$flight->id}}</td>
+                      <td>{{$flight->type}}</td>
                       <td>{{$flight->airline_name}}</td>
                       <td>{{date("F j, Y G:i ", strtotime($flight->flight_time))}}</td>
                       <td class="d-flex justify-content-center">
