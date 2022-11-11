@@ -37,14 +37,9 @@ class SponsorController extends Controller
         return view('sponsors.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'nama' => 'required|string',
             'logo' => 'required|image|mimes:jpg,jpeg,png|max:1999',
@@ -60,8 +55,8 @@ class SponsorController extends Controller
 
         if($request->hasFile('logo')){
             $extension = $request->file('logo')->getClientOriginalExtension();
-            $file_name = $fileName.'_'.$current.'.'.$extension;
-            $path = $request->file("logo")->storeAs("public/sponsor/logo",$fileName);
+            $fixedName = $fileName.'_'.$current.'.'.$extension;
+            $path = $request->file("logo")->storeAs("public/sponsor/logo",$fixedName);
         }
         
 
@@ -69,44 +64,25 @@ class SponsorController extends Controller
             // 'created_by' => Auth::user()->name,
             'created_by' => 'Admin',
             'name' => $request->nama,
-            'logo' => $file_name,
+            'logo' => $fixedName,
             'is_showed' => $request->is_showed,
         ]);
 
         return redirect()->route('sponsors.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit( Sponsor $sponsor)
+    public function edit( Sponsors $sponsor)
     {
         return view('sponsors.edit',[ 
             'sponsor' => $sponsor
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Sponsors $sponsor){
         $request->validate([
             'nama' => 'required|string',
@@ -114,28 +90,26 @@ class SponsorController extends Controller
             'logo_old' => 'required|string',
             'is_showed' => 'required'
         ]);
-    
-        
-        
  
+        $sponsor= $request->nama;
+        $fileName = str_replace(' ', '-', $sponsor);
+        $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
+        $fileName = str_replace('-', '_', $fileName);
+        $current = time();
+
         if ($request->hasFile('logo_new')){
-            $sponsor= $request->nama;
-            $fileName = str_replace(' ', '-', $sponsor);
-            $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
-            $fileName = str_replace('-', '_', $fileName);
-            $current = time();
             $extension = $request->file('logo')->getClientOriginalExtension();
-            $file_name = $fileName.'_'.$current.'.'.$extension;
-            $path = $request->file("logo")->storeAs("public/sponsor/logo",$fileName);
+            $fixedName = $fileName.'_'.$current.'.'.$extension;
+            $path = $request->file("logo")->storeAs("public/sponsor/logo",$fixedName);
         }
         else{
-            $file_name = $request->logo_old;
+            $fixedName = $request->logo_old;
         }
 
         $sponsor->update([
             'updated_by' => 'admin',
             'name' => $request->nama,
-            'logo' => $file_name,
+            'logo' => $fixedName,
             'is_showed' => $request->is_showed,
         ]);
         return redirect()->route('sponsors.index');

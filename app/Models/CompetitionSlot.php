@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Competition;
 use App\Models\CompetitionPayment;
+use App\Models\CompetitionParticipant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -27,8 +28,9 @@ class CompetitionSlot extends Model
     public function payment(){
         return $this-> belongsTo(CompetitionPayment::class);
     }
-
-
-
-  
+    
+    public function competitionParticipants(){
+        return $this-> hasMany(CompetitionParticipant::class);
+    }
+ 
 }

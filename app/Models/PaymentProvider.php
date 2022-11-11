@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\CompetitionPayment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PaymentProvider extends Model
 {
@@ -14,5 +15,8 @@ class PaymentProvider extends Model
     protected $timestamp = true;
     protected $guarded = [];
 
-    public function 
+    public function payment(){
+        return $this-> belongsTo(CompetitionPayment::class,'payment_id','id');
+    }
+ 
 }

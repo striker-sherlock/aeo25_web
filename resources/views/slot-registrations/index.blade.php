@@ -1,4 +1,5 @@
 <x-admin>
+ 
     <div class="container mt-4">
         <x-card>
             <h1 class="mb-3">Registration Summary</h1>
@@ -13,7 +14,7 @@
                 </thead>
                 <tbody class="text-center">
                     <tr>
-                        <th>Remaining Slot</th>
+                        <th>Remaining Slot (Temp)</th>
                         @foreach ($competitions as $competition)
                             <th> {{$competition->temp_quota}}</th>
                         @endforeach
@@ -21,48 +22,52 @@
                     <tr>
                         <th>Registered Slot</th>
                         @foreach ($competitions as $competition)
-                            <th> {{$competition->fixed_quota -$competition->temp_quota }}</th>
+                            <th> {{$registeredSlot[$competition->name]}}</th>
                         @endforeach
                     </tr>
                 </tbody>
             </table>
         </x-card>
+        
         {{-- pending --}}
         <x-card>
-            <h1 class="mb-3 text-warning">Pending</h1>
-            <table class="table table-striped table-bordered">
-                <thead class="text-center">
-                  <tr>
-                    <th scope="col">Competition Field</th>
-                    <th scope="col">Institution Name</th>
-                    <th scope="col">PIC Name</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Registered At</th>
-                    <th scope="col">Total Slot</th>
-                    <th scope="col">Action </th>
-                    
-                  </tr>
-                </thead>
-                <tbody class="text-center">
-                    @foreach ($pending as $competition)
-                        <tr>
-                            <th>{{$competition->competition->name}}</th>
-                            <th>{{$competition->user->institution_name}}</th>
-                            <th>{{$competition->user->pic_name}}</th>
-                            <th>{{$competition->user->pic_phone_number}}</th>
-                            <th>{{$competition->created_at}}</th>
-                            <th>{{$competition->quantity}}</th>
-                            <th class="m-auto"> 
-                                <div class="d-flex  justify-content-center">
-                                    <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-success btn-sm me-2">C</a>
-                                    <a  class="btn btn-danger btn-sm me-2" data-bs-toggle="modal" data-bs-target="#reason{{$competition->id}}">R</a>
-                                    
-                                </div>
-                            </th>
-                        </tr>
-                    @endforeach
-                </tbody>
-              </table>
+            <h1 class="mb-3 text-warning">Pending Slot Registration</h1>
+            @if ($pending->count())
+                <table class="table table-striped table-bordered">
+                    <thead class="text-center">
+                    <tr>
+                        <th scope="col">Competition Field</th>
+                        <th scope="col">Institution Name</th>
+                        <th scope="col">PIC Name</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Registered At</th>
+                        <th scope="col">Total Slot</th>
+                        <th scope="col">Action </th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach ($pending as $competition)
+                            <tr>
+                                <th>{{$competition->competition->name}}</th>
+                                <th>{{$competition->user->institution_name}}</th>
+                                <th>{{$competition->user->pic_name}}</th>
+                                <th>{{$competition->user->pic_phone_number}}</th>
+                                <th>{{$competition->created_at}}</th>
+                                <th>{{$competition->quantity}}</th>
+                                <th class="m-auto"> 
+                                    <div class="d-flex  justify-content-center">
+                                        <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-success btn-sm me-2">C</a>
+                                        <a  class="btn btn-danger btn-sm me-2" data-bs-toggle="modal" data-bs-target="#reason{{$competition->id}}">R</a>
+                                        
+                                    </div>
+                                </th>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                @else <hr><p class="text-center">No Data</p>
+            @endif
         </x-card>
 
         {{-- confirmed --}}
@@ -103,38 +108,38 @@
        @endif
 
         {{-- rejected --}}
-        @if ($rejected->count())
-            <x-card>
+        <x-card>
             <h1 class="mb-3 text-danger">Rejected Slot Registration</h1>
-            <table class="table table-striped table-bordered">
-                <thead class="text-center">
-                  <tr>
-                    <th scope="col">Competition Field</th>
-                    <th scope="col">Institution Name</th>
-                    <th scope="col">PIC Name</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Registered At</th>
-                    <th scope="col">Total Slot</th>
-                    
-                  </tr>
-                </thead>
-                <tbody class="text-center">
-                    @foreach ($rejected as $competition)
-                        <tr>
-                            <th>{{$competition->competition->name}}</th>
-                            <th>{{$competition->user->institution_name}}</th>
-                            <th>{{$competition->user->pic_name}}</th>
-                            <th>{{$competition->user->pic_phone_number}}</th>
-                            <th>{{$competition->created_at}}</th>
-                            <th>{{$competition->quantity}}</th>
-                        </tr>
-                    @endforeach
-                </tbody>
-              </table>
-            </x-card>
-            
-        @endif
-    </div>
+                @if ($rejected->count())
+                <table class="table table-striped table-bordered">
+                    <thead class="text-center">
+                    <tr>
+                        <th scope="col">Competition Field</th>
+                        <th scope="col">Institution Name</th>
+                        <th scope="col">PIC Name</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Registered At</th>
+                        <th scope="col">Total Slot</th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach ($rejected as $competition)
+                            <tr>
+                                <th>{{$competition->competition->name}}</th>
+                                <th>{{$competition->user->institution_name}}</th>
+                                <th>{{$competition->user->pic_name}}</th>
+                                <th>{{$competition->user->pic_phone_number}}</th>
+                                <th>{{$competition->created_at}}</th>
+                                <th>{{$competition->quantity}}</th>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+              @else <hr><p class="text-center">No Data</p>
+              @endif
+            </div>
+        </x-card>
    
     
     <!-- Modal -->

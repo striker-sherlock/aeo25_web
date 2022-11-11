@@ -20,10 +20,11 @@
                         @foreach ($pending as $payment)
                             <tr class="text-center">
                                 <th>{{$payment->id}}</th>
-                                <th>{{$payment->user->institution_name}}</th>
-                                <th>{{$payment->user->pic_name}}</th>
-                                <th>indonesia</th>
+                                <th>{{$payment->institution_name}}</th>
+                                <th>{{$payment->pic_name}}</th>
+                                <th>{{$payment->name}}</th>
                                 <th>{{$payment->amount}}</th>
+                                 
                                 <th>{{$payment->created_at}}</th>
                                 <th>
                                     <div class="d-flex justify-content-around">
@@ -54,7 +55,6 @@
                         <th scope="col">PIC Name</th>
                         <th scope="col">Country</th>
                         <th scope="col">Grand Total</th>
-                        <th scope="col">Created At</th>
                         <th scope="col">Action</th>
                     
                     </tr>
@@ -63,15 +63,14 @@
                         @foreach ($confirmed as $payment)
                         <tr class="text-center">
                             <th>{{$payment->id}}</th>
-                            <th>{{$payment->user->institution_name}}</th>
-                            <th>{{$payment->user->pic_name}}</th>
-                            <th>indonesia</th>
+                            <th>{{$payment->institution_name}}</th>
+                            <th>{{$payment->pic_name}}</th>
+                            <th>{{$payment->name}}</th>
                             <th>{{$payment->amount}}</th>
-                            <th>{{$payment->created_at}}</th>
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    {{-- <a href="{{route('competition-payments.confirm',$payment->id)}}" class="btn btn-outline-success">C</a>
-                                    <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a> --}}
+                                    <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">X</a>
+                                    {{-- <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a> --}}
                                 </div>
                             </th>
                         </tr>
@@ -103,11 +102,17 @@
                         @foreach ($rejected as $payment)
                         <tr class="text-center">
                             <th>{{$payment->id}}</th>
+                            <th>{{$payment->institution_name}}</th>
+                            <th>{{$payment->pic_name}}</th>
+                            <th>{{$payment->name}}</th>
+                            <th>{{$payment->amount}}</th>
+                            <th>{{$payment->created_at}}</th>
+                            {{-- <th>{{$payment->id}}</th>
                             <th>{{$payment->user->institution_name}}</th>
                             <th>{{$payment->user->pic_name}}</th>
                             <th>indonesia</th>
                             <th>{{$payment->amount}}</th>
-                            <th>{{$payment->created_at}}</th>
+                            <th>{{$payment->created_at}}</th> --}}
                             <th>
                                 <div class="d-flex justify-content-around">
                                      
@@ -157,11 +162,12 @@
         
     @endforeach
 
+    {{-- modal untuk payment proof --}}
     @foreach ($pending as $payment)
         <div class="modal fade p-4" id="proof{{$payment->id}}" tabindex="-1" role="dialog" >
             <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <img src="/storage/transfer_proof/{{$payment->transfer_proof}}" class="img-fluid" alt="tf_proof">
+                <img src="/storage/transfer_proof/{{$payment->payment_proof}}" class="img-fluid" alt="tf_proof">
             </div>
             </div>
         </div>

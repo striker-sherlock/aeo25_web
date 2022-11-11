@@ -65,12 +65,23 @@
                 <input type="text" value="{{Auth::user()->id}}" name="pic_id" hidden>
                 <input type="text" value="{{$totalPrice}}" name="amount" hidden>
                 <input type="text" name="type" hidden>
+                
                 <input type="text" name="isPayAll"  value="{{$isPayAll}}" hidden>
                 <input type="text" name="competitionSlot"  value="{{ $competitionSlot == NULL ? '0' : $competitionSlot->id }}" hidden>
 
 
                 <div class="tab-content">
                     <div id="bank" class="tab-pane fade">
+                        <div class="form-group mb-2">
+                            <label for="payment_provider" class="col-form-label">Payment Type<span class="text-danger">*</span></label>
+                            <select class="form-select"  name="payment_provider">
+                                <option selected class="d-none">Select The payment type</option>
+                                @foreach ($paymentProviders as $paymentProvider)
+                                    <option value="{{$paymentProvider->id}}" {{old('payment_provider' == $paymentProvider->id? 'selected' : '')}}>{{$paymentProvider->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group mb-3">
                             <label for="account_name" class="col-form-label">Account Name<span class="text-danger">*</span></label>
                             <input type="text"  class="form-control"  name="account_name" id="account_name" value="{{old('account_name')}}">
@@ -96,7 +107,7 @@
                         </div>        
                         <div class="form-group mb-3">
                             <label for="track" class="col-form-label">Tranking Link<span class="text-danger">*</span></label>
-                            <input type="link"  class="form-control"  name="track" id="track" value="{{old('track')}}">
+                            <input type="url"  class="form-control"  name="track" id="track" value="{{old('track')}}">
                         </div>
 
                         <div class="form-group mb-3">

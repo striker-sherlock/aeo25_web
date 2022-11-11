@@ -85,6 +85,7 @@
                 </div>
             </div>
             
+            {{-- registration summary --}}
             <x-card>
                 <h1 class="mb-3">Registration Summary</h1>
                 <table class="table table-striped table-bordered">
@@ -98,9 +99,9 @@
                     </thead>
                     <tbody class="text-center">
                         <tr>
-                            <th>Remaining Slot</th>
+                            <th>Remaining Slot (fixed)</th>
                             @foreach ($competitions as $competition)
-                                <th> {{$competition->temp_quota}}</th>
+                                <th> {{$competition->fixed_quota}}</th>
                             @endforeach
                         </tr>
                         <tr>
@@ -117,5 +118,9 @@
 
 
         </div>
-    {{-- </section> --}}
+    <script>
+        $(document).ready(function(){
+            console.log('ready');
+        })
+    </script>
 </x-admin>

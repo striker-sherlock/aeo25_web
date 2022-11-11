@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Competition;
 use Illuminate\Http\Request;
 use App\Models\CompetitionSlot;
+use App\Models\PaymentProvider;
 use App\Models\CompetitionPayment;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,8 @@ class UserCompetitionPaymentController extends Controller
         $allCompetition = NULL;
         $isPaid = false;
 
+
+        // ini kalo pay all
         if ($slot == NULL){
             $isPayAll = 1;
             $allCompetition = $this->getAllCompetitionRegistered(Auth::user()->id);
@@ -35,19 +38,24 @@ class UserCompetitionPaymentController extends Controller
             }
           
         }
+
+        // ini kalo bayar per slot 
         else{
             $competition = Competition::where('id',$slot->competition_id)->first();
             $totalPrice = $slot->quantity * $competition->price;
             if($slot->payment)$isPaid = true;
         }
         
-        if($totalPrice == 0 || $isPaid ) return redirect()->back()->with('error','Please wait the payment to be checked by admin ');
+        // if($totalPrice == 0 || $isPaid ) return redirect()->back()->with('error','Please wait the payment to be checked by admin ');
 
         return view('competition-payments.create',[
             'totalPrice' =>$totalPrice,
             'competitionSlot' => $slot,
             'isPayAll' => $isPayAll,
             'allCompetitions' => $allCompetition,
+            'isPaid' => $isPaid,
+            'paymentProviders' => PaymentProvider::all()
+
         ]);
     }
 
@@ -55,39 +63,39 @@ class UserCompetitionPaymentController extends Controller
         // dd($request->competitionSlot);
         $request->validate([
             'account_name' => 'nullable|string',
-            'account_number' => 'nullable|string',
+            'account_number' => 'nullable|numeric',
             'email' => 'nullable|string',
             'track' => 'nullable|string',
             'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
             'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
         ]);
-        $pic = Auth::user()->name;
+        $pic = Auth::user()->username;
         $fileName = str_replace(' ', '-', $pic );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
         $fileName = str_replace('-', '_', $fileName);
         $current = time();
+
         if ($request->hasFile('transfer_proof_bank')){
             $extension = $request->file('transfer_proof_bank')->getClientOriginalExtension();
-            $file_name = $fileName.'_'.$current.'.'.$extension;
-            $path = $request->file("transfer_proof_bank")->storeAs("public/transfer_proof/",$fileName);
+            $fixedName = $fileName.'_'.$current.'.'.$extension;
+            $path = $request->file("transfer_proof_bank")->storeAs("public/transfer_proof",$fixedName);
         }
         if ($request->hasFile('transfer_proof_wise')){
             $extension = $request->file('transfer_proof_wise')->getClientOriginalExtension();
-            $file_name = $fileName.'_'.$current.'.'.$extension;
-            $path = $request->file("transfer_proof_wise")->storeAs("public/transfer_proof/",$fileName);
+            $fixedName = $fileName.'_'.$current.'.'.$extension;
+            $path = $request->file("transfer_proof_wise")->storeAs("public/transfer_proof",$fixedName);
         }
-
         $payment = CompetitionPayment::create([
             'pic_id' => Auth::user()->id,
-            'payment_provider_id' => 1,
+            'payment_provider_id' => $request->payment_provider,
             'account_name' => $request->account_name,
             'account_number' => $request->account_number,
-            'email' => $request->track,
+            'email' => $request->email,
             'tracking_link' => $request->track,
-            'payment_proof' => $file_name,
+            'payment_proof' => $fixedName,
             'amount' => $request->amount,
             'is_confirmed' => 0,
-            'created_by' => Auth::user()->pic_name,
+            'created_by' => Auth::user()->username,
         ]);
 
         if ($request->isPayAll == 1){
@@ -105,7 +113,91 @@ class UserCompetitionPaymentController extends Controller
             ]);
         }
         
-        return redirect()->route('dashboard.step',2)->with('suceess','Payment successfuly submitted, Please wait for the confirmation');
+        return redirect()->route('dashboard.step',2)->with('success','Payment successfuly submitted, Please wait for the confirmation');
     }
 
+    
+    public function edit(CompetitionPayment $competitionPayment){
+        $paidSlot= CompetitionSlot::where('payment_id',$competitionPayment->id)->get();
+        return view('competition-payments.edit',[
+            'competitionPayment' => $competitionPayment,
+            'paidSlot' =>$paidSlot,
+            'paymentProviders' => PaymentProvider::all()
+        ]);
+    }
+
+    public function update(Request $request, CompetitionPayment $competitionPayment){
+        $request->validate([
+            'account_name' => 'nullable|string',
+            'account_number' => 'nullable|numeric',
+            'email' => 'nullable|string',
+            'track' => 'nullable|string',
+            'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
+            'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
+        ]);
+ 
+        $pic = Auth::user()->username;
+        $fileName = str_replace(' ', '-', $pic );
+        $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
+        $fileName = str_replace('-', '_', $fileName);
+        $current = time();
+        
+        // kalo payment type nya bank
+        if($request->type == 'BANK'){
+            if ($request->hasFile('transfer_proof_bank')){
+                $extension = $request->file('transfer_proof_bank')->getClientOriginalExtension();
+                $fixedName = $fileName.'_'.$current.'.'.$extension;
+                $path = $request->file("transfer_proof_bank")->storeAs("public/transfer_proof",$fixedName);
+            }
+            else{
+                $fixedName = $request->transfer_proof_old;
+            }
+            $competitionPayment->update([
+                'payment_provider_id' => $request->payment_provider,
+                'account_name' => $request->account_name,
+                'account_number' => $request->account_number,
+                'payment_proof' => $fixedName,
+                'updated_by' => Auth::user()->username,
+                'is_confirmed' => 0,
+            ]);
+        }
+
+        // ini untuk update menjadi wise
+        else{
+            if ($request->hasFile('transfer_proof_wise')){
+                $extension = $request->file('transfer_proof_wise')->getClientOriginalExtension();
+                $fixedName = $fileName.'_'.$current.'.'.$extension;
+                $path = $request->file("transfer_proof_wise")->storeAs("public/transfer_proof",$fixedName);
+            }
+            else{
+                $fixedName = $request->transfer_proof_old;
+            }
+            $competitionPayment->update([
+                'payment_provider_id' => 18,
+                'email' => $request->email,
+                'tracking_link' => $request->track,
+                'payment_proof' => $fixedName,
+                'updated_by' => Auth::user()->username,
+                'is_confirmed' => 0,
+            ]);
+
+        }
+
+        
+       
+        
+
+        return redirect()->route('dashboard.step',2)->with('success','Payment successfuly updated');
+    }
+
+    public function destroy(CompetitionPayment $competitionPayment ){
+        $competitionPayment->delete();
+        $competitionSlots = CompetitionSlot::where('payment_id',$competitionPayment->id)->get();
+        foreach ($competitionSlots as $competitionSlot) {
+            $competitionSlot->update([
+                'payment_id' => NULL
+            ]);
+        }
+        return redirect()->back()->with('success','Payment successfully deleted');
+    }
 }

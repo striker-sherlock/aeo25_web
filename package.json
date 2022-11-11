@@ -25,8 +25,8 @@
         "chart.js": "^3.9.1",
         "datatables.net": "^1.12.1",
         "datatables.net-dt": "^1.12.1",
-        "get-google-fonts": "^1.2.2",
         "jquery": "^3.6.1",
-        "popper.js": "^1.16.1"
+        "popper.js": "^1.16.1",
+        "font-awesome": "^4.7.0"
     }
 }

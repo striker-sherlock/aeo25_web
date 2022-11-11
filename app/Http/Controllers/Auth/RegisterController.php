@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Countries;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -62,9 +63,15 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-    {
-        // dd($data);
+    protected  function index(){
+    
+        return view('auth.register',[
+            "countries" => Countries::all()
+        ]);
+    }
+    protected function create(array $data){
+
+       $username = $data['username'];
         return User::create([
             'institution_name' => $data['ins_name'],
             'institution_email' => $data['ins_email'],
@@ -75,8 +82,8 @@ class RegisterController extends Controller
             'email' =>  $data['email'],
             'pic_phone_number' => $data['phone'],
             'password' => Hash::make($data['password']),
-            'country_id' => 1,
-            'created_by' => 'PIC',
+            'country_id' => $data['country'],
+            'created_by' => $username,
         ]);
 
         return redirect()->route('/');

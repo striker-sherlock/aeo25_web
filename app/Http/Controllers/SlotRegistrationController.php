@@ -10,6 +10,7 @@ use App\Mail\ConfirmedSlotMail;
 use App\Models\CompetitionSlot;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Arr;
 
 class SlotRegistrationController extends Controller
 {
@@ -19,16 +20,25 @@ class SlotRegistrationController extends Controller
     public function index()
     {
         //data table jangan lupa
-        
+        $competitions = Competition::all();
+        $count = [];
+        foreach ($competitions as $competition){
+            $competitionSlot = CompetitionSlot::where('competition_id',$competition->id)
+                                ->where('is_confirmed',1)
+                                ->sum('quantity');
+            $count = array_add($count,$competition->name, $competitionSlot);
+        };
+
         $pending = CompetitionSlot::where('is_confirmed',0)->get();
         $confirmed = CompetitionSlot::where('is_confirmed',1)->get();
         $rejected = CompetitionSlot::where('is_confirmed',-1)->get();
         
         return view('slot-registrations.index',[
-            'competitions' => Competition::all(),
+            'competitions' =>$competitions,
             'pending' => $pending,
             'confirmed' => $confirmed,
             'rejected' => $rejected,
+            'registeredSlot' => $count,
         ]);
     }
     
@@ -92,22 +102,24 @@ class SlotRegistrationController extends Controller
     }
     
     public function confirm(CompetitionSlot $competitionSlot){
+         
         $competitionSlot ->update([
             'updated_by' => 'Admin',
             'is_confirmed' => 1
         ]);
+
         
         $remainedParticipant =$competitionSlot ->competition->temp_quota;
         $competitionSlot->competition -> update([
             'temp_quota' => $remainedParticipant - $competitionSlot->quantity,
         ]);
 
-        $confirmedMail = [
-            'subject' => $competitionSlot->competition->name. " - Confirmed Slot",
-            'name'=>$competitionSlot->competition->name,
+        // $confirmedMail = [
+        //     'subject' => $competitionSlot->competition->name. " - Confirmed Slot",
+        //     'name'=>$competitionSlot->competition->name,
 
-        ];
-        Mail::to($competitionSlot->user->email)->send(new ConfirmedSlotMail($confirmedMail));
+        // ];
+        // Mail::to($competitionSlot->user->email)->send(new ConfirmedSlotMail($confirmedMail));
         return redirect()->route('slot-registrations.index');
     }
 
@@ -132,14 +144,14 @@ class SlotRegistrationController extends Controller
             'is_confirmed' => -1
         ]);
 
-        $rejectMail = [
-            'subject' => $competitionSlot->competition->name. " - Rejection Slot",
-            'name'=>$competitionSlot->competition->name,
-            'reason' => $request->reason
+        // $rejectMail = [
+        //     'subject' => $competitionSlot->competition->name. " - Rejection Slot",
+        //     'name'=>$competitionSlot->competition->name,
+        //     'reason' => $request->reason
 
-        ];
-        Mail::to($competitionSlot->user->email)->send(new RejectionMail($rejectMail));
-        return redirect()->route('slot-registrations.index');
+        // ];
+        // Mail::to($competitionSlot->user->email)->send(new RejectionMail($rejectMail));
+        // return redirect()->route('slot-registrations.index');
 
         
 

@@ -17,7 +17,10 @@ $(document).ready( function () {
     console.log('ready');
     $('#data-table').DataTable();
 } );
- 
+
+$(document).ready( function () {
+    console.log('ready');
+} );
  
 window.$('#data-table').DataTable();
  //  Sidebar
