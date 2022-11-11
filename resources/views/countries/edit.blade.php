@@ -11,6 +11,7 @@
                   <label class="col-form-label" for="name">Country Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control" name="name" id="name" value="{{ $country->name }}">
                 </div>
+
                 <div class="row my-4">
                   <div class="col">
                     <a href="{{ route("countries.index") }}" class="btn btn-outline-secondary btn-rounded w-100 mb-3">Back</a>

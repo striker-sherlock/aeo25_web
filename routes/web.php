@@ -23,17 +23,10 @@ use App\Http\Controllers\UserCompetitionPaymentController;
 use App\Http\Controllers\AdminCompetitionPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 // use Yajra\DataTables\DataTablesServiceProvider
+use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\AccommodationController;
+use App\Http\Controllers\EnvironmentController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Auth::routes(['verify'=>true]);
 
@@ -124,7 +117,17 @@ Route::post('/participants/store', [UserCompetitionParticipantController::class,
 
 
 //Facilities
-Route::resource('facilities', FacilitiesController::class);
+Route::resource('facilities', FacilityController::class);
 
-//Accomodations
-Route::resource('accomodations', AccomodationsController::class);
+//Accommodation
+Route::resource('accommodations', AccommodationController::class);
+
+//Inventory
+Route::resource('inventories', InventoryController::class)->except('show');
+
+// Institution Contact
+Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy']);
+
+// Environments
+Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
+Route::resource('environments', EnvironmentController::class);
