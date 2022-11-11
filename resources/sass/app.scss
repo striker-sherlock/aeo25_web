@@ -1,3 +1,15 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+@import 'style.scss';
+@import 'sidebar.scss';
+@import 'bootstrap/scss/bootstrap';;
+@import "@fortawesome/fontawesome-free/css/all.css";
 @import '~bootstrap/scss/bootstrap';
 @import '~dataTables.net-dt/css/jquery.dataTables.min.css';
 
