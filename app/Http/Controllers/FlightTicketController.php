@@ -9,6 +9,10 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class FlightTicketController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsShowed:ENV002')->only(['index']);
+    }
+
     public function index()
     {
         $trashed = FlightTicket::onlyTrashed()->get();
