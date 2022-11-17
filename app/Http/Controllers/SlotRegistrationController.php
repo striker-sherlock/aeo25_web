@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Mail\RejectionMail;
 use App\Models\Competition;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use App\Mail\ConfirmedSlotMail;
 use App\Models\CompetitionSlot;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Arr;
 
 class SlotRegistrationController extends Controller
 {
     public function __construct(){
         $this->middleware('auth')->only(['create']);
     }
-    public function index()
-    {
+    public function index(){
         //data table jangan lupa
         $competitions = Competition::all();
         $count = [];
@@ -28,6 +27,7 @@ class SlotRegistrationController extends Controller
                                 ->sum('quantity');
             $count = array_add($count,$competition->name, $competitionSlot);
         };
+
 
         $pending = CompetitionSlot::where('is_confirmed',0)->get();
         $confirmed = CompetitionSlot::where('is_confirmed',1)->get();
@@ -42,27 +42,31 @@ class SlotRegistrationController extends Controller
         ]);
     }
     
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+ 
+    public function create(){
         return view('slot-registrations.create',[
             'competitions' => Competition::all(),
+            'competitionSlots' => CompetitionSlot::where('pic_id',Auth::user()->id)->get(),
         ]);
     }
+    public function checkSlotAvailability(int $slot, $competitionID){
+        $competition = Competition::find($competitionID);
+        if ($slot > $competition->temp_quota) return false;
+        return true; 
+    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $len = count($request->quantity);
+        // dd($request->all());
+        //  code ini untuk mengecek apabila slot nya masih tersedia atau tidak
+        for($i = 0; $i < $len; $i++){
+            if ($request->quantity[$i] != '0')$valid = $this->checkSlotAvailability($request->quantity[$i],$request->compet_id[$i]);
+            else continue;
+            $competitionName = Competition::find($request->compet_id[$i])->name;
+            if(!$valid) return redirect()->back()->with('error',"Sorry, ".$competitionName."'s slot is not available");
+        }
+
+
         for ($i= 0; $i < $len; $i++){
             if ($request->quantity[$i] != '0'){
                 CompetitionSlot::create([
@@ -79,26 +83,20 @@ class SlotRegistrationController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show($id)
     {
-        //
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+ 
+    public function edit($id) {
+        $competitionSlot = CompetitionSlot::find($id);
+        $pic = $competitionSlot->user;
+        return view('slot-registrations.edit',[
+            'competitionSlots' => CompetitionSlot::where('pic_id', $pic->id)->get()->where('is_confirmed',0),
+            'pic' => $pic 
+        ]);
     }
     
     public function confirm(CompetitionSlot $competitionSlot){
@@ -135,7 +133,8 @@ class SlotRegistrationController extends Controller
         ]);
         return redirect()->route('slot-registrations.index');
     }
-    public function reject ( Request $request){
+
+    public function reject (Request $request){
         //admin kasi alasan kenapa di reject
         $competitionSlot = CompetitionSlot::find($request->slot);
         // dd($competitionSlot->user->email);
@@ -157,26 +156,34 @@ class SlotRegistrationController extends Controller
 
         return redirect()->route('slot-registrations.index');
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    
+    public function update(Request $request, $id){
+        $competitionSlot = CompetitionSlot::find($id);
+        if($competitionSlot->is_confirmed != 0 ) return redirect()->back()->with('error','Sorry, the updates is failed');
+        
+        // cari selisih quantity 
+        $difference = $competitionSlot->quantity - $request->quantity ;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        //update competition slot table
+        $competitionSlot->update([
+            'quantity' => $request->quantity
+        ]);
+        
+        $competition = Competition::find($competitionSlot->competition->id);
+        $remainedQuota = $competition->temp_quota;
+        //update competition table (temp quota) 
+        $competition->update([
+            'temp_quota' => $remainedQuota + $difference
+        ]);
+        if (Auth::guard('admin')->check()) return redirect()->back()->with('success',"Slot's quantity is successfully updated");
+
+        return redirect()->route('dashboard.step',1)->with('success',"Slot's quantity is successfully updated");
+    }
+    
+    
+    public function destroy($id){
+        $competitionSlot = CompetitionSlot::find($id);
+        $competitionSlot->delete();
+        return redirect()->route('dashboard.step',1)->with('success',"The Slot is successfully deleted");
     }
 }

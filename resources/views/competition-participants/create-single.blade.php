@@ -9,6 +9,7 @@
             <input type="text" hidden value="{{Auth::user()->id}}" name="pic_id">
             <input type="text" hidden value="{{$competitionSlot->id}}" name="competition_slot_id">
             <input type="text" hidden value="{{$competitionSlot->competition->id}}" name="competition_id">
+            <input type="text" hidden value="{{$quantity}}" name="quantity">
 
             @for ($i = 1; $i <= $quantity; $i++)
                 <x-card>
@@ -17,39 +18,39 @@
                         <div class="row">
                             <div class="col">
                                 <div class="form-group mb-3">
-                                    <label for="nama" class="col-form-label">Name<span class="text-danger">*</span></label>
-                                    <input type="text"  class="form-control"  name="nama[]" id="nama" value="{{old('nama.'.$i-1)}}" required>
-                                    {{-- @if ($errors->has('nama.'.$i-1))
+                                    <label for="nama{{$i}}" class="col-form-label">Name<span class="text-danger">*</span></label>
+                                    <input type="text"  class="form-control"  name="nama[]" id="nama{{$i}}" value="{{old('nama.'.$i-1)}}" required>
+                                    @if ($errors->has('nama.'.$i-1))
                                         <span class="invalid feedback text-danger"role="alert">
                                             <strong>*{{ $errors->first('nama.*') }}.</strong>
                                         </span>
-                                    @endif --}}
+                                    @endif
                                 </div>    
 
                                 <div class="form-group mb-3">
-                                    <label for="email" class="col-form-label">Email Address<span class="text-danger">*</span></label>
-                                    <input type="email"  class="form-control"  name="email[]" id="email" value="{{old('email.'.$i-1)}}" required>
+                                    <label for="email{{$i}}" class="col-form-label">Email Address<span class="text-danger">*</span></label>
+                                    <input type="email"  class="form-control"  name="email[]" id="email{{$i}}" value="{{old('email.'.$i-1)}}" required>
                                     @if ($errors->has('email.'.$i-1))
                                     <span class="invalid feedback text-danger"role="alert">
                                         <strong>*{{ $errors->first('email.*') }}.</strong>
                                     </span>
                                 @endif
                                 </div>   
-                                
+                                {{-- {{old('gender') ? dd(old('gender.0')):''}} --}}
                                 <div class="form-group mb-2">
-                                    <label for="payment_provider" class="col-form-label">Gender<span class="text-danger">*</span></label>
-                                    <select class="form-select"  name="gender[]" required>
-                                        <option selected class="d-none">Select participant's gender</option>
-                                        <option value="{{'Male'}}" {{old('gender.'.$i) == 'Male' ? 'selected':''}}>Male</option>
-                                        <option value="{{'Female'}}" {{old('gender.'.$i) == 'Female' ? 'selected':''}}>Female</option>
+                                    <label for="gender{{$i}}" class="col-form-label">Gender<span class="text-danger">*</span></label>
+                                    <select class="form-select"  name="gender[]" required id="gender{{$i}}">
+                                        <option class="d-none">Select participant's gender</option>
+                                        <option value="Male" {{old('gender.'.$i-1) == 'Male' ? 'selected':''}}>Male</option>
+                                        <option value="Female" {{old('gender.'.$i-1) == 'Female' ? 'selected':''}}>Female</option>
                                     </select>
                                 </div>     
  
                             </div>   
                             <div class="col">
                                 <div class="form-group mb-3">
-                                    <label for="phone" class="col-form-label">Phone Number (WA)<span class="text-danger">*</span></label>
-                                    <input type="text"  class="form-control"  name="phone[]" id="phone" value="{{old('phone.'.$i-1)}}" placeholder="" required>
+                                    <label for="phone{{$i}}" class="col-form-label">Phone Number (WA)<span class="text-danger">*</span></label>
+                                    <input type="text"  class="form-control"  name="phone[]" id="phone{{$i}}" value="{{old('phone.'.$i-1)}}" placeholder="" required>
                                     @if ($errors->has('phone.'.$i-1))
                                     <span class="invalid feedback text-danger"role="alert">
                                         <strong>*{{ $errors->first('phone.*') }}.</strong>
@@ -58,8 +59,8 @@
                                 </div> 
 
                                 <div class="form-group mb-3">
-                                    <label for="phone" class="col-form-label">Date of Birth <span class="text-danger">*</span> <span class="text-muted">(yyyy-mm-dd)</span></label>
-                                    <input type="text"  class="form-control"  name="birth[]" id="birth"  placeholder="e.g. 2022-10-12" required value="{{old('birth.'.$i-1)}}">
+                                    <label for="birth{{$i}}" class="col-form-label">Date of Birth <span class="text-danger">*</span> <span class="text-muted">(yyyy-mm-dd)</span></label>
+                                    <input type="text"  class="form-control"  name="birth[]" id="birth{{$i}}"  placeholder="e.g. 2022-10-12" required value="{{old('birth.'.$i-1)}}">
                                     @if ($errors->has('birth.'.$i-1))
                                     <span class="invalid feedback text-danger"role="alert">
                                         <strong>*{{ $errors->first('birth.*') }}.</strong>
@@ -68,8 +69,8 @@
                                 </div>  
 
                                 <div class="form-group mb-3">
-                                    <label for="profile_picture" class="col-form-label">Profile Picture<span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control"  name="profile_picture[]" id="profile_picture" accept="image/png,image/jpeg,image/jpg" required>    
+                                    <label for="profile_picture{{$i}}" class="col-form-label">Profile Picture<span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control"  name="profile_picture[]" id="profile_picture{{$i}}" accept="image/png,image/jpeg,image/jpg" required>    
                                     <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                                     @if ($errors->has('profile_picture.*'))
                                     <span class="invalid feedback text-danger"role="alert">
