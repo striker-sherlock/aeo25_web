@@ -31,4 +31,9 @@ class CompetitionParticipant extends Model
     public function competitionSlot(){
         return $this->belongsTo(CompetitionSlot::class);
     }
+
+    public function rank ()
+    {
+        return $this->hasOne(ParticipantRank::class, 'id', 'rank_id');
+    }
 }

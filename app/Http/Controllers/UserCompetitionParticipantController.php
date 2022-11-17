@@ -9,6 +9,8 @@ use App\Models\CompetitionSlot;
 use App\Models\CompetitionTeam;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompetitionParticipant;
+use App\Models\CompetitionScore;
+use App\Models\ScoreType;
 
 class UserCompetitionParticipantController extends Controller
 {
@@ -107,7 +109,7 @@ class UserCompetitionParticipantController extends Controller
                         $path = $request->file("profile_picture.".$index)->storeAs("public/profile_picture/".$request->competition_id,$fixedName);
                     }
             
-                    CompetitionParticipant::create([
+                    $newParticipant = CompetitionParticipant::create([
                         'team_id' => $team_id->id,
                         'created_by' => Auth::user()->username,
                         'pic_id' => Auth::user()->id,
@@ -123,10 +125,15 @@ class UserCompetitionParticipantController extends Controller
                         'is_vegetarian' =>0,
                         'is_attend' => 0,
                     ]);
-                    
+                    if ($newParticipant) {
+                        CompetitionScore::create([
+                            'created_by' => Auth::user()->username,
+                            'participant_id' => $newParticipant->id,
+                            'score_type_id' => ScoreType::min('id')
+                        ]);
+                    }
                 }
             }
-
         }
         else {
             for($i = 0; $i < $len; $i++ ){
@@ -143,7 +150,7 @@ class UserCompetitionParticipantController extends Controller
                 }
                 // dd($request->all());
     
-                CompetitionParticipant::create([
+                $newParticipant = CompetitionParticipant::create([
                     'created_by' => Auth::user()->username,
                     'pic_id' => Auth::user()->id,
                     'competition_slot_id' =>$request->competition_slot_id,
@@ -158,10 +165,16 @@ class UserCompetitionParticipantController extends Controller
                     'is_vegetarian' =>0,
                     'is_attend' => 0,
                 ]);
+
+                if ($newParticipant) {
+                    CompetitionScore::create([
+                        'created_by' => Auth::user()->username,
+                        'participant_id' => $newParticipant->id,
+                        'score_type_id' => ScoreType::min('id')
+                    ]);
+                }
             }
         }
-        return redirect()->route('dashboard.step',3)->with('success','Participant successfuly registered');
+        return redirect()->route('dashboard.step',3)->with('success','Participant successfully registered');
     }
-
-
 }

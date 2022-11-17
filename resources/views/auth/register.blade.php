@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <div class="form-group mb-2">
                                 <label for="country" class="col-form-label">Country<span class="text-danger">*</span></label>
-                                <select class="form-select"  name="ins_type">
+                                <select class="form-select"  name="country_id">
                                     <option selected class="d-none">Select The Country</option>
                                     @foreach ($countries as $country)
                                         <option value="{{$country->id}}">{{$country->name}}</option>

@@ -35,11 +35,10 @@ class DashboardController extends Controller
         if ($step == 2){
             // jika step-1 belum di confirmasi atau belom dilewati maka, kembali ke dashboard
             // dd(Auth::user()->id);
-            $confirmedSlot = CompetitionSlot::find(Auth::user()->id);
-            if ($confirmedSlot == NULL ) return redirect()->route('dashboard')->with('error','You Have to make slot registration first');
+            $confirmedSlots = CompetitionSlot::where('pic_id', Auth::user()->id)->get();
+            if ($confirmedSlots->count() == 0) return redirect()->route('dashboard')->with('error','You Have to make slot registration first');
 
-            $confirmedSlot = $confirmedSlot->where('is_confirmed',1)->get();
-            if ($confirmedSlot ->count() == 0) return redirect()->route('dashboard')->with('error','Please Wait your slot registration to be confirmed by admin');
+            if ($confirmedSlots->where('is_confirmed')->count() == 0) return redirect()->route('dashboard')->with('error','Please Wait your slot registration to be confirmed by admin');
             
             $history = DB::table('competition_slot_details')
                         ->join('competition_payments','competition_slot_details.payment_id','=','competition_payments.id')
@@ -52,7 +51,7 @@ class DashboardController extends Controller
             $competitionPayment = competitionSlot::where('pic_id',Auth::user()->id)->get()->where('payment_id',NULL);
             // dd($competitionPayment); 
             return view('dashboards.step-two',[
-                'confirmedSlot' => $confirmedSlot,
+                'confirmedSlot' => $confirmedSlots,
                 'history' => $history,
                 'isPaidAll' => $competitionPayment
             ]);
