@@ -48,4 +48,4 @@
           </div>
       </div>
     </div>
-  </x-admin>
+</x-admin>

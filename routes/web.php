@@ -27,7 +27,8 @@ use App\Http\Controllers\UserCompetitionPaymentController;
 use App\Http\Controllers\AdminCompetitionPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
-
+use App\Http\Controllers\RankingListController;
+use App\Http\Controllers\ScoreTypeController;
 
 Auth::routes(['verify'=>true]);
 
@@ -63,12 +64,11 @@ Route::resource('slot-registrations',SlotRegistrationController::class);
 Route::get('/slot-registrations/confirm/{competitionSlot}', [SlotRegistrationController::class, 'confirm'])->name('slot-registrations.confirm');
 Route::post('/slot-registrations/reject', [SlotRegistrationController::class, 'reject'])->name('slot-registrations.reject');
 Route::get('/slot-registrations/cancel/{competitionSlot}', [SlotRegistrationController::class, 'cancel'])->name('slot-registrations.cancel');
- 
-
 
 //Media Partner
 Route::resource('media-partners', MediaPartnerController::class)->except('show');
 Route::get('media-partners/{media_partner}/update-visibility',[MediaPartnerController::class,'updateVisibility'])->name('media-partners.update-visibility');
+
 //Flight Registrations
 Route::controller(FlightRegistrationController::class)->prefix('flight-registrations')->name('flight-registrations.')->group(function() {
     Route::post('{flightRegistrations}/store', 'store')->name('store');
@@ -85,43 +85,30 @@ Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['inde
 // INSTITUTION CONTACT
 Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy']);
 
-
 //COMPETITION PAYMENT ADMIN
 Route::get('/{type}/payments', [AdminCompetitionPaymentController::class, 'index'])->name('competition-payments.index');
 Route::get('/payments/confirm/{competitionSlot}', [AdminCompetitionPaymentController::class, 'confirm'])->name('competition-payments.confirm');
-
 Route::post('/payments/reject', [AdminCompetitionPaymentController::class, 'reject'])->name('competition-payments.reject');
-
 Route::get('/payments/cancel/{competitionSlot}', [AdminCompetitionPaymentController::class, 'cancel'])->name('competition-payments.cancel');
-
 Route::get('/payments/export', [AdminCompetitionPaymentController::class, 'export'])->name('competition-payments.export');
-
-
 
 //COMPETITION PAYMENT USER
 Route::get('/payments/create/{id}', [UserCompetitionPaymentController::class, 'create'])->name('competition-payments.create');
 Route::post('/payments/store', [UserCompetitionPaymentController::class, 'store'])->name('competition-payments.store');
-
 Route::get('/payments/{competitionPayment}/edit', [UserCompetitionPaymentController::class, 'edit'])->name('competition-payments.edit');
-
 Route::put('/payments/{competitionPayment}/update', [UserCompetitionPaymentController::class, 'update'])->name('competition-payments.update');
-
 Route::delete('/payments/{competitionPayment}/destroy', [UserCompetitionPaymentController::class, 'destroy'])->name('competition-payments.destroy');
 
 // USER COMPETITION PARTICIPANT
 Route::get('/participants/{competition}', [UserCompetitionParticipantController::class, 'index'])->name('competition-participants.index');
 Route::get('/participants/create/{competitionParticipant}', [UserCompetitionParticipantController::class, 'create'])->name('competition-participants.create');
 Route::get('/participants/show/{user}/{competitition}', [UserCompetitionParticipantController::class, 'show'])->name('competition-participants.show');
-
 Route::post('/participants/store', [UserCompetitionParticipantController::class, 'store'])->name('competition-participants.store');
 
 // ADMIN COMPETITION PARTICIPANT
 Route::get('/edit-participant/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'edit'])->name('competition-participants.edit');
 Route::put('/participants/update/{id}', [AdminCompetitionParticipantController::class, 'update'])->name('competition-participants.update');
 Route::get('/participants/export/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'export'])->name('competition-participants.export');
-
-
-
 
 //Facilities
 Route::resource('facilities', FacilityController::class);
@@ -138,3 +125,16 @@ Route::resource('institution-contacts', InstitutionContactController::class)->ex
 // Environments
 Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
 Route::resource('environments', EnvironmentController::class);
+
+// Ranking List
+Route::controller(RankingListController::class)->prefix('ranking-lists')->name('ranking-lists.')->group(function () {
+    Route::get('manage/{competition}/{scoreType}', 'manage')->name('manage');
+    Route::put('update-score/{competitionScore}', 'updateScore')->name('update-score');
+    Route::get('update-score-type/{competitionScore}/{type}', 'updateScoreType')->name('update-score-type');
+    Route::get('update-team-score-type/{competitionScore}/{competitionTeam}/{type}', 'updateTeamScoreType')->name('update-team-score-type');
+    Route::get('update-debate-type/{competitionTeam}', 'updateDebateType')->name('update-debate-type');
+});
+Route::resource('ranking-lists', RankingListController::class)->only('index');
+
+// Score Type
+Route::resource('score-types', ScoreTypeController::class)->except('show');

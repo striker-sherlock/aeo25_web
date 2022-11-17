@@ -23,7 +23,9 @@ return new class extends Migration
             $table->integer('competition_slot_id');
             $table->string('competition_id');
             $table->integer('team_id')-> nullable();
+            $table->integer('rank_id')->default(0);
             $table->boolean('is_novice_debater');
+            $table->boolean('is_adjudicator')->default(0);
             $table->string('name');
             $table->string('email');
             $table->string('phone_number');
@@ -31,7 +33,7 @@ return new class extends Migration
             $table->string('birth_date');
             $table->string('profile_picture');
             $table->string('is_vegetarian');
-            $table->string('addictional_notes')->nullable();
+            $table->string('additional_notes')->nullable();
             $table->boolean('is_attend');
         });
     }

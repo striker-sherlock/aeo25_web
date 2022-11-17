@@ -70,20 +70,19 @@ class RegisterController extends Controller
         ]);
     }
     protected function create(array $data){
-
-       $username = $data['username'];
+       $username = strtolower(str_replace(' ', '', $data['name']));
         return User::create([
+            'created_by' => $username,
             'institution_name' => $data['ins_name'],
             'institution_email' => $data['ins_email'],
             'institution_type' => $data['ins_type'],
             'institution_logo' => 'logo.png',
             'pic_name' => $data['name'],
-            'username' => $data['username'],
+            'username' => $username,
             'email' =>  $data['email'],
             'pic_phone_number' => $data['phone'],
             'password' => Hash::make($data['password']),
-            'country_id' => $data['country'],
-            'created_by' => $username,
+            'country_id' => $data['country_id'],
         ]);
 
         return redirect()->route('/');

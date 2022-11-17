@@ -3,6 +3,7 @@ import "../sass/app.scss";
 import './script'
 import * as bootstrap from "bootstrap";
 import jquery, { ready } from 'jquery';
+import "./sidebar";
 
 
 window.jQuery = jquery;
