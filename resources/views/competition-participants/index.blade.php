@@ -4,6 +4,7 @@
         <x-card>
             <h2 class="fw-bold">{{$competition->name}}'s Participants</h2>
             @if ($competitionParticipants->count())
+                <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4">Download Participant</a>
                 <table class="table table-striped table-bordered">
                     <thead class="text-center">
                     <tr>
@@ -25,8 +26,7 @@
                             <th>{{$participant->user->pic_name}}</th>
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    {{-- <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">X</a> --}}
-                                    {{-- <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a> --}}
+                                    <a href="{{route('competition-participants.edit',$participant->id)}}" class="btn btn-primary btn-sm me-2">E</a>
                                 </div>
                             </th>
                         </tr>

@@ -5,27 +5,28 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FacilitiesController;
+use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\FlightTicketController;
 use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
+use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\CompetitionPaymentController;
 use App\Http\Controllers\FlightRegistrationController;
 use App\Http\Controllers\InstitutionContactController;
+// use Yajra\DataTables\DataTablesServiceProvider
 use App\Http\Controllers\UserCompetitionPaymentController;
 use App\Http\Controllers\AdminCompetitionPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
-// use Yajra\DataTables\DataTablesServiceProvider
-use App\Http\Controllers\FacilityController;
-use App\Http\Controllers\AccommodationController;
-use App\Http\Controllers\EnvironmentController;
+use App\Http\Controllers\AdminCompetitionParticipantController;
 
 
 Auth::routes(['verify'=>true]);
@@ -60,10 +61,9 @@ Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, '
 //slot registration
 Route::resource('slot-registrations',SlotRegistrationController::class);
 Route::get('/slot-registrations/confirm/{competitionSlot}', [SlotRegistrationController::class, 'confirm'])->name('slot-registrations.confirm');
-
 Route::post('/slot-registrations/reject', [SlotRegistrationController::class, 'reject'])->name('slot-registrations.reject');
-
 Route::get('/slot-registrations/cancel/{competitionSlot}', [SlotRegistrationController::class, 'cancel'])->name('slot-registrations.cancel');
+ 
 
 
 //Media Partner
@@ -111,9 +111,16 @@ Route::delete('/payments/{competitionPayment}/destroy', [UserCompetitionPaymentC
 // USER COMPETITION PARTICIPANT
 Route::get('/participants/{competition}', [UserCompetitionParticipantController::class, 'index'])->name('competition-participants.index');
 Route::get('/participants/create/{competitionParticipant}', [UserCompetitionParticipantController::class, 'create'])->name('competition-participants.create');
+Route::get('/participants/show/{user}/{competitition}', [UserCompetitionParticipantController::class, 'show'])->name('competition-participants.show');
+
 Route::post('/participants/store', [UserCompetitionParticipantController::class, 'store'])->name('competition-participants.store');
 
 // ADMIN COMPETITION PARTICIPANT
+Route::get('/edit-participant/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'edit'])->name('competition-participants.edit');
+Route::put('/participants/update/{id}', [AdminCompetitionParticipantController::class, 'update'])->name('competition-participants.update');
+Route::get('/participants/export/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'export'])->name('competition-participants.export');
+
+
 
 
 //Facilities

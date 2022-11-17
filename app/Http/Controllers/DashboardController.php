@@ -24,7 +24,11 @@ class DashboardController extends Controller
     }
     public function step($step){
         if ($step == 1){
-            return view('dashboards.step-one');
+            $competitionSlots = CompetitionSlot::where('pic_id', Auth::user()->id)->get();
+            
+            return view('dashboards.step-one',[
+                'competitionSlots' => $competitionSlots,
+            ]);
         }
 
 

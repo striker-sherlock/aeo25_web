@@ -107,12 +107,7 @@
                             <th>{{$payment->name}}</th>
                             <th>{{$payment->amount}}</th>
                             <th>{{$payment->created_at}}</th>
-                            {{-- <th>{{$payment->id}}</th>
-                            <th>{{$payment->user->institution_name}}</th>
-                            <th>{{$payment->user->pic_name}}</th>
-                            <th>indonesia</th>
-                            <th>{{$payment->amount}}</th>
-                            <th>{{$payment->created_at}}</th> --}}
+                        
                             <th>
                                 <div class="d-flex justify-content-around">
                                      

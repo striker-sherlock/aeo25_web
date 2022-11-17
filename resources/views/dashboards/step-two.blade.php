@@ -1,8 +1,7 @@
-<x-admin>
- 
+<x-admin> 
     <div class="mt-2 container">
-        <h1 class="fw-bold">Step 2</h1>
-        <hr class="mb-4">
+        <h1>Step 2</h1>
+        <h2 class="display-6 fw-bold">Competition Payment</h2>
         <x-card>
             <h3 class="fw-bold"> Additional Information</h3 >
             <p>We highly suggest you to complete your payment once your registration has been confirmed. If 10 days have passed and the confirmed slot has not been paid yet, we will move your slot to the pending list again.
@@ -26,13 +25,13 @@
                                         
                                     @else
                                         @if ($competition->payment->is_confirmed == 1)
-                                            <span class="text-success fw-bold">Was Confirmed</span>
+                                            <span class="text-success fw-bold">Confirmed</span>
                                         @endif
                                         @if ($competition->payment->is_confirmed == 0)
-                                            <span class="text-warning fw-bold">Wait For Confirmation</span>
+                                            <span class="text-warning fw-bold">Pending</span>
                                         @endif
                                         @if ($competition->payment->is_confirmed == -1)
-                                            <span class="text-danger fw-bold">Was Rejected</span>
+                                            <span class="text-danger fw-bold">Rejected</span>
                                         @endif 
                                     @endif
                                 </h5>
@@ -58,9 +57,9 @@
                             <h6 class="">Status : 
                                 @if ($item->is_confirmed == 0)<span class="text-warning fw-bold">Pending</span>
 
-                                @elseif ($item->is_confirmed == 1)<span class="text-success fw-bold">Was Confirmed</span> <span>At {{ date("F j, Y", strtotime($item->updated_at))}}</span>
+                                @elseif ($item->is_confirmed == 1)<span class="text-success fw-bold">Confirmed</span> <span>At {{ date("F j, Y", strtotime($item->updated_at))}}</span>
 
-                                @else <span class="text-danger fw-bold">Was rejected</span> <span>At {{ date("F j, Y", strtotime($item->updated_at))}}</span>     
+                                @else <span class="text-danger fw-bold">rejected</span> <span>At {{ date("F j, Y", strtotime($item->updated_at))}}</span>     
                                 @endif
                             </h6>
                             <h6 ><span >Registered for:</span> <span class="fw-bold">{{$item->quantity}} {{$item->need_team == 1? 'team' : 'people'}}</span></h6>
