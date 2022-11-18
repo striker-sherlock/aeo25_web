@@ -1,8 +1,8 @@
 <x-layout>
     <x-navbar-admin></x-navbar-admin>
     <main id="page-toggled" class="page-wrapper">
-    <div class="d-inline-flex w-100">
-        {{-- <x-sidebar></x-sidebar> --}}
+    <div class="d-inline-flex w-100" style="min-height: 50vh">
+        {{-- <x-sidebar-admin></x-sidebar-admin> --}}
         {{ $slot }}
     </div>
     </main>

@@ -12,4 +12,8 @@ class Countries extends Model
     protected $primaryKey = 'id';
     protected $timestamp = 'true';
     protected $guarded = [];
+
+    public function user(){
+        return $this->hasOne(User::class);
+    }
 }

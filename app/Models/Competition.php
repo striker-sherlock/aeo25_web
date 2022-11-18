@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\CompetitionSlot;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Competition extends Model
 {
@@ -14,4 +15,8 @@ class Competition extends Model
     protected $keyType = 'string';
     
     protected $guarded = [];
+
+    public function competitionSlot(){
+        return $this-> hasMany(CompetitionSlot::class);
+    }
 }

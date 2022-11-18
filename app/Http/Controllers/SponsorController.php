@@ -2,27 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sponsors;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SponsorController extends Controller
 {
+    public function __construct(){
+        // $this->middleware('auth');
+        // $this->middleware('IsAdmin');
+    }
 
     public function index()
     {
         return view('sponsors.index',[
-            'sponsors' => Sponsors::all(),
+            'sponsors' => Sponsor::all(),
         ]);
     }
 
     public function updateVisibility(Sponsors $sponsor){
         $sponsor->update([
+            'updated_by' => 'admin',
             'is_showed' =>  !$sponsor->is_showed
         ]);
         return redirect()->route('sponsors.index');
     }
-
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         return view('sponsors.create');
@@ -37,17 +46,25 @@ class SponsorController extends Controller
             'is_showed' => 'required'
         ]);
 
-        if ($request->hasFile('logo')){
-            $extension  =$request->file("logo")->getClientOriginalExtension();
-            $fileName = $request->nama.'.'.$extension;
-            $path = $request->file("logo")->storeAs("public/sponsor/logo",$fileName);
-        }
+        // ubah nama file 
+        $sponsor= $request->nama;
+        $fileName = str_replace(' ', '-', $sponsor);
+        $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
+        $fileName = str_replace('-', '_', $fileName);
+        $current = time();
 
-        Sponsors::create([
+        if($request->hasFile('logo')){
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            $fixedName = $fileName.'_'.$current.'.'.$extension;
+            $path = $request->file("logo")->storeAs("public/sponsor/logo",$fixedName);
+        }
+        
+
+        Sponsor::create([
             // 'created_by' => Auth::user()->name,
             'created_by' => 'Admin',
             'name' => $request->nama,
-            'logo' => $fileName,
+            'logo' => $fixedName,
             'is_showed' => $request->is_showed,
         ]);
 
@@ -73,25 +90,39 @@ class SponsorController extends Controller
             'logo_old' => 'required|string',
             'is_showed' => 'required'
         ]);
-    
+ 
+        $sponsor= $request->nama;
+        $fileName = str_replace(' ', '-', $sponsor);
+        $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
+        $fileName = str_replace('-', '_', $fileName);
+        $current = time();
+
         if ($request->hasFile('logo_new')){
-            $extension  =$request->file("logo_new")->getClientOriginalExtension();
-            $fileName = $request->nama.'.'.$extension;
-            $path = $request->file("logo_new")->storeAs("public/sponsor/logo",$fileName);
+            $extension = $request->file('logo')->getClientOriginalExtension();
+            $fixedName = $fileName.'_'.$current.'.'.$extension;
+            $path = $request->file("logo")->storeAs("public/sponsor/logo",$fixedName);
         }
         else{
-            $fileName = $request->logo_old;
+            $fixedName = $request->logo_old;
         }
 
         $sponsor->update([
+            'updated_by' => 'admin',
             'name' => $request->nama,
-            'logo' => $fileName,
+            'logo' => $fixedName,
             'is_showed' => $request->is_showed,
         ]);
         return redirect()->route('sponsors.index');
+
     }
 
-    public function destroy(Sponsors $sponsor)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Sponsor $sponsor)
     {
         $sponsor->delete();
         return redirect()->route('sponsors.index');
