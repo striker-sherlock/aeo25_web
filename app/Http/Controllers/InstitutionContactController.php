@@ -5,18 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\InstitutionContact;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 
 class InstitutionContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function __construct()
     {
+        $this->middleware('admin');
+    }
+
+
+    public function index($type)
+    {
+        if ($type == 'national') {
+            $contactList = InstitutionContact::where([['division', 'NR'], ['is_valid', true]])->orderBy('id')->get();
+            $invalidContacts = InstitutionContact::where([['division', 'NR'], ['is_valid', false]])->orderBy('id')->get();
+        } elseif ($type == 'international') {
+            $contactList = InstitutionContact::where([['division', 'IR'], ['is_valid', true]])->orderBy('id')->get();
+            $invalidContacts = InstitutionContact::where([['division', 'IR'], ['is_valid', false]])->orderBy('id')->get();
+        }
+
         return view('institution-contacts.index', [
-            'institutionContacts' => InstitutionContact::all(),
+            'validInstitutions' => $contactList,
+            'invalidInstitutions' => $invalidContacts,
+            'type' => $type,
         ]);
     }
 
@@ -25,10 +38,17 @@ class InstitutionContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type)
     {
+
+        if ($type == 'national') {
+            $admins = Admin::where('division_id', 'NR')->orderBy('id')->get();
+        } else if ($type == 'international') {
+            $admins = Admin::where('division_id', 'IR')->orderBy('id')->get();
+        }
         return view('institution-contacts.create', [
-            'admin' =>  Admin::all(),
+            'admins' => $admins,
+            'type' => $type,
         ]);
     }
 
@@ -61,13 +81,23 @@ class InstitutionContactController extends Controller
 
         ]);
 
-        return redirect()->route('institution-contacts.index')->with('success', 'Data Succesfully Inserted');
+        $type = $request->division;
+
+        if ($type == 'NR') {
+            return redirect()->route('institution-contacts.index', 'national')->with('success', 'Data Succesfully Inserted');
+        } elseif ($type == 'IR') {
+            return redirect()->route('institution-contacts.index', 'international')->with('success', 'Data Succesfully Inserted');
+        }
     }
 
 
-    public function edit(InstitutionContact $institutionContact)
+    public function edit($type, $id)
     {
-        return view('institution-contacts.edit', ['institution_contact' => $institutionContact]);
+        return view('institution-contacts.edit', [
+            'institutionContact' => InstitutionContact::find($id),
+            'admins' =>  Admin::where('department_id', 'MITR')->orderBy('id')->get(),
+            'type' => $type,
+        ]);
     }
 
     /**
@@ -86,7 +116,6 @@ class InstitutionContactController extends Controller
             'division' => $request->division,
             'inst_type' => $request->inst_type,
             'institution_name' => $request->institution_name,
-            'institution_name' => $request->institution_name,
             'location' => $request->location,
             'pic_name' => $request->pic_name,
             'email' => $request->email,
@@ -101,25 +130,30 @@ class InstitutionContactController extends Controller
 
         ]);
 
-        return redirect()->route('institution-contacts.index')->with('success', 'Data Successfully Updated');
+        if ($institutionContact->division == 'NR') {
+            return redirect()->route('institution-contacts.index', 'national')->with('success', 'Data Successfully Updated');
+        } elseif ($institutionContact->division == 'IR') {
+            return redirect()->route('institution-contacts.index', 'international')->with('success', 'Data Successfully Updated');
+        };
+
     }
 
     protected function validateInstitutionContact(Request $request)
     {
         $request->validate([
-            'admin_id' =>'required|integer',
-            'division' =>'required|string',
-            'inst_type' =>'required|string',
-            'institution_name' =>'required|string',
-            'location' =>'required|string',
-            'pic_name' =>'required|string',
-            'email' =>'required|string',
-            'phone_number' =>'required|string',
-            'informal_letter_sent' =>'required|integer',
-            'formal_letter_sent' =>'required|integer',
-            'whatsapp_sent' =>'required|integer',
-            'is_valid' =>'required|boolean',
-            'reason' =>'required|string',
+            'admin_id' => 'required|integer',
+            'division' => 'required|string',
+            'inst_type' => 'required|string',
+            'institution_name' => 'required|string',
+            'location' => 'required|string',
+            'pic_name' => 'required|string',
+            'email' => 'required|string',
+            'phone_number' => 'required|string',
+            'informal_letter_sent' => 'required|integer',
+            'formal_letter_sent' => 'required|integer',
+            'whatsapp_sent' => 'required|integer',
+            'is_valid' => 'required|boolean',
+            'reason' => 'required|string',
             'additional_notes' => 'nullable|string',
 
         ]);

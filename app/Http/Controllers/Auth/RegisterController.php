@@ -53,6 +53,17 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'pic_name'  => ['nullable', 'string', 'max:255'],
+            'username'  => ['nullable', 'string', 'max:255'],
+            'pic_email'  => ['nullable', 'string', 'max:255'],
+            'pic_phone_number' => ['nullable', 'string', 'max:255'],
+            'country_id' => ['nullable', 'integer'],
+            'email' => ['nullable', 'string', 'max:255'],
+            'institution_name' => ['nullable', 'string', 'max:255'],
+            'institution_email' => ['nullable', 'string', 'max:255'],
+            'institution_type' => ['nullable', 'string', 'max:255'],
+            'institution_logo' => ['nullable', 'string', 'max:255'],
+          
         ]);
     }
 
@@ -68,6 +79,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'created_by' => 'user',
+            
         ]);
     }
 }
