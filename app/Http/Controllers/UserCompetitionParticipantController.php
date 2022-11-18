@@ -77,7 +77,6 @@ class UserCompetitionParticipantController extends Controller
         $competition = Competition::find($request->competition_id);    
         $len = $request->quantity;
         if($request->total_teams){
-            dd($request->all());
             $index = 0 ;
             for ($i = 0 ; $i < $len ; $i++){
                 $numberOfParticipant = 'people'.$i+$request->total_teams;
@@ -95,6 +94,7 @@ class UserCompetitionParticipantController extends Controller
                         $index++;
                         continue;
                     };
+
                     $name= $request->nama[$index];
                     $fileName = str_replace(' ', '-', $name);
                     $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
@@ -141,7 +141,6 @@ class UserCompetitionParticipantController extends Controller
                     $fixedName = $fileName.'_'.$current.'.'.$extension;
                     $path = $request->file("profile_picture.".$i)->storeAs("public/profile_picture/".$request->competition_id,$fixedName);
                 }
-                // dd($request->all());
     
                 CompetitionParticipant::create([
                     'created_by' => Auth::user()->username,

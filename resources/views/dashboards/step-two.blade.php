@@ -13,10 +13,11 @@
                     @if ($isPaidAll->count())
                         <a href="{{route('competition-payments.create',0)}}" class="btn btn-outline-primary rounded-20 my-2">Pay All Slot Registration</a>
                     @endif
-                    @foreach ($confirmedSlot as $competition)
-                    {{-- {{dd($competition->payment_id)}} --}}
-                        <div class="row border p-2 mx-1 mb-3 rounded-20">
-                            <div class="col-md-4"></div>
+                    @foreach ($confirmedSlots as $competition)
+                        <div class="row border p-2 mx-1 mb-3 rounded-20 align-items-center shadow-sm">
+                            <div class="col-md-4">
+                                <img src="/storage/competition_logo/{{$competition->competition->logo}}" class="img-fluid" alt="{{$competition->competition->name}} logo">
+                            </div>
                             <div class="col-md-8 ">
                                 <h5> {{$competition->competition->name}}: {{$competition->quantity}} {{$competition->competition->need_team == 0 ? 'People' : 'Team'}}</h5>
                                 <h5>Payment Status : 
@@ -66,10 +67,10 @@
                             <div class="row">
                                 @if ($item->is_confirmed != 1)
                                     <div class="col">
-                                        <a href="{{route('competition-payments.edit',$item->id)}}" class="btn btn-outline-primary w-100 rounded-pill">Edit</a>
+                                        <a href="{{route('competition-payments.edit',$item->id)}}" class="btn btn-outline-primary w-100 rounded-pill">Edit Payment</a>
                                     </div>
                                     <div class="col">
-                                        <a  href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$item->id}}" class="btn btn-outline-danger rounded-pill w-100"> Delete</a>
+                                        <a  href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$item->id}}" class="btn btn-outline-danger rounded-pill w-100"> Delete Payment</a>
                                 
                                     </div>
                                     

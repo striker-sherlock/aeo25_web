@@ -118,7 +118,7 @@
                     @endfor
                 
                     @if ($i == $quantity+$totalTeams-1  )
-                        <button type="submit" class="d-none btn btn-outline-primary w-100 rounded-pill">Register Participant</button>
+                        <button type="submit" class="{{$competitionSlot->competition->id == 'DB' ? '' : ' d-none'}} btn btn-outline-primary w-100 rounded-pill">Register Participant</button>
                     @endif
                 </x-card>
             @endfor

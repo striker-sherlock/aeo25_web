@@ -51,9 +51,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'institution_name' => ['required', 'string', 'unique:users'],
+            'institution_type' => ['required', 'string'],
+            'institution_logo' => ['image', 'required', 'max:1999', 'mimes:jpg,png,jpeg'],
+            'pic_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'institution_email' => ['required', 'email'],
+            'pic_phone_number' => ['required', 'numeric'],
+            'country_id' => ['required', 'integer'],
         ]);
     }
 
@@ -64,28 +70,39 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected  function index(){
-    
         return view('auth.register',[
             "countries" => Countries::all()
         ]);
     }
     protected function create(array $data){
+        $username = $data['pic_name'];
+        $pic = $data['institution_name'];
+        $fileName = str_replace(' ', '-', $pic );
+        $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
+        $fileName = str_replace('-', '_', $fileName);
+        $current = time();
 
-       $username = $data['username'];
+        if ($data['institution_logo']) {
+            $extension = $data['institution_logo']->getClientOriginalExtension();
+            $fixedName = $fileName.'_'.$current.'.'.$extension;
+            $path = $data['institution_logo']->storeAs("public/instition_logo",$fixedName);
+ 
+        }
+        
         return User::create([
-            'institution_name' => $data['ins_name'],
-            'institution_email' => $data['ins_email'],
-            'institution_type' => $data['ins_type'],
-            'institution_logo' => 'logo.png',
-            'pic_name' => $data['name'],
-            'username' => $data['username'],
+            'institution_name' => $data['institution_name'],
+            'institution_email' => $data['institution_email'],
+            'institution_type' => $data['institution_type'],
+            'institution_logo' => $fixedName,
+            'pic_name' => $data['pic_name'],
+            'username' => $username,
             'email' =>  $data['email'],
-            'pic_phone_number' => $data['phone'],
+            'pic_phone_number' => $data['pic_phone_number'],
             'password' => Hash::make($data['password']),
-            'country_id' => $data['country'],
+            'country_id' => $data['country_id'],
             'created_by' => $username,
         ]);
 
-        return redirect()->route('/');
+        return redirect()->route('/')->with('success','Account is successfully made');
     }
 }

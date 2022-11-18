@@ -5,49 +5,63 @@
             <h5 class="text-muted">Welcome to 2023 Asian English Olympics!</h5>
             <hr>
         </div>
-        
-
         <div class="step-by-step row">
-            <div class="col">
-                <x-card>
-                    <h4>Registration Slots</h4>
-                    <a href="{{route('slot-registrations.create')}}" class="btn btn-outline-success rounded-pill btn-sm">Add New Slot</a>
-                    <h1 class="display-2 fw-bold  ">11<span class="fs-4">/12</span> </h1>
-                  
-                     
-                </x-card>
+           {{-- {{dd($confirmedSlotRegistration->count(),$allSlotRegistration->count())}} --}}
+            <div class="col-md-3">
+                <a href="{{route('dashboard.step',1)}}" class="d-block text-decoration-none btn ">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 green-shadow" style="border-radius:20px">
+                        <div class="card-header bg-secondary"></div>
+                        <div class="card-body my-3 p-4">
+                            <h2 class="fw-bold">STEP 1</h2>
+                            <h4>Confirmed Slot Registration </h4>
+                            <h1 class="display-2 fw-bold {{$confirmedSlotRegistration->count()- $allSlotRegistration->count() == 0 ? 'text-success':'text-danger'}}">{{$confirmedSlotRegistration->count()}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
+            
+                        </div>
+                    </div>
+                </a>
             </div>
             
-            <div class="col">
-                <x-card>
-                    <h4 class="">Unpaid Slots</h4>
-                    <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-success rounded-pill btn-sm">Make Payment</a>
-                    <h1 class="display-2 fw-bold">2</h1>
-                    
-                     
-                </x-card>
-            </div>
-            <div class="col">
-                <x-card>
-                    <h4 class="">Total Participants</h4>
-                    <a href=" " class="btn btn-outline-success rounded-pill btn-sm">Regist New Participant</a>
-                    <h1 class="display-2 fw-bold">20</h1>
-                  
-                   
-                </x-card>
-            </div>
-            <div class="col">
-                <x-card>
-                    <h4 class="">Total Submission</h4>
-                    <a href=" " class="btn btn-outline-success rounded-pill btn-sm">Add Submission</a>
-                    <h1 class="display-2 fw-bold">8<span class="fs-4">/12</span></h1>
-                    <div class="d-flex justify-content-end px-3 mb-1">
-                        {{-- <span style="font-size: 0.6em" class="fw-bold">100/600</span> --}}
+            <div class="col-md-3">
+                    <a href="{{route('dashboard.step',2)}}" class="d-block text-decoration-none btn" title="You must have at least 1 confirmed slot registration to move into this step">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{$confirmedSlotRegistration->count()-$allSlotRegistration->count()!=0 ||$confirmedSlotRegistration->count() == 0 ? 'red-shadow':'green-shadow'}}" style="border-radius:20px">
+                        <div class="card-header bg-secondary"></div>
+                        <div class="card-body my-3 p-4">
+                            <h2 class="fw-bold">STEP 2</h2>
+                            @if (!$confirmedSlotRegistration->count())
+                                <i class="fas fa-lock" style="font-size: 5em"></i>
+                                <h4 class="mt-3 fw-bold">LOCKED</h4>
+                            @else
+                                <h4>Paid Slot Registration </h4>
+                                <h1 class="display-2 fw-bold {{$confirmedPayment->count() - $allSlotRegistration->count() == 0 ? 'text-success' : 'text-danger'}}">{{$confirmedPayment->count()}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
+                            @endif
+                        </div>
                     </div>
-                    {{-- <div class="progress ">
-                        <div class="progress-bar" role="progressbar" style="width:50%;" aria-valuemin="0" aria-valuemax="100"> </div>
-                    </div> --}}
-                </x-card>
+                </a>
+            </div>
+
+            <div class="col-md-3">
+                <a href="{{route('dashboard.step',3)}}" class="d-block text-decoration-none btn" title="You must have at least 1 confirmed payment slot to move into this step">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 red-shadow" style="border-radius:20px">
+                        <div class="card-header bg-secondary"></div>
+                        <div class="card-body my-3 p-4">
+                            <h2 class="fw-bold">STEP 3</h2>
+                            <i class="fas fa-lock" style="font-size: 5em"></i>
+                            <h4 class="mt-3 fw-bold">LOCKED</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="{{route('dashboard.step',2)}}" class="d-block text-decoration-none btn ">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 red-shadow" style="border-radius:20px">
+                        <div class="card-header bg-secondary"></div>
+                        <div class="card-body my-3 p-4">
+                            <h2 class="fw-bold">STEP 4</h2>
+                            <i class="fas fa-lock" style="font-size: 5em"></i>
+                            <h4 class="mt-3 fw-bold">LOCKED</h4>
+                        </div>
+                    </div>
+                </a>
             </div>
 
         </div>

@@ -8,13 +8,20 @@
 .btn:hover{
     transform: scale(1.05);
 }
-// .row{
-//     width: 3000px;
-//     height: 2000px;
-// }
 
+.data-table tbody tr:hover {
+    background-color:#eee;
+}
 
 .nav-pills li {
     display: inline-block;
     min-width: 30%;
+}
+
+.green-shadow {
+    box-shadow: 1px 0px 38px 0px rgba(34,107,81,0.5);
+}
+
+.red-shadow {
+    box-shadow: 1px 0px 30px 0px red;
 }

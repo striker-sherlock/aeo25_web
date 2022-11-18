@@ -33,7 +33,7 @@
         <x-card>
             <h1 class="mb-3 text-warning">Pending Slot Registration</h1>
             @if ($pending->count())
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered data-table" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>
@@ -41,7 +41,6 @@
                         <th scope="col">PIC Name</th>
                         <th scope="col">Contact</th>
                         <th scope="col">Total Slot</th>
-                        <th scope="col">Expired</th>
                         <th scope="col">Action </th>
                         
                     </tr>
@@ -54,8 +53,6 @@
                                 <th>{{$competition->user->pic_name}}</th>
                                 <th>{{$competition->user->pic_phone_number}}</th>
                                 <th>{{$competition->quantity}}</th>
-                                @php($diff = \Carbon\Carbon::parse( now() )->diffInDays( $competition->created_at ))
-                                <th class="{{$diff > 2 ? 'text-danger' : 'text-success'}}">{{$diff}} Days</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex  justify-content-center">
                                         <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn btn-sm btn-primary me-2">E</a>
@@ -73,47 +70,51 @@
         </x-card>
 
         {{-- confirmed --}}
-       @if ($confirmed->count())
         <x-card>
             <h1 class="mb-3 text-success">Confirmed Slot Registration </h1>
-            <table class="table table-striped table-bordered">
-                <thead class="text-center">
-                <tr>
-                    <th scope="col">Competition Field</th>
-                    <th scope="col">PIC Name</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Registered At</th>
-                    <th scope="col">Total Slot</th>
-                    <th scope="col">Action </th>
-                    
-                </tr>
-                </thead>
-                <tbody class="text-center">
-                    @foreach ($confirmed as $competition)
-                        <tr>
-                            <th>{{$competition->competition->name}}</th>
-                            <th>{{$competition->user->pic_name}}</th>
-                            <th>{{$competition->user->pic_phone_number}}</th>
-                            <th>{{$competition->created_at}}</th>
-                            <th>{{$competition->quantity}}</th>
-                            <th class="m-auto"> 
-                                <div class="d-flex   justify-content-center">
-                                     
-                                    <a href="{{route('slot-registrations.cancel',$competition->id)}}" class="btn btn-warning  btn-sm">X</a>
-                                </div>
-                            </th>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+            @if ($confirmed->count())
+                <table class="table table-striped table-bordered data-table" id="">
+                    <thead class="text-center">
+                    <tr>
+                        <th scope="col">Competition Field</th>
+                        <th scope="col">PIC Name</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Expired</th>
+                        <th scope="col">Payment Status</th>
+                        <th scope="col">Total Slot</th>
+                        <th scope="col">Action </th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach ($confirmed as $competition)
+                            <tr>
+                              
+                                <th>{{$competition->competition->name}}</th>
+                                <th>{{$competition->user->pic_name}}</th>
+                                <th>{{$competition->user->pic_phone_number}}</th>
+                                @php($diff = \Carbon\Carbon::parse( now() )->diffInDays( $competition->confirmed_at ))
+                                <th class="{{$diff > 2 ? 'text-danger' : 'text-success'}}">H + {{$diff}} Days</th>
+                                <th class="{{$competition->payment_id == NULL ? 'text-danger' : 'text-warning'}}">{{$competition->payment_id == NULL ? 'No Payment Yet' : 'Payment is on progress'}}</th>
+                                <th>{{$competition->quantity}}</th>
+                                <th class="m-auto"> 
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{route('slot-registrations.cancel',$competition->id)}}" class="btn btn-warning  btn-sm">X</a>
+                                    </div>
+                                </th>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else <hr><p class="text-center">No Data</p>
+            @endif
         </x-card>
-       @endif
 
         {{-- rejected --}}
         <x-card>
             <h1 class="mb-3 text-danger">Rejected Slot Registration</h1>
                 @if ($rejected->count())
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered data-table" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>
