@@ -14,11 +14,12 @@
 @import '~dataTables.net-dt/css/jquery.dataTables.min.css';
 
 // ICONS
+$fa-font-path: "~fa/../webfonts";
+@import '~fa/brands.scss';
+@import '~fa/regular.scss';
+@import '~fa/solid.scss';
+@import '~fa/fontawesome.scss';
 
-// @import '~@fortawesome/fontawesome-free/scss/brands';
-// @import '~@fortawesome/fontawesome-free/scss/regular';
-// @import '~@fortawesome/fontawesome-free/scss/solid';
-// @import '~@fortawesome/fontawesome-free/scss/fontawesome';
-// @import '~@fortawesome/fontawesome-free/css/all.scss';
-@import "node_modules/font-awesome/scss/font-awesome.scss";
+// @import '~@fortawesome/fontawesome-free/scss/all.scss';
+// @import "node_modules/font-awesome/scss/font-awesome.scss";
 @import 'style.scss'

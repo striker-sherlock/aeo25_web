@@ -17,6 +17,7 @@ class SlotRegistrationController extends Controller
     public function __construct(){
         $this->middleware('auth')->only(['create']);
     }
+
     public function index(){
         //data table jangan lupa
         $competitions = Competition::all();
@@ -41,8 +42,7 @@ class SlotRegistrationController extends Controller
             'registeredSlot' => $count,
         ]);
     }
-    
- 
+
     public function create(){
         return view('slot-registrations.create',[
             'competitions' => Competition::all(),

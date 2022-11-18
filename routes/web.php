@@ -17,6 +17,7 @@ use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
+use App\Http\Controllers\AccommodationSlotRegistrationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\CompetitionPaymentController;
@@ -115,6 +116,14 @@ Route::resource('facilities', FacilityController::class);
 
 //Accommodation
 Route::resource('accommodations', AccommodationController::class);
+
+//Accommodation Slot
+Route::controller(AccommodationSlotRegistrationController::class)->prefix('accommodation-slot-registrations')->name('accommodation-slot-registrations.')->group(function(){
+    Route::get('{accommodationSlot}/confirm', 'confirm')->name('confirm');
+    Route::get('{accommodationSlot}/reject', 'reject')->name('reject');
+    Route::get('{accommodationSlot}/cancel', 'cancel')->name('cancel');
+});
+Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only'=>['index', 'create', 'destroy', 'store']]);
 
 //Inventory
 Route::resource('inventories', InventoryController::class)->except('show');

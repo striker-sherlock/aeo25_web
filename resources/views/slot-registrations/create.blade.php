@@ -1,6 +1,6 @@
 <x-admin>
     <div class="container mt-3">
-        <h1 class="display-4  fw-bold text-primary">Select The Competition Bellow</h1><hr class="mb-3">
+        <h1 class="display-4  fw-bold text-primary">Select The Competition Below</h1><hr class="mb-3">
         <form action="{{route('slot-registrations.store')}}" method="POST" enctype="multipart/form-data"> 
             <div class="row">
                 @csrf
