@@ -12,6 +12,7 @@
                           <th class="align-middle text-center">ID</th>
                           <th class="align-middle text-center">Room Type</th>
                           <th class="align-middle text-center">Max Guests</th>
+                          <th class="align-middle text-center">Price</th>
                           <th class="align-middle text-center">Action</th>
                         </tr>
                       </thead>
@@ -21,6 +22,7 @@
                             <td>{{$accommodation->id}}</td>
                             <td>{{$accommodation->room_type}}</td>
                             <td>{{$accommodation->max_guests}}</td>
+                            <td>Rp. {{ number_format($accommodation->price, 0, ',', '.') }}</td>
                             <td class="d-flex justify-content-center">
                               <div class="btn-toolbar flex-nowrap justify-content-center" role="toolbar">
                                 <button type="button" class ="btn btn-sm btn-info text-white me-2 {{ ($accommodation->facilities->count() > 0) ? '' : 'disabled' }}" data-bs-target="#viewFacility-{{ $accommodation->id }}" data-bs-toggle="modal" title="View Facilities">
@@ -58,7 +60,7 @@
                   </span>
                   </div>
                   <div class="body mb-3">
-                  <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$accommodation->name}}</span>" </h1>
+                  <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$accommodation->room_type}}</span>" </h1>
                   </div>
                   <div class="footer">
                       <div class="row">
@@ -66,10 +68,10 @@
                           <button type="button" class="btn btn-secondary w-100"  data-bs-dismiss="modal">Back</button>
                       </div>
                       <div class="col">
-                          <form method="POST" action="{{route('countries.destroy',$accommodation->id)}}">
+                          <form method="POST" action="{{route('accommodations.destroy',$accommodation->id)}}">
                           <input type="hidden" name="_method" value = "DELETE">
                               <button class="btn btn-danger rounded w-100" title="delete">
-                              Delete
+                                Delete
                               </button>
                           @csrf
                           </form>

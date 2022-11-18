@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('room_type');
             $table->string('picture');
             $table->integer('max_guests');
+            $table->integer('price');
         });
     }
 

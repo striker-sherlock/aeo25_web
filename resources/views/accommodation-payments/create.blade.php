@@ -1,6 +1,6 @@
 <x-admin>
     <div class="container mt-3">
-        <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-primary rounded-pill mb-3">Go Back</a>
+        <a href="{{route('dashboard.accommodation-step',2)}}" class="btn btn-outline-primary rounded-pill mb-3">Go Back</a>
         <div class="row">
             <div class="col-md-6">
                 <x-card>
@@ -14,35 +14,35 @@
                 <x-card>
                     <h5 class="text-uppercase fw-bold text-center">Receipt Summary</h5><hr>
                     <div class="d-flex justify-content-between">
-                        <h4>Competition</h4>
+                        <h4>Accommodation</h4>
                         <h4>Price</h4>
                     </div>
                     {{-- ini jika pic ingin membayar semua sekaligus --}}
-                    @if ($isPayAll == 1)
-                        @foreach ($allCompetitions as $competition)
+                    @if ($payAll == 1)
+                        @foreach ($allAccommodations as $accommodation)
                             <div class="d-flex justify-content-between">
-                                <h6>{{$competition->competition->name}} x {{$competition->quantity}} {{$competition->competition->need_team == 1 ? 'Team' : 'People'}}</h6>
-                                <h6>{{ number_format($competition->competition->price * $competition->quantity, 2, ',', '.')}} IDR</h6>
+                                <h6>{{$accommodation->accommodation->room_type}} x {{$accommodation->quantity}}</h6>
+                                <h6>{{ number_format($accommodation->accommodation->price * $accommodation->quantity, 2, ',', '.')}} IDR</h6>
                             </div>
                         @endforeach
                         <hr>
                         <div class="d-flex justify-content-between">
                             <h3>Grand Total</h3>
-                            <h4>{{ number_format($totalPrice, 2, ',', '.')}} IDR</h4>
+                            <h4>{{ number_format($total, 2, ',', '.')}} IDR</h4>
                         </div>
 
                     {{-- ini kondidi bila PIC ingin membayar slotnya 1 per 1  --}}
                     @else
                         <div class="d-flex justify-content-between">
-                            <h6>{{$competitionSlot->competition->name}} x {{$competitionSlot->quantity}} {{$competitionSlot->competition->need_team == 1 ? 'Team' : 'People'}}</h6>
-                            <h6>{{ number_format($totalPrice, 2, ',', '.')}} IDR</h6>
+                            <h6>{{$accommodationSlot->accommodation->room_type}} x {{$accommodationSlot->quantity}} </h6>
+                            <h6>{{ number_format($total, 2, ',', '.')}} IDR</h6>
                         </div>
 
                         <hr>
                         
                         <div class="d-flex justify-content-between">
                             <h3>Grand Total</h3>
-                            <h4>{{ number_format($totalPrice, 2, ',', '.')}} IDR</h4>
+                            <h4>{{ number_format($total, 2, ',', '.')}} IDR</h4>
                         </div>
                     @endif
                     
@@ -60,14 +60,14 @@
  
               
               </ul>
-            <form action="{{route('competition-payments.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('accommodation-payments.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="text" value="{{Auth::user()->id}}" name="pic_id" hidden>
-                <input type="text" value="{{$totalPrice}}" name="amount" hidden>
+                <input type="text" value="{{$total}}" name="amount" hidden>
                 <input type="text" name="type" hidden>
                 
-                <input type="text" name="isPayAll"  value="{{$isPayAll}}" hidden>
-                <input type="text" name="competitionSlot"  value="{{ $competitionSlot == NULL ? '0' : $competitionSlot->id }}" hidden>
+                <input type="text" name="payAll"  value="{{$payAll}}" hidden>
+                <input type="text" name="accommodationSlot"  value="{{ $accommodationSlot == NULL ? '0' : $accommodationSlot->id }}" hidden>
 
 
                 <div class="tab-content">
