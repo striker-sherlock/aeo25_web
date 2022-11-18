@@ -130,4 +130,4 @@
         </div>  
       </div>  
     @endforeach
-    </x-admin>
+</x-admin>

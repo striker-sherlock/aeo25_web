@@ -1,6 +1,17 @@
 .rounded-20{
-    border-radius: 12,5%;
+    border-radius: 20px;
 }
+
+.btn{
+    transition: 0.7s;
+}
+.btn:hover{
+    transform: scale(1.05);
+}
+// .row{
+//     width: 3000px;
+//     height: 2000px;
+// }
 
 
 .nav-pills li {

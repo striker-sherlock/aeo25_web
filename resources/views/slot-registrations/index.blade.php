@@ -40,8 +40,8 @@
                         <th scope="col">Institution Name</th>
                         <th scope="col">PIC Name</th>
                         <th scope="col">Contact</th>
-                        <th scope="col">Registered At</th>
                         <th scope="col">Total Slot</th>
+                        <th scope="col">Expired</th>
                         <th scope="col">Action </th>
                         
                     </tr>
@@ -53,10 +53,12 @@
                                 <th>{{$competition->user->institution_name}}</th>
                                 <th>{{$competition->user->pic_name}}</th>
                                 <th>{{$competition->user->pic_phone_number}}</th>
-                                <th>{{$competition->created_at}}</th>
                                 <th>{{$competition->quantity}}</th>
+                                @php($diff = \Carbon\Carbon::parse( now() )->diffInDays( $competition->created_at ))
+                                <th class="{{$diff > 2 ? 'text-danger' : 'text-success'}}">{{$diff}} Days</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex  justify-content-center">
+                                        <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn btn-sm btn-primary me-2">E</a>
                                         <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-success btn-sm me-2">C</a>
                                         <a  class="btn btn-danger btn-sm me-2" data-bs-toggle="modal" data-bs-target="#reason{{$competition->id}}">R</a>
                                         
@@ -142,7 +144,7 @@
         </x-card>
    
     
-    <!-- Modal -->
+    <!-- Modal untuk reject -->
     @foreach ($pending as $competition)
         <div class="modal fade p-4" id="reason{{$competition->id}}" tabindex="-1" role="dialog" >
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -174,8 +176,9 @@
             </div>
             </div>
         </div>
-        
     @endforeach
+    
+
     
 </x-admin>
 
