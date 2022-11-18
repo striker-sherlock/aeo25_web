@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\Countries;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -73,14 +74,28 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'created_by' => 'user',
-            
+    protected  function index(){
+    
+        return view('auth.register',[
+            "countries" => Countries::all()
         ]);
+    }
+    protected function create(array $data){
+       $username = strtolower(str_replace(' ', '', $data['name']));
+        return User::create([
+            'created_by' => $username,
+            'institution_name' => $data['ins_name'],
+            'institution_email' => $data['ins_email'],
+            'institution_type' => $data['ins_type'],
+            'institution_logo' => 'logo.png',
+            'pic_name' => $data['name'],
+            'username' => $username,
+            'email' =>  $data['email'],
+            'pic_phone_number' => $data['phone'],
+            'password' => Hash::make($data['password']),
+            'country_id' => $data['country_id'],
+        ]);
+
+        return redirect()->route('/');
     }
 }
