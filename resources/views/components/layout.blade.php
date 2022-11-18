@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AEO 2023</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <title>The 2023 Asian Engllish Olympics</title>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>

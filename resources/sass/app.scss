@@ -1,11 +1,17 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
+// Style
+@import 'style';
+
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';;
 @import "@fortawesome/fontawesome-free/css/all.css";
+
+// Datatables
+@import 'datatables.net-dt';
 
 
