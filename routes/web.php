@@ -2,12 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\CountriesController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -18,7 +14,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FacilitiesController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\FlightTicketController;
-use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
@@ -36,6 +31,7 @@ use App\Http\Controllers\SponsorController;
 use App\Models\AccessControl;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\RankingListController;
+use App\Http\Controllers\AccessControlController;
 use App\Http\Controllers\ScoreTypeController;
 
 Auth::routes(['verify'=>true]);

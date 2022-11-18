@@ -39,7 +39,7 @@
             </div>
         </nav>
 
-        <main class="">
+        <main class="py-4">
             @yield('content')
         </main>
     </div>
