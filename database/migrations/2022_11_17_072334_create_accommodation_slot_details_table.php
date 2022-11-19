@@ -15,6 +15,7 @@ return new class extends Migration
             $table->timestamp('created_at')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->timestamp('confirmed_at')->nullable();
             $table->integer('pic_id');
             $table->string('accommodation_id');
             $table->string('check_in_date');

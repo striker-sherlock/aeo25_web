@@ -6,6 +6,7 @@ use App\Models\Accommodation;
 use App\Models\AccommodationFacility;
 use App\Models\Facility;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AccommodationController extends Controller
 {
@@ -29,6 +30,7 @@ class AccommodationController extends Controller
             'room_type'=>'required|string',
             'max_guests'=>'required|integer',
             'picture'=>'required|image',
+            'price'=>'required|integer',
         ]);
         
         $name = $request->room_type;
@@ -48,6 +50,7 @@ class AccommodationController extends Controller
             'room_type'=>$request->room_type,
             'max_guests'=>$request->max_guests,
             'picture' => $fileName,
+            'price'=>$request->price,
         ]);
 
         foreach (Facility::all() as $facility) {
@@ -71,7 +74,7 @@ class AccommodationController extends Controller
         return view('accommodations.edit', [
             'accommodation' => $accommodation,
             'accommodationFacilities' => AccommodationFacility::where('accommodation_id', $accommodation->id)->orderBy('is_available', 'DESC')->get(),
-            'facilities' => Facility::orderBy('name')->get()
+            'facilities' => Facility::orderBy('name')->get(),
         ]);
     }
 
@@ -81,6 +84,7 @@ class AccommodationController extends Controller
             'room_type'=>'required|string',
             'max_guests'=>'required|int',
             'picture_new'=>'nullable|image',
+            'price'=>'required|int',
         ]);
         
         $name = $request->room_type;
@@ -103,6 +107,7 @@ class AccommodationController extends Controller
             'room_type'=>$request->room_type,
             'max_guests'=>$request->max_guests,
             'picture' => $fileName,
+            'price'=>$request->price,
         ]);
 
         if($accommodation->facilities->count() > 0) {
@@ -122,8 +127,6 @@ class AccommodationController extends Controller
                 ]);
             }
         }
-
-
         return redirect()->route('accommodations.index');// ->with('success','Succesfuly Added');
     }
 

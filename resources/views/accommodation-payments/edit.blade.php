@@ -1,4 +1,5 @@
-<x-admin>
+<x-admin>   
+ 
     <div class="container mt-3">
         <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-primary rounded-pill mb-3">Go Back</a>
         <div class="row">
@@ -12,39 +13,26 @@
             <div class="col-md-6">
                 {{-- RECEIPT SUMMARY --}}
                 <x-card>
-                    <h5 class="text-uppercase fw-bold text-center">Receipt Summary</h5><hr>
+                    <h5 class="text-uppercase fw-bold text-center">Reciept Summary</h5><hr>
                     <div class="d-flex justify-content-between">
-                        <h4>Competition</h4>
+                        <h4>Accommodation</h4>
                         <h4>Price</h4>
                     </div>
-                    {{-- ini jika pic ingin membayar semua sekaligus --}}
-                    @if ($isPayAll == 1)
-                        @foreach ($allCompetitions as $competition)
-                            <div class="d-flex justify-content-between">
-                                <h6>{{$competition->competition->name}} x {{$competition->quantity}} {{$competition->competition->need_team == 1 ? 'Team' : 'People'}}</h6>
-                                <h6>{{ number_format($competition->competition->price * $competition->quantity, 2, ',', '.')}} IDR</h6>
-                            </div>
-                        @endforeach
-                        <hr>
+                    @foreach ($paidSlot as $accommodationSlot)
+             
                         <div class="d-flex justify-content-between">
-                            <h3>Grand Total</h3>
-                            <h4>{{ number_format($totalPrice, 2, ',', '.')}} IDR</h4>
+                            <h6>{{$accommodationSlot->accommodation->room_type}} x {{$accommodationSlot->quantity}}</h6>
+                            <h6>{{ number_format($accommodationSlot->accommodation->price, 2, ',', '.')}} IDR</h6>
                         </div>
-
-                    {{-- ini kondidi bila PIC ingin membayar slotnya 1 per 1  --}}
-                    @else
-                        <div class="d-flex justify-content-between">
-                            <h6>{{$competitionSlot->competition->name}} x {{$competitionSlot->quantity}} {{$competitionSlot->competition->need_team == 1 ? 'Team' : 'People'}}</h6>
-                            <h6>{{ number_format($totalPrice, 2, ',', '.')}} IDR</h6>
-                        </div>
-
-                        <hr>
                         
-                        <div class="d-flex justify-content-between">
-                            <h3>Grand Total</h3>
-                            <h4>{{ number_format($totalPrice, 2, ',', '.')}} IDR</h4>
-                        </div>
-                    @endif
+                    @endforeach
+                    <hr>
+                    
+                    <div class="d-flex justify-content-between">
+                        <h3>Grand Total</h3>
+                        <h4>{{ number_format($accommodationPayment->amount, 2, ',', '.')}} IDR</h4>
+                    </div>
+                 
                     
                 </x-card>
             </div>
@@ -54,68 +42,72 @@
             <p class="text-muted">Please Fill the Form Bellow</p>
             <hr> 
             <ul class="nav nav-pills d-flex justify-content-around mb-3">
-                <li class=""><a data-bs-toggle="pill" href="#bank" class="btn btn-outline-primary rounded-pill me-3 d-block w-100 bank">Bank Transfer</a></li>
 
-                <li class=""><a data-bs-toggle="pill" href="#wise" class="btn btn-outline-primary rounded-pill me-3 d-block w-100 wise"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a></li>
+                <li class="">
+                    <a data-bs-toggle="pill" href="#bank" class="btn btn-outline-primary rounded-pill me-3 d-block w-100 bank {{$accommodationPayment->paymentProvider->type == "BANK" ? 'active' : ''}}">Bank Transfer</a>
+                </li>
+
+                <li class="">
+                    <a data-bs-toggle="pill" href="#wise" class="btn btn-outline-primary rounded-pill me-3 d-block w-100 wise {{$accommodationPayment->paymentProvider->type == "Wise" ? 'active' : ''}}"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a>
+                </li>
  
               
               </ul>
-            <form action="{{route('competition-payments.store')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('accommodation-payments.update',$accommodationPayment->id)}}" method="POST" enctype="multipart/form-data">
+ 
                 @csrf
-                <input type="text" value="{{Auth::user()->id}}" name="pic_id" hidden>
-                <input type="text" value="{{$totalPrice}}" name="amount" hidden>
-                <input type="text" name="type" hidden>
-                
-                <input type="text" name="isPayAll"  value="{{$isPayAll}}" hidden>
-                <input type="text" name="competitionSlot"  value="{{ $competitionSlot == NULL ? '0' : $competitionSlot->id }}" hidden>
-
-
+                @method('PUT')
+                <input type="text" name="type" value="{{$accommodationPayment->paymentProvider->type}}" hidden>
                 <div class="tab-content">
-                    <div id="bank" class="tab-pane fade">
+                    <div id="bank" class="tab-pane fade {{$accommodationPayment->paymentProvider->type == "BANK" ? 'show active' : ''}}">
+
                         <div class="form-group mb-2">
                             <label for="payment_provider" class="col-form-label">Payment Type<span class="text-danger">*</span></label>
                             <select class="form-select"  name="payment_provider">
-                                <option selected class="d-none">Select The payment type</option>
                                 @foreach ($paymentProviders as $paymentProvider)
-                                    <option value="{{$paymentProvider->id}}" {{old('payment_provider' == $paymentProvider->id? 'selected' : '')}}>{{$paymentProvider->name}}</option>
+                                    <option value="{{$paymentProvider->id}}" {{$accommodationPayment->payment_provider_id == $paymentProvider->id ? 'selected' : ''}}>{{$paymentProvider->name}}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="account_name" class="col-form-label">Account Name<span class="text-danger">*</span></label>
-                            <input type="text"  class="form-control"  name="account_name" id="account_name" value="{{old('account_name')}}">
+                            <input type="text"  class="form-control"  name="account_name" id="account_name" value="{{$accommodationPayment->account_name}}">
                         </div>        
                         <div class="form-group mb-3">
                             <label for="account_number" class="col-form-label">Account Number<span class="text-danger">*</span></label>
-                            <input type="text"  class="form-control"  name="account_number" id="account_number" value="{{old('account_number')}}">
+                            <input type="text"  class="form-control"  name="account_number" id="account_number" value="{{$accommodationPayment->account_number }}">
                         </div>        
                 
                         <div class="form-group mb-3">
-                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof<span class="text-danger">*</span></label>
+                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof</label>
                             <input type="file" class="form-control"  name="transfer_proof_bank" id="transfer_proof_bank" accept="image/png,image/jpeg,image/jpg">    
                             <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                         </div>  
+                        <a href="#" class="btn btn-outline-info rounded-pill mb-3" data-bs-toggle="modal" data-bs-target="#payment-proof" >View Current Proof</a>
+                         
+                        <input type="text" name="transfer_proof_old" value="{{$accommodationPayment->payment_proof}}" hidden>
+
                         <button type="submit" class="btn btn-outline-primary w-100 rounded-pill">Submit Payment Confirmation</button>
                     </div>
 
                     {{-- WISE --}}
-                    <div id="wise" class="tab-pane fade">
+                    <div id="wise" class="tab-pane fade {{$accommodationPayment->paymentProvider->type == "Wise" ? 'show active' : ''}}">
                         <div class="form-group mb-3">
                             <label for="email" class="col-form-label">Email Address<span class="text-danger">*</span></label>
-                            <input type="email"  class="form-control"  name="email" id="email" value="{{old('email')}}">
+                            <input type="email"  class="form-control"  name="email" id="email" value="{{$accommodationPayment->email}}">
                         </div>        
                         <div class="form-group mb-3">
                             <label for="track" class="col-form-label">Tranking Link<span class="text-danger">*</span></label>
-                            <input type="url"  class="form-control"  name="track" id="track" value="{{old('track')}}">
+                            <input type="url" class="form-control"  name="track" id="track" value="{{$accommodationPayment->tracking_link}}">
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="transfer_proof_wise" class="col-form-label">Transfer Proof<span class="text-danger">*</span></label>
+                            <label for="transfer_proof_wise" class="col-form-label">Transfer Proof</label>
                             <input type="file"  class="form-control"  name="transfer_proof_wise" id="transfer_proof_wise" accept="image/png,image/jpeg,image/jpg">    
                             <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                         </div>       
-
+                        <a href="#" class="btn btn-outline-info rounded-pill mb-3" data-bs-toggle="modal" data-bs-target="#payment-proof" >View Current Proof</a>
                         <button type="submit" class="btn btn-outline-primary w-100 rounded-pill">Submit Payment Confirmation</button>
                     </div>
                 </div>
@@ -127,33 +119,34 @@
         let wise = document.querySelector('.wise');
         let type = document.querySelector('input[name="type"]');
         bank.addEventListener('click', function(){
-            type.value = "bank";
+            type.value = "BANK";
 
             //set required untuk bank dan remove required buat yang wise
             document.querySelector('input[name="account_name"]').setAttribute('required','');
             document.querySelector('input[name="account_number"]').setAttribute('required','');
             document.querySelector('input[name="email"]').removeAttribute('required');
             document.querySelector('input[name="track"]').removeAttribute('required');
-
-            //reset value yang ada di wise
-            document.querySelector('input[name="email"]').value = "";
-            document.querySelector('input[name="track"]').value = "";
-            document.querySelector('input[name="transfer_proof_wise"]').value = "";
         })
         wise.addEventListener('click', function(){
-            type.value = "wise";
+            type.value = "WISE";
+            document.querySelector('input[name="payment_provider"]').value = "18";
             //set required untuk kolom inputan di wise dan remove required buat inputan yang di bank
             document.querySelector('input[name="email"]').setAttribute('required','');
             document.querySelector('input[name="track"]').setAttribute('required','');
             document.querySelector('input[name="account_name"]').removeAttribute('required');
             document.querySelector('input[name="account_number"]').removeAttribute('required');
             
-            //reset value inputan di bank tf
-            document.querySelector('input[name="account_name"]').value = "";
-            document.querySelector('input[name="account_number"]').value = "";
-            document.querySelector('input[name="transfer_proof_bank"]').value = "";
-            
         })
     </script>
+
+    {{-- modal untuk menampilkan payment proof --}}
+    <div class="modal fade p-4" id="payment-proof" tabindex="-1" role="dialog" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <img src="/storage/transfer_proof/{{$accommodationPayment->payment_proof}}" class="img-fluid" alt="tf_proof">
+        </div>
+        </div>
+    </div>
+            
 </x-admin>
 

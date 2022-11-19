@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Countries;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CountriesController extends Controller
     {
@@ -69,6 +70,6 @@ class CountriesController extends Controller
     public function destroy(Countries $country)
     {
         $country->delete();
-        return redirect()->back();//->with('success','Succesfuly Deleted');
+        return redirect()->back()->with('success','Succesfuly Deleted');
     }
 }

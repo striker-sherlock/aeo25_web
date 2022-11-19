@@ -7,12 +7,16 @@
               <form action="{{route('accommodations.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
                   <div class="form-group mb-3">
-                    <label class="col-form-label" for="room_type">Room Type<span class="text-danger">*</span></label>
+                    <label class="col-form-label" for="room_type">Room Type <span class="text-danger">*</span></label>
                     <input type="text" class="form-control" name="room_type" id="room_type" placeholder="Enter Type" value="{{old('room_type')}}">
                   </div>
                   <div class="form-group mb-3">
-                    <label class="col-form-label" for="max_guests">Max Guests<span class="text-danger">*</span></label>
+                    <label class="col-form-label" for="max_guests">Max Guests <span class="text-danger">*</span></label>
                     <input type="number" class="form-control" name="max_guests" id="max_guests" placeholder="Enter Number of Guests" value="{{old('max_guests')}}">
+                  </div>
+                  <div class="form-group mb-3">
+                    <label class="col-form-label" for="max_guests">Price <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" name="price" id="price" placeholder="Enter Room Price" value="{{old('price')}}">
                   </div>
                   <div class="form-group mb-3">
                     <label for="picture" class="col-form-label">Picture <span class="text-danger">*</span></label>

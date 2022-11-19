@@ -18,6 +18,8 @@ use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
+use App\Http\Controllers\UserAccommodationPaymentController;
+use App\Http\Controllers\AdminAccommodationPaymentController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\CompetitionPaymentController;
@@ -50,6 +52,7 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 Route::get('/dashboard/step-{step}', [DashboardController::class, 'step'])->name('dashboard.step');
+Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 'accommodationStep'])->name('dashboard.accommodation-step');
 //Countries
 Route::resource('countries', CountriesController::class);
 
@@ -123,7 +126,21 @@ Route::controller(AccommodationSlotRegistrationController::class)->prefix('accom
     Route::get('{accommodationSlot}/reject', 'reject')->name('reject');
     Route::get('{accommodationSlot}/cancel', 'cancel')->name('cancel');
 });
-Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only'=>['index', 'create', 'destroy', 'store']]);
+Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only'=>['index', 'create', 'destroy', 'store', 'edit', 'update']]);
+
+//USER ACCOMMODATION PAYMENT
+Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
+Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
+Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');
+Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
+Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
+
+//ACCOMMODATION PAYMENT ADMIN
+Route::get('/accommodation-payments', [AdminAccommodationPaymentController::class, 'index'])->name('accommodation-payments.index');
+Route::get('/accommodation-payments/confirm/{accommodationPayment}', [AdminAccommodationPaymentController::class, 'confirm'])->name('accommodation-payments.confirm');
+Route::post('/accommodation-payments/reject', [AdminAccommodationPaymentController::class, 'reject'])->name('accommodation-payments.reject');
+Route::get('/accommodation-payments/cancel/{accommodationPayment}', [AdminAccommodationPaymentController::class, 'cancel'])->name('accommodation-payments.cancel');
+Route::get('/accommodation-payments/export', [AdminAccommodationPaymentController::class, 'export'])->name('accommodation-payments.export');
 
 //Inventory
 Route::resource('inventories', InventoryController::class)->except('show');
