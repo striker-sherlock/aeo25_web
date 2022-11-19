@@ -3,6 +3,7 @@ import "../sass/app.scss";
 import './script'
 import * as bootstrap from "bootstrap";
 import jquery, { ready } from 'jquery';
+import "./sidebar";
 
 
 window.jQuery = jquery;
@@ -18,9 +19,8 @@ window.bootstrap = bootstrap;
 
  
 $(document).ready( function () {
-    console.log('ready');
-    // $('#countries').select2();
-    // $('#data-table').DataTable();
+    $('#countries').select2();
+    $('#data-table').DataTable();
 } );
 
 
@@ -47,48 +47,4 @@ $(toggleConfirmPassword).click(function(){
     
 })
 
-
-//  Sidebar
-$(document).ready(function(){
-    $("#page-toggled").addClass("toggled");
-    $("#footer-toggled").addClass("toggled");
-    if ($(window).width() < 1200) {
-        var trigger = $("#page-toggled");
-        // console.log('asdfsdf');
-    
-        trigger.click(function () {
-            $("#page-toggled").removeClass("toggled");
-            $("#footer-toggled").removeClass("toggled");
-       
-            $("#show-sidebar").show();
-        });
-    } else {
-        console.log('asdfsdf');
-        $("#page-toggled").addClass("toggled");
-        $("#footer-toggled").addClass("toggled");
-    }
-    
-    $("#close-sidebar").click(function () {
-        $(".page-wrapper").removeClass("toggled");
-        $(".footer-wrapper").removeClass("toggled");
-        $("#show-sidebar").show();
-    });
-    $("#show-sidebar").click(function () {
-        $(".page-wrapper").addClass("toggled");
-        $(".footer-wrapper").addClass("toggled");
-        $("#show-sidebar").hide();
-    });
-    
-    $(".sidebar-dropdown > a").click(function () {
-        $(".sidebar-submenu").slideUp(200);
-        if ($(this).parent().hasClass("active")) {
-            $(".sidebar-dropdown").removeClass("active");
-            $(this).parent().removeClass("active");
-        } else {
-            $(".sidebar-dropdown").removeClass("active");
-            $(this).next(".sidebar-submenu").slideDown(200);
-            $(this).parent().addClass("active");
-        }
-    });
-    
-})
+ 

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\CompetitionParticipant;
 
 class DashboardController extends Controller
-{
+{   
     public function __construct(){
  
         $this->middleware(['auth', 'verified'])->only(['showDashboard','step']);
@@ -23,12 +23,27 @@ class DashboardController extends Controller
     public function showDashboard(){
         $allSlotRegistration = CompetitionSlot::where('pic_id',Auth::user()->id)->get();
         $confirmedSlotRegistration =  $allSlotRegistration->where('is_confirmed',1);
-        $confirmedPayment = CompetitionPayment::where('pic_id', Auth::user()->id)->get()->where('is_confirmed',1);
-        // dd($confirmedPayment);
+        $confirmedPayment = CompetitionSlot::join('competition_payments','competition_payments.id','=','competition_slot_details.payment_id')
+                ->where('competition_payments.is_confirmed',1)
+                ->count();  
+
+        $totalParticipants= CompetitionParticipant::rightJoin('competition_slot_details','competition_slot_details.id' , '=', 'competition_participants.competition_slot_id')->count();
+ 
+        $participantCompetition = CompetitionSlot::join('users','competition_slot_details.pic_id', '=','users.id')
+            ->leftJoin('competition_participants', 'competition_slot_details.id','=','competition_participants.competition_slot_id')
+            ->where('competition_slot_id',NULL)
+            ->count();
+
+        $allParticipants = CompetitionParticipant::where('pic_id',Auth::user()->id)->get();
+        
+        // dd($totalParticipants);
         return view('dashboards.user', [
             'allSlotRegistration' => $allSlotRegistration,
             'confirmedSlotRegistration' => $confirmedSlotRegistration,
-            'confirmedPayment' => $confirmedPayment
+            'confirmedPayment' => $confirmedPayment,
+            'totalParticipants' => $totalParticipants,
+            'participantCompetition' => $participantCompetition,
+            'allParticipants' => $allParticipants
         ]);
     }
     public function step($step){

@@ -9,7 +9,7 @@
     transform: scale(1.05);
 }
 
-.data-table tbody tr:hover {
+.data-table tbody tr:hover, tbody tr:hover {
     background-color:#eee;
 }
 

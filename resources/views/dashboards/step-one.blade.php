@@ -11,7 +11,7 @@
         {{--list informasi competition apa saja yang didaftar--}}
         <x-card>
             <h3>Registered Competition's Slot</h3>
-            <a href="{{route('slot-registrations.create')}}" class="btn btn-outline-primary rounded-pill">Add New Registration Slot</a>    
+                   
             <hr>
             @if ($competitionSlots->count())
             <div class="row">

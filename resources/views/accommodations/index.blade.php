@@ -3,7 +3,7 @@
       <div class="card border-0 overflow-hidden shadow rounded-20 mb-5" style="border-radius:20px">
           <div class="card-header bg-secondary"></div>
           <div class="card-body my-3">
-            <h1>accommodations List</h1>
+            <h1>Accommodations List</h1>
               <a href="{{ route('accommodations.create') }}" class="btn btn-primary btn-rounded mb-3">Create New Accomodation</a>
                 <div class="table-responsive py-2">
                     <table class="table table-sm table-striped table-bordered no-footer" id="dataTables">
@@ -130,4 +130,4 @@
         </div>  
       </div>  
     @endforeach
-    </x-admin>
+</x-admin>

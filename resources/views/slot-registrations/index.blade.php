@@ -79,6 +79,7 @@
                         <th scope="col">Competition Field</th>
                         <th scope="col">PIC Name</th>
                         <th scope="col">Contact</th>
+                        <th scope="col">Country</th>
                         <th scope="col">Expired</th>
                         <th scope="col">Payment Status</th>
                         <th scope="col">Total Slot</th>
@@ -89,10 +90,10 @@
                     <tbody class="text-center">
                         @foreach ($confirmed as $competition)
                             <tr>
-                              
                                 <th>{{$competition->competition->name}}</th>
                                 <th>{{$competition->user->pic_name}}</th>
                                 <th>{{$competition->user->pic_phone_number}}</th>
+                                <th>{{$competition->user->country->name}}</th>
                                 @php($diff = \Carbon\Carbon::parse( now() )->diffInDays( $competition->confirmed_at ))
                                 <th class="{{$diff > 2 ? 'text-danger' : 'text-success'}}">H + {{$diff}} Days</th>
                                 <th class="{{$competition->payment_id == NULL ? 'text-danger' : 'text-warning'}}">{{$competition->payment_id == NULL ? 'No Payment Yet' : 'Payment is on progress'}}</th>
@@ -106,6 +107,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                <a href="{{route('competition-payments.index','National')}}" class="btn btn-outline-info rounded-pill my-4 me-2" >View Intenational Payment</a>
+                <a href="{{route('competition-payments.index','international')}}" class="btn btn-outline-info rounded-pill my-4">View National Payment</a>
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>

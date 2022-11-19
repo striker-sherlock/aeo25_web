@@ -44,7 +44,7 @@ class AccommodationController extends Controller
         }
 
         $newAccommodation = Accommodation::create([
-            'created_by'=>"qwerty",
+            'created_by'=>Auth::user()->username,
             'room_type'=>$request->room_type,
             'max_guests'=>$request->max_guests,
             'picture' => $fileName,

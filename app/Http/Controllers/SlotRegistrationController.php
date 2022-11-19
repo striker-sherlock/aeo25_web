@@ -17,6 +17,7 @@ class SlotRegistrationController extends Controller
     public function __construct(){
         $this->middleware('auth')->only(['create']);
     }
+
     public function index(){
         //data table jangan lupa
         $competitions = Competition::all();
@@ -32,10 +33,7 @@ class SlotRegistrationController extends Controller
         $pending = CompetitionSlot::where('is_confirmed',0)->get();
         $confirmed = CompetitionSlot::leftJoin('competition_payments','competition_slot_details.payment_id','competition_payments.id')
             ->where('competition_slot_details.is_confirmed',1)
-            ->where(function($query){
-                $query->where('competition_payments.is_confirmed','!=','1')
-                ->orWhere('competition_slot_details.payment_id', NULL);
-            })
+            ->Where('competition_slot_details.payment_id', NULL)
             ->select('competition_slot_details.*')
             ->get();
         // dd($confirmed);
@@ -49,8 +47,7 @@ class SlotRegistrationController extends Controller
             'registeredSlot' => $count,
         ]);
     }
-    
- 
+
     public function create(){
         return view('slot-registrations.create',[
             'competitions' => Competition::all(),
@@ -64,8 +61,7 @@ class SlotRegistrationController extends Controller
     }
 
     public function store(Request $request){
-        dd($request->all());
-    
+
         $len = count($request->quantity);
         //  code ini untuk mengecek apabila slot nya masih tersedia atau tidak
         for($i = 0; $i < $len; $i++){

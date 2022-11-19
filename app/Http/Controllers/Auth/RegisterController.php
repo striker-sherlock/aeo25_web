@@ -75,7 +75,6 @@ class RegisterController extends Controller
         ]);
     }
     protected function create(array $data){
-        $username = $data['pic_name'];
         $pic = $data['institution_name'];
         $fileName = str_replace(' ', '-', $pic );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
@@ -86,8 +85,8 @@ class RegisterController extends Controller
             $extension = $data['institution_logo']->getClientOriginalExtension();
             $fixedName = $fileName.'_'.$current.'.'.$extension;
             $path = $data['institution_logo']->storeAs("public/instition_logo",$fixedName);
- 
         }
+        $username = strtolower(str_replace(' ', '', $data['name']));
         
         return User::create([
             'institution_name' => $data['institution_name'],

@@ -15,9 +15,9 @@
                     </div>
                 @endif
 
-                <div class="row align-items-center">
-                    <div class="col-md-4">
-                        <img src="/storage/profile_picture/{{$participant->competition->id}}/{{$participant->profile_picture}}" class="img-fluid" alt="profile picture">
+                <div class="row align-items-center justify-content-center mt-4">
+                    <div class="col-md-4  ">
+                        <img src="/storage/profile_picture/{{$participant->competition->id}}/{{$participant->profile_picture}}" class="img-fluid d-block mx-auto w-100" alt="profile picture">
                     </div>
                     <div class="col-md-4">
                         <div class="form-group mb-3">

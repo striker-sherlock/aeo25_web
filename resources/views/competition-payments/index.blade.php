@@ -38,6 +38,7 @@
                         
                     </tbody>
                 </table>
+           
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -77,6 +78,7 @@
                     @endforeach
                     </tbody>
                 </table>
+            
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
