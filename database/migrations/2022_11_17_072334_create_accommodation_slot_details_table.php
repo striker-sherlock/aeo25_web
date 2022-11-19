@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('accommodation_id');
             $table->string('check_in_date');
             $table->string('check_out_date');
-            $table->string('special_req');
+            $table->string('special_req')->nullable();
             $table->integer('quantity');
             $table->integer('payment_id')->nullable();
             $table->boolean('is_confirmed');

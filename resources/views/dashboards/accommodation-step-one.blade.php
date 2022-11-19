@@ -11,32 +11,38 @@
         {{--list informasi competition apa saja yang didaftar--}}
         <x-card>
             <h3>Registered Accommodation Slot</h3>
-            <div class="row">
-                @foreach ($accommodationSlots as $accommodationSlot)
+            <a href="{{route('accommodation-slot-registrations.create')}}" class="btn btn-outline-primary rounded-pill">Book Our Accommodation</a>
+            <hr>
+            @if ($accommodationSlots->count())
+                <div class="row">
+                    @foreach ($accommodationSlots as $accommodationSlot)
                     <div class="col-lg-6">
                         <div class="row  m-2 py-4 border border-1 shadow-sm rounded-20" >
                             <div class="col-4">
-                                {{-- logo competition --}}
-                            </div>
-                            <div class="col-8" >
-                                <h4>{{$accommodationSlot->accommodation->room_type}} {{$accommodationSlot->quantity}} {{$accommodationSlot->quantity == 1 ? 'room':'room(s)'}}</h4>
-                                <h4>Status :
-                                    @if ($accommodationSlot->is_confirmed == 0 )<span class="text-warning fw-bold">Pending</span> 
-                                    @elseif($accommodationSlot->is_confirmed == -1)<span class="text-danger fw-bold">Rejected</span>
-                                    @else <span class="text-success fw-bold fs-5">Confirmed</span>  
-                                    @endif
-                                </h4>
-                                @if ($accommodationSlot->is_confirmed == 0)
+                                    {{-- logo competition --}}
+                                </div>
+                                <div class="col-8" >
+                                    <h4>{{$accommodationSlot->accommodation->room_type}} {{$accommodationSlot->quantity}} {{$accommodationSlot->quantity == 1 ? 'room':'room(s)'}}</h4>
+                                    <h4>Status :
+                                        @if ($accommodationSlot->is_confirmed == 0 )<span class="text-warning fw-bold">Pending</span> 
+                                        @elseif($accommodationSlot->is_confirmed == -1)<span class="text-danger fw-bold">Rejected</span>
+                                        @else <span class="text-success fw-bold fs-5">Confirmed</span>  
+                                        @endif
+                                    </h4>
+                                    @if ($accommodationSlot->is_confirmed == 0)
                                     <div class="d-flex justify-content-start ">
                                         <a href="{{ route('accommodation-slot-registrations.edit', $accommodationSlot->id) }}" data-bs-target="#edit{{$accommodationSlot->id}}" class="btn btn-outline-primary rounded-20 me-2">Edit Slot</a>
-                                        <a href="#" data-bs-toggle ="modal" data-bs-target="#delete{{$accommodationSlot->id}}" class="btn btn-outline-danger rounded-20">Delete Slot</a>
-                                    </div>
-                                @endif
+                                            <a href="#" data-bs-toggle ="modal" data-bs-target="#delete{{$accommodationSlot->id}}" class="btn btn-outline-danger rounded-20">Delete Slot</a>
+                                        </div>
+                                        @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
+            @else
+            <p class="text-center fs-4 text-danger">No Accommodation Booked</p>
+            @endif
         </x-card>
 
         <div class="navigasi  mb-4 d-flex justify-content-center align-items-center py-1">

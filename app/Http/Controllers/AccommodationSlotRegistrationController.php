@@ -27,11 +27,12 @@ class AccommodationSlotRegistrationController extends Controller
         ]);
     }
 
-    public function create()
+    public function create($accommodation = 1 )
     {
+        $accommodation = Accommodation::find($accommodation);
         return view('accommodation-slot-registrations.create', [
             'accommodations' => Accommodation::all(),
-
+            'selectedType' => $accommodation
         ]);
     }
 
@@ -41,8 +42,8 @@ class AccommodationSlotRegistrationController extends Controller
         $request->validate([
             'accommodation_id'=>'required', 
             'check_in_date'=>'required',
-            'check_out_date'=>'required',
-            'special_req'=>'required',
+            'check_out_date'=>'required|after:check_in_date',
+            'special_req'=>'nullable|string',
             'quantity'=>'required',
         ]);
 

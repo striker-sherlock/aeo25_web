@@ -51,9 +51,9 @@
             </x-card>
     
             {{-- confirmed --}}
-           @if ($confirmed->count())
             <x-card>
                 <h1 class="mb-3 text-success">Confirmed Accommodation Registration </h1>
+                @if ($confirmed->count())
                 <table class="table table-striped table-bordered">
                     <thead class="text-center">
                     <tr>
@@ -94,8 +94,10 @@
                         @endforeach
                     </tbody>
                 </table>
+                @else
+                <hr><p class="text-center">No Data</p>
+                @endif
             </x-card>
-           @endif
     
             {{-- rejected --}}
             <x-card>

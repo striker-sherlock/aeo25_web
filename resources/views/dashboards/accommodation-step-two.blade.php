@@ -14,23 +14,24 @@
                         <a href="{{route('accommodation-payments.create',0)}}" class="btn btn-outline-primary rounded-20 my-2">Pay All Slot Registration</a>
                     @endif
                     @foreach ($confirmedSlot as $accommodation)
-                    {{-- {{dd($competition->payment_id)}} --}}
-                        <div class="row border p-2 mx-1 mb-3 rounded-20">
-                            <div class="col-md-4"></div>
+                        <div class="row border p-4 mx-1 mb-3 rounded-20 align-items-center">
+                            <div class="col-md-4">
+                                <img src="/storage/images/accommodations/{{$accommodation->accommodation->picture}}" alt="{{$accommodation->accommodation->room_type}}" class="img-fluid mx-auto d-block w-100" >   
+                            </div>
                             <div class="col-md-8 ">
                                 <h5> {{$accommodation->accommodation->room_type}} {{$accommodation->quantity}} {{$accommodation->quantity == 1 ? 'room':'rooms'}}</h5>
-                                <h5>Payment Status : 
-                                    @if ($accommodation->payment == NULL)
-                                        <span class="text-danger fw-bold">No Payment Yet</span>
-                                        
+                                <h5>Status : 
+                                    @if ($accommodation->accommodationPayment == NULL)
+                                        <span class="text-danger fw-bold">No Payment Yet</span><br>
+                                        <small class="text-warning fw-bold">Was Confirmed {{ \Carbon\Carbon::parse($accommodation->created_at)->diffForHumans()}}</small>
                                     @else
-                                        @if ($accommodation->payment->is_confirmed == 1)
+                                        @if ($accommodation->accommodationPayment->is_confirmed == 1)
                                             <span class="text-success fw-bold">Confirmed</span>
                                         @endif
-                                        @if ($accommodation->payment->is_confirmed == 0)
+                                        @if ($accommodation->accommodationPayment->is_confirmed == 0)
                                             <span class="text-warning fw-bold">Pending</span>
                                         @endif
-                                        @if ($accommodation->payment->is_confirmed == -1)
+                                        @if ($accommodation->accommodationPayment->is_confirmed == -1)
                                             <span class="text-danger fw-bold">Rejected</span>
                                         @endif 
                                     @endif
@@ -53,11 +54,11 @@
                         <div class="row   p-2 mx-1 mb-3 rounded-20">
                             <h3 class="mb-2">{{$item->room_type}}'s Payment</h3>
                             <hr>
-                            <h6 ><span>Created At</span> : <span class="fw-bold">{{ date("F j, Y", strtotime($item->created_at)) }} {{ date("H : i", strtotime($item->created_at))}}</span></h6>
+                            <h6 ><span>Created At</span> : <span class="fw-bold">{{ \Carbon\Carbon::parse($item->created_at)->diffForHumans()}}</span></h6>
                             <h6 class="">Status : 
                                 @if ($item->is_confirmed == 0)<span class="text-warning fw-bold">Pending</span>
 
-                                @elseif ($item->is_confirmed == 1)<span class="text-success fw-bold">Confirmed</span> <span>At {{ date("F j, Y", strtotime($item->updated_at))}}</span>
+                                @elseif ($item->is_confirmed == 1)<span class="text-success fw-bold">Confirmed</span> <span>{{ \Carbon\Carbon::parse($item->updated_at)->diffForHumans()}}</span>
 
                                 @else <span class="text-danger fw-bold">rejected</span> <span>At {{ date("F j, Y", strtotime($item->updated_at))}}</span>     
                                 @endif

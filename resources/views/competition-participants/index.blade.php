@@ -2,7 +2,8 @@
     <div class="container mt-4">
         {{-- {{dd($competitionParticipants[0]->user->country)}} --}}
         <x-card>
-            <h2 class="fw-bold">{{$competition->name}}'s Participants</h2>
+            
+                        
             @if ($competitionParticipants->count())
                 <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4">Download Participant</a>
                 <table class="table table-striped table-bordered">

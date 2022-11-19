@@ -9,8 +9,8 @@
                         <tr class="text-center">
                             <th scope="col">ID</th>
                             <th scope="col">Institution Name</th>
-                            <th scope="col">PIC Name</th>
                             <th scope="col">Room Type</th>
+                            <th scope="col">PIC Name</th>
                             <th scope="col">Grand Total</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Action</th>
@@ -22,14 +22,14 @@
                                 <th>{{$payment->id}}</th>
                                 <th>{{$payment->institution_name}}</th>
                                 <th>{{$payment->room_type}}</th>
-                                <th>{{$payment->name}}</th>
+                                <th>{{$payment->user->pic_name}}</th>
                                 <th>{{$payment->amount}}</th>
                                  
                                 <th>{{$payment->created_at}}</th>
                                 <th>
                                     <div class="d-flex justify-content-around">
-                                        <a href="{{route('competition-payments.confirm',$payment->id)}}" class="btn btn-outline-success">C</a>
-                                        <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a>
+                                        <a href="{{route('accommodation-payments.confirm',$payment->id)}}" class="btn btn-outline-success">C</a>
+                                        <a href="{{route('accommodation-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a>
                                         <a href="#" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >V</a>
                                     </div>
                                 </th>
@@ -46,7 +46,7 @@
         <x-card>
             <h2 class="mb-3 text-success fw-bold">Confirmed Accommodation Payment </h2>
             @if ($confirmed->count())
-                <a href="{{route('competition-payments.export')}}" class="btn btn-outline-primary mb-3">Download Excel</a>
+                <a href="{{route('accommodation-payments.export')}}" class="btn btn-outline-primary mb-3">Download Excel</a>
                 <table class="table table-striped table-bordered">
                     <thead class="text-center">
                     <tr>

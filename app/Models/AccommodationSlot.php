@@ -26,7 +26,7 @@ class AccommodationSlot extends Model
     }
 
     public function accommodationPayment(){
-        return $this-> belongsTo(AccommodationPayment::class);
+        return $this-> belongsTo(AccommodationPayment::class,'payment_id','id');
     }
     
     public function accommodationGuest(){

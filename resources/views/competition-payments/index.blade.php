@@ -38,6 +38,7 @@
                         
                     </tbody>
                 </table>
+           
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -47,7 +48,7 @@
             <h2 class="mb-3 text-success fw-bold">Confirmed Competition Payment </h2>
             @if ($confirmed->count())
                 <a href="{{route('competition-payments.export')}}" class="btn btn-outline-primary mb-3">Download Excel</a>
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -77,6 +78,7 @@
                     @endforeach
                     </tbody>
                 </table>
+            
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -85,7 +87,7 @@
         <x-card>
             <h2 class="mb-3 text-danger fw-bold">Rejected Competition Payment </h2>
             @if ($rejected->count())
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>

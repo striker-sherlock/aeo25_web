@@ -11,12 +11,16 @@
         {{--list informasi competition apa saja yang didaftar--}}
         <x-card>
             <h3>Registered Competition's Slot</h3>
+            <a href="{{route('slot-registrations.create')}}" class="btn btn-outline-info rounded-pill">Add Slot Registration</a>   
+            <hr>
+            @if ($competitionSlots->count())
             <div class="row">
                 @foreach ($competitionSlots as $competitionSlot)
                     <div class="col-lg-6">
-                        <div class="row  m-2 py-4 border border-1 shadow-sm rounded-20" >
+                        <div class="row  m-2 py-4 border border-1 shadow-sm rounded-20 align-items-center" >
                             <div class="col-4">
                                 {{-- logo competition --}}
+                                <img src="/storage/competition_logo/{{$competitionSlot->competition->logo}}" class="img-fluid" alt="{{$competitionSlot->competition->name}} logo">
                             </div>
                             <div class="col-8" >
                                 <h4>{{$competitionSlot->competition->name}} {{$competitionSlot->quantity}} {{$competitionSlot->competition->need_team == 1 ? 'team(s)':'person(s)'}}</h4>
@@ -26,19 +30,26 @@
                                     @else <span class="text-success fw-bold fs-5">Confirmed</span>  
                                     @endif
                                 </h4>
-                                @if ($competitionSlot->is_confirmed == 0)
-                                    <div class="d-flex justify-content-start ">
-                                        <a href="#" data-bs-toggle ="modal" data-bs-target="#edit{{$competitionSlot->id}}" class="btn btn-outline-primary rounded-20 me-2">Edit Slot</a>
-                                        <a href="#" data-bs-toggle ="modal" data-bs-target="#delete{{$competitionSlot->id}}" class="btn btn-outline-danger rounded-20">Delete Slot</a>
+                                @if ($competitionSlot->is_confirmed != 1)
+                                <div class="d-flex justify-content-start ">
+                                    <a href="#" data-bs-toggle ="modal" data-bs-target="#edit{{$competitionSlot->id}}" class="btn btn-outline-primary rounded-20 me-2">Edit Slot</a>
+                                            <a href="#" data-bs-toggle ="modal" data-bs-target="#delete{{$competitionSlot->id}}" class="btn btn-outline-danger rounded-20">Delete Slot</a>
+                                        </div>
+                                        @endif
                                     </div>
-                                @endif
+                                </div>
                             </div>
-                        </div>
-                    </div>
                 @endforeach
             </div>
-        </x-card>
 
+            @else
+           
+            <p class="text-center text-warning  fs-3" >You don't have SLOT REGISTERED yet</p><br>
+       
+            @endif
+        </x-card>
+        
+        <h5 class="text-center fs-4 fw-bold">Step Navigation</h5>
         <div class="navigasi  mb-4 d-flex justify-content-center align-items-center py-1">
             <ul class="list-unstyled d-flex align-items-center">
                 <li> <a href="#" class="btn btn-outline-primary active me-2 ">1</a></li>
@@ -126,5 +137,4 @@
             </div>  
         </div>  
     @endforeach
-   
 </x-admin>
