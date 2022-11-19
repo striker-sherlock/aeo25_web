@@ -33,7 +33,7 @@
                       <input type="datetime-local" class="form-control" id="check_out_date" placeholder="Enter Check Out Date" name="check_out_date" required value="{{old('check_out_date')}}">
                     </div>
                     <div class="form-group mb-3">
-                      <label class="col-form-label" for="special_req">Special Request <span class="text-danger" >*</span></label>
+                      <label class="col-form-label" for="special_req">Special Request</label>
                       <textarea class="form-control" name="special_req" id="special_req" rows="2">{{old('special_req')}}</textarea>
                     </div>
                     <div class="form-group mb-3">
@@ -103,6 +103,11 @@
     button.addEventListener('click',function(){
       document.querySelector('#quantity').innerHTML = `${quantity.value}`
     })
+    // const link = document.querySelectorAll('a')
+    // link.addEventListener('click',function(e){
+    //   e.preventDefault()
+    // })
+    
   </script>
   
     

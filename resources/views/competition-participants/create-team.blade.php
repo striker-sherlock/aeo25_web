@@ -72,8 +72,8 @@
                                     </div>   
                                     
                                     <div class="form-group mb-2">
-                                        <label for="payment_provider{{$j}}{{$i}}" class="col-form-label">Gender<span class="text-danger">*</span></label>
-                                        <select class="form-select"  name="gender[]" id="payment_provider{{$j}}{{$i}}" required>
+                                        <label for="gender{{$j}}{{$i}}" class="col-form-label">Gender<span class="text-danger">*</span></label>
+                                        <select class="form-select"  name="gender[]" id="gender{{$j}}{{$i}}" required>
                                             <option selected class="d-none">Select participant's gender</option>
                                             <option value="Male" {{old('gender.'.$j+($i-$totalTeams)*5) == 'Male' ? 'selected':''}}>Male</option>
                                             <option value="Female" {{old('gender.'.$j+($i-$totalTeams)*5) == 'Female' ? 'selected':''}}>Female</option>

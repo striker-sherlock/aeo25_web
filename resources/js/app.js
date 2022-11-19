@@ -19,8 +19,8 @@ window.bootstrap = bootstrap;
 
  
 $(document).ready( function () {
-    $('#countries').select2();
     $('#data-table').DataTable();
+    $('#countries').select2();
 } );
 
 

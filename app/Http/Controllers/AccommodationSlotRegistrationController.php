@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AccommodationSlotRegistrationController extends Controller
 {
 
     public function index()
     {
-        
         $pending = AccommodationSlot::where('is_confirmed', 0)->get();
         $confirmed = AccommodationSlot::where('is_confirmed', 1)->get();
         $rejected = AccommodationSlot::where('is_confirmed', -1)->get();
@@ -30,7 +30,6 @@ class AccommodationSlotRegistrationController extends Controller
     public function create($accommodation = 1 )
     {
         $accommodation = Accommodation::find($accommodation);
-        // dd($accommodation);
         return view('accommodation-slot-registrations.create', [
             'accommodations' => Accommodation::all(),
             'selectedType' => $accommodation
@@ -44,16 +43,13 @@ class AccommodationSlotRegistrationController extends Controller
             'accommodation_id'=>'required', 
             'check_in_date'=>'required',
             'check_out_date'=>'required|after:check_in_date',
-            'special_req'=>'required',
+            'special_req'=>'nullable|string',
             'quantity'=>'required',
-            
         ]);
-        dd($request->all());
 
         AccommodationSlot::create([
             'created_by' => Auth::user()->username,
             'pic_id' => Auth::user()->id,
-            // 'created_at' => Carbon::now(),
             'accommodation_id' => $request->accommodation_id,
             'check_in_date'=>$request->check_in_date,
             'check_out_date'=>$request->check_out_date,
@@ -70,28 +66,55 @@ class AccommodationSlotRegistrationController extends Controller
         //
     }
 
- 
-    public function edit($id)
+    public function edit(AccommodationSlot $accommodation_slot_registration)
     {
-        //
+        return view('accommodation-slot-registrations.edit', [
+            'accommodationSlot' => $accommodation_slot_registration,
+            'accommodations' => Accommodation::all(),
+        ]);
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, AccommodationSlot $accommodation_slot_registration)
     {
-        //
+        // dd($request);
+        $request->validate([
+            'accommodation_id'=>'required', 
+            'check_in_date'=>'required',
+            'check_out_date'=>'required',
+            'special_req'=>'required',
+            'quantity'=>'required',
+        ]);
+
+        $accommodation_slot_registration->update([
+            'created_by' => Auth::user()->username,
+            'pic_id' => Auth::user()->id,
+            'accommodation_id' => $request->accommodation_id,
+            'check_in_date'=>$request->check_in_date,
+            'check_out_date'=>$request->check_out_date,
+            'special_req'=>$request->special_req,
+            'quantity' => $request->quantity,
+        ]);
+        if(!Auth::guard('admin')->check()){
+            return redirect()->route('dashboard.accommodation-step',1)->with('success', "Accommodation registration successfully updated!");
+        }
+        else{
+            return redirect()->route('accommodation-slot-registrations.index')->with('success', "Accommodation registration successfully updated!");
+        }
     }
 
 
-    public function destroy($id)
+    public function destroy(AccommodationSlot $accommodationSlot)
     {
-        //
+        $accommodationSlot->delete();
+        return redirect()->back();
     }
 
     public function confirm(AccommodationSlot $accommodationSlot){
         $accommodationSlot ->update([
             'updated_by' => 'Admin',
             'is_confirmed' => 1,
+            'confirmed_at' => Carbon::now(),
         ]);
         return redirect()->route('accommodation-slot-registrations.index');
     }

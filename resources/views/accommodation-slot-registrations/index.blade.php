@@ -1,10 +1,11 @@
 <x-admin>
+    
     <div class="container mt-4">
               {{-- pending --}}
               <x-card>
                 <h1 class="mb-3 text-warning">Pending Accommodation Registration</h1>
                 @if ($pending->count())
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered dataTables">
                         <thead class="text-center">
                         <tr>
                             <th scope="col">Institution Name</th>
@@ -29,8 +30,15 @@
                                     <th>{{$accommodation->quantity}}</th>
                                     <th class="m-auto"> 
                                         <div class="d-flex  justify-content-center">
-                                            <a href="{{route('accommodation-slot-registrations.confirm', $accommodation->id)}}" class="btn btn-success btn-sm me-2">C</a>
-                                            <a href="{{route('accommodation-slot-registrations.reject', $accommodation->id)}}" class="btn btn-danger btn-sm me-2">R</a>
+                                            <a href="{{route('accommodation-slot-registrations.edit', $accommodation->id)}}" class="btn btn-primary btn-sm me-2">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a href="{{route('accommodation-slot-registrations.confirm', $accommodation->id)}}" class="btn btn-success btn-sm me-2">
+                                                <i class="fas fa-check-circle"></i>
+                                            </a>
+                                            <a href="{{route('accommodation-slot-registrations.reject', $accommodation->id)}}" class="btn btn-danger btn-sm me-2">
+                                                <i class="fas fa-times"></i>
+                                            </a>
                                             
                                         </div>
                                     </th>
@@ -71,8 +79,15 @@
                               <th>{{$accommodation->quantity}}</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex justify-content-center">
-                                         
-                                        <a href="{{route('accommodation-slot-registrations.cancel',$accommodation->id)}}" class="btn btn-warning btn-sm">X</a>
+                                        <a href="{{route('accommodation-slot-registrations.edit', $accommodation->id)}}" class="btn btn-primary btn-sm me-2">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{route('accommodation-slot-registrations.cancel',$accommodation->id)}}" class="btn btn-warning btn-sm me-2">
+                                            <i class="fas fa-undo" ></i>
+                                        </a>
+                                        <a href="{{route('accommodation-slot-registrations.reject', $accommodation->id)}}" class="btn btn-danger btn-sm me-2">
+                                            <i class="fas fa-times"></i>
+                                        </a>
                                     </div>
                                 </th>
                             </tr>
@@ -113,8 +128,12 @@
                                   <th>{{$accommodation->quantity}}</th>
                                   <th class="m-auto"> 
                                     <div class="d-flex justify-content-center">
-                                         
-                                        <a href="{{route('accommodation-slot-registrations.cancel',$accommodation->id)}}" class="btn btn-warning btn-sm">X</a>
+                                        <a href="{{route('accommodation-slot-registrations.edit', $accommodation->id)}}" class="btn btn-primary btn-sm me-2">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{route('accommodation-slot-registrations.cancel',$accommodation->id)}}" class="btn btn-warning btn-sm me-2">
+                                            <i class="fas fa-undo" ></i>
+                                        </a>
                                     </div>
                                 </th>
                                 </tr>

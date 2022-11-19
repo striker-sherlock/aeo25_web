@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Accommodation;
 use App\Models\Competition;
 use Illuminate\Http\Request;
+use App\Models\AccommodationSlot;
 use App\Models\CompetitionSlot;
+use App\Models\AccommodationPayment;
 use App\Models\CompetitionPayment;
 use App\Models\CompetitionSummary;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompetitionParticipant;
+use App\Models\AccommodationGuest;
 
 class DashboardController extends Controller
 {   
@@ -20,6 +24,9 @@ class DashboardController extends Controller
         $this->middleware('IsAdmin')->only(['showAdminDashboard']);
     }
 
+    public function accommodationStepOneValidation($pic){
+        return true;
+    }
     public function showDashboard(){
         $allSlotRegistration = CompetitionSlot::where('pic_id',Auth::user()->id)->get();
         $confirmedSlotRegistration =  $allSlotRegistration->where('is_confirmed',1);
@@ -27,23 +34,47 @@ class DashboardController extends Controller
                 ->where('competition_payments.is_confirmed',1)
                 ->count();  
 
-        $totalParticipants= CompetitionParticipant::rightJoin('competition_slot_details','competition_slot_details.id' , '=', 'competition_participants.competition_slot_id')->count();
- 
+        $totalParticipants= CompetitionParticipant::rightJoin('competition_slot_details','competition_slot_details.id' , '=', 'competition_participants.competition_slot_id')
+            ->where('competition_participants.competition_slot_id','!=',NULL)
+            ->count();
+        
+        // competition slot yang ga ada participantnya
         $participantCompetition = CompetitionSlot::join('users','competition_slot_details.pic_id', '=','users.id')
             ->leftJoin('competition_participants', 'competition_slot_details.id','=','competition_participants.competition_slot_id')
             ->where('competition_slot_id',NULL)
             ->count();
-
         $allParticipants = CompetitionParticipant::where('pic_id',Auth::user()->id)->get();
-        
-        // dd($totalParticipants);
+
+
+        // accommodation
+        $allAccSlot = AccommodationSlot::where('pic_id',Auth::user()->id)->get();
+        $confimedAccSlot = $allAccSlot->where('is_confirmed',1)->count();
+
+        $confirmedAccPayment = AccommodationSlot::join('accommodation_payments','accommodation_payments.id','=','accommodation_slot_details.payment_id')
+            ->where('accommodation_payments.is_confirmed',1)
+            ->count();  
+
+        $totalGuests= AccommodationGuest::rightJoin('accommodation_slot_details','accommodation_slot_details.id' , '=', 'accommodation_guests.accommodation_slot_id')
+            ->where('accommodation_guests.accommodation_slot_id','!=',NULL)
+            ->count();
+         
+        $accGuests = AccommodationSlot::join('users','accommodation_slot_details.pic_id', '=','users.id')
+            ->leftJoin('accommodation_guests', 'accommodation_slot_details.id','=','accommodation_guests.accommodation_slot_id')
+            ->where('accommodation_slot_id',NULL)
+            ->count();
+
         return view('dashboards.user', [
             'allSlotRegistration' => $allSlotRegistration,
             'confirmedSlotRegistration' => $confirmedSlotRegistration,
             'confirmedPayment' => $confirmedPayment,
             'totalParticipants' => $totalParticipants,
             'participantCompetition' => $participantCompetition,
-            'allParticipants' => $allParticipants
+            'allParticipants' => $allParticipants,
+            'allAccSlot'=> $allAccSlot, 
+            'confirmedAccSlot'=> $confimedAccSlot,
+            'confirmedAccPayment' => $confirmedAccPayment,
+            'totalGuests' => $totalGuests,
+            'accGuests' => $accGuests,
         ]);
     }
     public function step($step){
@@ -103,6 +134,60 @@ class DashboardController extends Controller
         }
     }
     
+    public function accommodationStep($step){
+        if ($step == 1){
+            $accommodationSlots = AccommodationSlot::where('pic_id', Auth::user()->id)->get();
+            
+            return view('dashboards.accommodation-step-one',[
+                'accommodationSlots' => $accommodationSlots,
+            ]);
+        }
+
+        if ($step == 2){
+            // jika step-1 belum di confirmasi atau belom dilewati maka, kembali ke dashboard
+            // dd(Auth::user()->id);
+            $confirmedSlots = AccommodationSlot::where('pic_id', Auth::user()->id)->get();
+            if ($confirmedSlots->count() == 0) return redirect()->back()->with('error','You have to book accommodation first');
+
+            if ($confirmedSlots->where('is_confirmed')->count() == 0) return redirect()->back()->with('error','Please Wait your accommodation slot registration to be confirmed by admin');
+            
+            $history = DB::table('accommodation_slot_details')
+                        ->join('accommodation_payments','accommodation_slot_details.payment_id','=','accommodation_payments.id')
+                        ->join('accommodations','accommodation_slot_details.accommodation_id','=','accommodations.id')
+                        ->where('accommodation_payments.is_confirmed','!=',NULL)
+                        ->select('accommodation_payments.is_confirmed as is_confirmed','accommodation_payments.id as id','accommodations.id as accommodation_id','accommodation_payments.created_at','accommodations.room_type','quantity','accommodation_payments.updated_at as updated_at')
+                        ->get();
+
+            
+            $accommodationPayment = AccommodationSlot::where('pic_id',Auth::user()->id)->get()->where('payment_id',NULL);
+            // dd($competitionPayment); 
+            return view('dashboards.accommodation-step-two',[
+                'confirmedSlot' => $confirmedSlots,
+                'history' => $history,
+                'isPaidAll' => $accommodationPayment
+            ]);
+  
+        }
+
+        if ($step == 3){
+            // validate eligibility
+            
+            $accommodationPayment = AccommodationPayment::where('pic_id', Auth::user()->id)->get();
+            if ($accommodationPayment->count() == 0)return redirect()->back()->with('error','Please make a payment first');
+            $accommodationPayment = $accommodationPayment->where('is_confirmed', 1);
+            if ($accommodationPayment->count() == 0)return redirect()->back()->with('error','Please wait your payment to be confirmed');
+            
+            $accommodationSlots = AccommodationSlot::where('pic_id',Auth::user()->id)->get();
+            $accommodationGuest  = AccommodationGuest::where('pic_id', Auth::user()->id)->get();
+            // dd($accommodationSlots[1]->accommodationGuest);
+            return view('dashboards.accommodation-step-three',[
+                'accommodationSlots' => $accommodationSlots,
+                'accommodationGuest' => $accommodationGuest,    
+
+            ]);
+        }
+    }
+
     public function showAdminDashboard(){
         // menghitung confirmed payment slot 
         $confirmed = CompetitionSlot::join('competition_payments','competition_payments.id','competition_slot_details.payment_id')

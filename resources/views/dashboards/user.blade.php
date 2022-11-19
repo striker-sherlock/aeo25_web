@@ -5,7 +5,10 @@
             <h5 class="text-muted">Welcome to 2023 Asian English Olympics!</h5>
             <hr>
         </div>
-        <div class="step-by-step row">
+
+        {{-- competition step  --}}
+        <div class="step-by-step-compet row">
+            <h3 class="text-uppercase fw-bold my-4" style="letter-spacing: 0.1em">Competition Step by step Registration</h3>
             <div class="col-md-3">
                 <a href="{{route('dashboard.step',1)}}" class="d-block text-decoration-none btn ">
                     @php($totalSlot = $allSlotRegistration->count())
@@ -15,7 +18,7 @@
                         <div class="card-body my-3 p-4">
                             <h2 class="fw-bold">STEP 1</h2>
                             <h4>Confirmed Slot Registration </h4>
-                            <h1 class="display-2 fw-bold {{$confirmedSlotRegistration->count()- $allSlotRegistration->count() == 0 ? 'text-success':'text-danger'}}">{{$confirmedSlotRegistration->count()}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
+                            <h1 class="display-3 fw-bold {{$confirmedSlotRegistration->count()- $allSlotRegistration->count() == 0 ? 'text-success':'text-danger'}}">{{$confirmedSlotRegistration->count()}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
             
                         </div>
                     </div>
@@ -35,7 +38,7 @@
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
                             @else
                                 <h4>Paid Slot Registration </h4>
-                                <h1 class="display-2 fw-bold {{$confirmedPayment - $allSlotRegistration->count() == 0 ? 'text-success' : 'text-danger'}}">{{$confirmedPayment}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
+                                <h1 class="display-3 fw-bold {{$confirmedPayment - $allSlotRegistration->count() == 0 ? 'text-success' : 'text-danger'}}">{{$confirmedPayment}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
                             @endif
                         </div>
                     </div>
@@ -53,7 +56,7 @@
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
                             @else
                                 <h4>Total Participants Registered</h4>
-                                <h1 class="display-2 fw-bold">{{$totalParticipants}}</h1>
+                                <h1 class="display-3 fw-bold">{{$totalParticipants}}</h1>
                             @endif
                         </div>
                     </div>
@@ -74,6 +77,61 @@
 
         </div>
          
+        <hr>
+        {{-- accommodation step --}}
+        <div class="step-by-step-accommodation row">
+            <h3 class="text-uppercase fw-bold  my-4" style="letter-spacing: 0.1em">Accommodation Step By Step Registration</h3>
+            <div class="col-md-4">
+                @php($totalAccSlot = $allAccSlot->count())
+                <a href="{{route('dashboard.accommodation-step',1)}}" class="d-block text-decoration-none btn ">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{$totalAccSlot - $confirmedAccSlot != 0 || $totalAccSlot == 0 ? 'red-shadow' : 'green-shadow'}}" style="border-radius:20px">
+                        <div class="card-header bg-secondary"></div>
+                        <div class="card-body my-3 p-4">
+                            <h2 class="fw-bold">STEP 1</h2>
+                            <h4>Confirmed Accommodation Slot </h4>
+                            <h1 class="display-3 fw-bold {{$totalAccSlot - $confirmedAccSlot != 0 || $totalAccSlot == 0 ? 'text-danger':'text-success'}}">{{$confirmedAccSlot}}<span class="fs-4">/{{$totalAccSlot}}</span> </h1>
+            
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{route('dashboard.accommodation-step',2)}}" class="d-block text-decoration-none btn ">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{$totalAccSlot - $confirmedAccPayment != 0 || $totalAccSlot == 0 ? 'red-shadow' : 'green-shadow'}}" style="border-radius:20px">
+                        <div class="card-header bg-secondary"></div>
+                        <div class="card-body my-3 p-4">
+                            <h2 class="fw-bold">STEP 2</h2>
+                            @if (!$confirmedAccPayment)
+                                <i class="fas fa-lock" style="font-size: 5em"></i>
+                                <h4 class="mt-3 fw-bold">LOCKED</h4>
+                            @else
+                                <h4>Paid Slot Registration </h4>
+                                <h1 class="display-3 fw-bold {{$confirmedAccPayment - $totalAccSlot == 0 ? 'text-success' : 'text-danger'}}">{{$confirmedAccPayment}}<span class="fs-4">/{{$totalAccSlot}}</span> </h1>
+                            @endif
+            
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="{{route('dashboard.accommodation-step',3)}}" class="d-block text-decoration-none btn ">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{ $accGuests == 0 ? 'red-shadow':'green-shadow'}} " style="border-radius:20px">
+                        <div class="card-header bg-secondary"></div>
+                        <div class="card-body my-3 p-4">
+                            <h2 class="fw-bold">STEP 3</h2>
+                            @if(!$confirmedAccPayment)
+                                <i class="fas fa-lock" style="font-size: 5em"></i>
+                                <h4 class="mt-3 fw-bold">LOCKED</h4>
+                            @else
+                                <h4>Total Guest Registered</h4>
+                                <h1 class="display-3 fw-bold">{{$totalGuests}}</h1>
+                            @endif
+            
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
 
         {{-- registration list --}}
         <x-card>
@@ -175,7 +233,10 @@
             @endif
 
         </x-card>
-        <h1 class="fw-bold display-5 mb-4">Our Event </h1>
+
+
+        {{-- event --}}
+        {{-- <h1 class="fw-bold display-5 mb-4">Our Event </h1>
         <div class="event">
             <div class="row">
                 <div class="col-md-8">
@@ -234,7 +295,7 @@
                 </div>
             </div>
         </div>
-        <hr>
+        <hr> --}}
         
         
 

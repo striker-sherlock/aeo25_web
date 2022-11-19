@@ -47,11 +47,10 @@ class FlightTicketController extends Controller
         if($files = $request->file('ticket_proof_new')){
             $i = 1;
             $flight_airline = $request->airline_name;
-            $flight_schedule = $request->flight_time;
             $flight_type = $request->type;
             foreach($files as $file){
                 $extension = strtolower($file->extension());
-                $newName = $flight_type.'_'.$flight_airline.'_'.$flight_schedule;
+                $newName = $flight_type.'_'.$flight_airline;
                 $newName = str_replace(' ', '-', $newName);
                 $newName = str_replace('/[^A-Za-z0-9\-]/', '', $newName);
                 $newName = str_replace('-', '_', $newName);
@@ -66,8 +65,8 @@ class FlightTicketController extends Controller
             $ticket_proof_new[] = $request->ticket_proof_old;
         }
         $flightTicket->update([
-            'pic_id'=>'1',
-            'updated_by'=>'PIC',
+            'pic_id'=>Auth::user()->id,
+            'created_by'=>Auth::user()->username,
             'type'=>$request->type,
             'airline_name'=>$request->airline_name,
             'flight_time'=>$request->flight_time,
