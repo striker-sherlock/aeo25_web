@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Accommodation;
 use App\Models\AccommodationGuest;
 
-class AdminAccommodationGuest extends Controller
+class AdminAccommodationGuestController extends Controller
 {
     public function index($roomType = NULL){
+        $trashed = AccommodationGuest::onlyTrashed()->get();
+
         $guests = AccommodationGuest::all();
         if($roomType){
             $guests = AccommodationGuest::join('accommodations','accommodations.id','accommodation_guests.accommodation_id')
@@ -20,7 +22,8 @@ class AdminAccommodationGuest extends Controller
         return view('accommodation-guests.index',[
             'guests' => $guests,
             'accommodations' => Accommodation::all(),
-            'roomType' => $roomType 
+            'roomType' => $roomType,
+            'trashed' => $trashed,
         ]);
         
     }
@@ -43,5 +46,23 @@ class AdminAccommodationGuest extends Controller
         ]);
 
         return redirect()->route('accommodation-guests.index')->with('Guest is successfully updated');
+    }
+
+    public function destroy(AccommodationGuest $accommodationGuest) // SOFT DELETE
+    {
+        $accommodationGuest->delete();
+        return redirect()->back();
+    }
+
+    public function delete($id) // HARD DELETE
+    {
+        AccommodationGuest::where('id', $id)->forceDelete();
+        return redirect()->back();
+    }
+
+    public function restore($id)
+    {
+        AccommodationGuest::where('id', $id)->restore();
+        return redirect()->back();
     }
 }

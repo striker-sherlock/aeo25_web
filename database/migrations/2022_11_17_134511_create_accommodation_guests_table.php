@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('accommodation_id');
             $table->string('guest_name');
             $table->enum('guest_gender',['M','F']);
+            $table->softDeletes();
         });
     }
 

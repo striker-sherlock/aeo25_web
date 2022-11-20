@@ -194,7 +194,6 @@ class DashboardController extends Controller
             ->where('competition_payments.is_confirmed',1)
             ->select('quantity')
             ->sum('quantity');
-        dd($confirmed);
         return view('dashboards.admin', [
             'competitions' => Competition::all(),
             

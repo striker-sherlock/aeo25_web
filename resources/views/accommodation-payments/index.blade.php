@@ -28,9 +28,15 @@
                                 <th>{{$payment->created_at}}</th>
                                 <th>
                                     <div class="d-flex justify-content-around">
-                                        <a href="{{route('accommodation-payments.confirm',$payment->id)}}" class="btn btn-outline-success">C</a>
-                                        <a href="{{route('accommodation-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a>
-                                        <a href="#" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >V</a>
+                                        <a href="{{route('accommodation-payments.confirm',$payment->id)}}" class="btn btn-outline-success">
+                                            <i class="fas fa-check-circle"></i>
+                                        </a>
+                                        <a href="{{route('accommodation-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >
+                                            <i class="fa-solid fa-receipt"></i>
+                                        </a>
                                     </div>
                                 </th>
                             </tr>
@@ -69,7 +75,9 @@
                             <th>{{$payment->amount}}</th>
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">X</a>
+                                    <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
                                     {{-- <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a> --}}
                                 </div>
                             </th>
@@ -110,7 +118,9 @@
                         
                             <th>
                                 <div class="d-flex justify-content-around">
-                                     
+                                    <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
                                 </div>
                             </th>
                         </tr>
