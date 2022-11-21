@@ -1,15 +1,19 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url('https://fonts.bunny.net/css?family=lexend');
+@import url('https://fonts.bunny.net/css?family=roboto');
 
-// Style
-@import 'style';
+
 
 // Variables
 @import 'variables';
 
+// Style
+@import 'assets';
+@import 'home';
+
 // Bootstrap
+@import 'swiper/css/bundle';
 @import 'bootstrap/scss/bootstrap';
-@import 'style.scss';
 @import 'sidebar';
 @import 'bootstrap/scss/bootstrap';;
 @import "@fortawesome/fontawesome-free/css/all.css";
@@ -20,12 +24,8 @@
 // Datatables
 @import 'datatables.net-dt';
 
-// ICONS
 
-// @import '~@fortawesome/fontawesome-free/scss/brands';
-// @import '~@fortawesome/fontawesome-free/scss/regular';
-// @import '~@fortawesome/fontawesome-free/scss/solid';
-// @import '~@fortawesome/fontawesome-free/scss/fontawesome';
-// @import '~@fortawesome/fontawesome-free/css/all.scss';
-// @import "node_modules/font-awesome/scss/font-awesome.scss";
-@import 'style.scss'
+@import 'style';
+
+
+

@@ -1,5 +1,6 @@
-<x-admin>
-    <div class="container">
+<x-layout>
+
+    <div class="container mt-4 pt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -68,4 +69,5 @@
             </div>
         </div>
     </div>
-</x-admin>
+
+</x-layout>

@@ -59,9 +59,16 @@
                                 <label for="country" class="col-form-label">Country<span class="text-danger">*</span></label>
                                 <select class="form-select"  name="country_id">
                                     <option selected class="d-none">Select The Country</option>
-                                    @foreach ($countries as $country)
+                                    {{-- @foreach ($countries as $country)
                                         <option value="{{$country->id}}">{{$country->name}}</option>
-                                    @endforeach
+                                    @endforeach --}}
+                                    <option value="1">Indonesia</option>
+                                    <option value="2">Singapore</option>
+                                    <option value="3">Malaysia</option>
+                                    <option value="4">Thailand</option>
+                                    <option value="5">Bangladesh</option>
+                                    <option value="6">Vietnam</option>
+                                    <option value="7">Cambodia</option>
                                 </select>
                             </div>
                             <div class="form-group mb-2">

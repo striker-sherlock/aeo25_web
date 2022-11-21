@@ -77,7 +77,7 @@ class RegisterController extends Controller
     protected  function index(){
     
         return view('auth.register',[
-            "countries" => Countries::all()
+            "countries" => Countries::all(),
         ]);
     }
     protected function create(array $data){

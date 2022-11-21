@@ -36,8 +36,6 @@ use App\Http\Controllers\ScoreTypeController;
 
 Auth::routes(['verify'=>true]);
 
-Auth::routes();
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('faqs', FaqController::class);
 Route::resource('lost-and-found', LostAndFoundController::class);
@@ -52,18 +50,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
 //register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
+// Sponsors
+Route::resource('sponsors', SponsorController::class);
+Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
+
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 Route::get('/dashboard/step-{step}', [DashboardController::class, 'step'])->name('dashboard.step');
-//Countries
-Route::resource('countries', CountriesController::class);
+
 
 //Countries
 Route::resource('countries', CountriesController::class);
 
-//Sponsors
-// Route::resource('sponsors', SponsorController::class);
-// Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
+//Countries
+Route::resource('countries', CountriesController::class);
+
 
 //slot registration
 Route::resource('slot-registrations',SlotRegistrationController::class);
