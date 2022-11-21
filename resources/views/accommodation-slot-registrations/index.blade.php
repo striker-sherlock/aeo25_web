@@ -1,5 +1,4 @@
 <x-admin>
-    
     <div class="container mt-4">
               {{-- pending --}}
               <x-card>

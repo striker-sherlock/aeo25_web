@@ -20,7 +20,7 @@ use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\UserAccommodationGuest;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
-use App\Http\Controllers\AdminAccommodationGuest;
+use App\Http\Controllers\AdminAccommodationGuestController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\CompetitionPaymentController;
@@ -153,13 +153,11 @@ Route::get('/guests/create/{accommodationSlot}', [UserAccommodationGuest::class,
 // Route::get('/participants/show/{user}/{competitition}', [UserCompetitionParticipantController::class, 'show'])->name('competition-participants.show');
 Route::post('/guests/store', [UserAccommodationGuest::class, 'store'])->name('accommodation-guests.store');
 
-// ADMIN COMPETITION PARTICIPANT
-Route::get('/guests/{roomType?}', [AdminAccommodationGuest::class, 'index'])->name('accommodation-guests.index');
-Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuest::class, 'edit'])->name('accommodation-guests.edit');
-Route::put('/guests/update/{id}', [AdminAccommodationGuest::class, 'update'])->name('accommodation-guests.update');
+// ADMIN ACCOMMODATION PARTICIPANT
+Route::get('/guests/{roomType?}', [AdminAccommodationGuestController::class, 'index'])->name('accommodation-guests.index');
+Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuestController::class, 'edit'])->name('accommodation-guests.edit');
+Route::put('/guests/update/{id}', [AdminAccommodationGuestController::class, 'update'])->name('accommodation-guests.update');
 // Route::get('/participants/export/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'export'])->name('competition-participants.export');
-
-
 
 //Inventory
 Route::resource('inventories', InventoryController::class)->except('show');
