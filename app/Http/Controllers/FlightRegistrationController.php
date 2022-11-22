@@ -8,6 +8,10 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class FlightRegistrationController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth')->only(['create']);
+    }
+
     public function index()
     {
 
@@ -61,17 +65,6 @@ class FlightRegistrationController extends Controller
     public function show($id)
     {
         //
-    }
-
-    public function edit($id)
-    {
-        
-    }
-
-    
-    public function update(Request $request, FlightTicket $flightTicket)
-    {
-        
     }
 
     public function destroy(FlightRegistration $flightRegistration) // SOFT DELETE

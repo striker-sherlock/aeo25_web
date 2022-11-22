@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ScoreTypeController;
@@ -61,12 +62,19 @@ Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, '
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 Route::get('/dashboard/step-{step}', [DashboardController::class, 'step'])->name('dashboard.step');
 Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 'accommodationStep'])->name('dashboard.accommodation-step');
-//Countries
-Route::resource('countries', CountriesController::class);
 
 //Countries
 Route::resource('countries', CountriesController::class);
 
+<<<<<<< HEAD
+//Competitions
+Route::resource('competitions', CompetitionController::class);
+
+//Sponsors
+Route::resource('sponsors', SponsorController::class);
+Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
+=======
+>>>>>>> da2a0efb1139fb1ba46d6a864b81388c328f187f
 
 //slot registration
 Route::get('/slot-registrations/confirm/{competitionSlot}', [SlotRegistrationController::class, 'confirm'])->name('slot-registrations.confirm');
@@ -156,7 +164,7 @@ Route::get('/guests/create/{accommodationSlot}', [UserAccommodationGuest::class,
 // Route::get('/participants/show/{user}/{competitition}', [UserCompetitionParticipantController::class, 'show'])->name('competition-participants.show');
 Route::post('/guests/store', [UserAccommodationGuest::class, 'store'])->name('accommodation-guests.store');
 
-// ADMIN ACCOMMODATION PARTICIPANT
+// ADMIN ACCOMMODATION GUEST
 Route::get('/guests/{roomType?}', [AdminAccommodationGuestController::class, 'index'])->name('accommodation-guests.index');
 Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuestController::class, 'edit'])->name('accommodation-guests.edit');
 Route::put('/guests/update/{id}', [AdminAccommodationGuestController::class, 'update'])->name('accommodation-guests.update');

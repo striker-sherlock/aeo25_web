@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class SponsorController extends Controller
 {
-    // public function __construct(){
-    //     $this->middleware('admin');
-    // }
+    public function __construct(){
+        // $this->middleware('auth');
+        $this->middleware('IsAdmin');
+    }
 
     public function index()
     {

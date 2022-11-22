@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AccommodationController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsAdmin')->only(['index', 'create', 'edit']);
+    }
+
     public function index()
     {
         return view('accommodations.index', [

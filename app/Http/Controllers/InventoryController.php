@@ -8,6 +8,9 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class InventoryController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsAdmin');
+    }
 
     public function index()
     {
