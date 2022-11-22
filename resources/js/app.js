@@ -10,7 +10,7 @@ window.jQuery = jquery;
 window.$ = jquery;
 window.bootstrap = bootstrap;
 
- 
+
 
 
 
