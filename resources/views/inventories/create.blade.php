@@ -14,33 +14,33 @@
                 <form method="POST" action="{{ route('inventories.store') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="item_name" class="">Item Name <span class="text-danger">*</span></label>
+                        <label for="item_name" class="col-form-label">Item Name <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="item_name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="qty">Quantity <span class="text-danger">*</span></label>
+                        <label for="qty" class="col-form-label">Quantity <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" name="qty" required>
                     </div>
                     <div class="mb-3">
-                        <label for="borrowed_by" class="">Borrowed By <span class="text-danger">*</span></label>
+                        <label for="borrowed_by" class="col-form-label">Borrowed By <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="borrowed_by" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="borrowed_from" class="">Borrowed From <span class="text-danger">*</span></label>
+                        <label for="borrowed_from" class="col-form-label">Borrowed From <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="borrowed_from" required>
                     </div>
                     <div class="mb-3">
-                        <label for="status" class="">Status <span class="text-danger">*</span></label>
+                        <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="status" required>
                     </div>
                     <div class="mb-3">
-                        <label for="location" class="">Location <span class="text-danger">*</span></label>
+                        <label for="location" class="col-form-label">Location <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="location" required>
                     </div>
 
                     <div class="mb-3">
-                        <label for="additional_notes" class="">Additional Notes</label>
+                        <label for="additional_notes" class="col-form-label">Additional Notes</label>
                         <textarea class="form-control" name="additional_notes" rows="3"></textarea>
 
                     </div>

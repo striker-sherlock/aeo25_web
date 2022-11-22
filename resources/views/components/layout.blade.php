@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AEO 2023</title>
-    @vite(['resources/js/app.js'])
+    <link rel="icon" type="image/png" href="/storage/assets/AEO 2023Colored No Text.png" />
+    <title>The 2023 Asian Engllish Olympics</title>
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -18,3 +19,4 @@
 </body>
 
 </html>
+

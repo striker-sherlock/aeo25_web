@@ -15,11 +15,11 @@
           <form method="POST" action="{{ route('media-partners.store') }}" enctype="multipart/form-data">   
               @csrf
               <div class="mb-3">
-                <label for="name" class="">Media Partner Name <span class="text-danger">*</span></label>
+                <label for="name" class="col-form-label">Media Partner Name <span class="text-danger">*</span></label>
                 <input type="text" class="form-control" name="name"  >
               </div>
               <div class="mb-3">
-                <label for="logo">Media Partner Logo <span class="text-danger">*</span></label>
+                <label for="logo" class="col-form-label">Media Partner Logo <span class="text-danger">*</span></label>
                 <input type="file" accept="image/jpg, image/png, image/jpeg" class="form-control" name="logo" >
               </div>
               <button type="submit" class="btn btn-outline-primary rounded-pill w-100">Submit</button>

@@ -6,11 +6,14 @@ import 'bootstrap';
 import $ from 'jquery'
 window.$ = $;
 
-import "datatables.net";
+import 'datatables.net'
 
-import DataTable from "datatables.net";
+import DataTable from 'datatables.net';
 window.DataTable = DataTable;
-DataTable($);
+
+
+
+
 
 $(document).ready(function(){
     $('#dataTables').DataTable();
@@ -30,23 +33,37 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
+$(document).ready(function () {
 
-// import Echo from 'laravel-echo';
+    $('.InstitutionContactTable').DataTable();
+    $('.FollowUpTable').DataTable();
+    $('#DoneFollowUpTable').DataTable();
+    $('#OnProgressFollowUpTable').DataTable();
+    $('#MediaPartnerTable').DataTable();
+    $('#InventoryTable').DataTable();
+    $('#AccessControlTable').DataTable();
 
-// import Pusher from 'pusher-js';
-// window.Pusher = Pusher;
+    $('#competitionCarousel').carousel({
+        interval: 10000
+      })
+      
+      $('.carousel .carousel-item').each(function(){
+          var minPerSlide = 3;
+          var next = $(this).next();
+          if (!next.length) {
+          next = $(this).siblings(':first');
+          }
+          next.children(':first-child').clone().appendTo($(this));
+          
+          for (var i=0;i<minPerSlide;i++) {
+              next=next.next();
+              if (!next.length) {
+                  next = $(this).siblings(':first');
+                }
+              
+              next.children(':first-child').clone().appendTo($(this));
+            }
+      });
+      
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: import.meta.env.VITE_PUSHER_APP_KEY,
-//     wsHost: import.meta.env.VITE_PUSHER_HOST ?? `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
-//     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
-//     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
-//     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
-//     enabledTransports: ['ws', 'wss'],
-// });
+});

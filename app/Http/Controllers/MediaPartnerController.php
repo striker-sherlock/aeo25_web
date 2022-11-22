@@ -86,7 +86,7 @@ class MediaPartnerController extends Controller
     public function destroy(MediaPartner $mediaPartner)
     {
         $mediaPartner->delete();
-        return redirect()->route('media-partners.index')->with('Success', 'Data Successfully Deleted');
+        return redirect()->route('media-partners.index')->with('success', 'Data Successfully Deleted');
     }
 
     public function updateVisibility(MediaPartner $mediaPartner)

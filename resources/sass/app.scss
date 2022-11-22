@@ -1,10 +1,18 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url('https://fonts.bunny.net/css?family=lexend');
+@import url('https://fonts.bunny.net/css?family=roboto');
+
+
 
 // Variables
 @import 'variables';
 
+// Style
+@import 'assets';
+@import 'home';
+
 // Bootstrap
+@import 'swiper/css/bundle';
 @import 'bootstrap/scss/bootstrap';
 @import 'style.scss';
 @import '_sidebar.scss';
