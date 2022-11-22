@@ -50,6 +50,7 @@
             </table>
           </div>
     </x-card>
+    
       {{-- TRASHED --}}
     <x-card>
       <h1>Recycle Bin</h1>
