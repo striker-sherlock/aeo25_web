@@ -28,9 +28,15 @@
                                 <th>{{$payment->created_at}}</th>
                                 <th>
                                     <div class="d-flex justify-content-around">
-                                        <a href="{{route('competition-payments.confirm',$payment->id)}}" class="btn btn-outline-success">C</a>
-                                        <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a>
-                                        <a href="#" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >V</a>
+                                        <a href="{{route('competition-payments.confirm',$payment->id)}}" class="btn btn-outline-success">
+                                            <i class="fas fa-check-circle"></i>
+                                        </a>
+                                        <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >
+                                            <i class="fa-solid fa-receipt"></i>
+                                        </a>
                                     </div>
                                 </th>
                             </tr>
@@ -38,6 +44,7 @@
                         
                     </tbody>
                 </table>
+           
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -47,7 +54,7 @@
             <h2 class="mb-3 text-success fw-bold">Confirmed Competition Payment </h2>
             @if ($confirmed->count())
                 <a href="{{route('competition-payments.export')}}" class="btn btn-outline-primary mb-3">Download Excel</a>
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -69,7 +76,9 @@
                             <th>{{$payment->amount}}</th>
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">X</a>
+                                    <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
                                     {{-- <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a> --}}
                                 </div>
                             </th>
@@ -77,6 +86,7 @@
                     @endforeach
                     </tbody>
                 </table>
+            
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -85,7 +95,7 @@
         <x-card>
             <h2 class="mb-3 text-danger fw-bold">Rejected Competition Payment </h2>
             @if ($rejected->count())
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -110,7 +120,9 @@
                         
                             <th>
                                 <div class="d-flex justify-content-around">
-                                     
+                                    <a href="{{route('competition-payments.cancel', $payment->id)}}" class="btn btn-outline-warning" title="cancel payment">
+                                        <i class="fas fa-undo"></i>
+                                    </a>
                                 </div>
                             </th>
                         </tr>

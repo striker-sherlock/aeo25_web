@@ -20,7 +20,7 @@ class AdminCompetitionPaymentController extends Controller
             $competitionPayment = DB::table('competition_payments')
                 ->join('users','competition_payments.pic_id','=','users.id')
                 ->join('countries', 'countries.id', '=' , 'users.country_id')  
-                -> where('countries.name', '!=' ,'indonesia')
+                ->where('countries.name', '!=' ,'indonesia')
                 ->select('competition_payments.*','countries.name','users.*','competition_payments.created_at','competition_payments.id as id', 'payment_proof')  
                 ->get();
         } else{

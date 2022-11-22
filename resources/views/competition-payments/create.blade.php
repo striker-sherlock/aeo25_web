@@ -10,9 +10,9 @@
                 </x-card>
             </div>
             <div class="col-md-6">
-                {{-- RECIEPT SUMMARY --}}
+                {{-- RECEIPT SUMMARY --}}
                 <x-card>
-                    <h5 class="text-uppercase fw-bold text-center">Reciept Summary</h5><hr>
+                    <h5 class="text-uppercase fw-bold text-center">Receipt Summary</h5><hr>
                     <div class="d-flex justify-content-between">
                         <h4>Competition</h4>
                         <h4>Price</h4>

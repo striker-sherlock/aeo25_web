@@ -69,4 +69,22 @@ class AdminCompetitionParticipantController extends Controller
         return Excel::download(new ParticipantExport($competition), $competitionName.'Participant.xlsx');
     }
 
+    public function destroy(CompetitionParticipant $competitionParticipant) // SOFT DELETE
+    {
+        $competitionParticipant->delete();
+        return redirect()->back();
+    }
+
+    public function delete($id) // HARD DELETE
+    {
+        CompetitionParticipant::where('id', $id)->forceDelete();
+        return redirect()->back();
+    }
+
+    public function restore($id)
+    {
+        CompetitionParticipant::where('id', $id)->restore();
+        return redirect()->back();
+    }
+
 }

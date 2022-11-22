@@ -17,6 +17,7 @@ class SlotRegistrationController extends Controller
     public function __construct(){
         $this->middleware('auth')->only(['create']);
     }
+
     public function index(){
         //data table jangan lupa
         $competitions = Competition::all();
@@ -28,9 +29,14 @@ class SlotRegistrationController extends Controller
             $count = array_add($count,$competition->name, $competitionSlot);
         };
 
-
+        // dd($count);
         $pending = CompetitionSlot::where('is_confirmed',0)->get();
-        $confirmed = CompetitionSlot::where('is_confirmed',1)->get();
+        $confirmed = CompetitionSlot::leftJoin('competition_payments','competition_slot_details.payment_id','competition_payments.id')
+            ->where('competition_slot_details.is_confirmed',1)
+            ->Where('competition_slot_details.payment_id', NULL)
+            ->select('competition_slot_details.*')
+            ->get();
+        // dd($confirmed);
         $rejected = CompetitionSlot::where('is_confirmed',-1)->get();
         
         return view('slot-registrations.index',[
@@ -41,8 +47,7 @@ class SlotRegistrationController extends Controller
             'registeredSlot' => $count,
         ]);
     }
-    
- 
+
     public function create(){
         return view('slot-registrations.create',[
             'competitions' => Competition::all(),
@@ -56,8 +61,8 @@ class SlotRegistrationController extends Controller
     }
 
     public function store(Request $request){
+
         $len = count($request->quantity);
-        // dd($request->all());
         //  code ini untuk mengecek apabila slot nya masih tersedia atau tidak
         for($i = 0; $i < $len; $i++){
             if ($request->quantity[$i] != '0')$valid = $this->checkSlotAvailability($request->quantity[$i],$request->compet_id[$i]);
@@ -103,7 +108,8 @@ class SlotRegistrationController extends Controller
          
         $competitionSlot ->update([
             'updated_by' => 'Admin',
-            'is_confirmed' => 1
+            'is_confirmed' => 1,
+            'confirmed_at' => Carbon::now()
         ]);
 
         
@@ -112,12 +118,14 @@ class SlotRegistrationController extends Controller
             'temp_quota' => $remainedParticipant - $competitionSlot->quantity,
         ]);
 
-        // $confirmedMail = [
-        //     'subject' => $competitionSlot->competition->name. " - Confirmed Slot",
-        //     'name'=>$competitionSlot->competition->name,
+        $confirmedMail = [
+            'subject' => $competitionSlot->competition->name. " - Confirmed Slot",
+            'name'=>$competitionSlot->competition->name,
+            'body'=>'ini body',
+            'url' => 'http://aeo.mybnec.org/dashboard/step-2'
 
-        // ];
-        // Mail::to($competitionSlot->user->email)->send(new ConfirmedSlotMail($confirmedMail));
+        ];
+        Mail::to($competitionSlot->user->email)->send(new ConfirmedSlotMail($confirmedMail));
         return redirect()->route('slot-registrations.index');
     }
 
@@ -137,20 +145,20 @@ class SlotRegistrationController extends Controller
     public function reject (Request $request){
         //admin kasi alasan kenapa di reject
         $competitionSlot = CompetitionSlot::find($request->slot);
-        // dd($competitionSlot->user->email);
         $competitionSlot ->update([
             'updated_by' => 'Admin',
             'is_confirmed' => -1
         ]);
 
-        // $rejectMail = [
-        //     'subject' => $competitionSlot->competition->name. " - Rejection Slot",
-        //     'name'=>$competitionSlot->competition->name,
-        //     'reason' => $request->reason
+        $rejectMail = [
+            'subject' => $competitionSlot->competition->name. " - Rejection Slot",
+            'name'=>$competitionSlot->competition->name,
+            'reason' => $request->reason,
+            'url' => 'http://aeo.mybnec.org/dashboard/step-2'
 
-        // ];
-        // Mail::to($competitionSlot->user->email)->send(new RejectionMail($rejectMail));
-        // return redirect()->route('slot-registrations.index');
+        ];
+        Mail::to($competitionSlot->user->email)->send(new RejectionMail($rejectMail));
+        return redirect()->route('slot-registrations.index');
 
         
 
@@ -159,14 +167,15 @@ class SlotRegistrationController extends Controller
     
     public function update(Request $request, $id){
         $competitionSlot = CompetitionSlot::find($id);
-        if($competitionSlot->is_confirmed != 0 ) return redirect()->back()->with('error','Sorry, the updates is failed');
+        if($competitionSlot->is_confirmed == 1) return redirect()->back()->with('error','Sorry, the updates is failed');
         
+
         // cari selisih quantity 
         $difference = $competitionSlot->quantity - $request->quantity ;
-
         //update competition slot table
         $competitionSlot->update([
-            'quantity' => $request->quantity
+            'quantity' => $request->quantity,
+            'is_confirmed' => 0
         ]);
         
         $competition = Competition::find($competitionSlot->competition->id);

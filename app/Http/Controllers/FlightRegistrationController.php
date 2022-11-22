@@ -46,8 +46,8 @@ class FlightRegistrationController extends Controller
             }
         }
         FlightTicket::create([
-            'pic_id'=>'1',
-            'created_by'=>'PIC',
+            'pic_id'=>Auth::user()->id,
+            'created_by'=>Auth::user()->username,
             'type'=>$request->type,
             'airline_name'=>$request->airline_name,
             'flight_time'=>$request->flight_time,

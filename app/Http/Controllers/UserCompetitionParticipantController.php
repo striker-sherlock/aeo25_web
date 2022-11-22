@@ -15,12 +15,12 @@ use App\Models\ScoreType;
 class UserCompetitionParticipantController extends Controller
 {
     public function index($competition){
-        
+        $trashed = Donation::onlyTrashed()->get();
         // dd($competitionParticipants);
         return view('competition-participants.index',[
             'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
             'competition' => Competition::find($competition),
-        
+            'trashed' => $trashed,
         ]);
     }
 
@@ -36,7 +36,9 @@ class UserCompetitionParticipantController extends Controller
             
         
     public function create(CompetitionSlot $competitionParticipant){
-        // dd($competitionParticipant->competitionParticipant);
+        if ($competitionParticipant->payment == NULL)return redirect()->back()->with('error','Please make payment first');
+        if($competitionParticipant->payment->is_confirmed != 1 )return redirect()->back()->with('error','Please wait for the confirmation to be confirmed');
+
         if ($competitionParticipant->competition->need_team){
             $totalTeams = CompetitionSlot::join('competition_participants', 'competition_participants.competition_slot_id', 'competition_slot_details.id')
                 ->join('competitions', 'competitions.id', 'competition_slot_details.competition_id')
@@ -79,7 +81,6 @@ class UserCompetitionParticipantController extends Controller
         $competition = Competition::find($request->competition_id);    
         $len = $request->quantity;
         if($request->total_teams){
-            dd($request->all());
             $index = 0 ;
             for ($i = 0 ; $i < $len ; $i++){
                 $numberOfParticipant = 'people'.$i+$request->total_teams;
@@ -97,6 +98,7 @@ class UserCompetitionParticipantController extends Controller
                         $index++;
                         continue;
                     };
+
                     $name= $request->nama[$index];
                     $fileName = str_replace(' ', '-', $name);
                     $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
@@ -148,7 +150,6 @@ class UserCompetitionParticipantController extends Controller
                     $fixedName = $fileName.'_'.$current.'.'.$extension;
                     $path = $request->file("profile_picture.".$i)->storeAs("public/profile_picture/".$request->competition_id,$fixedName);
                 }
-                // dd($request->all());
     
                 $newParticipant = CompetitionParticipant::create([
                     'created_by' => Auth::user()->username,

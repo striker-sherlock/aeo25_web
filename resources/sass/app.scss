@@ -14,18 +14,21 @@
 // Bootstrap
 @import 'swiper/css/bundle';
 @import 'bootstrap/scss/bootstrap';
-@import 'sidebar';
+@import 'style.scss';
+@import '_sidebar.scss';
 @import 'bootstrap/scss/bootstrap';;
 @import "@fortawesome/fontawesome-free/css/all.css";
 @import '~bootstrap/scss/bootstrap';
 @import '~dataTables.net-dt/css/jquery.dataTables.min.css';
 
+// ICONS
+$fa-font-path: "~fa/../webfonts";
+@import '~fa/brands.scss';
+@import '~fa/regular.scss';
+@import '~fa/solid.scss';
+@import '~fa/fontawesome.scss';
 
-// Datatables
-@import 'datatables.net-dt';
-
-
-@import 'style';
-
-
-
+// @import '~@fortawesome/fontawesome-free/scss/all.scss';
+// @import "node_modules/font-awesome/scss/font-awesome.scss";
+@import 'style.scss';
+@import '_sidebar.scss';

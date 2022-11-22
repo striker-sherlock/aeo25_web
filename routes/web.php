@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ScoreTypeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FaqController;
@@ -13,26 +14,28 @@ use App\Http\Controllers\FollowUpTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FacilitiesController;
 use App\Http\Controllers\EnvironmentController;
+use App\Http\Controllers\RankingListController;
 use App\Http\Controllers\FlightTicketController;
 use App\Http\Controllers\MediaPartnerController;
+use App\Http\Controllers\UserAccommodationGuest;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
+use App\Http\Controllers\AdminAccommodationGuestController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\CompetitionPaymentController;
 use App\Http\Controllers\FlightRegistrationController;
-use App\Http\Controllers\InstitutionContactController;
 // use Yajra\DataTables\DataTablesServiceProvider
+use App\Http\Controllers\InstitutionContactController;
 use App\Http\Controllers\UserCompetitionPaymentController;
 use App\Http\Controllers\AdminCompetitionPaymentController;
-use App\Http\Controllers\LostAndFoundController;
+use App\Http\Controllers\UserAccommodationPaymentController;
+use App\Http\Controllers\AdminAccommodationPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\SponsorController;
 use App\Models\AccessControl;
 use App\Http\Controllers\AdminCompetitionParticipantController;
-use App\Http\Controllers\RankingListController;
-use App\Http\Controllers\AccessControlController;
-use App\Http\Controllers\ScoreTypeController;
+use App\Http\Controllers\AccommodationSlotRegistrationController;
 
 Auth::routes(['verify'=>true]);
 
@@ -57,8 +60,7 @@ Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, '
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 Route::get('/dashboard/step-{step}', [DashboardController::class, 'step'])->name('dashboard.step');
-
-
+Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 'accommodationStep'])->name('dashboard.accommodation-step');
 //Countries
 Route::resource('countries', CountriesController::class);
 
@@ -67,10 +69,11 @@ Route::resource('countries', CountriesController::class);
 
 
 //slot registration
-Route::resource('slot-registrations',SlotRegistrationController::class);
 Route::get('/slot-registrations/confirm/{competitionSlot}', [SlotRegistrationController::class, 'confirm'])->name('slot-registrations.confirm');
 Route::post('/slot-registrations/reject', [SlotRegistrationController::class, 'reject'])->name('slot-registrations.reject');
 Route::get('/slot-registrations/cancel/{competitionSlot}', [SlotRegistrationController::class, 'cancel'])->name('slot-registrations.cancel');
+Route::resource('slot-registrations',SlotRegistrationController::class);
+
 
 //Media Partner
 Route::resource('media-partners', MediaPartnerController::class)->except('show');
@@ -123,6 +126,42 @@ Route::resource('facilities', FacilityController::class);
 //Accommodation
 Route::resource('accommodations', AccommodationController::class);
 
+//Accommodation Slot
+Route::controller(AccommodationSlotRegistrationController::class)->prefix('accommodation-slot-registrations')->name('accommodation-slot-registrations.')->group(function(){
+    Route::get('{accommodationSlot}/confirm', 'confirm')->name('confirm');
+    Route::get('{accommodationSlot}/reject', 'reject')->name('reject');
+    Route::get('{accommodationSlot}/cancel', 'cancel')->name('cancel');
+    Route::get('create/{accommodation?}', 'create')->name('create');
+
+});
+Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only'=>['index', 'destroy', 'store', 'edit', 'update']]);
+
+//USER ACCOMMODATION PAYMENT
+Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
+Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
+Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');
+Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
+Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
+
+//ACCOMMODATION PAYMENT ADMIN
+Route::get('/accommodation-payments', [AdminAccommodationPaymentController::class, 'index'])->name('accommodation-payments.index');
+Route::get('/accommodation-payments/confirm/{accommodationPayment}', [AdminAccommodationPaymentController::class, 'confirm'])->name('accommodation-payments.confirm');
+Route::post('/accommodation-payments/reject', [AdminAccommodationPaymentController::class, 'reject'])->name('accommodation-payments.reject');
+Route::get('/accommodation-payments/cancel/{accommodationPayment}', [AdminAccommodationPaymentController::class, 'cancel'])->name('accommodation-payments.cancel');
+Route::get('/accommodation-payments/export', [AdminAccommodationPaymentController::class, 'export'])->name('accommodation-payments.export');
+
+
+//USER ACCOMMODATION GUEST
+Route::get('/guests/create/{accommodationSlot}', [UserAccommodationGuest::class, 'create'])->name('accommodation-guests.create');
+// Route::get('/participants/show/{user}/{competitition}', [UserCompetitionParticipantController::class, 'show'])->name('competition-participants.show');
+Route::post('/guests/store', [UserAccommodationGuest::class, 'store'])->name('accommodation-guests.store');
+
+// ADMIN ACCOMMODATION PARTICIPANT
+Route::get('/guests/{roomType?}', [AdminAccommodationGuestController::class, 'index'])->name('accommodation-guests.index');
+Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuestController::class, 'edit'])->name('accommodation-guests.edit');
+Route::put('/guests/update/{id}', [AdminAccommodationGuestController::class, 'update'])->name('accommodation-guests.update');
+// Route::get('/participants/export/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'export'])->name('competition-participants.export');
+
 //Inventory
 Route::resource('inventories', InventoryController::class)->except('show');
 
@@ -172,16 +211,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Score Type
 Route::resource('score-types', ScoreTypeController::class)->except('show');
-
-// Environments
-Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
-Route::resource('environments', EnvironmentController::class);
-
-// Ranking List
-Route::controller(RankingListController::class)->prefix('ranking-lists')->name('ranking-lists.')->group(function () {
-    Route::get('manage/{competition}/{scoreType}', 'manage')->name('manage');
-    Route::put('update-score/{competitionScore}', 'updateScore')->name('update-score');
-    Route::get('update-score-type/{competitionScore}/{type}', 'updateScoreType')->name('update-score-type');
-    Route::get('update-team-score-type/{competitionScore}/{competitionTeam}/{type}', 'updateTeamScoreType')->name('update-team-score-type');
-    Route::get('update-debate-type/{competitionTeam}', 'updateDebateType')->name('update-debate-type');
-});

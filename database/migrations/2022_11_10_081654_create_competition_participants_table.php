@@ -6,11 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('competition_participants', function (Blueprint $table) {
@@ -24,7 +20,7 @@ return new class extends Migration
             $table->string('competition_id');
             $table->integer('team_id')-> nullable();
             $table->integer('rank_id')->default(0);
-            $table->boolean('is_novice_debater');
+            $table->boolean('is_novice_debater')->default(0);
             $table->boolean('is_adjudicator')->default(0);
             $table->string('name');
             $table->string('email');
@@ -34,7 +30,8 @@ return new class extends Migration
             $table->string('profile_picture');
             $table->string('is_vegetarian');
             $table->string('additional_notes')->nullable();
-            $table->boolean('is_attend');
+            $table->boolean('is_attend')->default(0);
+            $table->softDeletes();
         });
     }
 
