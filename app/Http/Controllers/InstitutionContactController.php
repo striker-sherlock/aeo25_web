@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class InstitutionContactController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsAdmin');
+    }
+
     public function index()
     {
         return view('institution-contacts.index', [

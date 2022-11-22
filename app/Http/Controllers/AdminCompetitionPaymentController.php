@@ -15,6 +15,10 @@ use App\Exports\CompetitionPaymentExport;
 
 class AdminCompetitionPaymentController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsAdmin')->only(['index']);
+    }
+    
     public function index($type){
         if ($type == 'international'){
             $competitionPayment = DB::table('competition_payments')
@@ -69,8 +73,6 @@ class AdminCompetitionPaymentController extends Controller
         Mail::to($competitionPayment->user->email)->send(new ConfirmedSlotMail($confirmedMail));
 
         return redirect()->back()->with('success','Payment is successfuly confirmed');
-
-
     }
 
     public function cancel($id){

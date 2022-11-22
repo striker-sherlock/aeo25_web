@@ -6,6 +6,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
@@ -55,11 +56,12 @@ Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 Route::get('/dashboard/step-{step}', [DashboardController::class, 'step'])->name('dashboard.step');
 Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 'accommodationStep'])->name('dashboard.accommodation-step');
-//Countries
-Route::resource('countries', CountriesController::class);
 
 //Countries
 Route::resource('countries', CountriesController::class);
+
+//Competitions
+Route::resource('competitions', CompetitionController::class);
 
 //Sponsors
 Route::resource('sponsors', SponsorController::class);
@@ -153,7 +155,7 @@ Route::get('/guests/create/{accommodationSlot}', [UserAccommodationGuest::class,
 // Route::get('/participants/show/{user}/{competitition}', [UserCompetitionParticipantController::class, 'show'])->name('competition-participants.show');
 Route::post('/guests/store', [UserAccommodationGuest::class, 'store'])->name('accommodation-guests.store');
 
-// ADMIN ACCOMMODATION PARTICIPANT
+// ADMIN ACCOMMODATION GUEST
 Route::get('/guests/{roomType?}', [AdminAccommodationGuestController::class, 'index'])->name('accommodation-guests.index');
 Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuestController::class, 'edit'])->name('accommodation-guests.edit');
 Route::put('/guests/update/{id}', [AdminAccommodationGuestController::class, 'update'])->name('accommodation-guests.update');

@@ -10,7 +10,7 @@ class SponsorController extends Controller
 {
     public function __construct(){
         // $this->middleware('auth');
-        // $this->middleware('IsAdmin');
+        $this->middleware('IsAdmin');
     }
 
     public function index()

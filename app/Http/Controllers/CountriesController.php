@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Auth;
 class CountriesController extends Controller
     {
     public function __construct(){
-        $this->middleware('IsShowed:ENV001')->only(['index', 'create']);
+        $this->middleware('IsShowed:ENV001')->only(['index', 'create', 'edit']);
+        $this->middleware('IsAdmin')->only(['index', 'create', 'edit']);
+
     }
 
     public function index()

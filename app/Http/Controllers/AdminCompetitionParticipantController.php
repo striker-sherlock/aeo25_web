@@ -11,6 +11,9 @@ use App\Models\CompetitionParticipant;
 
 class AdminCompetitionParticipantController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsAdmin')->only(['edit']);
+    }
     public function edit(CompetitionParticipant $competitionParticipant){
         
         return view('competition-participants.edit',[
