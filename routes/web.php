@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessControlController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FacilityController;
@@ -37,6 +38,8 @@ use App\Http\Controllers\SponsorController;
 use App\Models\AccessControl;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
+use App\Http\Controllers\AmbassadorController;
+use App\Http\Controllers\LostAndFoundController;
 
 Auth::routes(['verify'=>true]);
 
@@ -53,6 +56,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 //register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
+
+
+
+// Ambassadors 
+Route::get('ambassadors/manage', [AmbassadorController::class, 'manage'])->name('ambassadors.manage');
+Route::resource('ambassadors', AmbassadorController::class)->except('show');
+
 
 // Sponsors
 Route::resource('sponsors', SponsorController::class);
@@ -207,6 +217,10 @@ Route::controller(RankingListController::class)->prefix('ranking-lists')->name('
 });
 Route::resource('ranking-lists', RankingListController::class)->only('index');
 });
+
+
+
+
 Route::resource('follow-ups', FollowUpController::class, ['except' => ['index','create']]);
 
 Route::resource('follow-up-types', FollowUpTypeController::class); 
