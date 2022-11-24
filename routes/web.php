@@ -1,11 +1,13 @@
 <?php
 
+use App\Models\AccessControl;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
@@ -15,19 +17,21 @@ use App\Http\Controllers\FacilitiesController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\RankingListController;
 use App\Http\Controllers\FlightTicketController;
+use App\Http\Controllers\FollowUpTypeController;
 use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\UserAccommodationGuest;
+use App\Http\Controllers\AccessControlController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
-use App\Http\Controllers\AdminAccommodationGuest;
 use App\Http\Controllers\Auth\RegisterController;
+// use Yajra\DataTables\DataTablesServiceProvider
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\CompetitionPaymentController;
 use App\Http\Controllers\FlightRegistrationController;
-// use Yajra\DataTables\DataTablesServiceProvider
 use App\Http\Controllers\InstitutionContactController;
 use App\Http\Controllers\UserCompetitionPaymentController;
+use App\Http\Controllers\AdminAccommodationGuestController;
 use App\Http\Controllers\AdminCompetitionPaymentController;
 use App\Http\Controllers\UserAccommodationPaymentController;
 use App\Http\Controllers\AdminAccommodationPaymentController;
@@ -37,9 +41,9 @@ use App\Http\Controllers\AccommodationSlotRegistrationController;
 
 Auth::routes(['verify'=>true]);
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::resource('faqs', FaqController::class);
-Route::resource('lost-and-found', LostAndFoundController::class);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::resource('/faqs', FaqController::class);
+Route::resource('/lost-and-found', LostAndFoundController::class);
 
 //Route Admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -51,19 +55,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
 //register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
+// Sponsors
+Route::resource('sponsors', SponsorController::class);
+Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
+
 //Dashboard
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 Route::get('/dashboard/step-{step}', [DashboardController::class, 'step'])->name('dashboard.step');
 Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 'accommodationStep'])->name('dashboard.accommodation-step');
 //Countries
+
 Route::resource('countries', CountriesController::class);
 
-//Countries
-Route::resource('countries', CountriesController::class);
 
-//Sponsors
-Route::resource('sponsors', SponsorController::class);
-Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
 
 //slot registration
 Route::get('/slot-registrations/confirm/{competitionSlot}', [SlotRegistrationController::class, 'confirm'])->name('slot-registrations.confirm');
@@ -153,20 +157,35 @@ Route::get('/guests/create/{accommodationSlot}', [UserAccommodationGuest::class,
 // Route::get('/participants/show/{user}/{competitition}', [UserCompetitionParticipantController::class, 'show'])->name('competition-participants.show');
 Route::post('/guests/store', [UserAccommodationGuest::class, 'store'])->name('accommodation-guests.store');
 
-// ADMIN COMPETITION PARTICIPANT
-Route::get('/guests/{roomType?}', [AdminAccommodationGuest::class, 'index'])->name('accommodation-guests.index');
-Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuest::class, 'edit'])->name('accommodation-guests.edit');
-Route::put('/guests/update/{id}', [AdminAccommodationGuest::class, 'update'])->name('accommodation-guests.update');
+// ADMIN ACCOMMODATION PARTICIPANT
+Route::get('/guests/{roomType?}', [AdminAccommodationGuestController::class, 'index'])->name('accommodation-guests.index');
+Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuestController::class, 'edit'])->name('accommodation-guests.edit');
+Route::put('/guests/update/{id}', [AdminAccommodationGuestController::class, 'update'])->name('accommodation-guests.update');
 // Route::get('/participants/export/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'export'])->name('competition-participants.export');
-
-
 
 //Inventory
 Route::resource('inventories', InventoryController::class)->except('show');
 
 // Institution Contact
-Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy']);
+Route::prefix('institution-contacts')->name('institution-contacts.')->group(function () {
+    Route::get('/manage/{type}', [InstitutionContactController::class, 'index'])->name('index');
+    Route::get('/{type}/create', [InstitutionContactController::class, 'create'])->name('create');
+    Route::get('/{type}/{id}/edit', [InstitutionContactController::class, 'edit'])->name('edit');
 
+});
+
+Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy','index','create','edit']);
+
+// Follow Up
+Route::prefix('follow-ups')->name('follow-ups.')->group(function () {
+    Route::get('/manage/{type}', [FollowUpController::class, 'index'])->name('index');
+    Route::get('/{type}/{id}/edit', [FollowUpController::class, 'edit'])->name('edit');
+    Route::put('assign-pic/{followUp}', [FollowUpController::class, 'assignPIC'])->name('assign-pic');
+    Route::put('/update-status/{followUp}',[FollowUpController::class, 'updateStatus'])->name('update-status');
+    Route::get('/{type}/create', [FollowUpController::class, 'create'])->name('create');
+    Route::get('delete/{id}', [FollowUpController::class, 'delete'])->name('delete');
+    Route::get('restore/{id}', [FollowUpController::class, 'restore'])->name('restore');
+    
 // Environments
 Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
 Route::resource('environments', EnvironmentController::class);
@@ -180,6 +199,16 @@ Route::controller(RankingListController::class)->prefix('ranking-lists')->name('
     Route::get('update-debate-type/{competitionTeam}', 'updateDebateType')->name('update-debate-type');
 });
 Route::resource('ranking-lists', RankingListController::class)->only('index');
+});
+Route::resource('follow-ups', FollowUpController::class, ['except' => ['index','create']]);
+
+Route::resource('follow-up-types', FollowUpTypeController::class); 
+
+Route::resource('access-controls',AccessControlController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Score Type
 Route::resource('score-types', ScoreTypeController::class)->except('show');

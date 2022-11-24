@@ -36,6 +36,7 @@ class DashboardController extends Controller
 
         $totalParticipants= CompetitionParticipant::rightJoin('competition_slot_details','competition_slot_details.id' , '=', 'competition_participants.competition_slot_id')
             ->where('competition_participants.competition_slot_id','!=',NULL)
+            ->whereNull('competition_participants.deleted_at')
             ->count();
         
         // competition slot yang ga ada participantnya
@@ -194,7 +195,6 @@ class DashboardController extends Controller
             ->where('competition_payments.is_confirmed',1)
             ->select('quantity')
             ->sum('quantity');
-        dd($confirmed);
         return view('dashboards.admin', [
             'competitions' => Competition::all(),
             

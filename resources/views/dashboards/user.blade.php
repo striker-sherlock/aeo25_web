@@ -18,7 +18,7 @@
                         <div class="card-body my-3 p-4">
                             <h2 class="fw-bold">STEP 1</h2>
                             <h4>Confirmed Slot Registration </h4>
-                            <h1 class="display-3 fw-bold {{$confirmedSlotRegistration->count()- $allSlotRegistration->count() == 0 ? 'text-success':'text-danger'}}">{{$confirmedSlotRegistration->count()}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
+                            <h1 class="display-3 fw-bold {{$confirmedSlotRegistration->count()- $allSlotRegistration->count() != 0 || $totalSlot == 0 ? 'text-danger':'text-success'}}">{{$confirmedSlotRegistration->count()}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
             
                         </div>
                     </div>
@@ -47,7 +47,7 @@
 
             <div class="col-md-3">
                 <a href="{{route('dashboard.step',3)}}" class="d-block text-decoration-none btn" title="You must have at least 1 confirmed payment slot to move into this step">
-                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{ $participantCompetition != 0 ? 'red-shadow':'green-shadow'}}" style="border-radius:20px">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{ $totalParticipants == 0 ? 'red-shadow':'green-shadow'}}" style="border-radius:20px">
                         <div class="card-header bg-secondary"></div>
                         <div class="card-body my-3 p-4">
                             <h2 class="fw-bold">STEP 3</h2>

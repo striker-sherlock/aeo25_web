@@ -1,5 +1,6 @@
 <x-admin>
-    <div class="container my-3">
+    {{-- {{dd($countries)}} --}}
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <x-card >
@@ -87,7 +88,7 @@
                         <button type="submit" class="btn btn-outline-primary w-100 rounded-pill" >
                             {{ __('Register') }}
                         </button>
-                        
+                        <a href="/login" class="mx-auto d-block text-dark btn mt-3" >Already Have an Account ? <span class="text-primary">Login</span></a>
                         
                     </form>
                 </x-card>

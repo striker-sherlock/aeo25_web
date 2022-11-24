@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompetitionSlot;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SponsorController extends Controller
 {
-    public function __construct(){
-        // $this->middleware('auth');
-        // $this->middleware('IsAdmin');
-    }
+    // public function __construct(){
+    //     $this->middleware('admin');
+    // }
 
     public function index()
     {
         return view('sponsors.index',[
             'sponsors' => Sponsor::all(),
+            'competitionSlots' => CompetitionSlot::all(),
         ]);
     }
 
-    public function updateVisibility(Sponsors $sponsor){
+    public function updateVisibility(Sponsor $sponsor){
         $sponsor->update([
             'updated_by' => 'admin',
             'is_showed' =>  !$sponsor->is_showed
@@ -76,14 +77,14 @@ class SponsorController extends Controller
         //
     }
 
-    public function edit( Sponsors $sponsor)
+    public function edit( Sponsor $sponsor)
     {
         return view('sponsors.edit',[ 
             'sponsor' => $sponsor
         ]);
     }
 
-    public function update(Request $request, Sponsors $sponsor){
+    public function update(Request $request, Sponsor $sponsor){
         $request->validate([
             'nama' => 'required|string',
             'logo_new' => 'nullable|image|mimes:jpeg,jpg,png|max:1999',

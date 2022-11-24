@@ -55,9 +55,15 @@
                                 <th>{{$competition->quantity}}</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex  justify-content-center">
-                                        <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn btn-sm btn-primary me-2">E</a>
-                                        <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-success btn-sm me-2">C</a>
-                                        <a  class="btn btn-danger btn-sm me-2" data-bs-toggle="modal" data-bs-target="#reason{{$competition->id}}">R</a>
+                                        <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn btn-sm btn-primary me-2">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-success btn-sm me-2">
+                                            <i class="fas fa-check-circle"></i>
+                                        </a>
+                                        <a class="btn btn-danger btn-sm me-2" data-bs-toggle="modal" data-bs-target="#reason{{$competition->id}}">
+                                            <i class="fas fa-times"></i>
+                                        </a>
                                         
                                     </div>
                                 </th>
@@ -100,7 +106,9 @@
                                 <th>{{$competition->quantity}}</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex justify-content-center">
-                                        <a href="{{route('slot-registrations.cancel',$competition->id)}}" class="btn btn-warning  btn-sm">X</a>
+                                        <a href="{{route('slot-registrations.cancel',$competition->id)}}" class="btn btn-warning  btn-sm">
+                                            <i class="fas fa-undo" ></i>
+                                        </a>
                                     </div>
                                 </th>
                             </tr>

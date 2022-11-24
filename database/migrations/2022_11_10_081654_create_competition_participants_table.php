@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('is_vegetarian');
             $table->string('additional_notes')->nullable();
             $table->boolean('is_attend')->default(0);
+            $table->softDeletes();
         });
     }
 

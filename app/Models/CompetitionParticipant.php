@@ -6,10 +6,12 @@ use App\Models\CompetitionSlot;
 use App\Models\CompetitionTeam;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CompetitionParticipant extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $table = 'competition_participants';
     protected $primaryKey = 'id';
     protected $timestamp = true;

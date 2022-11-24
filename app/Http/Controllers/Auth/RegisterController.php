@@ -25,41 +25,29 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
+   
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+ 
     public function __construct()
     {
         $this->middleware('guest');
     }
-
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+ 
     protected function validator(array $data)
     {
         return Validator::make($data, [
             'institution_name' => ['required', 'string', 'unique:users'],
             'institution_type' => ['required', 'string'],
             'institution_logo' => ['image', 'required', 'max:1999', 'mimes:jpg,png,jpeg'],
-            'pic_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'institution_email' => ['required', 'email'],
-            'pic_phone_number' => ['required', 'numeric'],
-            'country_id' => ['required', 'integer'],
+            'pic_name'  => ['nullable', 'string', 'max:255'],
+            'pic_email'  => ['nullable', 'string', 'max:255'],
+            'pic_phone_number' => ['nullable', 'string', 'max:255'],
+            'country_id' => ['nullable', 'integer'],
+            'institution_email' => ['nullable', 'string', 'max:255'],
+          
         ]);
     }
 
@@ -69,11 +57,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected  function index(){
+    public function showRegistrationForm(){
         return view('auth.register',[
-            "countries" => Countries::all()
+            "countries" => Countries::all(),
         ]);
     }
+
     protected function create(array $data){
         $pic = $data['institution_name'];
         $fileName = str_replace(' ', '-', $pic );
