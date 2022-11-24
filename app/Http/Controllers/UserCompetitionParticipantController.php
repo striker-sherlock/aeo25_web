@@ -20,7 +20,7 @@ class UserCompetitionParticipantController extends Controller
         return view('competition-participants.index',[
             'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
             'competition' => Competition::find($competition),
-            'trashed' => $trashed,
+            // 'trashed' => $trashed,
         ]);
     }
 

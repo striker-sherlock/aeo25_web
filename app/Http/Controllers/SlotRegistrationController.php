@@ -84,7 +84,7 @@ class SlotRegistrationController extends Controller
                 ]);
             }
         }
-        return redirect()->route('slot-registrations.index');
+        return redirect()->route('dashboard.step',1)->with('success','Slot is successfully registered');
 
     }
 

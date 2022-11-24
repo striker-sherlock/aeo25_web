@@ -1,4 +1,4 @@
-<x-admin>
+<x-user title="step three">
    {{-- {{dd($competitionSlots[0]->payment)}} --}}
     <div class="container mt-3">
         <h1>Step 3</h1>
@@ -45,4 +45,4 @@
         </x-card>
     </div>
 
-</x-admin>
+</x-user>

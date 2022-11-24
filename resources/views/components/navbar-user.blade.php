@@ -5,6 +5,9 @@
             <a class="navbar-brand" href="/">
                 <img src="/storage/assets/AEO 2023White.png" alt="" width="100">
             </a>
+            <a class=" toggle-wrapper rounded p-2" >
+                <span class="navbar-toggler-icon m-0 h5 " id="show-sidebar" style="cursor: pointer;"> </span>
+            </a>
         </div>
         <button class="navbar-toggler border" type="button" data-bs-target="#navbar-menu" data-bs-toggle="collapse"
             aria-controls="contain" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,4 +1,4 @@
-<x-admin>
+<x-user title="Show Participant">
     <div class="container mt-4">
         <h1>Step 3</h1>
         <h2 class="display-6 fw-bold">{{Auth::user()->institution_name}}'s {{$competitionParticipants[0]->competition->name}} Participant Details</h2>
@@ -83,4 +83,4 @@
             </div>
         </div>
     @endforeach
-</x-admin>
+</x-user>

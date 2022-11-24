@@ -1,5 +1,5 @@
-<x-admin> 
-    <div class="mt-2 container">
+<x-user title="step two"> 
+    <div class="mt-5 container">
         <h1>Step 2</h1>
         <h2 class="display-6 fw-bold">Competition Payment</h2>
         <x-card>
@@ -127,4 +127,4 @@
         </div>  
     </div>  
     @endforeach
-</x-admin>
+</x-user>

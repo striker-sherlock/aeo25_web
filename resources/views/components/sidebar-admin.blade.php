@@ -1,24 +1,24 @@
 <style>
-    ::-webkit-scrollbar-thumb {
-        border-radius: 5px;
-        background-color: #767D7F !important;
-    }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background-color: #767D7F !important;
+        }
 </style>
 <nav id="sidebar" class="sidebar-wrapper h-100 mh-100 fixed-top bg-gradient-blue pr-0">
     <div class="sidebar-content">
         <div class="sidebar-brand text-end row my-2 py-2"  style="padding: 0.15rem;">
             
-            <span class="c-text-1 ms-auto" id="close-sidebar" style="cursor: pointer;">
+            <span class="c-text-1 ms-auto me-4" id="close-sidebar" style="cursor: pointer;">
                 <i class="fas fa-arrow-alt-circle-left fa-lg text-white"></i>
-            </span>
+            </span> 
         
         </div>
         <div class="sidebar-header  mb-3" style="height: auto; ">
             <div class="d-flex flex-column align-items-center justify-content-center text-center">
                 <img src="/storage/assets/AEO 2023Black.png" class="rounded-circle card-shadow bg-white" style="padding: 0.5rem; border-radius: 50;" alt="" width="70">
-                <span class="mt-1 fw-bold text-white" style="font-size: 0.9rem"> Name </span>
-                <small class="text-secondary text-wrap text-light">   Position </small>
-                <small class="text-secondary text-wrap text-light">  Division </small>
+                <span class="mt-1 fw-bold text-white" style="font-size: 0.9rem">{{Auth::guard('admin')->user()->name}} </span>
+                <small class="text-secondary text-wrap text-light">{{Auth::guard('admin')->user()->position}} </small>
+                <small class="text-secondary text-wrap text-light"> {{Auth::guard('admin')->user()->division}} </small>
             </div>
         </div>
         <div class="sidebar-menu border-top overflow-auto" style="height: calc(100% - 196px);">
@@ -48,7 +48,7 @@
                         <div class="sidebar-submenu">
                             <ul class="fa-ul">
                                 <li class="mb-1">
-                                    <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                    <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark w-100"
                                         href="{{route('competition-payments.index', "international")}}">
                                         <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                         International
@@ -69,7 +69,7 @@
                     </li>
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                            href="#">
+                            href="{{route('slot-registrations.index')}}">
                             <span class="fa-stack fa-sm ms-n1">
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fas fa-list-ol fa-stack-1x text-dark"></i>
@@ -157,57 +157,57 @@
                         <div class="sidebar-submenu">
                             <ul class="fa-ul">
                                     <li class="mb-1">
-                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('competition-participants.index', 1) }}">
+                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark w-100"
+                                            href="{{ route('competition-participants.index', 'DB') }}">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Debate
                                         </a>
                                     </li>
                                     <li class="mb-1">
-                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('competition-participants.index', 2) }}">
+                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark w-100"
+                                            href="{{ route('competition-participants.index', 'IA') }}">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Ind.Adjudicator
                                         </a>
                                     </li>
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('competition-participants.index', 3) }}" style="display: block">
+                                            href="{{ route('competition-participants.index', 'NC') }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Newscasting
                                         </a>
                                     </li>
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('competition-participants.index', 4) }}" style="display: block">
+                                            href="{{ route('competition-participants.index', 'SP') }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Speech
                                         </a>
                                     </li>
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('competition-participants.index', 5) }}" style="display: block">
+                                            href="{{ route('competition-participants.index', 'ST') }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Storytelling
                                         </a>
                                     </li>
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('competition-participants.index', 6) }}" style="display: block">
+                                            href="{{ route('competition-participants.index', 'SB') }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Spelling bee
                                         </a>
                                     </li>
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('competition-participants.index', 7) }}" style="display: block">
+                                            href="{{ route('competition-participants.index', 'RD') }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Radio Drama
                                         </a>
                                     </li>
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('competition-participants.index', 8) }}" style="display: block">
+                                            href="{{ route('competition-participants.index', 'SSW') }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Short Story Writing
                                         </a>
