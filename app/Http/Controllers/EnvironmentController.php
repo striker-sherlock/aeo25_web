@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 
 class EnvironmentController extends Controller
 {
-
+    public function __construct(){
+        $this->middleware('IsAdmin');
+    }
     public function index()
     {
         return view("environments.index", [

@@ -9,12 +9,9 @@ use Illuminate\Routing\Route;
 
 class InstitutionContactController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('admin');
+    public function __construct(){
+        $this->middleware('IsAdmin');
     }
-
 
     public function index($type)
     {
