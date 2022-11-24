@@ -2,7 +2,7 @@
     <div class="container mt-3">
         {{-- PENDING --}}
         <x-card>
-            <h2 class="text-warning">Pending Competition Payment </h2>
+            <h2 class="text-warning fw-bold">Pending Competition Payment </h2>
             @if ($pending->count())
                 <table class="table table-striped table-bordered" id="data-table">
                     <thead>

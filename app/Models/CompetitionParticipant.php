@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CompetitionParticipant extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+    // use SoftDeletes;
     protected $table = 'competition_participants';
     protected $primaryKey = 'id';
     protected $timestamp = true;

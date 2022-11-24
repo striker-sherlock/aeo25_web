@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FlightTicket;
 use App\Exports\FlightTicketExport;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class FlightTicketController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsShowed:ENV002')->only(['index']);
+        $this->middleware('IsShowed:ENV002')->only(['index']);  
     }
 
     public function index()

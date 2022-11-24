@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\File;
 
 class LostAndFoundController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth')->only(['create']);
+    }
     public function index()
     {
         return view('lost-and-found.index', [

@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 
 class AdminAccommodationPaymentController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsAdmin')->only(['index']);
+    }
 
     public function index()
     {

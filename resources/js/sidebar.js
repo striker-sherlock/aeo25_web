@@ -1,11 +1,11 @@
 $(document).ready(function () {
-    if ($(window).width() < 1200) {
+    if ($(window).width() > 1200) {
         var trigger = $(".page-content");
 
         trigger.click(function () {
+            $("#show-sidebar").show();
             $("#page-toggled").removeClass("toggled");
             $("#footer-toggled").removeClass("toggled");
-            $("#show-sidebar").show();
         });
     } else {
         $("#page-toggled").addClass("toggled");

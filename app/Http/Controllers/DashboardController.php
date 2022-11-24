@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompetitionParticipant;
 use App\Models\AccommodationGuest;
+use Exception;
 
 class DashboardController extends Controller
 {   
@@ -24,9 +25,7 @@ class DashboardController extends Controller
         $this->middleware('IsAdmin')->only(['showAdminDashboard']);
     }
 
-    public function accommodationStepOneValidation($pic){
-        return true;
-    }
+ 
     public function showDashboard(){
         $allSlotRegistration = CompetitionSlot::where('pic_id',Auth::user()->id)->get();
         $confirmedSlotRegistration =  $allSlotRegistration->where('is_confirmed',1);
@@ -195,9 +194,44 @@ class DashboardController extends Controller
             ->where('competition_payments.is_confirmed',1)
             ->select('quantity')
             ->sum('quantity');
+        $totalParticipants= CompetitionParticipant::all()->count();
+        $totalNationalParticipants = CompetitionParticipant::join('users','users.id','competition_participants.pic_id')
+            ->join('countries','countries.id','users.country_id')
+            ->where('countries.name', 'LIKE','indonesia')
+            ->count();
+        $totalInternationalParticipants = CompetitionParticipant::join('users','users.id','competition_participants.pic_id')
+            ->join('countries','countries.id','users.country_id')
+            ->where('countries.name', 'NOT LIKE','indonesia')
+            ->count();
+        
+        $totalCountries = CompetitionParticipant::join('users','users.id','competition_participants.pic_id')
+            ->join('countries','countries.id','users.country_id')
+            ->select('countries.name')
+            ->distinct('countries.name')
+            ->count();
+
+        $totalInstitutions = DB::table('users')->distinct('institution_name')->count();
+        // dd($totalInstitutions);
+
+        $competitions = Competition::all();
+        $count = [];
+        foreach ($competitions as $competition){
+            $competitionSlot = CompetitionSlot::join('competition_payments','competition_payments.id','competition_slot_details.payment_id')
+                                ->where('competition_id',$competition->id)
+                                ->where('competition_slot_details.is_confirmed',1)
+                                ->where('competition_payments.is_confirmed',1)
+                                ->sum('quantity');
+            $count = array_add($count,$competition->name, $competitionSlot);
+        };
+
         return view('dashboards.admin', [
             'competitions' => Competition::all(),
-            
+            'totalParticipants' => $totalParticipants,
+            'totalNationalParticipants' => $totalNationalParticipants,
+            'totalInternationalParticipants' => $totalInternationalParticipants,
+            'totalCountries' => $totalCountries,
+            'totalInstitutions' => $totalInstitutions,
+            'registeredSlot' => $count
         ]);
     }
 

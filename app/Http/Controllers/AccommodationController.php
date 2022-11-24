@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AccommodationController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsAdmin')->only(['index', 'create', 'edit']);
+    }
+
     public function index()
     {
         return view('accommodations.index', [
@@ -46,7 +50,7 @@ class AccommodationController extends Controller
         }
 
         $newAccommodation = Accommodation::create([
-            'created_by'=>Auth::user()->username,
+            'created_by'=>Auth::guard('admin')->user()->name,
             'room_type'=>$request->room_type,
             'max_guests'=>$request->max_guests,
             'picture' => $fileName,

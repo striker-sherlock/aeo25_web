@@ -1,5 +1,5 @@
-<x-admin>
-    <div class="container mt-3">
+<x-user title="Main Dashboard">
+    <div class="container" style="margin-top:65px;">
         <div class="header">
             <h2 class="fw-bold ">Welcome back, PIC </h2>
             <h5 class="text-muted">Welcome to 2023 Asian English Olympics!</h5>
@@ -233,73 +233,6 @@
             @endif
 
         </x-card>
-
-
-        {{-- event --}}
-        {{-- <h1 class="fw-bold display-5 mb-4">Our Event </h1>
-        <div class="event">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="row ">
-                        <div class="col-md-6">
-                            <x-card>
-                                
-                            </x-card>
-                        </div>
-                        <div class="col-md-6">
-                            <x-card>
-
-                            </x-card>
-                        </div>
-                        <div class="col-md-6">
-                            <x-card>
-
-                            </x-card>
-                        </div>
-                        <div class="col-md-6">
-                            <x-card>
-
-                            </x-card>
-                        </div>
-                    </div>
-                </div>
-                <div class="upcomming-event col-md-4">
-                    <x-card>
-                        <h1>Upcoming Event</h1>
-                        <hr>
-                        <h4>Breaking Announcement</h4>
-                        <div class="row ">
-                            <div class="col-2 mb-2">
-                                <span class="d-block rounded-pill bg-secondary" style="height:50px; width:50px;"> </span>
-                            </div>    
-                            <div class="col-10 d-flex align-items-center">
-                                <h6>Anggrek, 808</h6>
-                            </div>
-
-                            <div class="col-2 mb-2">
-                                <span class="d-block rounded-pill bg-secondary" style="height:50px; width:50px;"> </span>
-                            </div>    
-                            <div class="col-10 d-flex align-items-center">
-                                <h6>Feb, 27 2022 </h6>
-                            </div>
-
-                            <div class="col-2 mb-2">
-                                <span class="d-block rounded-pill bg-secondary" style="height:50px; width:50px;"> </span>
-                            </div>    
-                            <div class="col-10 d-flex align-items-center">
-                                <h6>16.00 -> 20.00</h6>
-                            </div>    
-                        </div>       
-
-                    </x-card>
-                </div>
-            </div>
-        </div>
-        <hr> --}}
-        
-        
-
-
+ 
     </div>
-    
-</x-admin>
+</x-user>

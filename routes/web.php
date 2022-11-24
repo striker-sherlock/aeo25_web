@@ -1,13 +1,14 @@
 <?php
 
 use App\Models\AccessControl;
+use App\Http\Controllers\AccessControlController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
-use App\Http\Controllers\FollowUpController;
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
@@ -21,7 +22,6 @@ use App\Http\Controllers\FollowUpTypeController;
 use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\UserAccommodationGuest;
-use App\Http\Controllers\AccessControlController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -38,6 +38,8 @@ use App\Http\Controllers\AdminAccommodationPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
+use App\Http\Controllers\AmbassadorController;
+use App\Http\Controllers\PDFController;
 
 Auth::routes(['verify'=>true]);
 
@@ -52,8 +54,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
 });
 
+// Environments
+Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
+Route::resource('environments', EnvironmentController::class);
+
 //register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
+
+
+
+// Ambassadors 
+Route::get('ambassadors/manage', [AmbassadorController::class, 'manage'])->name('ambassadors.manage');
+Route::resource('ambassadors', AmbassadorController::class)->except('show');
+
 
 // Sponsors
 Route::resource('sponsors', SponsorController::class);
@@ -104,6 +117,7 @@ Route::get('/payments/cancel/{competitionSlot}', [AdminCompetitionPaymentControl
 Route::get('/payments/export', [AdminCompetitionPaymentController::class, 'export'])->name('competition-payments.export');
 
 //COMPETITION PAYMENT USER
+Route::get('/invoice/{user}/{id}', [PDFController::class, 'viewInvoice'])->name('payments.invoice');
 Route::get('/payments/create/{id}', [UserCompetitionPaymentController::class, 'create'])->name('competition-payments.create');
 Route::post('/payments/store', [UserCompetitionPaymentController::class, 'store'])->name('competition-payments.store');
 Route::get('/payments/{competitionPayment}/edit', [UserCompetitionPaymentController::class, 'edit'])->name('competition-payments.edit');
@@ -157,7 +171,7 @@ Route::get('/guests/create/{accommodationSlot}', [UserAccommodationGuest::class,
 // Route::get('/participants/show/{user}/{competitition}', [UserCompetitionParticipantController::class, 'show'])->name('competition-participants.show');
 Route::post('/guests/store', [UserAccommodationGuest::class, 'store'])->name('accommodation-guests.store');
 
-// ADMIN ACCOMMODATION PARTICIPANT
+// ADMIN ACCOMMODATION GUEST
 Route::get('/guests/{roomType?}', [AdminAccommodationGuestController::class, 'index'])->name('accommodation-guests.index');
 Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuestController::class, 'edit'])->name('accommodation-guests.edit');
 Route::put('/guests/update/{id}', [AdminAccommodationGuestController::class, 'update'])->name('accommodation-guests.update');
@@ -186,9 +200,7 @@ Route::prefix('follow-ups')->name('follow-ups.')->group(function () {
     Route::get('delete/{id}', [FollowUpController::class, 'delete'])->name('delete');
     Route::get('restore/{id}', [FollowUpController::class, 'restore'])->name('restore');
     
-// Environments
-Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
-Route::resource('environments', EnvironmentController::class);
+
 
 // Ranking List
 Route::controller(RankingListController::class)->prefix('ranking-lists')->name('ranking-lists.')->group(function () {
@@ -200,6 +212,10 @@ Route::controller(RankingListController::class)->prefix('ranking-lists')->name('
 });
 Route::resource('ranking-lists', RankingListController::class)->only('index');
 });
+
+
+
+
 Route::resource('follow-ups', FollowUpController::class, ['except' => ['index','create']]);
 
 Route::resource('follow-up-types', FollowUpTypeController::class); 

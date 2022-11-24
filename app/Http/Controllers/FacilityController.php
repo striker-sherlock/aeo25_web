@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class FacilityController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsAdmin');
+    }
+    
     public function index()
     {
         return view('facilities.index', [

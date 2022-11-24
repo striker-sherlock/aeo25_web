@@ -1,6 +1,6 @@
 <footer id="footer" class="footer">
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
+    <div class="container ">
+        <div class="row justify-content-center align-items-center ">
             <div class="col-lg-4 col-md-6 my-3 text-center text-lg-start ">
                 <div class="title-line mx-lg-0 mx-auto"></div>
                 <h4 class="my-3 fw-bold">International Registration</h4>

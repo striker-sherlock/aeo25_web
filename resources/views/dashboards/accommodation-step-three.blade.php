@@ -1,4 +1,4 @@
-<x-admin>
+<x-user title="Accommodation Step three">
    {{-- {{dd($accommodationSlots[0]->payment)}} --}}
     <div class="container mt-3 w-75">
         <h1>Step 3</h1>
@@ -43,4 +43,4 @@
         </x-card>
     </div>
 
-</x-admin>
+</x-user>

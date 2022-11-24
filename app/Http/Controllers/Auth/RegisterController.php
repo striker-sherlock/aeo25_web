@@ -47,6 +47,7 @@ class RegisterController extends Controller
             'pic_phone_number' => ['nullable', 'string', 'max:255'],
             'country_id' => ['nullable', 'integer'],
             'institution_email' => ['nullable', 'string', 'max:255'],
+            'institution_type' => ['nullable', 'string', 'max:255'],
           
         ]);
     }
@@ -75,7 +76,7 @@ class RegisterController extends Controller
             $fixedName = $fileName.'_'.$current.'.'.$extension;
             $path = $data['institution_logo']->storeAs("public/instition_logo",$fixedName);
         }
-        $username = strtolower(str_replace(' ', '', $data['name']));
+        $username = strtolower(str_replace(' ', '', $data['pic_name']));
         
         return User::create([
             'institution_name' => $data['institution_name'],
