@@ -27,7 +27,7 @@ class RankingListController extends Controller
                 ->join('users', 'users.id', 'competition_slot_details.pic_id')
                 ->where('competition_participants.competition_id', $competition->id)
                 ->where('competition_scores.score_type_id', $scoreType->id)
-                // ->whereNull('competition_participants.deleted_at') //! jgn lupa di uncomment kalo column deleted_at udah dibuat
+                ->whereNull('competition_participants.deleted_at') //! jgn lupa di uncomment kalo column deleted_at udah dibuat
                 ->select(
                     'competition_scores.id',
                     'competition_participants.team_id',
@@ -59,7 +59,7 @@ class RankingListController extends Controller
                 ->join('users', 'users.id', 'competition_slot_details.pic_id')
                 ->where('competition_participants.competition_id', $competition->id)
                 ->where('competition_scores.score_type_id', $scoreType->id)
-                // ->whereNull('competition_participants.deleted_at') //! jgn lupa di uncomment kalo column deleted_at udah dibuat
+                ->whereNull('competition_participants.deleted_at') //! jgn lupa di uncomment kalo column deleted_at udah dibuat
                 ->select(
                     'competition_scores.id',
                     'competition_participants.id as participant_id',

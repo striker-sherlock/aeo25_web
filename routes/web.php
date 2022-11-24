@@ -40,6 +40,7 @@ use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
 use App\Http\Controllers\AmbassadorController;
 use App\Http\Controllers\LostAndFoundController;
+use App\Http\Controllers\PDFController;
 
 Auth::routes(['verify'=>true]);
 
@@ -116,6 +117,7 @@ Route::get('/payments/cancel/{competitionSlot}', [AdminCompetitionPaymentControl
 Route::get('/payments/export', [AdminCompetitionPaymentController::class, 'export'])->name('competition-payments.export');
 
 //COMPETITION PAYMENT USER
+Route::get('/invoice/{user}/{id}', [PDFController::class, 'viewInvoice'])->name('payments.invoice');
 Route::get('/payments/create/{id}', [UserCompetitionPaymentController::class, 'create'])->name('competition-payments.create');
 Route::post('/payments/store', [UserCompetitionPaymentController::class, 'store'])->name('competition-payments.store');
 Route::get('/payments/{competitionPayment}/edit', [UserCompetitionPaymentController::class, 'edit'])->name('competition-payments.edit');
