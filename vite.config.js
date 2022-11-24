@@ -4,11 +4,15 @@ const path = require('path');
 
 export default defineConfig({
     plugins: [
-        laravel([
-            'resources/sass/app.scss',
-            'resources/js/app.js',
-    ]),
+        laravel({
+            input: [
+                'resources/js/app.js',
+                'resources/sass/app.scss'
+            ],
+            refresh: true,
+        }),
     ],
+
     resolve: {
         alias: {
             "~fa": path.resolve(__dirname, "node_modules/@fortawesome/fontawesome-free/scss"),
@@ -17,4 +21,11 @@ export default defineConfig({
             ),
         },
     },
+
+    server: {
+        https: false,
+        host: 'uat.aeo.mybnec.org.loc',
+    },
+
+    
 });
