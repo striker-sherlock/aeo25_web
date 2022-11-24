@@ -1,6 +1,6 @@
-<x-admin>
-    <div class="container mt-3">
-        <h1 class="display-4  fw-bold text-primary">Select The Competition Below</h1><hr class="mb-3">
+<x-user title="create slot registration">
+    <div class="container mt-5">
+        <h1 class="display-4  fw-bold aeo-title">Select The Competition Below</h1><hr class="mb-3">
         <form action="{{route('slot-registrations.store')}}" method="POST" enctype="multipart/form-data"> 
             <div class="row">
                 @csrf
@@ -63,10 +63,10 @@
                     <div class="footer">
                         <div class="row">
                             <div class="col">
-                                <button type="button" class="close btn btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>
+                                <button type="button" class="close btn rounded-pill btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-outline-primary w-100">Submit</button>
+                                <button type="submit" class="rounded-pill btn btn-outline-primary w-100">Submit</button>
                                 
                             </div>
                         </div>  
@@ -92,4 +92,4 @@
             })
         })
     </script>
-</x-admin>
+</x-user>

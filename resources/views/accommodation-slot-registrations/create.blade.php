@@ -1,5 +1,5 @@
-<x-admin>
-    <div class="container mt-4">
+<x-user title="Create Accommodation Slot">
+    <div class="container mt-5">
       <h1>Step 1</h1>
       <h2 class="display-6 fw-bold">Select Your Room Type</h2>
       <hr>
@@ -111,4 +111,4 @@
   </script>
   
     
-</x-admin>
+</x-user>

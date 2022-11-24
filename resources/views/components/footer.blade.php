@@ -1,6 +1,6 @@
 <footer id="footer" class="footer">
-    <div class="container">
-        <div class="row justify-content-center align-items-center">
+    <div class="container ">
+        <div class="row justify-content-center align-items-center ">
             <div class="col-lg-4 col-md-6 my-3 text-center text-lg-start ">
                 <div class="title-line mx-lg-0 mx-auto"></div>
                 <h4 class="my-3 fw-bold">International Registration</h4>
@@ -10,15 +10,16 @@
                                 class="fa fa-envelope me-2 fa-lg"></i>
                             contact.aeointernational@gmail.com</a>
                     </li>
-                    <li class="my-1"><a href="https://api.whatsapp.com/send?phone=+6285708042003"
+                 
+                    <li class="my-1"><a href="https://api.whatsapp.com/send?phone=6281617228800"
                             class="text-reset text-decoration-none" target="_blank"><i
-                                class="fab fa-whatsapp me-2 fa-lg"></i>+62-857-0804-2003
-                            (Nicholas)</a>
+                                class="fab fa-whatsapp me-2 fa-lg"></i>+62-816-1722-8800
+                            (Thaddeus)</a>
                     </li>
-                    <li class="my-1"><a href="https://api.whatsapp.com/send?phone=+6281213252870"
+                    <li class="my-1"><a href="https://api.whatsapp.com/send?phone=6281383080274"
                             class="text-reset text-decoration-none" target="_blank"><i
-                                class="fab fa-whatsapp me-2 fa-lg"></i>+62-812-1325-2870
-                            (Alleandra)</a>
+                                class="fab fa-whatsapp me-2 fa-lg"></i>+62-813-8308-0274
+                            (Masika)</a>
                     </li>
                 </ul>
             </div>
@@ -31,15 +32,15 @@
                                 class="fa fa-envelope me-2 fa-lg"></i>
                             contact.aeonational@gmail.com</a>
                     </li>
-                    <li class="my-1"><a href="https://api.whatsapp.com/send?phone=+6282148032166"
+                    <li class="my-1"><a href="https://api.whatsapp.com/send?phone=6285219610407"
                             class="text-reset text-decoration-none" target="_blank"><i
-                                class="fab fa-whatsapp me-2 fa-lg"></i>+62-821-4803-2166
-                            (Lily)</a>
+                                class="fab fa-whatsapp me-2 fa-lg"></i>+62-852-1961-0407
+                            (Andru)</a>
                     </li>
-                    <li class="my-1"><a href="https://api.whatsapp.com/send?phone=+6285972957515"
+                    <li class="my-1"><a href="https://api.whatsapp.com/send?phone=6281239939000"
                             class="text-reset text-decoration-none" target="_blank"><i
-                                class="fab fa-whatsapp me-2 fa-lg"></i>+62-859-7295-7515
-                            (Edison)</a>
+                                class="fab fa-whatsapp me-2 fa-lg"></i>+62-812-3993-9000
+                            (Kein)</a>
                     </li>
                 </ul>
             </div>

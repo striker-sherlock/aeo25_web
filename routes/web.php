@@ -1,52 +1,51 @@
 <?php
 
+use App\Models\AccessControl;
 use App\Http\Controllers\AccessControlController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ScoreTypeController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FaqController;
-use App\Http\Controllers\FollowUpController;
-use App\Http\Controllers\FollowUpTypeController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FacilitiesController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\RankingListController;
 use App\Http\Controllers\FlightTicketController;
+use App\Http\Controllers\FollowUpTypeController;
+use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\UserAccommodationGuest;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
-use App\Http\Controllers\AdminAccommodationGuestController;
 use App\Http\Controllers\Auth\RegisterController;
+// use Yajra\DataTables\DataTablesServiceProvider
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\CompetitionPaymentController;
 use App\Http\Controllers\FlightRegistrationController;
-// use Yajra\DataTables\DataTablesServiceProvider
 use App\Http\Controllers\InstitutionContactController;
 use App\Http\Controllers\UserCompetitionPaymentController;
+use App\Http\Controllers\AdminAccommodationGuestController;
 use App\Http\Controllers\AdminCompetitionPaymentController;
 use App\Http\Controllers\UserAccommodationPaymentController;
 use App\Http\Controllers\AdminAccommodationPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
-use App\Http\Controllers\SponsorController;
-use App\Models\AccessControl;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
 use App\Http\Controllers\AmbassadorController;
-use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\PDFController;
 
 Auth::routes(['verify'=>true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::resource('faqs', FaqController::class);
-Route::resource('lost-and-found', LostAndFoundController::class);
+Route::resource('/faqs', FaqController::class);
+Route::resource('/lost-and-found', LostAndFoundController::class);
 
 //Route Admin
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -77,9 +76,10 @@ Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, '
 Route::get('/dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
 Route::get('/dashboard/step-{step}', [DashboardController::class, 'step'])->name('dashboard.step');
 Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 'accommodationStep'])->name('dashboard.accommodation-step');
-
 //Countries
+
 Route::resource('countries', CountriesController::class);
+
 
 
 //slot registration

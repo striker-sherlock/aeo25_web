@@ -1,13 +1,13 @@
-<x-admin>
-    <div class="container my-3">
+<x-layout>
+    <x-navbar></x-navbar>
+    <div class="container " style="margin-top: 100px">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <x-card >
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
-                        <h1 class="mb-4 text-center">Create New account </h1>
-                        <hr>
-                        <h3 class="text-uppercase fw-bold" style="letter-spacing: 0.1em">Institutional Data</h3>
+                        <h1 class="mb-4 text-center text-gradient fw-bold display-5">Create New account </h1>
+                        <h3 class="text-uppercase fw-bold aeo-title" style="letter-spacing: 0.1em">Institutional Data</h3>
                         <div class="form-group mb-3">
                             <label for="ins_name" class="col-form-label"> Institutional Name<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="ins_name" name="institution_name" value="{{old('institution_name')}}" required>
@@ -33,7 +33,7 @@
                         </div>
                         <hr class="my-3">
 
-                        <h3 class="text-uppercase fw-bold" style="letter-spacing: 0.1em">PIC Data</h3>
+                        <h3 class="text-uppercase fw-bold aeo-title" style="letter-spacing: 0.1em">PIC Data</h3>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
@@ -95,12 +95,13 @@
                         <button type="submit" class="btn btn-outline-primary w-100 rounded-pill" >
                             {{ __('Register') }}
                         </button>
-                        
+                        <a href="/login" class="mx-auto d-block text-dark btn mt-3" >Already Have an Account ? <span class="text-primary">Login</span></a>
                         
                     </form>
                 </x-card>
             </div>
         </div>
     </div>
-</x-admin>
+    <x-footer></x-footer>
+</x-layout>
  

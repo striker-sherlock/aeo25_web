@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MediaPartner;
 use App\Models\Sponsor;
+use App\Models\Countries;
+use App\Models\Competition;
+use App\Models\MediaPartner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +26,8 @@ class HomeController extends Controller
         return view('home', [
             'mediaPartners' => MediaPartner::all(),
             'sponsors' => Sponsor::all(),
+            'countries' => Countries::all(),
+            'competitions' => Competition::all()
             
         ]);
     }

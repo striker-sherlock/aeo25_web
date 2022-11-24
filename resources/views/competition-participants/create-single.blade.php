@@ -1,4 +1,4 @@
-<x-admin>
+<x-user title="Create Single">
     <div class="container mt-3">
         <h1 class="fs-2 mb-2">Step 3</h1>
         <h2 class="display-6 fw-bold">Competition Field's Participant Registration</h2>
@@ -87,4 +87,4 @@
             @endfor
         </form>
     </div>
-</x-admin>
+</x-user>

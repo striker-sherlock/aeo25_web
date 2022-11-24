@@ -12,7 +12,6 @@
 @import 'home';
 
 // Bootstrap
-@import 'swiper/css/bundle';
 @import 'bootstrap/scss/bootstrap';
 @import 'style.scss';
 @import '_sidebar.scss';
@@ -20,6 +19,8 @@
 @import "@fortawesome/fontawesome-free/css/all.css";
 @import '~bootstrap/scss/bootstrap';
 @import '~dataTables.net-dt/css/jquery.dataTables.min.css';
+
+@import 'owl.carousel/dist/assets/owl.carousel.css';
 
 // ICONS
 $fa-font-path: "~fa/../webfonts";
