@@ -80,15 +80,6 @@ Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 
 //Countries
 Route::resource('countries', CountriesController::class);
 
-<<<<<<< HEAD
-//Competitions
-Route::resource('competitions', CompetitionController::class);
-
-//Sponsors
-Route::resource('sponsors', SponsorController::class);
-Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
-=======
->>>>>>> da2a0efb1139fb1ba46d6a864b81388c328f187f
 
 //slot registration
 Route::get('/slot-registrations/confirm/{competitionSlot}', [SlotRegistrationController::class, 'confirm'])->name('slot-registrations.confirm');
