@@ -15,7 +15,7 @@ use App\Models\ScoreType;
 class UserCompetitionParticipantController extends Controller
 {
     public function index($competition){
-        $trashed = Donation::onlyTrashed()->get();
+        $trashed = CompetitionParticipant::onlyTrashed()->get();
         // dd($competitionParticipants);
         return view('competition-participants.index',[
             'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
