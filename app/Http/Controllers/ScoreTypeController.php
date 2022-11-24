@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\CompetitionScore;
 use App\Models\ScoreType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScoreTypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('IsAdmin');
+    }
+
     public function index()
     {
         return view('score-types.index', [
