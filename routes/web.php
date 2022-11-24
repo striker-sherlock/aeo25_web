@@ -53,6 +53,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
 });
 
+// Environments
+Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
+Route::resource('environments', EnvironmentController::class);
+
 //register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 
@@ -195,9 +199,7 @@ Route::prefix('follow-ups')->name('follow-ups.')->group(function () {
     Route::get('delete/{id}', [FollowUpController::class, 'delete'])->name('delete');
     Route::get('restore/{id}', [FollowUpController::class, 'restore'])->name('restore');
     
-// Environments
-Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
-Route::resource('environments', EnvironmentController::class);
+
 
 // Ranking List
 Route::controller(RankingListController::class)->prefix('ranking-lists')->name('ranking-lists.')->group(function () {

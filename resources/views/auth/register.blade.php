@@ -16,8 +16,8 @@
                             <label for="type" class="col-form-label"> Institutional Type<span class="text-danger">*</span></label>
                             <select class="form-select"  name="institution_type" required>
                                 <option selected class="d-none">Select The Institutional Type</option>
-                                <option value="school" {{old('institution_type') == 'school' ? 'selected':''}}>school</option>
-                                <option value="university" {{old('institution_type') == 'university' ? 'selected':''}}>university</option>
+                                <option value="school" {{old('institution_type') == 'school' ? 'selected':''}}>School</option>
+                                <option value="university" {{old('institution_type') == 'university' ? 'selected':''}}>University</option>
                             </select>
                         </div>
                         
@@ -27,8 +27,8 @@
                         </div>
                         
                         <div class="form-group mb-2">
-                            <label for="ins_logo" class="col-form-label"> Institutional Logo<span class="text-danger">*</span></label>
-                            <input type="file" accept="image/png,image/jpeg,image/jpg" class="form-control" id="ins_logo" name="institution_logo" required> 
+                            <label for="institution_logo" class="col-form-label"> Institutional Logo<span class="text-danger">*</span></label>
+                            <input type="file" accept="image/png,image/jpeg,image/jpg" class="form-control" id="institution_logo" name="institution_logo" required> 
                             <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | Max: 2MB</small>
                         </div>
                         <hr class="my-3">
@@ -56,12 +56,20 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label for="country" class="col-form-label">Country<span class="text-danger">*</span></label>
-                                    <select class="form-select" id="countries"  name="country_id" required>
-                                        <option selected class="d-none">Select The Country</option>
-                                        @foreach ($countries as $country)
-                                            <option value="{{$country->id}}" {{old('country_id') == $country->id ? 'selected' : ''}}>{{$country->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <select name="country_id" class="form-select  @error('country_id') is-invalid
+                                    @enderror" required>
+                                    <option value="" selected disabled>Choose...
+                                    </option>
+                                    @php
+                                    $countries = App\Models\Countries::all();
+                                    @endphp
+                                    @foreach ($countries as $country)
+                                    <option value="{{ $country->id }}"
+                                        {{ old('country_id') == $country->id ? 'selected' : '' }}>
+                                        {{ $country->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
                                 </div>
                                 <div class="form-group mb-2 position-relative">
                                     <label for="password" class="col-form-label">Password<span class="text-danger">*</span></label>

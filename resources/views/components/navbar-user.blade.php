@@ -8,7 +8,7 @@
         </div>
         <button class="navbar-toggler border" type="button" data-bs-target="#navbar-menu" data-bs-toggle="collapse"
             aria-controls="contain" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon pt-1 c-text-1">☰</span>
+            <span class="navbar-toggler-icon pt-1 c-text-1"></span>
         </button>
         <div class="navbar-collapse collapse" id="navbar-menu">
             <ul class="navbar-nav mx-auto">
