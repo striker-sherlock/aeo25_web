@@ -87,13 +87,6 @@ class SlotRegistrationController extends Controller
         return redirect()->route('slot-registrations.index');
 
     }
-
-  
-    public function show($id)
-    {
-        
-    }
-
  
     public function edit($id) {
         $competitionSlot = CompetitionSlot::find($id);

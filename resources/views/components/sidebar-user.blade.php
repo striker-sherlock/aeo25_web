@@ -7,6 +7,9 @@
             <span class="c-text-1 ms-auto" id="close-sidebar" style="cursor: pointer;">
                 <i class="fas fa-arrow-alt-circle-left fa-lg text-white"></i>
             </span>
+            <a class=" toggle-wrapper rounded p-2" >
+                <span class="navbar-toggler-icon m-0 h5 " id="show-sidebar" style="cursor: pointer;"> </span>
+            </a>
         </div>
         <div class="sidebar-header border-top border-gray" style="height: auto; padding: 0.5rem 1rem;">
             <div class="d-flex flex-column align-items-center justify-content-center text-center my-3">
@@ -30,7 +33,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{ route('profiles.edit') }}">
+                        href="#">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fas fa-user-edit fa-stack-1x text-dark-silver"></i>
@@ -40,7 +43,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{route('user-dashboard.show',1)}}">
+                        href="">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fas fa-user-plus fa-stack-1x text-dark-silver"></i>
@@ -50,7 +53,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{route('user-dashboard.show',2)}}">
+                        href="">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fas fa-credit-card fa-stack-1x text-dark-silver"></i>
@@ -60,7 +63,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{route('user-dashboard.show', 3)}}">
+                        href="">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fa fa-users fa-stack-1x text-dark-silver"></i>
@@ -70,7 +73,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{route('user-dashboard.show', 4)}}">
+                        href="#">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fas fa-copy fa-stack-1x text-dark-silver"></i>
@@ -80,7 +83,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{ route('schedules.index') }}">
+                        href="">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fa fa-calendar fa-stack-1x text-dark-silver"></i>
@@ -100,7 +103,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{ route('ranking-list.index', ['DB', 'preliminary']) }}">
+                        href="">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fas fa-trophy fa-stack-1x text-dark-silver"></i>
@@ -110,7 +113,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{ route('certificates.index') }}">
+                        href="">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fa fa-certificate fa-stack-1x text-dark-silver"></i>

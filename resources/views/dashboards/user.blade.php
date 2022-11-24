@@ -1,4 +1,4 @@
-<x-admin>
+<x-user title="Dashboard">
     <div class="container mt-3">
         <div class="header">
             <h2 class="fw-bold ">Welcome back, PIC </h2>
@@ -302,4 +302,4 @@
 
     </div>
     
-</x-admin>
+</x-user>

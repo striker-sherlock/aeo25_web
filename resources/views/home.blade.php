@@ -557,7 +557,7 @@
                                 @csrf
                                 <div class="form-group row mb-0 mb-sm-3">
                                     <label for="name" class="col-sm-3 col-form-label text-sm-left">
-                                        {{ _('Name') }}
+                                        Name
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
@@ -568,29 +568,22 @@
 
                                 <div class="form-group row mb-0 mb-sm-3">
                                     <label for="country_id" class="col-sm-3 col-form-label text-sm-left">
-                                        {{ _('Country') }}
+                                        Country
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
                                         <select class="form-select " name="country_id">
                                             <option selected class="d-none">Select your Country</option>
-                                            {{-- @foreach ($countries as $country)
+                                            @foreach ($countries as $country)
                                         <option value="{{$country->id}}">{{$country->name}}</option>
-                                    @endforeach --}}
-                                            <option value="1">Indonesia</option>
-                                            <option value="2">Singapore</option>
-                                            <option value="3">Malaysia</option>
-                                            <option value="4">Thailand</option>
-                                            <option value="5">Bangladesh</option>
-                                            <option value="6">Vietnam</option>
-                                            <option value="7">Cambodia</option>
+                                    @endforeach
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="form-group row mb-0 mb-sm-3">
                                     <label for="phone_number" class="col-sm-3 col-form-label text-sm-left">
-                                        {{ _('Phone Number') }}
+                                       Phone Number
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
@@ -602,7 +595,7 @@
 
                                 <div class="form-group row mb-0 mb-sm-3">
                                     <label for="email" class="col-sm-3 col-form-label text-sm-left">
-                                        {{ _('Email') }}
+                                       Email
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
@@ -613,7 +606,7 @@
 
                                 <div class="form-group row mb-0 mb-sm-3">
                                     <label for="question" class="col-sm-3 col-form-label text-sm-left">
-                                        {{ _('Question') }}
+                                       Question
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
@@ -704,7 +697,7 @@
                             <div class="col-12 order-first order-lg-last mb-3 mb-lg-0">
                                 <a class="btn c-button-1 c-rounded px-3 mt-3"
                                     href="https://forms.gle/vnMcPQkY79BWNTag6"
-                                    target="_blank">{{ __('Request Invitation Letter') }}</a>
+                                    target="_blank">Request Invitation Letter</a>
                             </div>
                         </div>
                     </div>

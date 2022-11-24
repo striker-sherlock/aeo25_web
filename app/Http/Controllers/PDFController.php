@@ -116,7 +116,7 @@ class PDFController extends Controller
                 }
 
                 #logo img {
-                width: 101%
+                width: 100%
                 }
 
                 #details {
@@ -199,12 +199,12 @@ class PDFController extends Controller
                 }
 
                 table .unit {
-                background: #9fcfe6;
+                background: #7FBCD2;
                 color: #FFFFFF;
                 }
 
                 table .total {
-                background: #275DA3;
+                background: #80679e;
                 color: #FFFFFF;
                 }
 
@@ -279,11 +279,12 @@ class PDFController extends Controller
                 }
                 </style>';
 
-        $output .= '
+
+        $output .= ' 
             </head>
             <header class="clearfix">
                 <div id="logo">
-                <img src="/storage/app/public/assets/letterhead.png">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead.png">
                 </div>
             </header>
             <body>
@@ -371,7 +372,7 @@ class PDFController extends Controller
         $output .= '
                                     <tr>
                                         <td>Email</td>
-                                        <td>: elen.novianti@binus.ac.id</td>
+                                        <td>: rahmadira.herdiningtyas@binus.ac.id</td>
                                     </tr>
                                     ';
         }
@@ -386,7 +387,7 @@ class PDFController extends Controller
                                     </tr>
                                     <tr>
                                         <td>Bank Account Name</td>
-                                        <td>: Elen Novianti</td>
+                                        <td>:Rahmadira Febi Herdiningtyas</td>
                                     </tr>';
         if ($user->country->name != 'INDONESIA') {
         $output .= '
@@ -418,7 +419,7 @@ class PDFController extends Controller
                     <li>The payment amount we receive must match the amount of total fees listed in the invoice.</li>
                     <li>You can make your payments using a bank transfer to the following bank account:
                     <ol>Bank Account: BCA (Bank Central Asia)<br>
-                    Bank Account Name: Elen Novianti<br>
+                    Bank Account Name: Rahmadira Febi Herdiningtyas<br>
                     Bank Account Number: 5271848871<br>
                     Swift Code: CENAIDJA</ol></li>
                     <li>We only accept payment in <b>Indonesian Rupiahs (IDR).</b></li>
@@ -437,7 +438,7 @@ class PDFController extends Controller
                 <p>After the payment is made, you will have to wait for a maximum of <b>7 working days to receive your payment confirmation.</b></p>
                 <p><b>All the money that has been transferred into our account cannot be refunded for all reasons.</b></p>
                 <p>If you have any question regarding payment or administration, kindly contact:<br>
-                Elen Novianti (Secretary and Treasurer of The 2023 AEO)<br>
+                Rahmadira Febi Herdiningtyas (Secretary and Treasurer of The 2023 AEO)<br>
                 Whatsapp: 081256255542<br>
                 Line: elennovianti_<br></p>
                 <p><b>Please see the details and instructions inside the invoice.</b></p>
@@ -454,7 +455,7 @@ class PDFController extends Controller
                 <li>The payment amount that we receive must match the amount of total fees listed in the invoice.</li>
                 <li>For <b>Indonesian Teams</b>, you can make your payments using a bank transfer to the following bank account:
                 <ol>Bank Account: BCA (Bank Central Asia)<br>
-                Bank Account Name: Elen Novianti<br>
+                Bank Account Name: Rahmadira Febi Herdiningtyas<br>
                 Bank Account Number: 5271848871<br>
                 Swift Code: CENAIDJA</ol></li>
                 <li>For <b>Non-Indonesian Teams</b>, you are suggested to make your payments via <b>Wise</b><br> (<a href="https://wise.com/">https://wise.com/</a>).</li>
@@ -491,9 +492,9 @@ class PDFController extends Controller
                 <li>Click “Continue”;</li>
                 <li>Click “Someone else” as your recipient;</li>
                 <li>Enter these details:<br>
-                Email<t>:  elen.novianti@binus.ac.id<br>
+                Email<t>:  rahmadira.herdiningtyas@binus.ac.id<br>
                 Bank Name: BCA (Bank Central Asia)<br>
-                Bank Account Name: Elen Novianti<br>
+                Bank Account Name: Rahmadira Febi Herdiningtyas<br>
                 Bank Account Number: 5271848871<br></li>
                 <li>Select “Pay for Goods and Services” as a reason for the transfer. Then click “Continue”;</li>
                 <li>You will proceed to the review transfer page. Enter the reference in the following format: “AEO 2023” followed by your field and institution name.<br>Example: AEO 2023 Debate, Speech Binus University;</li>
@@ -523,7 +524,7 @@ class PDFController extends Controller
                 City:  Pontianak<br>
                 Province:  West Kalimantan<br>
                 Postal Code:  78243<br>
-                Email Address:  elen.novianti@binus.ac.id<br>
+                Email Address:  rahmadira.herdiningtyas@binus.ac.id<br>
                 Bank Name: BCA (Bank Central Asia)<br>
                 Bank Account Number: 5271848871<br></li>
                 <li>Complete the data on the payment information;</li>
@@ -535,7 +536,7 @@ class PDFController extends Controller
                 </div>
                 <div id="notices" style="padding: 0px 110px 50px 20px">
                 <p>If you have any question regarding payment or administration, kindly contact:<br>
-                Elen Novianti (Secretary and Treasurer of The 2023 AEO)<br>
+                Rahmadira Febi Herdiningtyas (Secretary and Treasurer of The 2023 AEO)<br>
                 Whatsapp: 081256255542<br>
                 Line: elennovianti_<br></p>
                 <p><b>Please see the details and instructions inside the invoice.</b></p>
@@ -575,7 +576,7 @@ class PDFController extends Controller
                     'competitions.price',
                     'competitions.id'
                 )
-                ->where('competition_slot_details.user_id', '=', $payment->user_id)
+                ->where('competition_slot_details.pic_id', '=', $payment->user_id)
                 ->where('competition_slot_details.payment_id', '=', $payment->id)
                 ->orderby('updated_at', 'DESC')
                 ->get();
@@ -600,8 +601,13 @@ class PDFController extends Controller
         $output .= '
                 <title>Invoice - ' . $user->institution_name . ' - 02' . '</title>';
         }
+        '<link rel="preconnect" href="https://fonts.googleapis.com">';
+        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
+         '<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">';
+
         $output .= '
                 <style>
+                
                 @page{
                 margin-top: 0;
                 margin-left: 1.2cm;
@@ -610,7 +616,7 @@ class PDFController extends Controller
                 }
 
                 @font-face {
-                    font-family: "Roboto";
+                    font-family: "Roboto", sans-serif;
                     font-style: normal;
                     font-weight: normal;
                     src: url("/storage/fonts/RobotoRegular.woff") format("woff");
@@ -653,7 +659,7 @@ class PDFController extends Controller
                 }
 
                 #logo img {
-                width: 101%
+                width: 100%
                 }
 
                 #details {
@@ -818,8 +824,8 @@ class PDFController extends Controller
         $output .= '
             </head>
             <header class="clearfix">
-                <div id="logo">
-                <img src="/storage/app/public/assets/letterhead.png">
+                <div id="logo"> 
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead.png">
                 </div>
             </header>
             <body>
@@ -906,7 +912,7 @@ class PDFController extends Controller
         $output .= '
                                     <tr>
                                         <td>Email</td>
-                                        <td>: elen.novianti@binus.ac.id</td>
+                                        <td>: rahmadira.herdiningtyas@binus.ac.id</td>
                                     </tr>
                                     ';
         }
@@ -921,7 +927,7 @@ class PDFController extends Controller
                                     </tr>
                                     <tr>
                                         <td>Bank Account Name</td>
-                                        <td>: Elen Novianti</td>
+                                        <td>: Rahmadira Febi Herdiningtyas</td>
                                     </tr>';
         if ($user->country->name != 'INDONESIA') {
         $output .= '
@@ -953,7 +959,7 @@ class PDFController extends Controller
                     <li>The payment amount we receive must match the amount of total fees listed in the invoice.</li>
                     <li>You can make your payments using a bank transfer to the following bank account:
                     <ol>Bank Account: BCA (Bank Central Asia)<br>
-                    Bank Account Name: Elen Novianti<br>
+                    Bank Account Name: Rahmadira Febi Herdiningtyas<br>
                     Bank Account Number: 5271848871<br>
                     Swift Code: CENAIDJA</ol></li>
                     <li>We only accept payment in <b>Indonesian Rupiahs (IDR).</b></li>
@@ -972,7 +978,7 @@ class PDFController extends Controller
                 <p>After the payment is made, you will have to wait for a maximum of <b>7 working days to receive your payment confirmation.</b></p>
                 <p><b>All the money that has been transferred into our account cannot be refunded for all reasons.</b></p>
                 <p>If you have any question regarding payment or administration, kindly contact:<br>
-                Elen Novianti (Secretary and Treasurer of The 2023 AEO)<br>
+                Rahmadira Febi Herdiningtyas (Secretary and Treasurer of The 2023 AEO)<br>
                 Whatsapp: 081256255542<br>
                 Line: elennovianti_<br></p>
                 <p><b>Please see the details and instructions inside the invoice.</b></p>
@@ -989,7 +995,7 @@ class PDFController extends Controller
                 <li>The payment amount that we receive must match the amount of total fees listed in the invoice.</li>
                 <li>For <b>Indonesian Teams</b>, you can make your payments using a bank transfer to the following bank account:
                 <ol>Bank Account: BCA (Bank Central Asia)<br>
-                Bank Account Name: Elen Novianti<br>
+                Bank Account Name: Rahmadira Febi Herdiningtyas<br>
                 Bank Account Number: 5271848871<br>
                 Swift Code: CENAIDJA</ol></li>
                 <li>For <b>Non-Indonesian Teams</b>, you are suggested to make your payments via <b>Wise</b><br> (<a href="https://wise.com/">https://wise.com/</a>).</li>
@@ -1026,9 +1032,9 @@ class PDFController extends Controller
                 <li>Click “Continue”;</li>
                 <li>Click “Someone else” as your recipient;</li>
                 <li>Enter these details:<br>
-                Email<t>:  elen.novianti@binus.ac.id<br>
+                Email<t>:  rahmadira.herdiningtyas@binus.ac.id<br>
                 Bank Name: BCA (Bank Central Asia)<br>
-                Bank Account Name: Elen Novianti<br>
+                Bank Account Name: Rahmadira Febi Herdiningtyas<br>
                 Bank Account Number: 5271848871<br></li>
                 <li>Select “Pay for Goods and Services” as a reason for the transfer. Then click “Continue”;</li>
                 <li>You will proceed to the review transfer page. Enter the reference in the following format: “AEO 2023” followed by your field and institution name.<br>Example: AEO 2023 Debate, Speech Binus University;</li>
@@ -1058,7 +1064,7 @@ class PDFController extends Controller
                 City:  Pontianak<br>
                 Province:  West Kalimantan<br>
                 Postal Code:  78243<br>
-                Email Address:  elen.novianti@binus.ac.id<br>
+                Email Address:  rahmadira.herdiningtyas@binus.ac.id<br>
                 Bank Name: BCA (Bank Central Asia)<br>
                 Bank Account Number: 5271848871<br></li>
                 <li>Complete the data on the payment information;</li>
@@ -1070,7 +1076,7 @@ class PDFController extends Controller
                 </div>
                 <div id="notices" style="padding: 0px 110px 50px 20px">
                 <p>If you have any question regarding payment or administration, kindly contact:<br>
-                Elen Novianti (Secretary and Treasurer of The 2023 AEO)<br>
+                Rahmadira Febi Herdiningtyas (Secretary and Treasurer of The 2023 AEO)<br>
                 Whatsapp: 081256255542<br>
                 Line: elennovianti_<br></p>
                 <p><b>Please see the details and instructions inside the invoice.</b></p>
