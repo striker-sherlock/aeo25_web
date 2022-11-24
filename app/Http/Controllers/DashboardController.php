@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompetitionParticipant;
 use App\Models\AccommodationGuest;
+use Exception;
 
 class DashboardController extends Controller
 {   

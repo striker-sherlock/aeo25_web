@@ -1,18 +1,49 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info w-100">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> 
 
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li>
-          <div class="burgerButton mt-3" style="float: right;">
-              <span class="d-block stripes bg-white my-1"></span>
-              <span class="d-block stripes bg-white my-1"></span>
-              <span class="d-block stripes bg-white"></span>
-          </div>
-      </li>
-    </ul>
-  </div>
+    <div class="container-fluid" style="opacity: 100% !important;">
+        <div class="d-inline-block">
+            <a class="navbar-brand" href="/">
+                <img src="/storage/assets/AEO 2023White No Text.png" alt="aeo logo" width="100">
+            </a>
+            <a class=" toggle-wrapper rounded p-2" >
+                <span class="navbar-toggler-icon m-0 h5 " id="show-sidebar" style="cursor: pointer;"> </span>
+            </a>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbar-menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item  m-1">
+                    <a href="/" class="btn btn-block px-3 nav-text nav-btn text-white">Home</a>
+                </li>
+                <li class="nav-item  m-1">
+                    <a href="#" class="btn btn-block px-3 nav-text nav-btn text-white">Merchandise</a>
+                </li>
+                @php
+                    $ambassadors = App\Models\Ambassador::all()->count();
+                @endphp
+                @if ($ambassadors > 0)
+                    <li class="nav-item  m-1">
+                        <a href="/#ambassadors" class="btn btn-block px-3 nav-text nav-btn text-white">Our
+                            Ambassadors</a>
+                    </li>
+                @endif
+
+                <li class="nav-item  m-1">
+                    <a href="" class="btn btn-block px-3 nav-text nav-btn text-white">Ranking List</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
+
+<style>
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 255)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+    
+    .toggle-wrapper:hover {
+        border: 4.5px solid #7FBCD2 ;
+
+    }
+
+</style>

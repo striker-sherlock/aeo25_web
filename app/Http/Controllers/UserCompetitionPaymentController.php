@@ -54,7 +54,9 @@ class UserCompetitionPaymentController extends Controller
             'isPayAll' => $isPayAll,
             'allCompetitions' => $allCompetition,
             'isPaid' => $isPaid,
-            'paymentProviders' => PaymentProvider::all()
+            'paymentProviders' => PaymentProvider::all(),
+            'user' => Auth::user(),
+            'slotId' => $id,
 
         ]);
     }

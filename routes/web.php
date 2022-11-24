@@ -40,6 +40,7 @@ use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
 use App\Http\Controllers\AmbassadorController;
 use App\Http\Controllers\LostAndFoundController;
+use App\Http\Controllers\PDFController;
 
 Auth::routes(['verify'=>true]);
 
@@ -53,6 +54,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('login/auth', [LoginController::class, 'adminLogin'])->name('login-auth');
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
 });
+
+// Environments
+Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
+Route::resource('environments', EnvironmentController::class);
 
 //register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
@@ -76,15 +81,6 @@ Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 
 //Countries
 Route::resource('countries', CountriesController::class);
 
-<<<<<<< HEAD
-//Competitions
-Route::resource('competitions', CompetitionController::class);
-
-//Sponsors
-Route::resource('sponsors', SponsorController::class);
-Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
-=======
->>>>>>> da2a0efb1139fb1ba46d6a864b81388c328f187f
 
 //slot registration
 Route::get('/slot-registrations/confirm/{competitionSlot}', [SlotRegistrationController::class, 'confirm'])->name('slot-registrations.confirm');
@@ -121,6 +117,7 @@ Route::get('/payments/cancel/{competitionSlot}', [AdminCompetitionPaymentControl
 Route::get('/payments/export', [AdminCompetitionPaymentController::class, 'export'])->name('competition-payments.export');
 
 //COMPETITION PAYMENT USER
+Route::get('/invoice/{user}/{id}', [PDFController::class, 'viewInvoice'])->name('payments.invoice');
 Route::get('/payments/create/{id}', [UserCompetitionPaymentController::class, 'create'])->name('competition-payments.create');
 Route::post('/payments/store', [UserCompetitionPaymentController::class, 'store'])->name('competition-payments.store');
 Route::get('/payments/{competitionPayment}/edit', [UserCompetitionPaymentController::class, 'edit'])->name('competition-payments.edit');
@@ -203,9 +200,7 @@ Route::prefix('follow-ups')->name('follow-ups.')->group(function () {
     Route::get('delete/{id}', [FollowUpController::class, 'delete'])->name('delete');
     Route::get('restore/{id}', [FollowUpController::class, 'restore'])->name('restore');
     
-// Environments
-Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
-Route::resource('environments', EnvironmentController::class);
+
 
 // Ranking List
 Route::controller(RankingListController::class)->prefix('ranking-lists')->name('ranking-lists.')->group(function () {
