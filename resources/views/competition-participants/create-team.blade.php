@@ -1,4 +1,4 @@
-<x-admin>
+<x-user title="Create Team">
     {{-- {{dd($quantity)}} --}}
     <div class="container mt-4">
         <h1 class="fs-3">Step 3</h1>
@@ -177,4 +177,4 @@
             };
         })
     </script>
-</x-admin>
+</x-user>

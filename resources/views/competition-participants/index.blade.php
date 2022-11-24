@@ -1,7 +1,7 @@
 <x-admin>
     <div class="container mt-4">
-        {{-- {{dd($competitionParticipants[0]->user->country)}} --}}
-        <x-card>            
+        <x-card>   
+            <h3 class="text-uppercase fw-bold" style="letter-spacing: 0.1em">{{$competition->name}}'s Participants </h3>         
             @if ($competitionParticipants->count())
                 <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4">Download Participant</a>
                 <table class="table table-striped table-bordered dataTables">
@@ -55,7 +55,7 @@
             @endif
         </x-card>
 
-       <x-card>
+       {{-- <x-card>
             @if ($trashed->count())
                 <table class="table table-striped table-bordered dataTables">
                     <thead class="text-center">
@@ -104,7 +104,7 @@
                 </table>
             @else <hr><p class="text-center">No Data</p>
             @endif
-       </x-card>
+       </x-card> --}}
     </div>
 
 {{-- move to recycle bin confirmation --}}
@@ -179,7 +179,7 @@
 @endforeach
 
 {{-- delete confirmation (for $trashed) --}}
-  @foreach ($trashed as $participant)
+  {{-- @foreach ($trashed as $participant)
   <div class="modal fade p-5" id="modal{{$participant->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered ">
           <div class="modal-content rounded-20 border-0 shadow p-5">
@@ -212,5 +212,5 @@
           </div>
       </div>  
   </div>  
-@endforeach
+@endforeach --}}
 </x-admin>

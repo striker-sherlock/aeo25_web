@@ -1,29 +1,37 @@
 <x-layout>
-
     <body>
         <x-navbar></x-navbar>
-
         <!-- ======= Header Section ======= -->
         <section id="hero" class="hero d-flex align-items-center mx-auto">
-
-            <div class="container">
-                <div class="row d-flex justify-content-center text-center">
-                    <div class="col-lg-8">
-                        <div class="d-flex justify-content-center">
+            <div class="container mt-5">
+                <div class="row d-flex justify-content-center text-center text-md-start">
+                    <div class=" col-md-6 ">
+                        <div class="d-flex justify-content-center justify-content-md-start ">
                             <hr class="w-25">
                         </div>
-                        <h2 data-aos="fade-up" class="aeo-title  mb-3">The 2023 Asian English Olympics</h5>
-                            <h1 data-aos="fade-up" class='aeo-theme '>UNVEIL YOUR SPARK</h1>
-                            <div data-aos="fade-up" data-aos-delay="600">
-                                <div class="text-center text-lg-center">
-                                    <a href="#about"
-                                        class="btn action scrollto d-inline-flex align-items-center justify-content-center align-self-center text-center text-white text-decoration-none rounded-pill my-3 px-5 py-2 ">
-                                        <span class="fs-4">Register</span>
+                        <h3 data-bs-aos="fade-up" class="aeo-title fs-2  mb-3">The 2023 Asian E nglish Olympics</h3>
+                        <h1 data-bs-aos="fade-up" class='aeo-theme mb-4'>UNVEIL YOUR SPARK</h1>
+                    </div>
+                    <div class="col-md-6  border border-1 text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px white;">
+                        <h2 class="fs-3 m-0 mb-2 aeo-title ">Open Registration Until: </h2>
+                        <h1 class="m-0 mb-3 fw-bold display-5">13 January 2023 </h1>
+                        <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
+                            <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br> Days</div> 
+                            <div class="col  bg-dark rounded me-2 p-2"><span id="cd-hours" class="fs-1 "></span> <br>Hours</div> 
+                            <div class="col bg-dark rounded me-2 p-2"><span id="cd-minutes" class="fs-1 "></span><br> Minutes</div> 
+                            <div class="col bg-dark rounded me-2 p-2"><span id="cd-seconds" class="fs-1 "></span> <br>Seconds</div> 
+                            <div data-aos="fade-up" data-aos-delay="600" >
+                                <div class="text-start text-lg-center ">
+                                    <a href="{{route('register')}}"
+                                        class="btn action scrollto d-inline-flex align-items-center justify-content-center align-self-center text-center text-white text-decoration-none rounded-pill my-3 px-5 py-2 w-100">
+                                        <span class="fs-4 aeo-title text-uppercase">Register now</span>
                                         <i class="bi bi-arrow-right"></i>
                                     </a>
                                 </div>
+                                </div>
+                                
                             </div>
-                    </div>
+                        </div>
 
                 </div>
             </div>
@@ -117,98 +125,27 @@
                     </div>
                     <h1 class="mt-3 fw-bold ">COMPETITION FIELDS</h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
-                    <div class="row mx-auto my-auto">
-                        <div id="competitionCarousel" class="carousel slide w-100" data-bs-ride="carousel">
-                            <div class="carousel-inner w-100" role="listbox">
-                                <div class="carousel-item active d-flex justify-content-center">
-                                    <div class="col-lg-4">
-                                        <div class="card card-body w-75">
-                                            <div class="d-flex justify-content-center">
-                                                <img class="img-fluid w-50 d-flex justify-content-center"
-                                                    src="storage/competition-fields/db.png">
-                                            </div>
-                                            <p class="fs-3">Debate</p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="col-lg-4">
-                                        <div class="card card-body w-75">
-                                            <div class="d-flex justify-content-center">
-                                                <img class="img-fluid w-50 d-flex justify-content-center"
-                                                    src="storage/competition-fields/nc.png">
-                                            </div>
-                                            <p class="fs-3">Newscasting</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="col-lg-4">
-                                        <div class="card card-body w-75">
-                                            <div class="d-flex justify-content-center">
-                                                <img class="img-fluid w-50 d-flex justify-content-center"
-                                                    src="storage/competition-fields/rd.png">
-                                            </div>
-                                            <p class="fs-3">Radio Drama</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="col-lg-4">
-                                        <div class="card card-body w-75">
-                                            <div class="d-flex justify-content-center">
-                                                <img class="img-fluid w-50 d-flex justify-content-center"
-                                                    src="storage/competition-fields/db.png">
-                                            </div>
-                                            <p class="fs-3">Debate</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="col-lg-4">
-                                        <div class="card card-body w-75">
-                                            <div class="d-flex justify-content-center">
-                                                <img class="img-fluid w-50 d-flex justify-content-center"
-                                                    src="storage/competition-fields/db.png">
-                                            </div>
-                                            <p class="fs-3">Debate</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="col-lg-4">
-                                        <div class="card card-body w-75">
-                                            <div class="d-flex justify-content-center">
-                                                <img class="img-fluid w-50 d-flex justify-content-center"
-                                                    src="storage/competition-fields/db.png">
-                                            </div>
-                                            <p class="fs-3">Debate</p>
-                                        </div>
-                                    </div>
-                                </div>
+                    
+                    <div class="owl-carousel owl-theme d-flex">
+                        @foreach ($competitions as $competition)
+                            @if ($competition->name == 'Observer' || $competition->id == 'IA' )@continue @endif
+                            <div class="item border border-1 rounded-20">
+                                <a>
+                                    <img src="storage/competition_logo/{{$competition->logo}}" class="img-fluid" alt="{{$competition->logo}}" loading="lazy">
+                                    <h3 class="aeo-title fw-bold">{{$competition->name}}</h3>
+                                </a>
                             </div>
-                            <a class="carousel-control-prev w-auto" href="#competitionCarousel" role="button"
-                                data-slide="prev">
-                                <span class="carousel-control-prev-icon bg-dark border border-dark rounded-circle"
-                                    aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next w-auto" href="#competitionCarousel" role="button"
-                                data-slide="next">
-                                <span class="carousel-control-next-icon bg-dark border border-dark rounded-circle"
-                                    aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
+                        @endforeach
                     </div>
-                </div>
 
+                     
+                </div>
+            
             </section>
 
             <!-- End Competition Fields Section -->
 
-            <section class="how-to-regist" id="howToRegister">
+            {{-- <section class="how-to-regist" id="howToRegister">
 
                 <div class="d-flex justify-content-center">
                     <hr class="w-25 pink-line fw-bold">
@@ -267,13 +204,13 @@
 
                 </div>
 
-            </section>
+            </section> --}}
 
              <!-- End How To Register Section -->
 
              <!-- ======= Ambassador Section ======= -->
           
-        <section id="ambassadors" class="bg-white mt-0">
+            <section id="ambassadors" class="bg-white mt-0">
             <div class="ambassadors wow fadeIn">
                 <div class="container">
                     <div class="title-line mx-auto"></div>
@@ -340,7 +277,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+            </section>
     
             
 
@@ -577,6 +514,10 @@
                                             @foreach ($countries as $country)
                                         <option value="{{$country->id}}">{{$country->name}}</option>
                                     @endforeach
+                                            @foreach ($countries as $country)
+                                                <option value="{{$country->id}}">{{$country->name}}</option>
+                                            @endforeach
+                                             
                                         </select>
                                     </div>
                                 </div>
@@ -584,6 +525,7 @@
                                 <div class="form-group row mb-0 mb-sm-3">
                                     <label for="phone_number" class="col-sm-3 col-form-label text-sm-left">
                                        Phone Number
+                                        Phone Number
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
@@ -628,119 +570,75 @@
 
 
         <!-- ======= Footer ======= -->
-        <footer id="footer" class="footer">
-            <div class="container">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-lg-4 col-md-6 my-3 text-center text-lg-start ">
-                        <div class="title-line mx-lg-0 mx-auto"></div>
-                        <h4 class="my-3 fw-bold">International Registration</h4>
-                        <ul class="list-unstyled">
-                            <li class="my-1"><a href="mailto:contact.aeointernational@gmail.com"
-                                    class="text-reset text-decoration-none" target="_blank"><i
-                                        class="fa fa-envelope me-2 fa-lg"></i>
-                                    contact.aeointernational@gmail.com</a>
-                            </li>
-                            <li class="my-1"><a href="https://api.whatsapp.com/send?phone=+6285708042003"
-                                    class="text-reset text-decoration-none" target="_blank"><i
-                                        class="fab fa-whatsapp me-2 fa-lg"></i>+62-857-0804-2003
-                                    (Nicholas)</a>
-                            </li>
-                            <li class="my-1"><a href="https://api.whatsapp.com/send?phone=+6281213252870"
-                                    class="text-reset text-decoration-none" target="_blank"><i
-                                        class="fab fa-whatsapp me-2 fa-lg"></i>+62-812-1325-2870
-                                    (Alleandra)</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 col-md-6 my-3 text-center text-lg-start">
-                        <div class="title-line mx-lg-0 mx-auto"></div>
-                        <h4 class="my-3 fw-bold">National Registration</h4>
-                        <ul class="list-unstyled">
-                            <li class="my-1"><a href="mailto:contact.aeonational@gmail.com"
-                                    class="text-reset text-decoration-none" target="_blank"><i
-                                        class="fa fa-envelope me-2 fa-lg"></i>
-                                    contact.aeonational@gmail.com</a>
-                            </li>
-                            <li class="my-1"><a href="https://api.whatsapp.com/send?phone=+6282148032166"
-                                    class="text-reset text-decoration-none" target="_blank"><i
-                                        class="fab fa-whatsapp me-2 fa-lg"></i>+62-821-4803-2166
-                                    (Lily)</a>
-                            </li>
-                            <li class="my-1"><a href="https://api.whatsapp.com/send?phone=+6285972957515"
-                                    class="text-reset text-decoration-none" target="_blank"><i
-                                        class="fab fa-whatsapp me-2 fa-lg"></i>+62-859-7295-7515
-                                    (Edison)</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 text-lg-end text-center my-lg-3 my-2">
-                        <div class="row align-items-center">
-                            <div class="col-12">
-                                <ul class="d-inline-flex list-unstyled">
-                                    <li class="me-4">
-                                        <a class="text-decoration-none text-reset ic-social"
-                                            href="https://www.facebook.com/asianenglisholympics" target="_blank"><span
-                                                class="fab fa-facebook fs-1"></span></a>
-                                    </li>
-                                    <li class="me-4">
-                                        <a class="text-decoration-none text-reset ic-social"
-                                            href="https://www.instagram.com/asianenglisholympics"
-                                            target="_blank"><span class="fab fa-instagram fs-1"></span></a>
-                                    </li>
-                                    <li>
-                                        <a class="text-decoration-none text-reset ic-social"
-                                            href="https://www.youtube.com/channel/UCiKj5b1zQyWHkENyquAUfnA"
-                                            target="_blank"><span class="fab fa-youtube fs-1"></span></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-12 order-first order-lg-last mb-3 mb-lg-0">
-                                <a class="btn c-button-1 c-rounded px-3 mt-3"
-                                    href="https://forms.gle/vnMcPQkY79BWNTag6"
-                                    target="_blank">Request Invitation Letter</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-lg-3 col-6 col-sm-4 order-3 text-center">
-                        <h6 id="organized-by" class="text-white mb-3">Organized By:</h6>
-                        <a href="https://mybnec.org/" target="_blank">
-                            <img src="/storage/assets/logo-bnec-original.png" width="60%"
-                                style="filter: brightness(0) invert(1);">
-                        </a>
-                    </div>
-                    <div class="col-lg-3 col-5 col-md-4 order-2 text-center">
-                        <img src="/storage/assets/aeo_main_logo.png" width="40%"
-                            style="filter: brightness(0) invert(1);">
-                    </div>
-                    <div class="col-lg-3 col-5 col-md-4 order-1 text-center">
-                        <img src="/storage/assets/aeo_logo_general.png" width="70%"
-                            style="filter: brightness(0) invert(1);">
-                    </div>
-                </div>
-                <hr>
-          
-                <div class="credits">
-                    This website is designed and built with ❤️ by <a href="#">Media Information and
-                        Technology
-                        Division</a>
-                </div>
-                <div class="copyright">
-                    Copyright &copy; <strong><span>2022 Binus English Club </span></strong>. All Rights Reserved
-                </div>
-            </div>
-            </div>
-        </footer>
+        <x-footer></x-footer>
+         
 
 
-    <!-- End Footer -->
+        <!-- End Footer -->
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                 class="bi bi-arrow-up-short"></i></a>
-
-
-
     </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let owl = $('.owl-carousel');
+        owl.owlCarousel({
+            loop:true,
+            nav:true,
+            autoplay:true,
+            dots: true,
+            lazyLoad: true,
+            margin:15,
+            center: true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:2
+                },            
+                960:{
+                    items:3
+                },
+           
+            }
+        });
+        owl.on('mousewheel', '.owl-stage', function (e) {
+            if (e.deltaY>0) {
+                owl.trigger('next.owl');
+            } else {
+                owl.trigger('prev.owl');
+            }
+            e.preventDefault();
+        });
 
+        let timer = function (date) {
+        let timer = Math.round(new Date(date).getTime()/1000) - Math.round(new Date().getTime()/1000);
+		let minutes, seconds;
+		setInterval(function () {
+            if (--timer < 0) {
+				timer = 0;
+			}
+			days = parseInt(timer / 60 / 60 / 24, 10);
+			hours = parseInt((timer / 60 / 60) % 24, 10);
+			minutes = parseInt((timer / 60) % 60, 10);
+			seconds = parseInt(timer % 60, 10);
+
+			days = days < 10 ? "0" + days : days;
+			hours = hours < 10 ? "0" + hours : hours;
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			seconds = seconds < 10 ? "0" + seconds : seconds;
+
+			document.getElementById('cd-days').innerHTML = days;
+			document.getElementById('cd-hours').innerHTML = hours;
+			document.getElementById('cd-minutes').innerHTML = minutes;
+			document.getElementById('cd-seconds').innerHTML = seconds;
+		}, 1000);
+	}
+ 
+    //using the function
+        const tomorrow = new Date("January 13, 2023 18:00:00")
+        timer(tomorrow);
+    </script>
 </x-layout>

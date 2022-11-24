@@ -1,5 +1,5 @@
-<x-admin>
-    <div class="container mt-4">
+<x-user title="step one">
+    <div class="container mt-5">
         <h1>Step 1</h1>
         <h2 class="display-6 fw-bold">Competition Field Slot Registration</h2>
         <hr>
@@ -90,10 +90,10 @@
                         <div class="footer">
                             <div class="row">
                                 <div class="col">
-                                    <button type="button" class="btn btn-outline-secondary w-100"  data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn rounded-pill btn-outline-secondary w-100"  data-bs-dismiss="modal">Cancel</button>
                                 </div>
                                 <div class="col">
-                                    <button type="submit" class="btn btn-outline-primary w-100">Confirm Edit</button>
+                                    <button type="submit" class="btn rounded-pill btn-outline-primary w-100">Confirm Edit</button>
                                 </div>
                             </div>  
                         </div>
@@ -120,12 +120,12 @@
                     <div class="footer">
                         <div class="row">
                             <div class="col">
-                                <button type="button" class="btn btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>
+                                <button type="button" class="btn rounded-pill btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>
                             </div>
                             <div class="col">
                                 <form method="POST" action="{{route('slot-registrations.destroy',$competitionSlot->id)}}">
                                 <input type="hidden" name="_method" value = "DELETE">
-                                    <button class="btn btn-outline-danger rounded w-100" title="delete">
+                                    <button class="btn rounded-pill btn-outline-danger rounded w-100" title="delete">
                                     Delete
                                     </button>
                                 @csrf
@@ -137,4 +137,4 @@
             </div>  
         </div>  
     @endforeach
-</x-admin>
+</x-user>

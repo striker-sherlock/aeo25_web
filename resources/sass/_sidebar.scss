@@ -1,5 +1,6 @@
 #sidebar {
     font-family: "Lexend", Arial, Helvetica, sans-serif !important;
+    transition: 0.5s;
 }
 
 .bg-gradient-blue {
@@ -53,6 +54,7 @@
 .sidebar-content {
     max-height: calc(100% - 40px);
     height: calc(100% - 40px);
+    transition: 0.5s;
 }
 
 .sidebar-wrapper {

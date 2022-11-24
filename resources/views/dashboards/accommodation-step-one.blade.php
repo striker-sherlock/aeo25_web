@@ -1,5 +1,5 @@
-<x-admin>
-    <div class="container mt-4">
+<x-user title="Accommodation Step One">
+    <div class="container mt-5">
         <h1>Step 1</h1>
         <h2 class="display-6 fw-bold">Accommodation Slot Registration</h2>
         <hr>
@@ -89,4 +89,4 @@
         </div>  
     @endforeach
    
-</x-admin>
+</x-user>

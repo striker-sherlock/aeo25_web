@@ -1,4 +1,4 @@
-<x-admin>
+<x-user title="Create Accommodation Guests">
     <div class="container mt-4 ">
         <h1 class="fs-3">Accommodation Step 3</h1>
         <h2 class="display-5 fw-bold">Guest's Personal Detail</h2>
@@ -64,4 +64,4 @@
             });
         })
     </script>
-</x-admin>
+</x-user>

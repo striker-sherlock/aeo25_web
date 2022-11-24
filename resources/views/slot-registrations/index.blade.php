@@ -2,7 +2,7 @@
  
     <div class="container mt-4">
         <x-card>
-            <h1 class="mb-3">Registration Summary</h1>
+            <h2 class="mb-3">Registration Summary</h2>
             <table class="table table-striped table-bordered">
                 <thead class="text-center">
                   <tr>
@@ -31,7 +31,7 @@
         
         {{-- pending --}}
         <x-card>
-            <h1 class="mb-3 text-warning">Pending Slot Registration</h1>
+            <h2 class="mb-3 text-warning fw-bold">Pending Slot Registration</h2>
             @if ($pending->count())
                 <table class="table table-striped table-bordered data-table" id="data-table">
                     <thead class="text-center">
@@ -77,7 +77,7 @@
 
         {{-- confirmed --}}
         <x-card>
-            <h1 class="mb-3 text-success">Confirmed Slot Registration </h1>
+            <h2 class="mb-3 text-success fw-bold">Confirmed Slot Registration </h2>
             @if ($confirmed->count())
                 <table class="table table-striped table-bordered data-table" id="">
                     <thead class="text-center">
@@ -123,7 +123,7 @@
 
         {{-- rejected --}}
         <x-card>
-            <h1 class="mb-3 text-danger">Rejected Slot Registration</h1>
+            <h2 class="mb-3 text-danger fw-bold">Rejected Slot Registration</h2>
                 @if ($rejected->count())
                 <table class="table table-striped table-bordered data-table" id="data-table">
                     <thead class="text-center">

@@ -27,7 +27,7 @@ class Admin extends Authenticatable
     ];
 
  
-    protected $casts = [
+protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 }

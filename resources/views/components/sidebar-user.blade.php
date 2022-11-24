@@ -31,7 +31,7 @@
                         <span class="ms-2">Main Dashboard</span>
                     </a>
                 </li>
-                <li class="side-item">
+                {{-- <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="#">
                         <span class="fa-stack fa-sm ms-n1">
@@ -40,10 +40,10 @@
                         </span>
                         <span class="ms-2">Edit Profile</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="">
+                        href="{{route('dashboard.step',1)}}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fas fa-user-plus fa-stack-1x text-dark-silver"></i>
@@ -53,7 +53,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="">
+                        href="{{route('dashboard.step',2)}}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fas fa-credit-card fa-stack-1x text-dark-silver"></i>
@@ -63,7 +63,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="">
+                        href="{{route('dashboard.step', 3)}}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fa fa-users fa-stack-1x text-dark-silver"></i>
@@ -73,7 +73,7 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="#">
+                        href="{{route('dashboard.step', 4)}}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fas fa-copy fa-stack-1x text-dark-silver"></i>
@@ -83,14 +83,44 @@
                 </li>
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="">
+                        href="{{route('dashboard.accommodation-step', 1)}}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fas fa-copy fa-stack-1x text-dark-silver"></i>
+                        </span>
+                        <span class="ms-2">Accommodation Slot Registration</span>
+                    </a>
+                </li>
+                <li class="side-item">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{route('dashboard.accommodation-step', 2)}}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fas fa-copy fa-stack-1x text-dark-silver"></i>
+                        </span>
+                        <span class="ms-2">Accommodation Payment</span>
+                    </a>
+                </li>
+                <li class="side-item">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{route('dashboard.accommodation-step', 3)}}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-circle fa-stack-2x"></i>
+                            <i class="fas fa-copy fa-stack-1x text-dark-silver"></i>
+                        </span>
+                        <span class="ms-2">Accommodation Participant Registration</span>
+                    </a>
+                </li>
+                {{-- <li class="side-item">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{ route('schedules.index') }}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-circle fa-stack-2x"></i>
                             <i class="fa fa-calendar fa-stack-1x text-dark-silver"></i>
                         </span>
                         <span class="ms-2">Schedule</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="https://aeo.mybnec.org/storage/guidebook/The_2022_AEO_Guidebook.pdf" target="_blank" rel="noreferrer">
@@ -101,7 +131,7 @@
                         <span class="ms-2">Guide Book</span>
                     </a>
                 </li>
-                <li class="side-item">
+                {{-- <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="">
                         <span class="fa-stack fa-sm ms-n1">
@@ -110,8 +140,8 @@
                         </span>
                         <span class="ms-2">Ranking List</span>
                     </a>
-                </li>
-                <li class="side-item">
+                </li> --}}
+                {{-- <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="">
                         <span class="fa-stack fa-sm ms-n1">
@@ -120,7 +150,7 @@
                         </span>
                         <span class="ms-2">Certificate</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

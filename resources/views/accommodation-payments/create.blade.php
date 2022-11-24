@@ -1,4 +1,4 @@
-<x-admin>
+<x-user title="Accommodation Payment">
     <div class="container mt-3">
         <a href="{{route('dashboard.accommodation-step',2)}}" class="btn btn-outline-primary rounded-pill mb-3">Go Back</a>
         <div class="row">
@@ -155,5 +155,5 @@
             
         })
     </script>
-</x-admin>
+</x-user>
 

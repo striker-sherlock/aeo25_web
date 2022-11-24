@@ -9,6 +9,7 @@ class FaqController extends Controller
 {
     public function __construct(){
         $this->middleware('IsAdmin')->only(['index', 'create', 'edit']);
+        $this->middleware('auth')->only(['create']);
     }
     public function index()
     {
