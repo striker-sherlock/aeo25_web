@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class FollowUpTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view ('follow-up-types.index',[
