@@ -33,7 +33,6 @@ use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
 use App\Http\Controllers\AmbassadorController;
-use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\PDFController;
 
 // Auth routes
