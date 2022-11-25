@@ -1,15 +1,10 @@
+import * as bootstrap from "bootstrap";
 $(document).ready(function () {
-
-  //  Show Modal
-  var myModal = new bootstrap.Modal(document.getElementById('alert'));
-  myModal.show();
-
-
-
-
-
-(function() {
-    "use strict";
+    //  Show Modal
+    var myModal = new bootstrap.Modal(document.getElementById("alert"));
+    myModal.show();
+    (function () {
+        "use strict";
 
     /**
      * Easy selector helper function
