@@ -1,36 +1,14 @@
-import './bootstrap';
-import * as bootstrap from "bootstrap";
-import jquery, { ready } from 'jquery';
+import "./bootstrap";
 import "../sass/app.scss";
-import './script'
+import "./script";
 import "./sidebar";
 import "./toggle-password";
-import 'owl.carousel';
+import "owl.carousel";
 
-window.jQuery = jquery;
-window.$ = jquery;
-window.bootstrap = bootstrap;
-
-
- 
-// $(document).ready( function () {
-//     $('#data-table').DataTable();
-    // $('#countries').select2();
-//     window.$('.data-table').DataTable();
-// } );
-
-
- 
-
-
-
-$(document).ready(function(){
-    $('.owl-carousel').owlCarousel();
+$(document).ready(function () {
+    $(".owl-carousel").owlCarousel();
 });
 
-
-
- 
 // owl.on('mousewheel', '.owl-stage', function (e) {
 //     if (e.deltaY>0) {
 //         owl.trigger('next.owl');

@@ -2,25 +2,8 @@
 @import url('https://fonts.bunny.net/css?family=lexend');
 @import url('https://fonts.bunny.net/css?family=roboto');
 
-
-
 // Variables
 @import 'variables';
-
-// Style
-@import 'assets';
-@import 'home';
-
-// Bootstrap
-@import 'bootstrap/scss/bootstrap';
-@import 'style.scss';
-@import '_sidebar.scss';
-@import 'bootstrap/scss/bootstrap';;
-@import "@fortawesome/fontawesome-free/css/all.css";
-@import '~bootstrap/scss/bootstrap';
-@import '~dataTables.net-dt/css/jquery.dataTables.min.css';
-
-@import 'owl.carousel/dist/assets/owl.carousel.css';
 
 // ICONS
 $fa-font-path: "~fa/../webfonts";
@@ -29,7 +12,19 @@ $fa-font-path: "~fa/../webfonts";
 @import '~fa/solid.scss';
 @import '~fa/fontawesome.scss';
 
-// @import '~@fortawesome/fontawesome-free/scss/all.scss';
-// @import "node_modules/font-awesome/scss/font-awesome.scss";
-@import 'style.scss';
-@import '_sidebar.scss';
+// External Style
+@import 'assets';
+@import 'home';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Datatables
+@import '~dataTables.net-dt/css/jquery.dataTables.min.css';
+
+// Owl carousel
+@import 'owl.carousel/dist/assets/owl.carousel.css';
+
+// External Style
+@import 'style';
+@import 'sidebar';
