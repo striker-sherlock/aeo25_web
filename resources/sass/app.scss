@@ -5,23 +5,26 @@
 // Variables
 @import 'variables';
 
-// Style
-@import 'assets';
-@import 'home';
-@import 'sidebar';
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
-
-// Datatable
-@import '~dataTables.net-dt/css/jquery.dataTables.min.css';
-
-// Owl carousel
-@import 'owl.carousel/dist/assets/owl.carousel.css';
-
-// Icons
+// ICONS
 $fa-font-path: "~fa/../webfonts";
 @import '~fa/brands.scss';
 @import '~fa/regular.scss';
 @import '~fa/solid.scss';
 @import '~fa/fontawesome.scss';
+
+// External Style
+@import 'assets';
+@import 'home';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Datatables
+@import '~dataTables.net-dt/css/jquery.dataTables.min.css';
+
+// Owl carousel
+@import 'owl.carousel/dist/assets/owl.carousel.css';
+
+// External Style
+@import 'style';
+@import 'sidebar';
