@@ -577,65 +577,68 @@
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        let owl = $('.owl-carousel');
-        owl.owlCarousel({
-            loop:true,
-            nav:true,
-            autoplay:true,
-            dots: true,
-            lazyLoad: true,
-            margin:15,
-            center: true,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:2
-                },            
-                960:{
-                    items:3
-                },
-           
+
+    {{-- @section('scripts') --}}
+        <script>
+            let owl = $('.owl-carousel');
+            owl.owlCarousel({
+                loop:true,
+                nav:true,
+                autoplay:true,
+                dots: true,
+                lazyLoad: true,
+                margin:15,
+                center: true,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:2
+                    },            
+                    960:{
+                        items:3
+                    },
+            
+                }
+            });
+            owl.on('mousewheel', '.owl-stage', function (e) {
+                if (e.deltaY>0) {
+                    owl.trigger('next.owl');
+                } else {
+                    owl.trigger('prev.owl');
+                }
+                e.preventDefault();
+            });
+            
+            let timer = function (date) {
+                let timer = Math.round(new Date(date).getTime()/1000) - Math.round(new Date().getTime()/1000);
+                let minutes, seconds;
+                setInterval(function () {
+                    if (--timer < 0) {
+                        timer = 0;
+                    }
+                    days = parseInt(timer / 60 / 60 / 24, 10);
+                    hours = parseInt((timer / 60 / 60) % 24, 10);
+                    minutes = parseInt((timer / 60) % 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+
+                    days = days < 10 ? "0" + days : days;
+                    hours = hours < 10 ? "0" + hours : hours;
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    document.getElementById('cd-days').innerHTML = days;
+                    document.getElementById('cd-hours').innerHTML = hours;
+                    document.getElementById('cd-minutes').innerHTML = minutes;
+                    document.getElementById('cd-seconds').innerHTML = seconds;
+                }, 1000);
             }
-        });
-        owl.on('mousewheel', '.owl-stage', function (e) {
-            if (e.deltaY>0) {
-                owl.trigger('next.owl');
-            } else {
-                owl.trigger('prev.owl');
-            }
-            e.preventDefault();
-        });
-
-        let timer = function (date) {
-        let timer = Math.round(new Date(date).getTime()/1000) - Math.round(new Date().getTime()/1000);
-		let minutes, seconds;
-		setInterval(function () {
-            if (--timer < 0) {
-				timer = 0;
-			}
-			days = parseInt(timer / 60 / 60 / 24, 10);
-			hours = parseInt((timer / 60 / 60) % 24, 10);
-			minutes = parseInt((timer / 60) % 60, 10);
-			seconds = parseInt(timer % 60, 10);
-
-			days = days < 10 ? "0" + days : days;
-			hours = hours < 10 ? "0" + hours : hours;
-			minutes = minutes < 10 ? "0" + minutes : minutes;
-			seconds = seconds < 10 ? "0" + seconds : seconds;
-
-			document.getElementById('cd-days').innerHTML = days;
-			document.getElementById('cd-hours').innerHTML = hours;
-			document.getElementById('cd-minutes').innerHTML = minutes;
-			document.getElementById('cd-seconds').innerHTML = seconds;
-		}, 1000);
-	}
- 
-    //using the function
-        const tomorrow = new Date("January 13, 2023 18:00:00")
-        timer(tomorrow);
-    </script>
-
+    
+            //using the function
+            const tomorrow = new Date("January 13, 2023 18:00:00")
+            timer(tomorrow);
+        </script>
+    {{-- @endsection --}}
+    
 </x-layout>

@@ -4,7 +4,7 @@
         <x-card>
             <h2 class="text-warning fw-bold">Pending Competition Payment </h2>
             @if ($pending->count())
-                <table class="table table-striped table-bordered" id="data-table">
+                <table class="table table-striped table-bordered data-table" >
                     <thead>
                         <tr class="text-center">
                             <th scope="col">ID</th>
