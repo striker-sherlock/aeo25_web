@@ -4,7 +4,8 @@
         <form action="{{route('slot-registrations.store')}}" method="POST" enctype="multipart/form-data"> 
             <div class="row">
                 @csrf
-                @foreach ($competitions as $competition)    
+                @foreach ($competitions as $competition) 
+                    @if ($competition->id == 'IA' || $competition->id == 'OBS')@continue @endif   
                 <div class="col-md-6">
                     <x-card>
                         <img src="/storage/competition_logo/{{$competition->logo}}" alt="{{$competition->name}}'s logo" class="img-fluid mx-auto d-block" width="200"> 
@@ -39,7 +40,7 @@
                 </div>
                 @endforeach         
             </div>
-            <a class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill" data-bs-toggle ="modal" data-bs-target="#modal" >submit</a>
+            <a class="btn btn-outline-theme w-100 rounded mb-4 rounded-pill" data-bs-toggle ="modal" data-bs-target="#modal" >submit</a>
        
         </div>
 
@@ -66,7 +67,7 @@
                                 <button type="button" class="close btn rounded-pill btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>
                             </div>
                             <div class="col">
-                                <button type="submit" class="rounded-pill btn btn-outline-primary w-100">Submit</button>
+                                <button type="submit" class="rounded-pill btn btn-outline-theme w-100">Submit</button>
                                 
                             </div>
                         </div>  

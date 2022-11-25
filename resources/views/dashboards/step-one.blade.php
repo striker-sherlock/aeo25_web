@@ -1,8 +1,8 @@
 <x-user title="step one">
+    <x-alert></x-alert>
     <div class="container mt-5">
-        <h1>Step 1</h1>
-        <h2 class="display-6 fw-bold">Competition Field Slot Registration</h2>
-        <hr>
+        <h1 class="aeo-title">Step 1</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Competition Slot Registration </h3>
         <x-card>
             <p class="fs-5">
                 We highly suggest you to complete your payment once your registration has been confirmed. If 10 days have passed and the confirmed slot has not been paid yet, we will move your slot to the pending list again.
@@ -10,8 +10,8 @@
         </x-card>
         {{--list informasi competition apa saja yang didaftar--}}
         <x-card>
-            <h3>Registered Competition's Slot</h3>
-            <a href="{{route('slot-registrations.create')}}" class="btn btn-outline-info rounded-pill">Add Slot Registration</a>   
+            <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Registered Competition's Slot</h3>
+            <a href="{{route('slot-registrations.create')}}" class="btn btn-outline-theme rounded-pill">Add Slot Registration</a>   
             <hr>
             @if ($competitionSlots->count())
             <div class="row">
@@ -32,7 +32,7 @@
                                 </h4>
                                 @if ($competitionSlot->is_confirmed != 1)
                                 <div class="d-flex justify-content-start ">
-                                    <a href="#" data-bs-toggle ="modal" data-bs-target="#edit{{$competitionSlot->id}}" class="btn btn-outline-primary rounded-20 me-2">Edit Slot</a>
+                                    <a href="#" data-bs-toggle ="modal" data-bs-target="#edit{{$competitionSlot->id}}" class="btn btn-outline-theme rounded-20 me-2">Edit Slot</a>
                                             <a href="#" data-bs-toggle ="modal" data-bs-target="#delete{{$competitionSlot->id}}" class="btn btn-outline-danger rounded-20">Delete Slot</a>
                                         </div>
                                         @endif
@@ -44,7 +44,7 @@
 
             @else
            
-            <p class="text-center text-warning  fs-3" >You don't have SLOT REGISTERED yet</p><br>
+            <p class="text-center   fs-3" >You don't have slot registered yet</p><br>
        
             @endif
         </x-card>
@@ -52,9 +52,9 @@
         <h5 class="text-center fs-4 fw-bold">Step Navigation</h5>
         <div class="navigasi  mb-4 d-flex justify-content-center align-items-center py-1">
             <ul class="list-unstyled d-flex align-items-center">
-                <li> <a href="#" class="btn btn-outline-primary active me-2 ">1</a></li>
-                <li> <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-primary me-2">2</a></li>
-                <li> <a href="{{route('dashboard.step',3)}}" class="btn btn-outline-primary me-2">3</a></li>
+                <li> <a href="#" class="btn btn-outline-theme active me-2 ">1</a></li>
+                <li> <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme me-2">2</a></li>
+                <li> <a href="{{route('dashboard.step',3)}}" class="btn btn-outline-theme me-2">3</a></li>
             </ul>
         </div>
     </div>
@@ -93,7 +93,7 @@
                                     <button type="button" class="btn rounded-pill btn-outline-secondary w-100"  data-bs-dismiss="modal">Cancel</button>
                                 </div>
                                 <div class="col">
-                                    <button type="submit" class="btn rounded-pill btn-outline-primary w-100">Confirm Edit</button>
+                                    <button type="submit" class="btn rounded-pill btn-outline-theme w-100">Confirm Edit</button>
                                 </div>
                             </div>  
                         </div>

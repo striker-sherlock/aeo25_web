@@ -37,7 +37,7 @@
   font-family: 'Lexend' !important;
 }
 .text-gradient{
-  background:-webkit-linear-gradient(#F175AD, #7FBCD2 );
+  background:-webkit-linear-gradient(#32649e, #4c3c5f);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   color:transparent;
@@ -47,16 +47,53 @@
   border-radius: 20px;
 }
 
+
+.focused {
+  --shadow-color:#7fbcd2;
+  filter: drop-shadow(
+    1px 2px 8px var(--shadow-color)
+  );
+}
+ 
 .btn {
   transition: 0.7s;
 }
 
-.btn:hover {
-  transform: scale(1.05);
+.btn-outline-theme{
+  border: 1px solid #7fbcd2;
+  color: #7fbcd2;
+  transition: .2s ease;
+}
+
+.btn-outline-theme:hover{
+  background-color: #7fbcd2;
+  color: #FFF;
+}
+
+ 
+ 
+
+
+
+//DASHBOARD USER 
+.step-by-step-compet .card,
+.step-by-step-accommodation .card{
+  transition: 0.7s;
+}
+
+.step-by-step-compet .card .card-header,
+.step-by-step-accommodation .card .card-header{
+  background-color: #3f3b74;
+
+}
+
+.step-by-step-compet .card:hover ,
+.step-by-step-accommodation .card:hover{
+  transform: scale(1.1);
 }
 
 tbody tr:hover {
-    background-color:#eee;
+  background-color:#eee;
 }
 
 .nav-pills li {
@@ -68,11 +105,9 @@ tbody tr:hover {
     box-shadow: 1px 0px 38px 0px rgba(34,107,81,0.5);
 }
 
-.red-shadow {
-    box-shadow: 1px 0px 30px 0px red;
-}
+ 
 .mt-5{
-  margin-top: 75px !important;
+  margin-top: 80px !important;
 } 
 
 .nav-btn {

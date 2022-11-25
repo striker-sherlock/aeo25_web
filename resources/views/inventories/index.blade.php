@@ -4,7 +4,7 @@
             <div class="card-header bg-secondary"></div>
             <div class="card-body my-3">
                 <h1 class="text-primary text-center">Inventory List</h1>
-                    <a class="btn btn-outline-primary rounded-pill  mt-2 mb-3 px-4" href="{{ route('inventories.create') }}">
+                    <a class="btn btn-outline-theme rounded-pill  mt-2 mb-3 px-4" href="{{ route('inventories.create') }}">
                         <i class="fa fa-plus" aria-hidden="true"></i> Add New Item
                     </a>
 

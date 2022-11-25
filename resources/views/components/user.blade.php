@@ -4,7 +4,6 @@
              min-height: 100vh;
          }
      </style>
-     <x-alert></x-alert>
      <x-navbar-user></x-navbar-user>
      <main id="page-toggled" class="page-wrapper mb-5">
          <x-sidebar-user></x-sidebar-user>

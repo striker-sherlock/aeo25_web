@@ -6,7 +6,7 @@
         @foreach ($competitionParticipants as $index => $participant)
             <x-card>
                 <h3 class="text-uppercase fw-bold fs-4 text-capitalize" style="letter-spacing: 0.1em">{{$participant->competition->name}} participant information - {{$index+1}}</h3>
-                <a  class="btn btn-outline-primary btn rounded-pill" data-bs-toggle="modal" data-bs-target="#note{{$participant->id}}">Add Addictional Note</a>
+                <a  class="btn btn-outline-theme btn rounded-pill" data-bs-toggle="modal" data-bs-target="#note{{$participant->id}}">Add Additional Note (optional) </a>
                 
                 @if ($participant->team_id)
                     <div class="form-group mb-3">
@@ -74,7 +74,7 @@
                                 <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">Close</button>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-outline-primary w-100">Submit</button>
+                                <button type="submit" class="btn btn-outline-theme w-100">Submit</button>
                             </div>
                         </div>
                     </div>

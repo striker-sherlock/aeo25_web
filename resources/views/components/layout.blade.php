@@ -9,7 +9,6 @@
     <link rel="icon" type="image/png" href="/storage/assets/AEO 2023Colored No Text.png" />
     <title>The 2023 Asian Engllish Olympics</title>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <script src="jquery-3.6.0.min.js"></script>
     {{-- <link rel="stylesheet" href="/node_modules/owl.carousel/dist/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="/bower_components/owl.carousel/dist/assets/owl.carousel.min.css" /> --}}
 

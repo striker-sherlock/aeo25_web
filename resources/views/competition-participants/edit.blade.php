@@ -91,14 +91,14 @@
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="profile_picture" name="profile_picture_new" accept="image/png,image/jpeg,image/jpg">
                                 <div class="input-group-append">
-                                <button class="btn btn-outline-primary" type="button" data-bs-toggle ="modal" data-bs-target="#profile_picture" >Profile Picture</button>
+                                <button class="btn btn-outline-theme" type="button" data-bs-toggle ="modal" data-bs-target="#profile_picture" >Profile Picture</button>
                                 </div>
                                 
                             </div> 
                         </div>
                     </div>  
                 </div>    
-                <button type="submit" class="btn btn-outline-primary w-100 rounded-pill"> Confirm Edit </button>
+                <button type="submit" class="btn btn-outline-theme w-100 rounded-pill"> Confirm Edit </button>
             </form>
         </x-card>
     </div>

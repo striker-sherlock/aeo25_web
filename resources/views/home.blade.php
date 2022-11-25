@@ -9,7 +9,7 @@
                         <div class="d-flex justify-content-center justify-content-md-start ">
                             <hr class="w-25">
                         </div>
-                            <h3 data-bs-aos="fade-up" class="aeo-title fs-2  mb-3">The 2023 Asian E nglish Olympics</h3>
+                            <h3 data-bs-aos="fade-up" class="aeo-title fs-2  mb-3">The 2023 Asian English Olympics</h3>
                             <h1 data-bs-aos="fade-up" class='aeo-theme mb-4'>UNVEIL YOUR SPARK</h1>
                         </div>
                         <div class="col-md-6  border border-1 text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px white;">
@@ -474,92 +474,95 @@
             @endif
 
             <!-- End Medpar Section -->
-            <!-- ======= Question ======= -->
+             <!-- ======= Question ======= -->
+ <!-- ======= Question ======= -->
 
-            <section id="contact-us" class="bg-white">
-                <div class="container wow fadeInUp">
-                    <div class="title-line mx-auto"></div>
-                    <div class="d-flex justify-content-center">
-                        <hr class="w-25 pink-line">
-                    </div>
-                    <h5 class="my-3 fw-bold text-center " style="color: #32649E;">SUBMIT QUESTION</h5>
-                    <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary" >Drop Your Question Here
-                    </h1>
-                    <div class="card rounded-20 card-shadow border-0">
-                        <div class="card-body m-3">
-                            <p class="text-muted mb-4">Please fill the form below, then we will answer your question
-                                via e-mail.
-                            </p>
-                            <form method="POST" action="" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group row mb-0 mb-sm-3">
-                                    <label for="name" class="col-sm-3 col-form-label text-sm-left">
-                                        Name
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control " id="name" name="name"
-                                            value="{{ old('name') }}" required>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-0 mb-sm-3">
-                                    <label for="country_id" class="col-sm-3 col-form-label text-sm-left">
-                                        Country
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <select class="form-select " name="country_id">
-                                            <option selected class="d-none">Select your Country</option>
-                                            @foreach ($countries as $country)
-                                                <option value="{{$country->id}}">{{$country->name}}</option>
-                                            @endforeach
-                                             
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-0 mb-sm-3">
-                                    <label for="phone_number" class="col-sm-3 col-form-label text-sm-left">
-                                        Phone Number
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input type="tel" class="form-control " id="phone_number"
-                                            name="phone_number" value="{{ old('phone_number') }}"
-                                            placeholder="812-345-678" required>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-0 mb-sm-3">
-                                    <label for="email" class="col-sm-3 col-form-label text-sm-left">
-                                        {{ _('Email') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control " id="email" name="email"
-                                            value="{{ old('email') }}" required>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-0 mb-sm-3">
-                                    <label for="question" class="col-sm-3 col-form-label text-sm-left">
-                                        {{ _('Question') }}
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control " id="question" name="question" value="{{ old('question') }}" style="height: 100px"
-                                            required>{{ old('question') }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="d-grid mt-5">
-                                    <button type="submit" class="btn btn-outline-1 rounded-20 btnSubmit"
-                                        id="btn-submit">Submit</button>
-                                </div>
-                            </form>
+    <section id="contact-us" class="bg-white">
+        <div class="container wow fadeInUp">
+            <div class="title-line mx-auto"></div>
+            <div class="d-flex justify-content-center">
+                <hr class="w-25 pink-line">
+            </div>
+            <h5 class="my-3 fw-bold text-center " style="color: #32649E;">SUBMIT QUESTION</h5>
+            <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary" >Drop Your Question Here
+            </h1>
+            <div class="card rounded-20 card-shadow border-0">
+                <div class="card-body m-3">
+                    <p class="text-muted mb-4">Please fill the form below, then we will answer your question
+                        via e-mail.
+                    </p>
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group row mb-0 mb-sm-3">
+                            <label for="name" class="col-sm-3 col-form-label text-sm-left">
+                                Name
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input class="form-control " id="name" name="name"
+                                    value="{{ old('name') }}" required>
+                            </div>
                         </div>
-                    </div>
-            </section>
+
+                        <div class="form-group row mb-0 mb-sm-3">
+                            <label for="country_id" class="col-sm-3 col-form-label text-sm-left">
+                                Country
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <select class="form-select " name="country_id">
+                                    <option selected class="d-none">Select your Country</option>
+                                    @foreach ($countries as $country)
+                                        <option value="{{$country->id}}">{{$country->name}}</option>
+                                    @endforeach
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0 mb-sm-3">
+                            <label for="phone_number" class="col-sm-3 col-form-label text-sm-left">
+                                Phone Number
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="tel" class="form-control " id="phone_number"
+                                    name="phone_number" value="{{ old('phone_number') }}"
+                                    placeholder="812-345-678" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0 mb-sm-3">
+                            <label for="email" class="col-sm-3 col-form-label text-sm-left">
+                                {{ _('Email') }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <input class="form-control " id="email" name="email"
+                                    value="{{ old('email') }}" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0 mb-sm-3">
+                            <label for="question" class="col-sm-3 col-form-label text-sm-left">
+                                {{ _('Question') }}
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control " id="question" name="question" value="{{ old('question') }}" style="height: 100px"
+                                    required>{{ old('question') }}</textarea>
+                            </div>
+                        </div>
+                        <div class="d-grid mt-5">
+                            <button type="submit" class="btn btn-outline-1 rounded-20 btnSubmit"
+                                id="btn-submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </section>
+
+
 
 
         </main><!-- End #main -->
@@ -567,9 +570,6 @@
 
         <!-- ======= Footer ======= -->
         <x-footer></x-footer>
-         
-
-
         <!-- End Footer -->
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i

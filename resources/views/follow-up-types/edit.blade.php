@@ -19,7 +19,7 @@
                     <input type="text" class="form-control" name="name" value="{{ $followUpType->name }}">
                 </div>
                 @method('PUT')
-                <button type="submit" class="btn btn-outline-primary rounded-pill w-100">Update</button>
+                <button type="submit" class="btn btn-outline-theme rounded-pill w-100">Update</button>
             </form>
 
 

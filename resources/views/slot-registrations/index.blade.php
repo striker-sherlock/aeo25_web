@@ -1,5 +1,4 @@
 <x-admin>
- 
     <div class="container mt-4">
         <x-card>
             <h2 class="mb-3">Registration Summary</h2>
@@ -115,8 +114,8 @@
                         @endforeach
                     </tbody>
                 </table>
-                <a href="{{route('competition-payments.index','National')}}" class="btn btn-outline-info rounded-pill my-4 me-2" >View Intenational Payment</a>
-                <a href="{{route('competition-payments.index','international')}}" class="btn btn-outline-info rounded-pill my-4">View National Payment</a>
+                <a href="{{route('competition-payments.index','National')}}" class="btn btn-outline-info rounded-pill my-4 me-2" >View National Payment</a>
+                <a href="{{route('competition-payments.index','international')}}" class="btn btn-outline-info rounded-pill my-4">View International Payment</a>
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>

@@ -1,8 +1,7 @@
 <x-user title="Create Single">
-    <div class="container mt-3">
-        <h1 class="fs-2 mb-2">Step 3</h1>
-        <h2 class="display-6 fw-bold">Competition Field's Participant Registration</h2>
-        <hr class="mb-4">
+    <div class="container mt-5">
+        <h1 class="aeo-title">Step 3</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">{{$competitionSlot->Competition->name}} Participant Registration</h3>
 
         <form action="{{route('competition-participants.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -80,7 +79,7 @@
                                 </div>       
                             </div> 
                             @if ($i == $quantity)
-                                <button type="submit" class="btn btn-outline-primary w-100 rounded-pill">Register Participant</button>
+                                <button type="submit" class="btn btn-outline-theme w-100 rounded-pill">Register Participant</button>
                             @endif
                         </div>   
                 </x-card>

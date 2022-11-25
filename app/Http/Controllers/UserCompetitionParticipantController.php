@@ -15,7 +15,7 @@ use App\Models\ScoreType;
 class UserCompetitionParticipantController extends Controller
 {
     public function index($competition){
-        $trashed = CompetitionParticipant::onlyTrashed()->get();
+        //$trashed = CompetitionParticipant::onlyTrashed()->get();
         // dd($competitionParticipants);
         return view('competition-participants.index',[
             'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
@@ -38,7 +38,6 @@ class UserCompetitionParticipantController extends Controller
     public function create(CompetitionSlot $competitionParticipant){
         if ($competitionParticipant->payment == NULL)return redirect()->back()->with('error','Please make payment first');
         if($competitionParticipant->payment->is_confirmed != 1 )return redirect()->back()->with('error','Please wait for the confirmation to be confirmed');
-
         if ($competitionParticipant->competition->need_team){
             $totalTeams = CompetitionSlot::join('competition_participants', 'competition_participants.competition_slot_id', 'competition_slot_details.id')
                 ->join('competitions', 'competitions.id', 'competition_slot_details.competition_id')
@@ -69,22 +68,30 @@ class UserCompetitionParticipantController extends Controller
             'email.*' => 'nullable|string|unique:competition_participants,email|distinct',
             'gender.*' => 'nullable',
             'phone.*' => 'nullable|numeric|distinct',
-            'birth.*' => 'nullable|date_format:Y-m-d',
+            'birth.*' => 'nullable|date_format:Y-m-d|after:-23 years|before:-15years',
             'profile_picture.*' => 'nullable|image|max:1999|mimes:jpeg,jpg,png',
         ],
         // customize error
         [
-            'nama.*' => 'name must be distinct '
+            'nama.*.distinct' => "Participant's name field must be distinct",
+            'email.*.unique' => 'Duplicated Email Found',
+            'email.*.distinct' => "Participant's email field must be distinct",
+            'birth.*.before' => 'Participant must be at least 15 years old',
+            'birth.*.after' => 'Participant must not be older than 23 years old',
+            'birth.*.date_format' => 'The date format must be yyyy-mm-dd',
+            'phone.*' => 'Phone number must be numeric',
+            'profile_picture.*.image' => 'The profile picture must be an image ',
+            'profile_picture.*.max' => 'The profile picture size must less than 2MB '
         ]);
-
-      
+        dd($request->quantity);
         $competition = Competition::find($request->competition_id);    
         $len = $request->quantity;
+        dd($len);
         if($request->total_teams){
             $index = 0 ;
             for ($i = 0 ; $i < $len ; $i++){
                 $numberOfParticipant = 'people'.$i+$request->total_teams;
-                // dd($numberOfParticipant);
+                 
                 $team_id = CompetitionTeam::create([
                     'created_by'=> Auth::user()->username,
                     'name' => $request->team_name[$i],

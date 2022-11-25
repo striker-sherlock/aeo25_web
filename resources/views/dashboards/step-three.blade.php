@@ -1,11 +1,10 @@
 <x-user title="step three">
-   {{-- {{dd($competitionSlots[0]->payment)}} --}}
-    <div class="container mt-3">
-        <h1>Step 3</h1>
-        <h2 class="display-6 fw-bold">Competition Field's Participant Registration</h2>
-        <hr class="mb-4">
+    <div class="container mt-5">
+        <h1 class="aeo-title">Step 3</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Competition Participant Registration</h3>
         <x-card>
-            <h3>Participant Registration</h3>
+            <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">Participant Registration</h3>
+            <hr>
             <div class="row">
                 @foreach ($competitionSlots as $competitionSlot)
                     <div class=" col-md-6 ">

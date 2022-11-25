@@ -6,7 +6,7 @@
                 <x-card >
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
-                        <h1 class="mb-4 text-center text-gradient fw-bold display-5">Create New account </h1>
+                        <h1 class="mb-4 text-center text-gradient fw-bold display-5">Create New Account </h1>
                         <h3 class="text-uppercase fw-bold aeo-title" style="letter-spacing: 0.1em">Institutional Data</h3>
                         <div class="form-group mb-3">
                             <label for="ins_name" class="col-form-label"> Institutional Name<span class="text-danger">*</span></label>
@@ -92,10 +92,12 @@
                             
                         </div>
 
-                        <button type="submit" class="btn btn-outline-primary w-100 rounded-pill" >
+                        <button type="submit" class="btn btn-outline-theme w-100 rounded-pill" >
                             {{ __('Register') }}
                         </button>
-                        <a href="/login" class="mx-auto d-block text-dark btn mt-3" >Already Have an Account ? <span class="text-primary">Login</span></a>
+                        <hr>
+                        <span class="d-block mx-auto text-center">Already Have an Account ? <a href="/login" class="" >  Login</a></span>
+                        
                         
                     </form>
                 </x-card>

@@ -30,6 +30,7 @@ class DashboardController extends Controller
         $allSlotRegistration = CompetitionSlot::where('pic_id',Auth::user()->id)->get();
         $confirmedSlotRegistration =  $allSlotRegistration->where('is_confirmed',1);
         $confirmedPayment = CompetitionSlot::join('competition_payments','competition_payments.id','=','competition_slot_details.payment_id')
+                ->where('competition_slot_details.pic_id',Auth::user()->id)
                 ->where('competition_payments.is_confirmed',1)
                 ->count();  
 
@@ -51,6 +52,7 @@ class DashboardController extends Controller
         $confimedAccSlot = $allAccSlot->where('is_confirmed',1)->count();
 
         $confirmedAccPayment = AccommodationSlot::join('accommodation_payments','accommodation_payments.id','=','accommodation_slot_details.payment_id')
+            ->where('accommodation_slot_details.pic_id',Auth::user()->id)
             ->where('accommodation_payments.is_confirmed',1)
             ->count();  
 
@@ -90,10 +92,10 @@ class DashboardController extends Controller
         if ($step == 2){
             // jika step-1 belum di confirmasi atau belom dilewati maka, kembali ke dashboard
             $confirmedSlot = CompetitionSlot::where('pic_id',Auth::user()->id)->get();
-            if ($confirmedSlot->count() == 0) return redirect()->route('dashboard')->with('error','You have to make slot registration first');
+            if ($confirmedSlot->count() == 0) return redirect()->back()->with('error','You have to make slot registration first');
 
             $confirmedSlot = $confirmedSlot->where('is_confirmed',1);
-            if ($confirmedSlot ->count() == 0) return redirect()->route('dashboard')->with('error','Please Wait your slot registration to be confirmed by admin');
+            if ($confirmedSlot ->count() == 0) return redirect()->back()->with('error','Please Wait your slot registration to be confirmed by admin');
             
             $history = DB::table('competition_slot_details')
                         ->join('competition_payments','competition_slot_details.payment_id','=','competition_payments.id')

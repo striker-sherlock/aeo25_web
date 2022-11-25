@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
                 'institution_email' => 'asdf@gmail.com',
                 'institution_type' =>'school',
                 'institution_logo' => 'asdf',
-                'password' =>Hash::make('pic123'), // passwor'd
+                'password' =>Hash::make('pic123'), // password
                 'remember_token' => Str::random(10),
 
             ]);

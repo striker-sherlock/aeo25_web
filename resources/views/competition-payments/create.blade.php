@@ -1,6 +1,6 @@
 <x-user title="Competition Payment">
     <div class="container mt-5">
-        <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-primary rounded-pill mb-3">Go Back</a>
+        <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
         <div class="row">
             <div class="col-md-6">
                 <x-card>
@@ -8,7 +8,7 @@
                     <hr>
                     <p class="text-justify">Please download the file below to see the payment guide and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
                         <a href="{{route('payments.invoice', [$user->id, $slotId])}}" target="_blank"
-                            class="btn btn-outline-primary rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice and Guide</a>
+                            class="btn btn-outline-theme rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice and Guide</a>
                 </x-card>
             </div>
             <div class="col-md-6">
@@ -56,9 +56,9 @@
             <p class="text-muted">Please Fill the Form Bellow</p>
             <hr> 
             <ul class="nav nav-pills d-flex justify-content-around mb-3">
-                <li class=""><a data-bs-toggle="pill" href="#bank" class="btn btn-outline-primary rounded-pill me-3 d-block w-100 bank">Bank Transfer</a></li>
+                <li class=""><a data-bs-toggle="pill" href="#bank" class="btn btn-outline-theme rounded-pill me-3 d-block w-100 bank">Bank Transfer</a></li>
 
-                <li class=""><a data-bs-toggle="pill" href="#wise" class="btn btn-outline-primary rounded-pill me-3 d-block w-100 wise"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a></li>
+                <li class=""><a data-bs-toggle="pill" href="#wise" class="btn btn-outline-theme rounded-pill me-3 d-block w-100 wise"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a></li>
  
               
               </ul>
@@ -98,7 +98,7 @@
                             <input type="file" class="form-control"  name="transfer_proof_bank" id="transfer_proof_bank" accept="image/png,image/jpeg,image/jpg">    
                             <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                         </div>  
-                        <button type="submit" class="btn btn-outline-primary w-100 rounded-pill">Submit Payment Confirmation</button>
+                        <button type="submit" class="btn btn-outline-theme w-100 rounded-pill">Submit Payment Confirmation</button>
                     </div>
 
                     {{-- WISE --}}
@@ -118,7 +118,7 @@
                             <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                         </div>       
 
-                        <button type="submit" class="btn btn-outline-primary w-100 rounded-pill">Submit Payment Confirmation</button>
+                        <button type="submit" class="btn btn-outline-theme w-100 rounded-pill">Submit Payment Confirmation</button>
                     </div>
                 </div>
             </form>

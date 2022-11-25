@@ -61,7 +61,6 @@ class SlotRegistrationController extends Controller
     }
 
     public function store(Request $request){
-
         $len = count($request->quantity);
         //  code ini untuk mengecek apabila slot nya masih tersedia atau tidak
         for($i = 0; $i < $len; $i++){
@@ -70,8 +69,10 @@ class SlotRegistrationController extends Controller
             $competitionName = Competition::find($request->compet_id[$i])->name;
             if(!$valid) return redirect()->back()->with('error',"Sorry, ".$competitionName."'s slot is not available");
         }
-
-
+        // dd($request->all());    
+        return redirect('/slot-registrations')->with('success','Slot is successfully registered');
+        
+        
         for ($i= 0; $i < $len; $i++){
             if ($request->quantity[$i] != '0'){
                 CompetitionSlot::create([
@@ -84,8 +85,6 @@ class SlotRegistrationController extends Controller
                 ]);
             }
         }
-        return redirect()->route('dashboard.step',1)->with('success','Slot is successfully registered');
-
     }
 
   

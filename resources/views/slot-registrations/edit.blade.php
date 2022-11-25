@@ -29,7 +29,7 @@
                                 </div>
                             </th>
                             <th>
-                                <button type="submit" class="btn btn-outline-primary w-100 rounded-20">Submit</button>
+                                <button type="submit" class="btn btn-outline-theme w-100 rounded-20">Submit</button>
                             </th>
                         </tr>
                     </form>
