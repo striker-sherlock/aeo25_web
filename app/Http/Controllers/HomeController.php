@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ambassador;
 use App\Models\Sponsor;
 use App\Models\Countries;
 use App\Models\Competition;
@@ -27,7 +28,8 @@ class HomeController extends Controller
             'mediaPartners' => MediaPartner::all(),
             'sponsors' => Sponsor::all(),
             'countries' => Countries::all(),
-            'competitions' => Competition::all()
+            'competitions' => Competition::all(),
+            'ambassadors' => Ambassador::all(),
             
         ]);
     }

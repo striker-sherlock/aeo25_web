@@ -11,7 +11,6 @@
             {{ $slot }}
         </div>
     </main>
-    <div id="footer-toggled" class=" footer-wrapper">
-        <x-footer class="footer-content"></x-footer>
-    </div>
+    {{-- <x-footer></x-footer> --}}
+   
 </x-layout>

@@ -19,6 +19,7 @@ use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\RankingListController;
 use App\Http\Controllers\FlightTicketController;
 use App\Http\Controllers\FollowUpTypeController;
+use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\UserAccommodationGuest;
@@ -118,7 +119,7 @@ Route::get('/payments/export', [AdminCompetitionPaymentController::class, 'expor
 
 //COMPETITION PAYMENT USER
 Route::get('/paid-invoice/{payment}', [PDFController::class, 'paidInvoice'])->name('payments.paid-invoice');
-Route::get('/invoice/{user}/{id}', [PDFController::class, 'viewInvoice'])->name('payments.invoice');
+Route::get('/competition-invoice/{user}/{id}', [PDFController::class, 'viewInvoice'])->name('payments.invoice');
 Route::get('/payments/create/{id}', [UserCompetitionPaymentController::class, 'create'])->name('competition-payments.create');
 Route::post('/payments/store', [UserCompetitionPaymentController::class, 'store'])->name('competition-payments.store');
 Route::get('/payments/{competitionPayment}/edit', [UserCompetitionPaymentController::class, 'edit'])->name('competition-payments.edit');
@@ -153,6 +154,8 @@ Route::controller(AccommodationSlotRegistrationController::class)->prefix('accom
 Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only'=>['index', 'destroy', 'store', 'edit', 'update']]);
 
 //USER ACCOMMODATION PAYMENT
+Route::get('/paid-accommodation-invoice/{payment}', [PDFController::class, 'paidAccommodationInvoice'])->name('payments.paid-accommodation-invoice');
+Route::get('/invoice/{user}/{id}', [PDFController::class, 'accommodationInvoice'])->name('accommodation-payments.invoice');
 Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
 Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
 Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');

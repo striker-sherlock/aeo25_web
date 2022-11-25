@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Exports\CompetitionPaymentExport;
 use App\Models\AccommodationSlot;
 use App\Models\AccommodationPayment;
 use Illuminate\Support\Facades\DB;
