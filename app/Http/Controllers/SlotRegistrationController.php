@@ -106,7 +106,6 @@ class SlotRegistrationController extends Controller
             'confirmed_at' => Carbon::now()
         ]);
 
-        
         $remainedParticipant =$competitionSlot ->competition->temp_quota;
         $competitionSlot->competition -> update([
             'temp_quota' => $remainedParticipant - $competitionSlot->quantity,
