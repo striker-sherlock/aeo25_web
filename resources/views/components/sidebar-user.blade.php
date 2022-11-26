@@ -25,7 +25,10 @@
                         <span class="ms-2">Main Dashboard</span>
                     </a>
                 </li>
-              
+                <li class="pb-1 ps-3 header-menu side-item text-white fs-5 ">
+                    <span class="fw-bold aeo-title">Competition</span>
+                </li>
+                
                 <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{route('dashboard.step',1)}}">
@@ -43,7 +46,7 @@
                             <i class="fas fa-square fa-stack-2x"></i>
                             <i class="fas fa-credit-card fa-stack-1x text-dark"></i>
                         </span>
-                        <span class="ms-2">Payment</span>
+                        <span class="ms-2">Competition Payment</span>
                     </a>
                 </li>
                 <li class="side-item text-white">
@@ -66,6 +69,10 @@
                         <span class="ms-2">Participant Submission</span>
                     </a>
                 </li>
+                <li class="pb-1 ps-3 header-menu side-item text-white fs-5">
+                    <span class="fw-bold aeo-title">Accommodation </span>
+                </li>
+
                 <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{route('dashboard.accommodation-step', 1)}}">

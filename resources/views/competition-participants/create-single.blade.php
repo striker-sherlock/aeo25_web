@@ -43,6 +43,16 @@
                                         <option value="Male" {{old('gender.'.$i-1) == 'Male' ? 'selected':''}}>Male</option>
                                         <option value="Female" {{old('gender.'.$i-1) == 'Female' ? 'selected':''}}>Female</option>
                                     </select>
+                                </div>  
+                                <div class="form-group mb-3">
+                                    <label for="additional_notes{{$i}}" class="col-form-label">Additional Notes</label>
+                                    <textarea class="form-control text-area"  name="additional_notes[]"  id="additional_notes{{$i}}" rows="2">{{old('additional_notes.'.$i)}}</textarea>
+
+                                    @if ($errors->has('additional_notes.'.$i))
+                                        <span class="invalid feedback text-danger"role="alert">
+                                            <strong>*{{ $errors->first('additional_notes.*') }}.</strong>
+                                        </span>
+                                    @endif 
                                 </div>     
  
                             </div>   
@@ -65,7 +75,15 @@
                                         <strong>*{{ $errors->first('birth.*') }}.</strong>
                                     </span>
                                 @endif
-                                </div>  
+                                </div> 
+                                <div class="form-group mb-2">
+                                    <label for="vegetarian{{$i}}" class="col-form-label">Is This Participant Vegetarian ? <span class="text-danger">*</span></label>
+                                    <select class="form-select"  name="vegetarian[]" id="vegetarian{{$i}}" required>
+                                        <option selected class="d-none">choose...</option>
+                                        <option value="1" {{old('vegetarian.'.$i) == '1' ? 'selected':''}}>Vegetarian</option>
+                                        <option value="0" {{old('vegetarian.'.$i) == '0' ? 'selected':''}}>Non-Vegetarian</option>
+                                    </select>
+                                </div>    
 
                                 <div class="form-group mb-3">
                                     <label for="profile_picture{{$i}}" class="col-form-label">Profile Picture<span class="text-danger">*</span></label>

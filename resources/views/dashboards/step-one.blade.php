@@ -52,13 +52,14 @@
         <h5 class="text-center fs-4 fw-bold">Step Navigation</h5>
         <div class="navigasi  mb-4 d-flex justify-content-center align-items-center py-1">
             <ul class="list-unstyled d-flex align-items-center">
-                <li> <a href="#" class="btn btn-outline-theme active me-2 ">1</a></li>
-                <li> <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme me-2">2</a></li>
-                <li> <a href="{{route('dashboard.step',3)}}" class="btn btn-outline-theme me-2">3</a></li>
+                <li> <a href="{{route('dashboard')}}" class=" btn btn-outline-primary me-2">Main dashboard </a></li>
+                <li> <a href="#" class="btn btn-outline-primary active me-2 ">1</a></li>
+                <li> <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-primary me-2">2</a></li>
+                <li> <a href="{{route('dashboard.step',3)}}" class="btn btn-outline-primary me-2">3</a></li>
             </ul>
         </div>
     </div>
-
+    {{-- modal untuk update --}}
     @foreach ($competitionSlots as $competitionSlot)
         <div class="modal fade p-5" id="edit{{$competitionSlot->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
@@ -75,7 +76,7 @@
                         <div class="body mb-3">
                             <h1 class="fw-bold fs-3 text-center" >Edit your <span class="text-primary">{{$competitionSlot->competition->name}}</span> slot</h1>
                             <p class="fs-5 fw-bold text-center">Choose {{$competitionSlot->competition->need_team == 1 ? 'team':'person'}} quantity</p>
-
+                            <input type="text" value="{{$competitionSlot->competition->id}}" name="compet_id" hidden>
                             <div class="mx-auto text-center">
                                 @php ($slot = 3)
                                 @if ($slot > $competitionSlot->competition->temp_quota) 
@@ -87,7 +88,7 @@
                                 @endfor 
                             </div>
                         </div>
-                        <div class="footer">
+                        <div class="foot">
                             <div class="row">
                                 <div class="col">
                                     <button type="button" class="btn rounded-pill btn-outline-secondary w-100"  data-bs-dismiss="modal">Cancel</button>
@@ -103,6 +104,7 @@
         </div>
     @endforeach
 
+    {{-- modal untuk delete slot --}}
     @foreach ($competitionSlots as $competitionSlot)
         <div class="modal fade p-5" id="delete{{$competitionSlot->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
@@ -117,7 +119,7 @@
                         <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete <span class="fw-bolder text-danger">{{$competitionSlot->competition->name}}</span> ? </h1>
                         <p class="text-warning"> note: this action can't be undone  </p>
                     </div>
-                    <div class="footer">
+                    <div class="foot">
                         <div class="row">
                             <div class="col">
                                 <button type="button" class="btn rounded-pill btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>

@@ -29,7 +29,7 @@
                     <a href="#footer" class="btn btn-block px-3 nav-text nav-btn text-white">Contact</a>
                 </li>
                 <li class="nav-item active m-1">
-                    <a href="#" class="btn btn-block px-3 nav-text nav-btn text-white">Terms and Conditions</a>
+                    <a href="https://drive.google.com/file/d/1A7NQnXNSTViTaXpwJEEHiNE83J6MIXbP/view" class="btn btn-block px-3 nav-text nav-btn text-white">Terms and Conditions</a>
                 </li>
                
             </ul>

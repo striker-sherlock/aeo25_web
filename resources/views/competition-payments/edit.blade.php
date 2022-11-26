@@ -1,6 +1,6 @@
-<x-admin>   
- 
-    <div class="container mt-3">
+<x-layout title="Edit Competition Payment">
+    <x-navbar></x-navbar>   
+    <div class="container mt-5">
         <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
         <div class="row">
             <div class="col-md-6">
@@ -8,8 +8,18 @@
                     <h5 class="fw-bold text-uppercase text-center">payment guide and invoice</h5>
                     <hr>
                     <p>Please download the file below to see the payment guide and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
-                    <a href="{{route('payments.invoice', [$user->id, $slotId])}}" target="_blank"
-                        class="btn btn-outline-primary rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice and Guide</a>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{route('payments.paid-invoice',$competitionPayment->id)}}" target="_blank"
+                                class="btn btn-outline-theme rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice and Guide
+                            </a> 
+                        </div>
+                        <div class="col">
+                            <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
+                                class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fas fa-file-invoice"></i> Download Guideline
+                            </a>
+                        </div>
+                    </div>
                 </x-card>
             </div>
             <div class="col-md-6">
@@ -46,11 +56,11 @@
             <ul class="nav nav-pills d-flex justify-content-around mb-3">
 
                 <li class="">
-                    <a data-bs-toggle="pill" href="#bank" class="btn btn-outline-theme rounded-pill me-3 d-block w-100 bank {{$competitionPayment->paymentProvider->type == "BANK" ? 'active' : ''}}">Bank Transfer</a>
+                    <a data-bs-toggle="pill" href="#bank" class="btn btn-outline-info rounded-pill me-3 d-block w-100 bank {{$competitionPayment->paymentProvider->type == "BANK" ? 'active' : ''}}">Bank Transfer</a>
                 </li>
 
                 <li class="">
-                    <a data-bs-toggle="pill" href="#wise" class="btn btn-outline-theme rounded-pill me-3 d-block w-100 wise {{$competitionPayment->paymentProvider->type == "Wise" ? 'active' : ''}}"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a>
+                    <a data-bs-toggle="pill" href="#wise" class="btn btn-outline-info rounded-pill me-3 d-block w-100 wise {{$competitionPayment->paymentProvider->type == "Wise" ? 'active' : ''}}"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a>
                 </li>
  
               
@@ -150,5 +160,5 @@
         </div>
     </div>
             
-</x-admin>
+</x-layout>
 

@@ -44,6 +44,8 @@ class DashboardController extends Controller
             ->leftJoin('competition_participants', 'competition_slot_details.id','=','competition_participants.competition_slot_id')
             ->where('competition_slot_id',NULL)
             ->count();
+
+        // dd($participantCompetition);
         $allParticipants = CompetitionParticipant::where('pic_id',Auth::user()->id)->get();
 
 
@@ -59,7 +61,8 @@ class DashboardController extends Controller
         $totalGuests= AccommodationGuest::rightJoin('accommodation_slot_details','accommodation_slot_details.id' , '=', 'accommodation_guests.accommodation_slot_id')
             ->where('accommodation_guests.accommodation_slot_id','!=',NULL)
             ->count();
-         
+        
+        // competition slot yang ga ada participantnya
         $accGuests = AccommodationSlot::join('users','accommodation_slot_details.pic_id', '=','users.id')
             ->leftJoin('accommodation_guests', 'accommodation_slot_details.id','=','accommodation_guests.accommodation_slot_id')
             ->where('accommodation_slot_id',NULL)
@@ -91,11 +94,12 @@ class DashboardController extends Controller
 
         if ($step == 2){
             // jika step-1 belum di confirmasi atau belom dilewati maka, kembali ke dashboard
-            $confirmedSlot = CompetitionSlot::where('pic_id',Auth::user()->id)->get();
+            $confirmedSlot = CompetitionSlot::orderBy('payment_id')->where('pic_id',Auth::user()->id)->get();
             if ($confirmedSlot->count() == 0) return redirect()->back()->with('error','You have to make slot registration first');
 
             $confirmedSlot = $confirmedSlot->where('is_confirmed',1);
             if ($confirmedSlot ->count() == 0) return redirect()->back()->with('error','Please Wait your slot registration to be confirmed by admin');
+            
             
             $history = DB::table('competition_slot_details')
                         ->join('competition_payments','competition_slot_details.payment_id','=','competition_payments.id')

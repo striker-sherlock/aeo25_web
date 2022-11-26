@@ -84,6 +84,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('login/auth', [LoginController::class, 'adminLogin'])->name('login-auth');
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
     Route::get('logout', [LoginController::class, 'adminLogout'])->name('logout');
+    Route::get('loginAs', [LoginController::class, 'loginAsForm'])->name('login-as')->middleware('IsAdmin');
+    Route::post('Auth/LoginAs', [LoginController::class, 'loginAs'])->name('auth-login-as')->middleware('IsAdmin');
 });
 
 //Dashboard
@@ -93,9 +95,9 @@ Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 
 
 //Admin Privileges - Slot Registration
 Route::controller(SlotRegistrationController::class)->prefix('slot-registrations')->name('slot-registrations.')->group(function () {
-    Route::get('confirm/{competitionSlot}', 'confirm')->name('slot-registrations.confirm');
-    Route::post('reject', 'reject')->name('slot-registrations.reject');
-    Route::get('cancel/{competitionSlot}', 'cancel')->name('slot-registrations.cancel');
+    Route::get('confirm/{competitionSlot}', 'confirm')->name('confirm');
+    Route::post('reject', 'reject')->name('reject');
+    Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
 });
 Route::resource('slot-registrations',SlotRegistrationController::class);
 
@@ -132,7 +134,6 @@ Route::delete('/payments/{competitionPayment}/destroy', [UserCompetitionPaymentC
 
 // User Privileges - Competition Participant
 Route::controller(UserCompetitionParticipantController::class)->prefix('participants')->name('competition-participants.')->group(function () {
-    Route::get('{competition}', 'index')->name('index');
     Route::get('create/{competitionParticipant}', 'create')->name('create');
     Route::get('show/{user}/{competitition}', 'show')->name('show');
     Route::post('store', 'store')->name('store');
@@ -141,8 +142,13 @@ Route::controller(UserCompetitionParticipantController::class)->prefix('particip
 // Admin Privileges - Competition Participant
 Route::get('/edit-participant/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'edit'])->name('competition-participants.edit');
 Route::controller(AdminCompetitionParticipantController::class)->prefix('participants')->name('competition-participants.')->group(function () {
+    Route::get('{competition}', 'index')->name('index');
     Route::put('update/{id}', 'update')->name('update');
     Route::get('export/{competitionParticipant}', 'export')->name('export');
+    Route::delete('destroy/{competitionParticipant}', 'destroy')->name('destroy');
+    Route::delete('delete/{competitionParticipant}', 'delete')->name('delete');
+    Route::get('restore/{competitionParticipant}', 'restore')->name('restore');
+
 });
 
 // Facilities
@@ -161,13 +167,13 @@ Route::controller(AccommodationSlotRegistrationController::class)->prefix('accom
 Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only'=>['index', 'destroy', 'store', 'edit', 'update']]);
 
 //USER ACCOMMODATION PAYMENT
-Route::get('/paid-accommodation-invoice/{payment}', [PDFController::class, 'paidAccommodationInvoice'])->name('payments.paid-accommodation-invoice');
-Route::get('/invoice/{user}/{id}', [PDFController::class, 'accommodationInvoice'])->name('accommodation-payments.invoice');
-Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
-Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
-Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');
-Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
-Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
+    Route::get('/paid-accommodation-invoice/{payment}', [PDFController::class, 'paidAccommodationInvoice'])->name('payments.paid-accommodation-invoice');
+    Route::get('/invoice/{user}/{id}', [PDFController::class, 'accommodationInvoice'])->name('accommodation-payments.invoice');
+    Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
+    Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
+    Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');
+    Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
+    Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
 
 // Admin Privileges - Accommodation Participant
 Route::controller(AdminAccommodationPaymentController::class)->prefix('accommodation-payments')->name('accommodation-payments.')->group(function () {

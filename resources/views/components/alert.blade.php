@@ -1,5 +1,5 @@
 @if (count($errors) > 0)
-    <div class="modal fade show pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"
+    <div class="modal fade pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"
             aria-labelledby="alertTitle" aria-hidden="true" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content rounded-20 border-0">
@@ -35,7 +35,7 @@
 
 @if (session('error'))
 
-    <div class="modal fade show pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"
+    <div class="modal fade pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"
         aria-labelledby="alertTitle" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content rounded-20 border-0">
@@ -67,7 +67,7 @@
 
 @if (session('success'))
 {{-- {{dd('masuk sini')}} --}}
-    <div class="modal fade show pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"
+    <div class="modal fade pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"
             aria-labelledby="alertTitle" aria-hidden="true" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content rounded-20 border-0">
@@ -98,7 +98,7 @@
 @endif
 
 @if (session('successRegist'))
-    <div class="modal fade show pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"
+    <div class="modal fade pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"
     aria-labelledby="alertTitle" aria-hidden="true" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content rounded-20 border-0">

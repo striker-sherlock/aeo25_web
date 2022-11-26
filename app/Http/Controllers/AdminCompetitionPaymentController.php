@@ -93,12 +93,7 @@ class AdminCompetitionPaymentController extends Controller
             'updated_by' => Auth::guard('admin')->user()->name,
         ]);
 
-        foreach ($competitionSlots as $competitionSlot){
-            $competitionSlot->update([
-                'payment_id' => NULL,
-            ]);
-        }
-
+ 
         return redirect()->back()->with('success', 'The payment successfully canceled');
     }
 
@@ -108,18 +103,12 @@ class AdminCompetitionPaymentController extends Controller
 
     public function reject(Request $request){
         $competitionPayment= CompetitionPayment::find($request->payment);
-    // dd($competitionPayment);
+   
         $competitionPayment->update([
             'is_confirmed' => -1
         ]);
 
-        // $competitionSlots = CompetitionSlot::where('payment_id',$request->payment)->get();
-
-        // foreach ($competitionSlots as $competitionSlot){
-        //     $competitionSlot->update([
-        //         'payment_id' => NULL,
-        //     ]);
-        // }
+ 
 
         $rejectMail = [
             'subject' => "Competition Payment Rejection",

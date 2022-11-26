@@ -37,6 +37,7 @@
                     <input type="text" value="{{$competitionSlot->id}}" name="competition_slot_id" hidden>
                     <input type="text" value="{{$quantity}}" name="quantity" hidden>
                     <input type="text" hidden value="{{$totalTeams}}" name="total_teams">
+                    <input type="text" hidden value="1" name="need_teams">
                     @for ($j = 0; $j <= 4; $j++)
                         @if ($competitionSlot->competition->id == 'DB' && $j == 2 )
                             <input type="text" hidden value="{{$j}}" name="team_participant[]">
@@ -82,10 +83,10 @@
                                         <textarea class="form-control text-area"  name="additional_notes[]"  id="additional_notes{{$j}}{{$i}}" rows="2">{{old('additional_notes.'.$j+($i-$totalTeams)*5)}}</textarea>
 
                                         @if ($errors->has('additional_notes.'.$j+($i-$totalTeams)*5))
-                                        <span class="invalid feedback text-danger"role="alert">
-                                            <strong>*{{ $errors->first('additional_notes.*') }}.</strong>
-                                        </span>
-                                    @endif 
+                                            <span class="invalid feedback text-danger"role="alert">
+                                                <strong>*{{ $errors->first('additional_notes.*') }}.</strong>
+                                            </span>
+                                        @endif 
                                     </div>   
     
                                 </div>   

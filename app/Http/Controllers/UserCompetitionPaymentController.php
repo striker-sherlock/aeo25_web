@@ -21,6 +21,7 @@ class UserCompetitionPaymentController extends Controller
     }
 
     public function create($id){
+        
         $slot = CompetitionSlot::find($id);
         $competition = NULL;
         $isPayAll = 0;
@@ -124,7 +125,8 @@ class UserCompetitionPaymentController extends Controller
         return view('competition-payments.edit',[
             'competitionPayment' => $competitionPayment,
             'paidSlot' =>$paidSlot,
-            'paymentProviders' => PaymentProvider::all()
+            'paymentProviders' => PaymentProvider::all(),
+            'user' => Auth::user(),
         ]);
     }
 

@@ -12,11 +12,11 @@
                 <a href="{{route('dashboard.step',1)}}" class="d-block text-decoration-none btn ">
                     @php($totalSlot = $allSlotRegistration->count())
                     @php($confirmedRegistration = $confirmedSlotRegistration->count())
-                    <div class="card border-0 overflow-hidden rounded-20 mb-5 shadow-sm {{$totalSlot - $confirmedRegistration != 0 && $totalSlot != 0 ? 'focused':'shadow-sm'}}" style="border-radius:20px">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 shadow-sm {{$totalSlot - $confirmedRegistration != 0 || $totalSlot == 0 ? 'focused':'shadow-sm'}}" style="border-radius:20px">
                         <div class="card-header"></div>
                         <div class="card-body my-3 p-4">
                             <h2 class="fw-bold">STEP 1</h2>
-                            <h4>Confirmed Slot Registration </h4>
+                            <h4>Confirmed Slots Registration </h4>
                             <h1 class="display-3 fw-bold {{$confirmedSlotRegistration->count()- $allSlotRegistration->count() != 0 || $totalSlot == 0 ? 'text-danger':'text-success'}}">{{$confirmedSlotRegistration->count()}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
             
                         </div>
@@ -36,7 +36,7 @@
                                 <i class="fas fa-lock" style="font-size: 5em"></i>
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
                             @else
-                                <h4>Paid Slot Registration </h4>
+                                <h4>Total Paid Slots Registration </h4>
                                 <h1 class="display-3 fw-bold {{$confirmedPayment - $allSlotRegistration->count() == 0 ? 'text-success' : 'text-danger'}}">{{$confirmedPayment}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
                             @endif
                         </div>
@@ -46,7 +46,7 @@
 
             <div class="col-md">
                 <a href="{{route('dashboard.step',3)}}" class="d-block text-decoration-none btn" title="You must have at least 1 confirmed payment slot to move into this step">
-                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{ $totalParticipants == 0 ? 'focused':'shadow-sm'}}" style="border-radius:20px">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{ $participantCompetition != 0 && $confirmedPayment ? 'focused':'shadow-sm'}}" style="border-radius:20px">
                         <div class="card-header"></div>
                         <div class="card-body my-3 p-4">
                             <h2 class="fw-bold">STEP 3</h2>
@@ -71,7 +71,7 @@
             <div class="col-md-4">
                 @php($totalAccSlot = $allAccSlot->count())
                 <a href="{{route('dashboard.accommodation-step',1)}}" class="d-block text-decoration-none btn ">
-                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{$totalAccSlot - $confirmedAccSlot != 0 || $totalAccSlot == 0 ? 'red-shadow' : 'green-shadow'}}" style="border-radius:20px">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{$totalAccSlot - $confirmedAccSlot != 0 || $totalAccSlot == 0 ? 'focused':'shadow-sm'}}" style="border-radius:20px">
                         <div class="card-header"></div>
                         <div class="card-body my-3 p-4">
                             <h2 class="fw-bold">STEP 1</h2>
@@ -84,7 +84,7 @@
             </div>
             <div class="col-md-4">
                 <a href="{{route('dashboard.accommodation-step',2)}}" class="d-block text-decoration-none btn ">
-                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{$totalAccSlot - $confirmedAccPayment != 0 || $totalAccSlot == 0 ? 'red-shadow' : 'green-shadow'}}" style="border-radius:20px">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{$totalAccSlot - $confirmedAccPayment != 0 && $totalAccSlot != 0 ? 'focused':'shadow-sm'}}" style="border-radius:20px">
                         <div class="card-header"></div>
                         <div class="card-body my-3 p-4">
                             <h2 class="fw-bold">STEP 2</h2>
@@ -92,7 +92,7 @@
                                 <i class="fas fa-lock" style="font-size: 5em"></i>
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
                             @else
-                                <h4>Paid Slot Registration </h4>
+                                <h4>Total Paid Slot Accommodation </h4>
                                 <h1 class="display-3 fw-bold {{$confirmedAccPayment - $totalAccSlot == 0 ? 'text-success' : 'text-danger'}}">{{$confirmedAccPayment}}<span class="fs-4">/{{$totalAccSlot}}</span> </h1>
                             @endif
             
@@ -102,7 +102,7 @@
             </div>
             <div class="col-md-4">
                 <a href="{{route('dashboard.accommodation-step',3)}}" class="d-block text-decoration-none btn ">
-                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{ $accGuests == 0 ? 'red-shadow':'green-shadow'}} " style="border-radius:20px">
+                    <div class="card border-0 overflow-hidden rounded-20 mb-5 {{ $accGuests != 0 &&$confirmedAccPayment ? 'focused':'shadow-sm'}} " style="border-radius:20px">
                         <div class="card-header"></div>
                         <div class="card-body my-3 p-4">
                             <h2 class="fw-bold">STEP 3</h2>
@@ -122,7 +122,7 @@
 
         {{-- registration list --}}
         <x-card>
-            <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Slot Registration Summary</h3>
+            <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Slots Registration Summary</h3>
             @if ($allSlotRegistration->count())
                 <table class="table table-bordered">
                     <thead class="text-center">
@@ -158,14 +158,10 @@
                                             <span class="text-warning fw-bold">Wait for Confirmation</span>
                                         @elseif($slot->payment->is_confirmed == 1)
                                             {{-- kasi payment reciept nya disini --}}
-                                            <a href="{{route('payments.paid-invoice', $slot->payment->id)}}" class="btn btn-outline-info rounded-pill mt-2"> View Reciept</a>
+                                            <a href="{{route('payments.paid-invoice', $slot->payment->id)}}" class="btn btn-outline-info rounded-pill mt-2" target="_BLANK"> View Reciept</a>
                                         @else
                                             <span class="text-danger fw-bold">Rejected</span>
                                         @endif    
-
-                                       
-
-
                                     @endif
                                 </th>
                             <th> 
@@ -195,7 +191,7 @@
 
         {{-- participant list --}}
         <x-card>
-            <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Participant List</h3>
+            <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Participants List</h3>
             @if ($totalParticipants)
                 <table class="table table-bordered data-table" >
                     <thead class="text-center">

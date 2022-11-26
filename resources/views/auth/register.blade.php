@@ -59,9 +59,7 @@
                                     @enderror" required>
                                     <option value="" selected disabled>Choose...
                                     </option>
-                                    {{-- @php
-                                    $countries = App\Models\Countries::all();
-                                    @endphp --}}
+                                    
                                     @foreach ($countries as $country)
                                     <option value="{{ $country->id }}"
                                         {{ old('country_id') == $country->id ? 'selected' : '' }}>
@@ -94,8 +92,7 @@
                         <button type="submit" class="btn btn-outline-theme w-100 rounded-pill" >
                             {{ __('Register') }}
                         </button>
-                        <hr>
-                        <span class="d-block mx-auto text-center">Already Have an Account ? <a href="/login" class="" >  Login</a></span>
+                        <span class="d-block mx-auto text-center mt-3">Already Have an Account ? <a href="/login" class="" >  Login</a></span>
                         
                         
                     </form>

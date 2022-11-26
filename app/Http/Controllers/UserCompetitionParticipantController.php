@@ -14,38 +14,19 @@ use App\Models\ScoreType;
 
 class UserCompetitionParticipantController extends Controller
 {
-    public function index($competition){
-        //$trashed = CompetitionParticipant::onlyTrashed()->get();
-        // dd($competitionParticipants);
-        return view('competition-participants.index',[
-            'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
-            'competition' => Competition::find($competition),
-            // 'trashed' => $trashed,
-        ]);
-    }
-
-    public function show($user, $id){
-        $competition = Competition::find($id);
-        $competitionParticipants = CompetitionParticipant::where('pic_id',$user)
-                                    ->where('competition_id',$id);
-  
-        return view('competition-participants.show',[
-            'competitionParticipants' => $competitionParticipants->get(),
-        ]);
-    }
-            
-        
+    
     public function create(CompetitionSlot $competitionParticipant){
         if ($competitionParticipant->payment == NULL)return redirect()->back()->with('error','Please make payment first');
         if($competitionParticipant->payment->is_confirmed != 1 )return redirect()->back()->with('error','Please wait for the confirmation to be confirmed');
         if ($competitionParticipant->competition->need_team){
             $totalTeams = CompetitionSlot::join('competition_participants', 'competition_participants.competition_slot_id', 'competition_slot_details.id')
                 ->join('competitions', 'competitions.id', 'competition_slot_details.competition_id')
+                ->where('competition_slot_details.pic_id',Auth::user()->id)
                 ->where ('competitions.name',$competitionParticipant->competition->name)
                 ->distinct('team_id')
                 ->count();
 
-            // dd($totalTeams);
+            // dd($totalTeams == NULL);
 
             return view('competition-participants.create-team',[
                 'competitionSlot' =>$competitionParticipant ,
@@ -86,7 +67,7 @@ class UserCompetitionParticipantController extends Controller
         ]);
         $competition = Competition::find($request->competition_id);    
         $len = $request->quantity;
-        if($request->total_teams){
+        if($request->need_teams){
             $index = 0 ;
             for ($i = 0 ; $i < $len ; $i++){
                 $numberOfParticipant = 'people'.$i+$request->total_teams;
@@ -116,7 +97,6 @@ class UserCompetitionParticipantController extends Controller
                         $fixedName = $fileName.'_'.$current.'.'.$extension;
                         $path = $request->file("profile_picture.".$index)->storeAs("public/profile_picture/".$request->competition_id,$fixedName);
                     }
-            
                     $newParticipant = CompetitionParticipant::create([
                         'team_id' => $team_id->id,
                         'created_by' => Auth::user()->username,
@@ -133,13 +113,13 @@ class UserCompetitionParticipantController extends Controller
                         'is_vegetarian' =>0,
                         'is_attend' => 0,
                     ]);
-                    // if ($newParticipant) {
-                    //     CompetitionScore::create([
-                    //         'created_by' => Auth::user()->username,
-                    //         'participant_id' => $newParticipant->id,
-                    //         'score_type_id' => ScoreType::min('id')
-                    //     ]);
-                    // }
+                    if ($newParticipant) {
+                        CompetitionScore::create([
+                            'created_by' => Auth::user()->username,
+                            'participant_id' => $newParticipant->id,
+                            'score_type_id' => ScoreType::min('id')
+                        ]);
+                    }
                 }
             }
         }

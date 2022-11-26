@@ -14,6 +14,27 @@ class AdminCompetitionParticipantController extends Controller
     public function __construct(){
         $this->middleware('IsAdmin')->only(['edit']);
     }
+
+    public function index($competition){
+        // $trashed = CompetitionParticipant::onlyTrashed()->get();
+        // dd($competitionParticipants);
+        return view('competition-participants.index',[
+            'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
+            'competition' => Competition::find($competition),
+            // 'trashed' => $trashed,
+        ]);
+    }
+
+    public function show($user, $id){
+        $competition = Competition::find($id);
+        $competitionParticipants = CompetitionParticipant::where('pic_id',$user)
+                                    ->where('competition_id',$id);
+  
+        return view('competition-participants.show',[
+            'competitionParticipants' => $competitionParticipants->get(),
+        ]);
+    }
+
     public function edit(CompetitionParticipant $competitionParticipant){
         
         return view('competition-participants.edit',[
@@ -40,7 +61,6 @@ class AdminCompetitionParticipantController extends Controller
             return redirect()->back()->with('success','Note is successfully added');
         }
         else{
-            dd($request->all());
             $name= $request->nama;
             $fileName = str_replace(' ', '-', $name);
             $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);

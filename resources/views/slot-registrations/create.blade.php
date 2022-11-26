@@ -9,7 +9,7 @@
                 <div class="col-md-6">
                     <x-card>
                         <img src="/storage/competition_logo/{{$competition->logo}}" alt="{{$competition->name}}'s logo" class="img-fluid mx-auto d-block" width="200"> 
-                        <h3 class="text-center mb-3">{{$competition->name}}</h3>
+                        <h3 class="text-uppercase fw-bold text-center text-gradient mb-3" style="letter-spacing: 0.1em">{{$competition->name}}  </h3>
                         <input type="text" name="compet_id[]" hidden value="{{$competition->id}}">
                         <div class="mx-auto text-center">
                             
@@ -26,7 +26,7 @@
                             
                             @for($i=0 ; $i <= $slot; $i++ )
                                 @if ($slot == 0)
-                                    <h5 class="border bg-danger text-white py-2 mx-auto" style="max-width:50%;">Out of Slot<h5>
+                                    <h5 class="border bg-danger text-white py-2 mx-auto fw-bold" style="max-width:50%;">Unable to select this slot<h5>
                                     <input type="text" name="quantity[]-{{$competition->id}}" value="0" hidden>
                                     @break      
                                 @endif
@@ -61,7 +61,7 @@
                              
                         </ul>
                     </div>
-                    <div class="footer">
+                    <div class="">
                         <div class="row">
                             <div class="col">
                                 <button type="button" class="close btn rounded-pill btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>

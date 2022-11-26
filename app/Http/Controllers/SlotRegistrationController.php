@@ -29,14 +29,12 @@ class SlotRegistrationController extends Controller
             $count = array_add($count,$competition->name, $competitionSlot);
         };
 
-        // dd($count);
         $pending = CompetitionSlot::where('is_confirmed',0)->get();
         $confirmed = CompetitionSlot::leftJoin('competition_payments','competition_slot_details.payment_id','competition_payments.id')
             ->where('competition_slot_details.is_confirmed',1)
             ->Where('competition_slot_details.payment_id', NULL)
             ->select('competition_slot_details.*')
             ->get();
-        // dd($confirmed);
         $rejected = CompetitionSlot::where('is_confirmed',-1)->get();
         
         return view('slot-registrations.index',[
@@ -55,9 +53,14 @@ class SlotRegistrationController extends Controller
         ]);
     }
     public function checkSlotAvailability(int $slot, $competitionID){
+        $allSlotCompetition = CompetitionSlot::where('pic_id',Auth::user()->id)
+                            ->get()
+                            ->where('competition_id',$competitionID)
+                            ->sum('quantity');
         $competition = Competition::find($competitionID);
-        if ($slot > $competition->temp_quota) return false;
-        return true; 
+        if ($slot + $allSlotCompetition > 3) return "Sorry, maximum for each institution exceeded";
+        if ($slot > $competition->temp_quota) return "Sorry,".$competition->name."'s quota is not enough";
+        return 'true'; 
     }
 
     public function store(Request $request){
@@ -70,7 +73,6 @@ class SlotRegistrationController extends Controller
             if(!$valid) return redirect()->back()->with('error',"Sorry, ".$competitionName."'s slot is not available");
         }
         // dd($request->all());    
-        return redirect('/slot-registrations')->with('success','Slot is successfully registered');
         
         
         for ($i= 0; $i < $len; $i++){
@@ -85,8 +87,9 @@ class SlotRegistrationController extends Controller
                 ]);
             }
         }
+        return redirect()->route('dashboard.step',1)->with('success','Slot is successfully registered');
     }
- 
+    
     public function edit($id) {
         $competitionSlot = CompetitionSlot::find($id);
         $pic = $competitionSlot->user;
@@ -159,6 +162,9 @@ class SlotRegistrationController extends Controller
     
     public function update(Request $request, $id){
         $competitionSlot = CompetitionSlot::find($id);
+        $validation = $this->checkSlotAvailability($request->quantity,$request->compet_id);
+        if($validation != 'true')return redirect()->back()->with('error',$validation);
+        
         if($competitionSlot->is_confirmed == 1) return redirect()->back()->with('error','Sorry, the updates is failed');
         
 
