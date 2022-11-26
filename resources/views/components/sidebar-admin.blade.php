@@ -4,14 +4,12 @@
             background-color: #767D7F !important;
         }
 </style>
-<nav id="sidebar" class="sidebar-wrapper h-100 mh-100 fixed-top bg-gradient-blue pr-0">
+<nav id="sidebar-admin" class="sidebar-wrapper h-100 mh-100 fixed-top bg-gradient-blue pr-0">
     <div class="sidebar-content">
-        <div class="sidebar-brand text-end row my-2 py-2"  style="padding: 0.15rem;">
-            
-            <span class="c-text-1 ms-auto me-4" id="close-sidebar" style="cursor: pointer;">
-                <i class="fas fa-arrow-alt-circle-left fa-lg text-white"></i>
-            </span> 
-        
+        <div class="sidebar-brand text-end row my-2 py-2 me-2"  style="padding: 0.15rem;">
+                <span class=" ms-auto me-4  rounded burgerIcon" id="close-sidebar" style="cursor: pointer;">
+                    <i class=" fa-solid fa-bars fa-lg text-white "></i> 
+                </span> 
         </div>
         <div class="sidebar-header  mb-3" style="height: auto; ">
             <div class="d-flex flex-column align-items-center justify-content-center text-center">
@@ -90,25 +88,26 @@
                             <ul class="fa-ul">
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('follow-ups.index', "National") }}" style="display: block">
+                                            href="{{ route('follow-ups.index', "national") }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             National
                                         </a>
                                     </li>
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('follow-ups.index',"International") }}" style="display: block">
+                                            href="{{ route('follow-ups.index',"international") }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             International
                                         </a>
                                     </li>
-                                    <li class="mb-1">
+                                    
+                                    {{-- <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
                                             href="{{ route('follow-ups.create', 'type') }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Create Follow Up
                                         </a>
-                                    </li>
+                                    </li> --}}
                             </ul>
                         </div>
                     </li>
@@ -132,6 +131,43 @@
                             <span class="ms-2">Institution Contact</span>
                         </a>
                     </li>
+                    <li class="pb-1 ps-3 header-menu">
+                        <span class="fw-bold">Accommodations</span>
+                    </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{ route('accommodations.index') }}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fas fa-hotel fa-stack-1x text-dark"></i> 
+                            </span>
+                            <span class="ms-2">Manage Accommodations</span>
+                        </a>
+                       
+                    </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{ route('accommodation-payments.index') }}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fas fa-coins fa-stack-1x text-dark"></i> 
+                        </span>
+                        <span class="ms-2">Accommodations Payment</span>
+                    </a>
+
+                    </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{ route('accommodation-slot-registrations.index') }}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fas fa-bed fa-stack-1x text-dark"></i> 
+                        </span>
+                        <span class="ms-2">Accommodations Slots</span>
+                    </a>
+
+                    </li>
+
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Competition</span>
                     </li>
@@ -430,3 +466,5 @@
         </form>
     </div>
 </nav>
+
+
