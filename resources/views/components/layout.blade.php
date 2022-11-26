@@ -12,8 +12,8 @@
     <script src="jquery-3.6.0.min.js"></script>
     {{-- <link rel="stylesheet" href="/node_modules/owl.carousel/dist/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="/bower_components/owl.carousel/dist/assets/owl.carousel.min.css" /> --}}
-
- 
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
    
  
 </head>
@@ -26,5 +26,15 @@
 
     </body>
  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js">
+    </script>
+    <script>
+    
+    let table = new DataTable('#dataTables', {
+        // options
+    });
+
+    </script>
 </html>
 

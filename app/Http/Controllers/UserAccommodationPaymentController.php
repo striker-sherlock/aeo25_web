@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserAccommodationPaymentController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth', 'verified');
+        $this->middleware('IsShowed:ENV005');
+    }
 
     public function getAllSlotRegistered($id)
     {

@@ -11,11 +11,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         // User::factory(200)->create();
@@ -24,7 +19,7 @@ class UserSeeder extends Seeder
                 'created_by' => 'pic',
                 'pic_name' => 'pic',
                 'username' => 'pic',
-                'email' => 'gerenwidiarta477@gmail.com',
+                'email' => 'stefanbondito@gmail.com',
                 'pic_phone_number' => '12323',
                 'country_id' => 12,
                 'institution_name' => 'Bina Nusantara',

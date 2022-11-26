@@ -1,10 +1,20 @@
 @component('mail::message')
-CONGRATUALATIONS
+CONGRATULATIONS {{ $name }} ! <br>
 
-{{$body}}
-
+{{$body1}} <br>
+{{ $body2 }}<br>
+@component('mail::button', ['url' => $url, 'color' =>'secondary'])
+Go to Website
+@endcomponent <br>
  
 
-Thanks,<br>
-The 2023 Asian English Olympics
+Best Regards,<br>
+Someone's Name (Ms.) <br>
+Staff of Fundraising Division <br>
+Phone    : +62-812-8355-2223 <br>
+Email    : someone's_email@binus.ac.id <br>
+<img src="https://socialevent.mybnec.org/storage/images/assets/AEO-2023Colored.png" alt="" width="50%"> <br>
+{{ config('app.name') }} <br>
+Jakarta | Indonesia <br>
+Website : www.socialevent.mybnec.org <br>
 @endcomponent

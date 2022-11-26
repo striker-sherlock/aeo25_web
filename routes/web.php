@@ -39,6 +39,7 @@ use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
 use App\Http\Controllers\AmbassadorController;
+use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\PDFController;
 
 Auth::routes(['verify'=>true]);
@@ -52,7 +53,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', [LoginController::class, 'showAdminLoginForm'])->name('login');
     Route::post('login/auth', [LoginController::class, 'adminLogin'])->name('login-auth');
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
+    Route::get('logout', [LoginController::class, 'adminLogout'])->name('logout');
 });
+
 
 // Environments
 Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
@@ -134,6 +137,9 @@ Route::post('/participants/store', [UserCompetitionParticipantController::class,
 Route::get('/edit-participant/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'edit'])->name('competition-participants.edit');
 Route::put('/participants/update/{id}', [AdminCompetitionParticipantController::class, 'update'])->name('competition-participants.update');
 Route::get('/participants/export/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'export'])->name('competition-participants.export');
+Route::delete('/participants/{competitionParticipant}/destroy', [AdminCompetitionParticipantController::class, 'destroy'])->name('competition-participants.destroy');
+Route::get('/participants/{competitionParticipant}/restore', [AdminCompetitionParticipantController::class, 'restore'])->name('competition-participants.restore');
+Route::get('/participants/{competitionParticipant}/delete', [AdminCompetitionParticipantController::class, 'delete'])->name('competition-participants.delete');
 
 //Facilities
 Route::resource('facilities', FacilityController::class);

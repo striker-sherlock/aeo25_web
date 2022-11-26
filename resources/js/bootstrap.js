@@ -3,20 +3,20 @@ window._ = _;
 
 import 'bootstrap';
 
-import $ from 'jquery'
+import $ from 'jquery';
 window.$ = $;
 
-import 'datatables.net'
+import 'datatables.net';
 
 import DataTable from 'datatables.net';
 window.DataTable = DataTable;
 
-
-
-
-
 $(document).ready(function(){
     $('#dataTables').DataTable();
+});
+
+$(document).ready(function(){
+    $('#trashed').DataTable();
 });
 
 $(document).ready(function(){

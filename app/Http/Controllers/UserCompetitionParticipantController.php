@@ -14,6 +14,11 @@ use App\Models\ScoreType;
 
 class UserCompetitionParticipantController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth', 'verified');
+        $this->middleware('IsShowed:ENV008');
+    }
+
     public function index($competition){
         $trashed = CompetitionParticipant::onlyTrashed()->get();
         // dd($competitionParticipants);

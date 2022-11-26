@@ -1,8 +1,6 @@
-<x-admin>
+<x-user title="Create Flight Registration">
     <div class="container mt-4">
-        <div class="card border-0 overflow-hidden shadow rounded-20 mb-5" style="border-radius:20px">
-            <div class="card-header bg-secondary"></div>
-            <div class="card-body my-3">
+        <x-card>
               <h1>Create Flight Registration</h1>
                 <form action="{{route('flight-registrations.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -28,4 +26,6 @@
                     </div>
                     <button type="submit" class="btn btn-outline-primary w-100 btn-rounded my-2">Submit</button>
                 </form>
-</x-admin>
+            </x-card>
+    </div>
+</x-user>
