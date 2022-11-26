@@ -67,7 +67,7 @@
         <hr>
         {{-- accommodation step --}}
         <div class="step-by-step-accommodation row">
-            <h3 class="text-uppercase fw-bold  my-4" style="letter-spacing: 0.1em">Accommodation Step By Step Registration</h3>
+            <h3 class="text-uppercase fw-bold  my-4 text-gradient" style="letter-spacing: 0.1em">Accommodation Step By Step Registration</h3>
             <div class="col-md-4">
                 @php($totalAccSlot = $allAccSlot->count())
                 <a href="{{route('dashboard.accommodation-step',1)}}" class="d-block text-decoration-none btn ">
@@ -122,7 +122,7 @@
 
         {{-- registration list --}}
         <x-card>
-            <h3 class="text-uppercase fw-bold mb-3" style="letter-spacing: 0.1em">Your Slot Registration Summary</h3>
+            <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Slot Registration Summary</h3>
             @if ($allSlotRegistration->count())
                 <table class="table table-bordered">
                     <thead class="text-center">
@@ -137,9 +137,9 @@
                     <tbody class="text-center">
                         @foreach ($allSlotRegistration as $slot)
                         <tr class="text-center ">
-                            <th>{{$slot->competition->name}}</th>
-                            <th>{{$slot->quantity}} Slot(s)</th>
-                            <th>
+                            <th class="d-flex align-items-center justify-content-center">{{$slot->competition->name}}</th>
+                            <th  >{{$slot->quantity}} Slot(s)</th>
+                            <th   >
                                 @if ($slot->is_confirmed == 0)
                                     <span class="text-warning fw-bold">Wait for Confirmation </span>
                                     @elseif ($slot->is_confirmed == 1)
@@ -191,7 +191,7 @@
 
         {{-- participant list --}}
         <x-card>
-            <h3 class="text-uppercase fw-bold mb-3" style="letter-spacing: 0.1em">Your Participant List</h3>
+            <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Participant List</h3>
             @if ($totalParticipants)
                 <table class="table table-bordered data-table" >
                     <thead class="text-center">
@@ -219,5 +219,4 @@
         </x-card>
  
     </div>
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
 </x-user>

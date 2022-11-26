@@ -12,7 +12,7 @@
                             <h3 data-bs-aos="fade-up" class="aeo-title fs-2  mb-3">The 2023 Asian English Olympics</h3>
                             <h1 data-bs-aos="fade-up" class='aeo-theme mb-4'>UNVEIL YOUR SPARK</h1>
                         </div>
-                        <div class="col-md-6  border border-1 text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px white;">
+                        <div class="col-md-6  text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
                             <h2 class="fs-3 m-0 mb-2 aeo-title ">Open Registration Until: </h2>
                             <h1 class="m-0 mb-3 fw-bold display-5">13 January 2023 </h1>
                             <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
