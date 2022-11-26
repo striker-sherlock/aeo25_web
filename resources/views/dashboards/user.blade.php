@@ -158,10 +158,14 @@
                                             <span class="text-warning fw-bold">Wait for Confirmation</span>
                                         @elseif($slot->payment->is_confirmed == 1)
                                             {{-- kasi payment reciept nya disini --}}
-                                            <a href="#" class="btn btn-outline-info rounded-pill mt-2"> View Reciept</a>
+                                            <a href="{{route('payments.paid-invoice', $slot->payment->id)}}" class="btn btn-outline-info rounded-pill mt-2"> View Reciept</a>
                                         @else
                                             <span class="text-danger fw-bold">Rejected</span>
                                         @endif    
+
+                                       
+
+
                                     @endif
                                 </th>
                             <th> 

@@ -51,7 +51,10 @@ class UserAccommodationPaymentController extends Controller
             'payAll' => $payAll,
             'allAccommodations' => $allAccommodation,
             'isPaid' => $isPaid,
-            'paymentProviders' => PaymentProvider::select('name', 'id')->distinct()->get(),
+            'paymentProviders' => PaymentProvider::where('type','BANK')->get(),
+            'user' => Auth::user(),
+            'slotId' => $id,
+
 
         ]);
     }
@@ -98,7 +101,8 @@ class UserAccommodationPaymentController extends Controller
         if ($request->payAll == 1){
             $allAccommodation = $this->getAllSlotRegistered($request->pic_id);
             foreach($allAccommodation as $accommodation){
-                $accomodation->update([
+                
+                $accommodation->update([
                     'payment_id' => $payment->id,
                 ]);
             }

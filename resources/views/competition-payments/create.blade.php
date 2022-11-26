@@ -75,9 +75,9 @@
                 <div class="tab-content">
                     <div id="bank" class="tab-pane fade">
                         <div class="form-group mb-2">
-                            <label for="payment_provider" class="col-form-label">Payment Type<span class="text-danger">*</span></label>
+                            <label for="payment_provider" class="col-form-label">Bank Name<span class="text-danger">*</span></label>
                             <select class="form-select"  name="payment_provider">
-                                <option selected class="d-none">Select The payment type</option>
+                                <option selected class="d-none">Select Bank Name</option>
                                 @foreach ($paymentProviders as $paymentProvider)
                                     <option value="{{$paymentProvider->id}}" {{old('payment_provider' == $paymentProvider->id? 'selected' : '')}}>{{$paymentProvider->name}}</option>
                                 @endforeach

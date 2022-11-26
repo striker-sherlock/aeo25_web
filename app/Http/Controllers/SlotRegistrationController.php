@@ -86,13 +86,6 @@ class SlotRegistrationController extends Controller
             }
         }
     }
-
-  
-    public function show($id)
-    {
-        
-    }
-
  
     public function edit($id) {
         $competitionSlot = CompetitionSlot::find($id);

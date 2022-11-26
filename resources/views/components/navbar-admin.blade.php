@@ -42,6 +42,7 @@
     }
     
     .toggle-wrapper:hover {
+        width: fit-content;
         border: 4.5px solid #7FBCD2 ;
 
     }

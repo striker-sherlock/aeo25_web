@@ -1,4 +1,8 @@
 <x-layout>
+    <style>
+        
+ 
+    </style>
     <body>
         <x-navbar></x-navbar>
         <!-- ======= Header Section ======= -->
@@ -24,14 +28,16 @@
                                     <div class="text-start text-lg-center ">
                                         <a href="{{route('register')}}"
                                             class="btn action scrollto d-inline-flex align-items-center justify-content-center align-self-center text-center text-white text-decoration-none rounded-pill my-3 px-5 py-2 w-100">
-                                            <span class="fs-4 aeo-title text-uppercase">Register now</span>
+                                            <span class="fs-4 text-uppercase">Register now</span>
                                             <i class="bi bi-arrow-right"></i>
                                         </a>
                                     </div>
                                 </div>
                                 
                             </div>
+
                         </div>
+                    </div>
 
                 </div>
             </div>
@@ -125,22 +131,28 @@
                     </div>
                     <h1 class="mt-3 fw-bold ">COMPETITION FIELDS</h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
-                    
+
                     <div class="owl-carousel owl-theme d-flex">
                         @foreach ($competitions as $competition)
-                            @if ($competition->name == 'Observer' || $competition->id == 'IA' )@continue @endif
+                            @if ($competition->name == 'Observer' || $competition->id == 'IA')
+                                @continue
+                            @endif
                             <div class="item border border-1 rounded-20">
                                 <a>
-                                    <img src="storage/competition_logo/{{$competition->logo}}" class="img-fluid" alt="{{$competition->logo}}" loading="lazy">
-                                    <h3 class="aeo-title fw-bold">{{$competition->name}}</h3>
+                                    <div class="d-flex justify-content-center">
+                                        <img src="storage/competition_logo/{{ $competition->logo }}" class="img-fluid w-50"
+                                            alt="{{ $competition->logo }}" loading="lazy" width="50">
+                                    </div>
+
+                                    <h3 class="aeo-title fw-bold text-center">{{ $competition->name }}</h3>
                                 </a>
                             </div>
                         @endforeach
                     </div>
 
-                     
+
                 </div>
-            
+
             </section>
 
             <!-- End Competition Fields Section -->
@@ -206,92 +218,97 @@
 
             </section> --}}
 
-             <!-- End How To Register Section -->
+            <!-- End How To Register Section -->
 
-             <!-- ======= Ambassador Section ======= -->
-          
-            <section id="ambassadors" class="bg-white mt-0">
-            <div class="ambassadors wow fadeIn">
-                <div class="container">
-                    <div class="title-line mx-auto"></div>
-                    <div class="d-flex justify-content-center">
-                        <hr class="w-25 pink-line fw-bold">
-    
-                    </div>
-                    <h5 class="mt-3 fw-bold text-center heading-primary">OUR AMBASSADORS</h5>
-                    <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title" style="color: #32649E">What they say about AEO</h1>    
-                    <div class="slider">
-                        {{-- @foreach ($ambassadors as $ambassador)
-                        @if ($loop->iteration == 1)
-                        <div class="slide active">
-                            <div class="left">
-                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
-                            </div> 
-                            <div class="right">
-                                <p class="text-justify fs-6">"{{$ambassador->testimony}}"</p>
-                                <div class="client-info">
-                                    <small>
-                                        <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
-                                        <p class="text-muted mb-0">{{ $ambassador->institution }}</p>
-                                    </small>
-                                </div>
+            <!-- ======= Ambassador Section ======= -->
+
+            @if ($ambassadors->count() != 0)
+                <section id="ambassadors" class="bg-white mt-0">
+                    <div class="ambassadors wow fadeIn">
+                        <div class="container">
+                            <div class="title-line mx-auto"></div>
+                            <div class="d-flex justify-content-center">
+                                <hr class="w-25 pink-line fw-bold">
+
                             </div>
-                        </div>      
-                        @else
-                        <div class="slide">
-                            <div class="left">
-                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
-                            </div>
-                            <div class="right">
-                                <p class="text-justify fs-6">"{{$ambassador->testimony}}"</p>
-                                <div class="client-info">
-                                    <small>
-                                        <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
-                                        <p class="text-muted mb-0">{{ $ambassador->institution }}</p>
-                                    </small>
-                                </div>
-                            </div>
-                        </div> 
-                        @endif
-                        @endforeach --}}
-                    </div>
-                    <div class="bottom d-flex justify-content-center align-items-center">
-                        <div class="slider-indicator">
-                            {{-- @foreach ($ambassadors as $ambassador)
+                            <h5 class="mt-3 fw-bold text-center heading-primary">OUR AMBASSADORS</h5>
+                            <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title"
+                                style="color: #32649E">What they say about AEO</h1>
+                            <div class="slider">
+                                @foreach ($ambassadors as $ambassador)
                             @if ($loop->iteration == 1)
-                            <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="active" alt="img" data-id="{{$ambassador->id}}">      
+                            <div class="slide active">
+                                <div class="left">
+                                    <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
+                                </div> 
+                                <div class="right">
+                                    <p class="text-justify fs-6">"{{$ambassador->testimony}}"</p>
+                                    <div class="client-info">
+                                        <small>
+                                            <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
+                                            <p class="text-muted mb-0">{{ $ambassador->institution }}</p>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>      
                             @else
-                            <img src="/storage/images/ambassador/{{$ambassador->photo}}" alt="img" data-id="{{$ambassador->id}}">    
+                            <div class="slide">
+                                <div class="left">
+                                    <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
+                                </div>
+                                <div class="right">
+                                    <p class="text-justify fs-6">"{{$ambassador->testimony}}"</p>
+                                    <div class="client-info">
+                                        <small>
+                                            <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
+                                            <p class="text-muted mb-0">{{ $ambassador->institution }}</p>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div> 
                             @endif
                             @endforeach
-                            @php
-                                $allAmbassadors = App\Models\Ambassador::all()->count();
-                                $ambassadorCount = $allAmbassadors - count($ambassadors);
-                            @endphp
-                            @if ($ambassadorCount > 0)
-                                <a href="/ambassadors" target="_blank">
-                                    <button type="button" class="btn btn-lg opacity-25 rounded-circle">+{{ $ambassadorCount  }}</button>
-                                </a>
-                            @endif --}}
+                            </div>
+                            <div class="bottom d-flex justify-content-center align-items-center">
+                                <div class="slider-indicator">
+                                    @foreach ($ambassadors as $ambassador)
+                                @if ($loop->iteration == 1)
+                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="active" alt="img" data-id="{{$ambassador->id}}">      
+                                @else
+                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" alt="img" data-id="{{$ambassador->id}}">    
+                                @endif
+                                @endforeach
+                                @php
+                                    $allAmbassadors = App\Models\Ambassador::all()->count();
+                                    $ambassadorCount = $allAmbassadors - count($ambassadors);
+                                @endphp
+                                @if ($ambassadorCount > 0)
+                                    <a href="/ambassadors" target="_blank">
+                                        <button type="button" class="btn btn-lg opacity-25 rounded-circle">+{{ $ambassadorCount  }}</button>
+                                    </a>
+                                @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            </section>
-    
-            
+                </section>
+                
+            @endif
 
-             <!-- End Ambassador Section -->
+            <!-- End Ambassador Section -->
+
+
+
             <!-- ======= F.A.Q Section ======= -->
             <section id="faq" class="faq">
 
                 <div class="container" data-aos="fade-up">
 
                     <header class="section-header">
-                    <div class="d-flex justify-content-center">
-                        <hr class="w-25 pink-line">
+                        <div class="d-flex justify-content-center">
+                            <hr class="w-25 pink-line">
 
-                    </div>
+                        </div>
                         <h2>F.A.Q</h2>
                         <p>Frequently Asked Questions</p>
                     </header>
@@ -426,31 +443,33 @@
                 </div>
 
             </section><!-- End F.A.Q Section -->
-          <!-- ======= Sponsor ======= -->
-          @if(count($sponsors) > 0)
-          <section id="sponsors" class="bg-white">
-              <div class="container text-center pt-5 wow fadeInUp">
-                  <div class="title-line mx-auto"></div>
-                  <h1 class="fw-bold mt-3 c-text-1 c-text-about home_title text-center heading-primary">Sponsors</h1>
-                  <div class="card border-0 card-shadow rounded-20">
-                      <div class="card-body my-3">
-                          <div class="row justify-content-center align-items-center">
-                              @foreach ($sponsors as $sponsor)
-                              <div class="col-lg-2 col-md-3 col-4">
-                                  <img src="/storage/sponsor/logo/{{ $sponsor->logo }}" class="w-100 py-1" alt="{{ $sponsor->name }}">
-                              </div>
-                              @endforeach
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </section>
-          @endif   
-          
+            <!-- ======= Sponsor ======= -->
+            @if (count($sponsors) > 0)
+                <section id="sponsors" class="bg-white">
+                    <div class="container text-center pt-5 wow fadeInUp">
+                        <div class="title-line mx-auto"></div>
+                        <h1 class="fw-bold mt-3 c-text-1 c-text-about home_title text-center heading-primary">Sponsors
+                        </h1>
+                        <div class="card border-0 card-shadow rounded-20">
+                            <div class="card-body my-3">
+                                <div class="row justify-content-center align-items-center">
+                                    @foreach ($sponsors as $sponsor)
+                                        <div class="col-lg-2 col-md-3 col-4">
+                                            <img src="/storage/sponsor/logo/{{ $sponsor->logo }}" class="w-100 py-1"
+                                                alt="{{ $sponsor->name }}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            @endif
 
 
 
-         <!-- End Sponsor Section -->
+
+            <!-- End Sponsor Section -->
             <!-- ======= Medpar ======= -->
             @if (count($mediaPartners) > 0)
                 <section id="media-partners" class="bg-white">
@@ -475,88 +494,102 @@
 
             <!-- End Medpar Section -->
              <!-- ======= Question ======= -->
- <!-- ======= Question ======= -->
+            <!-- ======= Question ======= -->
+            <section id="contact-us" class="bg-white">
+                <div class="container wow fadeInUp">
+                    <div class="title-line mx-auto"></div>
+                    <div class="d-flex justify-content-center">
+                        <hr class="w-25 pink-line">
+                    </div>
+                    <h5 class="my-3 fw-bold text-center " style="color: #32649E;">SUBMIT QUESTION</h5>
+                    <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary">Drop
+                        Your Question Here
+                    </h1>
+                    <div class="card rounded-20 card-shadow border-0">
+                        <div class="card-body m-3">
+                            <p class="text-muted mb-4">Please fill the form below, then we will answer your question
+                                via e-mail.
+                            </p>
+                            <form method="POST" action="" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group row mb-0 mb-sm-3">
+                                    <label for="name" class="col-sm-3 col-form-label text-sm-left">
+                                        Name
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control " id="name" name="name"
+                                            value="{{ old('name') }}" required>
+                                    </div>
+                                </div>
 
-    <section id="contact-us" class="bg-white">
-        <div class="container wow fadeInUp">
-            <div class="title-line mx-auto"></div>
-            <div class="d-flex justify-content-center">
-                <hr class="w-25 pink-line">
-            </div>
-            <h5 class="my-3 fw-bold text-center " style="color: #32649E;">SUBMIT QUESTION</h5>
-            <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary" >Drop Your Question Here
-            </h1>
-            <div class="card rounded-20 card-shadow border-0">
-                <div class="card-body m-3">
-                    <p class="text-muted mb-4">Please fill the form below, then we will answer your question
-                        via e-mail.
-                    </p>
-                    <form method="POST" action="" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group row mb-0 mb-sm-3">
-                            <label for="name" class="col-sm-3 col-form-label text-sm-left">
-                                Name
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-sm-9">
-                                <input class="form-control " id="name" name="name"
-                                    value="{{ old('name') }}" required>
-                            </div>
+                                <div class="form-group row mb-0 mb-sm-3">
+                                    <label for="country_id" class="col-sm-3 col-form-label text-sm-left">
+                                        Country
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select " name="country_id">
+                                            <option selected class="d-none">Select your Country</option>
+                                            @foreach ($countries as $country)
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                            @endforeach
+                                            @foreach ($countries as $country)
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-0 mb-sm-3">
+                                    <label for="phone_number" class="col-sm-3 col-form-label text-sm-left">
+                                        Phone Number
+                                        Phone Number
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="tel" class="form-control " id="phone_number"
+                                            name="phone_number" value="{{ old('phone_number') }}"
+                                            placeholder="812-345-678" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-0 mb-sm-3">
+                                    <label for="email" class="col-sm-3 col-form-label text-sm-left">
+                                        Email
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control " id="email" name="email"
+                                            value="{{ old('email') }}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-0 mb-sm-3">
+                                    <label for="question" class="col-sm-3 col-form-label text-sm-left">
+                                        Question
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control " id="question" name="question" value="{{ old('question') }}" style="height: 100px"
+                                            required>{{ old('question') }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="d-grid mt-5">
+                                    <button type="submit" class="btn btn-outline-1 rounded-20 btnSubmit"
+                                        id="btn-submit">Submit</button>
+                                </div>
+                            </form>
                         </div>
 
-                        <div class="form-group row mb-0 mb-sm-3">
-                            <label for="country_id" class="col-sm-3 col-form-label text-sm-left">
-                                Country
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-sm-9">
-                                <select class="form-select " name="country_id">
-                                    <option selected class="d-none">Select your Country</option>
-                                    @foreach ($countries as $country)
-                                        <option value="{{$country->id}}">{{$country->name}}</option>
-                                    @endforeach
-                                    
-                                </select>
-                            </div>
-                        </div>
+                         
 
-                        <div class="form-group row mb-0 mb-sm-3">
-                            <label for="phone_number" class="col-sm-3 col-form-label text-sm-left">
-                                Phone Number
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="tel" class="form-control " id="phone_number"
-                                    name="phone_number" value="{{ old('phone_number') }}"
-                                    placeholder="812-345-678" required>
-                            </div>
-                        </div>
+                 
 
-                        <div class="form-group row mb-0 mb-sm-3">
-                            <label for="email" class="col-sm-3 col-form-label text-sm-left">
-                                {{ _('Email') }}
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-sm-9">
-                                <input class="form-control " id="email" name="email"
-                                    value="{{ old('email') }}" required>
-                            </div>
-                        </div>
+                
 
-                        <div class="form-group row mb-0 mb-sm-3">
-                            <label for="question" class="col-sm-3 col-form-label text-sm-left">
-                                {{ _('Question') }}
-                                <span class="text-danger">*</span>
-                            </label>
-                            <div class="col-sm-9">
-                                <textarea class="form-control " id="question" name="question" value="{{ old('question') }}" style="height: 100px"
-                                    required>{{ old('question') }}</textarea>
-                            </div>
-                        </div>
-                        <div class="d-grid mt-5">
-                            <button type="submit" class="btn btn-outline-1 rounded-20 btnSubmit"
-                                id="btn-submit">Submit</button>
-                        </div>
+               
                     </form>
                 </div>
             </div>
@@ -570,75 +603,76 @@
 
         <!-- ======= Footer ======= -->
         <x-footer></x-footer>
+
+
+
         <!-- End Footer -->
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                 class="bi bi-arrow-up-short"></i></a>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <script>
+        let owl = $('.owl-carousel');
+        owl.owlCarousel({
+            loop: true,
+            nav: true,
+            autoplay: true,
+            dots: true,
+            lazyLoad: true,
+            margin: 15,
+            center: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                960: {
+                    items: 3
+                },
 
-    {{-- @section('scripts') --}}
-        <script>
-            let owl = $('.owl-carousel');
-            owl.owlCarousel({
-                loop:true,
-                nav:true,
-                autoplay:true,
-                dots: true,
-                lazyLoad: true,
-                margin:15,
-                center: true,
-                responsive:{
-                    0:{
-                        items:1
-                    },
-                    600:{
-                        items:2
-                    },            
-                    960:{
-                        items:3
-                    },
-            
-                }
-            });
-            owl.on('mousewheel', '.owl-stage', function (e) {
-                if (e.deltaY>0) {
-                    owl.trigger('next.owl');
-                } else {
-                    owl.trigger('prev.owl');
-                }
-                e.preventDefault();
-            });
-            
-            let timer = function (date) {
-                let timer = Math.round(new Date(date).getTime()/1000) - Math.round(new Date().getTime()/1000);
-                let minutes, seconds;
-                setInterval(function () {
-                    if (--timer < 0) {
-                        timer = 0;
-                    }
-                    days = parseInt(timer / 60 / 60 / 24, 10);
-                    hours = parseInt((timer / 60 / 60) % 24, 10);
-                    minutes = parseInt((timer / 60) % 60, 10);
-                    seconds = parseInt(timer % 60, 10);
-
-                    days = days < 10 ? "0" + days : days;
-                    hours = hours < 10 ? "0" + hours : hours;
-                    minutes = minutes < 10 ? "0" + minutes : minutes;
-                    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                    document.getElementById('cd-days').innerHTML = days;
-                    document.getElementById('cd-hours').innerHTML = hours;
-                    document.getElementById('cd-minutes').innerHTML = minutes;
-                    document.getElementById('cd-seconds').innerHTML = seconds;
-                }, 1000);
             }
-    
-            //using the function
-            const tomorrow = new Date("January 13, 2023 18:00:00")
-            timer(tomorrow);
-        </script>
-    {{-- @endsection --}}
-    
+        });
+        owl.on('mousewheel', '.owl-stage', function(e) {
+            if (e.deltaY > 0) {
+                owl.trigger('next.owl');
+            } else {
+                owl.trigger('prev.owl');
+            }
+            e.preventDefault();
+        });
+
+        let timer = function(date) {
+            let timer = Math.round(new Date(date).getTime() / 1000) - Math.round(new Date().getTime() / 1000);
+            let minutes, seconds;
+            setInterval(function() {
+                if (--timer < 0) {
+                    timer = 0;
+                }
+                days = parseInt(timer / 60 / 60 / 24, 10);
+                hours = parseInt((timer / 60 / 60) % 24, 10);
+                minutes = parseInt((timer / 60) % 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                days = days < 10 ? "0" + days : days;
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                document.getElementById('cd-days').innerHTML = days;
+                document.getElementById('cd-hours').innerHTML = hours;
+                document.getElementById('cd-minutes').innerHTML = minutes;
+                document.getElementById('cd-seconds').innerHTML = seconds;
+            }, 1000);
+        }
+
+        //using the function
+        const tomorrow = new Date("January 13, 2023 18:00:00")
+        timer(tomorrow);
+    </script>
 </x-layout>

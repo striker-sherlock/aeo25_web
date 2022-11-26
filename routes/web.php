@@ -121,15 +121,14 @@ Route::controller(AdminCompetitionPaymentController::class)->prefix('payments')-
     Route::get('export', 'export')->name('export');
 });
 
-//User Privileges - Competition Payment
-Route::get('/invoice/{user}/{id}', [PDFController::class, 'viewInvoice'])->name('payments.invoice');
-Route::controller(UserCompetitionPaymentController::class)->prefix('payments')->name('competition-payments.')->group(function() {
-    Route::get('create/{id}', 'create')->name('create');
-    Route::post('store', 'store')->name('store');
-    Route::get('{competitionPayment}/edit', 'edit')->name('edit');
-    Route::put('{competitionPayment}/update', 'update')->name('update');
-    Route::delete('{competitionPayment}/destroy', 'destroy')->name('destroy');
-});
+//COMPETITION PAYMENT USER
+Route::get('/paid-invoice/{payment}', [PDFController::class, 'paidInvoice'])->name('payments.paid-invoice');
+Route::get('/competition-invoice/{user}/{id}', [PDFController::class, 'viewInvoice'])->name('payments.invoice');
+Route::get('/payments/create/{id}', [UserCompetitionPaymentController::class, 'create'])->name('competition-payments.create');
+Route::post('/payments/store', [UserCompetitionPaymentController::class, 'store'])->name('competition-payments.store');
+Route::get('/payments/{competitionPayment}/edit', [UserCompetitionPaymentController::class, 'edit'])->name('competition-payments.edit');
+Route::put('/payments/{competitionPayment}/update', [UserCompetitionPaymentController::class, 'update'])->name('competition-payments.update');
+Route::delete('/payments/{competitionPayment}/destroy', [UserCompetitionPaymentController::class, 'destroy'])->name('competition-payments.destroy');
 
 // User Privileges - Competition Participant
 Route::controller(UserCompetitionParticipantController::class)->prefix('participants')->name('competition-participants.')->group(function () {
@@ -161,14 +160,14 @@ Route::controller(AccommodationSlotRegistrationController::class)->prefix('accom
 });
 Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only'=>['index', 'destroy', 'store', 'edit', 'update']]);
 
-// User Privileges - Accommodation Participant
-Route::controller(UserAccommodationPaymentController::class)->prefix('accommodation-payments')->name('accommodation-payments.')->group(function () {
-    Route::get('create/{id}', 'create')->name('create');
-    Route::post('store', 'store')->name('store');
-    Route::get('{accommodationPayment}/edit', 'edit')->name('edit');
-    Route::put('{accommodationPayment}/update', 'update')->name('update');
-    Route::delete('{accommodationPayment}/destroy', 'destroy')->name('destroy');
-});
+//USER ACCOMMODATION PAYMENT
+Route::get('/paid-accommodation-invoice/{payment}', [PDFController::class, 'paidAccommodationInvoice'])->name('payments.paid-accommodation-invoice');
+Route::get('/invoice/{user}/{id}', [PDFController::class, 'accommodationInvoice'])->name('accommodation-payments.invoice');
+Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
+Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
+Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');
+Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
+Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
 
 // Admin Privileges - Accommodation Participant
 Route::controller(AdminAccommodationPaymentController::class)->prefix('accommodation-payments')->name('accommodation-payments.')->group(function () {

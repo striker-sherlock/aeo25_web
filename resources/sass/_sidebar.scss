@@ -1,4 +1,5 @@
-#sidebar {
+#sidebar-admin,
+#sidebar-user {
     font-family: "Lexend", Arial, Helvetica, sans-serif !important;
    
 }
@@ -11,9 +12,9 @@
     color: #000 !important;
 }
 
-.border-gray {
-    border-color: #c2c2c2 !important;
-}
+// .border-gray {
+//     border-color: #c2c2c2 !important;
+// }
 
 .footer-wrapper .sidebar-wrapper,
 .page-wrapper .sidebar-wrapper,

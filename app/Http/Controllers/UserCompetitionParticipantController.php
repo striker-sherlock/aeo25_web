@@ -79,14 +79,13 @@ class UserCompetitionParticipantController extends Controller
             'birth.*.before' => 'Participant must be at least 15 years old',
             'birth.*.after' => 'Participant must not be older than 23 years old',
             'birth.*.date_format' => 'The date format must be yyyy-mm-dd',
-            'phone.*' => 'Phone number must be numeric',
+            'phone.*.numeric' => 'Phone number must be numeric',
+            'phone.*.distinct' => "phone number field must be distinct",
             'profile_picture.*.image' => 'The profile picture must be an image ',
             'profile_picture.*.max' => 'The profile picture size must less than 2MB '
         ]);
-        dd($request->quantity);
         $competition = Competition::find($request->competition_id);    
         $len = $request->quantity;
-        dd($len);
         if($request->total_teams){
             $index = 0 ;
             for ($i = 0 ; $i < $len ; $i++){
@@ -134,13 +133,13 @@ class UserCompetitionParticipantController extends Controller
                         'is_vegetarian' =>0,
                         'is_attend' => 0,
                     ]);
-                    if ($newParticipant) {
-                        CompetitionScore::create([
-                            'created_by' => Auth::user()->username,
-                            'participant_id' => $newParticipant->id,
-                            'score_type_id' => ScoreType::min('id')
-                        ]);
-                    }
+                    // if ($newParticipant) {
+                    //     CompetitionScore::create([
+                    //         'created_by' => Auth::user()->username,
+                    //         'participant_id' => $newParticipant->id,
+                    //         'score_type_id' => ScoreType::min('id')
+                    //     ]);
+                    // }
                 }
             }
         }

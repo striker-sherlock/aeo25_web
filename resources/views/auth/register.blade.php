@@ -40,7 +40,6 @@
                                     <label for="name" class="col-form-label">PIC Name<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="name" value="{{old('pic_name')}}" name="pic_name" required>
                                 </div>
-                                
                     
                                 
                                 <div class="form-group mb-2">
@@ -60,9 +59,9 @@
                                     @enderror" required>
                                     <option value="" selected disabled>Choose...
                                     </option>
-                                    @php
+                                    {{-- @php
                                     $countries = App\Models\Countries::all();
-                                    @endphp
+                                    @endphp --}}
                                     @foreach ($countries as $country)
                                     <option value="{{ $country->id }}"
                                         {{ old('country_id') == $country->id ? 'selected' : '' }}>
