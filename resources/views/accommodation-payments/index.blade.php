@@ -78,6 +78,10 @@
                                     <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">
                                         <i class="fas fa-undo"></i>
                                     </a>
+                                    <a href="{{route('payments.paid-accommodation-invoice', $payment->id)}}" class="btn btn-outline-primary m-2" title="View Invoice" target="_blank">
+                                        <i class="fas fa-file-invoice"></i>
+                                    </a>
+
                                     {{-- <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a> --}}
                                 </div>
                             </th>

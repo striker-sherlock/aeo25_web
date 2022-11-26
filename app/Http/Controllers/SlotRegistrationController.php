@@ -87,13 +87,6 @@ class SlotRegistrationController extends Controller
         return redirect()->route('dashboard.step',1)->with('success','Slot is successfully registered');
 
     }
-
-  
-    public function show($id)
-    {
-        
-    }
-
  
     public function edit($id) {
         $competitionSlot = CompetitionSlot::find($id);
