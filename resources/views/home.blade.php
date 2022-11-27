@@ -142,20 +142,38 @@
                             <div class="item border border-1 rounded-20">
                                 <a>
                                     <div class="d-flex justify-content-center">
-                                        <img src="storage/competition_logo/{{ $competition->logo }}" class="img-fluid w-50"
-                                            alt="{{ $competition->logo }}" loading="lazy" width="50">
+                                        <img src="storage/images/competitions/{{ $competition->logo }}" class="img-fluid w-50"
+                                            alt="{{ $competition->logo }}" loading="lazy" width="50" data-bs-toggle="modal" data-bs-target="#competition{{ $competition->id }}">
                                     </div>
-
                                     <h3 class="aeo-title fw-bold text-center">{{ $competition->name }}</h3>
                                 </a>
                             </div>
                         @endforeach
                     </div>
-
-
                 </div>
-
             </section>
+            @foreach ($competitions as $competition)
+                <div class="modal fade" id="competition{{ $competition->id }}" tabindex="-1"
+                    aria-labelledby="competition" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                        <div class="modal-content rounded-20 border-0">
+                            <div class="modal-header border-bottom-0">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row justify-content-center align-items-center">
+                                <div class="col-11">
+                                    <div class="custom-divider"></div>
+                                    <h5 class="fw-bold subheading-text">Competition Field</h5>
+                                    <h1 class="c-text-1 fw-bold mt-2 mb-4">{{$competition->name}}</h1>
+                                    {!! $competition->content !!}
+                                </div>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
 
             <!-- End Competition Fields Section -->
 

@@ -11,28 +11,20 @@ class RejectionMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     protected $rejectMail;
     public function __construct($rejectMail)
     {
         $this->rejectMail = $rejectMail;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         // dd($this->rejectMail['reason']);
         return $this->markdown('emails.rejection_mail')
         ->with([
             'name' => $this->rejectMail['name'],
+            'body1' => $this->rejectMail['body1'],
+            'body2' => $this->rejectMail['body2'],
             'reason' => $this->rejectMail['reason'],
         ]) -> subject($this->rejectMail['subject']);
     }

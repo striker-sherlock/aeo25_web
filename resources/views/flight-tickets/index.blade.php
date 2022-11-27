@@ -55,7 +55,7 @@
     <x-card>
       <h1>Recycle Bin</h1>
         <div class="table-responsive py-2">
-          <table class="table table-sm table-striped table-bordered no-footer" id="dataTables">
+          <table class="table table-sm table-striped table-bordered no-footer" id="trashed">
             <thead class="thead-light">
               <tr>
                 <th class="align-middle text-center">ID</th>
@@ -205,3 +205,6 @@
   </div>  
 @endforeach
 </x-admin>
+
+
+

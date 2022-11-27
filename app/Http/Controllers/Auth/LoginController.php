@@ -56,4 +56,9 @@ class LoginController extends Controller
             return redirect()->route('admin.login')->with('error', 'Credentials not match!');
         }
     }
+    
+    public function adminLogout(){
+        Auth::guard('admin')->logout();
+        return redirect()->route('admin.login');
+    }
 }

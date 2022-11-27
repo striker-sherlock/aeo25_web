@@ -14,13 +14,18 @@ use App\Models\ScoreType;
 
 class UserCompetitionParticipantController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth', 'verified');
+        $this->middleware('IsShowed:ENV008');
+    }
+
     public function index($competition){
         $trashed = CompetitionParticipant::onlyTrashed()->get();
         // dd($competitionParticipants);
         return view('competition-participants.index',[
             'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
             'competition' => Competition::find($competition),
-            // 'trashed' => $trashed,
+            'trashed' => $trashed,
         ]);
     }
 

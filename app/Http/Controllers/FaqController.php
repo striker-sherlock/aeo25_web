@@ -8,9 +8,11 @@ use App\Models\Faq;
 class FaqController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsAdmin')->only(['index', 'create', 'edit']);
+        $this->middleware('IsAdmin');
         $this->middleware('auth')->only(['create']);
+        $this->middleware('IsShowed:ENV003')->only(['index', 'show']);
     }
+    
     public function index()
     {
         return view('faqs.index', [
