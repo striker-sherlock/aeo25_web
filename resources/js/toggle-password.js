@@ -5,6 +5,7 @@ $(togglePassword).click(function(){
     const type = password.attr('type') === 'password' ? 'text' : 'password'
     password.attr('type',type);
     this.classList.toggle('fa-eye-slash')
+    this.classList.toggle('fa-eye')
     
 })
 
@@ -15,4 +16,5 @@ $(toggleConfirmPassword).click(function(){
     const typeConfirm = passwordConfirm.attr('type') === 'password' ? 'text' : 'password'
     passwordConfirm.attr('type',typeConfirm);
     this.classList.toggle('fa-eye-slash');
+    this.classList.toggle('fa-eye')
 })

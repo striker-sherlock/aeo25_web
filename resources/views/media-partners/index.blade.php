@@ -6,7 +6,7 @@
             <div class="card-header bg-secondary"></div>
             <div class="card-body ">
                 <h1 class="text-primary text-center ml-2">Media Partner List</h1>
-                    <a class="btn btn-outline-primary rounded-pill  mt-2 mb-3 px-4" href="{{ route('media-partners.create') }}">
+                    <a class="btn btn-outline-theme rounded-pill  mt-2 mb-3 px-4" href="{{ route('media-partners.create') }}">
                         <i class="fa fa-plus" aria-hidden="true"></i> Create Media Partners
                     </a>
                 <table class="table table-bordered" id="MediaPartnerTable">

@@ -3,7 +3,8 @@ CONGRATULATIONS {{ $name }} ! <br>
 
 {{$body1}} <br>
 {{ $body2 }}<br>
-@component('mail::button', ['url' => $url, 'color' =>'secondary'])
+
+@component('mail::button', ['url' => $url])
 Go to Website
 @endcomponent <br>
  

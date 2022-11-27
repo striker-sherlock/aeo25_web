@@ -1,7 +1,7 @@
 <x-admin>
     <div class="container mt-4">
         <x-card>
-            <h1>Competition List</h1>
+          <h3 class="text-uppercase fw-bold text-gradient" style="letter-spacing: 0.1em">Competition List</h3>
                 <div class="table-responsive py-2">
                     <table class="table table-sm table-striped table-bordered no-footer">
                       <thead class="thead-light">

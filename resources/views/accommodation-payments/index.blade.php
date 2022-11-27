@@ -52,7 +52,7 @@
         <x-card>
             <h2 class="mb-3 text-success fw-bold">Confirmed Accommodation Payment </h2>
             @if ($confirmed->count())
-                <a href="{{route('accommodation-payments.export')}}" class="btn btn-outline-primary mb-3">Download Excel</a>
+                <a href="{{route('accommodation-payments.export')}}" class="btn btn-outline-theme mb-3">Download Excel</a>
                 <table class="table table-striped table-bordered">
                     <thead class="text-center">
                     <tr>

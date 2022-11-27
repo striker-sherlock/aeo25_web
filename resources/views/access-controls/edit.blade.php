@@ -40,7 +40,7 @@
                         </select>
                     </div>
                     @method('PUT')
-                    <button type="submit" class="btn btn-outline-primary rounded-pill w-100">Submit</button>
+                    <button type="submit" class="btn btn-outline-theme rounded-pill w-100">Submit</button>
                 </form>
 
             </div>

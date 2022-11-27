@@ -22,7 +22,7 @@
                 <div class="row append mt-4 ">
                     
                 </div>
-                <button type="submit" class="d-none btn btn-outline-primary w-100 rounded-pill">Submit</button>
+                <button type="submit" class="d-none btn btn-outline-theme w-100 rounded-pill">Submit</button>
             </form>
         </x-card>
     </div>

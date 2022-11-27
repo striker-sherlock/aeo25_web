@@ -5,13 +5,13 @@
             <div class="card-body my-3">
                 <h1 class="text-primary text-center ">Follow Ups</h1>
                 @if ($type == 'national')
-                    <a class="btn btn-outline-primary rounded-pill  mt-2 mb-3 px-4"
+                    <a class="btn btn-outline-theme rounded-pill  mt-2 mb-3 px-4"
                         href="{{ route('follow-ups.create', 'national') }}">
                         <i class="fa fa-plus" aria-hidden="true"></i> Create New Follow Up
                     </a>
                     <h3 class="text-start text-dark">National Registration</h3>
                 @else
-                    <a class="btn btn-outline-primary rounded-pill  mt-2 mb-3 px-4"
+                    <a class="btn btn-outline-theme rounded-pill  mt-2 mb-3 px-4"
                         href="{{ route('follow-ups.create', 'international') }}">
                         <i class="fa fa-plus" aria-hidden="true"></i> Create New Follow Up
                     </a>

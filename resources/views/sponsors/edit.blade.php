@@ -29,7 +29,7 @@
                     </div>
                     <div class="row">
                         <div class="col"><a href="{{route('sponsors.index')}}" class="btn btn-outline-dark w-100">Back</a></div>
-                        <div class="col"><button type="submit" class="btn w-100 btn-outline-primary">Update</button></div>
+                        <div class="col"><button type="submit" class="btn w-100 btn-outline-theme">Update</button></div>
                     </div>
                   </form>
             </div>

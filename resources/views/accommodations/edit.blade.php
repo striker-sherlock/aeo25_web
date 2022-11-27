@@ -58,7 +58,7 @@
                     </div>
                     <div class="col">
                       @method('PUT')
-                      <button type="submit" class="btn btn-outline-primary btn-rounded w-100 ">Update</button>
+                      <button type="submit" class="btn btn-outline-theme btn-rounded w-100 ">Update</button>
                     </div>
                   </div>
               </form>

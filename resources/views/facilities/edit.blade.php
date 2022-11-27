@@ -18,7 +18,7 @@
                     </div>
                     <div class="col">
                       @method('PUT')
-                      <button type="submit" class="btn btn-outline-primary btn-rounded w-100">Submit</button>
+                      <button type="submit" class="btn btn-outline-theme btn-rounded w-100">Submit</button>
                     </div>
                   </div>
               </form>

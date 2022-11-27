@@ -26,7 +26,7 @@ class CompetitionPaymentExport implements FromCollection, WithHeadings
         // return redirect()->back();
     }
 
-    public function haedings():array{
+    public function headings():array{
         return ['ID', 'Amount','Account_number', 'PIC', 'PIC Email', 'Contact'];
     }
 }

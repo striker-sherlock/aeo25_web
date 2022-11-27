@@ -173,7 +173,7 @@
                     </li>
                         <li class="side-item">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                                href="#">
+                                href="{{route('competitions.index')}}">
                                 <span class="fa-stack fa-sm ms-n1">
                                     <i class="fas fa-square fa-stack-2x"></i>
                                     <i class="fas fa-tools fa-stack-1x text-dark"></i>
@@ -414,7 +414,7 @@
                     </li>
                         <li class="side-item">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                                href="#">
+                                href="{{route('admin.login-as')}}">
                                 <span class="fa-stack fa-sm ms-n1">
                                     <i class="fas fa-square fa-stack-2x"></i>
                                     <i class="fas fa-user-lock fa-stack-1x text-dark"></i>

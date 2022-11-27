@@ -1,7 +1,7 @@
 #sidebar-admin,
 #sidebar-user {
     font-family: "Lexend", Arial, Helvetica, sans-serif !important;
-    transition: 0.5s;
+   
 }
 
 .bg-gradient-blue {
@@ -35,7 +35,7 @@
 }
 
 .page-wrapper {
-    height: 100vh;
+    min-height: 100vh;
 }
 .page-wrapper.toggled .sidebar-wrapper {
     left: 0rem;
@@ -61,6 +61,8 @@
 .sidebar-wrapper {
     width: 16rem;
     left: -16rem;
+    transition: 0.5s;
+
 }
 
 .sidebar-wrapper .sidebar-content .sidebar-brand #close-sidebar {

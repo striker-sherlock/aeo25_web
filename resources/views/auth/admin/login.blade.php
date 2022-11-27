@@ -4,7 +4,7 @@
         <div class="container my-4 py-4">
             <div class="row justify-content-center align-items-center ">
                 <div class="col-lg-6 col-md-8 col-sm-9 col-11">
-                    <div class="card card-shadow rounded ">
+                    <div class="card card-shadow rounded-20 overflow-hidden">
                         <div class="card-header py-3 w-100"></div>
                         <div class="card-body m-lg-3 m-2">
                             <div class="title-line"></div>
@@ -42,7 +42,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="d-grid mt-5 mx-2">
+                                <div class="d-grid mt-4 mx-2">
                                     <button type="submit" class="btn c-button-1 rounded-pill btnSubmit">Login</button>
                                 </div>
                             </form>

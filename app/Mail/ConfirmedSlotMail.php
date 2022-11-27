@@ -23,7 +23,7 @@ class ConfirmedSlotMail extends Mailable
             'name' => $this->confirmedMail['name'],
             'body1' => $this->confirmedMail['body1'],
             'body2' => $this->confirmedMail['body2'],
-            'body3' => $this->confirmedMail['body3'],
+            // 'body3' => $this->confirmedMail['body3'],
             'url' => $this->confirmedMail['url'],
         ])->subject($this->confirmedMail['subject']);
     }

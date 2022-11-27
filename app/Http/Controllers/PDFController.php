@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AccommodationPayment;
-use App\Models\CompetitionPayment;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Dompdf\Dompdf;
 use App\Models\User;
-use Dompdf\DomPDF;
+use Illuminate\Http\Request;
+use App\Models\CompetitionPayment;
+use Illuminate\Support\Facades\DB;
+use App\Models\AccommodationPayment;
 
 class PDFController extends Controller
 {

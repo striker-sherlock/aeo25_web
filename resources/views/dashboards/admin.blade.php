@@ -7,8 +7,8 @@
             <hr>
         </div>
         <div class="info">
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                <div class="col-md-4 col-sm-6">
                     <x-card>
                         <h4 class="">Total Participant</h4>
                         <h1 class="display-2 fw-bold">{{$totalParticipants}}</h1>
@@ -20,7 +20,7 @@
                             </div>
                     </x-card>
                 </div>  
-                <div class="col">
+                <div class="col-md-4 col-sm-6">
                     @php($targetCountries = 11)
                     <x-card>
                         <h4 class="">Country Participate</h4>
@@ -33,7 +33,7 @@
                             </div>
                     </x-card>
                 </div>
-                <div class="col">
+                <div class="col-md-4 col-sm-6 ">
                     <x-card>
                         @php($targetInstitution = 100)
                         <h4 class="">Total Institution</h4>
@@ -47,8 +47,8 @@
                     </x-card>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div class="row justify-content-center">
+                {{-- <div class="col">
                     <x-card>
                         <h4 class="">Total Revenue</h4>
                         <h1 class="display-2 fw-bold">100.000</h1>
@@ -59,11 +59,11 @@
                             <div class="progress-bar" role="progressbar" style="width:50%;"   aria-valuemin="0" aria-valuemax="100"> </div>
                             </div>
                     </x-card>
-                </div>  
-                <div class="col">
+                </div>   --}}
+                <div class="col-md-4 col-sm-6">
                     <x-card>
                         @php($targetNational = 337)
-                        <h4 class="">National Participant</h4>
+                        <h4 class="fs-5">National Participant</h4>
                         <h1 class="display-2 fw-bold">{{$totalNationalParticipants}}</h1>
                         <div class="d-flex justify-content-end px-3 mb-1">
                             <span style="font-size: 0.6em" class="fw-bold">{{$totalNationalParticipants}}/{{$targetNational}}</span>
@@ -73,10 +73,10 @@
                             </div>
                     </x-card>
                 </div>
-                <div class="col">
+                <div class="col-md-4 col-sm-6">
                     <x-card>
                         @php($targetInter = 338)
-                        <h4 class="">International Participant </h4>
+                        <h4 class="fs-5">International Participant </h4>
                         <h1 class="display-2 fw-bold">{{$totalInternationalParticipants}}</h1>
                         <div class="d-flex justify-content-end px-3 mb-1">
                             <span style="font-size: 0.6em" class="fw-bold">{{$totalInternationalParticipants}}/{{$targetInter}}</span>
@@ -119,10 +119,5 @@
         </x-card>
     </div>
     @section('scripts')
-        <script type="module">
-            $(document).ready(function() {
-                alert("Test")
-            })
-        </script>
     @endsection
 </x-admin>
