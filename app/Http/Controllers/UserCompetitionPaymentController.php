@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserCompetitionPaymentController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth', 'verified');
+        $this->middleware('IsShowed:ENV007');
+    }
+
     public function getAllCompetitionRegistered($id){
         return CompetitionSlot::where('pic_id',$id)
             ->where('payment_id',NULL)

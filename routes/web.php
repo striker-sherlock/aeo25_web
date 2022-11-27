@@ -49,6 +49,7 @@ Route::resource('follow-up-types', FollowUpTypeController::class);
 Route::resource('access-controls',AccessControlController::class);
 Route::resource('score-types', ScoreTypeController::class)->except('show');
 
+
 // Environments
 Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
 Route::resource('environments', EnvironmentController::class);
@@ -76,6 +77,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', [LoginController::class, 'showAdminLoginForm'])->name('login');
     Route::post('login/auth', [LoginController::class, 'adminLogin'])->name('login-auth');
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
+    Route::get('logout', [LoginController::class, 'adminLogout'])->name('logout');
 });
 
 //Dashboard

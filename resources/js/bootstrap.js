@@ -1,6 +1,8 @@
 import _ from 'lodash';
 window._ = _;
 
+import 'bootstrap';
+
 import $ from 'jquery'
 window.$ = $;
 
@@ -24,33 +26,36 @@ window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 $(document).ready(function () {
-    $(".InstitutionContactTable").DataTable();
-    $(".FollowUpTable").DataTable();
-    $("#DoneFollowUpTable").DataTable();
-    $("#OnProgressFollowUpTable").DataTable();
-    $("#MediaPartnerTable").DataTable();
-    $("#InventoryTable").DataTable();
-    $("#AccessControlTable").DataTable();
 
-    $("#competitionCarousel").carousel({
-        interval: 10000,
-    });
+    $('.InstitutionContactTable').DataTable();
+    $('.FollowUpTable').DataTable();
+    $('#DoneFollowUpTable').DataTable();
+    $('#OnProgressFollowUpTable').DataTable();
+    $('#MediaPartnerTable').DataTable();
+    $('#InventoryTable').DataTable();
+    $('#AccessControlTable').DataTable();
 
-    $(".carousel .carousel-item").each(function () {
-        var minPerSlide = 3;
-        var next = $(this).next();
-        if (!next.length) {
-            next = $(this).siblings(":first");
-        }
-        next.children(":first-child").clone().appendTo($(this));
-
-        for (var i = 0; i < minPerSlide; i++) {
-            next = next.next();
-            if (!next.length) {
-                next = $(this).siblings(":first");
+    $('#competitionCarousel').carousel({
+        interval: 10000
+      })
+      
+      $('.carousel .carousel-item').each(function(){
+          var minPerSlide = 3;
+          var next = $(this).next();
+          if (!next.length) {
+          next = $(this).siblings(':first');
+          }
+          next.children(':first-child').clone().appendTo($(this));
+          
+          for (var i=0;i<minPerSlide;i++) {
+              next=next.next();
+              if (!next.length) {
+                  next = $(this).siblings(':first');
+                }
+              
+              next.children(':first-child').clone().appendTo($(this));
             }
+      });
+      
 
-            next.children(":first-child").clone().appendTo($(this));
-        }
-    });
 });

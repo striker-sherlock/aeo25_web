@@ -54,7 +54,7 @@ class CompetitionController extends Controller
         if($request->hasFile('logo_new')){
             $extension = $request->file('logo_new')->getClientOriginalExtension();
             $file_name = $newLogoName.'_'.$current.'.'.$extension;
-            $path = $request->file('logo_new')->storeAs('public/images/donations', $file_name);
+            $path = $request->file('logo_new')->storeAs('public/images/competitions', $file_name);
         }
         else{
             $file_name = $request->logo_old;

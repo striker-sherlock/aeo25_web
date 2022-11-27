@@ -11,27 +11,19 @@ class ConfirmedSlotMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public function __construct($confirmedMail)
     {
         $this->confirmedMail= $confirmedMail;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->markdown('emails.confirmed_slot_mail')
         ->with([
             'name' => $this->confirmedMail['name'],
-            'body' => $this->confirmedMail['body'],
+            'body1' => $this->confirmedMail['body1'],
+            'body2' => $this->confirmedMail['body2'],
+            'body3' => $this->confirmedMail['body3'],
             'url' => $this->confirmedMail['url'],
         ])->subject($this->confirmedMail['subject']);
     }

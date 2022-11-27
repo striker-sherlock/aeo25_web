@@ -16,6 +16,7 @@ class SlotRegistrationController extends Controller
 {
     public function __construct(){
         $this->middleware('auth')->only(['create']);
+        $this->middleware('IsShowed:ENV009');
     }
 
     public function index(){
@@ -105,7 +106,6 @@ class SlotRegistrationController extends Controller
             'confirmed_at' => Carbon::now()
         ]);
 
-        
         $remainedParticipant =$competitionSlot ->competition->temp_quota;
         $competitionSlot->competition -> update([
             'temp_quota' => $remainedParticipant - $competitionSlot->quantity,
@@ -114,7 +114,8 @@ class SlotRegistrationController extends Controller
         $confirmedMail = [
             'subject' => $competitionSlot->competition->name. " - Confirmed Slot",
             'name'=>$competitionSlot->competition->name,
-            'body'=>'ini body',
+            'body1'=>'We are grateful to inform you that your slot registration has been confirmed.',
+            'body2'=>'Please proceed to the payment for your slot by clicking the button below.',
             'url' => 'http://aeo.mybnec.org/dashboard/step-2'
 
         ];
@@ -146,8 +147,10 @@ class SlotRegistrationController extends Controller
         $rejectMail = [
             'subject' => $competitionSlot->competition->name. " - Rejection Slot",
             'name'=>$competitionSlot->competition->name,
+            'body1'=>'We are regretful to inform you that your competition slot has been rejected with the following reason: ',
+            'body2'=>'You can edit your slot registration again by going into the registration step on our website.',
             'reason' => $request->reason,
-            'url' => 'http://aeo.mybnec.org/dashboard/step-2'
+            'url' => 'http://aeo.mybnec.org/dashboard/step-1'
 
         ];
         Mail::to($competitionSlot->user->email)->send(new RejectionMail($rejectMail));

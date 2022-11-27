@@ -47,6 +47,19 @@ class AdminSeeder extends Seeder
                     'password' => Hash::make("test123&*^")
                 ],
 
+                [
+                    'created_by' => 'admin',
+                    'name' =>  'Stefan Bondito',
+                    'nim' =>  '2515051173',
+                    'email' => 'stefan@gmail.com',
+                    'position_id' => 2,
+                    'position' => 'Staff',
+                    'department_id' => 'MITR',
+                    'department' => 'MIT Registration',
+                    'division_id' => 'MIT',
+                    'division' => 'Media Information Technology',
+                    'password' => Hash::make("admin123")
+                ],
 
                 [
                     'created_by' => 'admin',
