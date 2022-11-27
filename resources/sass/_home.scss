@@ -319,6 +319,13 @@
     }
 }
 
+#contact-us .container {
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 20px 8px #d0d0d0 !important;
+
+  }
+
 // PRELOADER
 .preloader {
     position: fixed;
@@ -404,7 +411,6 @@
 }
 
 .accordion-button:not(.collapsed) {
-    border-radius: 10px !important;
     background: $teal;
 }
 

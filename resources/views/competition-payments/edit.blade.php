@@ -1,4 +1,4 @@
-<x-admin>   
+<x-user title="Edit Competition Payment">   
  
     <div class="container mt-3">
         <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-primary rounded-pill mb-3">Go Back</a>
@@ -8,7 +8,7 @@
                     <h5 class="fw-bold text-uppercase text-center">payment guide and invoice</h5>
                     <hr>
                     <p>Please download the file below to see the payment guide and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
-                    <a href="{{route('payments.invoice', [$user->id, $slotId])}}" target="_blank"
+                    <a href="{{route('payments.invoice', [$user->id, $paidSlot])}}" target="_blank"
                         class="btn btn-outline-primary rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice and Guide</a>
                 </x-card>
             </div>
@@ -150,5 +150,5 @@
         </div>
     </div>
             
-</x-admin>
+</x-user>
 

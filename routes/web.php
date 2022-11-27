@@ -88,7 +88,9 @@ Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 
 //Admin Privileges - Slot Registration
 Route::controller(SlotRegistrationController::class)->prefix('slot-registrations')->name('slot-registrations.')->group(function () {
     Route::get('confirm/{competitionSlot}', 'confirm')->name('slot-registrations.confirm');
+
     Route::post('reject', 'reject')->name('slot-registrations.reject');
+
     Route::get('cancel/{competitionSlot}', 'cancel')->name('slot-registrations.cancel');
 });
 Route::resource('slot-registrations',SlotRegistrationController::class);
@@ -166,8 +168,8 @@ Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAcc
 // Admin Privileges - Accommodation Participant
 Route::controller(AdminAccommodationPaymentController::class)->prefix('accommodation-payments')->name('accommodation-payments.')->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/confirm/{accommodationPayment}', 'confirm')->name('confirm');
-    Route::post('/reject', 'reject')->name('reject');
+    // Route::get('/confirm/{accommodationPayment}', 'confirm')->name('confirm');
+    // Route::post('/reject', 'reject')->name('reject');
     Route::get('/cancel/{accommodationPayment}', 'cancel')->name('cancel');
     Route::get('/export', 'export')->name('export');
 });
