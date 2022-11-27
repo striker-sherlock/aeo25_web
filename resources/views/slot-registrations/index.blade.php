@@ -32,7 +32,7 @@
         <x-card>
             <h2 class="mb-3 text-warning fw-bold">Pending Slot Registration</h2>
             @if ($pending->count())
-                <table class="table table-striped table-bordered data-table" id="data-table">
+                <table class="table table-striped table-bordered dataTables" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>
@@ -78,7 +78,7 @@
         <x-card>
             <h2 class="mb-3 text-success fw-bold">Confirmed Slot Registration </h2>
             @if ($confirmed->count())
-                <table class="table table-striped table-bordered data-table" id="">
+                <table class="table table-striped table-bordered dataTables" id="">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>
@@ -117,8 +117,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <a href="{{route('competition-payments.index','National')}}" class="btn btn-outline-info rounded-pill my-4 me-2" >View National Payment</a>
-                <a href="{{route('competition-payments.index','international')}}" class="btn btn-outline-info rounded-pill my-4">View International Payment</a>
+                < 
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -127,7 +126,7 @@
         <x-card>
             <h2 class="mb-3 text-danger fw-bold">Rejected Slot Registration</h2>
                 @if ($rejected->count())
-                <table class="table table-striped table-bordered data-table" id="data-table">
+                <table class="table table-striped table-bordered dataTables" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>

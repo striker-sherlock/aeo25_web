@@ -64,6 +64,10 @@ Route::resource('environments', EnvironmentController::class);
 Route::get('ambassadors/manage', [AmbassadorController::class, 'manage'])->name('ambassadors.manage');
 Route::resource('ambassadors', AmbassadorController::class)->except('show');
 
+
+//competition 
+Route::resource('competitions', CompetitionController::class);
+
 // Sponsors
 Route::resource('sponsors', SponsorController::class);
 Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');

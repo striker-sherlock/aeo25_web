@@ -59,7 +59,7 @@
                         <span class="ms-2">Participant Registration</span>
                     </a>
                 </li>
-                <li class="side-item text-white">
+                {{-- <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{route('dashboard.step', 4)}}">
                         <span class="fa-stack fa-sm ms-n1">
@@ -68,7 +68,7 @@
                         </span>
                         <span class="ms-2">Participant Submission</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="pb-1 ps-3 header-menu side-item text-white fs-5">
                     <span class="fw-bold aeo-title">Accommodation </span>
                 </li>
@@ -113,7 +113,7 @@
                         <span class="ms-2">Schedule</span>
                     </a>
                 </li> --}}
-                <li class="side-item text-white">
+                {{-- <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="https://aeo.mybnec.org/storage/guidebook/The_2022_AEO_Guidebook.pdf" target="_blank" rel="noreferrer">
                         <span class="fa-stack fa-sm ms-n1">
@@ -122,7 +122,7 @@
                         </span>
                         <span class="ms-2">Guide Book</span>
                     </a>
-                </li>
+                </li> --}}
                 {{-- <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="">

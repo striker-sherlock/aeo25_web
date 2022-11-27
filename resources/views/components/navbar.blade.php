@@ -15,13 +15,13 @@
                 <li class="nav-item active m-1">
                     <a href="/" class="btn btn-block px-3 nav-text nav-btn text-white">Home</a>
                 </li>
-                <li class="nav-item active m-1">
+                {{-- <li class="nav-item active m-1">
                     <a href="#" class="btn btn-block px-3 nav-text nav-btn text-white">About Us</a>
-                </li>
+                </li> --}}
        
-                    <li class="nav-item active m-1">
-                        <a href="/#merchandise" class="btn btn-block px-3 nav-text nav-btn text-white">Merchandise</a>
-                    </li>
+                {{-- <li class="nav-item active m-1">
+                    <a href="/#merchandise" class="btn btn-block px-3 nav-text nav-btn text-white">Merchandise</a>
+                </li> --}}
                 <li class="nav-item active m-1">
                     <a href="#footer" class="btn btn-block px-3 nav-text nav-btn text-white">Contact</a>
                 </li>

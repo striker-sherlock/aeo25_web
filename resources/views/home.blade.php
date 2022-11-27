@@ -13,8 +13,8 @@
                         <div class="d-flex justify-content-center justify-content-md-start ">
                             <hr class="w-25">
                         </div>
-                            <h3 data-bs-aos="fade-up" class="aeo-title fs-2  mb-3">The 2023 Asian English Olympics</h3>
-                            <h1 data-bs-aos="fade-up" class='aeo-theme mb-4'>UNVEIL YOUR SPARK</h1>
+                            <h3 data-bs-aos="fade-up" class="aeo-title fs-2 mb-3">The 2023 Asian English Olympics</h3>
+                            <h1 data-bs-aos="fade-up" class='aeo-theme mb-4 display-5'>UNVEIL YOUR SPARK</h1>
                         </div>
                         <div class="col-md-6  text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
                             <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
@@ -53,11 +53,11 @@
 
                     <div class=" d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
-                            <hr class="w-25 pink-line">
-                            <h3 class="text-light fw-bold aeo-title">WHAT IS ASIAN ENGLISH OLYMPICS?</h3>
-                            <h2 class="pink fw-bold display-5">The Asian English Olympics (AEO) is one of Asia's most anticipated international English competitions. </h2>
-                            
-                            <p class='w-100 fs-5' >
+                           <div class="w-25 custom-border rounded  my-2"></div>
+                            <h3 class="text-light">WHAT IS ASIAN ENGLISH OLYMPICS?</h3>
+                            <h2 class="pink">The Asian English Olympics (AEO) is one of Asia's</h2>
+                            <h2 class="light-green">most anticipated international English competitions.</h2>
+                            <p class='w-100 fs-5'>
                                 This event is conducted by Bina Nusantara English Club (BNEC), an english student
                                 organization of BINUS University in Jakarta, Indonesia. We began as a National English
                                 Olympics. With the passage of time, we have evolved into an Asian-scaled competition
@@ -66,9 +66,9 @@
                                 Newscasting, Storytelling, Spelling Bee, Radio Drama, and Short Story Writing.
                             </p>
                             <div class="text-end text-lg-right">
-                                <a href="#" class="btn action d-inline-flex text-white px-4 py-2  rounded-pill">
+                                {{-- <a href="#" class="btn action d-inline-flex text-white px-4 py-2  rounded-pill">
                                     <span>Read More</span>
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                 <div class="container text-center wow fadeInUp">
                     <div class="title-line mx-auto"></div>
                     <div class="d-flex justify-content-center">
-                        <hr class="w-25 pink-line">
+                       <div class="w-25 custom-border rounded  my-2"></div>
                     </div>
                     <h5 class="mt-3 fw-bold text-light">ABOUT ASIAN ENGLISH OLYMPICS</h5>
                     <h1 class="fw-bold mt-3 c-text-1 c-text-about home_title">We are continuously spreading our impact
@@ -127,7 +127,7 @@
             <section class='competition-fields' id='competition-fields'>
                 <div class="container text-center my-3">
                     <div class="d-flex justify-content-center">
-                        <hr class="w-25 pink-line">
+                       <div class="w-25 custom-border rounded  my-2"></div>
                     </div>
                     <h1 class="mt-3 fw-bold ">COMPETITION FIELDS</h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
@@ -137,7 +137,7 @@
                             @if ($competition->name == 'Observer' || $competition->id == 'IA')
                                 @continue
                             @endif
-                            <div class="item border border-1 rounded-20">
+                            <div class="item border border-1 rounded-20 w-75">
                                 <a>
                                     <div class="d-flex justify-content-center">
                                         <img src="storage/competition_logo/{{ $competition->logo }}" class="img-fluid w-50"
@@ -178,72 +178,22 @@
 
             <!-- End Competition Fields Section -->
 
-            {{-- <section class="how-to-regist" id="howToRegister">
-
-                <div class="d-flex justify-content-center">
-                    <hr class="w-25 pink-line fw-bold">
-
-                </div>
-                <h1 class="text-center text-uppercase fw-bold">How To Register?</h1>
-                <br>
-                <div class="d-flex justify-content-center">
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item">
-                                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800"
-                                    height="400" xmlns="http://www.w3.org/2000/svg" role="img"
-                                    aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice"
-                                    focusable="false">
-                                    <title>Placeholder</title>
-                                    <rect width="100%" height="100%" fill="#777"></rect><text x="50%"
-                                        y="50%" fill="#555" dy=".3em">First slide</text>
-                                </svg>
-
-                            </div>
-                            <div class="carousel-item">
-                                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800"
-                                    height="400" xmlns="http://www.w3.org/2000/svg" role="img"
-                                    aria-label="Placeholder: Second slide" preserveAspectRatio="xMidYMid slice"
-                                    focusable="false">
-                                    <title>Placeholder</title>
-                                    <rect width="100%" height="100%" fill="#666"></rect><text x="50%"
-                                        y="50%" fill="#444" dy=".3em">Second slide</text>
-                                </svg>
-
-                            </div>
-                            <div class="carousel-item active">
-                                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800"
-                                    height="400" xmlns="http://www.w3.org/2000/svg" role="img"
-                                    aria-label="Placeholder: Third slide" preserveAspectRatio="xMidYMid slice"
-                                    focusable="false">
-                                    <title>Placeholder</title>
-                                    <rect width="100%" height="100%" fill="#555"></rect><text x="50%"
-                                        y="50%" fill="#333" dy=".3em">Third slide</text>
-                                </svg>
-
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev" type="button"
-                            data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button"
-                            data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
+            <section class="how-to-regist" id="howToRegister">
+                <div class="container">
+                    <div class="d-flex justify-content-center">
+                        <div class="w-25 custom-border rounded  my-2"></div>
+                     </div>
+                     <h1 class="mt-3 fw-bold text-center mb-4"> STEP BY STEP REGISTRATION</h1>
+                    <img src="/storage/assets/step-regist.webp" loading="lazy" class="img-fluid" alt="step-by-step">
 
                 </div>
-
-            </section> --}}
+            </section>
 
             <!-- End How To Register Section -->
 
             <!-- ======= Ambassador Section ======= -->
 
-            @if ($ambassadors->count() != 0)
+            {{-- @if ($ambassadors->count() != 0)
                 <section id="ambassadors" class="bg-white mt-0">
                     <div class="ambassadors wow fadeIn">
                         <div class="container">
@@ -314,7 +264,7 @@
                     </div>
                 </section>
                 
-            @endif
+            @endif --}}
 
             <!-- End Ambassador Section -->
 
@@ -327,7 +277,7 @@
 
                     <header class="section-header">
                         <div class="d-flex justify-content-center">
-                            <hr class="w-25 pink-line">
+                           <div class="w-25 custom-border rounded  my-2"></div>
 
                         </div>
                         <h2>F.A.Q</h2>
@@ -489,7 +439,6 @@
 
 
 
-
             <!-- End Sponsor Section -->
             <!-- ======= Medpar ======= -->
             @if (count($mediaPartners) > 0)
@@ -498,17 +447,18 @@
                         <div class="title-line mx-auto"></div>
                         <h1 class="fw-bold mt-3 c-text-about home_title text-center">Media Partners</h1>
                         <br>
-                        <div class="card border-0 card-shadow rounded-20" <div class="card-body my-3">
-                            <div class="row justify-content-center align-items-center">
-                                @foreach ($mediaPartners as $mediaPartner)
-                                    <div class="col-lg-1 col-md-2 col-3">
-                                        <img src="/storage/logo/media-partner/{{ $mediaPartner->logo }}"
-                                            class="w-100" alt="{{ $mediaPartner->name }}">
-                                    </div>
-                                @endforeach
+                        <div class="card border-0 card-shadow rounded-20"> 
+                            <div class="card-body my-3">
+                                <div class="row justify-content-center align-items-center">
+                                    @foreach ($mediaPartners as $mediaPartner)
+                                        <div class="col-lg-1 col-md-2 col-3 ">
+                                            <img src="/storage/logo/media-partner/{{ $mediaPartner->logo }}"
+                                                class="w-100 me-3 pe-3 rounded" alt="{{ $mediaPartner->name }}">
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </section>
             @endif
@@ -516,11 +466,11 @@
             <!-- End Medpar Section -->
              <!-- ======= Question ======= -->
             <!-- ======= Question ======= -->
-            <section id="contact-us" class="bg-white">
-                <div class="container wow fadeInUp">
+            {{-- <section id="contact-us" class="bg-white">
+                <div class="container wow fadeInUp p-4">
                     <div class="title-line mx-auto"></div>
                     <div class="d-flex justify-content-center">
-                        <hr class="w-25 pink-line">
+                       <div class="w-25 custom-border rounded  mt-2"></div>
                     </div>
                     <h5 class="my-3 fw-bold text-center " style="color: #32649E;">SUBMIT QUESTION</h5>
                     <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary">Drop
@@ -566,7 +516,6 @@
                                 <div class="form-group row mb-0 mb-sm-3">
                                     <label for="phone_number" class="col-sm-3 col-form-label text-sm-left">
                                         Phone Number
-                                        Phone Number
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
@@ -603,17 +552,9 @@
                                 </div>
                             </form>
                         </div>
-
-                         
-
-                 
-
-                
-
-               
                     </form>
                 </div>
-            </div>
+            </div> --}}
     </section>
 
 

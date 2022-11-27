@@ -53,6 +53,7 @@ class SlotRegistrationController extends Controller
             'competitionSlots' => CompetitionSlot::where('pic_id',Auth::user()->id)->get(),
         ]);
     }
+    
     public function checkSlotAvailability(int $slot, $competitionID){
         $allSlotCompetition = CompetitionSlot::where('pic_id',Auth::user()->id)
                             ->get()

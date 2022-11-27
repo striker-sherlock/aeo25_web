@@ -2,9 +2,9 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\IsAdmin;
 // use App\Http\Middleware\Access;
-use App\Http\Middleware\isShowed;
+use App\Http\Middleware\isAdmin;
+use App\Http\Middleware\IsShowed;
 use App\Http\Middleware\Authenticate;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Illuminate\Session\Middleware\AuthenticateSession;
@@ -62,7 +62,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'IsShowed' => isShowed::class,
-        'IsAdmin' => IsAdmin::class,
+        'IsShowed' => IsShowed::class,
+        'IsAdmin' => isAdmin::class,
     ];
 }

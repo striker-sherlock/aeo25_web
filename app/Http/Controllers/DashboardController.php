@@ -104,6 +104,7 @@ class DashboardController extends Controller
             $history = DB::table('competition_slot_details')
                         ->join('competition_payments','competition_slot_details.payment_id','=','competition_payments.id')
                         ->join('competitions','competition_slot_details.competition_id','=','competitions.id')
+                        ->where('competition_slot_details.pic_id',Auth::user()->id)
                         ->where('competition_payments.is_confirmed','!=',NULL)
                         ->select('competition_payments.is_confirmed as is_confirmed','competition_payments.id as id','competitions.id as competition_id','competition_payments.created_at','competitions.name','competitions.need_team','quantity','competition_payments.updated_at as updated_at')
                         ->get();
@@ -160,6 +161,7 @@ class DashboardController extends Controller
             $history = DB::table('accommodation_slot_details')
                         ->join('accommodation_payments','accommodation_slot_details.payment_id','=','accommodation_payments.id')
                         ->join('accommodations','accommodation_slot_details.accommodation_id','=','accommodations.id')
+                        ->where('accommodation_slot_details.pic_id', Auth::user()->id)
                         ->where('accommodation_payments.is_confirmed','!=',NULL)
                         ->select('accommodation_payments.is_confirmed as is_confirmed','accommodation_payments.id as id','accommodations.id as accommodation_id','accommodation_payments.created_at','accommodations.room_type','quantity','accommodation_payments.updated_at as updated_at')
                         ->get();

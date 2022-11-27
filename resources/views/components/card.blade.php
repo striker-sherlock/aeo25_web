@@ -4,4 +4,11 @@
         {{ $slot }}
     </div>
 
+    <style>
+        .bg-dark-blue {
+            background-color: #3f3b74;
+        }
+
+    </style>
+
 </div>

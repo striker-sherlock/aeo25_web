@@ -12,6 +12,7 @@ class isShowed
     public function handle(Request $request, Closure $next, string $code)
     {
         $page = Environment::where('env_code', $code)->first();
+
         if(!$page->is_showed){
             return abort(404);
         }

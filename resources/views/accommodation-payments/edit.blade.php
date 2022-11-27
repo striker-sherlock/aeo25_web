@@ -1,5 +1,5 @@
-<x-admin>   
- 
+<x-layout>   
+    <x-navbar></x-navbar>
     <div class="container mt-3">
         <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
         <div class="row">
@@ -148,5 +148,5 @@
         </div>
     </div>
             
-</x-admin>
+</x-layout>
 

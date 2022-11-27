@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('IsShowed:ENV004');
-    // }
+    public function __construct()
+    {
+        $this->middleware('IsShowed:ENV004');
+    }
 
     public function index()
     {

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class UserAccommodationPaymentController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth', 'verified');
+        $this->middleware(['auth', 'verified']);
         $this->middleware('IsShowed:ENV005');
     }
 
@@ -192,6 +192,7 @@ class UserAccommodationPaymentController extends Controller
             ]);
 
         }
+        return redirect()->route('dashboard.accommodation-step',2)->with('success','Accommodation payment successfuly updated ');
     }
 
     public function destroy(AccommodationPayment $accommodationPayment)

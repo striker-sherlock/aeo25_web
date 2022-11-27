@@ -12,7 +12,7 @@ use App\Models\CompetitionParticipant;
 class AdminCompetitionParticipantController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsAdmin')->only(['edit']);
+        $this->middleware('IsAdmin')->only(['edit','index']);
     }
 
     public function index($competition){
@@ -21,16 +21,6 @@ class AdminCompetitionParticipantController extends Controller
             'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
             'competition' => Competition::find($competition),
             'trashed' => $trashed,
-        ]);
-    }
-
-    public function show($user, $id){
-        $competition = Competition::find($id);
-        $competitionParticipants = CompetitionParticipant::where('pic_id',$user)
-                                    ->where('competition_id',$id);
-  
-        return view('competition-participants.show',[
-            'competitionParticipants' => $competitionParticipants->get(),
         ]);
     }
 
@@ -55,7 +45,7 @@ class AdminCompetitionParticipantController extends Controller
         $competitionParticipant = CompetitionParticipant::find($id);
         if (!Auth::guard('admin')->check()){
             $competitionParticipant->update([
-                'addictional_notes' => $request->note,
+                'additional_notes' => $request->note,
             ]);
             return redirect()->back()->with('success','Note is successfully added');
         }
@@ -79,7 +69,7 @@ class AdminCompetitionParticipantController extends Controller
                 'birth_date' => $request->birth ,
                 'phone_number' => $request->phone,
                 'profile_picture' => $fixedName,
-                'addictional_notes' => $request->notes,
+                'additional_notes' => $request->notes,
             ]);
 
         }

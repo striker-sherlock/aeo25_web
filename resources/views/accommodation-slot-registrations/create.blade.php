@@ -5,7 +5,7 @@
       <div class="row mb-4">
         @foreach ($accommodations as $accommodation)
           <div class="col">
-            <a href="{{route('accommodation-slot-registrations.create',$accommodation->id)}}" class="btn btn-outline-theme w-100 rounded-pill {{$selectedType->id == $accommodation->id ? 'active':''}}">{{$accommodation->room_type}}</a>
+            <a href="{{route('accommodation-slot-registrations.create',$accommodation->id)}}" class="btn btn-outline-primary w-100 rounded-pill {{$selectedType->id == $accommodation->id ? 'active':''}}">{{$accommodation->room_type}}</a>
           </div>
         @endforeach
       </div>

@@ -126,12 +126,15 @@ class UserCompetitionPaymentController extends Controller
 
     
     public function edit(CompetitionPayment $competitionPayment){
-        $paidSlot= CompetitionSlot::where('payment_id',$competitionPayment->id)->get();
+        $paidSlot= CompetitionSlot::where('payment_id', $competitionPayment->id)->get();
+        
         return view('competition-payments.edit',[
             'competitionPayment' => $competitionPayment,
             'paidSlot' =>$paidSlot,
             'paymentProviders' => PaymentProvider::all(),
             'user' => Auth::user(),
+            'slotId' => $competitionPayment->id,
+
         ]);
     }
 
