@@ -121,3 +121,35 @@
         </div>
     </div>
 @endif
+
+@if(session('resent'))
+<div class="modal fade show pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"
+    aria-labelledby="alertTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content rounded-20">
+            <div class="modal-header border-bottom-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body border-0">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <div class="col-12 text-center mb-3">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-success"></i>
+                            <i class="fas fa-check fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </div>
+                    <div class="col-12 my-2 text-center">
+                        <h5 class="fw-bold">Success</h5>
+                        <h6 class="fw-normal">Fresh verification link has been sent!</h6>
+                        <button type="button" class="btn rounded-20 btn-outline-success my-3 px-5"
+                            data-bs-dismiss="modal" aria-label="Close">
+                            OK, I got it
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+

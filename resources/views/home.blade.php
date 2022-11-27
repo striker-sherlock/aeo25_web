@@ -10,7 +10,7 @@
                         <div class="d-flex justify-content-center justify-content-md-start ">
                             <hr class="w-25">
                         </div>
-                        <h3 data-bs-aos="fade-up" class="aeo-title fs-2  mb-3">The 2023 Asian E nglish Olympics</h3>
+                        <h3 data-bs-aos="fade-up" class="aeo-title fs-2  mb-3">The 2023 Asian English Olympics</h3>
                         <h1 data-bs-aos="fade-up" class='aeo-theme mb-4'>UNVEIL YOUR SPARK</h1>
                     </div>
                     <div class="col-md-6  border border-1 text-start rounded-20 "
@@ -55,11 +55,11 @@
 
                     <div class=" d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
-                            <hr class="w-25 pink-line">
+                           <div class="w-25 custom-border rounded  my-2"></div>
                             <h3 class="text-light">WHAT IS ASIAN ENGLISH OLYMPICS?</h3>
                             <h2 class="pink">The Asian English Olympics (AEO) is one of Asia's</h2>
                             <h2 class="light-green">most anticipated international English competitions.</h2>
-                            <p class='w-100'>
+                            <p class='w-100 fs-5'>
                                 This event is conducted by Bina Nusantara English Club (BNEC), an english student
                                 organization of BINUS University in Jakarta, Indonesia. We began as a National English
                                 Olympics. With the passage of time, we have evolved into an Asian-scaled competition
@@ -86,7 +86,7 @@
                 <div class="container text-center wow fadeInUp">
                     <div class="title-line mx-auto"></div>
                     <div class="d-flex justify-content-center">
-                        <hr class="w-25 pink-line">
+                       <div class="w-25 custom-border rounded  my-2"></div>
                     </div>
                     <h5 class="mt-3 fw-bold text-light">ABOUT ASIAN ENGLISH OLYMPICS</h5>
                     <h1 class="fw-bold mt-3 c-text-1 c-text-about home_title">We are continuously spreading our impact
@@ -129,7 +129,7 @@
             <section class='competition-fields' id='competition-fields'>
                 <div class="container text-center my-3">
                     <div class="d-flex justify-content-center">
-                        <hr class="w-25 pink-line">
+                       <div class="w-25 custom-border rounded  my-2"></div>
                     </div>
                     <h1 class="mt-3 fw-bold ">COMPETITION FIELDS</h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
@@ -139,11 +139,11 @@
                             @if ($competition->name == 'Observer' || $competition->id == 'IA')
                                 @continue
                             @endif
-                            <div class="item border border-1 rounded-20">
+                            <div class="item border border-1 rounded-20 w-75">
                                 <a>
                                     <div class="d-flex justify-content-center">
-                                        <img src="storage/images/competitions/{{ $competition->logo }}" class="img-fluid w-50"
-                                            alt="{{ $competition->logo }}" loading="lazy" width="50" data-bs-toggle="modal" data-bs-target="#competition{{ $competition->id }}">
+                                        <img src="storage/competition_logo/{{ $competition->logo }}" class="img-fluid w-25"
+                                            alt="{{ $competition->logo }}" loading="lazy" width="25" data-bs-toggle="modal" data-bs-target="#competition{{ $competition->id }}">
                                     </div>
                                     <h3 class="aeo-title fw-bold text-center">{{ $competition->name }}</h3>
                                 </a>
@@ -326,7 +326,7 @@
 
                     <header class="section-header">
                         <div class="d-flex justify-content-center">
-                            <hr class="w-25 pink-line">
+                           <div class="w-25 custom-border rounded  my-2"></div>
 
                         </div>
                         <h2>F.A.Q</h2>
@@ -488,7 +488,6 @@
 
 
 
-
             <!-- End Sponsor Section -->
             <!-- ======= Medpar ======= -->
             @if (count($mediaPartners) > 0)
@@ -500,9 +499,9 @@
                         <div class="card border-0 card-shadow rounded-20" <div class="card-body my-3">
                             <div class="row justify-content-center align-items-center">
                                 @foreach ($mediaPartners as $mediaPartner)
-                                    <div class="col-lg-1 col-md-2 col-3">
+                                    <div class="col-lg-1 col-md-2 col-3 ">
                                         <img src="/storage/logo/media-partner/{{ $mediaPartner->logo }}"
-                                            class="w-100" alt="{{ $mediaPartner->name }}">
+                                            class="w-100 me-3 pe-3 rounded" alt="{{ $mediaPartner->name }}">
                                     </div>
                                 @endforeach
                             </div>
@@ -519,7 +518,7 @@
                 <div class="container wow fadeInUp">
                     <div class="title-line mx-auto"></div>
                     <div class="d-flex justify-content-center">
-                        <hr class="w-25 pink-line">
+                       <div class="w-25 custom-border rounded  mt-2"></div>
                     </div>
                     <h5 class="my-3 fw-bold text-center " style="color: #32649E;">SUBMIT QUESTION</h5>
                     <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary">Drop

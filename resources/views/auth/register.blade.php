@@ -3,7 +3,7 @@
     <div class="container " style="margin-top: 100px">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <x-card >
+                <x-card class="car" >
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <h1 class="mb-4 text-center text-gradient fw-bold display-5">Create New account </h1>
@@ -103,4 +103,10 @@
     </div>
     <x-footer></x-footer>
 </x-layout>
+
+<style>
+    .card-header {
+        background-color: #3f3b74;
+    }
+</style>
  
