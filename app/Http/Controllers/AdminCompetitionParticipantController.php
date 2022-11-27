@@ -16,12 +16,11 @@ class AdminCompetitionParticipantController extends Controller
     }
 
     public function index($competition){
-        // $trashed = CompetitionParticipant::onlyTrashed()->get();
-        // dd($competitionParticipants);
+        $trashed = CompetitionParticipant::onlyTrashed()->get();
         return view('competition-participants.index',[
             'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
             'competition' => Competition::find($competition),
-            // 'trashed' => $trashed,
+            'trashed' => $trashed,
         ]);
     }
 
