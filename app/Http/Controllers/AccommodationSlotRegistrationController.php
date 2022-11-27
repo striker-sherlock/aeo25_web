@@ -12,6 +12,11 @@ use Carbon\Carbon;
 
 class AccommodationSlotRegistrationController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsShowed:ENV010');   
+        $this->middleware('IsAdmin');
+        $this->middleware('auth')->only(['create']);
+    }
 
     public function index()
     {

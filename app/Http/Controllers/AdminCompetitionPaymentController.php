@@ -66,7 +66,8 @@ class AdminCompetitionPaymentController extends Controller
         $confirmedMail = [
             'subject' =>"Confirmed Competition Payment",
             'name'=>$competitionPayment->user->pic_name,
-            'body' => 'Your Competition Payment have confirmed', 
+            'body1' => 'With this email, Your payment for competition slot has been confirmed.', 
+            'body2' => 'We also like to inform you to continue to the Participant Registration step by clicking this link below.', 
             'url' => 'http://aeo.mybnec.org/dashboard/step-3'
 
         ];
@@ -113,6 +114,8 @@ class AdminCompetitionPaymentController extends Controller
         $rejectMail = [
             'subject' => "Competition Payment Rejection",
             'name'=>$competitionPayment->user->name,
+            'body1'=>'We are regretful to inform you that your payment for competition slot has been rejected with the reason below: ',
+            'body2'=>'You can edit your payment again by going into the payment step on our website.',
             'reason' => $request->reason,
 
         ];

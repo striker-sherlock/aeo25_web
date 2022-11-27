@@ -16,7 +16,7 @@
                             <label for="type" class="col-form-label"> Institutional Type<span class="text-danger">*</span></label>
                             <select class="form-select"  name="institution_type" required>
                                 <option selected class="d-none">Select The Institutional Type</option>
-                                <option value="school" {{old('institution_type') == 'school' ? 'selected':''}}>School</option>
+                                <option value="high-school" {{old('institution_type') == 'high-school' ? 'selected':''}}>High School</option>
                                 <option value="university" {{old('institution_type') == 'university' ? 'selected':''}}>University</option>
                             </select>
                         </div>
@@ -69,7 +69,7 @@
                                 </select>
                                 </div>
                                 <div class="form-group mb-2 position-relative">
-                                    <label for="password" class="col-form-label">Password<span class="text-danger">*</span></label>
+                                    <label for="password" class="col-form-label">Password<span class="text-danger">*</span><small class="text-muted"  style="font-size: 0.7em"> (Min: 8 Character)</small></label>
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" required>
                                     <i class="fa fa-eye position-absolute" id="toggle-password" style="top:50px; right:10px; cursor:pointer;"></i>
                                     @error('password')
@@ -77,6 +77,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    
                                 </div>
                                 <div class="form-group mb-2 position-relative">
                                     <label for="password-confirm" class="col-form-label">{{ __('Confirm Password') }}<span class="text-danger">*</span></label>

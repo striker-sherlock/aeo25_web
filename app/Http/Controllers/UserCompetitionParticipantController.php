@@ -15,6 +15,32 @@ use App\Models\ScoreType;
 class UserCompetitionParticipantController extends Controller
 {
     
+    public function __construct(){
+        $this->middleware('auth', 'verified');
+        $this->middleware('IsShowed:ENV008');
+    }
+
+    public function index($competition){
+        $trashed = CompetitionParticipant::onlyTrashed()->get();
+        // dd($competitionParticipants);
+        return view('competition-participants.index',[
+            'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
+            'competition' => Competition::find($competition),
+            'trashed' => $trashed,
+        ]);
+    }
+
+    public function show($user, $id){
+        $competition = Competition::find($id);
+        $competitionParticipants = CompetitionParticipant::where('pic_id',$user)
+                                    ->where('competition_id',$id);
+  
+        return view('competition-participants.show',[
+            'competitionParticipants' => $competitionParticipants->get(),
+        ]);
+    }
+            
+        
     public function create(CompetitionSlot $competitionParticipant){
         if ($competitionParticipant->payment == NULL)return redirect()->back()->with('error','Please make payment first');
         if($competitionParticipant->payment->is_confirmed != 1 )return redirect()->back()->with('error','Please wait for the confirmation to be confirmed');

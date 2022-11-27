@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FlightTicket;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Auth;
 
 class FlightRegistrationController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth')->only(['create']);
+        $this->middleware('IsShowed:ENV002')->only(['index', 'create', 'edit']);   
+        
     }
 
     public function index()

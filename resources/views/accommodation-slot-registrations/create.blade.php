@@ -10,8 +10,8 @@
         @endforeach
       </div>
       @if ($selectedType)
-        <div class="row   justify-content-center">
-          <div class="col-md-10">
+        <div class="row  justify-content-center">
+          <div class="col-md-12">
             <x-card>
               <h3 class="text-uppercase text-center fw-bold" style="letter-spacing: 0.1em">Accommodation Slot Registration</h3>
               <form action="{{route('accommodation-slot-registrations.store')}}" method="POST" enctype="multipart/form-data">
@@ -40,8 +40,16 @@
                       <input type="number" class="form-control" name="quantity" id="max_guests" min="1"  value="{{old('quantity')!= NULL ? old("quantity"): '1'}}">
                       {{-- {{dd(old('quantity'))}} --}}
                     </div>
-                    <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-theme w-100 rounded mb-4 rounded-pill">Submit</button>
-                    {{-- confirmation modal --}}
+
+                    <div class="row">
+                      <div class="col">
+                        <button type="button" class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill {{ ($selectedType->facilities->count() > 0) ? '' : 'disabled' }}" data-bs-target="#viewFacility-{{ $selectedType->id }}" data-bs-toggle="modal" title="View Facilities">View Facilities</button>
+                      </div>
+                      <div class="col">
+                        <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>
+                      </div>
+                    </div>
+                      {{-- confirmation modal --}}
                     <div class="modal fade p-5" id="confirmation" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered ">
                           <div class="modal-content rounded-20 border-0 shadow p-5">
@@ -67,9 +75,58 @@
                           </div>
                       </div>  
                   </div> 
+
+                  {{-- View Facility Modal --}}
+                  <div class="modal fade" id="viewFacility-{{$selectedType->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content rounded-20 border-0 shadow">
+                            <div class="modal-header border-bottom-0">
+                              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                  aria-label="Close">
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <h4 class="text-muted text-center">{{ $selectedType->room_type }} - Room Facility</h4>
+                              <hr>
+                              <div class="table-responsive">
+                                <table class="table table-hover">
+                                  <thead class="bg-light">
+                                    <th class="align-middle text-center">#</th>
+                                    <th class="align-middle text-center">Facility</th>
+                                    <th class="align-middle text-center">Availability</th>
+                                  </thead>
+                                  <tbody>
+                                    @foreach ($selectedType->facilities->sortByDesc('is_available') as $accommFacility)
+                                      <tr class="align-middle text-center">
+                                        <td>
+                                          {{ $loop->iteration }}
+                                        </td>
+                                        <td>
+                                          {{ $accommFacility->facility->name }}
+                                        </td>
+                                        <td>
+                                          <span class="{{ ($accommFacility->is_available) ? 'text-success' : 'text-danger' }}">
+                                            {{ ($accommFacility->is_available) ? 'Available' : 'Not Available' }}
+                                          </span>
+                                        </td>
+                                      </tr>
+                                    @endforeach
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button"
+                                    class="btn btn-success rounded-pill rounded-20 mb-4 px-4"
+                                    data-bs-dismiss="modal">
+                                    OK, I got it
+                                </button>
+                            </div>
+                        </div>
+                    </div>  
+                  </div>  
               </form>
             </x-card>
-            
           </div>
         </div>
       @endif
@@ -108,6 +165,7 @@
     // })
     
   </script>
+  
   
     
 </x-user>

@@ -36,6 +36,10 @@
   color: #7FBCD2 !important;
   font-family: 'Lexend' !important;
 }
+.aeo-theme {
+  color: #F175AD !important;
+  font-family: 'Lexend' !important;
+}
 .text-gradient{
   background:-webkit-linear-gradient(#32649e, #4c3c5f);
   -webkit-background-clip: text;
@@ -431,7 +435,7 @@ section {
 }
 
 .about h3 {
-  font-size: 14px;
+  font-size: 1em;
   font-weight: 700;
   color: #fff;
   text-transform: uppercase;
@@ -439,7 +443,7 @@ section {
 }
 
 .about h2 {
-  font-size: 24px;
+  font-size: 2em;
   font-weight: 700;
 }
 
@@ -956,3 +960,5 @@ button.owl-prev{
   font-size: 13px;
   color: #3f3b74;
 }
+
+

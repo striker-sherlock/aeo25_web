@@ -10,7 +10,7 @@
     @yield('scripts')
 </head>
     <body>
-        <x-alert />
+        <x-alert></x-alert>
         <main>
             {{ $slot }}
         </main>

@@ -55,6 +55,7 @@ Route::resource('follow-up-types', FollowUpTypeController::class);
 Route::resource('access-controls',AccessControlController::class);
 Route::resource('score-types', ScoreTypeController::class)->except('show');
 
+
 // Environments
 Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
 Route::resource('environments', EnvironmentController::class);

@@ -54,7 +54,7 @@
             <h2 class="mb-3 text-success fw-bold">Confirmed Competition Payment </h2>
             @if ($confirmed->count())
                 <a href="{{route('competition-payments.export')}}" class="btn btn-outline-theme mb-3">Download Excel</a>
-                <table class="table table-striped table-bordered dataTables" id="data-table">
+                <table class="table table-striped table-bordered dataTables" id="dataTables">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -215,7 +215,7 @@
                             <button type="button" class="btn btn-outline-secondary w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
                         </div>
                         <div class="col">
-                            <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-outline-success w-100 rounded-pill" >
+                            <a href="{{route('competition-payments.confirm',$competition->id)}}" class="btn btn-outline-success w-100 rounded-pill" >
                                 Confirm 
                             </a>
                         </div>

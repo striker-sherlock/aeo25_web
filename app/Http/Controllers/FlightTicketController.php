@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class FlightTicketController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsShowed:ENV002')->only(['index']);  
+        $this->middleware('IsShowed:ENV001')->only(['index', 'edit']);    
     }
 
     public function index()

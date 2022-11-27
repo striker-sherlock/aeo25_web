@@ -9,7 +9,7 @@ use App\Models\AccommodationGuest;
 class AdminAccommodationGuestController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsAdmin')->only(['index', 'edit']);
+        $this->middleware('IsAdmin')->only(['index']);
     }
 
     public function index($roomType = NULL){

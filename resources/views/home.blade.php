@@ -9,7 +9,7 @@
         <section id="hero" class="hero d-flex align-items-center mx-auto">
             <div class="container mt-5">
                 <div class="row d-flex justify-content-center text-center text-md-start">
-                    <div class=" col-md-6 ">
+                    <div class=" col-md-6 px-3">
                         <div class="d-flex justify-content-center justify-content-md-start ">
                             <hr class="w-25">
                         </div>
@@ -17,8 +17,8 @@
                             <h1 data-bs-aos="fade-up" class='aeo-theme mb-4'>UNVEIL YOUR SPARK</h1>
                         </div>
                         <div class="col-md-6  text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
-                            <h2 class="fs-3 m-0 mb-2 aeo-title ">Open Registration Until: </h2>
-                            <h1 class="m-0 mb-3 fw-bold display-5">13 January 2023 </h1>
+                            <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
+                            <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">13 January 2023 </h4>
                             <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
                                 <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br> Days</div> 
                                 <div class="col  bg-dark rounded me-2 p-2"><span id="cd-hours" class="fs-1 "></span> <br>Hours</div> 
@@ -54,10 +54,10 @@
                     <div class=" d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
                             <hr class="w-25 pink-line">
-                            <h3 class="text-light">WHAT IS ASIAN ENGLISH OLYMPICS?</h3>
-                            <h2 class="pink">The Asian English Olympics (AEO) is one of Asia's</h2>
-                            <h2 class="light-green">most anticipated international English competitions.</h2>
-                            <p class='w-100'>
+                            <h3 class="text-light fw-bold aeo-title">WHAT IS ASIAN ENGLISH OLYMPICS?</h3>
+                            <h2 class="pink fw-bold display-5">The Asian English Olympics (AEO) is one of Asia's most anticipated international English competitions. </h2>
+                            
+                            <p class='w-100 fs-5' >
                                 This event is conducted by Bina Nusantara English Club (BNEC), an english student
                                 organization of BINUS University in Jakarta, Indonesia. We began as a National English
                                 Olympics. With the passage of time, we have evolved into an Asian-scaled competition
@@ -141,19 +141,40 @@
                                 <a>
                                     <div class="d-flex justify-content-center">
                                         <img src="storage/competition_logo/{{ $competition->logo }}" class="img-fluid w-50"
-                                            alt="{{ $competition->logo }}" loading="lazy" width="50">
+                                            alt="{{ $competition->logo }}" loading="lazy" width="50" data-bs-toggle="modal" data-bs-target="#competition{{ $competition->id }}">
                                     </div>
-
                                     <h3 class="aeo-title fw-bold text-center">{{ $competition->name }}</h3>
                                 </a>
                             </div>
                         @endforeach
                     </div>
-
-
                 </div>
-
             </section>
+            @foreach ($competitions as $competition)
+                <div class="modal fade" id="competition{{ $competition->id }}" tabindex="-1"
+                    aria-labelledby="competition" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                        <div class="modal-content rounded-20 border-0">
+                            <div class="modal-header border-bottom-0">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row justify-content-center align-items-center">
+                                <div class="col-11 text-center">
+                                    <div class="custom-divider mx-auto"></div>
+                                    <h5 class="fw-bold aeo-title"  style="letter-spacing: 0.1em">Competition Field</h5>
+                                    <h3 class="text-uppercase fw-bold text-gradient display-6" style="letter-spacing: 0.1em">{{$competition->name}}'s Field</h3>
+                                    <h4 class="fw-bold">Price : {{$competition->price}} IDR / {{$competition->need_team ? 'team(s)':'person(s)' }}</h4>
+                                    {{-- {!! $competition->content !!} --}}
+                                    <h5 class="text-danger">The rules will be determined soon</h5>
+                                    <hr>
+                                </div>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
 
             <!-- End Competition Fields Section -->
 
