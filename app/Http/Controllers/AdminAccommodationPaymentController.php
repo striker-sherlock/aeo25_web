@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Mail\RejectionMail;
 use Illuminate\Http\Request;
+use App\Mail\ConfirmedSlotMail;
 
 class AdminAccommodationPaymentController extends Controller
 {
@@ -43,14 +45,15 @@ class AdminAccommodationPaymentController extends Controller
             'updated_by' => Auth::guard('admin')->user()->name,
         ]);
 
-        // $confirmedMail = [
-        //     'subject' =>"Confirmed Competition Payment",
-        //     'name'=>$competitionPayment->user->pic_name,
-        //     'body' => 'Your Competition Payment have confirmed', 
-        //     'url' => 'http://aeo.mybnec.org/dashboard/step-3'
+        $confirmedMail = [
+            'subject' =>"Confirmed Accommodation Payment",
+            'name'=>$accommodationPayment->user->pic_name,
+            'body1' => 'With this email, Your payment for your accommodation slot has been confirmed.', 
+            'body2' => 'We also like to inform you to continue to the Guest Registration step by clicking this link below.',
+            'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-3'
 
-        // ];
-        // Mail::to($competitionPayment->user->email)->send(new ConfirmedSlotMail($confirmedMail));
+        ];
+        Mail::to($accommodationPayment->user->email)->send(new ConfirmedSlotMail($confirmedMail));
 
         return redirect()->back()->with('success','Payment is successfuly confirmed');
     }
@@ -75,13 +78,16 @@ class AdminAccommodationPaymentController extends Controller
             'is_confirmed' => -1
         ]);
 
-        // $rejectMail = [
-        //     'subject' => "Competition Payment Rejection",
-        //     'name'=>$accommodationPayment->user->name,
-        //     'reason' => $request->reason,
+        $rejectMail = [
+            'subject' => "Accommodation Payment Rejection",
+            'name'=>$accommodationPayment->user->pic_name,
+            'body1'=>'We are regretful to inform you that your payment for your accommodation slot has been rejected with the reason below: ',
+            'body2'=>'You can edit your payment again by going into the payment step on our website.',
+            'reason' => $request->reason,
+            'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-2',
 
-        // ];
-        // Mail::to($acommodationPayment->user->email)->send(new RejectionMail($rejectMail));
+        ];
+        Mail::to($accommodationPayment->user->email)->send(new RejectionMail($rejectMail));
         return redirect()->back()->with('success', 'Payment is Successfuly rejected');
     }
 }

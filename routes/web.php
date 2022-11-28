@@ -183,8 +183,8 @@ Route::resource('accommodation-slot-registrations', AccommodationSlotRegistratio
 // Admin Privileges - Accommodation Participant
 Route::controller(AdminAccommodationPaymentController::class)->prefix('accommodation-payments')->name('accommodation-payments.')->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/confirm/{accommodationPayment}', 'confirm')->name('confirm');
-    Route::post('/reject', 'reject')->name('reject');
+    // Route::get('/confirm/{accommodationPayment}', 'confirm')->name('confirm');
+    // Route::post('/reject', 'reject')->name('reject');
     Route::get('/cancel/{accommodationPayment}', 'cancel')->name('cancel');
     Route::get('/export', 'export')->name('export');
 });
