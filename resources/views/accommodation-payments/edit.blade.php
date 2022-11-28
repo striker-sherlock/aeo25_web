@@ -12,7 +12,7 @@
                         <div class="col">
                             <a href="{{route('payments.paid-accommodation-invoice', $accommodationPayment->id)}}" target="_blank"
                                 class="btn btn-outline-theme rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice 
-                            </a> 
+                            </a> asdasdasd
                         </div>
                         <div class="col">
                             <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
