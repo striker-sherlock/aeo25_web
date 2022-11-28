@@ -1,26 +1,34 @@
 <?php
 
+use App\Models\AccessControl;
 use App\Http\Controllers\AccessControlController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ScoreTypeController;
+use App\Http\Controllers\AmbassadorController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\FacilitiesController;
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\RankingListController;
 use App\Http\Controllers\FlightTicketController;
 use App\Http\Controllers\FollowUpTypeController;
-use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\UserAccommodationGuest;
+// use Yajra\DataTables\DataTablesServiceProvider
 use App\Http\Controllers\AccommodationController;
+use App\Http\Controllers\AccomodationsController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\FlightRegistrationController;
 use App\Http\Controllers\InstitutionContactController;
@@ -32,8 +40,6 @@ use App\Http\Controllers\AdminAccommodationPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
-use App\Http\Controllers\AmbassadorController;
-use App\Http\Controllers\PDFController;
 
 // Auth routes
 Auth::routes(['verify'=>true]);
@@ -58,6 +64,10 @@ Route::resource('environments', EnvironmentController::class);
 Route::get('ambassadors/manage', [AmbassadorController::class, 'manage'])->name('ambassadors.manage');
 Route::resource('ambassadors', AmbassadorController::class)->except('show');
 
+
+//competition 
+Route::resource('competitions', CompetitionController::class);
+
 // Sponsors
 Route::resource('sponsors', SponsorController::class);
 Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, 'updateVisibility'])->name('sponsors.updateVisibility');
@@ -74,10 +84,13 @@ Route::resource('inventories', InventoryController::class)->except('show');
 
 //Route Admin
 Route::prefix('admin')->name('admin.')->group(function () {
+
     Route::get('login', [LoginController::class, 'showAdminLoginForm'])->name('login');
     Route::post('login/auth', [LoginController::class, 'adminLogin'])->name('login-auth');
     Route::get('dashboard', [DashboardController::class, 'showAdminDashboard'])->name('dashboard');
     Route::get('logout', [LoginController::class, 'adminLogout'])->name('logout');
+    Route::get('loginAs', [LoginController::class, 'loginAsForm'])->name('login-as')->middleware('IsAdmin');
+    Route::post('Auth/LoginAs', [LoginController::class, 'loginAs'])->name('auth-login-as')->middleware('IsAdmin');
 });
 
 //Dashboard
@@ -87,9 +100,9 @@ Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 
 
 //Admin Privileges - Slot Registration
 Route::controller(SlotRegistrationController::class)->prefix('slot-registrations')->name('slot-registrations.')->group(function () {
-    Route::get('confirm/{competitionSlot}', 'confirm')->name('slot-registrations.confirm');
-    Route::post('reject', 'reject')->name('slot-registrations.reject');
-    Route::get('cancel/{competitionSlot}', 'cancel')->name('slot-registrations.cancel');
+    Route::get('confirm/{competitionSlot}', 'confirm')->name('confirm');
+    Route::post('reject', 'reject')->name('reject');
+    Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
 });
 Route::resource('slot-registrations',SlotRegistrationController::class);
 
@@ -126,7 +139,6 @@ Route::delete('/payments/{competitionPayment}/destroy', [UserCompetitionPaymentC
 
 // User Privileges - Competition Participant
 Route::controller(UserCompetitionParticipantController::class)->prefix('participants')->name('competition-participants.')->group(function () {
-    Route::get('{competition}', 'index')->name('index');
     Route::get('create/{competitionParticipant}', 'create')->name('create');
     Route::get('show/{user}/{competitition}', 'show')->name('show');
     Route::post('store', 'store')->name('store');
@@ -135,8 +147,13 @@ Route::controller(UserCompetitionParticipantController::class)->prefix('particip
 // Admin Privileges - Competition Participant
 Route::get('/edit-participant/{competitionParticipant}', [AdminCompetitionParticipantController::class, 'edit'])->name('competition-participants.edit');
 Route::controller(AdminCompetitionParticipantController::class)->prefix('participants')->name('competition-participants.')->group(function () {
+    Route::get('{competition}', 'index')->name('index');
     Route::put('update/{id}', 'update')->name('update');
     Route::get('export/{competitionParticipant}', 'export')->name('export');
+    Route::delete('destroy/{competitionParticipant}', 'destroy')->name('destroy');
+    Route::delete('delete/{competitionParticipant}', 'delete')->name('delete');
+    Route::get('restore/{competitionParticipant}', 'restore')->name('restore');
+
 });
 
 // Facilities
@@ -155,19 +172,19 @@ Route::controller(AccommodationSlotRegistrationController::class)->prefix('accom
 Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only'=>['index', 'destroy', 'store', 'edit', 'update']]);
 
 //USER ACCOMMODATION PAYMENT
-Route::get('/paid-accommodation-invoice/{payment}', [PDFController::class, 'paidAccommodationInvoice'])->name('payments.paid-accommodation-invoice');
-Route::get('/invoice/{user}/{id}', [PDFController::class, 'accommodationInvoice'])->name('accommodation-payments.invoice');
-Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
-Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
-Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');
-Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
-Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
+    Route::get('/paid-accommodation-invoice/{payment}', [PDFController::class, 'paidAccommodationInvoice'])->name('payments.paid-accommodation-invoice');
+    Route::get('/invoice/{user}/{id}', [PDFController::class, 'accommodationInvoice'])->name('accommodation-payments.invoice');
+    Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
+    Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
+    Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');
+    Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
+    Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
 
 // Admin Privileges - Accommodation Participant
 Route::controller(AdminAccommodationPaymentController::class)->prefix('accommodation-payments')->name('accommodation-payments.')->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/confirm/{accommodationPayment}', 'confirm')->name('confirm');
-    Route::post('/reject', 'reject')->name('reject');
+    // Route::get('/confirm/{accommodationPayment}', 'confirm')->name('confirm');
+    // Route::post('/reject', 'reject')->name('reject');
     Route::get('/cancel/{accommodationPayment}', 'cancel')->name('cancel');
     Route::get('/export', 'export')->name('export');
 });
