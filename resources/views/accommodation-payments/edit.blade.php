@@ -8,20 +8,23 @@
                     <h5 class="fw-bold text-uppercase text-center">payment guideline and invoice</h5>
                     <hr>
                     <p>Please download the file below to see the payment guideline and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
+                   {{-- Updated --}}
                     <div class="row">
                         <div class="col">
                             <a href="{{route('payments.paid-accommodation-invoice', $accommodationPayment->id)}}" target="_blank"
                                 class="btn btn-outline-theme rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice 
-                            </a> asdasdasd
+                            </a>  
                         </div>
                         <div class="col">
                             <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
                                 class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fas fa-file-invoice"></i> Download Guideline
                             </a>
-                        </div>
+                        </div> 
                     </div>
                 </x-card>
             </div>
+            {{-- //commit --}}
+            
             <div class="col-md-6">
                 {{-- RECEIPT SUMMARY --}}
                 <x-card>
