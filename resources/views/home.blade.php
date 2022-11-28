@@ -1,8 +1,9 @@
 <x-layout>
     <style>
-        
- 
+
+
     </style>
+
     <body>
         <x-navbar></x-navbar>
         <!-- ======= Header Section ======= -->
@@ -13,33 +14,39 @@
                         <div class="d-flex justify-content-center justify-content-md-start ">
                             <hr class="w-25">
                         </div>
-                            <h3 data-bs-aos="fade-up" class="aeo-title fs-2 mb-3">The 2023 Asian English Olympics</h3>
-                            <h1 data-bs-aos="fade-up" class='aeo-theme mb-4 display-5'>UNVEIL YOUR SPARK</h1>
-                        </div>
-                        <div class="col-md-6  text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
-                            <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
-                            <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">13 January 2023 </h4>
-                            <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
-                                <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br> Days</div> 
-                                <div class="col  bg-dark rounded me-2 p-2"><span id="cd-hours" class="fs-1 "></span> <br>Hours</div> 
-                                <div class="col bg-dark rounded me-2 p-2"><span id="cd-minutes" class="fs-1 "></span><br> Minutes</div> 
-                                <div class="col bg-dark rounded me-2 p-2"><span id="cd-seconds" class="fs-1 "></span> <br>Seconds</div> 
-                                <div data-aos="fade-up" data-aos-delay="600" >
-                                    <div class="text-start text-lg-center ">
-                                        <a href="{{route('register')}}"
-                                            class="btn action scrollto d-inline-flex align-items-center justify-content-center align-self-center text-center text-white text-decoration-none rounded-pill my-3 px-5 py-2 w-100">
-                                            <span class="fs-4 text-uppercase">Register now</span>
-                                            <i class="bi bi-arrow-right"></i>
-                                        </a>
-                                    </div>
+                        <h3 data-bs-aos="fade-up" class="aeo-title fs-2 mb-3">The 2023 Asian English Olympics</h3>
+                        <h1 data-bs-aos="fade-up" class='aeo-theme mb-4 display-5'>UNVEIL YOUR SPARK</h1>
+                    </div>
+                    <div class="col-md-6  text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
+                        <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
+                        <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">13 January 2023 </h4>
+                        <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
+                            <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br>
+                                Days</div>
+                            <div class="col  bg-dark rounded me-2 p-2"><span id="cd-hours" class="fs-1 "></span>
+                                <br>Hours
+                            </div>
+                            <div class="col bg-dark rounded me-2 p-2"><span id="cd-minutes" class="fs-1 "></span><br>
+                                Minutes</div>
+                            <div class="col bg-dark rounded me-2 p-2"><span id="cd-seconds" class="fs-1 "></span>
+                                <br>Seconds
+                            </div>
+                            <div data-aos="fade-up" data-aos-delay="600">
+                                <div class="text-start text-lg-center ">
+                                    <a href="{{ route('register') }}"
+                                        class="btn action scrollto d-inline-flex align-items-center justify-content-center align-self-center text-center text-white text-decoration-none rounded-pill my-3 px-5 py-2 w-100">
+                                        <span class="fs-4 text-uppercase">Register now</span>
+                                        <i class="bi bi-arrow-right"></i>
+                                    </a>
                                 </div>
-                                
                             </div>
 
                         </div>
-                    </div>
 
+                    </div>
                 </div>
+
+            </div>
             </div>
 
         </section>
@@ -53,7 +60,7 @@
 
                     <div class=" d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
-                           <div class="w-25 custom-border rounded  my-2"></div>
+                            <div class="w-25 custom-border rounded  my-2"></div>
                             <h3 class="text-light">WHAT IS ASIAN ENGLISH OLYMPICS?</h3>
                             <h2 class="pink">The Asian English Olympics (AEO) is one of Asia's</h2>
                             <h2 class="light-green">most anticipated international English competitions.</h2>
@@ -84,7 +91,7 @@
                 <div class="container text-center wow fadeInUp">
                     <div class="title-line mx-auto"></div>
                     <div class="d-flex justify-content-center">
-                       <div class="w-25 custom-border rounded  my-2"></div>
+                        <div class="w-25 custom-border rounded  my-2"></div>
                     </div>
                     <h5 class="mt-3 fw-bold text-light">ABOUT ASIAN ENGLISH OLYMPICS</h5>
                     <h1 class="fw-bold mt-3 c-text-1 c-text-about home_title">We are continuously spreading our impact
@@ -92,7 +99,7 @@
                         across
                         Asia
                     </h1>
-                    <div class="row justify-content-center mt-5">
+                    <div class="counters row justify-content-center mt-5">
                         <div class="col-lg-3">
                             <h1 class="counter c-text-landing fw-bold text-light-gradient">11</h1>
                             <p class="text-light">Years old</p>
@@ -127,7 +134,7 @@
             <section class='competition-fields' id='competition-fields'>
                 <div class="container text-center my-3">
                     <div class="d-flex justify-content-center">
-                       <div class="w-25 custom-border rounded  my-2"></div>
+                        <div class="w-25 custom-border rounded  my-2"></div>
                     </div>
                     <h1 class="mt-3 fw-bold ">COMPETITION FIELDS</h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
@@ -140,8 +147,10 @@
                             <div class="item border border-1 rounded-20 w-75">
                                 <a>
                                     <div class="d-flex justify-content-center">
-                                        <img src="storage/competition_logo/{{ $competition->logo }}" class="img-fluid w-50"
-                                            alt="{{ $competition->logo }}" loading="lazy" width="50" data-bs-toggle="modal" data-bs-target="#competition{{ $competition->id }}">
+                                        <img src="storage/competition_logo/{{ $competition->logo }}"
+                                            class="img-fluid w-50" alt="{{ $competition->logo }}" loading="lazy"
+                                            width="50" data-bs-toggle="modal"
+                                            data-bs-target="#competition{{ $competition->id }}">
                                     </div>
                                     <h3 class="aeo-title fw-bold text-center">{{ $competition->name }}</h3>
                                 </a>
@@ -156,20 +165,24 @@
                     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                         <div class="modal-content rounded-20 border-0">
                             <div class="modal-header border-bottom-0">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="row justify-content-center align-items-center">
-                                <div class="col-11 text-center">
-                                    <div class="custom-divider mx-auto"></div>
-                                    <h5 class="fw-bold aeo-title"  style="letter-spacing: 0.1em">Competition Field</h5>
-                                    <h3 class="text-uppercase fw-bold text-gradient display-6" style="letter-spacing: 0.1em">{{$competition->name}}'s Field</h3>
-                                    <h4 class="fw-bold">Price : {{$competition->price}} IDR / {{$competition->need_team ? 'team(s)':'person(s)' }}</h4>
-                                    {{-- {!! $competition->content !!} --}}
-                                    <h5 class="text-danger">The rules will be determined soon</h5>
-                                    <hr>
+                                    <div class="col-11 text-center">
+                                        <div class="custom-divider mx-auto"></div>
+                                        <h5 class="fw-bold aeo-title" style="letter-spacing: 0.1em">Competition Field
+                                        </h5>
+                                        <h3 class="text-uppercase fw-bold text-gradient display-6"
+                                            style="letter-spacing: 0.1em">{{ $competition->name }}'s Field</h3>
+                                        <h4 class="fw-bold">Price : {{ $competition->price }} IDR /
+                                            {{ $competition->need_team ? 'team(s)' : 'person(s)' }}</h4>
+                                        {{-- {!! $competition->content !!} --}}
+                                        <h5 class="text-danger">The rules will be determined soon</h5>
+                                        <hr>
+                                    </div>
                                 </div>
-                                </div>  
                             </div>
                         </div>
                     </div>
@@ -182,8 +195,8 @@
                 <div class="container">
                     <div class="d-flex justify-content-center">
                         <div class="w-25 custom-border rounded  my-2"></div>
-                     </div>
-                     <h1 class="mt-3 fw-bold text-center mb-4"> STEP BY STEP REGISTRATION</h1>
+                    </div>
+                    <h1 class="mt-3 fw-bold text-center mb-4"> STEP BY STEP REGISTRATION</h1>
                     <img src="/storage/assets/step-regist.webp" loading="lazy" class="img-fluid" alt="step-by-step">
 
                 </div>
@@ -277,7 +290,7 @@
 
                     <header class="section-header">
                         <div class="d-flex justify-content-center">
-                           <div class="w-25 custom-border rounded  my-2"></div>
+                            <div class="w-25 custom-border rounded  my-2"></div>
 
                         </div>
                         <h2>F.A.Q</h2>
@@ -447,7 +460,7 @@
                         <div class="title-line mx-auto"></div>
                         <h1 class="fw-bold mt-3 c-text-about home_title text-center">Media Partners</h1>
                         <br>
-                        <div class="card border-0 card-shadow rounded-20"> 
+                        <div class="card border-0 card-shadow rounded-20">
                             <div class="card-body my-3">
                                 <div class="row justify-content-center align-items-center">
                                     @foreach ($mediaPartners as $mediaPartner)
@@ -464,7 +477,7 @@
             @endif
 
             <!-- End Medpar Section -->
-             <!-- ======= Question ======= -->
+            <!-- ======= Question ======= -->
             <!-- ======= Question ======= -->
             {{-- <section id="contact-us" class="bg-white">
                 <div class="container wow fadeInUp p-4">
@@ -555,7 +568,7 @@
                     </form>
                 </div>
             </div> --}}
-    </section>
+            </section>
 
 
 
@@ -576,8 +589,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+
+
+
         let owl = $('.owl-carousel');
         owl.owlCarousel({
             loop: true,

@@ -25,6 +25,10 @@
                         <span class="ms-2">Main Dashboard</span>
                     </a>
                 </li>
+                <li class="pb-1 ps-3 header-menu side-item text-white fs-5">
+                    <span class="fw-bold aeo-title">Competition </span>
+                </li>
+
 
                 <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"

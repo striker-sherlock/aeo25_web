@@ -52,7 +52,7 @@
             {{-- confirmed --}}
             <x-card>
                 <h1 class="mb-3 text-success">Confirmed Accommodation Registration </h1>
-                @if ($confirmed->count())
+                @if ($confirmed->count() != 0)
                 <table class="table table-striped table-bordered">
                     <thead class="text-center">
                     <tr>
@@ -69,6 +69,7 @@
                     <tbody class="text-center">
                         @foreach ($confirmed as $accommodation)
                             <tr>
+                    
                               <th>{{$accommodation->user->institution_name}}</th>
                               <th>{{$accommodation->user->pic_name}}</th>
                               <th>{{$accommodation->accommodation->room_type}}</th>
@@ -118,8 +119,8 @@
                         <tbody class="text-center">
                             @foreach ($rejected as $accommodation)
                                 <tr>
-                                  <th>{{$accommodation->user->institution_name}}</th>
-                                  <th>{{$accommodation->user->pic_name}}</th>
+                                  {{-- <th>{{$accommodation->user->institution_name}}</th>
+                                  <th>{{$accommodation->user->pic_name}}</th> --}}
                                   <th>{{$accommodation->accommodation->room_type}}</th>
                                   <th>{{$accommodation->check_in_date}}</th>
                                   <th>{{$accommodation->check_out_date}}</th>

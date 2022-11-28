@@ -7,8 +7,18 @@
                     <h5 class="fw-bold text-uppercase text-center">payment guide and invoice</h5>
                     <hr>
                     <p>Please download the file below to see the payment guide and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
-                    <a href="{{route('accommodation-payments.invoice', [$user->id, $slotId])}}" target="_blank"
-                        class="btn btn-outline-primary rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice and Guide</a>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{route('accommodation-payments.invoice', [$user->id, $slotId])}}" target="_blank"
+                                class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice  
+                            </a>  
+                        </div>
+                        <div class="col">
+                            <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
+                                class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fas fa-file-invoice"></i> Download Guideline
+                            </a>
+                        </div>
+                    </div>
                 </x-card>
             </div>
             <div class="col-md-6">

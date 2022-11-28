@@ -8,6 +8,7 @@ use App\Models\PaymentProvider;
 use App\Models\AccommodationPayment;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserAccommodationPaymentController extends Controller
 {
@@ -120,18 +121,21 @@ class UserAccommodationPaymentController extends Controller
         return redirect()->route('dashboard.accommodation-step',2)->with('success','Payment successfuly submitted, Please wait for confirmation');
     }
 
-    public function show($id)
-    {
-        //
-    }
 
     public function edit(AccommodationPayment $accommodationPayment)
     {
-        $paidSlot= AccommodationSlot::where('payment_id',$accommodationPayment->id)->get();
+        $paidSlot= AccommodationSlot::where('payment_id', $accommodationPayment->id )->get();
+       
+        
+
         return view('accommodation-payments.edit',[
             'accommodationPayment' => $accommodationPayment,
+            'paymentProviders' => PaymentProvider::all(),
             'paidSlot' =>$paidSlot,
-            'paymentProviders' => PaymentProvider::all()
+            'user' => Auth::user(),
+            'slotId' => $paidSlot->first()->id,
+          
+            
         ]);
     }
 

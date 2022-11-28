@@ -7,7 +7,7 @@
                 <x-card>
                     <h5 class="fw-bold text-uppercase text-center">payment guide and invoice</h5>
                     <hr>
-                    <p>Please download the file below to see the payment guide and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
+                    <p>Please download the file below to see the payment guide and your invoice by clicking the button below . After that, please fill the form.</p>
                     <div class="row">
                         <div class="col">
                             <a href="{{route('payments.paid-invoice',$competitionPayment->id)}}" target="_blank"
