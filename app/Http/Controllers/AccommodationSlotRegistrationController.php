@@ -7,7 +7,9 @@ use App\Models\AccommodationSlot;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Arr;
+use App\Mail\RejectionMail;
 use Illuminate\Http\Request;
+use App\Mail\ConfirmedSlotMail;
 use Carbon\Carbon;
 
 class AccommodationSlotRegistrationController extends Controller
@@ -15,7 +17,7 @@ class AccommodationSlotRegistrationController extends Controller
     public function __construct(){
         $this->middleware('IsShowed:ENV010');   
         $this->middleware('IsAdmin')->except(['create','store','edit','update']);
-        $this->middleware('auth')->only(['create','store','edit','update']);
+        $this->middleware('auth', ['verified'])->only(['create','store','edit','update']);
     }
 
     public function index()
@@ -121,6 +123,15 @@ class AccommodationSlotRegistrationController extends Controller
             'is_confirmed' => 1,
             'confirmed_at' => Carbon::now(),
         ]);
+        $confirmedMail = [
+            'subject' => $accommodationSlot->accommodation->room_type. " - Confirmed Slot",
+            'name'=>$accommodationSlot->user->pic_name,
+            'body1'=>'We are grateful to inform you that your accommodation slot registration has been confirmed.',
+            'body2'=>'Please proceed to the payment for your slot by clicking the button below.',
+            'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-2'
+
+        ];
+        Mail::to($accommodationSlot->user->email)->send(new ConfirmedSlotMail($confirmedMail));
         return redirect()->route('accommodation-slot-registrations.index');
     }
 
@@ -137,6 +148,16 @@ class AccommodationSlotRegistrationController extends Controller
             'updated_by' => 'Admin',
             'is_confirmed' => -1
         ]);
+        $rejectMail = [
+            'subject' => $accommodationSlot->accommodation->room_type. " - Rejection Slot",
+            'name'=>$accommodationSlot->user->pic_name,
+            'body1'=>'We are regretful to inform you that your accommodation slot has been rejected with the following reason: ',
+            'body2'=>'You can edit your slot registration again by going into the registration step on our website.',
+            'reason' => $request->reason,
+            'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-1',
+
+        ];
+        Mail::to($accommodationSlot->user->email)->send(new RejectionMail($rejectMail));
         return redirect()->route('accommodation-slot-registrations.index');
     }
 }

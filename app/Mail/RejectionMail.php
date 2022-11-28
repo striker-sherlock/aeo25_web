@@ -26,6 +26,8 @@ class RejectionMail extends Mailable
             'body1' => $this->rejectMail['body1'],
             'body2' => $this->rejectMail['body2'],
             'reason' => $this->rejectMail['reason'],
+            'url' => $this->rejectMail['url'],
+            
         ]) -> subject($this->rejectMail['subject']);
     }
 }
