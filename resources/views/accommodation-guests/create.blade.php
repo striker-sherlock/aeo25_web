@@ -27,13 +27,14 @@
         </x-card>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
+    <script type="module">
         $(document).ready(function(){
             $('input[type="number"]').on('keyup change', function(e) {
                 let max = parseInt($(this).attr('max'));
                 let min = parseInt($(this).attr('min'));
                 if ($(this).val() > max) $(this).val(max);
                 else if ($(this).val() < min)$(this).val(min);
+                
                 $('button[type="submit"]').removeClass('d-none')
                 console.log(document.querySelector('.append'));
                 $(('.append')).empty();

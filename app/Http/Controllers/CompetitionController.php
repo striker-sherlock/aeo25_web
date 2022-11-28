@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class CompetitionController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsAdmin')->only(['index', 'edit']);
+        $this->middleware('IsAdmin');
     }
 
     public function index()

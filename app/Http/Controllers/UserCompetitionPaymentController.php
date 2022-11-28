@@ -68,15 +68,23 @@ class UserCompetitionPaymentController extends Controller
     }
 
     public function store(Request $request){
-        // dd($request->competitionSlot);
-        $request->validate([
-            'account_name' => 'nullable|string',
-            'account_number' => 'nullable|numeric',
-            'email' => 'nullable|string',
-            'track' => 'nullable|string',
-            'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-            'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-        ]);
+    
+        if($request->type == "bank"){
+            $request->validate([
+                'payment_provider' => 'required',
+                'transfer_proof_bank' => 'required|image|max:1999|mimes:jpg,png,jpeg',
+                'account_name' => 'required|string',
+                'account_number' => 'required|numeric',
+            ]);
+        }
+        elseif ($request->type == "wise"){
+            $request->validate([
+                'email' => 'required|string',
+                'track' => 'required|string',
+                'transfer_proof_wise' => 'required|image|max:1999|mimes:jpg,png,jpeg',
+            ]);
+        }
+        
         $pic = Auth::user()->username;
         $fileName = str_replace(' ', '-', $pic );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
@@ -139,14 +147,21 @@ class UserCompetitionPaymentController extends Controller
     }
 
     public function update(Request $request, CompetitionPayment $competitionPayment){
-        $request->validate([
-            'account_name' => 'nullable|string',
-            'account_number' => 'nullable|numeric',
-            'email' => 'nullable|string',
-            'track' => 'nullable|string',
-            'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-            'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-        ]);
+        if($request->type == "BANK"){
+            $request->validate([
+                'payment_provider' => 'required',
+                'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
+                'account_name' => 'required|string',
+                'account_number' => 'required|numeric',
+            ]);
+        }
+        elseif ($request->type == "Wise"){
+            $request->validate([
+                'email' => 'required|string',
+                'track' => 'required|string',
+                'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
+            ]);
+        }
  
         $pic = Auth::user()->username;
         $fileName = str_replace(' ', '-', $pic );

@@ -41,6 +41,16 @@
                 </li>
                 <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{route('slot-registrations.create-other')}}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fas fa-user-plus fa-stack-1x text-dark"></i>
+                        </span>
+                        <span class="ms-2">Other - Slot Registration</span>
+                    </a>
+                </li>
+                <li class="side-item text-white">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{route('dashboard.step',2)}}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
@@ -78,7 +88,7 @@
                         href="{{route('dashboard.accommodation-step', 1)}}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fas fa-copy fa-stack-1x text-dark"></i>
+                            <i class="fas fa-bed fa-stack-1x text-dark"></i> 
                         </span>
                         <span class="ms-2">Accommodation Slot Registration</span>
                     </a>
@@ -88,7 +98,7 @@
                         href="{{route('dashboard.accommodation-step', 2)}}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fas fa-copy fa-stack-1x text-dark"></i>
+                            <i class="fas fa-coins fa-stack-1x text-dark"></i> 
                         </span>
                         <span class="ms-2">Accommodation Payment</span>
                     </a>
@@ -96,9 +106,9 @@
                 <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{route('dashboard.accommodation-step', 3)}}">
-                        <span class="fa-stack fa-sm ms-n1">
+                        <span class="fa-stack fa-sm ml-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fas fa-copy fa-stack-1x text-dark"></i>
+                            <i class="fas fa-users fa-stack-1x text-dark"></i>
                         </span>
                         <span class="ms-2">Accommodation Participant Registration</span>
                     </a>

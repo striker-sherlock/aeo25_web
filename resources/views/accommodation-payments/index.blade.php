@@ -2,9 +2,9 @@
     <div class="container mt-3">
         {{-- PENDING --}}
         <x-card>
-            <h2 class="text-warning">Pending Accommodation Payment </h2>
+            <h2 class="text-warning fw-bold">Pending Accommodation Payment </h2>
             @if ($pending->count())
-                <table class="table table-striped table-bordered" id="data-table">
+                <table class="table table-striped table-bordered dataTables">
                     <thead>
                         <tr class="text-center">
                             <th scope="col">ID</th>
@@ -28,14 +28,18 @@
                                 <th>{{$payment->created_at}}</th>
                                 <th>
                                     <div class="d-flex justify-content-around">
-                                        <a href="{{route('accommodation-payments.confirm',$payment->id)}}" class="btn btn-outline-success">
+
+                                        <a href="{{route('competition-payments.edit',$payment->id)}}" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{route('accommodation-payments.confirm',$payment->id)}}" class="btn btn-success">
                                             <i class="fas fa-check-circle"></i>
                                         </a>
-                                        <a href="{{route('accommodation-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                        <a href="#" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >
+                                        <a href="#" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >
                                             <i class="fa-solid fa-receipt"></i>
+                                        </a>
+                                        <a href="{{route('accommodation-payments.reject')}}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >
+                                            <i class="fas fa-times"></i>
                                         </a>
                                     </div>
                                 </th>
@@ -50,10 +54,10 @@
 
         {{-- CONFIRMED --}}
         <x-card>
-            <h2 class="mb-3 text-success fw-bold">Confirmed Accommodation Payment </h2>
+            <h2 class="mb-3 text-success fw-bold ">Confirmed Accommodation Payment </h2>
             @if ($confirmed->count())
                 <a href="{{route('accommodation-payments.export')}}" class="btn btn-outline-theme mb-3">Download Excel</a>
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered dataTables">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -75,10 +79,13 @@
                             <th>{{$payment->amount}}</th>
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">
+                                    <a href="{{route('accommodation-payments.edit',$payment->id)}}" class="btn btn-primary" title="edit payment">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-warning" title="cancel payment">
                                         <i class="fas fa-undo"></i>
                                     </a>
-                                    <a href="{{route('payments.paid-accommodation-invoice', $payment->id)}}" class="btn btn-outline-primary m-2" title="View Invoice" target="_blank">
+                                    <a href="{{route('payments.paid-accommodation-invoice', $payment->id)}}" class="btn btn-success " title="View Invoice" target="_blank">
                                         <i class="fas fa-file-invoice"></i>
                                     </a>
 
@@ -97,7 +104,7 @@
         <x-card>
             <h2 class="mb-3 text-danger fw-bold">Rejected Competition Payment </h2>
             @if ($rejected->count())
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered dataTables">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -122,7 +129,7 @@
                         
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-outline-warning" title="cancel payment">
+                                    <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-warning" title="cancel payment">
                                         <i class="fas fa-undo"></i>
                                     </a>
                                 </div>

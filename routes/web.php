@@ -103,6 +103,7 @@ Route::controller(SlotRegistrationController::class)->prefix('slot-registrations
     Route::get('confirm/{competitionSlot}', 'confirm')->name('confirm');
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
+    Route::get('create-others', 'createOthers')->name('create-other');
 });
 Route::resource('slot-registrations',SlotRegistrationController::class);
 
@@ -184,7 +185,7 @@ Route::resource('accommodation-slot-registrations', AccommodationSlotRegistratio
 Route::controller(AdminAccommodationPaymentController::class)->prefix('accommodation-payments')->name('accommodation-payments.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/confirm/{accommodationPayment}', 'confirm')->name('confirm');
-    Route::post('/reject', 'reject')->name('reject');
+    Route::post('/reject', 'reject')->name('reject');   
     Route::get('/cancel/{accommodationPayment}', 'cancel')->name('cancel');
     Route::get('/export', 'export')->name('export');
 });

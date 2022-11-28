@@ -1,7 +1,7 @@
 <x-admin>
     <div class="container mt-4">
         <x-card>
-            <h2 class="mb-3">Registration Summary</h2>
+            <h2 class="mb-3 fw-bold">Registration Summary</h2>
             <table class="table table-striped table-bordered">
                 <thead class="text-center">
                   <tr>
@@ -32,7 +32,7 @@
         <x-card>
             <h2 class="mb-3 text-warning fw-bold">Pending Slot Registration</h2>
             @if ($pending->count())
-                <table class="table table-striped table-bordered dataTables" id="data-table">
+                <table class="table table-striped table-bordered dataTables">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>

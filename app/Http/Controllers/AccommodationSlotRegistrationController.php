@@ -14,8 +14,8 @@ class AccommodationSlotRegistrationController extends Controller
 {
     public function __construct(){
         $this->middleware('IsShowed:ENV010');   
-        $this->middleware('IsAdmin')->except(['create','store','edit','update']);
-        $this->middleware('auth')->only(['create','store','edit','update']);
+        $this->middleware('IsAdmin')->except(['create','store','destroy','edit','update']);
+        $this->middleware('auth')->only(['create','store','destroy']);
     }
 
     public function index()
@@ -32,12 +32,10 @@ class AccommodationSlotRegistrationController extends Controller
         ]);
     }
 
-    public function create($accommodation = 1 )
-    {
-        $accommodation = Accommodation::find($accommodation);
+    public function create($accommodation = 1 ) {
         return view('accommodation-slot-registrations.create', [
             'accommodations' => Accommodation::all(),
-            'selectedType' => $accommodation
+            'selectedType' =>  Accommodation::find($accommodation)
         ]);
     }
 
@@ -46,8 +44,8 @@ class AccommodationSlotRegistrationController extends Controller
     {
         $request->validate([
             'accommodation_id'=>'required', 
-            'check_in_date'=>'required',
-            'check_out_date'=>'required|after:check_in_date',
+            'check_in_date'=>'required | after_or_equal:2023-02-01',
+            'check_out_date'=>'required|after:check_in_date|before:2023-02-28',
             'special_req'=>'nullable|string',
             'quantity'=>'required',
         ]);
@@ -82,18 +80,20 @@ class AccommodationSlotRegistrationController extends Controller
 
     public function update(Request $request, AccommodationSlot $accommodation_slot_registration)
     {
-        // dd($request);
+        if ($accommodation_slot_registration->is_confirmed == 1)return redirect()->back()->with('error','Unable to edit this slot, because this slot have already confirmed');
         $request->validate([
             'accommodation_id'=>'required', 
-            'check_in_date'=>'required',
-            'check_out_date'=>'required',
-            'special_req'=>'required',
+            'check_in_date'=>'required | after_or_equal:2023-02-01',
+            'check_out_date'=>'required|after:check_in_date|before:2023-02-28',
+            'special_req'=>'nullable|string',
             'quantity'=>'required',
         ]);
-
+        if(!Auth::guard('admin')->check()) $user = Auth::user()->username;
+        else $user = Auth::guard('admin')->user()->name;
+        
+        // dd($user);
         $accommodation_slot_registration->update([
-            'created_by' => Auth::user()->username,
-            'pic_id' => Auth::user()->id,
+            'updated_by' => $user,
             'accommodation_id' => $request->accommodation_id,
             'check_in_date'=>$request->check_in_date,
             'check_out_date'=>$request->check_out_date,
@@ -111,11 +111,13 @@ class AccommodationSlotRegistrationController extends Controller
 
     public function destroy(AccommodationSlot $accommodationSlot)
     {
+        if ($accommodationSlot->is_confirmed == 1)return redirect()->back()->with('error','Unable to delete this slot, because this slot have already confirmed');
         $accommodationSlot->delete();
         return redirect()->back();
     }
 
     public function confirm(AccommodationSlot $accommodationSlot){
+        
         $accommodationSlot ->update([
             'updated_by' => 'Admin',
             'is_confirmed' => 1,

@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\Auth;
 class UserAccommodationPaymentController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified'])->except(['edit','update']);
         $this->middleware('IsShowed:ENV005');
     }
 
-    public function getAllSlotRegistered($id)
-    {
+    public function getAllSlotRegistered($id){
         return AccommodationSlot::where('pic_id', $id)
-        ->where('payment_id', NULL)->where('is_confirmed', 1)
-        ->get();
+            ->where('payment_id', NULL)
+            ->where('is_confirmed', 1)
+            ->get();
     }
 
 
@@ -65,14 +65,23 @@ class UserAccommodationPaymentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'account_name' => 'nullable|string',
-            'account_number' => 'nullable|numeric',
-            'email' => 'nullable|string',
-            'track' => 'nullable|string',
-            'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-            'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-        ]);
+        if ($request->type == 'bank'){
+            $request->validate([
+                'account_name' => 'required|string',
+                'account_number' => 'required|numeric',
+                'payment_provider' => 'required|numeric',
+                'transfer_proof_bank' => 'required|image|max:1999|mimes:jpg,png,jpeg',
+
+            ]);
+        }
+        elseif ($request->type == 'wise'){
+            $request->validate([
+            'email' => 'required|string',
+            'track' => 'required|string',
+            'transfer_proof_wise' => 'required|image|max:1999|mimes:jpg,png,jpeg',
+            ]);
+        }
+        
         $pic = Auth::user()->username;
         $fileName = str_replace(' ', '-', $pic );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
@@ -84,7 +93,7 @@ class UserAccommodationPaymentController extends Controller
             $fixedName = $fileName.'_'.$current.'.'.$extension;
             $path = $request->file("transfer_proof_bank")->storeAs("public/transfer_proof",$fixedName);
         }
-        if ($request->hasFile('transfer_proof_wise')){
+        else if ($request->hasFile('transfer_proof_wise')){
             $extension = $request->file('transfer_proof_wise')->getClientOriginalExtension();
             $fixedName = $fileName.'_'.$current.'.'.$extension;
             $path = $request->file("transfer_proof_wise")->storeAs("public/transfer_proof",$fixedName);
@@ -103,9 +112,9 @@ class UserAccommodationPaymentController extends Controller
         ]);
 
         if ($request->payAll == 1){
+             
             $allAccommodation = $this->getAllSlotRegistered($request->pic_id);
             foreach($allAccommodation as $accommodation){
-                
                 $accommodation->update([
                     'payment_id' => $payment->id,
                 ]);
@@ -137,15 +146,22 @@ class UserAccommodationPaymentController extends Controller
 
     public function update(Request $request, AccommodationPayment $accommodationPayment)
     {
-        $request->validate([
-            'account_name' => 'nullable|string',
-            'account_number' => 'nullable|numeric',
-            'email' => 'nullable|string',
-            'track' => 'nullable|string',
-            'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-            'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-        ]);
-
+        if ($request->type == 'BANK'){
+            $request->validate([
+                'account_name' => 'required|string',
+                'account_number' => 'required|numeric',
+                'payment_provider' => 'required|numeric',
+                'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
+            ]);
+        }
+        elseif ($request->type == 'WISE'){
+            $request->validate([
+                'email' => 'required|string',
+                'track' => 'required|string',
+                'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
+            ]);
+        }
+        
         $pic = Auth::user()->username;
         $fileName = str_replace(' ', '-', $pic );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
@@ -173,7 +189,7 @@ class UserAccommodationPaymentController extends Controller
         }
 
         // ini untuk update menjadi wise
-        else{
+        elseif($request->type == 'WISE'){
             if ($request->hasFile('transfer_proof_wise')){
                 $extension = $request->file('transfer_proof_wise')->getClientOriginalExtension();
                 $fixedName = $fileName.'_'.$current.'.'.$extension;

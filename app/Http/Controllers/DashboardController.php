@@ -35,6 +35,7 @@ class DashboardController extends Controller
                 ->count();  
 
         $totalParticipants= CompetitionParticipant::rightJoin('competition_slot_details','competition_slot_details.id' , '=', 'competition_participants.competition_slot_id')
+            ->where('competition_slot_details.id', Auth::user()->id)
             ->where('competition_participants.competition_slot_id','!=',NULL)
             ->whereNull('competition_participants.deleted_at')
             ->count();
@@ -42,6 +43,7 @@ class DashboardController extends Controller
         // competition slot yang ga ada participantnya
         $participantCompetition = CompetitionSlot::join('users','competition_slot_details.pic_id', '=','users.id')
             ->leftJoin('competition_participants', 'competition_slot_details.id','=','competition_participants.competition_slot_id')
+            ->where('competition_slot_details.id', Auth::user()->id)
             ->where('competition_slot_id',NULL)
             ->count();
 
@@ -59,12 +61,14 @@ class DashboardController extends Controller
             ->count();  
 
         $totalGuests= AccommodationGuest::rightJoin('accommodation_slot_details','accommodation_slot_details.id' , '=', 'accommodation_guests.accommodation_slot_id')
+            ->where('accommodation_slot_details.pic_id', Auth::user()->id)
             ->where('accommodation_guests.accommodation_slot_id','!=',NULL)
             ->count();
         
         // competition slot yang ga ada participantnya
         $accGuests = AccommodationSlot::join('users','accommodation_slot_details.pic_id', '=','users.id')
             ->leftJoin('accommodation_guests', 'accommodation_slot_details.id','=','accommodation_guests.accommodation_slot_id')
+            ->where('accommodation_slot_details.pic_id', Auth::user()->id)
             ->where('accommodation_slot_id',NULL)
             ->count();
 
@@ -152,11 +156,12 @@ class DashboardController extends Controller
 
         if ($step == 2){
             // jika step-1 belum di confirmasi atau belom dilewati maka, kembali ke dashboard
-            // dd(Auth::user()->id);
+ 
             $confirmedSlots = AccommodationSlot::where('pic_id', Auth::user()->id)->get();
             if ($confirmedSlots->count() == 0) return redirect()->back()->with('error','You have to book accommodation first');
-
-            if ($confirmedSlots->where('is_confirmed')->count() == 0) return redirect()->back()->with('error','Please Wait your accommodation slot registration to be confirmed by admin');
+            
+            $confirmedSlots = $confirmedSlots->where('is_confirmed',1);
+            if ($confirmedSlots->count() == 0) return redirect()->back()->with('error','Please Wait your accommodation slot registration to be confirmed by admin');
             
             $history = DB::table('accommodation_slot_details')
                         ->join('accommodation_payments','accommodation_slot_details.payment_id','=','accommodation_payments.id')
@@ -167,8 +172,12 @@ class DashboardController extends Controller
                         ->get();
 
             
-            $accommodationPayment = AccommodationSlot::where('pic_id',Auth::user()->id)->get()->where('payment_id',NULL);
-            // dd($competitionPayment); 
+            $accommodationPayment = AccommodationSlot::where('pic_id',Auth::user()->id)
+                ->get()
+                ->where('payment_id',NULL)
+                ->where('is_confirmed',1);
+
+            // dd($confimred);
             return view('dashboards.accommodation-step-two',[
                 'confirmedSlot' => $confirmedSlots,
                 'history' => $history,

@@ -110,7 +110,7 @@ class CompetitionSeeder extends Seeder
             [
                 'created_by' => 'Admin-IT',
                 'id' => 'OBS',
-                'name' => 'Observer',
+                'name' => 'Spectator',
                 'fixed_quota' => 10,
                 'temp_quota' => 10,
                 'price' => 450000,

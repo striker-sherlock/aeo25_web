@@ -20,10 +20,18 @@ class AdminAccommodationPaymentController extends Controller
     public function index()
     {
         $accommodationPayment = AccommodationPayment::join('accommodation_slot_details', 'accommodation_payments.id', '=', 'accommodation_slot_details.payment_id')
-        ->join('users', 'accommodation_payments.pic_id', '=', 'users.id')
+        ->join('users', 'accommodation_slot_details.pic_id', '=', 'users.id')
         ->join('accommodations', 'accommodation_slot_details.accommodation_id', '=', 'accommodations.id')
-        ->select('accommodation_payments.*', 'users.*','accommodation_payments.created_at','accommodation_payments.id as id', 'payment_proof', 'accommodations.room_type')
+        ->select(
+            'accommodation_payments.*', 
+            'users.*',
+            'accommodation_payments.created_at',
+            'accommodation_payments.id as id', 
+            'payment_proof',
+            'accommodations.room_type')
         ->get();
+
+        dd($accommodationPayment);
 
         $pending =  $accommodationPayment->where('is_confirmed', 0);
         $confirmed =  $accommodationPayment->where('is_confirmed', 1);

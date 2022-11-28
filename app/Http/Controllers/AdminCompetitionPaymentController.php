@@ -51,6 +51,10 @@ class AdminCompetitionPaymentController extends Controller
         $competitionPayment = CompetitionPayment::find($id);
         $competitionSlots = $competitionPayment->competitionSlot;
 
+        foreach($competitionSlots as $competitionSlot){
+            if($comptitionSlot->competition->fixed_quota < $competitionSlot->quantity) return redirect()->back()->with('error' ,'Confirmation failed,'.$competitionSlot->competition->name."'s fixed quota is not enough ");
+        }
+        
         foreach ($competitionSlots as $competitionSlot) {
             $competition = $competitionSlot->competition;
             $competition->update([
