@@ -1,20 +1,30 @@
 <x-user title="Competition Payment">
     <div class="container mt-5">
-        <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-primary rounded-pill mb-3">Go Back</a>
+        <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
         <div class="row">
             <div class="col-md-6">
                 <x-card>
                     <h5 class="fw-bold text-uppercase text-center">payment guide and invoice</h5>
                     <hr>
                     <p class="text-justify">Please download the file below to see the payment guide and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
-                        <a href="{{route('payments.invoice', [$user->id, $slotId])}}" target="_blank"
-                            class="btn btn-outline-primary rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice and Guide</a>
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{route('payments.invoice', [$user->id, $slotId])}}" target="_blank"
+                                class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice  
+                            </a>  
+                        </div>
+                        <div class="col">
+                            <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
+                                class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fas fa-file-invoice"></i> Download Guideline
+                            </a>
+                        </div>
+                    </div>
                 </x-card>
             </div>
             <div class="col-md-6">
                 {{-- RECEIPT SUMMARY --}}
                 <x-card>
-                    <h5 class="text-uppercase fw-bold text-center">Receipt Summary</h5><hr>
+                    <h5 class="text-uppercase fw-bold text-center text-gradient">Receipt Summary</h5><hr>
                     <div class="d-flex justify-content-between">
                         <h4>Competition</h4>
                         <h4>Price</h4>
@@ -23,7 +33,7 @@
                     @if ($isPayAll == 1)
                         @foreach ($allCompetitions as $competition)
                             <div class="d-flex justify-content-between">
-                                <h6>{{$competition->competition->name}} x {{$competition->quantity}} {{$competition->competition->need_team == 1 ? 'Team' : 'People'}}</h6>
+                                <h6>{{$competition->competition->name}} x {{$competition->quantity}} {{$competition->competition->need_team == 1 ? 'Team(s)' : 'People(s)'}}</h6>
                                 <h6>{{ number_format($competition->competition->price * $competition->quantity, 2, ',', '.')}} IDR</h6>
                             </div>
                         @endforeach
@@ -36,7 +46,7 @@
                     {{-- ini kondidi bila PIC ingin membayar slotnya 1 per 1  --}}
                     @else
                         <div class="d-flex justify-content-between">
-                            <h6>{{$competitionSlot->competition->name}} x {{$competitionSlot->quantity}} {{$competitionSlot->competition->need_team == 1 ? 'Team' : 'People'}}</h6>
+                            <h6>{{$competitionSlot->competition->name}} x {{$competitionSlot->quantity}} {{$competitionSlot->competition->need_team == 1 ? 'Team(s)' : 'People(s)'}}</h6>
                             <h6>{{ number_format($totalPrice, 2, ',', '.')}} IDR</h6>
                         </div>
 
@@ -77,7 +87,7 @@
                         <div class="form-group mb-2">
                             <label for="payment_provider" class="col-form-label">Bank Name<span class="text-danger">*</span></label>
                             <select class="form-select"  name="payment_provider">
-                                <option selected class="d-none">Select Bank Name</option>
+                                <option selected class="d-none" disabled> Select Bank Name</option>
                                 @foreach ($paymentProviders as $paymentProvider)
                                     <option value="{{$paymentProvider->id}}" {{old('payment_provider' == $paymentProvider->id? 'selected' : '')}}>{{$paymentProvider->name}}</option>
                                 @endforeach
@@ -98,7 +108,7 @@
                             <input type="file" class="form-control"  name="transfer_proof_bank" id="transfer_proof_bank" accept="image/png,image/jpeg,image/jpg">    
                             <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                         </div>  
-                        <button type="submit" class="btn btn-outline-primary w-100 rounded-pill">Submit Payment Confirmation</button>
+                        <button type="submit" class="btn btn-outline-theme w-100 rounded-pill">Submit Payment Confirmation</button>
                     </div>
 
                     {{-- WISE --}}
@@ -118,7 +128,7 @@
                             <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                         </div>       
 
-                        <button type="submit" class="btn btn-outline-primary w-100 rounded-pill">Submit Payment Confirmation</button>
+                        <button type="submit" class="btn btn-outline-theme w-100 rounded-pill">Submit Payment Confirmation</button>
                     </div>
                 </div>
             </form>

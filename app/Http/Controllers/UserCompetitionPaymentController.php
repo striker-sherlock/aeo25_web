@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class UserCompetitionPaymentController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth', 'verified');
+        $this->middleware(['auth', 'verified']);
         $this->middleware('IsShowed:ENV007');
     }
 
@@ -26,6 +26,7 @@ class UserCompetitionPaymentController extends Controller
     }
 
     public function create($id){
+        
         $slot = CompetitionSlot::find($id);
         $competition = NULL;
         $isPayAll = 0;

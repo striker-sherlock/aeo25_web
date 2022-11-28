@@ -29,7 +29,7 @@
                         <small>JPG, PNG, JPEG | Max 2MB</small>
                     </div>
                     @method('PUT')
-                    <button type="submit" class="btn btn-outline-primary w-100 btn-rounded my-2">Update</button>
+                    <button type="submit" class="btn btn-outline-theme w-100 btn-rounded my-2">Update</button>
                 </form>
 
             

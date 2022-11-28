@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-12 order-first order-lg-last mb-3 mb-lg-0">
                         <a class="btn c-button-1 c-rounded px-3 mt-3"
-                            href="https://forms.gle/vnMcPQkY79BWNTag6"
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSdXCCb4ExnoUEbjxAWQYm4MeFB8-kv5kIXWAbbPsty5rkkdBg/viewform?usp=sharing"
                             target="_blank">{{ __('Request Invitation Letter') }}</a>
                     </div>
                 </div>

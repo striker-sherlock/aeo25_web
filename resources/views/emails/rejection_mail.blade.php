@@ -1,11 +1,14 @@
 @component('mail::message')
- Dear, {{ $name }}, <br>
+ Dear {{ $name }}, <br>
  {{ $body1 }} <br>
 {!!$reason!!} <br>
 
 {{ $body2 }} <br>
 
-
+@component('mail::button', ['url' => $url])
+Go to Website
+@endcomponent <br>
+ 
 Best Regards,<br>
 Someone's Name (Ms.) <br>
 Staff of Fundraising Division <br>

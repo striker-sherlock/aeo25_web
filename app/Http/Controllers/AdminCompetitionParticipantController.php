@@ -12,8 +12,18 @@ use App\Models\CompetitionParticipant;
 class AdminCompetitionParticipantController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsAdmin')->only(['edit']);
+        $this->middleware('IsAdmin')->only(['edit','index']);
     }
+
+    public function index($competition){
+        $trashed = CompetitionParticipant::onlyTrashed()->get();
+        return view('competition-participants.index',[
+            'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
+            'competition' => Competition::find($competition),
+            'trashed' => $trashed,
+        ]);
+    }
+
     public function edit(CompetitionParticipant $competitionParticipant){
         
         return view('competition-participants.edit',[
@@ -35,12 +45,11 @@ class AdminCompetitionParticipantController extends Controller
         $competitionParticipant = CompetitionParticipant::find($id);
         if (!Auth::guard('admin')->check()){
             $competitionParticipant->update([
-                'addictional_notes' => $request->note,
+                'additional_notes' => $request->note,
             ]);
             return redirect()->back()->with('success','Note is successfully added');
         }
         else{
-            dd($request->all());
             $name= $request->nama;
             $fileName = str_replace(' ', '-', $name);
             $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
@@ -60,7 +69,7 @@ class AdminCompetitionParticipantController extends Controller
                 'birth_date' => $request->birth ,
                 'phone_number' => $request->phone,
                 'profile_picture' => $fixedName,
-                'addictional_notes' => $request->notes,
+                'additional_notes' => $request->notes,
             ]);
 
         }

@@ -22,7 +22,7 @@
                     </div>      
                 </div>
                
-                <button type="submit" class="btn btn-outline-primary w-100 rounded-pill">Edit</button>
+                <button type="submit" class="btn btn-outline-theme w-100 rounded-pill">Edit</button>
              
             </form>
         </x-card>

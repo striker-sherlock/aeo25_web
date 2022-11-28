@@ -3,11 +3,11 @@
         <h2 class="fw-bold mb-2">Accommodation's Guest List</h2>
         <div class="row mb-4">
             <div class="col">
-                <a href="{{route('accommodation-guests.index',)}}" class="btn btn-outline-primary w-100 rounded-pill {{$roomType == NULL ? 'active' : '' }}">All Guest</a>
+                <a href="{{route('accommodation-guests.index',)}}" class="btn btn-outline-theme w-100 rounded-pill {{$roomType == NULL ? 'active' : '' }}">All Guest</a>
             </div>
             @foreach ($accommodations as $accommodation)
             <div class="col">
-                <a href="{{route('accommodation-guests.index',$accommodation->room_type)}}" class="btn btn-outline-primary w-100 rounded-pill {{$roomType == $accommodation->room_type ? 'active' : '' }}">{{$accommodation->room_type}}</a>
+                <a href="{{route('accommodation-guests.index',$accommodation->room_type)}}" class="btn btn-outline-theme w-100 rounded-pill {{$roomType == $accommodation->room_type ? 'active' : '' }}">{{$accommodation->room_type}}</a>
             </div>
             @endforeach   
         </div>

@@ -1,10 +1,7 @@
 <x-user title="Create Team">
-    {{-- {{dd($quantity)}} --}}
-    <div class="container mt-4">
-        <h1 class="fs-3">Step 3</h1>
-        <h2 class="display-5 fw-bold">Participant's Personal Detail</h2>
-        <hr class="mb-4">
-        {{-- {{dd($totalTeams)}} --}}
+    <div class="container mt-5">
+        <h1 class="aeo-title">Step 3</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">{{$competitionSlot->Competition->name}} Participant Registration</h3>
         <form action="{{route('competition-participants.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
             @for ($i = $totalTeams; $i <= 2; $i++)
@@ -33,20 +30,21 @@
 
                         <input type="radio" class="btn-check" name="people{{$i}}" id="5peeps{{$i}}" autocomplete="off"   value="5">
                         <label class="btn btn-outline-info mb-3" for="5peeps{{$i}}" value="5">5 people</label>
-
-                        <input type="text" value="{{$competitionSlot->competition->id}}" name="competition_id" hidden>
-                        <input type="text" value="{{$competitionSlot->id}}" name="competition_slot_id" hidden>
-                        <input type="text" value="{{$quantity}}" name="quantity" hidden>
-                        <input type="text" hidden value="{{$totalTeams}}" name="total_teams">
-
+                        
                     @endif
+
+                    <input type="text" value="{{$competitionSlot->competition->id}}" name="competition_id" hidden>
+                    <input type="text" value="{{$competitionSlot->id}}" name="competition_slot_id" hidden>
+                    <input type="text" value="{{$quantity}}" name="quantity" hidden>
+                    <input type="text" hidden value="{{$totalTeams}}" name="total_teams">
+                    <input type="text" hidden value="1" name="need_teams">
                     @for ($j = 0; $j <= 4; $j++)
                         @if ($competitionSlot->competition->id == 'DB' && $j == 2 )
                             <input type="text" hidden value="{{$j}}" name="team_participant[]">
                             @break
                          @endif
                         <div class="{{$competitionSlot->competition->id == 'RD' ? 'd-none' : ''}} form{{$i}}">
-                            <div class="row shadow-sm mb-4 {{old('people'.$i) == '4' && $j == 4 ? 'd-none' : ''}}" id="team{{$i}}participant{{$j}}">
+                            <div class="row shadow-sm   mb-5 p-4 rounded-20 {{old('people'.$i) == '4' && $j == 4 ? 'd-none' : ''}}" id="team{{$i}}participant{{$j}}">
                                 <h3 class="text-uppercase fw-bold" style="letter-spacing: 0.1em">{{$competitionSlot->competition->name}}'s Participant {{$j+1}}</h3>
 
                                 {{-- form registrasi --}}
@@ -74,11 +72,22 @@
                                     <div class="form-group mb-2">
                                         <label for="gender{{$j}}{{$i}}" class="col-form-label">Gender<span class="text-danger">*</span></label>
                                         <select class="form-select"  name="gender[]" id="gender{{$j}}{{$i}}" required>
-                                            <option selected class="d-none">Select participant's gender</option>
+                                            <option selected class="d-none">Select participant's gender...</option>
                                             <option value="Male" {{old('gender.'.$j+($i-$totalTeams)*5) == 'Male' ? 'selected':''}}>Male</option>
                                             <option value="Female" {{old('gender.'.$j+($i-$totalTeams)*5) == 'Female' ? 'selected':''}}>Female</option>
                                         </select>
-                                    </div>     
+                                    </div>  
+                                    
+                                    <div class="form-group mb-3">
+                                        <label for="additional_notes{{$j}}{{$i}}" class="col-form-label">Additional Notes</label>
+                                        <textarea class="form-control text-area"  name="additional_notes[]"  id="additional_notes{{$j}}{{$i}}" rows="2">{{old('additional_notes.'.$j+($i-$totalTeams)*5)}}</textarea>
+
+                                        @if ($errors->has('additional_notes.'.$j+($i-$totalTeams)*5))
+                                            <span class="invalid feedback text-danger"role="alert">
+                                                <strong>*{{ $errors->first('additional_notes.*') }}.</strong>
+                                            </span>
+                                        @endif 
+                                    </div>   
     
                                 </div>   
                                 <div class="col">
@@ -100,7 +109,16 @@
                                             <strong>*{{ $errors->first('birth.*') }}.</strong>
                                         </span>
                                     @endif
-                                    </div>  
+                                    </div>
+
+                                    <div class="form-group mb-2">
+                                        <label for="vegetarian{{$j}}{{$i}}" class="col-form-label">Is This Participant Vegetarian ? <span class="text-danger">*</span></label>
+                                        <select class="form-select"  name="vegetarian[]" id="vegetarian{{$j}}{{$i}}" required>
+                                            <option selected class="d-none">choose...</option>
+                                            <option value="1" {{old('vegetarian.'.$j+($i-$totalTeams)*5) == '1' ? 'selected':''}}>Vegetarian</option>
+                                            <option value="0" {{old('vegetarian.'.$j+($i-$totalTeams)*5) == '0' ? 'selected':''}}>Non-Vegetarian</option>
+                                        </select>
+                                    </div>     
     
                                     <div class="form-group mb-3">
                                         <label for="profile_picture{{$j}}{{$i}}" class="col-form-label">Profile Picture<span class="text-danger">*</span></label>
@@ -118,7 +136,7 @@
                     @endfor
                 
                     @if ($i == $quantity+$totalTeams-1  )
-                        <button type="submit" class="{{$competitionSlot->competition->id == 'DB' ? '' : ' d-none'}} btn btn-outline-primary w-100 rounded-pill">Register Participant</button>
+                        <button type="submit" class="{{$competitionSlot->competition->id == 'DB' ? '' : ' d-none'}} btn btn-outline-theme w-100 rounded-pill">Register Participant</button>
                     @endif
                 </x-card>
             @endfor

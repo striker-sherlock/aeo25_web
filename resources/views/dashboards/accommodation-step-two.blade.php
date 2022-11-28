@@ -1,7 +1,7 @@
 <x-user title="Accommodation Step Two"> 
     <div class="mt-5 container">
-        <h1>Step 2</h1>
-        <h2 class="display-6 fw-bold">Accommodation Payment</h2>
+        <h1 class="aeo-title">Step 2</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Accommodation Slot Payment</h3>
         <x-card>
             <h3 class="fw-bold"> Additional Information</h3 >
             <p>We highly suggest you to complete your payment once your registration has been confirmed. If 10 days have passed and the confirmed slot has not been paid yet, we will move your slot to the pending list again.
@@ -11,7 +11,7 @@
                 <x-card >
                     <h2 class="fw-bold ">Accommodation Registration Payment</h2>
                     @if ($isPaidAll->count())
-                        <a href="{{route('accommodation-payments.create',0)}}" class="btn btn-outline-primary rounded-20 my-2">Pay All Slot Registration</a>
+                        <a href="{{route('accommodation-payments.create',0)}}" class="btn btn-outline-theme rounded-20 my-2">Pay All Slot Registration</a>
                     @endif
                     @foreach ($confirmedSlot as $accommodation)
                         <div class="row border p-4 mx-1 mb-3 rounded-20 align-items-center">
@@ -67,7 +67,7 @@
                             <div class="row">
                                 @if ($item->is_confirmed != 1)
                                     <div class="col">
-                                        <a href="{{route('accommodation-payments.edit', $item->id)}}" class="btn btn-outline-primary w-100 rounded-pill">Edit</a>
+                                        <a href="{{route('accommodation-payments.edit', $item->id)}}" class="btn btn-outline-theme w-100 rounded-pill">Edit</a>
                                     </div>
                                     <div class="col">
                                         <a  href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$item->id}}" class="btn btn-outline-danger rounded-pill w-100"> Delete</a>
@@ -84,9 +84,9 @@
         </div>
         <div class="navigasi  mb-4 d-flex justify-content-center align-items-center py-1">
             <ul class="list-unstyled d-flex align-items-center">
-                <li> <a href="{{route('dashboard.accommodation-step', 1)}}" class="btn btn-outline-primary me-2">1</a></li>
-                <li> <a href="#" class="btn btn-outline-primary active me-2 ">2</a></li>
-                <li> <a href="{{route('dashboard.accommodation-step', 3)}}" class="btn btn-outline-primary me-2">3</a></li>
+                <li> <a href="{{route('dashboard.accommodation-step', 1)}}" class="btn btn-outline-theme me-2">1</a></li>
+                <li> <a href="#" class="btn btn-outline-theme active me-2 ">2</a></li>
+                <li> <a href="{{route('dashboard.accommodation-step', 3)}}" class="btn btn-outline-theme me-2">3</a></li>
             </ul>
         </div>
     </div>

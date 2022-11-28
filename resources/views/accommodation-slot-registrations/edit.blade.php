@@ -1,6 +1,6 @@
-<x-admin>
-    {{-- {{ dd($accommodationSlot->accommodation_id) }} --}}
-    <div class="container mt-4">
+<x-layout>
+  <x-navbar></x-navbar>
+    <div class="container mt-5">
       <x-card>
             <h1>Edit Accomodation Slot</h1>
               <form action="{{route('accommodation-slot-registrations.update', $accommodationSlot->id)}}" method="POST" enctype="multipart/form-data">
@@ -35,8 +35,8 @@
                   <label class="col-form-label" for="quantity">Total Room <span class="text-danger">*</span></label>
                   <input type="number" class="form-control" name="quantity" id="max_guests" placeholder="Enter Number of Room for Order" value="{{$accommodationSlot->quantity}}">
                 </div>
-                <button type="submit" class="btn btn-outline-primary w-100 rounded mb-4">Submit</button>
+                <button type="submit" class="btn btn-outline-theme w-100 rounded mb-4 rounded-pill">Submit</button>
               </form>
       </x-card>
     </div>
-  </x-admin>
+  </x-layout>

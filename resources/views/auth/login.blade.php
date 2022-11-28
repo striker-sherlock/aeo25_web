@@ -9,7 +9,7 @@
                                 <div class="card-body m-lg-3 m-2">
                                     <div class="title-line"></div>
                                     <div class="text-center">
-                                        <h3 class="fw-bold mt-3 text-center" id="loginText">LOGIN</h3>
+                                        <h3 class="fw-bold  text-center" id="loginText">LOGIN</h3>
                                         <h1 class="c-text-1 fw-bold mt-2">Welcome back!</h1>
                                     </div>
                                     @csrf
@@ -47,7 +47,7 @@
                                             </a>
                                         </div>
                                     @endif
-                                    <div class="d-grid mt-5 mx-2">
+                                    <div class="d-grid mt-4 mx-2">
                                         <button type="submit" class="btn c-button-1 rounded-pill btnSubmit">Login</button>
                                     </div>
                                     <hr>

@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<x-layout>
     <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -36,6 +34,9 @@
             </div>
         </div>
     </div>
+</x-layout>
+
+
     <style>
         main {
             min-height: 75vh;
@@ -92,7 +93,6 @@
         color: rgba(60, 118, 61, 1);
     }
     </style>
-@endsection
 
 @if(session('resent'))
 <div class="modal fade show pe-0" style="z-index: 9999;" id="alert" tabindex="-1" role="dialog"

@@ -138,7 +138,7 @@
                 @method('PUT')
                     <div class="form-group row mt-5">
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-outline-primary  btn-submit">Proceed</button>
+                            <button type="submit" class="btn btn-outline-theme  btn-submit">Proceed</button>
                         </div>
                     </div>
                     </form>

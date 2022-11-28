@@ -1,6 +1,6 @@
 <x-admin>
     <div class="container mt-4">
-        <a class="btn btn-outline-primary rounded-pill  mt-2 mb-3 px-4"
+        <a class="btn btn-outline-theme rounded-pill  mt-2 mb-3 px-4"
             href="{{ route('institution-contacts.create', $type) }}">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New Contact
         </a>
