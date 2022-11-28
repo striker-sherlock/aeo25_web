@@ -1,5 +1,4 @@
 <x-admin>
- 
     <div class="container mt-4">
         <x-card>
             <h2 class="mb-3">Registration Summary</h2>
@@ -33,7 +32,7 @@
         <x-card>
             <h2 class="mb-3 text-warning fw-bold">Pending Slot Registration</h2>
             @if ($pending->count())
-                <table class="table table-striped table-bordered data-table" id="data-table">
+                <table class="table table-striped table-bordered dataTables" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>
@@ -55,13 +54,13 @@
                                 <th>{{$competition->quantity}}</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex  justify-content-center">
-                                        <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn btn-sm btn-primary me-2">
+                                        <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn  btn-primary me-2">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-success btn-sm me-2">
+                                        <a  class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#confirm{{$competition->id}}">
                                             <i class="fas fa-check-circle"></i>
                                         </a>
-                                        <a class="btn btn-danger btn-sm me-2" data-bs-toggle="modal" data-bs-target="#reason{{$competition->id}}">
+                                        <a class="btn btn-danger  me-2" data-bs-toggle="modal" data-bs-target="#reason{{$competition->id}}">
                                             <i class="fas fa-times"></i>
                                         </a>
                                         
@@ -79,7 +78,7 @@
         <x-card>
             <h2 class="mb-3 text-success fw-bold">Confirmed Slot Registration </h2>
             @if ($confirmed->count())
-                <table class="table table-striped table-bordered data-table" id="">
+                <table class="table table-striped table-bordered dataTables" id="">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>
@@ -106,7 +105,10 @@
                                 <th>{{$competition->quantity}}</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex justify-content-center">
-                                        <a href="{{route('slot-registrations.cancel',$competition->id)}}" class="btn btn-warning  btn-sm">
+                                        <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn  btn-primary me-2">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{route('slot-registrations.cancel',$competition->id)}}" class="btn btn-warning ">
                                             <i class="fas fa-undo" ></i>
                                         </a>
                                     </div>
@@ -115,8 +117,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <a href="{{route('competition-payments.index','National')}}" class="btn btn-outline-info rounded-pill my-4 me-2" >View Intenational Payment</a>
-                <a href="{{route('competition-payments.index','international')}}" class="btn btn-outline-info rounded-pill my-4">View National Payment</a>
+                < 
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -125,7 +126,7 @@
         <x-card>
             <h2 class="mb-3 text-danger fw-bold">Rejected Slot Registration</h2>
                 @if ($rejected->count())
-                <table class="table table-striped table-bordered data-table" id="data-table">
+                <table class="table table-striped table-bordered dataTables" id="data-table">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>
@@ -185,6 +186,45 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            </div>
+        </div>
+    @endforeach
+
+    @foreach ($pending as $competition)
+        <div class="modal fade p-4" id="confirm{{$competition->id}}" tabindex="-1" role="dialog" >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-headers p-4 "></div>
+                <div class="body px-4">
+                    <div class="row d-flex justify-content-center align-items-center">
+                        <div class="col-12 mb-3 text-center">
+                            <span class="fa-stack fa-4x">
+                                <i class="fas fa-circle fa-stack-2x text-success"></i>
+                                <i class="fas fa-check fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </div>
+                        <div class="col-12 my-2 text-center">
+                            <h2 class="fw-bold mb-2 text-success">Slot Registration Confirmation</h2>
+                            <h4 class="font-weight-bold">Are you sure want to confirm <span class="fw-bold">{{$competition->user->pic_name}}'s</span> slot ? </h4>
+                        </div>
+                    </div>
+
+                    <input type="text" name="slot" value="{{$competition->id}}" hidden>
+                </div>
+                <div class="modal-footers p-4   mb-5">
+                    <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-outline-secondary w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
+                        </div>
+                        <div class="col">
+                            <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-outline-success w-100 rounded-pill" >
+                                Confirm 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                 
             </div>
             </div>
         </div>

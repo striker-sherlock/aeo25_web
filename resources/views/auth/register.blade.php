@@ -3,10 +3,10 @@
     <div class="container " style="margin-top: 100px">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <x-card >
+                <x-card class="car" >
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
-                        <h1 class="mb-4 text-center text-gradient fw-bold display-5">Create New account </h1>
+                        <h1 class="mb-4 text-center text-gradient fw-bold display-5">Create New Account </h1>
                         <h3 class="text-uppercase fw-bold aeo-title" style="letter-spacing: 0.1em">Institutional Data</h3>
                         <div class="form-group mb-3">
                             <label for="ins_name" class="col-form-label"> Institutional Name<span class="text-danger">*</span></label>
@@ -16,7 +16,7 @@
                             <label for="type" class="col-form-label"> Institutional Type<span class="text-danger">*</span></label>
                             <select class="form-select"  name="institution_type" required>
                                 <option selected class="d-none">Select The Institutional Type</option>
-                                <option value="school" {{old('institution_type') == 'school' ? 'selected':''}}>School</option>
+                                <option value="high-school" {{old('institution_type') == 'high-school' ? 'selected':''}}>High School</option>
                                 <option value="university" {{old('institution_type') == 'university' ? 'selected':''}}>University</option>
                             </select>
                         </div>
@@ -59,9 +59,7 @@
                                     @enderror" required>
                                     <option value="" selected disabled>Choose...
                                     </option>
-                                    @php
-                                    $countries = App\Models\Countries::all();
-                                    @endphp
+                                    
                                     @foreach ($countries as $country)
                                     <option value="{{ $country->id }}"
                                         {{ old('country_id') == $country->id ? 'selected' : '' }}>
@@ -71,7 +69,7 @@
                                 </select>
                                 </div>
                                 <div class="form-group mb-2 position-relative">
-                                    <label for="password" class="col-form-label">Password<span class="text-danger">*</span></label>
+                                    <label for="password" class="col-form-label">Password<span class="text-danger">*</span><small class="text-muted"  style="font-size: 0.7em"> (Min: 8 Character)</small></label>
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" required>
                                     <i class="fa fa-eye position-absolute" id="toggle-password" style="top:50px; right:10px; cursor:pointer;"></i>
                                     @error('password')
@@ -79,6 +77,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    
                                 </div>
                                 <div class="form-group mb-2 position-relative">
                                     <label for="password-confirm" class="col-form-label">{{ __('Confirm Password') }}<span class="text-danger">*</span></label>
@@ -91,10 +90,11 @@
                             
                         </div>
 
-                        <button type="submit" class="btn btn-outline-primary w-100 rounded-pill" >
+                        <button type="submit" class="btn btn-outline-theme w-100 rounded-pill" >
                             {{ __('Register') }}
                         </button>
-                        <a href="/login" class="mx-auto d-block text-dark btn mt-3" >Already Have an Account ? <span class="text-primary">Login</span></a>
+                        <span class="d-block mx-auto text-center mt-3">Already Have an Account ? <a href="/login" class="" >  Login</a></span>
+                        
                         
                     </form>
                 </x-card>
@@ -103,4 +103,10 @@
     </div>
     <x-footer></x-footer>
 </x-layout>
+
+<style>
+    .card-header {
+        background-color: #3f3b74;
+    }
+</style>
  

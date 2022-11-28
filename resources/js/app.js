@@ -5,15 +5,15 @@ import "./sidebar";
 import "./toggle-password";
 import "owl.carousel";
 
+$(document).ready(function(){
+   console.log('dsfasdfsaf');   
+})
+ 
+window.jQuery = jquery;
+window.$ = jquery;
+window.bootstrap = bootstrap;
 $(document).ready(function () {
     $(".owl-carousel").owlCarousel();
 });
 
-// owl.on('mousewheel', '.owl-stage', function (e) {
-//     if (e.deltaY>0) {
-//         owl.trigger('next.owl');
-//     } else {
-//         owl.trigger('prev.owl');
-//     }
-//     e.preventDefault();
-// });
+ 

@@ -1,7 +1,8 @@
 <x-user title="Accommodation Step One">
     <div class="container mt-5">
-        <h1>Step 1</h1>
-        <h2 class="display-6 fw-bold">Accommodation Slot Registration</h2>
+        <h1 class="aeo-title">Step 1</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Accommodation Slot Registration</h3>
+
         <hr>
         <x-card>
             <p class="fs-5">
@@ -11,7 +12,7 @@
         {{--list informasi competition apa saja yang didaftar--}}
         <x-card>
             <h3>Registered Accommodation Slot</h3>
-            <a href="{{route('accommodation-slot-registrations.create')}}" class="btn btn-outline-primary rounded-pill">Book Our Accommodation</a>
+            <a href="{{route('accommodation-slot-registrations.create')}}" class="btn btn-outline-theme rounded-pill">Book Our Accommodation</a>
             <hr>
             @if ($accommodationSlots->count())
                 <div class="row">
@@ -31,7 +32,7 @@
                                     </h4>
                                     @if ($accommodationSlot->is_confirmed == 0)
                                     <div class="d-flex justify-content-start ">
-                                        <a href="{{ route('accommodation-slot-registrations.edit', $accommodationSlot->id) }}" data-bs-target="#edit{{$accommodationSlot->id}}" class="btn btn-outline-primary rounded-20 me-2">Edit Slot</a>
+                                        <a href="{{ route('accommodation-slot-registrations.edit', $accommodationSlot->id) }}" data-bs-target="#edit{{$accommodationSlot->id}}" class="btn btn-outline-theme rounded-20 me-2">Edit Slot</a>
                                             <a href="#" data-bs-toggle ="modal" data-bs-target="#delete{{$accommodationSlot->id}}" class="btn btn-outline-danger rounded-20">Delete Slot</a>
                                         </div>
                                         @endif
@@ -41,15 +42,15 @@
                     @endforeach
                 </div>
             @else
-            <p class="text-center fs-4 text-danger">No Accommodation Booked</p>
+            <p class="text-center fs-4 fw-bold">No Accommodation Booked</p>
             @endif
         </x-card>
 
         <div class="navigasi  mb-4 d-flex justify-content-center align-items-center py-1">
             <ul class="list-unstyled d-flex align-items-center">
-                <li> <a href="#" class="btn btn-outline-primary active me-2 ">1</a></li>
-                <li> <a href="{{route('dashboard.accommodation-step', 2)}}" class="btn btn-outline-primary me-2">2</a></li>
-                <li> <a href="{{route('dashboard.accommodation-step', 3)}}" class="btn btn-outline-primary me-2">3</a></li>
+                <li> <a href="#" class="btn btn-outline-theme active me-2 ">1</a></li>
+                <li> <a href="{{route('dashboard.accommodation-step', 2)}}" class="btn btn-outline-theme me-2">2</a></li>
+                <li> <a href="{{route('dashboard.accommodation-step', 3)}}" class="btn btn-outline-theme me-2">3</a></li>
             </ul>
         </div>
     </div>

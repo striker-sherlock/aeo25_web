@@ -1,8 +1,7 @@
 <x-user title="Create Accommodation Slot">
     <div class="container mt-5">
-      <h1>Step 1</h1>
-      <h2 class="display-6 fw-bold">Select Your Room Type</h2>
-      <hr>
+      <h1 class="aeo-title">Step 1</h1>
+      <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Select Your Room Type</h3>
       <div class="row mb-4">
         @foreach ($accommodations as $accommodation)
           <div class="col">
@@ -69,7 +68,7 @@
                                           <button type="button" class="btn btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>
                                       </div>
                                       <div class="col">
-                                        <button type="submit" class="btn btn-outline-primary w-100">Book Now</button>
+                                        <button type="submit" class="btn btn-outline-theme w-100">Book Now</button>
                                       </div>
                                   </div>  
                               </div>

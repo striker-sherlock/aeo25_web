@@ -16,8 +16,8 @@ class AccommodationSlotRegistrationController extends Controller
 {
     public function __construct(){
         $this->middleware('IsShowed:ENV010');   
-        $this->middleware('IsAdmin');
-        $this->middleware('auth', ['verified'])->only(['create']);
+        $this->middleware('IsAdmin')->except(['create','store','edit','update']);
+        $this->middleware('auth', ['verified'])->only(['create','store','edit','update']);
     }
 
     public function index()

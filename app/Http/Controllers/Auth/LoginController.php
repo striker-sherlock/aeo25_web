@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
 
@@ -60,5 +61,23 @@ class LoginController extends Controller
     public function adminLogout(){
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
+    }
+
+    public function loginAsForm()
+    {
+        return view('auth.login-as');
+    }
+
+    public function loginAs (Request $request)
+    {
+        $userEmail = $request->email;
+
+        $userAccount = User::where('email', $userEmail)->first();
+         if ($userAccount) {
+            Auth::login($userAccount);
+            return redirect()->route('dashboard');
+         }else {
+            return redirect()->back()->with('error', 'Not Found');
+         }
     }
 }

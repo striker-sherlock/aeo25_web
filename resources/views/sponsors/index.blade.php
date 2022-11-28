@@ -1,11 +1,9 @@
 <x-admin>
     <div class="container mt-4">
-        <div class="card border-0 overflow-hidden shadow rounded-20 mb-5" style="border-radius:20px">
-            <div class="card-header bg-secondary"></div>
-            <div class="card-body my-3">
-                <h1>Sponsors List</h1>
+        <x-card>
+            <h1>Sponsors List</h1>
                 <a href="{{route('sponsors.create')}}" class="btn btn-success rounded btn-sm my-3">Add New Sponsor</a>
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" id="dataTables">
                     <thead class="text-center">
                       <tr>
                         <th scope="col">ID</th>
@@ -47,12 +45,10 @@
                       @endforeach
                     </tbody>
                   </table>
-            </div>
-
-        </div>
+        </x-card>
     </div>
-    @foreach ($competitionSlots as $competitionSlot)
-        <div class="modal fade p-5" id="delete{{$competitionSlot->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+    @foreach ($sponsors as $sponsor)
+        <div class="modal fade p-5" id="delete{{$sponsor->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content rounded-20 border-0 shadow p-5">
                     <div class="modal-headers mb-4">
@@ -62,7 +58,7 @@
                         </span>
                     </div>
                     <div class="body mb-3">
-                        <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$competitionSlot->competition->name}}</span>"? </h1>
+                        <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$sponsor->name}}</span>"? </h1>
                         <p class="text-warning"> note: this action can't be undone  </p>
                     </div>
                     <div class="footer">
@@ -71,7 +67,7 @@
                                 <button type="button" class="btn btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>
                             </div>
                             <div class="col">
-                                <form method="POST" action="{{route('slot-registrations.destroy',$sponsor->id)}}">
+                                <form method="POST" action="{{route('sponsors.destroy',$sponsor->id)}}">
                                 <input type="hidden" name="_method" value = "DELETE">
                                     <button class="btn btn-outline-danger rounded w-100" title="delete">
                                     Delete

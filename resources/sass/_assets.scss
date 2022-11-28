@@ -16,6 +16,11 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.custom-border {
+    background-color: #f175ad;
+    height: 2px;
+}
+
 .nav-item,
 .c-button-1,
 .c-button-2{
@@ -63,11 +68,6 @@
     border-radius: 0px;
   }
 
-  .pink-line{
-    height: 4px;
-    background-color: #F175AD;
-    color: #F175AD;
-  }
 
   .btn-outline-1 {
     color: #7FBCD2 !important;

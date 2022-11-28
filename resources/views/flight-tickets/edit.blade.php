@@ -29,6 +29,6 @@
                         <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg max: 3MB</small>
                     </div>
                     @method('PUT')
-                    <button type="submit" class="btn btn-outline-primary w-100 btn-rounded my-2">Submit</button>
+                    <button type="submit" class="btn btn-outline-theme w-100 btn-rounded my-2">Submit</button>
                 </form>
 </x-admin>

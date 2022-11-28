@@ -1,12 +1,11 @@
 <x-user title="Show Participant">
-    <div class="container mt-4">
-        <h1>Step 3</h1>
-        <h2 class="display-6 fw-bold">{{Auth::user()->institution_name}}'s {{$competitionParticipants[0]->competition->name}} Participant Details</h2>
-        <hr class="mb-4">
+    <div class="container mt-5 mb-4">
+        <h1 class="aeo-title">Step 3</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Competition Participant Details</h3>
         @foreach ($competitionParticipants as $index => $participant)
             <x-card>
                 <h3 class="text-uppercase fw-bold fs-4 text-capitalize" style="letter-spacing: 0.1em">{{$participant->competition->name}} participant information - {{$index+1}}</h3>
-                <a  class="btn btn-outline-primary btn rounded-pill" data-bs-toggle="modal" data-bs-target="#note{{$participant->id}}">Add Addictional Note</a>
+                <a  class="btn btn-outline-theme btn rounded-pill" data-bs-toggle="modal" data-bs-target="#note{{$participant->id}}">Add Additional Note (optional) </a>
                 
                 @if ($participant->team_id)
                     <div class="form-group mb-3">
@@ -46,6 +45,10 @@
                             <label class="col-form-label"> Phone Number </label>
                             <input type="text"  class="form-control" value="{{$participant->phone_number}}" disabled>
                         </div> 
+                        <div class="form-group mb-3">
+                            <label class="col-form-label">Vegetarian </label>
+                            <input type="text"  class="form-control" value="{{$participant->is_vegetarian == 1? 'vegetarian':'Non Vegetarian'}}" disabled>
+                        </div> 
                         
                     </div>
                 </div>
@@ -74,7 +77,7 @@
                                 <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">Close</button>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-outline-primary w-100">Submit</button>
+                                <button type="submit" class="btn btn-outline-theme w-100">Submit</button>
                             </div>
                         </div>
                     </div>

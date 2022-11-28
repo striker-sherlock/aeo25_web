@@ -58,6 +58,11 @@
                                     href="https://www.instagram.com/asianenglisholympics"
                                     target="_blank"><span class="fab fa-instagram fs-1"></span></a>
                             </li>
+                            <li class="me-4">
+                                <a class="text-decoration-none text-reset ic-social"
+                                    href="https://www.tiktok.com/@binusenglishclub?is_from_webapp=1&sender_device=pc"
+                                    target="_blank"><span class="fab fa-tiktok fs-1"></span></a>
+                            </li>
                             <li>
                                 <a class="text-decoration-none text-reset ic-social"
                                     href="https://www.youtube.com/channel/UCiKj5b1zQyWHkENyquAUfnA"
@@ -67,7 +72,7 @@
                     </div>
                     <div class="col-12 order-first order-lg-last mb-3 mb-lg-0">
                         <a class="btn c-button-1 c-rounded px-3 mt-3"
-                            href="https://forms.gle/vnMcPQkY79BWNTag6"
+                            href="https://docs.google.com/forms/d/e/1FAIpQLSdXCCb4ExnoUEbjxAWQYm4MeFB8-kv5kIXWAbbPsty5rkkdBg/viewform?usp=sharing"
                             target="_blank">{{ __('Request Invitation Letter') }}</a>
                     </div>
                 </div>
@@ -93,9 +98,9 @@
         <hr>
   
         <div class="credits">
-            This website is designed and built with ❤️ by <a href="#">Media Information and
+            This website is designed and built with ❤️ by Media Information and
                 Technology
-                Division</a>
+                Division
         </div>
         <div class="copyright">
             Copyright &copy; <strong><span>2022 Binus English Club </span></strong>. All Rights Reserved

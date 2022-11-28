@@ -27,7 +27,7 @@
                             <a href="{{ route("environments.index") }}" class="btn btn-outline-secondary btn-rounded w-100 mb-3">Back</a>
                         </div>
                         <div class="col">
-                            <button type="submit" class="btn btn-outline-primary btn-rounded w-100">Submit</button>
+                            <button type="submit" class="btn btn-outline-theme btn-rounded w-100">Submit</button>
                         </div>
                     </div>
                 </form>

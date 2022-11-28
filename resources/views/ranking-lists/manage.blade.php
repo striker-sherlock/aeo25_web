@@ -2,7 +2,7 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-center align-items-center flex-wrap">
             @foreach ($competitions as $competition)
-                <div class="btn btn-outline-primary {{ $selectedField->id == $competition->id ? 'bg-primary text-white' : '' }} mx-2 mb-3 p-2">
+                <div class="btn btn-outline-theme {{ $selectedField->id == $competition->id ? 'bg-primary text-white' : '' }} mx-2 mb-3 p-2">
                     <a class="text-decoration-none text-reset" href="{{route('ranking-lists.manage', [$competition->id, "preliminary"])}}">
                         {{ $competition->id }}
                     </a>
@@ -17,7 +17,7 @@
                 @if ($selectedField->id !== "DB" && $scoreType->id == 2)
                     @continue
                 @endif
-                <a class="btn {{ ($selectedType->id == $scoreType->id) ? 'btn-primary' : 'btn-outline-primary' }} me-2" href="{{ route('ranking-lists.manage', [$selectedField->id, $scoreType->scoreTypeName]) }}">{{ $scoreType->typeName }}</a>
+                <a class="btn {{ ($selectedType->id == $scoreType->id) ? 'btn-primary' : 'btn-outline-theme' }} me-2" href="{{ route('ranking-lists.manage', [$selectedField->id, $scoreType->scoreTypeName]) }}">{{ $scoreType->typeName }}</a>
             @endforeach
             @if ($rankingLists->count() > 0)
                 <div class="table-responsive py-2">

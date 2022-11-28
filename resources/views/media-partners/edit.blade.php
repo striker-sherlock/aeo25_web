@@ -24,7 +24,7 @@
                     <input type="file" accept="image/jpg, image/png, image/jpeg" class="form-control" name="logo_new" >
                 </div>
                 @method('PUT')
-                <button type="submit" class="btn btn-outline-primary rounded-pill w-100">Update</button>
+                <button type="submit" class="btn btn-outline-theme rounded-pill w-100">Update</button>
             </form>
 
 

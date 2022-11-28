@@ -1,5 +1,5 @@
 @component('mail::message')
- Dear, {{ $name }}, <br>
+ Dear {{ $name }}, <br>
  {{ $body1 }} <br>
 {!!$reason!!} <br>
 

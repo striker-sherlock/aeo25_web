@@ -91,28 +91,32 @@
                             <div class="input-group mb-3">
                                 <input type="file" class="form-control" id="profile_picture" name="profile_picture_new" accept="image/png,image/jpeg,image/jpg">
                                 <div class="input-group-append">
-                                <button class="btn btn-outline-primary" type="button" data-bs-toggle ="modal" data-bs-target="#profile_picture" >Profile Picture</button>
+                                <button class="btn btn-outline-theme" type="button" data-bs-toggle ="modal" data-bs-target="#picture" >Profile Picture</button>
                                 </div>
                                 
                             </div> 
+                            
                         </div>
                     </div>  
                 </div>    
-                <button type="submit" class="btn btn-outline-primary w-100 rounded-pill"> Confirm Edit </button>
+                <button type="submit" class="btn btn-outline-theme w-100 rounded-pill"> Confirm Edit </button>
             </form>
         </x-card>
     </div>
-    <div class="modal fade p-5" id="profile_picture" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+    
+    <div class="modal fade p-5" id="picture" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content rounded-20 border-0 shadow p-5">
-                <div class="modal-headers mb-4"></div>
-                <div class="body mb-3">
-                    <img src="/storage/profile_picture/{{$participant->competition->id}}/{{$participant->profile_picture}}" class="img-fluid" alt="{{$participant->name}}'s profile picture">
+                <div class="modal-headers mb-4">
+                    <h3 class="text-uppercase fw-bold fs-5 text-gradient text-center" style="letter-spacing: 0.1em">{{$participant->name}}'s Profile Picture</h3>
                 </div>
-                <div class="footer">
-                   
+                <div class="body mb-3">
+                    <img src="/storage/profile_picture/{{$participant->competition->id}}/{{$participant->profile_picture}}" class="img-fluid d-block mx-auto" alt="{{$participant->name}}'s profile picture">
+                </div>
+                <div class="modal-footer">
+                  
                 </div>
             </div>
         </div>  
-    </div>
+    </div> 
 </x-admin>

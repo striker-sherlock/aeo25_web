@@ -30,6 +30,7 @@ class DashboardController extends Controller
         $allSlotRegistration = CompetitionSlot::where('pic_id',Auth::user()->id)->get();
         $confirmedSlotRegistration =  $allSlotRegistration->where('is_confirmed',1);
         $confirmedPayment = CompetitionSlot::join('competition_payments','competition_payments.id','=','competition_slot_details.payment_id')
+                ->where('competition_slot_details.pic_id',Auth::user()->id)
                 ->where('competition_payments.is_confirmed',1)
                 ->count();  
 
@@ -43,6 +44,8 @@ class DashboardController extends Controller
             ->leftJoin('competition_participants', 'competition_slot_details.id','=','competition_participants.competition_slot_id')
             ->where('competition_slot_id',NULL)
             ->count();
+
+        // dd($participantCompetition);
         $allParticipants = CompetitionParticipant::where('pic_id',Auth::user()->id)->get();
 
 
@@ -51,13 +54,15 @@ class DashboardController extends Controller
         $confimedAccSlot = $allAccSlot->where('is_confirmed',1)->count();
 
         $confirmedAccPayment = AccommodationSlot::join('accommodation_payments','accommodation_payments.id','=','accommodation_slot_details.payment_id')
+            ->where('accommodation_slot_details.pic_id',Auth::user()->id)
             ->where('accommodation_payments.is_confirmed',1)
             ->count();  
 
         $totalGuests= AccommodationGuest::rightJoin('accommodation_slot_details','accommodation_slot_details.id' , '=', 'accommodation_guests.accommodation_slot_id')
             ->where('accommodation_guests.accommodation_slot_id','!=',NULL)
             ->count();
-         
+        
+        // competition slot yang ga ada participantnya
         $accGuests = AccommodationSlot::join('users','accommodation_slot_details.pic_id', '=','users.id')
             ->leftJoin('accommodation_guests', 'accommodation_slot_details.id','=','accommodation_guests.accommodation_slot_id')
             ->where('accommodation_slot_id',NULL)
@@ -89,15 +94,17 @@ class DashboardController extends Controller
 
         if ($step == 2){
             // jika step-1 belum di confirmasi atau belom dilewati maka, kembali ke dashboard
-            $confirmedSlot = CompetitionSlot::where('pic_id',Auth::user()->id)->get();
-            if ($confirmedSlot->count() == 0) return redirect()->route('dashboard')->with('error','You have to make slot registration first');
+            $confirmedSlot = CompetitionSlot::orderBy('payment_id')->where('pic_id',Auth::user()->id)->get();
+            if ($confirmedSlot->count() == 0) return redirect()->back()->with('error','You have to make slot registration first');
 
             $confirmedSlot = $confirmedSlot->where('is_confirmed',1);
-            if ($confirmedSlot ->count() == 0) return redirect()->route('dashboard')->with('error','Please Wait your slot registration to be confirmed by admin');
+            if ($confirmedSlot ->count() == 0) return redirect()->back()->with('error','Please Wait your slot registration to be confirmed by admin');
+            
             
             $history = DB::table('competition_slot_details')
                         ->join('competition_payments','competition_slot_details.payment_id','=','competition_payments.id')
                         ->join('competitions','competition_slot_details.competition_id','=','competitions.id')
+                        ->where('competition_slot_details.pic_id',Auth::user()->id)
                         ->where('competition_payments.is_confirmed','!=',NULL)
                         ->select('competition_payments.is_confirmed as is_confirmed','competition_payments.id as id','competitions.id as competition_id','competition_payments.created_at','competitions.name','competitions.need_team','quantity','competition_payments.updated_at as updated_at')
                         ->get();
@@ -154,6 +161,7 @@ class DashboardController extends Controller
             $history = DB::table('accommodation_slot_details')
                         ->join('accommodation_payments','accommodation_slot_details.payment_id','=','accommodation_payments.id')
                         ->join('accommodations','accommodation_slot_details.accommodation_id','=','accommodations.id')
+                        ->where('accommodation_slot_details.pic_id', Auth::user()->id)
                         ->where('accommodation_payments.is_confirmed','!=',NULL)
                         ->select('accommodation_payments.is_confirmed as is_confirmed','accommodation_payments.id as id','accommodations.id as accommodation_id','accommodation_payments.created_at','accommodations.room_type','quantity','accommodation_payments.updated_at as updated_at')
                         ->get();

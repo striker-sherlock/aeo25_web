@@ -25,6 +25,6 @@
                         <input type="file" accept="image/jpg, image/png, image/jpeg" class="form-control" name="photo">
                     </div>
 
-                    <button type="submit" class="btn btn-outline-primary w-100 btn-rounded my-2">Submit</button>
+                    <button type="submit" class="btn btn-outline-theme w-100 btn-rounded my-2">Submit</button>
                 </form>
 </x-admin>

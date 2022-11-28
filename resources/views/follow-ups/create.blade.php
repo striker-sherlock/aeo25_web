@@ -66,7 +66,7 @@
                     <input type="hidden" id="status" name="status" class="form-control" value="1">
                     <div class="form-group row mt-5">
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-outline-primary rounded-pill w-100">Submit</button>
+                            <button type="submit" class="btn btn-outline-theme rounded-pill w-100">Submit</button>
                         </div>
                     </div>
                 </form>

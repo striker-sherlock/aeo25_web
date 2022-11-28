@@ -15,7 +15,7 @@
                     <a href="{{ route("countries.index") }}" class="btn btn-outline-secondary btn-rounded mb-3 w-100">Back</a>
                   </div>
                   <div class="col">
-                    <button type="submit" class="btn btn-outline-primary btn-rounded w-100 ">Create</button>
+                    <button type="submit" class="btn btn-outline-theme btn-rounded w-100 ">Create</button>
                   </div>
                 </div>
             </form>
