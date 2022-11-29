@@ -7,9 +7,25 @@
     <div class="container mt-5 mb-5">
         <div class="">
             <h2 class="fw-bold text-capitalize text-gradient">Welcome back, {{Auth::user()->pic_name}} </h2>
-            <h5 class="text-muted text-uppercase  fs-6">Welcome to 2023 Asian English Olympics!</h5>
+            <h5 class="text-muted fs-6">Welcome to The 2023 Asian English Olympics!</h5>
             <hr>
         </div>
+        @if ($confirmedSlotRegistration->count() > 0)
+            <div class="alert alert-info border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
+                <div class="row">
+                    <div class="col-lg">
+                        <i class="fas fa-bullhorn"></i>
+                        Want to watch the thrill of our competitions? Let's register as <b>Observers</b>!
+                    </div>
+                    <div class="col-lg text-lg-end text-start">
+                        <a href="{{route('slot-registrations.create-other')}}" class="text-reset text-decoration-none">
+                            Register now
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
         {{-- competition step  --}}
         <div class="step-by-step-compet row">
             <h3 class="text-uppercase fw-bold my-4 text-gradient" style="letter-spacing: 0.1em">Competition Step by step Registration</h3>
