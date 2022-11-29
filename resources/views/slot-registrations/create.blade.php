@@ -1,6 +1,6 @@
 <x-user title="create slot registration">
     <div class="container mt-5">
-        <h1 class="display-4  fw-bold aeo-title">Select The Competition Below</h1><hr class="mb-3">
+        <h2 class="display-4  fw-bold aeo-title my-2 py-2">Select The Competition Below</h2><hr class="mb-3">
         <form action="{{route('slot-registrations.store')}}" method="POST" enctype="multipart/form-data"> 
             <div class="row">
                 @csrf
@@ -40,7 +40,7 @@
                 </div>
                 @endforeach         
             </div>
-            <a class="btn btn-outline-theme w-100 rounded mb-4 rounded-pill" data-bs-toggle ="modal" data-bs-target="#modal" >submit</a>
+            <a class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill" data-bs-toggle ="modal" data-bs-target="#modal" >Submit</a>
        
         </div>
 

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\CompetitionPayment;
 use Illuminate\Support\Facades\DB;
 use App\Models\AccommodationPayment;
+use Carbon\Carbon;
 
 class PDFController extends Controller
 {
@@ -105,7 +106,7 @@ class PDFController extends Controller
                 }
 
                 .signText{
-                margin-top:10px;
+                margin-top: 50px;
                 margin-right: 15%;
                 text-align: center;
                 }
@@ -409,141 +410,7 @@ class PDFController extends Controller
                 Project Manager<br>
                 The 2023 Asian English Olympics
                 </div>';
-        // if ($user->country->name == 'Indonesia') {
-        // $output .= '
-        //         <div id="notices">
-        //         <h2 class="signText"><u>Payment Guideline</u></h2>
-        //         <h3>General Rules</h3>
-        //         <ol>
-        //             <li>The payment amount we receive must match the amount of total fees listed in the invoice.</li>
-        //             <li>You can make your payments using a bank transfer to the following bank account:
-        //             <ol>Bank Account: BCA (Bank Central Asia)<br>
-        //             Bank Account Name: Rahmadira Febi Herdiningtyas<br>
-        //             Bank Account Number: 5271882077<br>
-        //             Swift Code: CENAIDJA</ol></li>
-        //             <li>We only accept payment in <b>Indonesian Rupiahs (IDR).</b></li>
-        //             <li>Please be aware of how much additional fees will be charged to you by your bank when you<br> transfer it to our account.
-        //             <b>All additional costs are borne by the participants.</b></li>
-        //             <li>If you happen to transfer less than the expected amount, we will contact the PIC to get you<br> to make another payment to cover the shortfall. This also means that you should pay the<br> <b>additional fees twice</b>. To avoid this,please pay <b>extra attention</b> to pay all the listed fees<br> moderately.</li>
-        //             <li>The payment deadline for the SHORT STORY WRITING and RADIO DRAMA is on <b>February 17,<br> 2023, at 06:00 P.M. (GMT + 07:00).</b></li>
-        //             <li>The payment deadline for SPEECH, NEWSCASTING, STORYTELLING, DEBATE, and SPELLING<br> BEE is on <b>February 14, 2023, at 6:00 P.M. (GMT + 07:00).</b></li>
-        //             <li>We have the right to <b>disqualify</b> the participants who didn’t pay the right amount of registration<br> fee until the expected deadline. For all the fields making video submissions for the preliminary<br> round. We will not proceed with your submission if you didn’t complete the payment.</li>
-        //             <li>We will only proceed with your submission if we have confirmed your payment. Any problems<br> you have when making a payment is not our responsibility as long as the money has not<br> entered our account.
-        //             For example, if you put the wrong bank account number or bank account<br> name resulting in the money isn’t getting into our account, this will be entirely your<br> responsibility. We will only confirm your payment if we have already made sure that the money<br> has entered our account.</li>
-        //         </ol>
-        //         </div>
-        //         <div id="notices" style="padding: 40px 100px 0px 35px">    
-        //         <p><b>If you want to secure your slots, we highly suggest  you to do the payment 10 days after you do the registration at maximum, or else we will revoke your booking.</b>Please also be aware that international transfer using a few days to be done.</p>
-        //         <p>After the payment is made, you will have to wait for a maximum of <b>7 working days to receive your payment confirmation.</b></p>
-        //         <p><b>All the money that has been transferred into our account cannot be refunded for all reasons.</b></p>
-        //         <p>If you have any question regarding payment or administration, kindly contact:<br>
-        //         Rahmadira Febi Herdiningtyas (Secretary and Treasurer of The 2023 AEO)<br>
-        //         Whatsapp: 085719927534<br>
-        //         Line: rahmadirafh<br></p>
-        //         <p><b>Please see the details and instructions inside the invoice.</b></p>
-        //         <h3>Winner Prize</h3>
-        //         <p>Note: All prize winners do not include admin fees.</p>
-        //         </div>
-        //         ';
-        // } else if ($user->country->name != 'Indonesia') {
-        // $output .= '
-        //         <div id="notices" style="padding: 0px 110px 50px 20px">
-        //         <h2 class="signText"><u>Payment Guideline</u></h2>
-        //         <h3>General Rules</h3>
-        //         <ol>
-        //         <li>The payment amount that we receive must match the amount of total fees listed in the invoice.</li>
-        //         <li>For <b>Indonesian Teams</b>, you can make your payments using a bank transfer to the following bank account:
-        //         <ol>Bank Account: BCA (Bank Central Asia)<br>
-        //         Bank Account Name: Rahmadira Febi Herdiningtyas<br>
-        //         Bank Account Number: 5271882077<br>
-        //         Swift Code: CENAIDJA</ol></li>
-        //         <li>For <b>Non-Indonesian Teams</b>, you are suggested to make your payments via <b>Wise</b><br> (<a href="https://wise.com/">https://wise.com/</a>).</li>
-        //         <li><b>Do note that for Non-Indonesian Teams.</b> If you would like to make your payments using bank transfer, you are free to do it only if you agree to the additional fees charged by the bank (it is usually around USD 20-USD 35, depending on the policies of each correspondent bank).
-        //         For example, if your listed fees are IDR 800.000 and the additional fees charged by the bank is USD 25 (around IDR 352.000), this means you have to transfer around IDR 1.152.000.</li>
-        //         <li>During your transaction using <b>Wise</b>, they may ask you to <b>verify your identity</b> before completing the transfer. This process may take around <b>3 days</b>, so pay attention to this if you don’t want to exceed the payment deadline.</li>
-        //         <li>We only accept payment in <b>Indonesian Rupiahs (IDR)</b>. Most payments will be automatically converted to> <b>IDR</b> in the International Bank or Wise.</li>
-        //         <li>Please be aware of how much additional fees will be charged to you by your bank or Wise when you transfer it to our account.
-        //         <b>All additional costs are borne by the participants.</b></li>
-        //         <li>If you happen to transfer less than the expected amount, we will contact the PIC to get you to make another payment to cover the shortfall. This also means that you should pay the <b>additional fees twice</b>. To avoid this, please pay <b>extra attention</b> to pay all the listed fees moderately.</li>
-        //         <li>The payment deadline for the SHORT STORY WRITING and RADIO DRAMA is on <b>February 17, 2023, at 06:00 P.M. (GMT + 07:00).</b></li>
-        //         <li>The payment deadline for SPEECH, NEWSCASTING, STORYTELLING, DEBATE, and SPELLING BEE is on<b> February 14, 2023, at 6:00 P.M. (GMT + 07:00).</b></li>
-        //         <li>We have the right to <b>disqualify</b> the participants who didn’t pay the right amount of registration fee until the expected deadline. For all the fields making video submissions for the preliminary round. We will not proceed with your submission if you didn’t complete the payment.</li>
-        //         <li>We will only proceed with your submission if we have confirmed your payment. Any problems you have when making a payment is not our responsibility as long as the money has not entered our account.
-        //         For example, if you put the wrong bank account number or bank account name resulting the money doesn’t get into our account, this will be entirely your responsibility. We will only confirm your payment if we have already made sure that the money has entered our account.</li>
-        //         </ol>
-        //         <div style="padding-top: 70px">
-              
-        //         </div>
-        //         <div id="notices" style="padding: 0px 110px 50px 20px">
-        //         <h3>Payment Steps</h3>
-        //         <p>There are <b>2 types of payment</b> (National and International Participants Payment).</p>
-        //         <p><b>If you want to secure your slots, we highly suggest you to do the payment within 10 days after you do the<br> registration at maximum, or else we will revoke your booking.</b> Please also be aware that international transfer<br> using Wise needs a few days to be done.</p>
-        //         <p>After the payment is made, you will have to wait for a maximum of <b>7 working days to receive your payment<br> confirmation.</b></p>
-        //         <p><b>All the money that has been transferred into our account cannot be refunded for all reasons.</b></p>            
-        //         </div>
-
-        //         <div id="notices" style="padding: 0px 110px 50px 20px">
-        //         <h3>Steps to use Wise</h3>
-        //         <ol>
-        //         <li>Go to Wise: <a href="https://wise.com/">https://wise.com/</a> or download the Wise, ex TransferWise application application;</li>
-        //         <li>Register a new account if you don’t have one, or log in if you already have an account;</li>
-        //         <li>Click on “Send Money” on the top left corner of your screen;</li>
-        //         <li>Enter the amount you have to pay. Make sure that the amount that the recipient will get is right and sufficient. Note that there are different rates of additional charges charged by Wise depending on the payment method you choose!</li>
-        //         <li>Click “Continue”;</li>
-        //         <li>Click “Someone else” as your recipient;</li>
-        //         <li>Enter these details:<br>
-        //         Email<t>:  rahmadira.herdiningtyas@binus.ac.id<br>
-        //         Bank Name: BCA (Bank Central Asia)<br>
-        //         Bank Account Name: Rahmadira Febi Herdiningtyas<br>
-        //         Bank Account Number: 5271882077<br></li>
-        //         <li>Select “Pay for Goods and Services” as a reason for the transfer. Then click “Continue”;</li>
-        //         <li>You will proceed to the review transfer page. Enter the reference in the following format: “AEO 2023” followed by your field and institution name.<br>Example: AEO 2023 Debate, Speech Binus University;</li>
-        //         <li>Click “Continue”;</li>
-        //         <li>On the last page, re-check the amount you wish to transfer and the details;</li>
-        //         <li>Click “Continue to Payment”;</li>
-        //         <li>Screenshot the last page and copy the tracking link;</li>
-        //         <li>Make sure that you’ve transfered the money, especially if you pay using your bank account. If so, you should enter your bank account details.</li>
-        //         </ol>
-        //         <p>If <b>Wise is not available</b> in your country, you are suggested to make your payments via <b>Western Union</b>.</p>
-        //         </div>
-        //         <div id="notices" style="padding: 0px 110px 50px 20px">
-        //         <h3>Steps to use Western Union</h3>
-        //         <ol>
-        //         <li>Go to Western Union:<a href="https://www.westernunion.com/us/en/send-to-bank-account.html">https://www.westernunion.com/us/en/send-to-bank-account.html</a> or download Western Union: Send Money Fast application;</li>
-        //         <li>Register a new account if you don’t have one, or log in if you already have an account;</li>
-        //         <li>Choose Indonesia as the receiver’s country;</li>
-        //         <li>Enter the amount you have to pay on the receive amount. Make sure that the amount that the recipient will get is right and sufficient;</li>
-        //         <li>Click “Bank Account”;</li>
-        //         <li>Select the payment method;</li>
-        //         <li>Click “Continue”;</li>
-        //         <li>Click “Accept”;</li>
-        //         <li>Enter these details:<br>
-        //         Receiver’s First Name: Elen<br>
-        //         Receiver’s Last Name: Novianti<br>
-        //         Street Address: Jl Budi Utomo Komplek Surya Kencana II<br>
-        //         City:  Pontianak<br>
-        //         Province:  West Kalimantan<br>
-        //         Postal Code:  78243<br>
-        //         Email Address:  rahmadira.herdiningtyas@binus.ac.id<br>
-        //         Bank Name: BCA (Bank Central Asia)<br>
-        //         Bank Account Number: 5271882077<br></li>
-        //         <li>Complete the data on the payment information;</li>
-        //         <li>Click “Continue to review”;</li>
-        //         <li>Re-check the amount you wish to transfer and the details;</li>
-        //         <li>Screenshot the last page and save the tracking number;</li>
-        //         <li>Make sure that you’ve transferred the money <b>straight to our bank</b>. If you pay using your bank account, you should enter your bank account details.</li>
-        //         </ol>
-        //         </div>
-        //         <div id="notices" style="padding: 0px 110px 50px 20px">
-        //         <p>If you have any question regarding payment or administration, kindly contact:<br>
-        //         Rahmadira Febi Herdiningtyas (Secretary and Treasurer of The 2023 AEO)<br>
-        //         Whatsapp: 085719927534<br>
-        //         Line: rahmadirafh<br></p>
-        //         <p><b>Please see the details and instructions inside the invoice.</b></p>
-        //         <h3>Winner Prize</h3>
-        //         <p>Note: All prize winners do not include admin fees.</p>
-        //         </div>';
-        // }
+    
         $output .= '
                 </main>
             </body>
@@ -647,7 +514,7 @@ class PDFController extends Controller
         }
 
         .signText{
-        margin-top:10px;
+        margin-top:50px;
         margin-right: 15%;
         text-align: center;
         }
@@ -869,7 +736,7 @@ class PDFController extends Controller
             $output .= '
                          <tr>
                              <td class="desc" colspan="2"><h3>'.$slot->name.'</h3></td>
-                             <td class="unit"> IDR ' . $slot->price . '</td>
+                             <td class="unit" colspan="2"> IDR ' . $slot->price . '</td>
                              <td class="qty">' . $slot->quantity .' '. $participant .' </td>
                              <td class="total"> IDR ' . ($slot->quantity * $slot->price) . '</td>
                          </tr>';
@@ -899,7 +766,7 @@ class PDFController extends Controller
         $output .= '
                     </tfoot>
                 </table>';
-                $output  .= '<p>The payment proof has been approved on ' . date("F j, Y H:i", strtotime($payment->updated_at)) . ' (GMT+7).</p>';
+                $output  .= '<p>This payment proof has been approved on ' . date("F j, Y H:i", strtotime($payment->updated_at)) . ' (GMT+7).</p>';
   
       
                     
@@ -935,7 +802,6 @@ class PDFController extends Controller
 
     public function accommodationInvoice(User $user, $id )
     {
-        $payment = AccommodationPayment::where('id', $id)->first();
 
         if($id == 0){
             $slots = DB::table('accommodation_slot_details')
@@ -956,7 +822,7 @@ class PDFController extends Controller
                 ->join('accommodations', 'accommodation_slot_details.accommodation_id', '=', 'accommodations.id')
                 ->select(
                     'accommodation_slot_details.*',
-                    'accommodations.name',
+                    'accommodations.room_type',
                     'accommodations.price',
                     'accommodations.id'
                 )
@@ -1029,7 +895,7 @@ class PDFController extends Controller
                 }
 
                 .signText{
-                margin-top:10px;
+                margin-top: 50px;
                 margin-right: 15%;
                 text-align: center;
                 }
@@ -1132,9 +998,13 @@ class PDFController extends Controller
                 }
 
                 table td.unit,
-                table td.qty,
+                table td.date,
                 table td.total {
                 font-size: 1em;
+                }
+
+                table td.date {
+                    colspan: 1;
                 }
 
                 table tbody tr:last-child td {
@@ -1233,9 +1103,10 @@ class PDFController extends Controller
                     <thead>
                     <tr>
                         <th class="desc" colspan="2" style="text-align:center;">ROOM TYPE</th>
-                        <th class="unit">PRICE</th>
-                        <th class="qty">QUANTITY</th>
-                        <th class="total">TOTAL</th>
+                        <th class="unit" >PRICE</th>
+                        <th class="date">CHECK-IN DATE</th>
+                        <th class="date">CHECK-OUT DATE</th>
+                        <th class="total" colspan="2">TOTAL</th>
                     </tr>
                     </thead>
                     <tbody>';
@@ -1247,9 +1118,10 @@ class PDFController extends Controller
             $output .= '
                          <tr>
                              <td class="desc" colspan="2"><h3>'.$slot->room_type.'</h3></td>
-                             <td class="unit"> IDR ' . $slot->price . '</td>
-                             <td class="qty">' . $slot->quantity .' '.  ' Room </td>
-                             <td class="total"> IDR ' . ($slot->quantity * $slot->price) . '</td>
+                             <td class="unit" > IDR ' . $slot->price . '</td>
+                             <td class="date">' . Carbon::parse($slot->check_in_date)->format('d-m-Y H:i').' '.'</td>
+                             <td class="date">' . Carbon::parse($slot->check_out_date)->format('d-m-Y H:i').' '.'</td>
+                             <td class="total" colspan="2"> IDR ' . ($slot->quantity * $slot->price) . '</td>
                          </tr>';
              $grandTotal += ($slot->quantity * $slot->price);
         }
@@ -1261,15 +1133,15 @@ class PDFController extends Controller
                     <td style="padding-bottom: 10px;"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"></td>
+                        <td colspan="3"></td>
                         <td colspan="2"><h3>GRAND TOTAL</h3></td>
-                        <td>IDR ' . $grandTotal . '</td>
+                        <td >IDR ' . $grandTotal . '</td>
                     </tr>';
                     
         if ($user->country->name != 'Indonesia') {
         $output .= '
                     <tr>
-                    <td colspan="2"></td>
+                    <td colspan="3"></td>
                     <td colspan="2">ADDITIONAL CHARGES</td>
                     <td>USD 20 - USD 35*</td>
                     </tr>';
@@ -1434,7 +1306,7 @@ class PDFController extends Controller
         }
 
         .signText{
-        margin-top:10px;
+        margin-top:50px;
         margin-right: 15%;
         text-align: center;
         }
@@ -1537,7 +1409,7 @@ class PDFController extends Controller
         }
 
         table td.unit,
-        table td.qty,
+        table td.date,
         table td.total {
         font-size: 1em;
         }
@@ -1640,7 +1512,8 @@ class PDFController extends Controller
                     <tr>
                         <th class="desc" colspan="2" style="text-align:center;">ROOM TYPE</th>
                         <th class="unit">PRICE</th>
-                        <th class="qty">QUANTITY</th>
+                        <th class="date">CHECK-IN DATE</th>
+                        <th class="date">CHECK-OUT DATE</th>
                         <th class="total">TOTAL</th>
                     </tr>
                     </thead>
@@ -1657,7 +1530,8 @@ class PDFController extends Controller
                          <tr>
                              <td class="desc" colspan="2"><h3>'.$slot->room_type.'</h3></td>
                              <td class="unit"> IDR ' . $slot->price . '</td>
-                             <td class="qty">' . $slot->quantity .' '. $participant .' </td>
+                             <td class="date">' . Carbon::parse($slot->check_in_date)->format('d-m-Y H:i').' '.'</td>
+                             <td class="date">' . Carbon::parse($slot->check_out_date)->format('d-m-Y H:i').' '.'</td>
                              <td class="total"> IDR ' . ($slot->quantity * $slot->price) . '</td>
                          </tr>';
              $grandTotal += ($slot->quantity * $slot->price);
@@ -1670,7 +1544,7 @@ class PDFController extends Controller
                     <td style="padding-bottom: 10px;"></td>
                     </tr>
                     <tr>
-                        <td colspan="2"></td>
+                        <td colspan="3"></td>
                         <td colspan="2"><h3>GRAND TOTAL</h3></td>
                         <td>IDR ' . $grandTotal . '</td>
                     </tr>';
@@ -1678,7 +1552,7 @@ class PDFController extends Controller
         if ($user->country->name != 'Indonesia') {
         $output .= '
                     <tr>
-                    <td colspan="2"></td>
+                    <td colspan="3"></td>
                     <td colspan="2">ADDITIONAL CHARGES</td>
                     <td>USD 20 - USD 35*</td>
                     </tr>';
@@ -1686,7 +1560,7 @@ class PDFController extends Controller
         $output .= '
                     </tfoot>
                 </table>';
-                $output  .= '<p>The payment proof has been approved on ' . date("F j, Y H:i", strtotime($payment->updated_at)) . ' (GMT+7).</p>';
+                $output  .= '<p>This payment proof has been approved on ' . date("F j, Y H:i", strtotime($payment->updated_at)) . ' (GMT+7).</p>';
   
       
                     
