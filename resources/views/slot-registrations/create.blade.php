@@ -1,6 +1,6 @@
 <x-user title="create slot registration">
     <div class="container mt-5">
-        <h2 class="display-4  fw-bold aeo-title my-2 py-2">Select The Competition Below</h2><hr class="mb-3">
+        <h3 class="text-uppercase fw-bold  aeo-title mb-4" style="letter-spacing: 0.1em">Select The Competition Slot Bellow</h3>
         <form action="{{route('slot-registrations.store')}}" method="POST" enctype="multipart/form-data"> 
             <div class="row">
                 @csrf
@@ -25,8 +25,8 @@
                             @endif
                             
                             @for($i=0 ; $i <= $slot; $i++ )
-                                @if ($slot == 0)
-                                    <h5 class="border bg-danger text-white py-2 mx-auto fw-bold" style="max-width:50%;">Unable to select this slot<h5>
+                                @if ($slot <= 0)
+                                    <h5 class="border bg-danger text-white py-2 mx-auto fw-bold" style="max-width:80%;">Unable to select this slot<h5>
                                     <input type="text" name="quantity[]-{{$competition->id}}" value="0" hidden>
                                     @break      
                                 @endif

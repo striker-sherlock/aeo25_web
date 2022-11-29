@@ -5,8 +5,9 @@
             <a class="navbar-brand" href="/">
                 <img src="/storage/assets/AEO 2023White.png" alt="" width="100">
             </a>
-            <a class=" toggle-wrapper rounded p-2" >
-                <span class="navbar-toggler-icon m-0 h5 " id="show-sidebar" style="cursor: pointer;"> </span>
+            <a class=" toggle-wrapper rounded p-2 text-white" >
+                {{-- <span class="navbar-toggler-icon m-0 h5 " id="show-sidebar" style="cursor: pointer;"> </span> --}}
+                <span class="navbar-toggler-icon m-0 h5 text-white " id="show-sidebar" style="cursor: pointer;"> </span>
             </a>
         </div>
         <button class="navbar-toggler border" type="button" data-bs-target="#navbar-menu" data-bs-toggle="collapse"
@@ -18,13 +19,13 @@
                 <li class="nav-item active m-1">
                     <a href="/" class="btn btn-block px-3 nav-text nav-btn text-white">Home</a>
                 </li>
-                <li class="nav-item active m-1">
+                {{-- <li class="nav-item active m-1">
                     <a href="#" class="btn btn-block px-3 nav-text nav-btn text-white">About Us</a>
-                </li>
+                </li> --}}
        
-                    <li class="nav-item active m-1">
-                        <a href="/#merchandise" class="btn btn-block px-3 nav-text nav-btn text-white">Merchandise</a>
-                    </li>
+                {{-- <li class="nav-item active m-1">
+                    <a href="/#merchandise" class="btn btn-block px-3 nav-text nav-btn text-white">Merchandise</a>
+                </li> --}}
                 <li class="nav-item active m-1">
                     <a href="#footer" class="btn btn-block px-3 nav-text nav-btn text-white">Contact</a>
                 </li>

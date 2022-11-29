@@ -1,9 +1,22 @@
 <x-layout>
     <style>
-
-
+        span.position-absolute{
+            top:-10px;
+            right:-20px;
+            width:20px;
+            height:20px;
+            cursor: pointer; 
+            font-size: 15px ;
+            transition: 0.5s;
+            padding: 10px;
+            color: #80679E;
+            border:2px solid  #F175AD !important;
+        }
+        span.position-absolute:hover{
+            background-color: #F175AD;
+            color:white;
+        }
     </style>
-
     <body>
         <x-navbar></x-navbar>
         <!-- ======= Header Section ======= -->
@@ -15,29 +28,24 @@
                             <hr class="w-25">
                         </div>
                         <h3 data-bs-aos="fade-up" class="aeo-title fs-2 mb-3">The 2023 Asian English Olympics</h3>
-                        <h1 data-bs-aos="fade-up" class='aeo-theme mb-4 display-5'>UNVEIL YOUR SPARK</h1>
+                        <h1 data-bs-aos="fade-up" class='aeo-theme  mb-4 display-5' style="letter-spacing:0.1em;">UNVEIL YOUR SPARK</h1>
                     </div>
-                    <div class="col-md-6  text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
-                        <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
-                        <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">13 January 2023 </h4>
-                        <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
-                            <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br>
-                                Days</div>
-                            <div class="col  bg-dark rounded me-2 p-2"><span id="cd-hours" class="fs-1 "></span>
-                                <br>Hours
-                            </div>
-                            <div class="col bg-dark rounded me-2 p-2"><span id="cd-minutes" class="fs-1 "></span><br>
-                                Minutes</div>
-                            <div class="col bg-dark rounded me-2 p-2"><span id="cd-seconds" class="fs-1 "></span>
-                                <br>Seconds
-                            </div>
-                            <div data-aos="fade-up" data-aos-delay="600">
-                                <div class="text-start text-lg-center ">
-                                    <a href="{{ route('register') }}"
-                                        class="btn action scrollto d-inline-flex align-items-center justify-content-center align-self-center text-center text-white text-decoration-none rounded-pill my-3 px-5 py-2 w-100">
-                                        <span class="fs-4 text-uppercase">Register now</span>
-                                        <i class="bi bi-arrow-right"></i>
-                                    </a>
+                        <div class="col-md-6  text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
+                            <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
+                            <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">13 January 2023 </h4>
+                            <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
+                                <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br> Days</div> 
+                                <div class="col  bg-dark rounded me-2 p-2"><span id="cd-hours" class="fs-1 "></span> <br>Hours</div> 
+                                <div class="col bg-dark rounded me-2 p-2"><span id="cd-minutes" class="fs-1 "></span><br> Minutes</div> 
+                                <div class="col bg-dark rounded me-2 p-2"><span id="cd-seconds" class="fs-1 "></span> <br>Seconds</div> 
+                                <div data-aos="fade-up" data-aos-delay="600" >
+                                    <div class="text-start text-lg-center ">
+                                        <a href="{{route('register')}}"
+                                            class="btn action scrollto d-inline-flex align-items-center justify-content-center align-self-center text-center text-white text-decoration-none rounded-pill my-3 px-5 py-2 w-100">
+                                            <span class="fs-4 text-uppercase">Register now</span>
+                                            <i class="bi bi-arrow-right"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -54,17 +62,17 @@
 
         <main id="main">
             <!-- ======= About Section ======= -->
-            <section id="about" class="about">
+            <section id="about" class="about d-flex align-items-center"  >
 
-                <div class="container" data-aos="fade-up">
+                <div class="container" data-aos="fade-up" >
 
-                    <div class=" d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class=" d-flex align-items-center flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
-                            <div class="w-25 custom-border rounded  my-2"></div>
-                            <h3 class="text-light">WHAT IS ASIAN ENGLISH OLYMPICS?</h3>
-                            <h2 class="pink">The Asian English Olympics (AEO) is one of Asia's</h2>
-                            <h2 class="light-green">most anticipated international English competitions.</h2>
-                            <p class='w-100 fs-5'>
+                           <div class="w-25 custom-border rounded  my-2" ></div>
+                            <h2 class="text-light pink fs-4" >WHAT IS ASIAN ENGLISH OLYMPICS?</h2>
+                            <h2 class="aeo-title ">The Asian English Olympics (AEO) is one of Asia's most anticipated international English competitions.</h2>
+                             
+                            <p class='w-100 fs-5' style="line-height:1.5em !important;">
                                 This event is conducted by Bina Nusantara English Club (BNEC), an english student
                                 organization of BINUS University in Jakarta, Indonesia. We began as a National English
                                 Olympics. With the passage of time, we have evolved into an Asian-scaled competition
@@ -93,12 +101,12 @@
                     <div class="d-flex justify-content-center">
                         <div class="w-25 custom-border rounded  my-2"></div>
                     </div>
-                    <h5 class="mt-3 fw-bold text-light">ABOUT ASIAN ENGLISH OLYMPICS</h5>
-                    <h1 class="fw-bold mt-3 c-text-1 c-text-about home_title">We are continuously spreading our impact
+                    <h5 class="mt-3 fw-bold text-light fs-4 ">ABOUT ASIAN ENGLISH OLYMPICS</h5>
+                    <h2 class="fw-bold mt-3 display-5" style="color:#ff99c7; font-family:lexend;">We are continuously spreading our impact
                         to all youths
                         across
                         Asia
-                    </h1>
+                    </h2>
                     <div class="counters row justify-content-center mt-5">
                         <div class="col-lg-3">
                             <h1 class="counter c-text-landing fw-bold text-light-gradient">11</h1>
@@ -134,17 +142,20 @@
             <section class='competition-fields' id='competition-fields'>
                 <div class="container text-center my-3">
                     <div class="d-flex justify-content-center">
-                        <div class="w-25 custom-border rounded  my-2"></div>
+                        <div class="w-25 custom-border rounded my-2"></div>
                     </div>
-                    <h1 class="mt-3 fw-bold ">COMPETITION FIELDS</h1>
+                    <h1 class="mt-3 fw-bold position-relative d-inline-block  ">COMPETITION FIELDS 
+
+                        <span class="d-flex justify-content-center align-items-center fs-6 position-absolute rounded-circle  fw-bold" title="see details" data-bs-toggle="modal" data-bs-target="#general-detail">!</span>
+                    </h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
 
-                    <div class="owl-carousel owl-theme d-flex">
+                    <div class="owl-carousel owl-theme d-flex mx-auto   " >
                         @foreach ($competitions as $competition)
-                            @if ($competition->name == 'Observer' || $competition->id == 'IA')
+                            @if ($competition->id == 'OBS' || $competition->id == 'IA')
                                 @continue
                             @endif
-                            <div class="item border border-1 rounded-20 w-75">
+                            <div class="item border border-1 mx-auto rounded-20 shadow-sm" style="width:90%;">
                                 <a>
                                     <div class="d-flex justify-content-center">
                                         <img src="storage/competition_logo/{{ $competition->logo }}"
@@ -179,7 +190,7 @@
                                         <h4 class="fw-bold">Price : {{ $competition->price }} IDR /
                                             {{ $competition->need_team ? 'team(s)' : 'person(s)' }}</h4>
                                         {{-- {!! $competition->content !!} --}}
-                                        <h5 class="text-danger">The rules will be determined soon</h5>
+                                        <h5 class="text-danger">To Be Announced</h5>
                                         <hr>
                                     </div>
                                 </div>
@@ -195,9 +206,9 @@
                 <div class="container">
                     <div class="d-flex justify-content-center">
                         <div class="w-25 custom-border rounded  my-2"></div>
-                    </div>
-                    <h1 class="mt-3 fw-bold text-center mb-4"> STEP BY STEP REGISTRATION</h1>
-                    <img src="/storage/assets/step-regist.webp" loading="lazy" class="img-fluid" alt="step-by-step">
+                     </div>
+                     <h1 class="mt-3 fw-bold text-center mb-4"> STEP BY STEP REGISTRATION</h1>
+                    <img src="/storage/assets/step-regist.webp" loading="lazy" class="img-fluid rounded-20 shadow-sm" alt="step-by-step">
 
                 </div>
             </section>
@@ -284,6 +295,8 @@
 
 
             <!-- ======= F.A.Q Section ======= -->
+
+{{--             
             <section id="faq" class="faq">
 
                 <div class="container" data-aos="fade-up">
@@ -341,6 +354,7 @@
                                         <button class="accordion-button collapsed" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#faq-content-3">
                                             Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, at!
                                         </button>
                                     </h2>
                                     <div id="faq-content-3" class="accordion-collapse collapse"
@@ -426,7 +440,9 @@
 
                 </div>
 
-            </section><!-- End F.A.Q Section -->
+            </section> --}}
+            
+            <!-- End F.A.Q Section -->
             <!-- ======= Sponsor ======= -->
             @if (count($sponsors) > 0)
                 <section id="sponsors" class="bg-white">
@@ -585,6 +601,92 @@
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
                 class="bi bi-arrow-up-short"></i></a>
+    
+        <div class="modal modal-lg fade" id="general-detail" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-20 border-0 shadow p-4">
+                    <div class="modal-headers border-bottom-0 p-3 ">
+                        <h1 class="text-uppercase fw-bold  text-center text-gradient " style="letter-spacing: 0.1em">General Rules </h1>
+                        <div class="d-flex justify-content-center">
+                            <div class="w-25 custom-border rounded mt-2 mb-4"></div>
+                        </div>
+                        <h2 class="text-gradient fw-bold">Competitions</h2>
+                        <p>
+                            There will be 7 different fields of competition, which are Speech, Newscasting, Storytelling, Debate, Spelling Bee, and Online Competition. All the fields of competition in the 2023 AEO will have the general rules that can be implemented in many kinds of the competition’s field. Hereby are the important general rules that should be mentioned to the participant by most of the competition’s fields.
+
+                        </p>
+                    </div>
+                    <div class="modal-body" style="margin-top:-20px;">
+                        <h2 class="text-gradient fw-bold">General Competition Rules</h2>
+                        <ul class="list-group" style="">
+                            <li class="list-group-item">Past champions of the Asian English Olympics are not allowed to join the same competition field that they have won before. But they are allowed to join other competition fields.   
+                            </li>
+                            <li class="list-group-item">Participants must re-register themselves before the technical meeting or opening ceremony to get their name tags and confirm their attendance.
+
+                            </li>
+                            <li class="list-group-item">Participants must come at least an hour before the Opening Ceremony, Breaking Announcement, Closing Ceremony and the competition rounds.
+
+                            </li>
+                            <li class="list-group-item">Participants are highly recommended to attend the coaching clinic to learn some tips and tricks from our judges regarding the rounds.
+
+                            </li>
+                            <li class="list-group-item"> Participants who don’t attend the technical meeting and coaching clinic won’t be guaranteed to get further information from the committee outside of those sessions.
+
+                            </li>
+
+                            <li class="list-group-item"> All participants must arrive at the waiting room at least 15 minutes before the competition starts.
+                            </li>
+
+                            <li class="list-group-item"> There will be a roll call before every round. All participants will be called 3 times when it’s their turn, before considered as a walk-out.
+
+                            </li>
+                            <li class="list-group-item">Participants should remain outside the performing room that is designated by the committee until they are called to perform.
+
+                            </li>
+                            <li class="list-group-item"> Judges may (in their discretion) deduct 3 points from the total score in one round for violation of rules (deduction for exceeding timing will be described in timing rules).
+
+                            </li>
+                            <li class="list-group-item"> 3 points will be deducted for each of violations, such as discriminating/insulting explicitly or implicitly any ethnicity, nation, and religion. 
+
+                            </li>
+                            <li class="list-group-item"> 3 points will be deducted for explicit content as well like pornography (for example mentioning about two people having an intercourse or describing some sensitive body part exaggeratedly) 
+
+                            </li>
+                            <li class="list-group-item"> Judges may also disqualify participants for gross misconduct or ineligibility.
+
+                            </li>
+                            <li class="list-group-item"> Properties categorized as sharp tools or dangerous weapons, liquids, or powders that can litter the performing room are strictly prohibited.
+
+                            </li>
+
+                            <li class="list-group-item">Participants are encouraged to bring their own stationery.
+                            </li>
+                            <li class="list-group-item">All judges’ decisions and results inside the result slips and ballots are considered final.
+                            </li>
+                            <li class="list-group-item">Participants are prohibited from bringing any script/notes during their performance on stage (except debate, speech in preliminary II, newscasting).
+                            </li>
+                            <li class="list-group-item">Participants are prohibited from being assisted by anyone else (friends, teachers, coaches, PICs, etc), except fellow teammates in Debate Competition.</li>
+                            <li class="list-group-item">Participants that perform any form of cheating will be disqualified.
+                            </li>
+                            <li class="list-group-item">Every payment done by the participant can’t be undone (no refund).
+                            </li>
+                            <li class="list-group-item">No electronic devices allowed during competition(Preparation room, performing room, after performing room).
+                            </li>
+                            <li class="list-group-item">The rules of the competition might change, if the changes did happen, the committee will provide notifications of the rules change in the AEO Website.
+                            </li>
+                        </ul>
+                        
+                    </div>
+                    <div class="modal-footers text-center">
+                        <button type="button"
+                            class="btn btn-success rounded-pill rounded-20 mb-4 px-4"
+                            data-bs-dismiss="modal">
+                            OK, I got it
+                        </button>
+                    </div>
+                </div>
+            </div>  
+            </div>  
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
@@ -616,15 +718,7 @@
 
             }
         });
-        owl.on('mousewheel', '.owl-stage', function(e) {
-            if (e.deltaY > 0) {
-                owl.trigger('next.owl');
-            } else {
-                owl.trigger('prev.owl');
-            }
-            e.preventDefault();
-        });
-
+ 
         let timer = function(date) {
             let timer = Math.round(new Date(date).getTime() / 1000) - Math.round(new Date().getTime() / 1000);
             let minutes, seconds;

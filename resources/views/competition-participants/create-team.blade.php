@@ -4,6 +4,8 @@
         <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">{{$competitionSlot->Competition->name}} Participant Registration</h3>
         <form action="{{route('competition-participants.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
+            {{-- {{dd($competitionSlot->competition->max_people)}} --}}
+            @php($maxPeople = $competitionSlot->competition->max_people )
             @for ($i = $totalTeams; $i <= 2; $i++)
                 @if ($competitionSlot->quantity + $totalTeams <= $i )
                     @break
@@ -51,8 +53,8 @@
                                 <div class="col">
                                     <div class="form-group mb-3">
                                         <label for="nama{{$j}}{{$i}}" class="col-form-label">Name<span class="text-danger">*</span></label>
-                                        <input type="text"  class="form-control"  name="nama[]" id="nama{{$j}}{{$i}}" value="{{old('nama.'.$j+($i-$totalTeams)*5)}}" required>
-                                        @if ($errors->has('nama.'.$j+($i-$totalTeams)*5))
+                                        <input type="text"  class="form-control"  name="nama[]" id="nama{{$j}}{{$i}}" value="{{old('nama.'.$j+($i-$totalTeams)*$maxPeople)}}" required>
+                                        @if ($errors->has('nama.'.$j+($i-$totalTeams)*$maxPeople))
                                         <span class="invalid feedback text-danger"role="alert">
                                             <strong>*{{ $errors->first('nama.*') }}.</strong>
                                         </span>
@@ -61,8 +63,8 @@
     
                                     <div class="form-group mb-3">
                                         <label for="email{{$j}}{{$i}}" class="col-form-label">Email Address<span class="text-danger">*</span></label>
-                                        <input type="email"  class="form-control"  name="email[]" id="email{{$j}}{{$i}}" value="{{old('email.'.$j+($i-$totalTeams)*5)}}" required>
-                                        @if ($errors->has('email.'.$j+($i-$totalTeams)*5))
+                                        <input type="email"  class="form-control"  name="email[]" id="email{{$j}}{{$i}}" value="{{old('email.'.$j+($i-$totalTeams)*$maxPeople)}}" required>
+                                        @if ($errors->has('email.'.$j+($i-$totalTeams)*$maxPeople))
                                         <span class="invalid feedback text-danger"role="alert">
                                             <strong>*{{ $errors->first('email.*') }}.</strong>
                                         </span>
@@ -73,16 +75,16 @@
                                         <label for="gender{{$j}}{{$i}}" class="col-form-label">Gender<span class="text-danger">*</span></label>
                                         <select class="form-select"  name="gender[]" id="gender{{$j}}{{$i}}" required>
                                             <option selected class="d-none">Select participant's gender...</option>
-                                            <option value="Male" {{old('gender.'.$j+($i-$totalTeams)*5) == 'Male' ? 'selected':''}}>Male</option>
-                                            <option value="Female" {{old('gender.'.$j+($i-$totalTeams)*5) == 'Female' ? 'selected':''}}>Female</option>
+                                            <option value="Male" {{old('gender.'.$j+($i-$totalTeams)*$maxPeople) == 'Male' ? 'selected':''}}>Male</option>
+                                            <option value="Female" {{old('gender.'.$j+($i-$totalTeams)*$maxPeople) == 'Female' ? 'selected':''}}>Female</option>
                                         </select>
                                     </div>  
                                     
                                     <div class="form-group mb-3">
                                         <label for="additional_notes{{$j}}{{$i}}" class="col-form-label">Additional Notes</label>
-                                        <textarea class="form-control text-area"  name="additional_notes[]"  id="additional_notes{{$j}}{{$i}}" rows="2">{{old('additional_notes.'.$j+($i-$totalTeams)*5)}}</textarea>
+                                        <textarea class="form-control text-area"  name="additional_notes[]"  id="additional_notes{{$j}}{{$i}}" rows="2">{{old('additional_notes.'.$j+($i-$totalTeams)*$maxPeople)}}</textarea>
 
-                                        @if ($errors->has('additional_notes.'.$j+($i-$totalTeams)*5))
+                                        @if ($errors->has('additional_notes.'.$j+($i-$totalTeams)*$maxPeople))
                                             <span class="invalid feedback text-danger"role="alert">
                                                 <strong>*{{ $errors->first('additional_notes.*') }}.</strong>
                                             </span>
@@ -93,8 +95,8 @@
                                 <div class="col">
                                     <div class="form-group mb-3">
                                         <label for="phone{{$j}}{{$i}}" class="col-form-label">Phone Number (WA)<span class="text-danger">*</span></label>
-                                        <input type="text"  class="form-control"  name="phone[]" id="phone{{$j}}{{$i}}" value="{{old('phone.'.$j+($i-$totalTeams)*5)}}" placeholder="" required >
-                                        @if ($errors->has('phone.'.$j+($i-$totalTeams)*5))
+                                        <input type="text"  class="form-control"  name="phone[]" id="phone{{$j}}{{$i}}" value="{{old('phone.'.$j+($i-$totalTeams)*$maxPeople)}}" placeholder="" required >
+                                        @if ($errors->has('phone.'.$j+($i-$totalTeams)*$maxPeople))
                                         <span class="invalid feedback text-danger"role="alert">
                                             <strong>*{{ $errors->first('phone.*') }}.</strong>
                                         </span>
@@ -103,8 +105,8 @@
     
                                     <div class="form-group mb-3">
                                         <label for="birth{{$j}}{{$i}}" class="col-form-label">Date of Birth <span class="text-danger">*</span> <span class="text-muted">(yyyy-mm-dd)</span></label>
-                                        <input type="text"  class="form-control"  name="birth[]" id="birth{{$j}}{{$i}}"  placeholder="e.g. 2022-10-12" value="{{old('birth.'.$j+($i-$totalTeams)*5)}}" required>
-                                        @if ($errors->has('birth.'.$j+($i-$totalTeams)*5))
+                                        <input type="text"  class="form-control"  name="birth[]" id="birth{{$j}}{{$i}}"  placeholder="e.g. 2022-10-12" value="{{old('birth.'.$j+($i-$totalTeams)*$maxPeople)}}" required>
+                                        @if ($errors->has('birth.'.$j+($i-$totalTeams)*$maxPeople))
                                         <span class="invalid feedback text-danger"role="alert">
                                             <strong>*{{ $errors->first('birth.*') }}.</strong>
                                         </span>
@@ -115,8 +117,8 @@
                                         <label for="vegetarian{{$j}}{{$i}}" class="col-form-label">Is This Participant Vegetarian ? <span class="text-danger">*</span></label>
                                         <select class="form-select"  name="vegetarian[]" id="vegetarian{{$j}}{{$i}}" required>
                                             <option selected class="d-none">choose...</option>
-                                            <option value="1" {{old('vegetarian.'.$j+($i-$totalTeams)*5) == '1' ? 'selected':''}}>Vegetarian</option>
-                                            <option value="0" {{old('vegetarian.'.$j+($i-$totalTeams)*5) == '0' ? 'selected':''}}>Non-Vegetarian</option>
+                                            <option value="1" {{old('vegetarian.'.$j+($i-$totalTeams)*$maxPeople) == '1' ? 'selected':''}}>Vegetarian</option>
+                                            <option value="0" {{old('vegetarian.'.$j+($i-$totalTeams)*$maxPeople) == '0' ? 'selected':''}}>Non-Vegetarian</option>
                                         </select>
                                     </div>     
     
@@ -124,7 +126,7 @@
                                         <label for="profile_picture{{$j}}{{$i}}" class="col-form-label">Profile Picture<span class="text-danger">*</span></label>
                                         <input type="file" class="form-control"  name="profile_picture[]" id="profile_picture{{$j}}{{$i}}" accept="image/png,image/jpeg,image/jpg" required>     
                                         <small class="text-danger" style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
-                                        @if ($errors->has('profile_picture.'.$j+($i-$totalTeams)*5))
+                                        @if ($errors->has('profile_picture.'.$j+($i-$totalTeams)*$maxPeople))
                                         <span class="invalid feedback text-danger"role="alert">
                                             <strong>*{{ $errors->first('profile_picture.*') }}.</strong>
                                         </span>

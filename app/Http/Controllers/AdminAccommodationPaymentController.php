@@ -22,10 +22,17 @@ class AdminAccommodationPaymentController extends Controller
     public function index()
     {
         $accommodationPayment = AccommodationPayment::join('accommodation_slot_details', 'accommodation_payments.id', '=', 'accommodation_slot_details.payment_id')
-        ->join('users', 'accommodation_payments.pic_id', '=', 'users.id')
+        ->join('users', 'accommodation_slot_details.pic_id', '=', 'users.id')
         ->join('accommodations', 'accommodation_slot_details.accommodation_id', '=', 'accommodations.id')
-        ->select('accommodation_payments.*', 'users.*','accommodation_payments.created_at','accommodation_payments.id as id', 'payment_proof', 'accommodations.room_type')
+        ->select(
+            'accommodation_payments.*', 
+            'users.*',
+            'accommodation_payments.created_at',
+            'accommodation_payments.id as id', 
+            'accommodations.room_type',
+            'payment_proof')
         ->get();
+
 
         $pending =  $accommodationPayment->where('is_confirmed', 0);
         $confirmed =  $accommodationPayment->where('is_confirmed', 1);
@@ -48,7 +55,7 @@ class AdminAccommodationPaymentController extends Controller
         $confirmedMail = [
             'subject' =>"Confirmed Accommodation Payment",
             'name'=>$accommodationPayment->user->pic_name,
-            'body1' => 'With this email, Your payment for your accommodation slot has been confirmed.', 
+            'body1' => 'With this email, your payment for your accommodation slot has been confirmed.', 
             'body2' => 'We also like to inform you to continue to the Guest Registration step by clicking this link below.',
             'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-3'
 

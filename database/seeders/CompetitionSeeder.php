@@ -22,7 +22,7 @@ class CompetitionSeeder extends Seeder
                 'name' => 'Debate',
                 'fixed_quota' => 100,
                 'temp_quota' => 100,
-                'price' => 850,
+                'price' => 850000,
                 'content' => 'Content DB',
                 'logo' => 'logoDB.webp',
                 'need_submission' => 0,
@@ -110,7 +110,7 @@ class CompetitionSeeder extends Seeder
             [
                 'created_by' => 'Admin-IT',
                 'id' => 'OBS',
-                'name' => 'Observer',
+                'name' => 'Spectator',
                 'fixed_quota' => 10,
                 'temp_quota' => 10,
                 'price' => 450000,

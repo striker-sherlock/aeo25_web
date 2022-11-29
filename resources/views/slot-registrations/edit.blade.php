@@ -19,6 +19,7 @@
                     <form action="{{route('slot-registrations.update',$competitionSlot)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method("PUT")
+                        <input type="text" hidden value="{{$competitionSlot->competition->id }}" name="compet_id">
                          <tr>
                             <th>{{$competitionSlot->competition->name}}</th>
                             <th>
