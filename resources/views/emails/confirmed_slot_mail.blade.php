@@ -3,19 +3,17 @@ CONGRATULATIONS {{ $name }} ! <br>
 
 {{$body1}} <br>
 {{ $body2 }}<br>
-
 @component('mail::button', ['url' => $url])
 Go to Website
 @endcomponent <br>
  
 
 Best Regards,<br>
-Someone's Name (Ms.) <br>
-Staff of Fundraising Division <br>
-Phone    : +62-812-8355-2223 <br>
-Email    : someone's_email@binus.ac.id <br>
-<img src="https://socialevent.mybnec.org/storage/images/assets/AEO-2023Colored.png" alt="" width="50%"> <br>
+Email    :<br> 
+contact.aeointernational@gmail.com<br>
+contact.aeointernational@gmail.com <br>
+<img src="https://uat.aeo.mybnec.org/storage/assets/AEO-2023-Colored.png" alt="" width="50%"> <br>
 {{ config('app.name') }} <br>
 Jakarta | Indonesia <br>
-Website : www.socialevent.mybnec.org <br>
+Website : www.aeo.mybnec.org <br>
 @endcomponent

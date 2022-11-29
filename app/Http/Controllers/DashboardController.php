@@ -98,7 +98,7 @@ class DashboardController extends Controller
 
         if ($step == 2){
             // jika step-1 belum di confirmasi atau belom dilewati maka, kembali ke dashboard
-            $confirmedSlot = CompetitionSlot::orderBy('payment_id')->where('pic_id',Auth::user()->id)->get();
+            $confirmedSlot = CompetitionSlot::orderBy('payment_id','desc')->where('pic_id',Auth::user()->id)->get();
             if ($confirmedSlot->count() == 0) return redirect()->back()->with('error','You have to make slot registration first');
 
             $confirmedSlot = $confirmedSlot->where('is_confirmed',1);
@@ -111,6 +111,7 @@ class DashboardController extends Controller
                         ->where('competition_slot_details.pic_id',Auth::user()->id)
                         ->where('competition_payments.is_confirmed','!=',NULL)
                         ->select('competition_payments.is_confirmed as is_confirmed','competition_payments.id as id','competitions.id as competition_id','competition_payments.created_at','competitions.name','competitions.need_team','quantity','competition_payments.updated_at as updated_at')
+                        ->orderBy('competition_payments.is_confirmed','asc')
                         ->get();
 
             
@@ -134,7 +135,7 @@ class DashboardController extends Controller
             $competitionPayment = $competitionPayment->where('is_confirmed',1);
             if ($competitionPayment->count() == 0 )return redirect()->back()->with('error','Please wait your payment to be confirmed');
             
-            $competitionSlots = CompetitionSlot::where('pic_id',Auth::user()->id)->get();
+            $competitionSlots = CompetitionSlot::where('pic_id',Auth::user()->id)->get()->where('is_confirmed',1);
             $competitionParticipant  = CompetitionParticipant::where('pic_id', Auth::user()->id)->get();
              
             return view('dashboards.step-three',[

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 class UserCompetitionPaymentController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'verified']);
+        $this->middleware('auth', ['verified']);
         $this->middleware('IsShowed:ENV007');
     }
 
@@ -103,7 +103,7 @@ class UserCompetitionPaymentController extends Controller
         }
         $payment = CompetitionPayment::create([
             'pic_id' => Auth::user()->id,
-            'payment_provider_id' => $request->payment_provider,
+            'payment_provider_id' => $request->payment_provider ? $request->payment_provider : 18,
             'account_name' => $request->account_name,
             'account_number' => $request->account_number,
             'email' => $request->email,

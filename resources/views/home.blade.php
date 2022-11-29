@@ -54,9 +54,9 @@
                     <div class=" d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
                            <div class="w-25 custom-border rounded  my-2"></div>
-                            <h3 class="text-light">WHAT IS ASIAN ENGLISH OLYMPICS?</h3>
-                            <h2 class="pink">The Asian English Olympics (AEO) is one of Asia's</h2>
-                            <h2 class="light-green">most anticipated international English competitions.</h2>
+                            <h2 class="text-light pink fs-4" >WHAT IS ASIAN ENGLISH OLYMPICS?</h2>
+                            <h2 class="aeo-title">The Asian English Olympics (AEO) is one of Asia's most anticipated international English competitions.</h2>
+                             
                             <p class='w-100 fs-5'>
                                 This event is conducted by Bina Nusantara English Club (BNEC), an english student
                                 organization of BINUS University in Jakarta, Indonesia. We began as a National English
@@ -87,7 +87,7 @@
                        <div class="w-25 custom-border rounded  my-2"></div>
                     </div>
                     <h5 class="mt-3 fw-bold text-light">ABOUT ASIAN ENGLISH OLYMPICS</h5>
-                    <h1 class="fw-bold mt-3 c-text-1 c-text-about home_title">We are continuously spreading our impact
+                    <h1 class="text-gradient fw-bold mt-3 c-text-1 c-text-about home_title ">We are continuously spreading our impact
                         to all youths
                         across
                         Asia
@@ -132,12 +132,12 @@
                     <h1 class="mt-3 fw-bold ">COMPETITION FIELDS</h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
 
-                    <div class="owl-carousel owl-theme d-flex">
+                    <div class="owl-carousel owl-theme d-flex mx-auto " >
                         @foreach ($competitions as $competition)
                             @if ($competition->name == 'Observer' || $competition->id == 'IA')
                                 @continue
                             @endif
-                            <div class="item border border-1 rounded-20 w-75">
+                            <div class="item border border-1  rounded-20 shadow-sm" style="width:90%;">
                                 <a>
                                     <div class="d-flex justify-content-center">
                                         <img src="storage/competition_logo/{{ $competition->logo }}" class="img-fluid w-50"
@@ -184,7 +184,7 @@
                         <div class="w-25 custom-border rounded  my-2"></div>
                      </div>
                      <h1 class="mt-3 fw-bold text-center mb-4"> STEP BY STEP REGISTRATION</h1>
-                    <img src="/storage/assets/step-regist.webp" loading="lazy" class="img-fluid" alt="step-by-step">
+                    <img src="/storage/assets/step-regist.webp" loading="lazy" class="img-fluid rounded-20 shadow-sm" alt="step-by-step">
 
                 </div>
             </section>
@@ -600,15 +600,7 @@
 
             }
         });
-        owl.on('mousewheel', '.owl-stage', function(e) {
-            if (e.deltaY > 0) {
-                owl.trigger('next.owl');
-            } else {
-                owl.trigger('prev.owl');
-            }
-            e.preventDefault();
-        });
-
+ 
         let timer = function(date) {
             let timer = Math.round(new Date(date).getTime() / 1000) - Math.round(new Date().getTime() / 1000);
             let minutes, seconds;

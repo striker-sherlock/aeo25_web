@@ -7,7 +7,9 @@ use App\Models\AccommodationSlot;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Arr;
+use App\Mail\RejectionMail;
 use Illuminate\Http\Request;
+use App\Mail\ConfirmedSlotMail;
 use Carbon\Carbon;
 
 class AccommodationSlotRegistrationController extends Controller
@@ -22,6 +24,11 @@ class AccommodationSlotRegistrationController extends Controller
     {
         $pending = AccommodationSlot::where('is_confirmed', 0)->get();
         $confirmed = AccommodationSlot::where('is_confirmed', 1)->get();
+        $confirmed = AccommodationSlot::leftJoin('accommodation_payments','accommodation_slot_details.payment_id','accommodation_payments.id')
+            ->where('accommodation_slot_details.is_confirmed',1)
+            ->Where('accommodation_slot_details.payment_id', NULL)
+            ->select('accommodation_slot_details.*')
+            ->get();
         $rejected = AccommodationSlot::where('is_confirmed', -1)->get();
     
         return view('accommodation-slot-registrations.index', [
@@ -123,7 +130,16 @@ class AccommodationSlotRegistrationController extends Controller
             'is_confirmed' => 1,
             'confirmed_at' => Carbon::now(),
         ]);
-        return redirect()->route('accommodation-slot-registrations.index');
+        $confirmedMail = [
+            'subject' => $accommodationSlot->accommodation->room_type. " - Confirmed Slot",
+            'name'=>$accommodationSlot->user->pic_name,
+            'body1'=>'We are grateful to inform you that your '.$accommodationSlot->accommodation->room_type .' slot registration has been confirmed.',
+            'body2'=>'Please proceed to the payment for your slot by clicking the button below.',
+            'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-2'
+
+        ];
+        Mail::to($accommodationSlot->user->email)->send(new ConfirmedSlotMail($confirmedMail));
+        return redirect()->route('accommodation-slot-registrations.index')->with('success','accommodation is successfuly confirmed');
     }
 
     public function cancel (AccommodationSlot $accommodationSlot){
@@ -133,12 +149,22 @@ class AccommodationSlotRegistrationController extends Controller
         ]);
         return redirect()->route('accommodation-slot-registrations.index');
     }
-    public function reject ( AccommodationSlot $accommodationSlot){
-       
+    public function reject ( Request $request){
+        $accommodationSlot = AccommodationSlot::find($request->slot);
         $accommodationSlot ->update([
-            'updated_by' => 'Admin',
+            'updated_by' => Auth::guard('admin')->user()->name,
             'is_confirmed' => -1
         ]);
-        return redirect()->route('accommodation-slot-registrations.index');
+        $rejectMail = [
+            'subject' => $accommodationSlot->accommodation->room_type. " - Rejection Slot",
+            'name'=>$accommodationSlot->user->pic_name,
+            'body1'=>'We are regretful to inform you that your '.$accommodationSlot->accommodation->room_type.' slot has been rejected with the following reason: ',
+            'body2'=>'You can edit your slot registration again by going into the registration step on our website.',
+            'reason' => $request->reason,
+            'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-1',
+
+        ];
+        Mail::to($accommodationSlot->user->email)->send(new RejectionMail($rejectMail));
+        return redirect()->route('accommodation-slot-registrations.index')->with('success', 'Accommodation is successfuly rejected');
     }
 }

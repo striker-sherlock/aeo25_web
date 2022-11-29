@@ -52,7 +52,7 @@ class AdminCompetitionPaymentController extends Controller
         $competitionSlots = $competitionPayment->competitionSlot;
 
         foreach($competitionSlots as $competitionSlot){
-            if($comptitionSlot->competition->fixed_quota < $competitionSlot->quantity) return redirect()->back()->with('error' ,'Confirmation failed,'.$competitionSlot->competition->name."'s fixed quota is not enough ");
+            if($competitionSlot->competition->fixed_quota < $competitionSlot->quantity) return redirect()->back()->with('error' ,'Confirmation failed,'.$competitionSlot->competition->name."'s fixed quota is not enough ");
         }
         
         foreach ($competitionSlots as $competitionSlot) {
@@ -92,7 +92,6 @@ class AdminCompetitionPaymentController extends Controller
             ]);
         }
 
-        
         $competitionPayment ->update([
             'is_confirmed' => 0,
             'updated_by' => Auth::guard('admin')->user()->name,
@@ -117,11 +116,11 @@ class AdminCompetitionPaymentController extends Controller
 
         $rejectMail = [
             'subject' => "Competition Payment Rejection",
-            'name'=>$competitionPayment->user->name,
+            'name'=>$competitionPayment->user->pic_name,
             'body1'=>'We are regretful to inform you that your payment for competition slot has been rejected with the reason below: ',
             'body2'=>'You can edit your payment again by going into the payment step on our website.',
             'reason' => $request->reason,
-
+            'url' => 'http://aeo.mybnec.org/dashboard/step-2',
         ];
         Mail::to($competitionPayment->user->email)->send(new RejectionMail($rejectMail));
         return redirect()->back()->with('success', 'Payment is Successfuly rejected');

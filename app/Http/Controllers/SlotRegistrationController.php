@@ -170,8 +170,8 @@ class SlotRegistrationController extends Controller
 
         $confirmedMail = [
             'subject' => $competitionSlot->competition->name. " - Confirmed Slot",
-            'name'=>$competitionSlot->competition->name,
-            'body1'=>'We are grateful to inform you that your slot registration has been confirmed.',
+            'name'=>$competitionSlot->user->pic_name,
+            'body1'=>'We are grateful to inform you that your '.$competitionSlot->competition->name.' slot registration has been confirmed.',
             'body2'=>'Please proceed to the payment for your slot by clicking the button below.',
             'url' => 'http://aeo.mybnec.org/dashboard/step-2'
 
@@ -197,25 +197,22 @@ class SlotRegistrationController extends Controller
         //admin kasi alasan kenapa di reject
         $competitionSlot = CompetitionSlot::find($request->slot);
         $competitionSlot ->update([
-            'updated_by' => 'Admin',
+            'updated_by' => Auth::guard('admin')->user()->name,
             'is_confirmed' => -1
         ]);
 
         $rejectMail = [
             'subject' => $competitionSlot->competition->name. " - Rejection Slot",
-            'name'=>$competitionSlot->competition->name,
-            'body1'=>'We are regretful to inform you that your competition slot has been rejected with the following reason: ',
+            'name'=>$competitionSlot->user->pic_name,
+            'body1'=>'We are regretful to inform you that your '.$competitionSlot->competition->name.' slot has been rejected with the following reason: ',
             'body2'=>'You can edit your slot registration again by going into the registration step on our website.',
             'reason' => $request->reason,
-            'url' => 'http://aeo.mybnec.org/dashboard/step-1'
+            'url' => 'http://aeo.mybnec.org/dashboard/step-1',
 
         ];
         Mail::to($competitionSlot->user->email)->send(new RejectionMail($rejectMail));
         return redirect()->route('slot-registrations.index');
 
-        
-
-        return redirect()->route('slot-registrations.index');
     }
     
     

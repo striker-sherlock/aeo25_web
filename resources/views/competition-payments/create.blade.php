@@ -68,7 +68,7 @@
             <ul class="nav nav-pills d-flex justify-content-around mb-3">
                 <li class=""><a data-bs-toggle="pill" href="#bank" class="btn btn-outline-primary rounded-pill me-3 d-block w-100 bank {{old('type') == "bank" ? 'show active':''}}">Bank Transfer</a></li>
 
-                <li class=""><a data-bs-toggle="pill" href="#wise" class="btn btn-outline-primary rounded-pill me-3 d-block w-100 wise {{old('type') == "wise" ? 'show active':''}}"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a></li>
+                <li class=""><a data-bs-toggle="pill" href="#wise" class="btn btn-outline-primary rounded-pill me-3 d-block w-100 wise {{old('type') == "wise" ? 'show':''}}"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a></li>
  
               
               </ul>
@@ -86,7 +86,7 @@
                     <div id="bank" class="tab-pane fade {{old('type') == "bank" ? 'show active':''}}">
                         <div class="form-group mb-2">
                             <label for="payment_provider" class="col-form-label">Bank Name<span class="text-danger">*</span></label>
-                            <select class="form-select"  name="payment_provider" id="payment_provider" required >  
+                            <select class="form-select"  name="payment_provider" id="payment_provider" >  
                                 <option selected class="d-none" disabled> select bank ... </option>
                                 @foreach ($paymentProviders as $paymentProvider)
                                     <option value="{{$paymentProvider->id}}" {{old('payment_provider') == $paymentProvider->id? 'selected' : ''}}>{{$paymentProvider->name}}</option>
@@ -166,8 +166,10 @@
             document.querySelector('input[name="account_number"]').setAttribute('required','');
             document.querySelector('select[name="payment_provider"]').setAttribute('required','');
             document.querySelector('input[name="transfer_proof_bank"]').setAttribute('required','');
+
             document.querySelector('input[name="email"]').removeAttribute('required');
             document.querySelector('input[name="track"]').removeAttribute('required');
+            document.querySelector('input[name="transfer_proof_wise"]').removeAttribute('required');
 
             //reset value yang ada di wise
             document.querySelector('input[name="email"]').value = "";
@@ -180,7 +182,7 @@
             document.querySelector('input[name="email"]').setAttribute('required','');
             document.querySelector('input[name="track"]').setAttribute('required','');
             document.querySelector('input[name="transfer_proof_wise"]').setAttribute('required','');
-
+            
             document.querySelector('select[name="payment_provider"]').removeAttribute('required','');
             document.querySelector('input[name="transfer_proof_bank"]').removeAttribute('required','');
             document.querySelector('input[name="account_name"]').removeAttribute('required');
@@ -190,7 +192,7 @@
             document.querySelector('input[name="account_name"]').value = "";
             document.querySelector('input[name="account_number"]').value = "";
             document.querySelector('input[name="transfer_proof_bank"]').value = "";
-            document.querySelector('select[name="payment_provider"]').value = "select bank ...";
+            document.querySelector('select[name="payment_provider"]').value = 18;
             
         })
     </script>

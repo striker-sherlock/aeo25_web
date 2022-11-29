@@ -7,7 +7,7 @@
 <nav id="sidebar-admin" class="sidebar-wrapper h-100 mh-100 fixed-top bg-gradient-blue pr-0">
     <div class="sidebar-content">
         <div class="sidebar-brand text-end row my-2 py-2 me-2"  style="padding: 0.15rem;">
-                <span class=" ms-auto me-4  rounded burgerIcon" id="close-sidebar" style="cursor: pointer;">
+                <span class=" ms-auto me-4  rounded-circle burgerIcon" id="close-sidebar" style="cursor: pointer;">
                     <i class=" fa-solid fa-bars fa-lg text-white "></i> 
                 </span> 
         </div>

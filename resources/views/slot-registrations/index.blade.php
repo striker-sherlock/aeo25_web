@@ -76,7 +76,7 @@
 
         {{-- confirmed --}}
         <x-card>
-            <h2 class="mb-3 text-success fw-bold">Confirmed Slot Registration </h2>
+            <h2 class="mb-3 text-success fw-bold">Confirmed Slot Registration (Unpaid) </h2>
             @if ($confirmed->count())
                 <table class="table table-striped table-bordered dataTables" id="">
                     <thead class="text-center">
@@ -117,7 +117,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                < 
+         
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -170,7 +170,7 @@
                         @csrf
                         <div class="form-gruop mb-3">
                             <label for="reason" class="col-form-label">State The Reason<span class="text-danger">*</span></label>
-                            <textarea class="form-control text-area" name="reason"  id="reason" rows="3"></textarea>
+                            <textarea class="form-control text-area" name="reason"  id="reason" rows="3"></textarea required>
                         </div>
 
                         <input type="text" name="slot" value="{{$competition->id}}" hidden>
@@ -191,6 +191,7 @@
         </div>
     @endforeach
 
+    {{-- modal untuk confirm --}}
     @foreach ($pending as $competition)
         <div class="modal fade p-4" id="confirm{{$competition->id}}" tabindex="-1" role="dialog" >
             <div class="modal-dialog modal-dialog-centered" role="document">

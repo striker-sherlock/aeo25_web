@@ -1,8 +1,8 @@
 <nav id="sidebar-user" class="sidebar-wrapper h-100 mh-100 fixed-top bg-gradient-blue pr-0">
     <div class="sidebar-content">
         <div class="sidebar-brand text-end row my-2 py-2" style="padding: 0.15rem;">
-            <span class="c-text-1 ms-auto me-4" id="close-sidebar" style="cursor: pointer;">
-                <i class="fas fa-arrow-alt-circle-left fa-lg text-white"></i>
+            <span class=" ms-auto me-4  rounded burgerIcon" id="close-sidebar" style="cursor: pointer;">
+                <i class="fa-solid fa-x me-3 fa-lg text-white"></i>
             </span> 
         </div>
         <div class="sidebar-header " style="height: auto; padding: 0.5rem 1rem;">
