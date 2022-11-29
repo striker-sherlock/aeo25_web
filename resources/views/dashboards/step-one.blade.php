@@ -12,7 +12,6 @@
         <x-card>
             <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Registered Competition's Slot</h3>
             <a href="{{route('slot-registrations.create')}}" class="btn btn-outline-theme rounded-pill me-2 ">Add Competition Slot Registration</a>   
-            <a href="{{route('slot-registrations.create-other')}}" class="btn btn-outline-theme rounded-pill" title="Spectators and Independent Adjudicators">Add Other Slot Registration</a>   
             <hr>
             @if ($competitionSlots->count())
             <div class="row">
