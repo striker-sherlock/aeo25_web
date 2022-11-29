@@ -40,7 +40,7 @@
                 </div>
                 @endforeach         
             </div>
-            <a class="btn btn-outline-theme w-100 rounded mb-4 rounded-pill" data-bs-toggle ="modal" data-bs-target="#modal" >submit</a>
+            <a class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill" data-bs-toggle ="modal" data-bs-target="#modal" >Submit</a>
        
         </div>
 

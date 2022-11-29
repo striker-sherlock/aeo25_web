@@ -64,12 +64,21 @@ class SlotRegistrationController extends Controller
             ->where('competition_slot_details.is_confirmed',1)
             ->distinct('competitions.id')
             ->count();
-        $registeredSpectators = CompetitionSlot::where('pic_id', Auth::user()->id)->where('competition_id','OBS ')->sum('quantity');
+        $registeredSpectators = CompetitionSlot::where('pic_id', Auth::user()->id)->where('competition_id','OBS')->sum('quantity');
+        $maxIA = CompetitionSlot::where('pic_id',Auth::user()->id)
+            ->get()
+            ->where('competition_id','DB')
+            ->where('is_confirmed',1)
+            ->sum('quantity')-1;
+        $registeredIA =CompetitionSlot::where('pic_id', Auth::user()->id)->where('competition_id','IA')->sum('quantity');
+        $maxIA -= $registeredIA;
+    // dd($maxIA);
         // dd($registeredSpectators->sum('quantity'));
         return view('slot-registrations.create-other',[
             'competitions' => $competitions,
             'competSlot' => $competSlot,
-            'registeredSpectators' =>$registeredSpectators
+            'registeredSpectators' =>$registeredSpectators,
+            'maxIA' => $maxIA,
         ]);
     }
     

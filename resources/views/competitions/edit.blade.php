@@ -26,7 +26,7 @@
     
                     <div class="form-group mb-3">
                       <label class="col-form-label" for="content">Content <span class="text-danger">*</span></label>
-                      <textarea class="form-control text-area" name="content" rows="3" id="content" placeholder="Enter Content" value="{{ $competition->content }}"></textarea>
+                      <textarea class="form-control text-area" name="content" rows="3" id="content" placeholder="Enter Content"  >{{ $competition->content }}</textarea>
                     </div>
                   </div>
                   <div class="col-md-6">

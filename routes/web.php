@@ -201,6 +201,9 @@ Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuestControll
 Route::controller(AdminAccommodationGuestController::class)->prefix('guests')->name('accommodation-guests.')->group(function () {
     Route::get('{roomType?}', 'index')->name('index');
     Route::put('update/{id}', 'update')->name('update');
+    Route::delete('destroy/{accommodationGuest}', 'destroy')->name('destroy');
+    Route::delete('delete/{accommodationGuest}', 'delete')->name('delete');
+    Route::get('restore/{accommodationGuest}', 'restore')->name('restore');
 });
 
 // Institution Contact

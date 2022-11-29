@@ -116,11 +116,12 @@ class AccommodationSlotRegistrationController extends Controller
     }
 
 
-    public function destroy(AccommodationSlot $accommodationSlot)
+    public function destroy($accommodationSlot)
     {
-        if ($accommodationSlot->is_confirmed == 1)return redirect()->back()->with('error','Unable to delete this slot, because this slot have already confirmed');
-        $accommodationSlot->delete();
-        return redirect()->back();
+        $slot = AccommodationSlot::find($accommodationSlot);
+        if ($slot->is_confirmed == 1)return redirect()->back()->with('error','Unable to delete this slot, because this slot have already confirmed');
+        $slot->delete();
+        return redirect()->back()->with('success','Accommodation slot is successfuly deleted');
     }
 
     public function confirm(AccommodationSlot $accommodationSlot){

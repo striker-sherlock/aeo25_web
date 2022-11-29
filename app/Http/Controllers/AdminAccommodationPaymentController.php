@@ -29,8 +29,8 @@ class AdminAccommodationPaymentController extends Controller
             'users.*',
             'accommodation_payments.created_at',
             'accommodation_payments.id as id', 
-            'payment_proof',
-            'accommodations.room_type')
+            'accommodations.room_type',
+            'payment_proof')
         ->get();
 
 
@@ -55,7 +55,7 @@ class AdminAccommodationPaymentController extends Controller
         $confirmedMail = [
             'subject' =>"Confirmed Accommodation Payment",
             'name'=>$accommodationPayment->user->pic_name,
-            'body1' => 'With this email, Your payment for your accommodation slot has been confirmed.', 
+            'body1' => 'With this email, your payment for your accommodation slot has been confirmed.', 
             'body2' => 'We also like to inform you to continue to the Guest Registration step by clicking this link below.',
             'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-3'
 

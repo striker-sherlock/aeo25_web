@@ -18,18 +18,18 @@ class AccommodationSlot extends Model
     public $timestamps = false;
 
     public function user(){
-        return $this-> belongsTo(User::class,'pic_id','id');
+        return $this->belongsTo(User::class,'pic_id','id');
     }
 
     public function accommodation(){
-        return $this-> belongsTo(Accommodation::class);
+        return $this->belongsTo(Accommodation::class);
     }
 
     public function accommodationPayment(){
-        return $this-> belongsTo(AccommodationPayment::class,'payment_id','id');
+        return $this->belongsTo(AccommodationPayment::class,'payment_id','id');
     }
     
     public function accommodationGuest(){
-        return $this-> hasMany(AccommodationGuest::class);
+        return $this->hasMany(AccommodationGuest::class);
     }
 }

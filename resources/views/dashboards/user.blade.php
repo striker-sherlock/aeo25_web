@@ -115,7 +115,7 @@
                                 <i class="fas fa-lock" style="font-size: 5em"></i>
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
                             @else
-                                <h4>Total Guest Registered</h4>
+                                <h4>Accommodation Guest Registered</h4>
                                 <h1 class="display-3 fw-bold">{{$totalGuests}}</h1>
                             @endif
             

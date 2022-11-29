@@ -37,6 +37,8 @@
                                         @if ($competition->id == 'OBS')
                                             ( Max slot = {{$maxOBS}})  
                                             <span class="d-flex justify-content-center align-items-center fs-6 position-absolute rounded-circle border fw-bold" title="see details" data-bs-toggle="modal" data-bs-target="#spectator-detail">!</span>
+                                        @else 
+                                            (Max slot = {{$maxIA}})
                                         @endif
                                     </small>
 
@@ -46,15 +48,17 @@
                                         
                                         @if ($competition->id =='OBS' && $maxOBS <= 0 )
                                             <a href="{{route('slot-registrations.create')}}" title="You have reached your spectators's slot limit or you might not have any confirmed competition slot yet "> Unable to register for Spectators </a>
+                                        @elseif($competition->id == 'IA' && $maxIA <= 0)
+                                            <a href="{{route('slot-registrations.create')}}" title="You have reached your Independent Adjudicator's slot limit or you might not have any confirmed atleast 2 debate competition slot yet "> Unable to register for Independent Adjudicator </a>
                                         @else
                                             <div class="col">
-                                                <input type="number" class="form-control" value="" name="quantity[]-{{$competition->id}}" min="0" max="{{$competition->id == 'OBS' ? $maxOBS : $competition->temp_quota}}" placeholder="Enter number of slot that you want to register" required>
+                                                <input type="number" class="form-control" value="" name="quantity[]-{{$competition->id}}" min="0" max="{{$competition->id == 'OBS' ? $maxOBS : $maxIA}}" placeholder="Enter number of slot that you want to register" required>
                                             </div>
                                         @endif
                                     </div>
                                 </th>
                                 <th>
-                                    <button type="submit" class="btn btn-outline-theme w-100 rounded-20 {{$maxOBS == 0 && $competition->id == 'OBS' ? 'disabled bg-secondary' : ''}}">Submit</button>
+                                    <button type="submit" class="btn btn-outline-theme w-100 rounded-20 {{($maxOBS == 0 && $competition->id == 'OBS')|| $maxIA == 0 && $competition->id == 'IA' ? 'disabled bg-secondary' : ''}}">Submit</button>
                                 </th>
                             </tr>
                             

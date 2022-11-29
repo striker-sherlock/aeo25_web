@@ -23,7 +23,7 @@
                                 <h5>Status : 
                                     @if ($accommodation->accommodationPayment == NULL)
                                         <span class="text-danger fw-bold">No Payment Yet</span><br>
-                                        <small style="font-size: 0.7em" class="text-warning fw-bold">This slot was Confirmed {{ \Carbon\Carbon::parse($accommodation->created_at)->diffForHumans()}}</small>
+                                        <small style="font-size: 0.7em" class="text-warning fw-bold">This slot was Confirmed {{ \Carbon\Carbon::parse($accommodation->confirmed_at)->diffForHumans()}}</small>
                                     @else
                                         @if ($accommodation->accommodationPayment->is_confirmed == 1)
                                             <span class="text-success fw-bold">Confirmed</span>

@@ -1,7 +1,7 @@
 <x-user title="Create Accommodation Guests">
-    <div class="container mt-4 ">
-        <h1 class="fs-3">Accommodation Step 3</h1>
-        <h2 class="display-5 fw-bold">Guest's Personal Detail</h2>
+    <div class="container mt-5 ">
+        <h1 class="aeo-title">Acommodation - Step 3</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Guest's Personal Detail </h3>
         <hr class="mb-4">
         <x-card>
             @php($maxPeople = 2*$accommodationSlot->quantity)

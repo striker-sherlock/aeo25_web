@@ -1,6 +1,6 @@
 <x-user title="Accommodation Step One">
     <div class="container mt-5">
-        <h1 class="aeo-title">Step 1</h1>
+        <h1 class="aeo-title">Acoommodation - Step 1</h1>
         <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Accommodation Slot Registration</h3>
 
         <hr>
@@ -72,7 +72,7 @@
                         <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete <span class="fw-bolder text-danger">{{$accommodationSlot->accommodation->room_type}}</span> ? </h1>
                         <p class="text-warning"> note: this action can't be undone  </p>
                     </div>
-                    <div class="footer">
+                    <div class="modal-footers">
                         <div class="row">
                             <div class="col">
                                 <button type="button" class="btn btn-outline-secondary w-100"  data-bs-dismiss="modal">Back</button>

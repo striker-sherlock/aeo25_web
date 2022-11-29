@@ -70,7 +70,7 @@ class AdminCompetitionPaymentController extends Controller
         $confirmedMail = [
             'subject' =>"Confirmed Competition Payment",
             'name'=>$competitionPayment->user->pic_name,
-            'body1' => 'With this email, Your payment for competition slot has been confirmed.', 
+            'body1' => 'With this email, your payment for competition slot has been confirmed.', 
             'body2' => 'We also like to inform you to continue to the Participant Registration step by clicking this link below.', 
             'url' => 'http://aeo.mybnec.org/dashboard/step-3'
 

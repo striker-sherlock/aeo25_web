@@ -12,7 +12,7 @@
         <x-card>
             <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Registered Competition's Slot</h3>
             <a href="{{route('slot-registrations.create')}}" class="btn btn-outline-theme rounded-pill me-2 ">Add Competition Slot Registration</a>   
-            <a href="{{route('slot-registrations.create-other')}}" class="btn btn-outline-theme rounded-pill">Add Other Slot Registration</a>   
+            <a href="{{route('slot-registrations.create-other')}}" class="btn btn-outline-theme rounded-pill" title="Spectators and Independent Adjudicators">Add Other Slot Registration</a>   
             <hr>
             @if ($competitionSlots->count())
             <div class="row">
@@ -33,7 +33,7 @@
                                 </h4>
                                 @if ($competitionSlot->is_confirmed != 1)
                                     <div class="row justify-content-start ">
-                                        @if ($competitionSlot->competition_id != 'OBS')
+                                        @if ($competitionSlot->competition_id != 'OBS' && $competitionSlot->competition_id != 'IA')
                                            <div class="col">
                                                 <a href="#" data-bs-toggle ="modal" data-bs-target="#edit{{$competitionSlot->id}}" class="btn btn-outline-theme rounded-20 me-2 w-100">Edit Slot</a>
                                            </div>

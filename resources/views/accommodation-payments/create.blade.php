@@ -11,8 +11,8 @@
                     <div class="row">
                         <div class="col">
                             <a href="{{route('accommodation-payments.invoice', [$user->id, $slotId])}}" target="_blank"
-                                class="btn btn-outline-theme rounded-pill px-4 w-100"><i class="fa-solid fa-download">&nbsp;</i>Download Invoice
-                            </a>
+                                class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice  
+                            </a>  
                         </div>
                         <div class="col">
                             <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"

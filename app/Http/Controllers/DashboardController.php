@@ -35,15 +35,17 @@ class DashboardController extends Controller
                 ->count();  
 
         $totalParticipants= CompetitionParticipant::rightJoin('competition_slot_details','competition_slot_details.id' , '=', 'competition_participants.competition_slot_id')
-            ->where('competition_slot_details.id', Auth::user()->id)
+            ->where('competition_slot_details.pic_id', Auth::user()->id)
+            // ->get();
             ->where('competition_participants.competition_slot_id','!=',NULL)
             ->whereNull('competition_participants.deleted_at')
             ->count();
+        // dd($totalParticipants);
         
         // competition slot yang ga ada participantnya
         $participantCompetition = CompetitionSlot::join('users','competition_slot_details.pic_id', '=','users.id')
             ->leftJoin('competition_participants', 'competition_slot_details.id','=','competition_participants.competition_slot_id')
-            ->where('competition_slot_details.id', Auth::user()->id)
+            ->where('competition_slot_details.pic_id', Auth::user()->id)
             ->where('competition_slot_id',NULL)
             ->count();
 
