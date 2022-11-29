@@ -1,5 +1,4 @@
-<x-layout title="Edit Competition Payment">
-    <x-navbar></x-navbar>   
+<x-user title="Edit Competition Payment">
     <div class="container mt-5">
         <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
         <div class="row">
@@ -11,7 +10,7 @@
                     <div class="row">
                         <div class="col">
                             <a href="{{route('payments.paid-invoice',$competitionPayment->id)}}" target="_blank"
-                                class="btn btn-outline-theme rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice and Guide
+                                class="btn btn-outline-theme rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice
                             </a> 
                         </div>
                         <div class="col">
@@ -160,5 +159,5 @@
         </div>
     </div>
             
-</x-layout>
+</x-user>
 

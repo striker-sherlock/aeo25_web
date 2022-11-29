@@ -12,7 +12,7 @@
                 <div class="row d-flex justify-content-center text-center text-md-start">
                     <div class=" col-md-6 px-3">
                         <div class="d-flex justify-content-center justify-content-md-start ">
-                            <hr class="w-25">
+                            <div class="w-25 custom-border rounded  my-2"></div>
                         </div>
                         <h3 data-bs-aos="fade-up" class="aeo-title fs-2 mb-3">The 2023 Asian English Olympics</h3>
                         <h1 data-bs-aos="fade-up" class='aeo-theme mb-4 display-5'>UNVEIL YOUR SPARK</h1>

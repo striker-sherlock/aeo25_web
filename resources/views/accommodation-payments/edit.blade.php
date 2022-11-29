@@ -1,5 +1,4 @@
-<x-layout>   
-    <x-navbar></x-navbar>
+<x-user title="Edit Accommodation Payment">   
     <div class="container mt-3">
         <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
         <div class="row mt-4">
@@ -163,5 +162,5 @@
         </div>
     </div>
             
-</x-layout>
+</x-user>
 
