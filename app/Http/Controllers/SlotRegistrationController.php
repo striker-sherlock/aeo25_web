@@ -72,13 +72,11 @@ class SlotRegistrationController extends Controller
             ->sum('quantity')-1;
         $registeredIA =CompetitionSlot::where('pic_id', Auth::user()->id)->where('competition_id','IA')->sum('quantity');
         $maxIA -= $registeredIA;
-    // dd($maxIA);
-        // dd($registeredSpectators->sum('quantity'));
+        
         return view('slot-registrations.create-other',[
             'competitions' => $competitions,
-            'competSlot' => $competSlot,
-            'registeredSpectators' =>$registeredSpectators,
             'maxIA' => $maxIA,
+            'maxOBS' => $competSlot - $registeredSpectators
         ]);
     }
     

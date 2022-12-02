@@ -92,8 +92,17 @@
     -webkit-text-fill-color: transparent;
 }
 
+.text-dark-purple {
+    color: $dark-purple !important;
+}
 
+.btn-outline-dark-purple {
+    color: $dark-purple !important;
+    border-color: $dark-purple !important;
+    transition: .3s ease;
+}
 
-
-
-
+.btn-outline-dark-purple:hover {
+    color: #FFF !important;
+    background-color: $dark-purple !important;
+}
