@@ -103,7 +103,7 @@ class SlotRegistrationController extends Controller
         $validation = $this->checkSlotAvailability($request->quantity,$request->compet_id,$competitionSlot->id);
         if($validation != 'true')return redirect()->back()->with('error',$validation);
         
-        if($competitionSlot->is_confirmed == 1) return redirect()->back()->with('error','Sorry, the updates failed, because the slot have already confirmed');
+        if($competitionSlot->is_confirmed == 1 && !Auth::guard('admin')->check()) return redirect()->back()->with('error','Sorry, the updates failed, because the slot have already confirmed');
         
         
 
@@ -127,7 +127,6 @@ class SlotRegistrationController extends Controller
     }
 
     public function store(Request $request){
-        // dd($request->all());        
         $len = count($request->quantity);
         //  code ini untuk mengecek apabila slot nya masih tersedia atau tidak
         for($i = 0; $i < $len; $i++){
@@ -136,7 +135,6 @@ class SlotRegistrationController extends Controller
             $competitionName = Competition::find($request->compet_id[$i])->name;
             if(!$valid) return redirect()->back()->with('error',"Sorry, ".$competitionName."'s slot is not available");
         }
-        // dd($request->all());    
         
         
         for ($i= 0; $i < $len; $i++){
@@ -158,7 +156,7 @@ class SlotRegistrationController extends Controller
         $competitionSlot = CompetitionSlot::find($id);
         $pic = $competitionSlot->user;
         return view('slot-registrations.edit',[
-            'competitionSlots' => CompetitionSlot::where('pic_id', $pic->id)->get()->where('is_confirmed',0),
+            'competitionSlots' => CompetitionSlot::where('pic_id', $pic->id)->get(),
             'pic' => $pic 
         ]);
     }

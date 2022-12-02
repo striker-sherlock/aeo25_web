@@ -10,6 +10,7 @@
                 <thead class="text-center">
                     <tr>
                         <th scope="col">Competition Field</th>
+                        <th scope="col">Registered</th>
                         <th scope="col"> Total Registered Slot</th>
                         <th scope="col"> Action</th>
                     </tr>
@@ -22,10 +23,11 @@
                         <input type="text" hidden value="{{$competitionSlot->competition->id }}" name="compet_id">
                          <tr>
                             <th>{{$competitionSlot->competition->name}}</th>
+                            <th>{{  \Carbon\Carbon::parse($competitionSlot->created_at)->diffForHumans()}}</th>
                             <th>
                                 <div class="form-row">
                                     <div class="col">
-                                        <input type="number" class="form-control" value="{{$competitionSlot->quantity}}" name="quantity" min="0" max="3">
+                                        <input type="number" class="form-control" value="{{$competitionSlot->quantity}}" name="quantity" min="0" max="{{$competitionSlot->competition->id == 'OBS' ||$competitionSlot->competition->id == 'IA' ? '' : '3' }}">
                                     </div>
                                 </div>
                             </th>
