@@ -27,14 +27,18 @@
                                  
                                 <th>{{$payment->created_at}}</th>
                                 <th>
-                                    <div class="d-flex justify-content-around">
-                                        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirm{{$payment->id}}">
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{route('competition-payments.edit',$payment->id)}}" class="btn btn-primary me-2" title="edit payment">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        <a href="#" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#confirm{{$payment->id}}" title="confirm ">
                                             <i class="fas fa-check-circle"></i>
                                         </a>
-                                        <a href="{{route('competition-payments.reject')}}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >
+                                        <a href="{{route('competition-payments.reject')}}" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" title="reject " >
                                             <i class="fas fa-times"></i>
                                         </a>
-                                        <a href="#" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >
+                                        <a href="#" class="btn btn-info me-2" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" title="view proof">
                                             <i class="fa-solid fa-receipt"></i>
                                         </a>
                                     </div>
@@ -76,14 +80,14 @@
                             <th>{{$payment->amount}}</th>
                             <th>
                                 <div class="d-flex justify-content-center">
-                                    <a href="{{route('competition-payments.edit',$payment->id)}}" class="btn btn-primary me-2">
+                                    <a href="{{route('competition-payments.edit',$payment->id)}}" class="btn btn-primary me-2" title="edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
 
-                                    <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-warning me-2" title="cancel payment">
+                                    <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-warning me-2" title="cancel payment" title="move to pending">
                                         <i class="fas fa-undo"></i>
                                     </a>
-                                    <a href="{{route('payments.paid-invoice', $payment->id)}}" class="btn btn-success me-2" title="View Invoice" target="_blank">
+                                    <a href="{{route('payments.paid-invoice', $payment->id)}}" class="btn btn-success me-2" title="View Invoice" target="_blank" title="view invoice">
                                         <i class="fas fa-file-invoice"></i>
                                     </a>
                                  
@@ -127,7 +131,7 @@
                         
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    <a href="{{route('competition-payments.cancel', $payment->id)}}" class="btn btn-warning" title="cancel payment">
+                                    <a href="{{route('competition-payments.cancel', $payment->id)}}" class="btn btn-warning" title="cancel payment" title="move to pending">
                                         <i class="fas fa-undo"></i>
                                     </a>
                                 </div>

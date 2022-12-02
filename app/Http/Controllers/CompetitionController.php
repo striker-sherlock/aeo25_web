@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class CompetitionController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsAdmin')->only(['index', 'edit']);
+        $this->middleware('IsAdmin');
     }
 
     public function index()
@@ -73,7 +73,7 @@ class CompetitionController extends Controller
             'max_people'=>$request->max_people,
         ]);
 
-        return redirect()->route('flight-tickets.index');
+        return redirect()->route('competitions.index')->with('success','competition is successfuly updated');
     }
 
  

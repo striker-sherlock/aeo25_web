@@ -103,6 +103,7 @@ Route::controller(SlotRegistrationController::class)->prefix('slot-registrations
     Route::get('confirm/{competitionSlot}', 'confirm')->name('confirm');
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
+    Route::get('create-others', 'createOthers')->name('create-other');
 });
 Route::resource('slot-registrations',SlotRegistrationController::class);
 
@@ -165,7 +166,7 @@ Route::resource('accommodations', AccommodationController::class);
 // Accommodation Slot
 Route::controller(AccommodationSlotRegistrationController::class)->prefix('accommodation-slot-registrations')->name('accommodation-slot-registrations.')->group(function(){
     Route::get('{accommodationSlot}/confirm', 'confirm')->name('confirm');
-    Route::get('{accommodationSlot}/reject', 'reject')->name('reject');
+    Route::post('/reject', 'reject')->name('reject');
     Route::get('{accommodationSlot}/cancel', 'cancel')->name('cancel');
     Route::get('create/{accommodation?}', 'create')->name('create');
 });
@@ -180,11 +181,11 @@ Route::resource('accommodation-slot-registrations', AccommodationSlotRegistratio
     Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
     Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
 
-// Admin Privileges - Accommodation Participant
+// Admin Privileges - Accommodation Payment
 Route::controller(AdminAccommodationPaymentController::class)->prefix('accommodation-payments')->name('accommodation-payments.')->group(function () {
     Route::get('/', 'index')->name('index');
-    // Route::get('/confirm/{accommodationPayment}', 'confirm')->name('confirm');
-    // Route::post('/reject', 'reject')->name('reject');
+    Route::get('/confirm/{accommodationPayment}', 'confirm')->name('confirm');
+    Route::post('/reject', 'reject')->name('reject');
     Route::get('/cancel/{accommodationPayment}', 'cancel')->name('cancel');
     Route::get('/export', 'export')->name('export');
 });
@@ -200,6 +201,9 @@ Route::get('/edit-guests/{accommodationGuest}', [AdminAccommodationGuestControll
 Route::controller(AdminAccommodationGuestController::class)->prefix('guests')->name('accommodation-guests.')->group(function () {
     Route::get('{roomType?}', 'index')->name('index');
     Route::put('update/{id}', 'update')->name('update');
+    Route::delete('destroy/{accommodationGuest}', 'destroy')->name('destroy');
+    Route::delete('delete/{accommodationGuest}', 'delete')->name('delete');
+    Route::get('restore/{accommodationGuest}', 'restore')->name('restore');
 });
 
 // Institution Contact

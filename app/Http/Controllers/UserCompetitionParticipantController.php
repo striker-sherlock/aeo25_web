@@ -61,7 +61,6 @@ class UserCompetitionParticipantController extends Controller
     }
 
     public function store(Request $request){
-        // dd($request->all());
         $request->validate([
             'nama.*' => 'nullable|string|distinct',
             'email.*' => 'nullable|string|unique:competition_participants,email|distinct',
@@ -83,13 +82,14 @@ class UserCompetitionParticipantController extends Controller
             'profile_picture.*.image' => 'The profile picture must be an image ',
             'profile_picture.*.max' => 'The profile picture size must less than 2MB '
         ]);
+        // dd($request->need_teams);
         $competition = Competition::find($request->competition_id);    
         $len = $request->quantity;
         if($request->need_teams){
             $index = 0 ;
             for ($i = 0 ; $i < $len ; $i++){
                 $numberOfParticipant = 'people'.$i+$request->total_teams;
-                 
+                
                 $team_id = CompetitionTeam::create([
                     'created_by'=> Auth::user()->username,
                     'name' => $request->team_name[$i],

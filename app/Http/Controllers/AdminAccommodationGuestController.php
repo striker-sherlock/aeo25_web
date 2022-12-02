@@ -21,6 +21,7 @@ class AdminAccommodationGuestController extends Controller
                 ->where('accommodations.room_type', 'LIKE', $roomType)
                 ->select('accommodation_guests.*')
                 ->get();
+            
         }
 
         return view('accommodation-guests.index',[

@@ -51,6 +51,10 @@ class AdminCompetitionPaymentController extends Controller
         $competitionPayment = CompetitionPayment::find($id);
         $competitionSlots = $competitionPayment->competitionSlot;
 
+        foreach($competitionSlots as $competitionSlot){
+            if($competitionSlot->competition->fixed_quota < $competitionSlot->quantity) return redirect()->back()->with('error' ,'Confirmation failed,'.$competitionSlot->competition->name."'s fixed quota is not enough ");
+        }
+        
         foreach ($competitionSlots as $competitionSlot) {
             $competition = $competitionSlot->competition;
             $competition->update([
@@ -66,7 +70,7 @@ class AdminCompetitionPaymentController extends Controller
         $confirmedMail = [
             'subject' =>"Confirmed Competition Payment",
             'name'=>$competitionPayment->user->pic_name,
-            'body1' => 'With this email, Your payment for competition slot has been confirmed.', 
+            'body1' => 'With this email, your payment for competition slot has been confirmed.', 
             'body2' => 'We also like to inform you to continue to the Participant Registration step by clicking this link below.', 
             'url' => 'http://aeo.mybnec.org/dashboard/step-3'
 

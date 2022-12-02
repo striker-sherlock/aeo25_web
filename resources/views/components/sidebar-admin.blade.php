@@ -7,7 +7,7 @@
 <nav id="sidebar-admin" class="sidebar-wrapper h-100 mh-100 fixed-top bg-gradient-blue pr-0">
     <div class="sidebar-content">
         <div class="sidebar-brand text-end row my-2 py-2 me-2"  style="padding: 0.15rem;">
-                <span class=" ms-auto me-4  rounded burgerIcon" id="close-sidebar" style="cursor: pointer;">
+                <span class=" ms-auto me-4  rounded-circle burgerIcon" id="close-sidebar" style="cursor: pointer;">
                     <i class=" fa-solid fa-bars fa-lg text-white "></i> 
                 </span> 
         </div>
@@ -40,7 +40,7 @@
                                 <i class="fas fa-square fa-stack-2x text-dark-green"></i>
                                 <i class="fas fa-dollar-sign fa-stack-1x text-dark"></i>
                             </span>
-                            <span class="ms-2">Payment</span>
+                            <span class="ms-2"> Competition Payment</span>
                             <i class="fas fa-angle-right ms-auto"></i>
                         </a>
                         <div class="sidebar-submenu">
@@ -101,13 +101,13 @@
                                         </a>
                                     </li>
                                     
-                                    {{-- <li class="mb-1">
-                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="{{ route('follow-ups.create', 'type') }}" style="display: block">
-                                            <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
-                                            Create Follow Up
-                                        </a>
-                                    </li> --}}
+                                        <li class="mb-1">
+                                            <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                                href="{{ route('follow-ups.create', 'type') }}" style="display: block">
+                                                <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                                Create Follow Up
+                                            </a>
+                                        </li>
                             </ul>
                         </div>
                     </li>
@@ -147,17 +147,6 @@
                     </li>
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{ route('accommodation-payments.index') }}">
-                        <span class="fa-stack fa-sm ms-n1">
-                            <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fas fa-coins fa-stack-1x text-dark"></i> 
-                        </span>
-                        <span class="ms-2">Accommodations Payment</span>
-                    </a>
-
-                    </li>
-                    <li class="side-item">
-                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{ route('accommodation-slot-registrations.index') }}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
@@ -167,6 +156,30 @@
                     </a>
 
                     </li>
+
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{ route('accommodation-payments.index') }}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fas fa-coins fa-stack-1x text-dark"></i> 
+                        </span>
+                        <span class="ms-2">Accommodations Payment</span>
+                        </a>
+                    </li>
+
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{ route('accommodation-guests.index') }}">
+                        <span class="fa-stack fa-sm ml-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fas fa-users fa-stack-1x text-dark"></i>
+                        </span>
+                        <span class="ms-2">Accommodations Guests</span>
+                        </a>
+                    </li>
+
+
 
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Competition</span>
@@ -187,7 +200,7 @@
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fas fa-users fa-stack-1x text-dark"></i>
                             </span>
-                            <span class="ms-2">Participants</span>
+                            <span class="ms-2">Competition Participants</span>
                             <i class="fas fa-angle-right ms-auto"></i>
                         </a>
                         <div class="sidebar-submenu">
@@ -251,7 +264,9 @@
                             </ul>
                         </div>
                     </li>
-                    <li class=" pb-1 side-item pb-1 sidebar-dropdown">
+
+                    {{-- submission --}}
+                    {{-- <li class=" pb-1 side-item pb-1 sidebar-dropdown">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
                                 <span class="fa-stack fa-sm ml-n1">
                                     <i class="fas fa-square fa-stack-2x"></i>
@@ -299,8 +314,10 @@
                                     </li>
                             </ul>
                         </div>
-                    </li>
-                        <li class="side-item">
+                    </li> --}}
+
+                    {{-- score ranking  --}}
+                        {{-- <li class="side-item">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                                 href="#">
                                 <span class="fa-stack fa-sm ms-n1">
@@ -309,8 +326,10 @@
                                 </span>
                                 <span class="ms-2">Score & Ranking</span>
                             </a>
-                        </li>
-                        <li class="side-item">
+                        </li> --}}
+
+                        {{-- side achievement  --}}
+                        {{-- <li class="side-item">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                                 href="#">
                                 <span class="fa-stack fa-sm ml-n1">
@@ -319,9 +338,11 @@
                                 </span>
                                 <span class="ms-2">Side Achievements</span>
                             </a>
-                        </li>
-                  
-                        <li class=" pb-1 side-item pb-1 sidebar-dropdown">
+                        </li> --}}
+
+
+                        {{-- schedule  --}}
+                        {{-- <li class=" pb-1 side-item pb-1 sidebar-dropdown">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
                                 <span class="fa-stack fa-sm ml-n1">
                                     <i class="fas fa-square fa-stack-2x"></i>
@@ -334,14 +355,14 @@
                                 <ul class="fa-ul">
                                         <li class="mb-1">
                                             <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                                href="#"
-                                                <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                                href="#">
+                                                <span class="fa-li"> <i class="fas fa-arrow-right"></i></span>
                                                 Competition Name
                                             </a>
                                         </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Ambassador</span>
                     </li>
@@ -355,7 +376,7 @@
                             <span class="ms-2">Manage Ambassador</span>
                         </a>
                     </li>
-                    <li class="pb-1 ps-3 header-menu">
+                    {{-- <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Event</span>
                     </li>
                     <li class="side-item">
@@ -367,7 +388,7 @@
                             </span>
                             <span class="ms-2">Main Event Schedule</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Funding</span>
                     </li>

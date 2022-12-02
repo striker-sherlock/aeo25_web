@@ -9,8 +9,9 @@ Go to Website
 @endcomponent <br>
 
 Best Regards,<br>
-Staff of Fundraising Division <br>
-Email    : contact.aeointernational@gmail.com | contact.aeointernational@gmail.com <br>
+Email    :<br> 
+contact.aeointernational@gmail.com<br>
+contact.aeointernational@gmail.com <br>
 <img src="https://uat.aeo.mybnec.org/storage/assets/AEO-2023-Colored.png" alt="" width="50%"> <br>
 {{ config('app.name') }} <br>
 Jakarta | Indonesia <br>

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="header">
             <h2 class="fw-bold ">Welcome back, {{Auth::guard('admin')->user()->name}} </h2>
-            <h5 class="text-muted">{{Auth::guard('admin')->user()->position}} of {{Auth::guard('admin')->user()->department}} </h5>
+            <h5 class="text-muted text-capitalize">{{Auth::guard('admin')->user()->position}} of {{Auth::guard('admin')->user()->department}} </h5>
             <hr>
         </div>
         <div class="info">
@@ -21,7 +21,7 @@
                     </x-card>
                 </div>  
                 <div class="col-md-4 col-sm-6">
-                    @php($targetCountries = 11)
+                    @php($targetCountries = 16)
                     <x-card>
                         <h4 class="">Country Participate</h4>
                         <h1 class="display-2 fw-bold">{{$totalCountries}}</h1>

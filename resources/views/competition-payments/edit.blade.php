@@ -1,17 +1,17 @@
 <x-layout title="Edit Competition Payment">
     <x-navbar></x-navbar>   
-    <div class="container mt-5">
+    <div class="container mt-5 mb-4">
         <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
         <div class="row">
             <div class="col-md-6">
                 <x-card>
                     <h5 class="fw-bold text-uppercase text-center">payment guide and invoice</h5>
                     <hr>
-                    <p>Please download the file below to see the payment guide and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
+                    <p>Please download the file below to see the payment guide and your invoice by clicking the button below . After that, please fill the form.</p>
                     <div class="row">
                         <div class="col">
                             <a href="{{route('payments.paid-invoice',$competitionPayment->id)}}" target="_blank"
-                                class="btn btn-outline-theme rounded-pill px-4 "><i class="fa-solid fa-download">&nbsp;</i>Download Invoice and Guide
+                                class="btn btn-outline-theme rounded-pill px-4 w-100"><i class="fa-solid fa-download">&nbsp;</i>Download Invoice 
                             </a> 
                         </div>
                         <div class="col">
@@ -41,8 +41,8 @@
                     <hr>
                     
                     <div class="d-flex justify-content-between">
-                        <h3>Grand Total</h3>
-                        <h4>{{ number_format($competitionPayment->amount, 2, ',', '.')}} IDR</h4>
+                        <h3 class="fw-bold">Grand Total</h3>
+                        <h4 class="fw-bold">{{ number_format($competitionPayment->amount, 2, ',', '.')}} IDR</h4>
                     </div>
                  
                     
@@ -92,7 +92,7 @@
                         </div>        
                 
                         <div class="form-group mb-3">
-                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof</label>
+                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof <span class="text-muted">(Optional)</span></label>
                             <input type="file" class="form-control"  name="transfer_proof_bank" id="transfer_proof_bank" accept="image/png,image/jpeg,image/jpg">    
                             <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                         </div>  
@@ -152,13 +152,13 @@
     </script>
 
     {{-- modal untuk menampilkan payment proof --}}
-    <div class="modal fade p-4" id="payment-proof" tabindex="-1" role="dialog" >
+    <div class="modal fade p-4  " id="payment-proof" tabindex="-1" role="dialog" >
         <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <img src="/storage/transfer_proof/{{$competitionPayment->payment_proof}}" class="img-fluid" alt="tf_proof">
         </div>
         </div>
     </div>
-            
+    <x-footer></x-footer>
 </x-layout>
 

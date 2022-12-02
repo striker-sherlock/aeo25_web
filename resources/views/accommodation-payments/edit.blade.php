@@ -1,19 +1,34 @@
 <x-layout>   
     <x-navbar></x-navbar>
-    <div class="container mt-3">
-        <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
-        <div class="row">
-            <div class="col-md-6">
+    <div class="container mt-5">
+        <a href="{{route('dashboard.accommodation-step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
+        <div class="row mt-4">
+            <div class="col-md-6 ">
                 <x-card>
-                    <h5 class="fw-bold text-uppercase text-center">payment guide and invoice</h5>
+                    <h5 class="fw-bold text-uppercase text-center text-gradient">payment guideline and invoice</h5>
                     <hr>
-                    <p>Please download the file below to see the payment guide and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
+                    <p>Please download the file below to see the payment guideline and your invoice by clicking "Download Invoice & Guide" button. After that, please fill the form.</p>
+                   {{-- Updated --}}
+                    <div class="row">
+                        <div class="col">
+                            <a href="{{route('payments.paid-accommodation-invoice', $accommodationPayment->id)}}" target="_blank"
+                                class="btn btn-outline-theme rounded-pill px-4 w-100"><i class="fa-solid fa-download">&nbsp;</i>Download Invoice 
+                            </a>  
+                        </div>
+                        <div class="col">
+                            <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
+                                class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fas fa-file-invoice"></i> Download Guideline
+                            </a>
+                        </div> 
+                    </div>
                 </x-card>
             </div>
+            {{-- //commit --}}
+            
             <div class="col-md-6">
                 {{-- RECEIPT SUMMARY --}}
                 <x-card>
-                    <h5 class="text-uppercase fw-bold text-center">Reciept Summary</h5><hr>
+                    <h5 class="text-uppercase fw-bold text-center text-gradient">Reciept Summary</h5><hr>
                     <div class="d-flex justify-content-between">
                         <h4>Accommodation</h4>
                         <h4>Price</h4>
@@ -29,8 +44,8 @@
                     <hr>
                     
                     <div class="d-flex justify-content-between">
-                        <h3>Grand Total</h3>
-                        <h4>{{ number_format($accommodationPayment->amount, 2, ',', '.')}} IDR</h4>
+                        <h3 class='fw-bold'>Grand Total</h3>
+                        <h4 class='fw-bold'>{{ number_format($accommodationPayment->amount, 2, ',', '.')}} IDR</h4>
                     </div>
                  
                     
@@ -38,17 +53,17 @@
             </div>
         </div>
         <x-card>
-            <h2 class="text-uppercase fw-bold">your payment details </h2>
+            <h2 class="text-uppercase fw-bold text-gradient">your payment details </h2>
             <p class="text-muted">Please Fill the Form Bellow</p>
             <hr> 
             <ul class="nav nav-pills d-flex justify-content-around mb-3">
 
                 <li class="">
-                    <a data-bs-toggle="pill" href="#bank" class="btn btn-outline-theme rounded-pill me-3 d-block w-100 bank {{$accommodationPayment->paymentProvider->type == "BANK" ? 'active' : ''}}">Bank Transfer</a>
+                    <a data-bs-toggle="pill" href="#bank" class="btn btn-outline-primary  rounded-pill me-3 d-block w-100 bank {{$accommodationPayment->paymentProvider->type == "BANK" ? 'active' : ''}}">Bank Transfer</a>
                 </li>
 
                 <li class="">
-                    <a data-bs-toggle="pill" href="#wise" class="btn btn-outline-theme rounded-pill me-3 d-block w-100 wise {{$accommodationPayment->paymentProvider->type == "Wise" ? 'active' : ''}}"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a>
+                    <a data-bs-toggle="pill" href="#wise" class="btn btn-outline-primary  rounded-pill me-3 d-block w-100 wise {{$accommodationPayment->paymentProvider->type == "Wise" ? 'active' : ''}}"> <input type="radio" class="btn-check" autocomplete="off" value="wise" id="type"> Wise</a>
                 </li>
  
               
@@ -80,7 +95,7 @@
                         </div>        
                 
                         <div class="form-group mb-3">
-                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof</label>
+                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof <small class="text-muted">(Optional)</small></label>
                             <input type="file" class="form-control"  name="transfer_proof_bank" id="transfer_proof_bank" accept="image/png,image/jpeg,image/jpg">    
                             <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                         </div>  
@@ -103,7 +118,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="transfer_proof_wise" class="col-form-label">Transfer Proof</label>
+                            <label for="transfer_proof_wise" class="col-form-label">Transfer Proof <small class="text-muted">(Optional)</small></label>
                             <input type="file"  class="form-control"  name="transfer_proof_wise" id="transfer_proof_wise" accept="image/png,image/jpeg,image/jpg">    
                             <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
                         </div>       
@@ -124,6 +139,8 @@
             //set required untuk bank dan remove required buat yang wise
             document.querySelector('input[name="account_name"]').setAttribute('required','');
             document.querySelector('input[name="account_number"]').setAttribute('required','');
+            document.querySelector('input[name="transfer_proof_bank"]').setAttribute('required','');
+            document.querySelector('input[name="transfer_proof_wise"]').removeAttribute('required','');
             document.querySelector('input[name="email"]').removeAttribute('required');
             document.querySelector('input[name="track"]').removeAttribute('required');
         })
@@ -133,6 +150,8 @@
             //set required untuk kolom inputan di wise dan remove required buat inputan yang di bank
             document.querySelector('input[name="email"]').setAttribute('required','');
             document.querySelector('input[name="track"]').setAttribute('required','');
+            document.querySelector('input[name="transfer_proof_wise"]').setAttribute('required','');
+            document.querySelector('input[name="transfer_proof_bank"]').removeAttribute('required','');
             document.querySelector('input[name="account_name"]').removeAttribute('required');
             document.querySelector('input[name="account_number"]').removeAttribute('required');
             

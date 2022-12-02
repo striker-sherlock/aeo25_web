@@ -15,9 +15,9 @@
                 <li class="nav-item  m-1">
                     <a href="/" class="btn btn-block px-3 nav-text nav-btn text-white">Home</a>
                 </li>
-                <li class="nav-item  m-1">
+                {{-- <li class="nav-item  m-1">
                     <a href="#" class="btn btn-block px-3 nav-text nav-btn text-white">Merchandise</a>
-                </li>
+                </li> --}}
                 @php
                     $ambassadors = App\Models\Ambassador::all()->count();
                 @endphp
@@ -28,9 +28,9 @@
                     </li>
                 @endif
 
-                <li class="nav-item  m-1">
+                {{-- <li class="nav-item  m-1">
                     <a href="" class="btn btn-block px-3 nav-text nav-btn text-white">Ranking List</a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

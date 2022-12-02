@@ -78,21 +78,22 @@
                 </div>
             </div>
         </div>
+        
         <div class="row justify-content-center align-items-center">
-            <div class="col-lg-3 col-6 col-sm-4 order-3 text-center">
-                <h6 id="organized-by" class="text-white mb-3">Organized By:</h6>
+            <div class="col-lg-3 col-6 col-sm-4 order-3 text-center ">
+                <h6 id="organized-by" class=" fw-bold mb-3">Organized By:</h6>
                 <a href="https://mybnec.org/" target="_blank">
-                    <img src="/storage/assets/logo-bnec-original.png" width="60%"
-                        style="filter: brightness(0) invert(1);">
+                    <img src="/storage/assets/bnecLogoOriginal.webp" width="100%"
+                        >
                 </a>
             </div>
-            <div class="col-lg-3 col-5 col-md-4 order-2 text-center">
-                <img src="/storage/assets/aeo_main_logo.png" width="40%"
-                    style="filter: brightness(0) invert(1);">
+            <div class="col-lg-3 col-5 col-md-4 order-2 text-center  mx-5 ">
+                <img src="/storage/assets/AEO 2023Colored.webp" width="100%"
+                    >
             </div>
-            <div class="col-lg-3 col-5 col-md-4 order-1 text-center">
-                <img src="/storage/assets/aeo_logo_general.png" width="70%"
-                    style="filter: brightness(0) invert(1);">
+            <div class="col-lg-3 col-5 col-md-4 order-1 text-center ">
+                <img src="/storage/assets/aeo_2012.webp" width="100%"
+                    >
             </div>
         </div>
         <hr>

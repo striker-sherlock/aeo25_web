@@ -14,6 +14,8 @@
     <link href="https://fonts.bunny.net/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="https://unpkg.com/counterup2@2.0.2/dist/index.js">	</script>
+
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])

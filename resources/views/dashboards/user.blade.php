@@ -1,10 +1,31 @@
 <x-user title="Main Dashboard">
+    <style>
+        table .btn {
+            width: 100%;
+        }
+    </style>
     <div class="container mt-5 mb-5">
         <div class="">
             <h2 class="fw-bold text-capitalize text-gradient">Welcome back, {{Auth::user()->pic_name}} </h2>
-            <h5 class="text-muted text-uppercase  fs-6">Welcome to 2023 Asian English Olympics!</h5>
+            <h5 class="text-muted fs-6">Welcome to The 2023 Asian English Olympics!</h5>
             <hr>
         </div>
+        @if ($confirmedSlotRegistration->count() > 0)
+            <div class="alert alert-info border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
+                <div class="row">
+                    <div class="col-lg">
+                        <i class="fas fa-bullhorn"></i>
+                        Want to watch the thrill of our competitions? Let's register as <b>Observers</b>!
+                    </div>
+                    <div class="col-lg text-lg-end text-start">
+                        <a href="{{route('slot-registrations.create-other')}}" class="text-reset text-decoration-none">
+                            Register now
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
         {{-- competition step  --}}
         <div class="step-by-step-compet row">
             <h3 class="text-uppercase fw-bold my-4 text-gradient" style="letter-spacing: 0.1em">Competition Step by step Registration</h3>
@@ -110,7 +131,7 @@
                                 <i class="fas fa-lock" style="font-size: 5em"></i>
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
                             @else
-                                <h4>Total Guest Registered</h4>
+                                <h4>Accommodation Guest Registered</h4>
                                 <h1 class="display-3 fw-bold">{{$totalGuests}}</h1>
                             @endif
             
@@ -137,9 +158,9 @@
                     <tbody class="text-center">
                         @foreach ($allSlotRegistration as $slot)
                         <tr class="text-center ">
-                            <th class="d-flex align-items-center justify-content-center">{{$slot->competition->name}}</th>
-                            <th  >{{$slot->quantity}} Slot(s)</th>
-                            <th   >
+                            <th >{{$slot->competition->name}}</th>
+                            <th > {{$slot->quantity}} Slot(s)</th>
+                            <th>
                                 @if ($slot->is_confirmed == 0)
                                     <span class="text-warning fw-bold">Wait for Confirmation </span>
                                     @elseif ($slot->is_confirmed == 1)
@@ -166,8 +187,7 @@
                                 </th>
                             <th> 
                                 @if ($slot->competitionParticipants->count() > 0)
-                                    <span class="fw-bold text-success">Registered</span> <br>
-                                    <a href="{{route('competition-participants.show',[Auth::user()->id,$slot->competition->id])}}" class="btn btn-outline-info rounded-pill mt-2">View Participant</a>
+                                        <a href="{{route('competition-participants.show',[Auth::user()->id,$slot->competition->id])}}" class="btn btn-outline-info rounded-pill mt-2">View Participant</a>
                                 @else
                                     @if ($slot->payment != NULL)
                                        @if ($slot->payment->is_confirmed == 1)
@@ -193,7 +213,7 @@
         <x-card>
             <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Participants List</h3>
             @if ($totalParticipants)
-                <table class="table table-bordered data-table" >
+                <table class="table table-bordered dataTables  t" >
                     <thead class="text-center">
                         <tr>
                             <th scope="col">Participant Name</th>
@@ -204,9 +224,13 @@
                     </thead>
                     <tbody class="text-center">
                         @foreach ($allParticipants as $participant)
-                            <tr class="text-center ">
+                            <tr class="text-center">
                                 <th>{{$participant->name}}</th>
-                                <th>{{$participant->competition->name}}</th>
+                                <th>{{$participant->competition->name}}
+                                    @if ($participant->competition->need_team)
+                                        <span>({{$participant->competitionTeam->name}})</span>
+                                    @endif
+                                </th>
                                 <th>{{$participant->email}}</th>
                             </tr>
                         @endforeach

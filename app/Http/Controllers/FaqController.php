@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Faq;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FaqController extends Controller
 {
     public function __construct(){
         $this->middleware('IsAdmin');
-        $this->middleware('auth')->only(['create']);
+        // $this->middleware('auth')->only(['create']);
         $this->middleware('IsShowed:ENV003')->only(['index', 'show']);
     }
     
@@ -38,7 +39,7 @@ class FaqController extends Controller
         ]);
 
         Faq::create([
-            "created_by" => "admin",
+            "created_by" => Auth::guard('admin')->user()->name,
             'question' => $request->question,
             'answer' => $request->answer
         ]);

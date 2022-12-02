@@ -8,19 +8,20 @@ use App\Models\PaymentProvider;
 use App\Models\AccommodationPayment;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserAccommodationPaymentController extends Controller
 {
     public function __construct(){
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified'])->except(['edit','update']);
         $this->middleware('IsShowed:ENV005');
     }
 
-    public function getAllSlotRegistered($id)
-    {
+    public function getAllSlotRegistered($id){
         return AccommodationSlot::where('pic_id', $id)
-        ->where('payment_id', NULL)->where('is_confirmed', 1)
-        ->get();
+            ->where('payment_id', NULL)
+            ->where('is_confirmed', 1)
+            ->get();
     }
 
 
@@ -65,15 +66,25 @@ class UserAccommodationPaymentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'account_name' => 'nullable|string',
-            'account_number' => 'nullable|numeric',
-            'email' => 'nullable|string',
-            'track' => 'nullable|string',
-            'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-            'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-        ]);
-        $pic = Auth::user()->username;
+        if ($request->type == 'bank'){
+            $request->validate([
+                'account_name' => 'required|string',
+                'account_number' => 'required|numeric',
+                'payment_provider' => 'required|numeric',
+                'transfer_proof_bank' => 'required|image|max:1999|mimes:jpg,png,jpeg',
+
+            ]);
+        }
+        elseif ($request->type == 'wise'){
+            $request->payment_provider = 18;
+            $request->validate([
+            'email' => 'required|string',
+            'track' => 'required|string',
+            'transfer_proof_wise' => 'required|image|max:1999|mimes:jpg,png,jpeg',
+            ]);
+        }
+        
+        $pic = Auth::user()->username ;
         $fileName = str_replace(' ', '-', $pic );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
         $fileName = str_replace('-', '_', $fileName);
@@ -84,7 +95,7 @@ class UserAccommodationPaymentController extends Controller
             $fixedName = $fileName.'_'.$current.'.'.$extension;
             $path = $request->file("transfer_proof_bank")->storeAs("public/transfer_proof",$fixedName);
         }
-        if ($request->hasFile('transfer_proof_wise')){
+        else if ($request->hasFile('transfer_proof_wise')){
             $extension = $request->file('transfer_proof_wise')->getClientOriginalExtension();
             $fixedName = $fileName.'_'.$current.'.'.$extension;
             $path = $request->file("transfer_proof_wise")->storeAs("public/transfer_proof",$fixedName);
@@ -103,9 +114,9 @@ class UserAccommodationPaymentController extends Controller
         ]);
 
         if ($request->payAll == 1){
+             
             $allAccommodation = $this->getAllSlotRegistered($request->pic_id);
             foreach($allAccommodation as $accommodation){
-                
                 $accommodation->update([
                     'payment_id' => $payment->id,
                 ]);
@@ -120,33 +131,43 @@ class UserAccommodationPaymentController extends Controller
         return redirect()->route('dashboard.accommodation-step',2)->with('success','Payment successfuly submitted, Please wait for confirmation');
     }
 
-    public function show($id)
-    {
-        //
-    }
 
     public function edit(AccommodationPayment $accommodationPayment)
     {
-        $paidSlot= AccommodationSlot::where('payment_id',$accommodationPayment->id)->get();
+        $paidSlot= AccommodationSlot::where('payment_id', $accommodationPayment->id )->get();
         return view('accommodation-payments.edit',[
             'accommodationPayment' => $accommodationPayment,
+            'paymentProviders' => PaymentProvider::all(),
             'paidSlot' =>$paidSlot,
-            'paymentProviders' => PaymentProvider::all()
+            'user' => Auth::user(),
+            'slotId' => $paidSlot->first()->id,
+          
+            
         ]);
     }
 
     public function update(Request $request, AccommodationPayment $accommodationPayment)
     {
-        $request->validate([
-            'account_name' => 'nullable|string',
-            'account_number' => 'nullable|numeric',
-            'email' => 'nullable|string',
-            'track' => 'nullable|string',
-            'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-            'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
-        ]);
-
-        $pic = Auth::user()->username;
+        // dd(Auth::guard('admin')->check());
+      
+        if($accommodationPayment->is_confirmed == 1 && !Auth::guard('admin')->check())return redirect()->route('dashboard.accommodation-step',2)->with('error','Sorry, unable to edit this payment, because the payment has already confirmed');
+        
+        if ($request->type == 'BANK'){
+            $request->validate([
+                'account_name' => 'required|string',
+                'account_number' => 'required|numeric',
+                'payment_provider' => 'required|numeric',
+                'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
+            ]);
+        }
+        elseif ($request->type == 'WISE'){
+            $request->validate([
+                'email' => 'required|string',
+                'track' => 'required|string',
+                'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
+            ]);
+        }
+        $pic = User::find($accommodationPayment->user->id);
         $fileName = str_replace(' ', '-', $pic );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
         $fileName = str_replace('-', '_', $fileName);
@@ -163,17 +184,22 @@ class UserAccommodationPaymentController extends Controller
                 $fixedName = $request->transfer_proof_old;
             }
             $accommodationPayment->update([
-                'payment_provider_id' => $request->payment_provider,
+                'payment_provider_id' => 12,
                 'account_name' => $request->account_name,
                 'account_number' => $request->account_number,
                 'payment_proof' => $fixedName,
-                'updated_by' => Auth::user()->username,
-                'is_confirmed' => 0,
+                'updated_by' => $pic->username,
             ]);
+            if(!Auth::guard('admin')->check()){
+                $accommodationPayment->update([
+                    'is_confirmed' => 0,
+                ]);
+            }
+
         }
 
         // ini untuk update menjadi wise
-        else{
+        elseif($request->type == 'WISE'){
             if ($request->hasFile('transfer_proof_wise')){
                 $extension = $request->file('transfer_proof_wise')->getClientOriginalExtension();
                 $fixedName = $fileName.'_'.$current.'.'.$extension;
@@ -187,16 +213,24 @@ class UserAccommodationPaymentController extends Controller
                 'email' => $request->email,
                 'tracking_link' => $request->track,
                 'payment_proof' => $fixedName,
-                'updated_by' => Auth::user()->username,
-                'is_confirmed' => 0,
+                'updated_by' => $pic->username,
             ]);
+            
+            if(!Auth::guard('admin')->check()){
+                $accommodationPayment->update([
+                    'is_confirmed' => 0,
+                ]);
+            }
 
         }
-        return redirect()->route('dashboard.accommodation-step',2)->with('success','Accommodation payment successfuly updated ');
+        if(!Auth::guard('admin')->check())  return redirect()->route('dashboard.accommodation-step',2)->with('success','Accommodation payment successfuly updated ');
+        else return redirect()->route('accommodation-payments.index')->with('success','Accommodation payment successfuly updated ');
     }
 
     public function destroy(AccommodationPayment $accommodationPayment)
     {
+        // dd($accommodationPayment);
+        if($accommodationPayment->is_confirmed == 1)return redirect()->route('dashboard.accommodation-step',2)->with('error','Sorry, unable to delete this payment, because the payment has already confirmed');
         $accommodationPayment->delete();
         $accommodationSlots = AccommodationSlot::where('payment_id', $accommodationPayment->id)->get();
         foreach ($accommodationSlots as $accommodationSlot) {

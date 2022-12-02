@@ -1,7 +1,7 @@
 <x-admin>
   <div class="container mt-4">
     <x-card>
-      <h1>Edit Competition</h1>
+      <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Edit Competition </h3>
             <form method="POST" action="{{ route('competitions.update', $competition->id) }}" enctype="multipart/form-data">
               @csrf
               @method('UPDATE')
@@ -26,7 +26,7 @@
     
                     <div class="form-group mb-3">
                       <label class="col-form-label" for="content">Content <span class="text-danger">*</span></label>
-                      <textarea class="form-control text-area" name="content" rows="3" id="content" placeholder="Enter Content" value="{{ $competition->content }}"></textarea>
+                      <textarea class="form-control text-area" name="content" rows="3" id="content" placeholder="Enter Content"  >{{ $competition->content }}</textarea>
                     </div>
                   </div>
                   <div class="col-md-6">
