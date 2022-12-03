@@ -50,7 +50,7 @@ class FlightRegistrationController extends Controller
                 $ticket_proof[] = $fileName;
                 $i++;
             }
-        }
+        }   
         FlightTicket::create([
             'pic_id'=>Auth::user()->id,
             'created_by'=>Auth::user()->username,

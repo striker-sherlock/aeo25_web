@@ -122,7 +122,7 @@
                         <div class="form-group mb-3">
                             <label for="transfer_proof_bank" class="col-form-label">Transfer Proof<span class="text-danger">*</span></label>
                             <input type="file" class="form-control"  name="transfer_proof_bank" id="transfer_proof_bank" accept="image/png,image/jpeg,image/jpg">    
-                            <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small> <br>
+                            <small class="text-danger"  style="font-size: 0.7em">Type : PNG, JPEG, JPG | Max : 2MB</small> <br>
                             @if ($errors->has('transfer_proof_bank'))
                                 <span class="invalid feedback text-danger"role="alert">
                                     <strong>*{{ $errors->first('transfer_proof_bank') }}</strong>
@@ -156,7 +156,7 @@
                         <div class="form-group mb-3">
                             <label for="transfer_proof_wise" class="col-form-label">Transfer Proof<span class="text-danger">*</span></label>
                             <input type="file"  class="form-control"  name="transfer_proof_wise" id="transfer_proof_wise" accept="image/png,image/jpeg,image/jpg">    
-                            <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small><br>
+                            <small class="text-danger "  style="font-size: 0.7em">Type : PNG, JPEG, JPG | Max : 2MB</small><br>
                             @if ($errors->has('transfer_proof_wise'))
                                 <span class="invalid feedback text-danger"role="alert">
                                     <strong>*{{ $errors->first('transfer_proof_wise') }}.</strong>

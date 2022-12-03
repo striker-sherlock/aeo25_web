@@ -23,7 +23,7 @@
                                 <th>{{$payment->institution_name}}</th>
                                 <th>{{$payment->pic_name}}</th>
                                 <th>{{$payment->name}}</th>
-                                <th>{{$payment->amount}}</th>
+                                <th>IDR {{ number_format($payment->amount)}} </th>
                                  
                                 <th>{{$payment->created_at}}</th>
                                 <th>

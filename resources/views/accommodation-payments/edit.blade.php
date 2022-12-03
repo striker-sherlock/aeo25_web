@@ -97,7 +97,7 @@
                         <div class="form-group mb-3">
                             <label for="transfer_proof_bank" class="col-form-label">Transfer Proof <small class="text-muted">(Optional)</small></label>
                             <input type="file" class="form-control"  name="transfer_proof_bank" id="transfer_proof_bank" accept="image/png,image/jpeg,image/jpg">    
-                            <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
+                            <small class="text-danger"  style="font-size: 0.7em">Type : PNG, JPEG, JPG | Max : 2MB</small>
                         </div>  
                         <a href="#" class="btn btn-outline-info rounded-pill mb-3" data-bs-toggle="modal" data-bs-target="#payment-proof" >View Current Proof</a>
                          
@@ -120,7 +120,7 @@
                         <div class="form-group mb-3">
                             <label for="transfer_proof_wise" class="col-form-label">Transfer Proof <small class="text-muted">(Optional)</small></label>
                             <input type="file"  class="form-control"  name="transfer_proof_wise" id="transfer_proof_wise" accept="image/png,image/jpeg,image/jpg">    
-                            <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
+                            <small class="text-danger "  style="font-size: 0.7em">Type : PNG, JPEG, JPG | Max : 2MB</small>
                         </div>       
                         <a href="#" class="btn btn-outline-info rounded-pill mb-3" data-bs-toggle="modal" data-bs-target="#payment-proof" >View Current Proof</a>
                         <button type="submit" class="btn btn-outline-theme w-100 rounded-pill">Submit Payment Confirmation</button>
