@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Countries;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class PicController extends Controller
 {
     public function __construct(){
-        // $this->middleware(['auth', 'verified'])->only(['edit']);
+        $this->middleware(['auth', 'verified'])->only(['edit']);
         $this->middleware('IsAdmin')->only(['index']);
     }
     public function index()
@@ -103,7 +104,8 @@ class PicController extends Controller
             'username' => $username,
         ]);
 
-        return redirect()->route('dashboard')->with('success','Profile has successfuly updated');
+        if(!Auth::guard('admin')->check())return redirect()->route('dashboard')->with('success','Profile has successfuly updated');
+        return redirect()->route('users.index')->with('success','Profile has successfuly updated');
     }
 
   

@@ -67,6 +67,16 @@
                     </li>
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{route('users.index')}}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fas fa-user fa-stack-1x text-dark"></i>
+                            </span>
+                            <span class="ms-2">PIC List</span>
+                        </a>
+                    </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                             href="{{route('slot-registrations.index')}}">
                             <span class="fa-stack fa-sm ms-n1">
                                 <i class="fas fa-square fa-stack-2x"></i>
