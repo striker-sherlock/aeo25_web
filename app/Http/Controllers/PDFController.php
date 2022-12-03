@@ -281,7 +281,7 @@ class PDFController extends Controller
             </head>
             <header class="clearfix">
                 <div id="logo">
-                <img src="https://uat.aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
                 </div>
             </header>
             <body>
@@ -402,7 +402,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://uat.aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
@@ -685,7 +685,7 @@ class PDFController extends Controller
             </head>
             <header class="clearfix">
                 <div id="logo"> 
-                <img src="https://uat.aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
                 </div>
             </header>
             <body>
@@ -768,7 +768,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://uat.aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
@@ -1068,7 +1068,7 @@ class PDFController extends Controller
             </head>
             <header class="clearfix">
                 <div id="logo">
-                <img src="https://uat.aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
                 </div>
             </header>
             <body>
@@ -1187,7 +1187,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://uat.aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
@@ -1472,7 +1472,7 @@ class PDFController extends Controller
             </head>
             <header class="clearfix">
                 <div id="logo"> 
-                <img src="https://uat.aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
                 </div>
             </header>
             <body>
@@ -1557,7 +1557,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://uat.aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
