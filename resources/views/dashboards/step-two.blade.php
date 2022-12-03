@@ -23,7 +23,7 @@
                                 <h5>Payment Status : 
                                     @if ($competition->payment == NULL)
                                         <span class="text-danger fw-bold">No Payment Yet</span><br>
-                                        <small class="text-warning fw-bold" style="font-size:0.7em;">The Slot Was Confirmed {{ \Carbon\Carbon::parse($competition->created_at)->diffForHumans()}}</small>
+                                        <small class="text-muted fw-bold mb-3" style="font-size:0.7em;">This Slot Was Confirmed {{ \Carbon\Carbon::parse($competition->created_at)->diffForHumans()}}</small>
                                     @else
                                         @if ($competition->payment->is_confirmed == 1)
                                             <span class="text-success fw-bold">Confirmed</span>

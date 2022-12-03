@@ -16,14 +16,19 @@ class AccommodationSlotRegistrationController extends Controller
 {
     public function __construct(){
         $this->middleware('IsShowed:ENV010');   
-        $this->middleware('IsAdmin')->except(['create','store','edit','update']);
-        $this->middleware('auth', ['verified'])->only(['create','store','edit','update']);
+        $this->middleware('IsAdmin')->except(['create','store','destroy','edit','update']);
+        $this->middleware('auth')->only(['create','store','destroy']);
     }
 
     public function index()
     {
         $pending = AccommodationSlot::where('is_confirmed', 0)->get();
         $confirmed = AccommodationSlot::where('is_confirmed', 1)->get();
+        $confirmed = AccommodationSlot::leftJoin('accommodation_payments','accommodation_slot_details.payment_id','accommodation_payments.id')
+            ->where('accommodation_slot_details.is_confirmed',1)
+            ->Where('accommodation_slot_details.payment_id', NULL)
+            ->select('accommodation_slot_details.*')
+            ->get();
         $rejected = AccommodationSlot::where('is_confirmed', -1)->get();
     
         return view('accommodation-slot-registrations.index', [
@@ -34,12 +39,10 @@ class AccommodationSlotRegistrationController extends Controller
         ]);
     }
 
-    public function create($accommodation = 1 )
-    {
-        $accommodation = Accommodation::find($accommodation);
+    public function create($accommodation = 1 ) {
         return view('accommodation-slot-registrations.create', [
             'accommodations' => Accommodation::all(),
-            'selectedType' => $accommodation
+            'selectedType' =>  Accommodation::find($accommodation)
         ]);
     }
 
@@ -48,8 +51,8 @@ class AccommodationSlotRegistrationController extends Controller
     {
         $request->validate([
             'accommodation_id'=>'required', 
-            'check_in_date'=>'required',
-            'check_out_date'=>'required|after:check_in_date',
+            'check_in_date'=>'required | after_or_equal:2023-02-01',
+            'check_out_date'=>'required|after:check_in_date|before:2023-02-28',
             'special_req'=>'nullable|string',
             'quantity'=>'required',
         ]);
@@ -84,18 +87,20 @@ class AccommodationSlotRegistrationController extends Controller
 
     public function update(Request $request, AccommodationSlot $accommodation_slot_registration)
     {
-        // dd($request);
+        if ($accommodation_slot_registration->is_confirmed == 1)return redirect()->back()->with('error','Unable to edit this slot, because this slot have already confirmed');
         $request->validate([
             'accommodation_id'=>'required', 
-            'check_in_date'=>'required',
-            'check_out_date'=>'required',
-            'special_req'=>'required',
+            'check_in_date'=>'required | after_or_equal:2023-02-01',
+            'check_out_date'=>'required|after:check_in_date|before:2023-02-28',
+            'special_req'=>'nullable|string',
             'quantity'=>'required',
         ]);
-
+        if(!Auth::guard('admin')->check()) $user = Auth::user()->username;
+        else $user = Auth::guard('admin')->user()->name;
+        
+        // dd($user);
         $accommodation_slot_registration->update([
-            'created_by' => Auth::user()->username,
-            'pic_id' => Auth::user()->id,
+            'updated_by' => $user,
             'accommodation_id' => $request->accommodation_id,
             'check_in_date'=>$request->check_in_date,
             'check_out_date'=>$request->check_out_date,
@@ -111,13 +116,16 @@ class AccommodationSlotRegistrationController extends Controller
     }
 
 
-    public function destroy(AccommodationSlot $accommodationSlot)
+    public function destroy($accommodationSlot)
     {
-        $accommodationSlot->delete();
-        return redirect()->back();
+        $slot = AccommodationSlot::find($accommodationSlot);
+        if ($slot->is_confirmed == 1)return redirect()->back()->with('error','Unable to delete this slot, because this slot have already confirmed');
+        $slot->delete();
+        return redirect()->back()->with('success','Accommodation slot is successfuly deleted');
     }
 
     public function confirm(AccommodationSlot $accommodationSlot){
+        
         $accommodationSlot ->update([
             'updated_by' => 'Admin',
             'is_confirmed' => 1,
@@ -126,13 +134,13 @@ class AccommodationSlotRegistrationController extends Controller
         $confirmedMail = [
             'subject' => $accommodationSlot->accommodation->room_type. " - Confirmed Slot",
             'name'=>$accommodationSlot->user->pic_name,
-            'body1'=>'We are grateful to inform you that your accommodation slot registration has been confirmed.',
+            'body1'=>'We are grateful to inform you that your '.$accommodationSlot->accommodation->room_type .' slot registration has been confirmed.',
             'body2'=>'Please proceed to the payment for your slot by clicking the button below.',
             'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-2'
 
         ];
         Mail::to($accommodationSlot->user->email)->send(new ConfirmedSlotMail($confirmedMail));
-        return redirect()->route('accommodation-slot-registrations.index');
+        return redirect()->route('accommodation-slot-registrations.index')->with('success','accommodation is successfuly confirmed');
     }
 
     public function cancel (AccommodationSlot $accommodationSlot){
@@ -142,22 +150,22 @@ class AccommodationSlotRegistrationController extends Controller
         ]);
         return redirect()->route('accommodation-slot-registrations.index');
     }
-    public function reject ( AccommodationSlot $accommodationSlot){
-       
+    public function reject ( Request $request){
+        $accommodationSlot = AccommodationSlot::find($request->slot);
         $accommodationSlot ->update([
-            'updated_by' => 'Admin',
+            'updated_by' => Auth::guard('admin')->user()->name,
             'is_confirmed' => -1
         ]);
         $rejectMail = [
             'subject' => $accommodationSlot->accommodation->room_type. " - Rejection Slot",
             'name'=>$accommodationSlot->user->pic_name,
-            'body1'=>'We are regretful to inform you that your accommodation slot has been rejected with the following reason: ',
+            'body1'=>'We are regretful to inform you that your '.$accommodationSlot->accommodation->room_type.' slot has been rejected with the following reason: ',
             'body2'=>'You can edit your slot registration again by going into the registration step on our website.',
             'reason' => $request->reason,
             'url' => 'http://aeo.mybnec.org/dashboard/accommodation-step-1',
 
         ];
         Mail::to($accommodationSlot->user->email)->send(new RejectionMail($rejectMail));
-        return redirect()->route('accommodation-slot-registrations.index');
+        return redirect()->route('accommodation-slot-registrations.index')->with('success', 'Accommodation is successfuly rejected');
     }
 }

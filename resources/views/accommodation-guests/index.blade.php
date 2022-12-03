@@ -1,24 +1,24 @@
 <x-admin>
     <div class="container mt-4">
-        <h2 class="fw-bold mb-2">Accommodation's Guest List</h2>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Accommodation Guest list </h3>
         <div class="row mb-4">
-            <div class="col">
-                <a href="{{route('accommodation-guests.index',)}}" class="btn btn-outline-theme w-100 rounded-pill {{$roomType == NULL ? 'active' : '' }}">All Guest</a>
+            <div class="col-md-3 col-sm-6">
+                <a href="{{route('accommodation-guests.index',)}}" class="btn btn-outline-primary w-100 rounded-pill {{$roomType == NULL ? 'active' : '' }}">All Guest</a>
             </div>
             @foreach ($accommodations as $accommodation)
-            <div class="col">
-                <a href="{{route('accommodation-guests.index',$accommodation->room_type)}}" class="btn btn-outline-theme w-100 rounded-pill {{$roomType == $accommodation->room_type ? 'active' : '' }}">{{$accommodation->room_type}}</a>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <a href="{{route('accommodation-guests.index',$accommodation->room_type)}}" class="btn btn-outline-primary w-100 rounded-pill {{$roomType == $accommodation->room_type ? 'active' : '' }}">{{$accommodation->room_type}}</a>
             </div>
             @endforeach   
         </div>
         <x-card> 
-            @if ($roomType)<h3 class="text-uppercase fw-bold mb-4" style="letter-spacing: 0.1em">{{$roomType}}'s Guest List </h3>
-            @else <h3 class="text-uppercase fw-bold mb-4" style="letter-spacing: 0.1em">All Guest List</h3>
+            @if ($roomType)<h3 class="text-uppercase fw-bold mb-4 text-gradient" style="letter-spacing: 0.1em">{{$roomType}}'s Guest List </h3>
+            @else <h3 class="text-uppercase fw-bold mb-4 text-gradient" style="letter-spacing: 0.1em">All Guest List</h3>
 
             @endif
             @if ($guests->count())
                 {{-- <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4">Download Participant</a> --}}
-                <table class="table table-striped table-bordered" id="data-table">
+                <table class="table table-striped table-bordered dataTables"  >
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -37,19 +37,22 @@
                                 <th>{{$guest->user->country->name}}</th>
                                 <th>
                                     <div class="d-flex justify-content-around">
-                                        <a href="{{route('accommodation-guests.edit',$guest->id)}}" class="btn btn-primary btn-sm me-2">
+                                        <a href="{{route('accommodation-guests.edit',$guest->id)}}" class="btn btn-primary me-2">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form method="get" action="{{ route('accommodation-guests.destroy', $guest->id) }}">
-                                            <button class = "btn btn-sm btn-info me-2">
+
+                                        <form method="POST" action="{{ route('accommodation-guests.destroy', $guest->id) }}">
+                                            @method('DELETE')
+                                            <button class = "btn btn-warning me-2">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                             @csrf
                                         </form>
+
                                         <form method="POST" action="{{ route('accommodation-guests.delete', $guest->id) }}">
                                             @method('DELETE')
                                             <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$guest->id}}">
-                                              <button class = "btn btn-sm btn-danger" >
+                                              <button class = "btn btn-danger" >
                                                 <i class="fa fa-close"></i>
                                               </button>
                                             </a>
@@ -65,9 +68,10 @@
             @endif
         </x-card>
         <x-card> 
+            <h3 class="text-uppercase fw-bold mb-4 text-gradient" style="letter-spacing: 0.1em">Recycle Bin (All Guests)</h3>
             @if ($trashed->count())
                 {{-- <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4">Download Participant</a> --}}
-                <table class="table table-striped table-bordered" id="dataTables">
+                <table class="table table-striped table-bordered dataTables" id="">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -86,11 +90,11 @@
                                 <th>{{$guest->user->country->name}}</th>
                                 <th>
                                     <div class="d-flex justify-content-around">
-                                        <a href="{{route('accommodation-guests.edit',$guest->id)}}" class="btn btn-primary btn-sm me-2">
+                                        <a href="{{route('accommodation-guests.edit',$guest->id)}}" class="btn btn-primary me-2">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <form method="get" action="{{ route('accommodation-guests.restore', $participant->id) }}">
-                                            <button class = "btn btn-sm btn-info me-2">
+                                        <form method="get" action="{{ route('accommodation-guests.restore', $guest->id) }}">
+                                            <button class = "btn btn-info me-2">
                                                 <i class="fa fa-repeat"></i>
                                             </button>
                                             @csrf
@@ -98,7 +102,7 @@
                                         <form method="POST" action="{{ route('accommodation-guests.delete', $guest->id) }}">
                                             @method('DELETE')
                                             <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$guest->id}}">
-                                              <button class = "btn btn-sm btn-danger" >
+                                              <button class = "btn btn-danger" >
                                                 <i class="fa fa-close"></i>
                                               </button>
                                             </a>

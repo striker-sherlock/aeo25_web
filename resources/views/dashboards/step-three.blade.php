@@ -7,6 +7,7 @@
             <hr>
             <div class="row">
                 @foreach ($competitionSlots as $competitionSlot)
+                    @if($competitionSlot->is_confirmed != 1) @continue @endif
                     <div class=" col-md-6 ">
                         <div class="row align-items-center py-3 rounded-20 w-100 border border-1 shadow-sm my-4 ">
                             <div class="col-md-4">
@@ -18,7 +19,7 @@
                                 <h5>Status:
                                     @if ($competitionSlot->competitionParticipants->count() > 0)
                                         <span class="fw-bold text-primary">Registered</span> <br>
-                                        <a href="{{route('competition-participants.show',[Auth::user()->id,$competitionSlot->competition->id])}}" class="btn btn-outline-info rounded-pill mt-2">View    Participant</a>
+                                        <a href="{{route('competition-participants.show',[Auth::user()->id,$competitionSlot->competition->id])}}" class="btn btn-outline-info rounded-pill mt-2">View Participant</a>
                                         
                                     @elseif($competitionSlot->payment == NULL)
                                         <span class="fw-bold text-danger">Not Eligible (No Payment Yet)</span>

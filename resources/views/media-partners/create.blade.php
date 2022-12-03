@@ -1,12 +1,10 @@
 <x-admin>
     
     <div class="container mx-5 mt-5 px-5">
-      <div class="card border-0 overflow-hidden shadow rounded-20 mb-5" style="border-radius:20px" >
-        <div class="card-header bg-secondary"></div>
-        <div class="card-body ">
+      <x-card>
           <div class="my-2">
-            <a class=" " href="{{ route('media-partners.index') }}" title="Back to Main Menu">
-              <i class="fas fa-arrow-circle-left fa-2x"></i>
+            <a class="" href="{{ route('media-partners.index') }}" title="Back to Main Menu">
+              <i class="fas fa-arrow-circle-left fa-2x p-4"></i>
             </a>
           </div>
 
@@ -30,7 +28,7 @@
       </div>
 
 
-
+    </x-card>
     </div>
 
 
