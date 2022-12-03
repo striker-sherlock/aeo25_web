@@ -1,7 +1,7 @@
 <x-admin title="Admin Login">
     <div id="mainBackground">
-        <div class="container my-5 py-5">
-            <div class="row justify-content-center align-items-center pt-5">
+        <div class="container   py-5">
+            <div class="row justify-content-center align-items-center">
                 <div class="col-lg-6 col-md-8 col-sm-9 col-11">
                     <div class="card card-shadow rounded-20 border">
                         <div class="card-body m-lg-3 m-2">

@@ -3,24 +3,24 @@
         <div class="alert alert-primary border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
             <i class="fa-solid fa-triangle-exclamation me-1"></i> <b>Important rules!</b> <br>
             <ul>
-                <li>Observers are <b>not allowed</b> to take pictures and videos during any
+                <li>Spectators are <b>not allowed</b> to take pictures and videos during any
                     participants' performances.
                 </li>
-                <li>Observers <b>should refrain</b> from talking with volume that could <b>potentially
+                <li>Spectators <b>should refrain</b> from talking with volume that could <b>potentially
                         distract</b> the participants or judges during competitions.
                 </li>
-                <li>Observers are <b>not allowed</b> to interfere or distract the participants or
+                <li>Spectators are <b>not allowed</b> to interfere or distract the participants or
                     judges during competitions.
                 </li>
-                <li>Observers are <b>not allowed</b> to bring <b>sharp tools</b> and/or <b>dangerous weapons,
+                <li>Spectators are <b>not allowed</b> to bring <b>sharp tools</b> and/or <b>dangerous weapons,
                         liquids, and powders</b> that can litter the performing room.
                 </li>
                 <li> Applause is <b>only allowed</b> after every performance.
                 </li>
-                <li> Observers are <b>not allowed</b> to leave or enter the room when a participant is performing.</li>
+                <li> Spectators are <b>not allowed</b> to leave or enter the room when a participant is performing.</li>
             </ul>
         </div>
-        <h2 class="aeo-title fw-semibold mb-4">How many observers would you like to register?</h2>
+        <h2 class="aeo-title fw-semibold mb-4">How many spectators would you like to register?</h2>
         <form action="{{route('slot-registrations.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="row justify-content-start align-items-center">
@@ -35,21 +35,29 @@
                                     </div>
                                     <div class="col">
                                         <small class="text-muted text-uppercase"
-                                            style="letter-spacing: .05em">observer - <b>{{ $maxOBS }}</b> slot(s)
+                                            style="letter-spacing: .05em">spectators - <b>{{ $maxOBS }}</b> slot(s)
                                             available</small>
-                                        <h3 class="text-gradient fw-semibold my-1" style="letter-spacing: .05em">
+                                        <h3 class="text-gradient fw-semibold my-1" style="letter-spacing:   .05em">
                                             {{$competition->name}}</h3>
                                         <h5 class="mt-2 mb-3 text-dark-purple" style="letter-spacing: .05em">IDR
                                             {{ number_format($competition->price, 0, ',', '.') }}</h5>
                                         <input type="text" name="compet_id[]" hidden value="{{$competition->id}}">
-                                        <div class="form-input">
-                                            <button type="button" id="btnDecrement" class="btn btn-outline-primary me-2">-</button>
-                                            <input type="text" id="counter" class="input-spinner" step="1"
-                                                name="quantity[]-{{$competition->id}}" value="0" min="0"
-                                                max="{{ $maxOBS }}" style="text-align: center; border: 0; background:
-                                                transparent; padding: 0; max-width: 3rem" readonly/>
-                                            <button type="button" id="btnIncrement" class="btn btn-outline-primary ms-2">+</button>
-                                        </div>
+                                        @if($maxOBS <= 0)
+                                            <h5 class=" bg-danger text-white py-2 mx-auto fw-bold text-center" title="You have exceeded the slot limit or you do not have any confirmed slot" style="cursor:pointer">
+                                                Unable to select this slot
+                                            </h5>
+                                            <input type="text" name="quantity[]-{{$competition->id}}"
+                                                value="0" hidden>
+                                        @else
+                                            <div class="form-input">
+                                                <button type="button" id="btnDecrement" class="btn btn-outline-primary me-2">-</button>
+                                                <input type="text" id="counter" class="input-spinner" step="1"
+                                                    name="quantity[]-{{$competition->id}}" value="0" min="0"
+                                                    max="{{ $maxOBS }}" style="text-align: center; border: 0; background:
+                                                    transparent; padding: 0; max-width: 3rem" readonly/>
+                                                <button type="button" id="btnIncrement" class="btn btn-outline-primary ms-2">+</button>
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +66,7 @@
                 @endforeach
             </div>
             <button type="submit"
-                class="btn btn-outline-primary w-100 rounded-20 mt-4 {{($maxOBS == 0 && $competition->id == 'OBS')|| $maxIA == 0 && $competition->id == 'IA' ? 'disabled bg-secondary' : ''}}">Register
+                class="btn btn-outline-primary w-100 rounded-20 mt-4 {{$maxOBS == 0 && $competition->id == 'OBS' ? 'disabled bg-secondary' : ''}}">Register
             </button>
         </form>
     </div>

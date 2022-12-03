@@ -21,7 +21,7 @@ class DashboardController extends Controller
 {   
     public function __construct(){
  
-        $this->middleware(['auth', 'verified'])->only(['showDashboard','step']);
+        $this->middleware(['auth', 'verified'])->only(['showDashboard','step','accommodationStep']);
         $this->middleware('IsAdmin')->only(['showAdminDashboard']);
     }
 

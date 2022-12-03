@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-lg">
                         <i class="fas fa-bullhorn"></i>
-                        Want to watch the thrill of our competitions? Let's register as <b>Observers</b>!
+                        Want to watch the thrill of our competitions? Let's register as <b>Spectators</b>!
                     </div>
                     <div class="col-lg text-lg-end text-start">
                         <a href="{{route('slot-registrations.create-other')}}" class="text-reset text-decoration-none">
@@ -51,11 +51,12 @@
                     {{-- {{dd($confirmedSlotRegistration->count())}} --}}
                     {{$totalSlot - $confirmedPayment != 0 &&  $confirmedSlotRegistration->count() != 0 ? 'focused':'shadow-sm'}}" style="border-radius:20px">
                         <div class="card-header"></div>
-                        <div class="card-body my-3 p-4">
+                        <div class="card-body my-3 p-4 position-relative">
                             <h2 class="fw-bold">STEP 2</h2>
                             @if (!$confirmedSlotRegistration->count())
                                 <i class="fas fa-lock" style="font-size: 5em"></i>
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
+                                <small style="font-size: 0.7em" class="text-danger" >*you have to finish previous step first</small>
                             @else
                                 <h4>Total Paid Slots Registration </h4>
                                 <h1 class="display-3 fw-bold {{$confirmedPayment - $allSlotRegistration->count() == 0 ? 'text-success' : 'text-danger'}}">{{$confirmedPayment}}<span class="fs-4">/{{$allSlotRegistration->count()}}</span> </h1>
@@ -74,6 +75,7 @@
                             @if(!$confirmedPayment)
                                 <i class="fas fa-lock" style="font-size: 5em"></i>
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
+                                <small style="font-size: 0.7em" class="text-danger" >*you have to finish previous step first</small>
                             @else
                                 <h4>Total Participants Registered</h4>
                                 <h1 class="display-3 fw-bold">{{$totalParticipants}}</h1>
@@ -112,6 +114,7 @@
                             @if (!$confirmedAccPayment)
                                 <i class="fas fa-lock" style="font-size: 5em"></i>
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
+                                <small style="font-size: 0.7em" class="text-danger" >*you have to finish previous step first</small>
                             @else
                                 <h4>Total Paid Slot Accommodation </h4>
                                 <h1 class="display-3 fw-bold {{$confirmedAccPayment - $totalAccSlot == 0 ? 'text-success' : 'text-danger'}}">{{$confirmedAccPayment}}<span class="fs-4">/{{$totalAccSlot}}</span> </h1>
@@ -130,6 +133,7 @@
                             @if(!$confirmedAccPayment)
                                 <i class="fas fa-lock" style="font-size: 5em"></i>
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
+                                <small style="font-size: 0.7em" class="text-danger" >*you have to finish previous step first</small>
                             @else
                                 <h4>Accommodation Guest Registered</h4>
                                 <h1 class="display-3 fw-bold">{{$totalGuests}}</h1>

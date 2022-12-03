@@ -52,7 +52,7 @@
                         </div>
                         <div class="col-12 my-2 text-center">
                             <h3 class="font-weight-bold">Error</h3>
-                            <h5 class="font-weight-normal">{{ session('error') }}</h5>
+                            <h5 class="font-weight-normal">{!! session('error') !!}</h5>
                             <button type="button" class="btn btn-outline-danger rounded-50 my-3 px-5"
                                 data-bs-dismiss="modal">
                                 OK, I got it

@@ -1,15 +1,15 @@
 <nav id="sidebar-user" class="sidebar-wrapper h-100 mh-100 fixed-top bg-gradient-blue pr-0">
     <div class="sidebar-content">
-        <div class="sidebar-brand text-end row my-2 py-2 me-2" style="padding: 0.15rem;">
+        <div class="sidebar-brand text-end row my-2 py-2 me-2  " style="padding: 0.15rem;">
             <span class=" ms-auto me-4  rounded burgerIcon" id="close-sidebar" style="cursor: pointer;">
                 <i class=" fa-solid fa-x fa-lg text-white "></i>
             </span>
         </div>
         
-        <div class="sidebar-header " style="height: auto; padding: 0.5rem 1rem;">
-            <div class="d-flex flex-column align-items-center justify-content-center text-center my-3">
+        <div class="sidebar-header " style="height: auto; padding: 0.5rem 1rem;"  >
+            <div class="d-flex flex-column align-items-center justify-content-center text-center ">
                 <img src="/storage/institution_logo/{{ Auth::user()->institution_logo }}"
-                    class="rounded border-teal w-25 rounded bg-white card-shadow-sm" alt="">
+                    class="rounded border-teal w-50 rounded bg-white card-shadow-sm" alt="">
                 <span class="mt-1 fw-bold text-wrap text-white">{{ Auth::user()->pic_name }}</span>
                 <small class="text-secondary text-wrap text-light">{{ Auth::user()->institution_name }}</small>
             </div>
@@ -24,6 +24,17 @@
                             <i class="fas fa-info fa-stack-1x text-dark"></i>
                         </span>
                         <span class="ms-2">Main Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="side-item text-white text-white">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{ route('users.edit',Auth::user()->id) }}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fas fa-user fa-stack-1x text-dark"></i>
+                        </span>
+                        <span class="ms-2">Edit Profile</span>
                     </a>
                 </li>
                 <li class="pb-1 ps-3 header-menu side-item text-white fs-5">
