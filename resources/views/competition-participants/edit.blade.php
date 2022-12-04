@@ -2,8 +2,8 @@
     <div class="container mt-4">
         {{-- PIC PERSONAL DATA --}}
         <x-card>
-            <h4 class="text-uppercase">PIC Information</h4>
-            <h2 class="fw-bold">PIC's Personal Detail</h2>
+            <h4 class="text-uppercase" style="letter-spacing: 0.05em" >PIC Information</h4>
+            <h3 class="text-uppercase fw-bold text-gradient " style="letter-spacing: 0.1em">PIC's Personal Detail  </h3>   
             <hr>
             <div class="row">
                 <div class="col-md-6">
@@ -29,11 +29,12 @@
             </div>
         </x-card>
         <x-card>
+            
             <form action="{{route('competition-participants.update',$participant->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <h4 class="text-uppercase">Edit Participant</h4>
-                <h2 class="fw-bold">{{$participant->competition->name}} Participant</h2>
+                <h4 class="text-uppercase" style="letter-spacing: 0.05em" >Edit Participant</h4>
+                <h3 class="text-uppercase fw-bold text-gradient " style="letter-spacing: 0.1em">{{$participant->competition->name}}'s Participants </h3>  
                 <hr>
                 <div class="row">
                     <div class="col-md-6">

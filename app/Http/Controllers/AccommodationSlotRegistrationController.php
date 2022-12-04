@@ -87,7 +87,7 @@ class AccommodationSlotRegistrationController extends Controller
 
     public function update(Request $request, AccommodationSlot $accommodation_slot_registration)
     {
-        if ($accommodation_slot_registration->is_confirmed == 1)return redirect()->back()->with('error','Unable to edit this slot, because this slot have already confirmed');
+        if ($accommodation_slot_registration->is_confirmed == 1  && !Auth::guard('admin')->check() )return redirect()->back()->with('error','Unable to edit this slot, because this slot have already confirmed');
         $request->validate([
             'accommodation_id'=>'required', 
             'check_in_date'=>'required | after_or_equal:2023-02-01',
@@ -98,7 +98,6 @@ class AccommodationSlotRegistrationController extends Controller
         if(!Auth::guard('admin')->check()) $user = Auth::user()->username;
         else $user = Auth::guard('admin')->user()->name;
         
-        // dd($user);
         $accommodation_slot_registration->update([
             'updated_by' => $user,
             'accommodation_id' => $request->accommodation_id,
@@ -107,6 +106,12 @@ class AccommodationSlotRegistrationController extends Controller
             'special_req'=>$request->special_req,
             'quantity' => $request->quantity,
         ]);
+        if(!Auth::guard('admin')->check()){
+            $accommodation_slot_registration->update([
+                'is_confirmed' => 0,
+            ]);
+        }
+
         if(!Auth::guard('admin')->check()){
             return redirect()->route('dashboard.accommodation-step',1)->with('success', "Accommodation registration successfully updated!");
         }

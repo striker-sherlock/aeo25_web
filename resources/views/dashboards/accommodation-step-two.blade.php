@@ -23,7 +23,7 @@
                                 <h5>Status : 
                                     @if ($accommodation->accommodationPayment == NULL)
                                         <span class="text-danger fw-bold">No Payment Yet</span><br>
-                                        <small style="font-size: 0.7em" class="text-warning fw-bold">This slot was Confirmed {{ \Carbon\Carbon::parse($accommodation->confirmed_at)->diffForHumans()}}</small>
+                                        <small style="font-size: 0.7em" class="text-muted fw-bold">This slot was Confirmed {{ \Carbon\Carbon::parse($accommodation->confirmed_at)->diffForHumans()}}</small>
                                     @else
                                         @if ($accommodation->accommodationPayment->is_confirmed == 1)
                                             <span class="text-success fw-bold">Confirmed</span>
@@ -36,6 +36,7 @@
                                         @endif 
                                     @endif
                                 </h5>
+                                {{dd($accommodation->payment_id)}}
                                 @if (!$accommodation->payment_id)
                                     <a href="{{route('accommodation-payments.create', $accommodation->id)}}" class="btn btn-outline-theme rounded-20">Pay This Slot Only</a>
                                 @endif

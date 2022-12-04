@@ -32,13 +32,13 @@
                                 </h4>
                                 @if ($competitionSlot->is_confirmed != 1)
                                     <div class="row justify-content-start ">
-                                        @if ($competitionSlot->competition_id != 'OBS' && $competitionSlot->competition_id != 'IA')
-                                           <div class="col">
-                                                <a href="#" data-bs-toggle ="modal" data-bs-target="#edit{{$competitionSlot->id}}" class="btn btn-outline-theme rounded-20 me-2 w-100">Edit Slot</a>
-                                           </div>
-                                        @endif
+                                        {{-- @if ($competitionSlot->competition_id != 'OBS' && $competitionSlot->competition_id != 'IA') --}}
                                         <div class="col">
-                                            <a href="#" data-bs-toggle ="modal" data-bs-target="#delete{{$competitionSlot->id}}" class="btn btn-outline-danger rounded-20 w-100">Delete Slot</a>
+                                            <a href="#" data-bs-toggle ="modal" data-bs-target="#edit{{$competitionSlot->id}}" class="btn btn-outline-theme rounded-20 me-2 w-100"> <i class="fa fa-edit"></i> Edit</a>
+                                        </div>
+                                        {{-- @endif --}}
+                                        <div class="col">
+                                            <a href="#" data-bs-toggle ="modal" data-bs-target="#delete{{$competitionSlot->id}}" class="btn btn-outline-danger rounded-20 w-100">  <i class="fa fa-trash"></i> Delete </a>
                                         </div>
                                 </div>
                                 @endif
@@ -65,6 +65,7 @@
             </ul>
         </div>
     </div>
+
     {{-- modal untuk update --}}
     @foreach ($competitionSlots as $competitionSlot)
         <div class="modal fade p-5" id="edit{{$competitionSlot->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
@@ -87,11 +88,21 @@
                                 @php ($slot = 3)
                                 @if ($slot > $competitionSlot->competition->temp_quota) 
                                     @php($slot = $competitionSlot->competition->temp_quota)
-                                @endif  
-                                @for($i=1 ; $i <= $slot; $i++ )
-                                    <input type="radio" class="btn-check" name="quantity" id="{{$competitionSlot->id.$i}}"  value="{{$i}}" {{$i == $competitionSlot->quantity ? 'checked' : ''}}>
-                                    <label class="btn btn-outline-secondary" for="{{$competitionSlot->id.$i}}"  >{{$i}}</label>
-                                @endfor 
+                                @endif
+                                @if ($competitionSlot->competition_id == 'IA' || $competitionSlot->competition_id == 'OBS')
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="">Quantity</span>
+                                        </div>
+                                        <input type="number" class="form-control" min="1" value="{{$competitionSlot->quantity}}" name="quantity">
+                                     
+                                    </div>
+                                @else
+                                    @for($i=1 ; $i <= $slot; $i++ )
+                                        <input type="radio" class="btn-check" name="quantity" id="{{$competitionSlot->id.$i}}"  value="{{$i}}" {{$i == $competitionSlot->quantity ? 'checked' : ''}}>
+                                        <label class="btn btn-outline-secondary" for="{{$competitionSlot->id.$i}}"  >{{$i}}</label>
+                                    @endfor 
+                                @endif
                             </div>
                         </div>
                         <div class="foot">
@@ -100,7 +111,7 @@
                                     <button type="button" class="btn rounded-pill btn-outline-secondary w-100"  data-bs-dismiss="modal">Cancel</button>
                                 </div>
                                 <div class="col">
-                                    <button type="submit" class="btn rounded-pill btn-outline-theme w-100">Confirm Edit</button>
+                                    <button type="submit" class="btn rounded-pill btn-outline-theme w-100">Save Changes</button>
                                 </div>
                             </div>  
                         </div>

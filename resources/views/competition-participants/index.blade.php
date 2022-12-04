@@ -1,14 +1,22 @@
 <x-admin>
     <div class="container mt-4">
+        <div class="row">
+            @foreach ($allCompetitions as $compet )
+                <div class="col-6 col-md-3 mb-4  ">
+                    <a href="{{route('competition-participants.index',$compet->id)}}" class="btn btn-outline-primary w-100 rounded-pill {{$competition->id == $compet->id ? 'active':''}}">{{$compet->name}}</a>
+                </div>
+            @endforeach
+        </div>
         <x-card>   
-            <h3 class="text-uppercase fw-bold" style="letter-spacing: 0.1em">{{$competition->name}}'s Participants </h3>         
+            <h3 class="text-uppercase fw-bold text-gradient " style="letter-spacing: 0.1em">{{$competition->name}}'s Participants </h3>         
             @if ($competitionParticipants->count())
-                <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4">Download Participant</a>
+                <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4"> <i class="fas fa-file-export" aria-hidden="true"></i> Download Participant</a>
                 <table class="table table-striped table-bordered dataTables">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">{{$competitionParticipants[0]->competition->need_team == 1 ? 'Team' : 'Participant Name'}}</th>
+                        <th scope="col">{{$competition->need_team == 1 ? 'Team' : ''}}</th>
+                        <th scope="col">Participant Name</th>
                         <th scope="col">Institution Name</th>
                         <th scope="col">Country</th>
                         <th scope="col">PIC Name </th>
@@ -19,32 +27,33 @@
                         @foreach ($competitionParticipants as $participant)
                         <tr class="text-center">
                             <th>{{$participant->id}}</th>
-                            <th>{{$participant->competition->need_team == 1 ? $participant->competitionTeam->name : $participant->name}}</th>
+                            <th>{{$participant->competition->need_team == 1 ? $participant->competitionTeam->name : ''}}</th>
+                            <th>{{ $participant->name}}</th>
                             <th>{{$participant->user->institution_name}}</th>
                             <th>{{$participant->user->country->name}}</th>
                             <th>{{$participant->user->pic_name}}</th>
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    <a class ="btn btn-sm btn-primary me-2" href="{{route('competition-participants.edit',$participant->id)}}" title="Edit">
+                                    <a class ="btn  btn-primary me-2" href="{{route('competition-participants.edit',$participant->id)}}" title="Edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <form method="get" action="{{ route('competition-participants.destroy', $participant->id) }}">
-                                    <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$participant->id}}">
-                                        <button class = "btn btn-sm btn-info me-2">
+                                    <a href="#" data-bs-toggle ="modal" data-bs-target="#move{{$participant->id}}">
+                                        <button class = "btn  btn-warning me-2" title="Move Participant to Recycle Bin">
                                             <i class="fa fa-trash"></i>
                                         </button>
                                     </a>
                                         @csrf
                                     </form>
-                                    <form method="POST" action="{{ route('competition-participants.delete', $participant->id) }}">
+                                    {{-- <form method="POST" action="{{ route('competition-participants.delete', $participant->id) }}">
                                         @method('DELETE')
                                         <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$participant->id}}">
-                                          <button class = "btn btn-sm btn-danger" >
+                                          <button class = "btn  btn-danger" >
                                             <i class="fa fa-close"></i>
                                           </button>
                                         </a>
                                         @csrf
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </th>
                         </tr>
@@ -55,13 +64,15 @@
             @endif
         </x-card>
 
-       {{-- <x-card>
+       <x-card>
+            <h3 class="text-uppercase fw-bold text-gradient " style="letter-spacing: 0.1em">{{$competition->name}}'s Recycle Bin </h3>  
             @if ($trashed->count())
                 <table class="table table-striped table-bordered dataTables">
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">{{$trashed[0]->competition->need_team == 1 ? 'Team' : 'Participant Name'}}</th>
+                        <th scope="col">{{$competition->need_team == 1 ? 'Team' : ''}}</th>
+                        <th scope="col">Participant Name</th>
                         <th scope="col">Institution Name</th>
                         <th scope="col">Country</th>
                         <th scope="col">PIC Name </th>
@@ -72,30 +83,31 @@
                         @foreach ($trashed as $participant)
                         <tr class="text-center">
                             <th>{{$participant->id}}</th>
-                            <th>{{$participant->competition->need_team == 1 ? $participant->competitionTeam->name : $participant->name}}</th>
+                            <th>{{$participant->competition->need_team == 1 ? $participant->competitionTeam->name : ''}}</th>
+                            <th>{{$participant->name}}</th>
                             <th>{{$participant->user->institution_name}}</th>
                             <th>{{$participant->user->country->name}}</th>
                             <th>{{$participant->user->pic_name}}</th>
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    <a class ="btn btn-sm btn-primary me-2" href="{{route('competition-participants.edit',$participant->id)}}" title="Edit">
+                                    <a class ="btn  btn-primary me-2" href="{{route('competition-participants.edit',$participant->id)}}" title="Edit">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <form method="get" action="{{ route('competition-participants.restore', $participant->id) }}">
-                                        <button class = "btn btn-sm btn-info me-2">
+                                    <form method="get" action="{{ route('competition-participants.restore', $participant->id) }}" >
+                                        <button class = "btn  btn-info me-2" title="Restore Participant">
                                         <i class="fa fa-repeat"></i>
                                         </button>
                                         @csrf
                                     </form>
-                                    <form method="POST" action="{{ route('competition-participants.delete', $participant->id) }}">
+                                    {{-- <form method="POST" action="{{ route('competition-participants.delete', $participant->id) }}">
                                         @method('DELETE')
                                         <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$participant->id}}">
-                                        <button class = "btn btn-sm btn-danger" >
+                                        <button class = "btn  btn-danger" >
                                             <i class="fa fa-close"></i>
                                         </button>
                                         </a>
                                         @csrf
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </th>
                         </tr>
@@ -104,7 +116,7 @@
                 </table>
             @else <hr><p class="text-center">No Data</p>
             @endif
-       </x-card> --}}
+       </x-card>
     </div>
 
 {{-- move to recycle bin confirmation --}}
@@ -119,17 +131,17 @@
             </span>
             </div>
             <div class="body mb-3">
-            <h1 class="fw-bold fs-3 text-center" > Are you sure want to move "<span class="fw-bolder text-danger">{{$participant->user->pic_name}}</span>" to recycle bin ? </h1>
+            <h1 class="fw-bold fs-3 text-center" > Are you sure want to move "<span class="fw-bolder text-danger">{{$participant->name}}</span>" to recycle bin ? </h1>
             </div>
-            <div class="footer">
+            <div class="modal-footers">
                 <div class="row">
                 <div class="col">
-                    <button type="button" class="btn btn-secondary w-100"  data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="btn btn-outline-secondary w-100  rounded-pill "  data-bs-dismiss="modal">Back</button>
                 </div>
                 <div class="col">
                     <form method="POST" action="{{route('competition-participants.destroy',$participant->id)}}">
                     <input type="hidden" name="_method" value = "DELETE">
-                        <button class="btn btn-danger rounded w-100" title="delete">
+                        <button class="btn btn-outline-danger  rounded-pill w-100 " title="delete">
                         Move
                         </button>
                     @csrf
@@ -157,15 +169,15 @@
             <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$participant->user->pic_name}}</span>"? </h1>
             <p class="text-warning"> note: this action can't be undone  </p>
             </div>
-            <div class="footer">
+            <div class="modal-footers">
                 <div class="row">
                 <div class="col">
-                    <button type="button" class="btn btn-secondary w-100"  data-bs-dismiss="modal">Back</button>
+                    <button type="button" class="btn btn-outline-secondary rounded-pill w-100"  data-bs-dismiss="modal">Back</button>
                 </div>
                 <div class="col">
                     <form method="POST" action="{{route('competition-participants.delete',$participant->id)}}">
                     <input type="hidden" name="_method" value = "DELETE">
-                        <button class="btn btn-danger rounded w-100" title="delete">
+                        <button class="btn btn-outline-danger rounded w-100 rounded-pill" title="delete">
                         Delete
                         </button>
                     @csrf
@@ -193,7 +205,7 @@
               <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$participant->user->pic_name}}</span>"? </h1>
               <p class="text-warning"> note: this action can't be undone  </p>
               </div>
-              <div class="footer">
+              <div class="modal-footers">
                   <div class="row">
                   <div class="col">
                       <button type="button" class="btn btn-secondary w-100"  data-bs-dismiss="modal">Back</button>

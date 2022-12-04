@@ -1,11 +1,11 @@
 <?php
 
 use App\Models\AccessControl;
-use App\Http\Controllers\AccessControlController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\PicController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
@@ -26,6 +26,7 @@ use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
 use App\Http\Controllers\UserAccommodationGuest;
 // use Yajra\DataTables\DataTablesServiceProvider
+use App\Http\Controllers\AccessControlController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -47,6 +48,12 @@ Auth::routes(['verify'=>true]);
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// About Us
+Route::get('/about-us', function() {
+    return view('about-us');
+}
+);
+
 // Masters
 Route::resource('faqs', FaqController::class);
 Route::resource('lost-and-found', LostAndFoundController::class);
@@ -54,6 +61,11 @@ Route::resource('countries', CountriesController::class);
 Route::resource('follow-up-types', FollowUpTypeController::class); 
 Route::resource('access-controls',AccessControlController::class);
 Route::resource('score-types', ScoreTypeController::class)->except('show');
+
+
+// PIC
+Route::resource('users',PicController::class)->except('show');
+Route::get('users/{id}/admin-edit',[PicController::class,'adminEdit'])->name('users.admin-edit');
 
 
 // Environments

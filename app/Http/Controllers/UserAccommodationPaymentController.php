@@ -146,10 +146,7 @@ class UserAccommodationPaymentController extends Controller
         ]);
     }
 
-    public function update(Request $request, AccommodationPayment $accommodationPayment)
-    {
-        // dd(Auth::guard('admin')->check());
-      
+    public function update(Request $request, AccommodationPayment $accommodationPayment){
         if($accommodationPayment->is_confirmed == 1 && !Auth::guard('admin')->check())return redirect()->route('dashboard.accommodation-step',2)->with('error','Sorry, unable to edit this payment, because the payment has already confirmed');
         
         if ($request->type == 'BANK'){

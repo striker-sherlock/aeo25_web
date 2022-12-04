@@ -1,21 +1,5 @@
 import * as bootstrap from "bootstrap";
 
-import counterUp from 'counterup2'
-
-const callback = entries => {
-    entries.forEach(entry => {
-        const el = entry.target
-        if (entry.isIntersecting && !el.classList.contains('is-visible')) {
-            for (const counter of counters) {
-                counterUp(counter, {
-                    duration: 1000,
-                    delay: 16,
-                })
-                el.classList.add('is-visible')
-            }
-        }
-    })
-}
 
 
 
@@ -222,9 +206,7 @@ $(document).ready(function () {
       aos_init();
     });
 
-    /**
-     * Initiate Pure Counter 
-     */
+    
 
   })();
 

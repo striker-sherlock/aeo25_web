@@ -49,14 +49,19 @@ class SlotRegistrationController extends Controller
     }
 
     public function create(){
+        // hitung ada berapa slot debate
+        $registeredDebate = CompetitionSlot::where('pic_id',Auth::user()->id)
+            ->where('competition_id','DB')
+            ->sum('quantity');
         return view('slot-registrations.create',[
             'competitions' => Competition::all(),
             'competitionSlots' => CompetitionSlot::where('pic_id',Auth::user()->id)->get(),
+            'registeredDebate' => $registeredDebate
         ]);
     }
 
     public function createOthers(){
-        $competitions = Competition::where('id','OBS')->orWhere('id','IA')->get();
+        $competitions = Competition::where('id','OBS')->get();
         $competSlot = CompetitionSlot::where('pic_id',Auth::user()->id)
             ->join('competitions','competitions.id','competition_slot_details.competition_id')
             ->where('competitions.id','!=', 'OBS')
@@ -65,17 +70,11 @@ class SlotRegistrationController extends Controller
             ->distinct('competitions.id')
             ->count();
         $registeredSpectators = CompetitionSlot::where('pic_id', Auth::user()->id)->where('competition_id','OBS')->sum('quantity');
-        $maxIA = CompetitionSlot::where('pic_id',Auth::user()->id)
-            ->get()
-            ->where('competition_id','DB')
-            ->where('is_confirmed',1)
-            ->sum('quantity')-1;
-        $registeredIA =CompetitionSlot::where('pic_id', Auth::user()->id)->where('competition_id','IA')->sum('quantity');
-        $maxIA -= $registeredIA;
+        
+        
         
         return view('slot-registrations.create-other',[
             'competitions' => $competitions,
-            'maxIA' => $maxIA,
             'maxOBS' => $competSlot - $registeredSpectators
         ]);
     }
@@ -84,12 +83,28 @@ class SlotRegistrationController extends Controller
         $competSlot = CompetitionSlot::find($id);
         $competition = Competition::find($competitionID);
         if ($competSlot){
+            $maxSlotIA = CompetitionSlot::where('pic_id',$competSlot->user->id)
+                ->get()
+                ->where('competition_id','DB')
+                ->where('is_confirmed',1)
+                ->sum('quantity')-1;
+            $maxSlotOBS = CompetitionSlot::where('pic_id',$competSlot->user->id)
+                ->join('competitions','competitions.id','competition_slot_details.competition_id')
+                ->where('competitions.id','!=', 'OBS')
+                ->where('competitions.id','!=', 'IA')
+                ->where('competition_slot_details.is_confirmed',1)
+                ->distinct('competitions.id')
+                ->count();
+            $availSlot = 3;
             $allSlotCompetition = CompetitionSlot::where('pic_id',$competSlot->user->id)
                                 ->get()
                                 ->where('competition_id',$competitionID)
                                 ->sum('quantity');
             $difference = $slot - $competSlot->quantity;
-            if ($difference + $allSlotCompetition > 3) return "Sorry, maximum for each institution exceeded";
+            if($competition-> id == 'IA') $availSlot = $maxSlotIA;
+            if($competition-> id == 'OBS') $availSlot = $maxSlotOBS;
+            $remainedSlot = $availSlot - $allSlotCompetition;
+            if ($difference + $allSlotCompetition > $availSlot) return "Sorry, maximum slot for each institution exceeded </br> (".$remainedSlot.'   Slot remaining)';
         }
 
         if ($slot > $competition->temp_quota) return "Sorry,".$competition->name."'s quota is not enough";
@@ -97,11 +112,12 @@ class SlotRegistrationController extends Controller
     }
 
     public function update(Request $request, $id){
+        // dd($request->all());
         $competitionSlot = CompetitionSlot::find($id);
         $validation = $this->checkSlotAvailability($request->quantity,$request->compet_id,$competitionSlot->id);
         if($validation != 'true')return redirect()->back()->with('error',$validation);
         
-        if($competitionSlot->is_confirmed == 1) return redirect()->back()->with('error','Sorry, the updates failed, because the slot have already confirmed');
+        if($competitionSlot->is_confirmed == 1 && !Auth::guard('admin')->check()) return redirect()->back()->with('error','Sorry, the updates failed, because the slot have already confirmed');
         
         
 
@@ -110,8 +126,16 @@ class SlotRegistrationController extends Controller
         //update competition slot table
         $competitionSlot->update([
             'quantity' => $request->quantity,
-            'is_confirmed' => 0
+            'updated_by' => Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name : Auth::user()->username 
         ]);
+
+        if(!Auth::guard('admin')->check()){
+            $competitionSlot->update([
+                'is_confirmed' => 0,
+            ]);
+        }
+
+
         
         $competition = Competition::find($competitionSlot->competition->id);
         $remainedQuota = $competition->temp_quota;
@@ -125,7 +149,6 @@ class SlotRegistrationController extends Controller
     }
 
     public function store(Request $request){
-        // dd($request->all());        
         $len = count($request->quantity);
         //  code ini untuk mengecek apabila slot nya masih tersedia atau tidak
         for($i = 0; $i < $len; $i++){
@@ -134,7 +157,6 @@ class SlotRegistrationController extends Controller
             $competitionName = Competition::find($request->compet_id[$i])->name;
             if(!$valid) return redirect()->back()->with('error',"Sorry, ".$competitionName."'s slot is not available");
         }
-        // dd($request->all());    
         
         
         for ($i= 0; $i < $len; $i++){
@@ -156,7 +178,7 @@ class SlotRegistrationController extends Controller
         $competitionSlot = CompetitionSlot::find($id);
         $pic = $competitionSlot->user;
         return view('slot-registrations.edit',[
-            'competitionSlots' => CompetitionSlot::where('pic_id', $pic->id)->get()->where('is_confirmed',0),
+            'competitionSlots' => CompetitionSlot::where('pic_id', $pic->id)->get(),
             'pic' => $pic 
         ]);
     }
