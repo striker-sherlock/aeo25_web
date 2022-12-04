@@ -47,7 +47,7 @@
         <h5 class="text-center fs-4 fw-bold">Step Navigation</h5>
         <div class="navigasi  mb-4 d-flex justify-content-center align-items-center py-1">
             <ul class="list-unstyled d-flex align-items-center">
-                <li> <a href="{{route('dashboard')}}" class=" btn btn-outline-primary me-2">Main dashboard </a></li>
+                <li> <a href="{{route('dashboard')}}" class=" btn btn-outline-purple me-2">Main dashboard </a></li>
                 <li> <a href="{{route('dashboard.step',1)}}" class=" btn btn-outline-primary me-2">1</a></li>
                 <li> <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-primary me-2">2</a></li>
                 <li> <a href="#" class="btn btn-outline-primary me-2 active">3</a></li>

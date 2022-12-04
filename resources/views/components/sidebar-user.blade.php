@@ -6,15 +6,15 @@
             </span>
         </div>
         
-        <div class="sidebar-header " style="height: auto; padding: 0.5rem 1rem;"  >
+        <div class="sidebar-header" style="height: auto; padding: 0.5rem 1rem;"  >
             <div class="d-flex flex-column align-items-center justify-content-center text-center ">
                 <img src="/storage/institution_logo/{{ Auth::user()->institution_logo }}"
-                    class="rounded border-teal w-50 rounded bg-white card-shadow-sm" alt="">
+                    class="rounded border-teal rounded bg-white card-shadow-sm" alt="" style="max-height:50px;">
                 <span class="mt-1 fw-bold text-wrap text-white">{{ Auth::user()->pic_name }}</span>
                 <small class="text-secondary text-wrap text-light">{{ Auth::user()->institution_name }}</small>
             </div>
         </div>
-        <div class="sidebar-menu border-top border-gray overflow-auto" style="height: calc(100% - 196px);">
+        <div class="sidebar-menu border-top border-gray overflow-auto" style="height: calc(100% - 188px);">
             <ul class="list-unstyled m-0 py-1 text-light-silver">
                 <li class="side-item text-white text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
@@ -103,7 +103,7 @@
                             <i class="fas fa-square fa-stack-2x"></i>
                             <i class="fas fa-bed fa-stack-1x text-dark"></i> 
                         </span>
-                        <span class="ms-2">Accommodation Slot Registration</span>
+                        <span class="ms-2">Accommodation Slot</span>
                     </a>
                 </li>
                 <li class="side-item text-white">
@@ -116,6 +116,8 @@
                         <span class="ms-2">Accommodation Payment</span>
                     </a>
                 </li>
+             
+
                 <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{route('dashboard.accommodation-step', 3)}}">
@@ -123,7 +125,7 @@
                             <i class="fas fa-square fa-stack-2x"></i>
                             <i class="fas fa-users fa-stack-1x text-dark"></i>
                         </span>
-                        <span class="ms-2">Accommodation Participant Registration</span>
+                        <span class="ms-2">Accommodation Guest  </span>
                     </a>
                 </li>
                 {{-- <li class="side-item text-white">

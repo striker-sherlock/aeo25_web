@@ -3,7 +3,7 @@
         <x-card>
             <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">National PIC</h3>
             @if ($nationalPIC->count())
-                <table class="table   table-bordered" id="dataTables">
+                <table class="table   table-bordered dataTables" >
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -37,7 +37,7 @@
         <x-card>
             <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">International PIC</h3>
             @if ($internationalPIC->count())
-                <table class="table   table-bordered" id="dataTables">
+                <table class="table   table-bordered dataTables" >
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>

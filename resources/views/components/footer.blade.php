@@ -7,7 +7,7 @@
                 <ul class="list-unstyled">
                     <li class="my-1"><a href="mailto:contact.aeointernational@gmail.com"
                             class="text-reset text-decoration-none" target="_blank"><i
-                                class="fa fa-envelope me-2 fa-lg"></i>
+                                class="fa fa-envelope me-1 fa-lg"></i>
                             contact.aeointernational@gmail.com</a>
                     </li>
                  
@@ -29,7 +29,7 @@
                 <ul class="list-unstyled">
                     <li class="my-1"><a href="mailto:contact.aeonational@gmail.com"
                             class="text-reset text-decoration-none" target="_blank"><i
-                                class="fa fa-envelope me-2 fa-lg"></i>
+                                class="fa fa-envelope me-1 fa-lg"></i>
                             contact.aeonational@gmail.com</a>
                     </li>
                     <li class="my-1"><a href="https://api.whatsapp.com/send?phone=6285219610407"
@@ -79,20 +79,21 @@
             </div>
         </div>
         
+
         <div class="row justify-content-center align-items-center">
-            <div class="col-lg-3 col-6 col-sm-4 order-3 text-center ">
+            <div class="col-3 order-3 text-center ">
                 <h6 id="organized-by" class=" fw-bold mb-3">Organized By:</h6>
                 <a href="https://mybnec.org/" target="_blank">
-                    <img src="/storage/assets/bnecLogoOriginal.webp" width="100%"
+                    <img src="/storage/assets/bnecLogoOriginal.webp" width="80%"
                         >
                 </a>
             </div>
-            <div class="col-lg-3 col-5 col-md-4 order-2 text-center  mx-5 ">
-                <img src="/storage/assets/AEO 2023Colored.webp" width="100%"
+            <div class=" col-3 order-2 text-center  mx-5 ">
+                <img src="/storage/assets/AEO 2023Colored.webp" width="80%"
                     >
             </div>
-            <div class="col-lg-3 col-5 col-md-4 order-1 text-center ">
-                <img src="/storage/assets/AEO_Phoenix.webp" width="100%"
+            <div class="col-3 order-1 text-center ">
+                <img src="/storage/assets/AEO_Phoenix.webp" width="80%"
                     >
             </div>
         </div>

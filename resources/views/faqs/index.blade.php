@@ -2,9 +2,7 @@
 
 <x-admin>
     <div class="container mt-4">
-        <div class="card border-0 overflow-hidden shadow  mb-5" style="border-radius:20px">
-            <div class="card-header bg-secondary"></div>
-            <div class="card-body my-3">
+        <x-card>
                 <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Frequently Asked Question</h3>
                 <a class="btn btn-outline-theme rounded-pill  mt-2 mb-3 px-4"
                     href= "{{ route('faqs.create') }}" >
@@ -34,7 +32,7 @@
                                     <div class="btn-toolbar flex-nowrap justify-content-center" role="toolbar"
                                         aria-label="Toolbar">
                                         <div class="btn-group me-2" role="group" aria-label="link">
-                                            <a class="btn btn-warning text-white rounded me-2"
+                                            <a class="btn btn-primary text-white rounded me-2"
                                                 href= "/faqs/{{ $faq->id }}/edit"
                                                 title="Edit">
                                                 <i class="fa fa-edit" aria-hidden="true"></i>
@@ -59,9 +57,6 @@
 
             </div>
 
-
-        </div>
-
-    </div>
+        </x-card>
     </div>
 </x-admin>

@@ -56,7 +56,7 @@ class UserAccommodationPaymentController extends Controller
             'payAll' => $payAll,
             'allAccommodations' => $allAccommodation,
             'isPaid' => $isPaid,
-            'paymentProviders' => PaymentProvider::where('type','BANK')->get(),
+            'paymentProviders' => PaymentProvider::orderBy('name')->where('type','BANK')->get(),
             'user' => Auth::user(),
             'slotId' => $id,
 
@@ -137,7 +137,7 @@ class UserAccommodationPaymentController extends Controller
         $paidSlot= AccommodationSlot::where('payment_id', $accommodationPayment->id )->get();
         return view('accommodation-payments.edit',[
             'accommodationPayment' => $accommodationPayment,
-            'paymentProviders' => PaymentProvider::all(),
+            'paymentProviders' => PaymentProvider::orderBy('name')->where('type','BANK')->get(),
             'paidSlot' =>$paidSlot,
             'user' => Auth::user(),
             'slotId' => $paidSlot->first()->id,
