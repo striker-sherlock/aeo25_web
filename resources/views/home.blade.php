@@ -181,7 +181,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row justify-content-center align-items-center">
-                                    <div class="col-11 text-center">
+                                    <div class="col-11  ">
                                         <div class="custom-divider mx-auto"></div>
                                         <h5 class="fw-bold aeo-title" style="letter-spacing: 0.1em">Competition Field
                                         </h5>
@@ -190,8 +190,8 @@
                                         <h4 class="fw-bold">Price : {{ $competition->price }} IDR /
                                             {{ $competition->need_team ? 'team(s)' : 'person(s)' }}</h4>
                                         {{-- {!! $competition->content !!} --}}
-                                        <h5 class="text-danger">To Be Announced</h5>
                                         <hr>
+                                        <h5 class="">{!!$competition->content!!}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -693,9 +693,6 @@
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-
-
-
         let owl = $('.owl-carousel');
         owl.owlCarousel({
             loop: true,
@@ -746,5 +743,7 @@
         //using the function
         const tomorrow = new Date("January 13, 2023 18:00:00")
         timer(tomorrow);
+
+        $('figure.table table').addClass('table-bordered mx-auto text-center w-100' )
     </script>
 </x-layout>
