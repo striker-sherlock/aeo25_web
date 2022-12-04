@@ -16,11 +16,12 @@ class AdminCompetitionParticipantController extends Controller
     }
 
     public function index($competition){
-        $trashed = CompetitionParticipant::onlyTrashed()->get();
+        // dd($competition); 
         return view('competition-participants.index',[
             'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
             'competition' => Competition::find($competition),
-            'trashed' => $trashed,
+            'allCompetitions' => Competition::all(),
+            'trashed' => CompetitionParticipant::onlyTrashed()->get()->where('competition_id',$competition),
         ]);
     }
 
@@ -73,7 +74,7 @@ class AdminCompetitionParticipantController extends Controller
             ]);
 
         }
-        return redirect()->back()->with('success','Participant is successfully updated');
+        return redirect()->route('competition-participants.index',$competitionParticipant->competition->id)->with('success','Participant has successfully updated');
     } 
 
     public function export($competition){

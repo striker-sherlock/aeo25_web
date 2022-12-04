@@ -147,6 +147,7 @@ class UserCompetitionPaymentController extends Controller
     }
 
     public function update(Request $request, CompetitionPayment $competitionPayment){
+        if ($competitionPayment ->is_confirmed == 1 && !Auth::guard('admin')->check())return redirect()->back()->with('error', 'Sorry, We are unable to update your changes because the payment has already confirmed.');
         if($request->type == "BANK"){
             $request->validate([
                 'payment_provider' => 'required',
@@ -162,8 +163,8 @@ class UserCompetitionPaymentController extends Controller
                 'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
             ]);
         }
- 
-        $pic = Auth::user()->username;
+        // dd(Auth::guard('admin')->user()->name);
+        $pic = $competitionPayment->user->username;
         $fileName = str_replace(' ', '-', $pic );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
         $fileName = str_replace('-', '_', $fileName);
@@ -184,8 +185,7 @@ class UserCompetitionPaymentController extends Controller
                 'account_name' => $request->account_name,
                 'account_number' => $request->account_number,
                 'payment_proof' => $fixedName,
-                'updated_by' => Auth::user()->username,
-                'is_confirmed' => 0,
+                'updated_by' => Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name  : Auth::user()->username,
             ]);
         }
 
@@ -204,20 +204,22 @@ class UserCompetitionPaymentController extends Controller
                 'email' => $request->email,
                 'tracking_link' => $request->track,
                 'payment_proof' => $fixedName,
-                'updated_by' => Auth::user()->username,
-                'is_confirmed' => 0,
+                'updated_by' => Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name  : Auth::user()->username,
             ]);
 
         }
-
+        if(!Auth::guard('admin')->check()){
+            $competitionPayment->update([
+                'is_confirmed' => 0,
+            ]);
+            return redirect()->route('dashboard.step',2)->with('success','Payment successfuly updated');
+        }
         
-       
-        
-
-        return redirect()->route('dashboard.step',2)->with('success','Payment successfuly updated');
+        return redirect()->back()->with('success','Payment successfuly updated');
     }
 
     public function destroy(CompetitionPayment $competitionPayment ){
+        if ($competitionPayment ->is_confirmed == 1 && !Auth::guard('admin')->check())return redirect()->back()->with('error', 'Sorry, We are unable to delete your payment because the payment has already confirmed.');
         $competitionPayment->delete();
         $competitionSlots = CompetitionSlot::where('payment_id',$competitionPayment->id)->get();
         foreach ($competitionSlots as $competitionSlot) {

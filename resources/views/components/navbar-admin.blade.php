@@ -1,5 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-info w-100">
-
+<nav class="navbar navbar-expand-lg navbar-light sticky-top bg-info w-100">
     <div class="container-fluid" style="opacity: 100% !important;">
         <div class="d-inline-block">
             <a class="navbar-brand" href="/">

@@ -92,7 +92,7 @@
                     >
             </div>
             <div class="col-lg-3 col-5 col-md-4 order-1 text-center ">
-                <img src="/storage/assets/aeo_2012.webp" width="100%"
+                <img src="/storage/assets/AEO_Phoenix.webp" width="100%"
                     >
             </div>
         </div>

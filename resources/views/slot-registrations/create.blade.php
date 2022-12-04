@@ -38,7 +38,7 @@
                                         @endif
                                         @for($i=0 ; $i <= $slot; $i++ ) 
                                             @if ($slot==0) 
-                                                <h5 class="border bg-danger text-white py-2 mx-auto fw-bold" style="max-width:50%;">
+                                                <h5 class="border bg-danger text-center text-white py-2 mx-auto fw-bold">
                                                     Unable to select this slot
                                                 <h5>
                                                 <input type="text" name="quantity[]-{{$competition->id}}" value="0" hidden>
@@ -55,14 +55,19 @@
                 @endforeach    
                 <hr>     
             </div>
+            
             {{-- Independent Adjudicator Registration Section --}}
             <h2 class="aeo-title fw-semibold mb-3">Would you also like to register an Independent Adjudicator?</h2>
+            <div class="alert alert-primary border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
+                <i class="fa-solid fa-triangle-exclamation me-1"></i> <b>Important info!</b> <br>
+                The Independent Adjudicator slot only available if you have registered at least 2 debate slot
+            </div>
             {{-- <div class="alert alert-primary border-0 shadow-sm mb-4" role="alert"
                 style="letter-spacing: .05em">
                 <i class="fa-solid fa-circle-question me-1"></i> <b>What is Independent Adjudicator?</b> <br>
                 Independent Adjudicator is Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea praesentium omnis deleniti.
             </div> --}}
-            <div class="row justify-content-start align-items-center">
+            <div class="row justify-content-start   align-items-center">
                 @foreach ($competitions->where('id', 'IA') as $independentAdju)
                     <div class="col-md-4">
                         <div class="card rounded-20 border-0 shadow-sm">
@@ -80,7 +85,7 @@
                                         <h5 class="mt-2 mb-3 text-dark-purple" style="letter-spacing: .05em">IDR
                                             {{ number_format($independentAdju->price, 0, ',', '.') }}</h5>
                                         <input type="text" name="compet_id[]" hidden value="{{$independentAdju->id}}">
-                                        @php ($slot = 3)
+                                        @php ($slot = $registeredDebate-1)
                                         @if ($independentAdju->temp_quota < $slot) 
                                             @php ($slot=$independentAdju->temp_quota)
                                         @else
@@ -90,18 +95,18 @@
                                                 @endif
                                             @endforeach
                                         @endif
-                                            @for($i=0 ; $i <= $slot; $i++ ) 
-                                                @if ($slot==0) 
-                                                    <h5 class="border bg-danger text-white py-2 mx-auto fw-bold" style="max-width:50%;">
-                                                        Unable to select this slot
-                                                    <h5>
-                                                    <input type="text" name="quantity[]-{{$independentAdju->id}}"
-                                                        value="0" hidden>
-                                                    @break
-                                                @endif
-                                                <input type="radio" class="btn-check" name="quantity[]-{{$independentAdju->id}}" id="{{$independentAdju->id.$i}}" value="{{$i}}" {{$i == 0 ? 'checked' : ''}} hidden data-field="{{$independentAdju->name}}" data-team={{$independentAdju->need_team == 0? 'Person(s)':'Team(s)'}}>
-                                                    <label class="btn btn-outline-primary" for="{{$independentAdju->id.$i}}">{{$i}}</label>
-                                            @endfor
+                                        @if ($slot <= 0) 
+                                            <h5 class="fs-6 bg-danger text-white p-2 mx-auto fw-bold text-center" title="You have exceeded the slot limit or you do not have at least 2 confirmed debate slot registered" style="cursor:pointer">
+                                                Unable to select this slot
+                                            </h5>
+                                            <input type="text" name="quantity[]-{{$independentAdju->id}}"
+                                                value="0" hidden>
+                                        @endif
+                                        
+                                        @for($i=0 ; $i <= $slot; $i++ ) 
+                                            <input type="radio" class="btn-check" name="quantity[]-{{$independentAdju->id}}" id="{{$independentAdju->id.$i}}" value="{{$i}}" {{$i == 0 ? 'checked' : ''}} hidden data-field="{{$independentAdju->name}}" data-team={{$independentAdju->need_team == 0? 'Person(s)':'Team(s)'}}>
+                                                <label class="btn btn-outline-primary" for="{{$independentAdju->id.$i}}">{{$i}}</label>
+                                        @endfor
                                     </div>
                                 </div>
                             </div>
@@ -109,44 +114,50 @@
                     </div>
                 @endforeach
             </div>
+
             <a class="btn btn-outline-primary w-100 rounded my-4 rounded-pill" data-bs-toggle="modal"
-                data-bs-target="#modal">Register</a>
-            </div>
+            data-bs-target="#modal">Register</a>
             {{-- modal confirmasi --}}
             <div class="modal fade p-5" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-                aria-labelledby="modal-title" aria-hidden="true">
+            aria-labelledby="modal-title" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered ">
-                    <div class="modal-content rounded-20 border-0 shadow p-5">
-                        <div class="modal-headers mb-4">
-                            <span class="fa-stack fa-4x d-block mx-auto">
-                                <i class="fas fa-circle fa-stack-2x text-danger"></i>
-                                <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
-                            </span>
-                            </div>
-                            <div class="body mb-3">
-                                <h1 class="fw-bold fs-4 text-center">Registration Slot Confirmation</h1>
-                                <h6 class="fs-6">Registration Summary: </h6>
-                                <ul class="unstyled-list">
-                                </ul>
-                            </div>
-                            <div class="">
-                                <div class="row">
-                                    <div class="col">
-                                        <button type="button" class="close btn rounded-pill btn-outline-secondary w-100" data-bs-dismiss="modal">Back</button>
-                                    </div>
-                                    <div class="col">
-                                        <button type="submit" class="rounded-pill btn btn-outline-theme w-100">Submit</button>
-                                    </div>
+                <div class="modal-content rounded-20 border-0 shadow p-5">
+                    <div class="modal-headers mb-4">
+                        <span class="fa-stack fa-4x d-block mx-auto">
+                            <i class="fas fa-circle fa-stack-2x text-danger"></i>
+                            <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
+                        </span>
+                        </div>
+                        <div class="body mb-3">
+                            <h1 class="fw-bold fs-4 text-center">Registration Slot Confirmation</h1>
+                            <h6 class="fs-6">Registration Summary: </h6>
+                            <ul class="unstyled-list">
+                            </ul>
+                        </div>
+                        <div class="">
+                            <div class="row">
+                                <div class="col">
+                                    <button type="button" class="close btn rounded-pill btn-outline-secondary w-100" data-bs-dismiss="modal">Back</button>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="rounded-pill btn btn-outline-theme w-100">Submit</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
+            </div>
+           
+        </form>
+    </div>
+       
+
+ 
+ 
+
+
+    <script type="module">
         $(document).ready(function(){
-            // $('#modal').modal({backdrop: 'static', keyboard: false})  
             $('a.btn').click(function(){
                 const radio = document.querySelectorAll('input[name]:checked')
                  
@@ -159,4 +170,5 @@
             })
         })
     </script>
+    
 </x-user>

@@ -18,3 +18,14 @@ $(toggleConfirmPassword).click(function(){
     this.classList.toggle('fa-eye-slash');
     this.classList.toggle('fa-eye')
 })
+
+// toggle old password
+const toggleOldPassword = $("#old-toggle-password");
+const oldPassword = $("input[name='old_password']");
+$(toggleOldPassword).click(function(){
+    const typeOldPassword = oldPassword.attr('type') === 'password' ? 'text' : 'password'
+    oldPassword.attr('type',typeOldPassword);
+    this.classList.toggle('fa-eye-slash')
+    this.classList.toggle('fa-eye')
+    
+})

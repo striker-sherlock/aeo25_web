@@ -88,7 +88,7 @@
                                 <div class="form-group mb-3">
                                     <label for="profile_picture{{$i}}" class="col-form-label">Profile Picture<span class="text-danger">*</span></label>
                                     <input type="file" class="form-control"  name="profile_picture[]" id="profile_picture{{$i}}" accept="image/png,image/jpeg,image/jpg" required>    
-                                    <small class="text-danger"  style="font-size: 0.7em">Type: png,jpg, jpeg | max: 2MB</small>
+                                    <small class="text-danger"  style="font-size: 0.7em">Type : PNG, JPEG, JPG | Max : 2MB</small>
                                     @if ($errors->has('profile_picture.*'))
                                     <span class="invalid feedback text-danger"role="alert">
                                         <strong>*{{ $errors->first('profile_picture.*') }}.</strong>

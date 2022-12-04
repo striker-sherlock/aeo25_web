@@ -43,7 +43,7 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'pic_name'  => ['nullable', 'string', 'max:255'],
-            'pic_email'  => ['nullable', 'string', 'max:255'],
+            'pic_email'  => ['nullable', 'string', 'max:255','unique:users'],
             'pic_phone_number' => ['nullable', 'string', 'max:255'],
             'country_id' => ['nullable', 'integer'],
             'institution_email' => ['nullable', 'string', 'max:255'],
@@ -74,7 +74,7 @@ class RegisterController extends Controller
         if ($data['institution_logo']) {
             $extension = $data['institution_logo']->getClientOriginalExtension();
             $fixedName = $fileName.'_'.$current.'.'.$extension;
-            $path = $data['institution_logo']->storeAs("public/instition_logo",$fixedName);
+            $path = $data['institution_logo']->storeAs("public/institution_logo",$fixedName);
         }
         $username = strtolower(str_replace(' ', '', $data['pic_name']));
         
@@ -94,4 +94,6 @@ class RegisterController extends Controller
 
         return redirect()->route('/')->with('success','Account is successfully made');
     }
+
+ 
 }

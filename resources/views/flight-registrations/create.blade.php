@@ -1,15 +1,17 @@
 <x-user title="Create Flight Registration">
-    <div class="container mt-4">
+    <div class="container mt-5">
         <x-card>
-              <h1>Create Flight Registration</h1>
+            <h3 class="text-uppercase fw-bold text-gradient mb-4" style="letter-spacing: 0.1em">Create Flight Registration</h3>
                 <form action="{{route('flight-registrations.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-3">
                         <label class="col-form-label" for="type">Type <span class="text-danger">*</span></label><br>
-                        <input type="radio" name="type" id="DEPARTURE" value="DEPARTURE">
+                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+                        <label class="btn btn-secondary" for="option1">Checked</label>
+                        <input type="radio" class="btn-check" name="type" id="DEPARTURE" value="DEPARTURE">
                         <label for="DEPARTURE">Departure</label>
                         <input type="radio" name="type" id="ARRIVAL" value="ARRIVAL">
-                        <label for="DEPARTURE">Arrival</label>
+                        <label for="ARRIVAL">Arrival</label>
                     </div>
                     <div class="form-group mb-3">
                         <label for="airline_name" class="col-form-label">Airline Name <span class="text-danger">*</span></label>
