@@ -52,6 +52,7 @@
                         </div>
 
                         <hr>
+                     
                         
                         <div class="d-flex justify-content-between">
                             <h3 class="fw-bold">Grand Total</h3>

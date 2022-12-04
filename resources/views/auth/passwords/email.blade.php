@@ -1,6 +1,6 @@
 <x-layout>
     <x-navbar></x-navbar>
-    <div class="container mt-5">
+    <div class="container my-5 py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -50,11 +50,13 @@
             </div>
         </div>
     </div>
+   <x-footer></x-footer>
 </x-layout>
 
 <style>
+    
+
     main {
-        min-height: 75vh;
         font-family: "Roboto", "Helvetica Neue", Helvetica, Arial;
     }
 

@@ -67,18 +67,15 @@ class PDFController extends Controller
         }
         $output .= '
                 <style>
+                @import url(https://fonts.bunny.net/css?family=roboto:500);
+
                 @page{
                 margin-top: 0;
                 margin-left: 1.2cm;
                 width: 21cm;
                 height: 29.7cm;
                 }
-
-                * {
-                  font-family: arial, arial, helvetica;
                 
-                }
-
                 .clearfix:after {
                 content: "";
                 display: table;
@@ -97,7 +94,7 @@ class PDFController extends Controller
                 margin: 0 1px 0 1px;
                 color: #555555;
                 background: #FFFFFF;
-                font-family: "Roboto";
+                font-family: "Roboto", sans-serif;
                 font-size: 13px;
                 }
 
@@ -284,7 +281,7 @@ class PDFController extends Controller
             </head>
             <header class="clearfix">
                 <div id="logo">
-                <img src="https://uat.aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
                 </div>
             </header>
             <body>
@@ -405,7 +402,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://uat.aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
@@ -475,16 +472,13 @@ class PDFController extends Controller
 
         $output .= '
         <style>
+        @import url(https://fonts.bunny.net/css?family=roboto:500);
+
         @page{
         margin-top: 0;
         margin-left: 1.2cm;
         width: 21cm;
         height: 29.7cm;
-        }
-
-        * {
-          font-family: arial, arial, helvetica;
-        
         }
 
         .clearfix:after {
@@ -505,7 +499,7 @@ class PDFController extends Controller
         margin: 0 1px 0 1px;
         color: #555555;
         background: #FFFFFF;
-        font-family: "Roboto";
+        font-family: "Roboto", sans-serif;
         font-size: 13px;
         }
 
@@ -691,7 +685,7 @@ class PDFController extends Controller
             </head>
             <header class="clearfix">
                 <div id="logo"> 
-                <img src="https://uat.aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
                 </div>
             </header>
             <body>
@@ -736,7 +730,7 @@ class PDFController extends Controller
             $output .= '
                          <tr>
                              <td class="desc" colspan="2"><h3>'.$slot->name.'</h3></td>
-                             <td class="unit" colspan="2"> IDR ' . $slot->price . '</td>
+                             <td class="unit"> IDR ' . $slot->price . '</td>
                              <td class="qty">' . $slot->quantity .' '. $participant .' </td>
                              <td class="total"> IDR ' . ($slot->quantity * $slot->price) . '</td>
                          </tr>';
@@ -774,7 +768,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://uat.aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
@@ -856,16 +850,13 @@ class PDFController extends Controller
         }
         $output .= '
                 <style>
+                @import url(https://fonts.bunny.net/css?family=roboto:500);
+
                 @page{
                 margin-top: 0;
                 margin-left: 1.2cm;
                 width: 21cm;
                 height: 29.7cm;
-                }
-
-                * {
-                  font-family: arial, arial, helvetica;
-                
                 }
 
                 .clearfix:after {
@@ -886,7 +877,7 @@ class PDFController extends Controller
                 margin: 0 1px 0 1px;
                 color: #555555;
                 background: #FFFFFF;
-                font-family: "Roboto";
+                font-family: "Roboto",sans-serif;
                 font-size: 13px;
                 }
 
@@ -1077,7 +1068,7 @@ class PDFController extends Controller
             </head>
             <header class="clearfix">
                 <div id="logo">
-                <img src="https://uat.aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
                 </div>
             </header>
             <body>
@@ -1196,7 +1187,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://uat.aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
@@ -1267,16 +1258,14 @@ class PDFController extends Controller
 
         $output .= '
         <style>
+
+        @import url(https://fonts.bunny.net/css?family=roboto:500);
+
         @page{
         margin-top: 0;
         margin-left: 1.2cm;
         width: 21cm;
         height: 29.7cm;
-        }
-
-        * {
-          font-family: arial, arial, helvetica;
-        
         }
 
         .clearfix:after {
@@ -1297,7 +1286,7 @@ class PDFController extends Controller
         margin: 0 1px 0 1px;
         color: #555555;
         background: #FFFFFF;
-        font-family: "Roboto";
+        font-family: "Roboto", sans-serif;
         font-size: 13px;
         }
 
@@ -1483,7 +1472,7 @@ class PDFController extends Controller
             </head>
             <header class="clearfix">
                 <div id="logo"> 
-                <img src="https://uat.aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
                 </div>
             </header>
             <body>
@@ -1568,7 +1557,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://uat.aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
