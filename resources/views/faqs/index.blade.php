@@ -6,7 +6,7 @@
             <div class="card-header bg-secondary"></div>
             <div class="card-body my-3">
                 <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Frequently Asked Question</h3>
-                <a class="btn btn-outline-theme rounded-pill  mt-2 mb-3 px-4"
+                <a class="btn btn-outline-primary rounded-pill  mt-2 mb-3 px-4"
                     href= "{{ route('faqs.create') }}" >
                     <i class="fa fa-plus" aria-hidden="true"></i> Add New F.A.Q
                 </a>

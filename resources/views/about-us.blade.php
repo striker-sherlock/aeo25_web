@@ -10,7 +10,10 @@
                 data-aos-delay="200">
                 <div class="content">
 
-                    <div class="custom-border rounded my-2"></div>
+                  <br>
+                  <br>
+                  <br>
+                  <div class="custom-border rounded my-2"></div>
                     <h2 class="text-light pink fs-4">WHAT IS ASIAN ENGLISH OLYMPICS?</h2>
                     <h2 class="aeo-title ">The Asian English Olympics (AEO) is one of Asia's most anticipated
                         international English competitions.</h2>
