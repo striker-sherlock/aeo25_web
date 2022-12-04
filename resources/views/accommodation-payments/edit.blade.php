@@ -167,5 +167,5 @@
         </div>
     </div>
             
-</x-layout>
+</x-user>
 

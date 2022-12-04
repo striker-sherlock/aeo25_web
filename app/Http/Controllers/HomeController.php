@@ -6,6 +6,7 @@ use App\Models\Ambassador;
 use App\Models\Sponsor;
 use App\Models\Countries;
 use App\Models\Competition;
+use App\Models\Faq;
 use App\Models\MediaPartner;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,7 @@ class HomeController extends Controller
             'countries' => Countries::all(),
             'competitions' => Competition::all(),
             'ambassadors' => Ambassador::all(),
+            'faqs' => Faq::all(),
             
         ]);
     }
