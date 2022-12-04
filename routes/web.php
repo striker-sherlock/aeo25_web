@@ -47,6 +47,12 @@ Auth::routes(['verify'=>true]);
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// About Us
+Route::get('/about-us', function() {
+    return view('about-us');
+}
+);
+
 // Masters
 Route::resource('faqs', FaqController::class);
 Route::resource('lost-and-found', LostAndFoundController::class);

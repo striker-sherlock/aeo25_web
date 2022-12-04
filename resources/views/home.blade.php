@@ -19,13 +19,14 @@
     </style>
     <body>
         <x-navbar></x-navbar>
+
         <!-- ======= Header Section ======= -->
         <section id="hero" class="hero d-flex align-items-center mx-auto">
             <div class="container mt-5">
                 <div class="row d-flex justify-content-center text-center text-md-start">
                     <div class=" col-md-6 px-3">
                         <div class="d-flex justify-content-center justify-content-md-start ">
-                            <div class="w-25 custom-border rounded  my-2"></div>
+                            <div class=" custom-border rounded  my-2"></div>
                         </div>
                         <h3 data-bs-aos="fade-up" class="aeo-title fs-2 mb-3">The 2023 Asian English Olympics</h3>
                         <h1 data-bs-aos="fade-up" class='aeo-theme  mb-4 display-5' style="letter-spacing:0.1em;">UNVEIL YOUR SPARK</h1>
@@ -68,7 +69,7 @@
 
                     <div class=" d-flex align-items-center flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
-                           <div class="w-25 custom-border rounded  my-2" ></div>
+                           <div class="custom-border rounded  my-2" ></div>
                             <h2 class="text-light pink fs-4" >WHAT IS ASIAN ENGLISH OLYMPICS?</h2>
                             <h2 class="aeo-title ">The Asian English Olympics (AEO) is one of Asia's most anticipated international English competitions.</h2>
                              
@@ -81,9 +82,9 @@
                                 Newscasting, Storytelling, Spelling Bee, Radio Drama, and Short Story Writing.
                             </p>
                             <div class="text-end text-lg-right">
-                                {{-- <a href="#" class="btn action d-inline-flex text-white px-4 py-2  rounded-pill">
+                                <a href="about-us" class="btn action d-inline-flex text-white px-4 py-2  rounded-pill">
                                     <span>Read More</span>
-                                </a> --}}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -99,7 +100,7 @@
                 <div class="container text-center wow fadeInUp">
                     <div class="title-line mx-auto"></div>
                     <div class="d-flex justify-content-center">
-                        <div class="w-25 custom-border rounded  my-2"></div>
+                        <div class="custom-border rounded  my-2"></div>
                     </div>
                     <h5 class="mt-3 fw-bold text-light fs-4 ">ABOUT ASIAN ENGLISH OLYMPICS</h5>
                     <h2 class="fw-bold mt-3 display-5" style="color:#ff99c7; font-family:lexend;">We are continuously spreading our impact
@@ -142,7 +143,7 @@
             <section class='competition-fields' id='competition-fields'>
                 <div class="container text-center my-3">
                     <div class="d-flex justify-content-center">
-                        <div class="w-25 custom-border rounded my-2"></div>
+                        <div class="custom-border rounded my-2"></div>
                     </div>
                     <h1 class="mt-3 fw-bold position-relative d-inline-block  ">COMPETITION FIELDS 
 
@@ -205,7 +206,7 @@
             <section class="how-to-regist" id="howToRegister">
                 <div class="container">
                     <div class="d-flex justify-content-center">
-                        <div class="w-25 custom-border rounded  my-2"></div>
+                        <div class="custom-border rounded  my-2"></div>
                      </div>
                      <h1 class="mt-3 fw-bold text-center mb-4"> STEP BY STEP REGISTRATION</h1>
                     <img src="/storage/assets/step-regist.webp" loading="lazy" class="img-fluid rounded-20 shadow-sm" alt="step-by-step">
@@ -293,154 +294,47 @@
             <!-- End Ambassador Section -->
 
 
-
+            
             <!-- ======= F.A.Q Section ======= -->
-
-{{--             
-            <section id="faq" class="faq">
-
-                <div class="container" data-aos="fade-up">
-
-                    <header class="section-header">
-                        <div class="d-flex justify-content-center">
-                            <div class="w-25 custom-border rounded  my-2"></div>
-
-                        </div>
-                        <h2>F.A.Q</h2>
-                        <p>Frequently Asked Questions</p>
-                    </header>
-
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- F.A.Q List 1-->
-                            <div class="accordion accordion-flush" id="faqlist1">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                                            Non consectetur a erat nam at lectus urna duis?
-                                        </button>
-                                    </h2>
-                                    <div id="faq-content-1" class="accordion-collapse collapse"
-                                        data-bs-parent="#faqlist1">
-                                        <div class="accordion-body">
-                                            Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus
-                                            laoreet non curabitur gravida. Venenatis lectus magna fringilla urna
-                                            porttitor rhoncus dolor purus non.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                                            Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
-                                        </button>
-                                    </h2>
-                                    <div id="faq-content-2" class="accordion-collapse collapse"
-                                        data-bs-parent="#faqlist1">
-                                        <div class="accordion-body">
-                                            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
-                                            interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
-                                            scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper
-                                            dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                                            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore, at!
-                                        </button>
-                                    </h2>
-                                    <div id="faq-content-3" class="accordion-collapse collapse"
-                                        data-bs-parent="#faqlist1">
-                                        <div class="accordion-body">
-                                            Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci.
-                                            Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet
-                                            nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis
-                                            convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio
-                                            morbi quis
-                                        </div>
-                                    </div>
-                                </div>
-
+            @if ($faqs->count() > 0)
+            <section id="faq" class="">
+                <div class="container text-center mt-5 wow fadeInUp">
+                    <div class="container text-center mt-5 wow fadeInUp" data-aos="fade-up">
+                        <header class="section-header">
+                            <div class="d-flex justify-content-center">
+                                <div class="custom-border rounded  my-2"></div>
                             </div>
-                        </div>
+                            <h1 class="mt-3 fw-bold text-center mb-3 text-gradient text-uppercase">Frequently Asked Questions</h1>
+                        </header>
 
-                        <div class="col-lg-6">
-
-                            <!-- F.A.Q List 2-->
-                            <div class="accordion accordion-flush" id="faqlist2">
-
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#faq2-content-1">
-                                            Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
-                                        </button>
-                                    </h2>
-                                    <div id="faq2-content-1" class="accordion-collapse collapse"
-                                        data-bs-parent="#faqlist2">
-                                        <div class="accordion-body">
-                                            Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
-                                            interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
-                                            scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper
-                                            dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                    <div class="accordion" id="faq-accordion">
+                        <div class="row align-items-top">
+                            @foreach ($faqs as $faq)
+                            <div class="col-lg-6 col-md-6">
+                                <div class="card border-0 card-shadow card-faq my-3 text-light">
+                                    <a id="accordionItem" class="btn collapsed accordion-button card-accordion text-center text-primary text-light "
+                                        data-bs-toggle="collapse" data-bs-target="#faqAccordion{{ $faq->id }}"
+                                        aria-expanded="false" aria-controls="faqAccordion{{ $faq->id }}">
+                                        <h5 class="section-title m-0 ps-5 pe-5">{{$faq->question}}
+                                        </h5>
+                                    </a>
+                                    <div id="faqAccordion{{ $faq->id }}" class="accordion-collapse collapse"
+                                        data-bs-parent="#faq-accordion">
+                                        <div class="card-body">
+                                            <p class="text-primary">
+                                                {{ $faq->answer }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#faq2-content-2">
-                                            Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
-                                        </button>
-                                    </h2>
-                                    <div id="faq2-content-2" class="accordion-collapse collapse"
-                                        data-bs-parent="#faqlist2">
-                                        <div class="accordion-body">
-                                            Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim
-                                            suspendisse in est ante in. Nunc vel risus commodo viverra maecenas
-                                            accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis
-                                            blandit turpis cursus in
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#faq2-content-3">
-                                            Varius vel pharetra vel turpis nunc eget lorem dolor?
-                                        </button>
-                                    </h2>
-                                    <div id="faq2-content-3" class="accordion-collapse collapse"
-                                        data-bs-parent="#faqlist2">
-                                        <div class="accordion-body">
-                                            Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae
-                                            ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est
-                                            sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus
-                                            vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas
-                                            egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit
-                                            massa enim nec.
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
+                            @endforeach
                         </div>
-
                     </div>
-
                 </div>
-
-            </section> --}}
+            </section>
+                
+            @endif
             
             <!-- End F.A.Q Section -->
             <!-- ======= Sponsor ======= -->
@@ -499,7 +393,7 @@
                 <div class="container wow fadeInUp p-4">
                     <div class="title-line mx-auto"></div>
                     <div class="d-flex justify-content-center">
-                       <div class="w-25 custom-border rounded  mt-2"></div>
+                       <div class="custom-border rounded  mt-2"></div>
                     </div>
                     <h5 class="my-3 fw-bold text-center " style="color: #32649E;">SUBMIT QUESTION</h5>
                     <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary">Drop
@@ -608,7 +502,7 @@
                     <div class="modal-headers border-bottom-0 p-3 ">
                         <h1 class="text-uppercase fw-bold  text-center text-gradient " style="letter-spacing: 0.1em">General Rules </h1>
                         <div class="d-flex justify-content-center">
-                            <div class="w-25 custom-border rounded mt-2 mb-4"></div>
+                            <div class="custom-border rounded mt-2 mb-4"></div>
                         </div>
                         <h2 class="text-gradient fw-bold">Competitions</h2>
                         <p>
