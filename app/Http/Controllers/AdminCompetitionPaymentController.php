@@ -98,7 +98,27 @@ class AdminCompetitionPaymentController extends Controller
         ]);
 
  
-        return redirect()->back()->with('success', 'The payment successfully canceled');
+        return redirect()->back()->with('success', 'The payment has successfully canceled');
+    }
+
+    public function pending($id){
+        $competitionPayment = CompetitionPayment::find($id);
+        $competitionSlots = $competitionPayment->competitionSlot;
+
+        foreach ($competitionSlots as $competitionSlot) {
+            $competition = $competitionSlot->competition;
+            $competition->update([
+                'fixed_quota' => $competition->fixed_quota + $competitionSlot->quantity,
+            ]);
+        }
+
+        $competitionPayment ->update([
+            'is_confirmed' => 0,
+            'updated_by' => Auth::guard('admin')->user()->name,
+        ]);
+
+ 
+        return redirect()->back()->with('success', 'The payment has successfully moved to pending');
     }
 
     public function export(){

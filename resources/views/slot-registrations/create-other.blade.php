@@ -18,6 +18,7 @@
                 <li> Applause is <b>only allowed</b> after every performance.
                 </li>
                 <li> Spectators are <b>not allowed</b> to leave or enter the room when a participant is performing.</li>
+                 
             </ul>
         </div>
         <h2 class="aeo-title fw-semibold mb-4">How many spectators would you like to register?</h2>

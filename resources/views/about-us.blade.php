@@ -2,19 +2,23 @@
     <x-navbar></x-navbar>
 
     <!-- ======= About Section ======= -->
-    <section id="about" class="about d-flex align-items-center">
+    <section id="about" class="about d-flex align-items-center mx-auto mt-md-3    pt-sm-4 pt-md-4 pt-lg-4  pt-xl-4  text-md-left text-sm-left">
 
         <div class="container" data-aos="fade-up">
 
-            <div class=" d-flex align-items-center flex-column justify-content-center mt-5 pt-5" data-aos="fade-up"
+            <div class=" d-flex align-items-center flex-column justify-content-center " data-aos="fade-up"
                 data-aos-delay="200">
                 <div class="content">
-                    <div class="custom-border rounded  my-2"></div>
+
+                  <br>
+                  <br>
+                  <br>
+                  <div class="custom-border rounded my-2"></div>
                     <h2 class="text-light pink fs-4">WHAT IS ASIAN ENGLISH OLYMPICS?</h2>
                     <h2 class="aeo-title ">The Asian English Olympics (AEO) is one of Asia's most anticipated
                         international English competitions.</h2>
 
-                    <p class='w-100 fs-5' style="line-height:1.5em !important;">
+                    <p class='w-100 fs-5 text-md-left text-sm-left' style="line-height:1.5em !important;">
                         This event is conducted by Bina Nusantara English Club (BNEC), an english student
                         organization of BINUS University in Jakarta, Indonesia. We began as a National English
                         Olympics. With the passage of time, we have evolved into an Asian-scaled competition
@@ -22,12 +26,12 @@
                         students from 9 nations to compete in 7 competition areas, including Speech, Debate,
                         Newscasting, Storytelling, Spelling Bee, Radio Drama, and Short Story Writing.
                     </p>
-                    <p class='w-100 fs-5' style="line-height:1.5em !important;">
+                    <p class='w-100 fs-5 text-md-left text-sm-left' style="line-height:1.5em !important;">
                         Learning Platform, Talent Display, Competitiveness, International Ambience, Hospitality,
                         Cultural Exchange, and Networking are the seven values that AEO upholds. As a result, AEO is a
                         memorable event that provides you with an excellent opportunity to enhance your abilities and
                         gain networks from youths across Asia. AEO will undoubtedly present you, remarkable individuals,
-                        with extraordinary experiences! The 2022 AEO will be held online on February 13-18, 2023.
+                        with extraordinary experiences! The 2023 AEO will be held onsite on February 13-18, 2023.
                         Unfortunately, only 7 competitive fields will be held, with Scrabble being excluded due to the
                         current conditions.
                     </p>
@@ -50,7 +54,7 @@
             <div class="d-flex justify-content-center">
                 <div class="custom-border rounded  my-2"></div>
             </div>
-            <h5 class="mt-3 fw-bold text-light fs-4 ">ABOUT ASIAN ENGLISH OLYMPICS</h5>
+            <h5 class="mt-3 fw-bold text-light fs-4 " >ABOUT ASIAN ENGLISH OLYMPICS</h5>
             <h2 class="fw-bold mt-3 display-5" style="color:#ff99c7; font-family:lexend;">We are continuously spreading
                 our impact
                 to all youths
@@ -89,18 +93,18 @@
 
     <!-- ======= Greeting Section ====== -->
     <section id="greetings" class="mt-0">
-        <div class="container wow fadeIn">
+        <div class="container wow fadeIn ">
             <div class="d-flex justify-content-center">
                 <div class=" custom-border rounded  "></div>
             </div>
-            <h5 class="mt-3 mb-5 fw-bold text-center text-gradient-blue">GREETINGS FROM PROJECT MANAGER</h5>
-            <div class="row justify-content-md-between justify-content-center align-items-center">
-                <div class="col-md-3 col-10 text-center my-3">
-                    <img id="pm_img" src="/storage/assets/pm-aeo.jpg" class="c-greetings-img" alt="">
-                    <h4 class="c-text-1 fw-bold mt-4">Michelle Natasya</h4>
+            <h5 class="mt-3 mb-5 fw-bold text-center aeo-purple " style="font-size: 1.8em">GREETINGS FROM PROJECT MANAGER</h5>
+            <div class="row   justify-content-center align-items-center w-100 mx-auto ">
+                <div class="col-md-3 col-10 text-center my-3  ">
+                    <img id="pm_img" src="/storage/assets/pm-aeo.webp" class="c-greetings-img" alt="" loading="lazy">
+                    <h4 class="c-text-1 fw-bold mt-4 aeo-title">Michelle Natasya</h4>
                     <p class="text-muted">Project Manager of <br> The 2023 Asian English Olympics</p>
                 </div>
-                <div class="col-md-8 my-3 px-4">
+                <div class="col-md-8 my-3 px-4  ">
                     <h1 class="fw-bold c-text-1 c-text-about text-gradient-blue">Hello, Asian Youths!</h1>
                     <p class="text-muted mt-4 text-justify">
                         After a few years of adjusting to the pandemic life, we are now ready to get back to our daily
@@ -128,41 +132,29 @@
             <div class="d-flex justify-content-center ">
                 <div class="custom-border rounded  my-2"></div>
             </div>
-            <h5 class="mt-3 my-5 fw-bold text-gradient-blue fs-4 text-center ">THIS YEAR’S THEME</h5>
+            <h5 class="mt-3 my-5 fw-bold text-center aeo-purple" style="font-size: 1.8em">THIS YEAR’S THEME</h5>
             <div class="d-flex justify-content-center">
-                <div class="card rounded-20  w-75">
+                <div class="card rounded-20 px-4 w-100">
                     <div class="card-body">
-                        <h5 class="mt-3 fw-bold text-gradient-blue fs-3 text-center text-uppercase ">Unveil Your Spark</h5>
-                        <p>     On the third quarter of 2022 precisely on August this year, Kementrian Kesehatan (Kemenkes)
-                            announce that the number of Covid-19 has decreased substantially down to 399,583 cases
-                            (sehatnegriku, 2022). It is also stated by the World Health Organization (WHO) that most of the
-                            countries in the world are in their best state and capable of dealing with the coronavirus and
-                            the pandemic are nearing the finish line.</p>
+                        <h5 class="my-3 fw-bold text-gradient-blue display-6 text-center text-uppercase ">Unveil Your Spark</h5>
+                        <p>     In the third quarter of 2022 precisely in August this year, Kementrian Kesehatan (Kemenkes) announce that the number of Covid-19 has decreased substantially down to 399,583 cases (sehatnegriku, 2022). It is also stated by the World Health Organization (WHO) that most of the countries in the world are in their best state and capable of dealing with the coronavirus and the pandemic are nearing the finish line.</p>
     
-                        <p>     Seeing the ray light of hope, we believe that the realization of The 2023 AEO can be held hybrid
-                            or both online and offline based on the competition. Despite the change currently happening in
-                            our mother earth, without a doubt youngsters like us are capable of adapting within the changes
-                            that presses us and able to grow as well as explore ourselves to spark and eventually be the
-                            finest version of us. Thus, the theme for the 2023 Asian English Olympics is “Unveil Your Spark”
+                        <p>     Seeing the ray light of hope, we believe that the realization of The 2023 AEO can be held hybrid or both online and offline based on the competition. Despite the change currently happening in our mother earth, without a doubt, youngsters like us are capable of adapting to the changes that press us and can grow as well as explore ourselves to spark and eventually be the finest version of us. Thus, the theme for the 2023 Asian English Olympics is “Unveil Your Spark”
                         </p>
     
-                        <p>     After 2 years adjusting to the pandemic life, now we are ready to get back to our daily life
-                            before the pandemic. Hence, without any doubt asian youths must unveil their biggest potential
-                            within themselves. According to Merriam-Webster dictionary, unveil can be defined as to remove a
-                            veil or covering from; discover, disclose, or reveal. The word “Unveil” means to expose the
-                            hidden talent that asian youths have. The word “Your” refers to Asian youths, committees, and
-                            all Asian English Olympics entities since they have their own spark.
+                        <p>     After 2 years of adjusting to the pandemic life, now we are ready to get back to our daily life before the pandemic. Hence, without any doubt, Asian youths must unveil their biggest potential within themselves. According to Merriam-Webster dictionary, unveil can be defined as removing a veil or covering from; discover, disclose, or reveal. The word “Unveil” means to expose the hidden talent that Asian youths have. The word “Your” refers to Asian youths, committees, and all Asian English Olympics entities since they have their spark.
+
+                        </p>
+                        <p>
+                          Hence, without any doubt asian youths must unveil their biggest potential
+                          within themselves. According to Merriam-Webster dictionary, unveil can be defined as to remove a
+                          veil or covering from; discover, disclose, or reveal. The word “Unveil” means to expose the
+                          hidden talent that asian youths have. The word “Your” refers to Asian youths, committees, and
+                          all Asian English Olympics entities since they have their own spark.
                         </p>
     
                         <p>
-                                We are sure that “Spark” is the perfect word to portray each individual's motivation. Based on
-                            Merriam Webster Dictionary, ‘spark’ can be interpreted as a small particle of a burning
-                            substance thrown out by a body in combustion or remaining when combustion is nearly completed.
-                            From the motivation they have, they can achieve something meaningful alongside their life
-                            journey. Like a spark that can turn into flame, that achievement doesn’t have to be a huge one,
-                            but can start from small things that matter in their life. From a little spark, you can make
-                            yourself sparkle even in the darkest night. The 2023 Asian English Olympics shall be their
-                            milestone to unveil their hidden spark.
+                          We are sure that “Spark” is the perfect word to portray each individual's motivation. Based on Merriam-Webster Dictionary, ‘spark’ can be interpreted as a small particle of a burning substance thrown out by a body in combustion or remaining when combustion is nearly completed. From the motivation they have, they can achieve something meaningful alongside their life journey. Like a spark that can turn into flame, that achievement doesn’t have to be a huge one but can start from small things that matter in their life. From a little spark, you can make yourself sparkle even in the darkest night. The 2023 Asian English Olympics shall be their milestone to unveil their hidden spark.
                         </p>
     
                     </div>
@@ -181,7 +173,7 @@
         <div class="d-flex justify-content-center ">
             <div class="custom-border rounded  my-2"></div>
         </div>
-        <h5 class="mt-3 my-5 fw-bold text-gradient-blue fs-4 text-center ">PREVIOUS ASIAN ENGLISH OLYMPICS</h5>
+        <h5 class="mt-3 my-5 fw-bold aeo-purple   text-center " style="font-size: 1.8em">PREVIOUS ASIAN ENGLISH OLYMPICS</h5>
         <div class="mt-5 px-3">
           <div class="timeline-wrapper timeline-inverted timeline-wrapper-primary">
             <div class="timeline-badge"></div>
@@ -190,19 +182,26 @@
         </div>
 
 
-        <div class="timeline-wrapper d-flex justify-content-center pt-4 pb-3">
-          <div class=" timeline-top  timeline-body">
-            <div class="d-flex justify-content-center">
-              <img class="img-responsive w-50 w-sm-75" src="/storage/assets/previous-logo/2022.png" alt="logo-2022" srcset="">
+        
+        <div class="timeline mx-2 px-2 ">
+    
+
+            <div class="timeline-wrapper timeline-inverted timeline-wrapper-primary">
+              <div class="timeline-badge"></div>
+              <div class="timeline-panel">
+                <div class="timeline-body d-flex justify-content-center">
+                  <img class="img-responsive w-50 w-sm-75 " src="/storage/assets/previous-logo/2022.webp" alt="logo-2022" srcset="" loading="lazy">
+                </div>
+                <div class="timeline-footer d-flex align-items-center flex-wrap">
+                   
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-          <div class="timeline mx-2 px-2 ">
             <div class="timeline-wrapper timeline-wrapper-primary">
               <div class="timeline-badge"></div>
               <div class="timeline-panel">
                 <div class="timeline-body d-flex justify-content-center">
-                  <img class="img-responsive w-50 w-sm-75" src="/storage/assets/previous-logo/2021.png" alt="logo-2021" srcset="">
+                  <img class="img-responsive w-50 w-sm-75 " src="/storage/assets/previous-logo/2021.webp" alt="logo-2021" srcset="" loading="lazy">
                 </div>
                 <div class="timeline-footer d-flex align-items-center flex-wrap">
                    
@@ -213,7 +212,7 @@
               <div class="timeline-badge"></div>
               <div class="timeline-panel">
                 <div class="timeline-body d-flex justify-content-center">
-                  <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2020.png" alt="logo-2020" srcset="">
+                  <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2020.webp" alt="logo-2020" srcset="" loading="lazy">
                 </div>
                 <div class="timeline-footer d-flex align-items-center flex-wrap">
                    
@@ -224,7 +223,7 @@
               <div class="timeline-badge"></div>
               <div class="timeline-panel">
                 <div class="timeline-body d-flex justify-content-center">
-                  <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2019.png" alt="logo-2019" srcset="">
+                  <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2019.webp" alt="logo-2019" srcset="" loading="lazy" >
 
                 </div>
                 <div class="timeline-footer d-flex align-items-center flex-wrap">
@@ -236,7 +235,7 @@
               <div class="timeline-badge"></div>
               <div class="timeline-panel">
                 <div class="timeline-body d-flex justify-content-center">
-                  <img  class='img-responsive w-50 w-sm-75'src="/storage/assets/previous-logo/2018.png" alt="logo-2018" srcset="">
+                  <img  class='img-responsive w-50 w-sm-75'src="/storage/assets/previous-logo/2018.webp" alt="logo-2018" srcset="" loading="lazy">
 
                 </div>
                 <div class="timeline-footer d-flex align-items-center flex-wrap">
@@ -248,7 +247,7 @@
               <div class="timeline-badge"></div>
               <div class="timeline-panel">
                 <div class="timeline-body d-flex justify-content-center">
-                  <img class="img-responsive w-50 w-sm-75" src="/storage/assets/previous-logo/2017.png" alt="logo-2017" srcset="">
+                  <img class="img-responsive w-50 w-sm-75" src="/storage/assets/previous-logo/2017.webp" alt="logo-2017" srcset="" loading="lazy">
                 </div>
                 <div class="timeline-footer d-flex align-items-center flex-wrap">
                   
@@ -259,7 +258,7 @@
               <div class="timeline-badge"></div>
               <div class="timeline-panel">
                 <div class="timeline-body d-flex justify-content-center">
-                  <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2016.png" alt="logo-2016" srcset="">
+                  <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2016.webp" alt="logo-2016" srcset="" loading="lazy">
 
                 </div>
                 <div class="timeline-footer d-flex align-items-center flex-wrap">
@@ -272,7 +271,7 @@
               <div class="timeline-panel">
             
                 <div class="timeline-body d-flex justify-content-center">
-                  <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2015.png" alt="logo-2015" srcset="">
+                  <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2015.webp" alt="logo-2015" srcset="" loading="lazy">
 
                 </div>
                 <div class="timeline-footer d-flex align-items-center flex-wrap">
@@ -280,12 +279,13 @@
                 </div>
               </div>
             </div>
+
             <div class="timeline-wrapper timeline-inverted timeline-wrapper-primary">
                 <div class="timeline-badge"></div>
                 <div class="timeline-panel">
               
                   <div class="timeline-body d-flex justify-content-center">
-                    <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2014.png" alt="logo-2014" srcset="">
+                    <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2014.webp" alt="logo-2014" srcset="" loading="lazy">
 
                   </div>
                   <div class="timeline-footer d-flex align-items-center flex-wrap">
@@ -298,7 +298,7 @@
                 <div class="timeline-panel">
             
                   <div class="timeline-body d-flex justify-content-center">
-                    <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2013.png" alt="logo-2013" srcset="">
+                    <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2013.webp" alt="logo-2013" srcset="" loading="lazy">
 
                   </div>
                   <div class="timeline-footer d-flex align-items-center flex-wrap">
@@ -306,12 +306,13 @@
                   </div>
                 </div>
               </div>
+
               <div class="timeline-wrapper timeline-inverted timeline-wrapper-primary">
                 <div class="timeline-badge"></div>
                 <div class="timeline-panel">
                
                   <div class="timeline-body d-flex justify-content-center">
-                    <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2012.png" alt="logo-2012" srcset="">
+                    <img class='img-responsive w-50 w-sm-75' src="/storage/assets/previous-logo/2012.webp" alt="logo-2012" srcset="" loading="lazy">
                   </div>
                   <div class="timeline-footer d-flex align-items-center flex-wrap">
             
@@ -320,14 +321,8 @@
           
           
             </div>
-
-
-
-
-
-  
  
-</div>
+        </div>
 
 
      </section>

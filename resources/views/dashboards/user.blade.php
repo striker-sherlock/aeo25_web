@@ -111,7 +111,7 @@
                         <div class="card-header"></div>
                         <div class="card-body my-3 p-4">
                             <h2 class="fw-bold">STEP 2</h2>
-                            @if (!$confirmedAccPayment)
+                            @if (!$confirmedAccSlot)
                                 <i class="fas fa-lock" style="font-size: 5em"></i>
                                 <h4 class="mt-3 fw-bold">LOCKED</h4>
                                 <small style="font-size: 0.7em" class="text-danger" >*you have to finish previous step first</small>
@@ -182,8 +182,8 @@
                                         @if ($slot->payment->is_confirmed == 0)
                                             <span class="text-warning fw-bold">Wait for Confirmation</span>
                                         @elseif($slot->payment->is_confirmed == 1)
-                                            {{-- kasi payment reciept nya disini --}}
-                                            <a href="{{route('payments.paid-invoice', $slot->payment->id)}}" class="btn btn-outline-info rounded-pill mt-2" target="_BLANK"> View Reciept</a>
+                                            {{-- kasi payment Receipt nya disini --}}
+                                            <a href="{{route('payments.paid-invoice', $slot->payment->id)}}" class="btn btn-outline-info rounded-pill mt-2" target="_BLANK"> View Receipt</a>
                                         @else
                                             <span class="text-danger fw-bold">Rejected</span>
                                         @endif    

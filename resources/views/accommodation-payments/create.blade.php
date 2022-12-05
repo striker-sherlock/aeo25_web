@@ -41,14 +41,14 @@
                         <hr>
                         <div class="d-flex justify-content-between">
                             <h3 class="fw-bold">Grand Total</h3>
-                            <h4 class="fw-bold">{{ number_format($total, 2, ',', '.')}} IDR</h4>
+                            <h4 class="fw-bold">IDR{{ number_format($total, 2, ',', '.')}} </h4>
                         </div>
 
                     {{-- ini kondidi bila PIC ingin membayar slotnya 1 per 1  --}}
                     @else
                         <div class="d-flex justify-content-between">
                             <h6>{{$accommodationSlot->accommodation->room_type}} x {{$accommodationSlot->quantity}} </h6>
-                            <h6>{{ number_format($total, 2, ',', '.')}} IDR</h6>
+                            <h6>IDR{{ number_format($total, 2, ',', '.')}} </h6>
                         </div>
 
                         <hr>
@@ -56,7 +56,7 @@
                         
                         <div class="d-flex justify-content-between">
                             <h3 class="fw-bold">Grand Total</h3>
-                            <h4 class="fw-bold">{{ number_format($total, 2, ',', '.')}} IDR</h4>
+                            <h4 class="fw-bold">IDR{{ number_format($total, 2, ',', '.')}} </h4>
                         </div>
                     @endif
                     
@@ -89,7 +89,7 @@
                         <div class="form-group mb-2">
                             <label for="payment_provider" class="col-form-label">Payment Type<span class="text-danger">*</span></label>
                             <select class="form-select"  name="payment_provider" >
-                                <option selected class="d-none" disabled>Select The payment type</option>
+                                <option selected class="d-none" disabled>Select the payment type</option>
                                 @foreach ($paymentProviders as $paymentProvider)
                                     <option value="{{$paymentProvider->id}}" {{old('payment_provider') == $paymentProvider->id? 'selected' : ''}}>{{$paymentProvider->name}}</option>
                                 @endforeach
@@ -205,7 +205,7 @@
             document.querySelector('input[name="account_name"]').value = "";
             document.querySelector('input[name="account_number"]').value = "";
             document.querySelector('input[name="transfer_proof_bank"]').value = "";
-            document.querySelector('select[name="payment_providers"]').value = "select bank ... ";
+            document.querySelector('select[name="payment_provider"]').value = "Select bank ... ";
             
         })
     </script>

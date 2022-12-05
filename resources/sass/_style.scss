@@ -40,6 +40,11 @@
   color: #F175AD !important;
   font-family: 'Lexend' !important;
 }
+
+.aeo-purple {
+  color: #80679e  !important;
+  font-family: 'Lexend' !important;
+}
 .text-gradient{
   background:-webkit-linear-gradient(#32649e, #4c3c5f);
   -webkit-background-clip: text;
@@ -78,6 +83,17 @@
 
 .btn-outline-theme:hover{
   background-color: #7fbcd2;
+  color: #FFF;
+}
+
+.btn-outline-purple{
+  border: 1px solid #80679e;
+  color: #80679e;
+  transition: .2s ease;
+}
+
+.btn-outline-purple:hover{
+  background-color: #80679e;
   color: #FFF;
 }
 
@@ -350,15 +366,17 @@ section {
 .hero , .about{
   width: 100%;
   height: 100vh;
-  background-image: linear-gradient(#4C3C5F, #32649E);
+  // background-color: #F175AD;
+  background-image:url('/storage/app/public/assets/Twinkle-BG.webp'),linear-gradient(#4C3C5F, #32649E);
   font-family: "Lexend";
+  background-size: cover;
 }
 
+ 
 .hero hr {
   height: 4px;
   background-color: #F175AD;
   color: #F175AD;
-
 }
 
 .hero h1 {
@@ -395,14 +413,10 @@ section {
   font-family: 'Lexend' !important;
 }
 
-// @media (min-width: 1024px) {
-//   .hero {
-//     background-attachment: fixed;
-//   }
-// }
+
 
 @media (max-width: 991px) {
-  .hero {
+  .hero,.about{
     height: auto;
     padding: 120px 0 60px 0;
   }
@@ -435,6 +449,7 @@ section {
   }
 }
  
+ 
 
 
 //   /*--------------------------------------------------------------
@@ -442,8 +457,10 @@ section {
 //   --------------------------------------------------------------*/
 
 .about {
-  background-image: linear-gradient(#32649E, #80679E);
+  background-image: url('/storage/app/public/assets/Twinkle-BG.webp'),linear-gradient(#32649E, #80679E);
   padding: 40px;
+  background-size: cover;
+  
 }
 
 .about h3 {
@@ -515,7 +532,9 @@ section {
 
 #why-join {
   padding: 5rem 0;
-  background-image: linear-gradient(#80679E, #32649E);
+  background-image:url('/storage/app/public/assets/Twinkle-BG.webp'),linear-gradient(#80679E, #32649E);
+  background-size: cover;
+ 
 }
 
 #why-join .text-light {
@@ -620,18 +639,21 @@ button.owl-prev{
   justify-content: center;
   align-items: center;
 }
-button.owl-next:hover{
-  color:white !important   ;
+button.owl-next:hover span{
+  font-size: 15px;
 }
+button.owl-prev:hover span{
+  font-size: 15px;
+}
+ 
 
 button.owl-next span,
 button.owl-prev span{
-  font-size:30px;
+  transition: 0.5s;
+  font-size:12px;
   margin: 0;
   padding: 0;
   color: #32649E;
-
-
 }
 
 button.owl-next{
@@ -696,9 +718,7 @@ button.owl-prev{
 .carousel-inner .carousel-item-left {
   transform: translateX(0);
 }
-
-
-
+ 
 
 
 /*--------------------------------------------------------------
@@ -998,12 +1018,11 @@ button.owl-prev{
 //   --------------------------------------------------------------*/
 
 
-#theme .card {
+#theme .card, section#greetings .row{
   background: #FFFFFF;
-  border: 1px solid #000000;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 40px;
-
+  
 }
 
 /* Timeline */
@@ -1057,8 +1076,6 @@ button.owl-prev{
   position: relative;
   width: 25%;
   padding-right: 90px;
-  
-  
   padding: 20px;
   position: relative;
   background: #ffffff;
@@ -1164,9 +1181,10 @@ button.owl-prev{
   .timeline .timeline-wrapper {
     padding-right: 150px;
   }
-  .timeline .timeline-wrapper.timeline-inverted {
-    padding-left: 150px;
+  .timeline .timeline-wrapper.timeline-inverted{
+    padding-left: 220px;
   }
+
   .timeline .timeline-wrapper .timeline-panel {
     width: 60%;
     margin-left: 0;
@@ -1183,6 +1201,52 @@ button.owl-prev{
 
 .timeline-wrapper-primary .timeline-badge {
    background-image: linear-gradient(#32649e, #343b74);
+}
+
+.about {
+  padding-bottom: 5rem;
+  padding-top: auto;
+}
+
+
+@media (max-width: 1208px) {
+  .about {
+    height: auto;
+    padding: 100px 0 60px 0;
+  }
+}
+
+
+@media (max-width: 970px) {
+  .about {
+    height: auto;
+    padding: 90px 0 60px 0;
+  }
+
+  .about .about-img {
+    text-align: start;
+    margin-top: 80px;
+  }
+
+
+}
+
+@media (max-width: 768px) {
+  .about {
+    text-align: start;
+  }
+
+  .about h1 {
+    font-size: 32px;
+  }
+
+  .about h2 {
+    font-size: 24px;
+  }
+
+  .abouthero .about-img img {
+    width: 100%;
+  }
 }
 
 

@@ -2,7 +2,7 @@
 <x-admin>
     <div class="container mt-5">
         <x-card>
-            <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Create New Sponsor</h3>
+            <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Create New FAQ</h3>
             <form method="POST" action="{{route('faqs.store')}}">
                 @csrf
                     <div class="form-group mb-3">

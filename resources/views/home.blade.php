@@ -31,7 +31,7 @@
                         <h3 data-bs-aos="fade-up" class="aeo-title fs-2 mb-3">The 2023 Asian English Olympics</h3>
                         <h1 data-bs-aos="fade-up" class='aeo-theme  mb-4 display-5' style="letter-spacing:0.1em;">UNVEIL YOUR SPARK</h1>
                     </div>
-                        <div class="col-md-6  text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
+                        <div class="col-11 col-md-6 text-start rounded-20 " style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
                             <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
                             <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">13 January 2023 </h4>
                             <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
@@ -69,7 +69,9 @@
 
                     <div class=" d-flex align-items-center flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
                         <div class="content">
-                           <div class="custom-border rounded  my-2" ></div>
+                            <div class="d-flex justify-content-center justify-content-md-start ">
+                                <div class=" custom-border rounded  my-2"></div>
+                            </div>
                             <h2 class="text-light pink fs-4" >WHAT IS ASIAN ENGLISH OLYMPICS?</h2>
                             <h2 class="aeo-title ">The Asian English Olympics (AEO) is one of Asia's most anticipated international English competitions.</h2>
                              
@@ -131,9 +133,9 @@
                     </div>
                 </div>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" >
                 <path fill="#32649E" fill-opacity="1"
-                    d="M0,160L60,181.3C120,203,240,245,360,224C480,203,600,117,720,117.3C840,117,960,203,1080,208C1200,213,1320,139,1380,101.3L1440,64L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
+                    d="M0,160L60,181.3C120,203,240,245,360,224C480,203,600,117,720,117.3C840,117,960,203,1080,208C1200,213,1320,139,1380,101.3L1440,64L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z" >
                 </path>
             </svg>
             <!-- End Why Join Section -->
@@ -182,17 +184,24 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row justify-content-center align-items-center">
-                                    <div class="col-11 text-center">
+                                    <div class="col-11  ">
                                         <div class="custom-divider mx-auto"></div>
                                         <h5 class="fw-bold aeo-title" style="letter-spacing: 0.1em">Competition Field
                                         </h5>
                                         <h3 class="text-uppercase fw-bold text-gradient display-6"
                                             style="letter-spacing: 0.1em">{{ $competition->name }}'s Field</h3>
-                                        <h4 class="fw-bold">Price : {{ $competition->price }} IDR /
+                                        <h4 class="fw-bold">Price : IDR {{ $competition->price }} /
                                             {{ $competition->need_team ? 'team(s)' : 'person(s)' }}</h4>
                                         {{-- {!! $competition->content !!} --}}
-                                        <h5 class="text-danger">To Be Announced</h5>
                                         <hr>
+                                        <h5 class="">{!!$competition->content!!}</h5>
+                                        <div class="modal-footers text-center">
+                                            <button type="button"
+                                                class="btn btn-outline-theme rounded-pill rounded-20 mb-4 px-4"
+                                                data-bs-dismiss="modal">
+                                                OK, I got it
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -293,7 +302,7 @@
 
             <!-- End Ambassador Section -->
 
-
+             
             
             <!-- ======= F.A.Q Section ======= -->
             @if ($faqs->count() > 0)
@@ -312,16 +321,17 @@
                             @foreach ($faqs as $faq)
                             <div class="col-lg-6 col-md-6">
                                 <div class="card border-0 card-shadow card-faq my-3 text-light">
-                                    <a id="accordionItem" class="btn collapsed accordion-button card-accordion text-center text-primary text-light "
+                                    <a id="accordionItem" class="btn collapsed accordion-button card-accordion text-start text-primary text-light mh-50"
                                         data-bs-toggle="collapse" data-bs-target="#faqAccordion{{ $faq->id }}"
                                         aria-expanded="false" aria-controls="faqAccordion{{ $faq->id }}">
-                                        <h5 class="section-title m-0 ps-5 pe-5">{{$faq->question}}
+                                        <h5 class="section-title m-0 ps-5 pe-5 text-start">
+                                                {{$faq->question}}
                                         </h5>
                                     </a>
-                                    <div id="faqAccordion{{ $faq->id }}" class="accordion-collapse collapse"
+                                    <div id="faqAccordion{{ $faq->id }}" class="accordion-collapse collapse "
                                         data-bs-parent="#faq-accordion">
-                                        <div class="card-body">
-                                            <p class="text-primary">
+                                        <div class="card-body shadow-sm rounded-20">
+                                            <p class="text-dark">
                                                 {{ $faq->answer }}
                                             </p>
                                         </div>
@@ -360,7 +370,7 @@
                 </section>
             @endif
 
-
+            
 
             <!-- End Sponsor Section -->
             <!-- ======= Medpar ======= -->
@@ -506,7 +516,7 @@
                         </div>
                         <h2 class="text-gradient fw-bold">Competitions</h2>
                         <p>
-                            There will be 7 different fields of competition, which are Speech, Newscasting, Storytelling, Debate, Spelling Bee, and Online Competition. All the fields of competition in the 2023 AEO will have the general rules that can be implemented in many kinds of the competition’s field. Hereby are the important general rules that should be mentioned to the participant by most of the competition’s fields.
+                            There will be 7 different fields of competition, which are Speech, Newscasting, Storytelling, Debate, Spelling Bee, and Online Competition. All the fields of competition in the 2023 AEO will have general rules that will be implemented in many kinds of the competition fields. Hereby are the important general rules that have to be noticed by the participants of the competition fields.
 
                         </p>
                     </div>
@@ -573,7 +583,7 @@
                     </div>
                     <div class="modal-footers text-center">
                         <button type="button"
-                            class="btn btn-success rounded-pill rounded-20 mb-4 px-4"
+                            class="btn btn-outline-theme rounded-pill rounded-20 mb-4 px-4"
                             data-bs-dismiss="modal">
                             OK, I got it
                         </button>
@@ -587,9 +597,6 @@
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-
-
-
         let owl = $('.owl-carousel');
         owl.owlCarousel({
             loop: true,
@@ -604,9 +611,9 @@
                     items: 1
                 },
                 600: {
-                    items: 2
+                items: 2
                 },
-                960: {
+                1200: {
                     items: 3
                 },
 
@@ -637,8 +644,15 @@
             }, 1000);
         }
 
+        $('.owl-next span').text('');
+        $('.owl-next span').addClass('fa-solid fa-arrow-right');
+        $('.owl-prev span').text('');
+        $('.owl-prev span').addClass('fa-solid fa-arrow-left');
+
         //using the function
         const tomorrow = new Date("January 13, 2023 18:00:00")
         timer(tomorrow);
+
+        $('figure.table table').addClass('table-bordered mx-auto text-center w-100' )
     </script>
 </x-layout>

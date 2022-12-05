@@ -94,6 +94,7 @@
 
 #about {
     padding-bottom: 5rem;
+    padding-top: auto;
 }
 
 #greetings {
@@ -138,8 +139,6 @@
     background: white;
     border-radius: 50%;
     padding: 0.5rem;
-    // background-image: linear-gradient(100deg, rgba(39,93,163,1) 0%, rgba(159,207,230,1) 100%);
-    background-image: linear-gradient(100deg, #3F3B74 0%, #32649E 100%);
  
 
 }
@@ -426,7 +425,9 @@
 }
 
 #accordionItem {
-    background-color: #32649e;
+    background-image: linear-gradient(#32649e, #80679e);
+    height: 75px;
+    text-align: center;
 
 }
 
@@ -436,6 +437,7 @@
 
 .accordion-button:not(.collapsed) {
     background: $teal;
+    
 }
 
 .c-button-outline-1 {

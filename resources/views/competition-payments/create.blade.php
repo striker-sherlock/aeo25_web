@@ -34,7 +34,7 @@
                         @foreach ($allCompetitions as $competition)
                             <div class="d-flex justify-content-between">
                                 <h6>{{$competition->competition->name}} x {{$competition->quantity}} {{$competition->competition->need_team == 1 ? 'Team(s)' : 'People(s)'}}</h6>
-                                <h6>{{ number_format($competition->competition->price * $competition->quantity, 2, ',', '.')}} IDR</h6>
+                                <h6>IDR {{ number_format($competition->competition->price * $competition->quantity, 2, ',', '.')}} </h6>
                             </div>
                         @endforeach
                         <hr>
@@ -47,14 +47,14 @@
                     @else
                         <div class="d-flex justify-content-between">
                             <h6>{{$competitionSlot->competition->name}} x {{$competitionSlot->quantity}} {{$competitionSlot->competition->need_team == 1 ? 'Team(s)' : 'People(s)'}}</h6>
-                            <h6>{{ number_format($totalPrice, 2, ',', '.')}} IDR</h6>
+                            <h6> IDR {{ number_format($totalPrice, 2, ',', '.')}} </h6>
                         </div>
 
                         <hr>
                         
                         <div class="d-flex justify-content-between">
                             <h3 class="fw-bold">Grand Total</h3>
-                            <h4 class="fw-bold">{{ number_format($totalPrice, 2, ',', '.')}} IDR</h4>
+                            <h4 class="fw-bold">IDR {{ number_format($totalPrice, 2, ',', '.')}} </h4>
                         </div>
                     @endif
                     

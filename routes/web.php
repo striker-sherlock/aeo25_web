@@ -7,6 +7,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PicController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AccessController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FollowUpController;
@@ -24,8 +25,8 @@ use App\Http\Controllers\FlightTicketController;
 use App\Http\Controllers\FollowUpTypeController;
 use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
-use App\Http\Controllers\UserAccommodationGuest;
 // use Yajra\DataTables\DataTablesServiceProvider
+use App\Http\Controllers\UserAccommodationGuest;
 use App\Http\Controllers\AccessControlController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
@@ -61,6 +62,7 @@ Route::resource('countries', CountriesController::class);
 Route::resource('follow-up-types', FollowUpTypeController::class); 
 Route::resource('access-controls',AccessControlController::class);
 Route::resource('score-types', ScoreTypeController::class)->except('show');
+Route::resource('accesses', AccessController::class);
 
 
 // PIC
@@ -113,6 +115,7 @@ Route::get('/dashboard/accommodation-step-{step}', [DashboardController::class, 
 //Admin Privileges - Slot Registration
 Route::controller(SlotRegistrationController::class)->prefix('slot-registrations')->name('slot-registrations.')->group(function () {
     Route::get('confirm/{competitionSlot}', 'confirm')->name('confirm');
+    Route::get('pending/{competitionSlot}', 'pending')->name('pending');
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
     Route::get('create-others', 'createOthers')->name('create-other');
@@ -136,6 +139,7 @@ Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['inde
 Route::get('/{type}/payments', [AdminCompetitionPaymentController::class, 'index'])->name('competition-payments.index');
 Route::controller(AdminCompetitionPaymentController::class)->prefix('payments')->name('competition-payments.')->group(function () {
     Route::get('confirm/{competitionSlot}', 'confirm')->name('confirm');
+    Route::get('pending/{competitionSlot}', 'pending')->name('pending');
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
     Route::get('export', 'export')->name('export');

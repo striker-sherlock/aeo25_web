@@ -67,10 +67,10 @@
                             <div class="row">
                                 @if ($item->is_confirmed != 1)
                                     <div class="col">
-                                        <a href="{{route('competition-payments.edit',$item->id)}}" class="btn btn-outline-theme w-100 rounded-pill">Edit Payment</a>
+                                        <a href="{{route('competition-payments.edit',$item->id)}}" class="btn btn-outline-theme w-100 rounded-pill"><i class="fa fa-edit"></i> Edit Payment</a>
                                     </div>
                                     <div class="col">
-                                        <a  href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$item->id}}" class="btn btn-outline-danger rounded-pill w-100"> Delete Payment</a>
+                                        <a  href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$item->id}}" class="btn btn-outline-danger rounded-pill w-100"> <i class="fa fa-trash"></i>Delete Payment</a>
                                 
                                     </div>
                                     
@@ -85,7 +85,7 @@
         <h5 class="text-center fs-4 fw-bold">Step Navigation</h5>
         <div class="navigasi  mb-4 d-flex justify-content-center align-items-center py-1">
             <ul class="list-unstyled d-flex align-items-center">
-                <li> <a href="{{route('dashboard')}}" class=" btn btn-outline-primary me-2">Main dashboard </a></li>
+                <li> <a href="{{route('dashboard')}}" class=" btn btn-outline-purple me-2">Main dashboard </a></li>
                 <li> <a href="{{route('dashboard.step',1)}}" class=" btn btn-outline-primary me-2">1</a></li>
                 <li> <a href="#" class="btn btn-outline-primary me-2 active">2</a></li>
                 <li> <a href="{{route('dashboard.step',3)}}" class="btn btn-outline-primary me-2">3</a></li>
@@ -114,7 +114,7 @@
                             @endif
                         @endforeach
                     </ul>
-                    <p class="text-warning"> NOTE : this action can't be undone  </p>
+                    <p class="text-warning fw-bold fs-5"> NOTE : this action can't be undone  </p>
                 </div>
                 <div class="footer">
                     <div class="row">

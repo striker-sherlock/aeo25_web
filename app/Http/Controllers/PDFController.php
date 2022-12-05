@@ -113,7 +113,7 @@ class PDFController extends Controller
                 }
 
                 #logo img {
-                width: 100%
+                width: 100.2%
                 }
 
                 #details {
@@ -219,8 +219,7 @@ class PDFController extends Controller
                     display: block;
                     margin-left: auto;
                     margin-right: auto;
-                    width: 50%;
-                    height: 70px;
+                    width: 25%;
                 }
 
                 table tfoot td {
@@ -402,7 +401,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.png" ><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
@@ -429,8 +428,7 @@ class PDFController extends Controller
         
     }
 
-    public function paidInvoice(CompetitionPayment $payment)
-    {
+    public function paidInvoice(CompetitionPayment $payment){
         $user = User::where('id' ,$payment->pic_id)->first();
 
         $slots = DB::table('competition_slot_details')
@@ -474,6 +472,7 @@ class PDFController extends Controller
         <style>
         @import url(https://fonts.bunny.net/css?family=roboto:500);
 
+    
         @page{
         margin-top: 0;
         margin-left: 1.2cm;
@@ -518,7 +517,9 @@ class PDFController extends Controller
         }
 
         #logo img {
-        width: 100%
+        width: 100.2%;
+        padding:0;
+        margin:0;
         }
 
         #details {
@@ -624,8 +625,8 @@ class PDFController extends Controller
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 50%;
-            height: 70px;
+            width: 25%;
+            padding:0;
         }
 
         table tfoot td {
@@ -768,7 +769,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.png"  ><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
@@ -896,7 +897,7 @@ class PDFController extends Controller
                 }
 
                 #logo img {
-                width: 100%
+                width: 100.2%
                 }
 
                 #details {
@@ -1006,8 +1007,7 @@ class PDFController extends Controller
                     display: block;
                     margin-left: auto;
                     margin-right: auto;
-                    width: 50%;
-                    height: 70px;
+                    width: 25%;
                 }
 
                 table tfoot td {
@@ -1187,7 +1187,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" ><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.png" ><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics
@@ -1305,7 +1305,7 @@ class PDFController extends Controller
         }
 
         #logo img {
-        width: 100%
+        width: 100.2%
         }
 
         #details {
@@ -1411,8 +1411,7 @@ class PDFController extends Controller
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 50%;
-            height: 70px;
+            width: 25%;
         }
 
         table tfoot td {
@@ -1557,7 +1556,7 @@ class PDFController extends Controller
         $output .= '
                 <div class="signText">
                 Approved By, <br>
-                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.jpg" height="80"><br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.png" height="80"><br>
                 <b>Michelle Natasya</b><br>
                 Project Manager<br>
                 The 2023 Asian English Olympics

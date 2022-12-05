@@ -10,6 +10,7 @@
                             <th scope="col">ID</th>
                             <th scope="col">Institution Name</th>
                             <th scope="col">PIC Name</th>
+                            <th scope="col">Contact</th>
                             <th scope="col">Country</th>
                             <th scope="col">Grand Total</th>
                             <th scope="col">Created At</th>
@@ -22,6 +23,7 @@
                                 <th>{{$payment->id}}</th>
                                 <th>{{$payment->institution_name}}</th>
                                 <th>{{$payment->pic_name}}</th>
+                                <th>{{$payment->pic_phone_number}}</th>
                                 <th>{{$payment->name}}</th>
                                 <th>IDR {{ number_format($payment->amount)}} </th>
                                  
@@ -64,6 +66,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Institution Name</th>
                         <th scope="col">PIC Name</th>
+                        <th scope="col">Contact</th>
                         <th scope="col">Country</th>
                         <th scope="col">Grand Total</th>
                         <th scope="col">Action</th>
@@ -76,8 +79,9 @@
                             <th>{{$payment->id}}</th>
                             <th>{{$payment->institution_name}}</th>
                             <th>{{$payment->pic_name}}</th>
+                            <th>{{$payment->pic_phone_number}}</th>
                             <th>{{$payment->name}}</th>
-                            <th>{{$payment->amount}}</th>
+                            <th>IDR {{ number_format($payment->amount)}}</th>
                             <th>
                                 <div class="d-flex justify-content-center">
                                     <a href="{{route('competition-payments.edit',$payment->id)}}" class="btn btn-primary me-2" title="edit">
@@ -112,6 +116,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Institution Name</th>
                         <th scope="col">PIC Name</th>
+                        <th scope="col">Contact</th>
                         <th scope="col">Country</th>
                         <th scope="col">Grand Total</th>
                         <th scope="col">Created At</th>
@@ -125,15 +130,20 @@
                             <th>{{$payment->id}}</th>
                             <th>{{$payment->institution_name}}</th>
                             <th>{{$payment->pic_name}}</th>
+                            <th>{{$payment->pic_phone_number}}</th>
                             <th>{{$payment->name}}</th>
-                            <th>{{$payment->amount}}</th>
+                            <th>IDR {{ number_format($payment->amount)}}</th>
                             <th>{{$payment->created_at}}</th>
                         
                             <th>
                                 <div class="d-flex justify-content-around">
-                                    <a href="{{route('competition-payments.cancel', $payment->id)}}" class="btn btn-warning" title="cancel payment" title="move to pending">
+                                    <a href="{{route('competition-payments.edit', $payment->id)}}" class="btn btn-primary" title="edit payment"  >
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{{route('competition-payments.pending', $payment->id)}}" class="btn btn-warning"  title="move to pending">
                                         <i class="fas fa-undo"></i>
                                     </a>
+                                    
                                 </div>
                             </th>
                         </tr>

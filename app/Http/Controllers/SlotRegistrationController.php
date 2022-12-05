@@ -211,7 +211,7 @@ class SlotRegistrationController extends Controller
 
     public function cancel (CompetitionSlot $competitionSlot){
         $competitionSlot ->update([
-            'updated_by' => 'Admin',
+            'updated_by' => Auth::guard('admin')->user()->name,
             'is_confirmed' => 0
         ]);
 
@@ -219,7 +219,15 @@ class SlotRegistrationController extends Controller
         $competitionSlot->competition -> update([
             'temp_quota' => $remainedParticipant + $competitionSlot->quantity,
         ]);
-        return redirect()->route('slot-registrations.index');
+        return redirect()->route('slot-registrations.index')->with('Slot has successfully moved to pending');
+    }
+
+    public function pending (CompetitionSlot $competitionSlot){
+        $competitionSlot ->update([
+            'updated_by' => Auth::guard('admin')->user()->name,
+            'is_confirmed' => 0
+        ]);
+        return redirect()->route('slot-registrations.index')->with('Slot has successfully moved to pending');
     }
 
     public function reject (Request $request){
