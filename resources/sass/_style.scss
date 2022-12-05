@@ -413,11 +413,7 @@ section {
   font-family: 'Lexend' !important;
 }
 
-// @media (min-width: 1024px) {
-//   .hero {
-//     background-attachment: fixed;
-//   }
-// }
+
 
 @media (max-width: 991px) {
   .hero,.about{
@@ -1205,6 +1201,52 @@ button.owl-prev{
 
 .timeline-wrapper-primary .timeline-badge {
    background-image: linear-gradient(#32649e, #343b74);
+}
+
+.about {
+  padding-bottom: 5rem;
+  padding-top: auto;
+}
+
+
+@media (max-width: 1208px) {
+  .about {
+    height: auto;
+    padding: 100px 0 60px 0;
+  }
+}
+
+
+@media (max-width: 970px) {
+  .about {
+    height: auto;
+    padding: 90px 0 60px 0;
+  }
+
+  .about .about-img {
+    text-align: start;
+    margin-top: 80px;
+  }
+
+
+}
+
+@media (max-width: 768px) {
+  .about {
+    text-align: start;
+  }
+
+  .about h1 {
+    font-size: 32px;
+  }
+
+  .about h2 {
+    font-size: 24px;
+  }
+
+  .abouthero .about-img img {
+    width: 100%;
+  }
 }
 
 

@@ -59,7 +59,7 @@
                             <i class="fas fa-square fa-stack-2x"></i>
                             <i class="fas fa-user-plus fa-stack-1x text-dark"></i>
                         </span>
-                        <span class="ms-2">Other - Slot Registration</span>
+                        <span class="ms-2">Spectator Slot Registration</span>
                     </a>
                 </li>
                 <li class="side-item text-white">

@@ -94,6 +94,7 @@
 
 #about {
     padding-bottom: 5rem;
+    padding-top: auto;
 }
 
 #greetings {
@@ -425,6 +426,9 @@
 
 #accordionItem {
     background-image: linear-gradient(#32649e, #80679e);
+    height: 75px;
+    text-align: center;
+
 }
 
 .accordion-button::after {
@@ -433,6 +437,7 @@
 
 .accordion-button:not(.collapsed) {
     background: $teal;
+    
 }
 
 .c-button-outline-1 {

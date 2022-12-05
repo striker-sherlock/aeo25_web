@@ -19,9 +19,26 @@ class AccessControlController extends Controller
     public function index()
     {
         return view('access-controls.index', [
-            'accessControls' => AccessControl::all()
+            'admins' => Admin::orderBy('position_id')->get()
         ]);
     }
+
+    public function show($id){
+    
+        $datas = AccessControl::where("admin_id",$id)->get();
+        $access_ids =[];
+ 
+        foreach($datas as $data){
+            array_push($access_ids,$data->access_id);
+        }
+ 
+        return view("access-controls.show",[
+            "accesses" => Access::all(),
+            "user" => Admin::find($id),
+            "access_id" => $access_ids
+        ]);
+    }
+
     public function create()
     {
         return view('access-controls.create', [
@@ -31,17 +48,19 @@ class AccessControlController extends Controller
 
     }
    
-    public function store(Request $request)
-    {
-        $this->validateAccessControl($request);
-
-        AccessControl::create([
-            'access_id' => $request->access_id,
-            'admin_id' => $request->admin_id,
-            'created_by' => 'admin',
-        ]);
-
-        return redirect()->route('access-controls.index')->with('success', 'New Access Created');
+    public function store(Request $request){
+        AccessControl::where('admin_id',$request->user_id)->delete();
+    
+        if ($request->access_id){
+            $len = count($request->access_id);
+        for($i = 0; $i < $len; $i++){
+            AccessControl::insert([
+                "admin_id" => $request->user_id,
+                "access_id" => $request->access_id[$i],
+            ]);
+        }
+        }
+        return redirect()->route("access-controls.index")->with("success","Successfuly Added");
     }
     
     public function edit(AccessControl $accessControl)

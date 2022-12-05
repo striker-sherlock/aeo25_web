@@ -2,17 +2,23 @@
     <x-navbar></x-navbar>
 
     <!-- ======= About Section ======= -->
-    <section id="about" class="about d-flex align-items-center">
+    <section id="about" class="about d-flex align-items-center mx-auto mt-md-3    pt-sm-4 pt-md-4 pt-lg-4  pt-xl-4  text-md-left text-sm-left">
+
         <div class="container" data-aos="fade-up">
-            <div class=" d-flex align-items-center flex-column justify-content-center mt-5 pt-5" data-aos="fade-up"
+
+            <div class=" d-flex align-items-center flex-column justify-content-center " data-aos="fade-up"
                 data-aos-delay="200">
                 <div class="content">
-                    <div class="custom-border rounded  my-2"></div>
+
+                  <br>
+                  <br>
+                  <br>
+                  <div class="custom-border rounded my-2"></div>
                     <h2 class="text-light pink fs-4">WHAT IS ASIAN ENGLISH OLYMPICS?</h2>
                     <h2 class="aeo-title ">The Asian English Olympics (AEO) is one of Asia's most anticipated
                         international English competitions.</h2>
 
-                    <p class='w-100 fs-5' style="line-height:1.5em !important;">
+                    <p class='w-100 fs-5 text-md-left text-sm-left' style="line-height:1.5em !important;">
                         This event is conducted by Bina Nusantara English Club (BNEC), an english student
                         organization of BINUS University in Jakarta, Indonesia. We began as a National English
                         Olympics. With the passage of time, we have evolved into an Asian-scaled competition
@@ -20,12 +26,12 @@
                         students from 9 nations to compete in 7 competition areas, including Speech, Debate,
                         Newscasting, Storytelling, Spelling Bee, Radio Drama, and Short Story Writing.
                     </p>
-                    <p class='w-100 fs-5' style="line-height:1.5em !important;">
+                    <p class='w-100 fs-5 text-md-left text-sm-left' style="line-height:1.5em !important;">
                         Learning Platform, Talent Display, Competitiveness, International Ambience, Hospitality,
                         Cultural Exchange, and Networking are the seven values that AEO upholds. As a result, AEO is a
                         memorable event that provides you with an excellent opportunity to enhance your abilities and
                         gain networks from youths across Asia. AEO will undoubtedly present you, remarkable individuals,
-                        with extraordinary experiences! The 2022 AEO will be held online on February 13-18, 2023.
+                        with extraordinary experiences! The 2023 AEO will be held onsite on February 13-18, 2023.
                         Unfortunately, only 7 competitive fields will be held, with Scrabble being excluded due to the
                         current conditions.
                     </p>

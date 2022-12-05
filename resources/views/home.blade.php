@@ -321,16 +321,17 @@
                             @foreach ($faqs as $faq)
                             <div class="col-lg-6 col-md-6">
                                 <div class="card border-0 card-shadow card-faq my-3 text-light">
-                                    <a id="accordionItem" class="btn collapsed accordion-button card-accordion text-center text-primary text-light "
+                                    <a id="accordionItem" class="btn collapsed accordion-button card-accordion text-start text-primary text-light mh-50"
                                         data-bs-toggle="collapse" data-bs-target="#faqAccordion{{ $faq->id }}"
                                         aria-expanded="false" aria-controls="faqAccordion{{ $faq->id }}">
-                                        <h5 class="section-title m-0 ps-5 pe-5">{{$faq->question}}
+                                        <h5 class="section-title m-0 ps-5 pe-5 text-start">
+                                                {{$faq->question}}
                                         </h5>
                                     </a>
-                                    <div id="faqAccordion{{ $faq->id }}" class="accordion-collapse collapse"
+                                    <div id="faqAccordion{{ $faq->id }}" class="accordion-collapse collapse "
                                         data-bs-parent="#faq-accordion">
                                         <div class="card-body shadow-sm rounded-20">
-                                            <p class="text-primary ">
+                                            <p class="text-dark">
                                                 {{ $faq->answer }}
                                             </p>
                                         </div>
@@ -369,7 +370,7 @@
                 </section>
             @endif
 
-
+            
 
             <!-- End Sponsor Section -->
             <!-- ======= Medpar ======= -->

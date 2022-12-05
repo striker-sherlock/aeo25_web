@@ -27,7 +27,7 @@
                         </div>
                         
                         <div class="form-group mb-2">
-                            <label for="institution_logo" class="col-form-label"> Institutional Logo<span class="text-danger">*</span> <small class="text-muted" style="font-size:0.7em;"> (3 X 4) </small> </label>
+                            <label for="institution_logo" class="col-form-label"> Institutional Logo<span class="text-danger">*</span> </label>
                             <input type="file" accept="image/png,image/jpeg,image/jpg" class="form-control" id="institution_logo" name="institution_logo" required> 
                             <small class="text-danger"  style="font-size: 0.7em;letter-spacing:0.03em;">Type : PNG, JPEG, JPG | Max : 2MB | Size : (3 X 4)</small>
                         </div>

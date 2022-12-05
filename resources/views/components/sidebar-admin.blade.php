@@ -8,7 +8,7 @@
     <div class="sidebar-content">
         <div class="sidebar-brand text-end row my-2 py-2 me-2"  style="padding: 0.15rem;">
                 <span class=" ms-auto me-4  rounded-circle burgerIcon" id="close-sidebar" style="cursor: pointer;">
-                    <i class=" fa-solid fa-bars fa-lg text-white "></i> 
+                    <i class="  fa-solid fa-x fa-lg text-white "></i> 
                 </span> 
         </div>
         <div class="sidebar-header  mb-3" style="height: auto; ">
