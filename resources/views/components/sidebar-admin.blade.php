@@ -31,6 +31,7 @@
                         <span class="ms-2">Main Dashboard</span>
                     </a>
                 </li>
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 1)->first()))
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Treasury</span>
                     </li>
@@ -62,9 +63,14 @@
                             </ul>
                         </div>
                     </li>
+                    
+                @endif
+
+                
+                @if(Auth::guard('admin')->user()->department_id == 'MITR' || Auth::guard('admin')->user()->department_id == 'SC' ||Auth::guard('admin')->user()->department_id == 'MIT')
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">MIT - Registration</span>
-                    </li>
+                    </li>                
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                             href="{{route('users.index')}}">
@@ -118,10 +124,40 @@
                                                 Create Follow Up
                                             </a>
                                         </li>
+                                </ul>
+                        </div>
+                    </li>
+                    <li class=" pb-1 side-item pb-1 sidebar-dropdown">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
+                            <span class="fa-stack fa-sm ml-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fas fa-scroll fa-stack-1x text-dark"></i>
+                            </span>
+                            <span class="ms-2">Institution Contacts</span>
+                            <i class="fas fa-angle-right ms-auto"></i>
+                        </a>
+                        <div class="sidebar-submenu">
+                            <ul class="fa-ul">
+                                <li class="mb-1">
+                                    <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                        href="{{ route('institution-contacts.index','national') }}" style="display: block">
+                                        <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                        National
+                                    </a>
+                                </li>
+                                <li class="mb-1">
+                                    <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                        href="{{ route('institution-contacts.index','international') }}" style="display: block">
+                                        <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                        International
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
-                    <li class="side-item">
+                @endif
+
+                    {{-- <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                             href="#">
                             <span class="fa-stack fa-sm ms-n1">
@@ -130,43 +166,39 @@
                             </span>
                             <span class="ms-2">Question List</span>
                         </a>
-                    </li>
-                    <li class="side-item">
-                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                            href="#">
-                            <span class="fa-stack fa-sm ms-n1">
-                                <i class="fas fa-square fa-stack-2x"></i>
-                                <i class="fas fa-address-book fa-stack-1x text-dark"></i>
-                            </span>
-                            <span class="ms-2">Institution Contact</span>
-                        </a>
-                    </li>
+                    </li> --}}
+        
+                    
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 24)->first()))
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Accommodations</span>
                     </li>
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                            href="{{ route('accommodations.index') }}">
-                            <span class="fa-stack fa-sm ms-n1">
-                                <i class="fas fa-square fa-stack-2x"></i>
-                                <i class="fas fa-hotel fa-stack-1x text-dark"></i> 
-                            </span>
-                            <span class="ms-2">Manage Accommodations</span>
-                        </a>
-                       
-                    </li>
-                    <li class="side-item">
-                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{ route('accommodation-slot-registrations.index') }}">
+                        href="{{ route('accommodations.index') }}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fas fa-bed fa-stack-1x text-dark"></i> 
+                            <i class="fas fa-hotel fa-stack-1x text-dark"></i> 
                         </span>
-                        <span class="ms-2">Accommodations Slots</span>
-                    </a>
+                        <span class="ms-2">Manage Accommodations</span>
+                        </a>
+                    
+                    </li>
+                @endif
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 25)->first()))  
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                                href="{{ route('accommodation-slot-registrations.index') }}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fas fa-bed fa-stack-1x text-dark"></i> 
+                            </span>
+                            <span class="ms-2">Accommodations Slots</span>
+                        </a>
 
                     </li>
-
+                @endif
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 26)->first()))
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{ route('accommodation-payments.index') }}">
@@ -177,7 +209,8 @@
                         <span class="ms-2">Accommodations Payment</span>
                         </a>
                     </li>
-
+                @endif
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 26)->first()))
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{ route('accommodation-guests.index') }}">
@@ -188,22 +221,24 @@
                         <span class="ms-2">Accommodations Guests</span>
                         </a>
                     </li>
+                @endif
 
-
-
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 5)->first()))
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Competition</span>
                     </li>
-                        <li class="side-item">
-                            <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                                href="{{route('competitions.index')}}">
-                                <span class="fa-stack fa-sm ms-n1">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <i class="fas fa-tools fa-stack-1x text-dark"></i>
-                                </span>
-                                <span class="ms-2">Competitions Config</span>
-                            </a>
-                        </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{route('competitions.index')}}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fas fa-tools fa-stack-1x text-dark"></i>
+                            </span>
+                            <span class="ms-2">Competitions Config</span>
+                        </a>
+                    </li>
+                @endif
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 6)->first()))
                     <li class=" pb-1 side-item pb-1 sidebar-dropdown">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
                             <span class="fa-stack fa-sm ml-n1">
@@ -274,7 +309,8 @@
                             </ul>
                         </div>
                     </li>
-
+                @endif
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 7)->first()))
                     {{-- submission --}}
                     {{-- <li class=" pb-1 side-item pb-1 sidebar-dropdown">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
@@ -287,27 +323,6 @@
                             </a>
                         <div class="sidebar-submenu">
                             <ul class="fa-ul">
-                                    <li class="mb-1">
-                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="#" style="display: block">
-                                            <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
-                                            Newscasting
-                                        </a>
-                                    </li>
-                                    <li class="mb-1">
-                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="#" style="display: block">
-                                            <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
-                                            Speech
-                                        </a>
-                                    </li>
-                                    <li class="mb-1">
-                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="#" style="display: block">
-                                            <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
-                                            Storytelling
-                                        </a>
-                                    </li>
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
                                             href="#" style="display: block">
@@ -325,7 +340,8 @@
                             </ul>
                         </div>
                     </li> --}}
-
+                @endif
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 8)->first()))
                     {{-- score ranking  --}}
                         {{-- <li class="side-item">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
@@ -373,19 +389,23 @@
                                 </ul>
                             </div>
                         </li> --}}
-                    <li class="pb-1 ps-3 header-menu">
-                        <span class="fw-bold">Ambassador</span>
-                    </li>
-                    <li class="side-item">
-                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                            href="{{ route('ambassadors.manage') }}">
-                            <span class="fa-stack fa-sm ms-n1">
-                                <i class="fas fa-square fa-stack-2x"></i>
-                                <i class="fas fa-user fa-stack-1x text-dark"></i>
-                            </span>
-                            <span class="ms-2">Manage Ambassador</span>
-                        </a>
-                    </li>
+                    @endif
+                    @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 11)->first()))
+                        <li class="pb-1 ps-3 header-menu">
+                            <span class="fw-bold">Ambassador</span>
+                        </li>
+                        <li class="side-item">
+                            <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                                href="{{ route('ambassadors.manage') }}">
+                                <span class="fa-stack fa-sm ms-n1">
+                                    <i class="fas fa-square fa-stack-2x"></i>
+                                    <i class="fas fa-user fa-stack-1x text-dark"></i>
+                                </span>
+                                <span class="ms-2">Manage Ambassador</span>
+                            </a>
+                        </li>
+                    @endif
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 16)->first()))
                     {{-- <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Event</span>
                     </li>
@@ -399,6 +419,9 @@
                             <span class="ms-2">Main Event Schedule</span>
                         </a>
                     </li> --}}
+                @endif
+
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 12)->first()))
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Funding</span>
                     </li>
@@ -412,24 +435,27 @@
                                 <span class="ms-2">Sponsor</span>
                             </a>
                         </li>
-
+                @endif
                          
            
                      
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 17)->first()))
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Branding</span>
                     </li>
-                        <li class="side-item">
-                            <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                                href="{{route('media-partners.index')}}">
-                                <span class="fa-stack fa-sm ms-n1">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <i class="fas fa-newspaper fa-stack-1x text-dark"></i>
-                                </span>
-                                <span class="ms-2">Media Partner</span>
-                            </a>
-                        </li>
-               
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{route('media-partners.index')}}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fas fa-newspaper fa-stack-1x text-dark"></i>
+                            </span>
+                            <span class="ms-2">Media Partner</span>
+                        </a>
+                    </li>
+                @endif
+
+                @if (Auth::guard('admin')->user()->division_id === 'MIT')
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Website Configuration</span>
                     </li>
@@ -483,6 +509,7 @@
                             <span class="ms-2">FAQ</span>
                         </a>
                     </li>
+                @endif
             </ul>
         </div>
     </div>

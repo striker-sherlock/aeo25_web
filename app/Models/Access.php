@@ -13,5 +13,9 @@ class Access extends Model
     protected $primaryKey = 'id';
     protected $timestamp = true;
     protected $guarded = [];
+    
+    public function accessControl(){
+        return $this-> hasMany(AccessControl::class);
+    }
 }
 

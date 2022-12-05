@@ -10,6 +10,20 @@
             <h5 class="text-muted fs-6">Welcome to The 2023 Asian English Olympics!</h5>
             <hr>
         </div>
+        <div class="alert alert-info border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
+            <div class="row">
+                <div class="col-lg-8">
+                    <i class="fas fa-bullhorn"></i>
+                    Don't forget to join The 2023 AEO - PICs Group via WhatsApp. If you have any questions regarding the competition, you can also ask it there.
+                </div>
+                <div class="col-lg-4 text-lg-end text-start">
+                    <a href="https://chat.whatsapp.com/Gqcj95O4PAuLgVBFB5N7rG" target="_blank" class="text-reset text-decoration-none">
+                        Join Now
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
         @if ($confirmedSlotRegistration->count() > 0)
             <div class="alert alert-info border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
                 <div class="row">
