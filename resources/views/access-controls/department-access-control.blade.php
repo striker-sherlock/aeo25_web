@@ -3,10 +3,10 @@
         <x-card>
             <a href="{{ route('access-controls.index') }}" class="btn btn-outline-secondary mb-3"> Back </a>
             <x-slot name="subtitle">access control</x-slot>
-            <h3 class="text-uppercase fw-bold  text-gradient mb-4" style="letter-spacing: 0.1em">Access List  - {{$user->name}}</h3>
-            <form action="{{ route("access-controls.store") }}" method="POST">
+            <h3 class="text-uppercase fw-bold  text-gradient mb-4" style="letter-spacing: 0.1em">Access List - {{$department}}</h3>
+            <form action="{{ route("access-controls.department-store") }}" method="POST">
                 @csrf
-                <input type="hidden" name="user_id" value="{{$user->id}}">
+                <input type="hidden" name="department_id" value="{{$departmentID}}">
                 @if ($accesses->count() > 0)
                     <div class="table-responsive py-2">
                         <table class="table table-sm table-striped table-bordered no-footer">
@@ -24,10 +24,7 @@
                                     <td>{{$access->name}}</td>
                                     <td class="d-flex justify-content-center">
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" name="access_id[]" value="{{$access->id}}" 
-                                            @if (in_array($access->id,$access_id))
-                                                checked
-                                            @endif>
+                                            <input class="form-check-input" type="checkbox" name="access_id[]" value="{{$access->id}}">
                                         </div>
                                     </td>
                                 </tr>

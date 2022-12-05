@@ -3,6 +3,8 @@
 namespace App\Http;
 
 // use App\Http\Middleware\Access;
+use App\Http\Middleware\IsMIT;
+use App\Http\Middleware\access;
 use App\Http\Middleware\isAdmin;
 use App\Http\Middleware\IsShowed;
 use App\Http\Middleware\Authenticate;
@@ -64,5 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'IsShowed' => IsShowed::class,
         'IsAdmin' => isAdmin::class,
+        'IsMIT' => IsMIT::class,
+        'Access' => access::class,
     ];
 }

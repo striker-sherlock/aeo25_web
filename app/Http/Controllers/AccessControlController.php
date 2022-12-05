@@ -2,24 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Access;
-use App\Models\AccessControl;
 use App\Models\Admin;
+use App\Models\Access;
 use Illuminate\Http\Request;
+use App\Models\AccessControl;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class AccessControlController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware('admin');
-    // }
-
+    public function __construct()
+    {
+        $this->middleware('IsAdmin');
+        $this->middleware('IsMIT');
+    }
 
     public function index()
     {
+        $allDepartment = DB::table('admins')->distinct('deparment_id')->select('department_id','department')->get();
         return view('access-controls.index', [
-            'admins' => Admin::orderBy('position_id')->get()
+            'admins' => Admin::orderBy('department_id')->get(),
+            'allDeparments' => $allDepartment,
         ]);
     }
 
@@ -47,7 +51,33 @@ class AccessControlController extends Controller
         ]);
 
     }
+    public function accessDepartment (Request $request){
+        $admins = Admin::where('department_id',$request->department_id)->get();
+        return view('access-controls.department-access-control',[
+            'admins' => $admins,
+            'departmentID' => $request->department_id,
+            "accesses" => Access::all(),
+            'department' => $admins[0]->department,
+        ]);
+    }
    
+    public function departmentStore(Request $request){
+        $admins = Admin::where('department_id',$request->department_id)->get();
+        foreach ($admins as $admin) {
+            AccessControl::where('admin_id',$admin->id)->delete();
+            if ($request->access_id){
+                $len = count($request->access_id);
+                for($i = 0; $i < $len; $i++){
+                    AccessControl::insert([
+                        "created_by" => Auth::guard('admin')->user()->name,
+                        "admin_id" => $admin->id,
+                        "access_id" => $request->access_id[$i],
+                    ]);
+                }
+            }
+        }
+        return redirect()->route("access-controls.index")->with("success","Successfuly Added");
+    }
     public function store(Request $request){
         AccessControl::where('admin_id',$request->user_id)->delete();
     
@@ -55,6 +85,7 @@ class AccessControlController extends Controller
             $len = count($request->access_id);
         for($i = 0; $i < $len; $i++){
             AccessControl::insert([
+                "created_by" => Auth::guard('admin')->user()->name,
                 "admin_id" => $request->user_id,
                 "access_id" => $request->access_id[$i],
             ]);

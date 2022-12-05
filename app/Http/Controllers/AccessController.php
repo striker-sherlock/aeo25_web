@@ -8,11 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class AccessController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('IsAdmin');
+        $this->middleware('IsMIT');
+    }
     public function index()
     {
         return view('accesses.index',[
