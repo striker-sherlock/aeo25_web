@@ -55,7 +55,7 @@ class DashboardController extends Controller
 
         // accommodation
         $allAccSlot = AccommodationSlot::where('pic_id',Auth::user()->id)->get();
-        $confimedAccSlot = $allAccSlot->where('is_confirmed',1)->count();
+        $confirmedAccSlot = $allAccSlot->where('is_confirmed',1)->count();
 
         $confirmedAccPayment = AccommodationSlot::join('accommodation_payments','accommodation_payments.id','=','accommodation_slot_details.payment_id')
             ->where('accommodation_slot_details.pic_id',Auth::user()->id)
@@ -82,7 +82,7 @@ class DashboardController extends Controller
             'participantCompetition' => $participantCompetition,
             'allParticipants' => $allParticipants,
             'allAccSlot'=> $allAccSlot, 
-            'confirmedAccSlot'=> $confimedAccSlot,
+            'confirmedAccSlot'=> $confirmedAccSlot,
             'confirmedAccPayment' => $confirmedAccPayment,
             'totalGuests' => $totalGuests,
             'accGuests' => $accGuests,

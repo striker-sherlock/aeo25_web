@@ -28,7 +28,7 @@
             <div class="col-md-6">
                 {{-- RECEIPT SUMMARY --}}
                 <x-card>
-                    <h5 class="text-uppercase fw-bold text-center text-gradient">Reciept Summary</h5><hr>
+                    <h5 class="text-uppercase fw-bold text-center text-gradient">Receipt Summary</h5><hr>
                     <div class="d-flex justify-content-between">
                         <h4>Accommodation</h4>
                         <h4>Price</h4>

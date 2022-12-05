@@ -60,7 +60,8 @@
             <h2 class="aeo-title fw-semibold mb-3">Would you also like to register an Independent Adjudicator?</h2>
             <div class="alert alert-primary border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
                 <i class="fa-solid fa-triangle-exclamation me-1"></i> <b>Important info!</b> <br>
-                The Independent Adjudicator slot only available if you have registered at least 2 debate slot
+                N-1 Adjudicator (each institution must register an adjudicator based on how many teams they register to the competition with formula N-1, which N is the total of registered teams. For instance, 3 teams must register (3-1) = 2 adjudicator)
+
             </div>
             {{-- <div class="alert alert-primary border-0 shadow-sm mb-4" role="alert"
                 style="letter-spacing: .05em">

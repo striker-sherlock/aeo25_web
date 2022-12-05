@@ -36,7 +36,6 @@
                                         @endif 
                                     @endif
                                 </h5>
-                                {{dd($accommodation->payment_id)}}
                                 @if (!$accommodation->payment_id)
                                     <a href="{{route('accommodation-payments.create', $accommodation->id)}}" class="btn btn-outline-theme rounded-20">Pay This Slot Only</a>
                                 @endif
@@ -50,7 +49,7 @@
             @if ($history->count())
                 <div class="col-md-6">
                     <x-card>
-                        <h3 class="text-uppercase fw-bold mb-4 text-gradient" style="letter-spacing: 0.1em">Payment Histroy</h3>
+                        <h3 class="text-uppercase fw-bold mb-4 text-gradient" style="letter-spacing: 0.1em">Payment History</h3>
                         @foreach ($history as $item)
                         <div class="row border border-1 p-0 overflow-hidden mx-1 mb-3 rounded-20">
                             <h3 class="mb-2 aeo-title fw-bold m-3">{{$item->room_type}}'s Payment</h3>
@@ -65,13 +64,13 @@
                                 @endif
                             </h6>
                             <h6 class="mx-3"><span >Registered for:</span> <span class="fw-bold">{{$item->quantity}} {{$accommodation->quantity == 1 ? 'room':'rooms'}} </span></h6>
-                            <div class="row p-3 w-100 m-0" style="background-color:rgba(0,0,0,0.1);" >
+                            <div class="row p-3 w-100 m-0"  >
                                 @if ($item->is_confirmed != 1)
                                     <div class="col">
-                                        <a href="{{route('accommodation-payments.edit', $item->id)}}" class="btn btn-outline-theme w-100 rounded-pill">Edit</a>
+                                        <a href="{{route('accommodation-payments.edit', $item->id)}}" class="btn btn-outline-theme w-100 rounded-pill"> <i class="fa fa-edit"></i> Edit</a>
                                     </div>
                                     <div class="col">
-                                        <a  href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$item->id}}" class="btn btn-outline-danger rounded-pill w-100"> Delete</a>
+                                        <a  href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$item->id}}" class="btn btn-outline-danger rounded-pill w-100"><i class="fa fa-trash"></i> Delete</a>
                                 
                                     </div>
                                     
@@ -86,7 +85,7 @@
         <h3 class="text-uppercase fw-bold  text-gradient mt-5 mb-3 text-center" style="letter-spacing: 0.1em"> Step Navigation </h3>
         <div class="navigasi mb-4 d-flex justify-content-center align-items-center py-1">
             <ul class="list-unstyled d-flex align-items-center">
-                <li> <a href="{{route('dashboard')}}" class=" btn btn-outline-primary me-2">Main dashboard </a></li>
+                <li> <a href="{{route('dashboard')}}" class=" btn btn-outline-purple me-2">Main dashboard </a></li>
                 <li> <a href="{{route('dashboard.accommodation-step',1)}}" class="btn btn-outline-primary me-2">1</a></li>
                 <li> <a href="#" class="btn btn-outline-primary active me-2 ">2</a></li>
                 <li> <a href="{{route('dashboard.accommodation-step', 3)}}" class="btn btn-outline-primary me-2">3</a></li>
@@ -115,7 +114,7 @@
                             @endif
                         @endforeach
                     </ul>
-                    <p class="text-warning"> NOTE : this action can't be undone  </p>
+                    <p class="text-warning fw-bold fs-5"> Note : this action can't be undone  </p>
                 </div>
                 <div class="modal-footers">
                     <div class="row">

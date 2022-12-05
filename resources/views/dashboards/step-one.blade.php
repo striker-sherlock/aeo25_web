@@ -58,7 +58,7 @@
         <h5 class="text-center fs-4 fw-bold">Step Navigation</h5>
         <div class="navigasi  mb-4 d-flex justify-content-center align-items-center py-1">
             <ul class="list-unstyled d-flex align-items-center">
-                <li> <a href="{{route('dashboard')}}" class=" btn btn-outline-primary me-2">Main dashboard </a></li>
+                <li> <a href="{{route('dashboard')}}" class=" btn btn-outline-purple me-2">Main dashboard </a></li>
                 <li> <a href="#" class="btn btn-outline-primary active me-2 ">1</a></li>
                 <li> <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-primary me-2">2</a></li>
                 <li> <a href="{{route('dashboard.step',3)}}" class="btn btn-outline-primary me-2">3</a></li>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="body mb-3">
                         <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete <span class="fw-bolder text-danger">{{$competitionSlot->competition->name}}</span> ? </h1>
-                        <p class="text-warning"> note: this action can't be undone  </p>
+                        <p class="text-warning fw-bold fs-5"> Note: this action can't be undone  </p>
                     </div>
                     <div class="foot">
                         <div class="row">
