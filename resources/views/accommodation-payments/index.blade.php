@@ -4,6 +4,7 @@
         <x-card>
             <h2 class="text-warning fw-bold">Pending Accommodation Payment </h2>
             @if ($pending->count())
+            <div class="table-responsive py-2">
                 <table class="table table-striped table-bordered dataTables">
                     <thead>
                         <tr class="text-center">
@@ -48,6 +49,7 @@
                         
                     </tbody>
                 </table>
+            </div>
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -57,45 +59,47 @@
             <h2 class="mb-3 text-success fw-bold ">Confirmed Accommodation Payment </h2>
             @if ($confirmed->count())
                 <a href="{{route('accommodation-payments.export')}}" class="btn btn-outline-theme mb-3">Download Excel</a>
-                <table class="table table-striped table-bordered dataTables">
-                    <thead class="text-center">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Institution Name</th>
-                        <th scope="col">PIC Name</th>
-                        <th scope="col">Room Type</th>
-                        <th scope="col">Grand Total</th>
-                        <th scope="col">Action</th>
-                    
-                    </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @foreach ($confirmed as $payment)
-                        <tr class="text-center">
-                            <th>{{$payment->id}}</th>
-                            <th>{{$payment->institution_name}}</th>
-                            <th>{{$payment->pic_name}}</th>
-                            <th>{{$payment->room_type}}</th>
-                            <th>{{$payment->amount}}</th>
-                            <th>
-                                <div class="d-flex justify-content-around">
-                                    <a href="{{route('accommodation-payments.edit',$payment->id)}}" class="btn btn-primary" title="edit payment">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-warning" title="cancel payment">
-                                        <i class="fas fa-undo"></i>
-                                    </a>
-                                    <a href="{{route('payments.paid-accommodation-invoice', $payment->id)}}" class="btn btn-success " title="View Invoice" target="_blank">
-                                        <i class="fas fa-file-invoice"></i>
-                                    </a>
-
-                                    {{-- <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a> --}}
-                                </div>
-                            </th>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped table-bordered dataTables">
+                        <thead class="text-center">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Institution Name</th>
+                            <th scope="col">PIC Name</th>
+                            <th scope="col">Room Type</th>
+                            <th scope="col">Grand Total</th>
+                            <th scope="col">Action</th>
+                        
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($confirmed as $payment)
+                            <tr class="text-center">
+                                <th>{{$payment->id}}</th>
+                                <th>{{$payment->institution_name}}</th>
+                                <th>{{$payment->pic_name}}</th>
+                                <th>{{$payment->room_type}}</th>
+                                <th>{{$payment->amount}}</th>
+                                <th>
+                                    <div class="d-flex justify-content-around">
+                                        <a href="{{route('accommodation-payments.edit',$payment->id)}}" class="btn btn-primary" title="edit payment">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-warning" title="cancel payment">
+                                            <i class="fas fa-undo"></i>
+                                        </a>
+                                        <a href="{{route('payments.paid-accommodation-invoice', $payment->id)}}" class="btn btn-success " title="View Invoice" target="_blank">
+                                            <i class="fas fa-file-invoice"></i>
+                                        </a>
+
+                                        {{-- <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a> --}}
+                                    </div>
+                                </th>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -104,6 +108,7 @@
         <x-card>
             <h2 class="mb-3 text-danger fw-bold">Rejected Competition Payment </h2>
             @if ($rejected->count())
+            <div class="table-responsive py-2">
                 <table class="table table-striped table-bordered dataTables">
                     <thead class="text-center">
                     <tr>
@@ -138,6 +143,7 @@
                     @endforeach
                     </tbody>
                 </table>
+            </div>
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>

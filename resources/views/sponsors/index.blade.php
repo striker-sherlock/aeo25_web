@@ -4,48 +4,50 @@
             <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Sponsors List </h3>
             <a href="{{route('sponsors.create')}}" class="btn btn-success mb-3">Add New Sponsor</a>
             @if ($sponsors->count())
-            <table class="table table-striped table-bordered" id="dataTables">
-                <thead class="text-center">
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody class="text-center">
-                  @foreach ($sponsors as $sponsor)
+            <div class="table-responsive py-2">
+                <table class="table table-striped table-bordered" id="dataTables">
+                    <thead class="text-center">
                     <tr>
-                        <th>{{$sponsor->id}}</th>
-                        <td>{{$sponsor->name}}</td>
-                        @if ($sponsor->is_showed == 1)
-                            <td class="text-success fw-bold ">Showed</td>
-                        @else    
-                            <td class="text-danger fw-bold">Hidden</td>
-                        @endif
-                        <td class="d-flex justify-content-center"> 
-                            <a href="{{route('sponsors.edit', $sponsor->id)}}" class="btn btn-primary btn-sm rounded me-2 " title="edit">
-                                E
-                            </a>
-                            
-                            <a href="{{route('sponsors.updateVisibility', $sponsor->id)}}" class="btn btn-success btn-sm rounded me-2 " title={{ $sponsor->is_showed ? 'Hide' : 'Show'}}>
-                                U
-                            </a>
-                            <form method="POST" action="{{route('sponsors.destroy',$sponsor->id)}}">
-                                <input type="hidden" name="_method" value = "DELETE">
-                                <a  href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$sponsor->id}}">
-                                <button class="btn btn-danger rounded btn-sm" title="delete" id ="delete">
-                                    D
-                                </button>
-                                </a>
-                                @csrf
-                            </form> 
-                        </td>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
                     </tr>
-                      
-                  @endforeach
-                </tbody>
-              </table>
+                    </thead>
+                    <tbody class="text-center">
+                    @foreach ($sponsors as $sponsor)
+                        <tr>
+                            <th>{{$sponsor->id}}</th>
+                            <td>{{$sponsor->name}}</td>
+                            @if ($sponsor->is_showed == 1)
+                                <td class="text-success fw-bold ">Showed</td>
+                            @else    
+                                <td class="text-danger fw-bold">Hidden</td>
+                            @endif
+                            <td class="d-flex justify-content-center"> 
+                                <a href="{{route('sponsors.edit', $sponsor->id)}}" class="btn btn-primary btn-sm rounded me-2 " title="edit">
+                                    E
+                                </a>
+                                
+                                <a href="{{route('sponsors.updateVisibility', $sponsor->id)}}" class="btn btn-success btn-sm rounded me-2 " title={{ $sponsor->is_showed ? 'Hide' : 'Show'}}>
+                                    U
+                                </a>
+                                <form method="POST" action="{{route('sponsors.destroy',$sponsor->id)}}">
+                                    <input type="hidden" name="_method" value = "DELETE">
+                                    <a  href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$sponsor->id}}">
+                                    <button class="btn btn-danger rounded btn-sm" title="delete" id ="delete">
+                                        D
+                                    </button>
+                                    </a>
+                                    @csrf
+                                </form> 
+                            </td>
+                        </tr>
+                        
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
               @else <hr> <p class="text-center"> No Data</p>
             @endif    
         </x-card>

@@ -11,55 +11,57 @@
             <h3 class="text-uppercase fw-bold text-gradient " style="letter-spacing: 0.1em">{{$competition->name}}'s Participants </h3>         
             @if ($competitionParticipants->count())
                 <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4"> <i class="fas fa-file-export" aria-hidden="true"></i> Download Participant</a>
-                <table class="table table-striped table-bordered dataTables">
-                    <thead class="text-center">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">{{$competition->need_team == 1 ? 'Team' : ''}}</th>
-                        <th scope="col">Participant Name</th>
-                        <th scope="col">Institution Name</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">PIC Name </th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @foreach ($competitionParticipants as $participant)
-                        <tr class="text-center">
-                            <th>{{$participant->id}}</th>
-                            <th>{{$participant->competition->need_team == 1 ? $participant->competitionTeam->name : ''}}</th>
-                            <th>{{ $participant->name}}</th>
-                            <th>{{$participant->user->institution_name}}</th>
-                            <th>{{$participant->user->country->name}}</th>
-                            <th>{{$participant->user->pic_name}}</th>
-                            <th>
-                                <div class="d-flex justify-content-around">
-                                    <a class ="btn  btn-primary me-2" href="{{route('competition-participants.edit',$participant->id)}}" title="Edit">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form method="get" action="{{ route('competition-participants.destroy', $participant->id) }}">
-                                    <a href="#" data-bs-toggle ="modal" data-bs-target="#move{{$participant->id}}">
-                                        <button class = "btn  btn-warning me-2" title="Move Participant to Recycle Bin">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </a>
-                                        @csrf
-                                    </form>
-                                    {{-- <form method="POST" action="{{ route('competition-participants.delete', $participant->id) }}">
-                                        @method('DELETE')
-                                        <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$participant->id}}">
-                                          <button class = "btn  btn-danger" >
-                                            <i class="fa fa-close"></i>
-                                          </button>
-                                        </a>
-                                        @csrf
-                                    </form> --}}
-                                </div>
-                            </th>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped table-bordered dataTables">
+                        <thead class="text-center">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">{{$competition->need_team == 1 ? 'Team' : ''}}</th>
+                            <th scope="col">Participant Name</th>
+                            <th scope="col">Institution Name</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">PIC Name </th>
+                            <th scope="col">Action</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($competitionParticipants as $participant)
+                            <tr class="text-center">
+                                <th>{{$participant->id}}</th>
+                                <th>{{$participant->competition->need_team == 1 ? $participant->competitionTeam->name : ''}}</th>
+                                <th>{{ $participant->name}}</th>
+                                <th>{{$participant->user->institution_name}}</th>
+                                <th>{{$participant->user->country->name}}</th>
+                                <th>{{$participant->user->pic_name}}</th>
+                                <th>
+                                    <div class="d-flex justify-content-around">
+                                        <a class ="btn  btn-primary me-2" href="{{route('competition-participants.edit',$participant->id)}}" title="Edit">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <form method="get" action="{{ route('competition-participants.destroy', $participant->id) }}">
+                                        <a href="#" data-bs-toggle ="modal" data-bs-target="#move{{$participant->id}}">
+                                            <button class = "btn  btn-warning me-2" title="Move Participant to Recycle Bin">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </a>
+                                            @csrf
+                                        </form>
+                                        {{-- <form method="POST" action="{{ route('competition-participants.delete', $participant->id) }}">
+                                            @method('DELETE')
+                                            <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$participant->id}}">
+                                            <button class = "btn  btn-danger" >
+                                                <i class="fa fa-close"></i>
+                                            </button>
+                                            </a>
+                                            @csrf
+                                        </form> --}}
+                                    </div>
+                                </th>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -67,6 +69,7 @@
        <x-card>
             <h3 class="text-uppercase fw-bold text-gradient " style="letter-spacing: 0.1em">{{$competition->name}}'s Recycle Bin </h3>  
             @if ($trashed->count())
+            <div class="table-responsive py-2">
                 <table class="table table-striped table-bordered dataTables">
                     <thead class="text-center">
                     <tr>
@@ -114,6 +117,7 @@
                     @endforeach
                     </tbody>
                 </table>
+            </div>
             @else <hr><p class="text-center">No Data</p>
             @endif
        </x-card>

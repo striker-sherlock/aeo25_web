@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PicController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\SponsorController;
@@ -69,6 +70,8 @@ Route::resource('accesses', AccessController::class);
 Route::resource('users',PicController::class)->except('show');
 Route::get('users/{id}/admin-edit',[PicController::class,'adminEdit'])->name('users.admin-edit');
 
+// Admin
+Route::resource('admins',AdminController::class)->except('show');
 
 // Environments
 Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');

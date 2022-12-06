@@ -38,7 +38,7 @@
                     aria-labelledby="nav-pending-tab" tabindex="0">
 
                     <hr>
-                    <div class="table-responsive">
+                    <div class="table-responsive py-2">
                         <table class="FollowUpTable table table-bordered">
                             <thead class="table-info">
                                 <tr>
