@@ -10,7 +10,7 @@
                 <h1 class="text-primary text-center ">Institution Contacts</h1>
                 <h5 class="text-white "> <span class="bg-success p-2 mb-3 rounded">Valid Contacts</span> </h5>
                 <br>
-                <div class="table-responsive">
+                <div class="table-responsive py-2">
                     <table class="InstitutionContactTable table table-bordered">
                         <thead class="table-info">
                             <tr>

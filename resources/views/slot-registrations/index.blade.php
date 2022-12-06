@@ -32,6 +32,7 @@
         <x-card>
             <h2 class="mb-3 text-warning fw-bold">Pending Slot Registration</h2>
             @if ($pending->count())
+            <div class="table-responsive py-2">
                 <table class="table table-striped table-bordered dataTables">
                     <thead class="text-center">
                     <tr>
@@ -70,6 +71,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
                 @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -78,6 +80,7 @@
         <x-card>
             <h2 class="mb-3 text-success fw-bold">Confirmed Slot Registration (Unpaid) </h2>
             @if ($confirmed->count())
+            <div class="table-responsive py-2">
                 <table class="table table-striped table-bordered dataTables" id="">
                     <thead class="text-center">
                     <tr>
@@ -117,7 +120,7 @@
                         @endforeach
                     </tbody>
                 </table>
-         
+            </div>
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -126,31 +129,33 @@
         <x-card>
             <h2 class="mb-3 text-danger fw-bold">Rejected Slot Registration</h2>
                 @if ($rejected->count())
-                <table class="table table-striped table-bordered dataTables" id="data-table">
-                    <thead class="text-center">
-                    <tr>
-                        <th scope="col">Competition Field</th>
-                        <th scope="col">Institution Name</th>
-                        <th scope="col">PIC Name</th>
-                        <th scope="col">Contact</th>
-                        <th scope="col">Registered At</th>
-                        <th scope="col">Total Slot</th>
-                        
-                    </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @foreach ($rejected as $competition)
-                            <tr>
-                                <th>{{$competition->competition->name}}</th>
-                                <th>{{$competition->user->institution_name}}</th>
-                                <th>{{$competition->user->pic_name}}</th>
-                                <th>{{$competition->user->pic_phone_number}}</th>
-                                <th>{{$competition->created_at}}</th>
-                                <th>{{$competition->quantity}}</th>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped table-bordered dataTables" id="data-table">
+                        <thead class="text-center">
+                        <tr>
+                            <th scope="col">Competition Field</th>
+                            <th scope="col">Institution Name</th>
+                            <th scope="col">PIC Name</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Registered At</th>
+                            <th scope="col">Total Slot</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($rejected as $competition)
+                                <tr>
+                                    <th>{{$competition->competition->name}}</th>
+                                    <th>{{$competition->user->institution_name}}</th>
+                                    <th>{{$competition->user->pic_name}}</th>
+                                    <th>{{$competition->user->pic_phone_number}}</th>
+                                    <th>{{$competition->created_at}}</th>
+                                    <th>{{$competition->quantity}}</th>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
               @else <hr><p class="text-center">No Data</p>
               @endif
             </div>
