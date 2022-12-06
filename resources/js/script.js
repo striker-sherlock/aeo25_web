@@ -2,8 +2,6 @@ import * as bootstrap from "bootstrap";
 
 
 
-
-
 $(document).ready(function () {
     //  Show Modal
     var myModal = new bootstrap.Modal(document.getElementById("alert"));

@@ -8,6 +8,7 @@
     <title>The 2023 Asian Engllish Olympics</title>
     @vite(['resources/js/app.js'])
     @yield('scripts')
+
 </head>
     <body>
         <x-alert></x-alert>
@@ -15,4 +16,5 @@
             {{ $slot }}
         </main>
     </body>
+
 </html>

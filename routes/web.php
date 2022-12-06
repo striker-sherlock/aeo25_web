@@ -42,6 +42,7 @@ use App\Http\Controllers\AdminAccommodationPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
+use App\Http\Controllers\QuestionController;
 
 // Auth routes
 Auth::routes(['verify'=>true]);
@@ -65,6 +66,15 @@ Route::resource('accesses', AccessController::class);
 Route::resource('access-controls',AccessControlController::class);
 Route::post('access-controls/department',[AccessControlController::class,'accessDepartment'])->name('access-controls.access-department');
 Route::post('access-controls/department-store',[AccessControlController::class,'departmentStore'])->name('access-controls.department-store');
+
+Route::prefix('questions')->name('questions.')->group(function () {
+    Route::get('viewreply/{question}', [QuestionController::class, 'viewreply'])->name('viewreply');
+    Route::post('reply/{question}', [QuestionController::class, 'reply'])->name('reply');
+    Route::get('confirm/{question}', [QuestionController::class, 'confirm'])->name('confirm');
+
+});
+Route::resource('questions', QuestionController::class)->except('show', 'create');
+
 
 
 // PIC
