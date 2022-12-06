@@ -18,52 +18,54 @@
             @endif
             @if ($guests->count())
                 {{-- <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4">Download Participant</a> --}}
-                <table class="table table-striped table-bordered dataTables"  >
-                    <thead class="text-center">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">PIC Name </th>
-                        <th scope="col">Room Type</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @foreach ($guests as $guest)
-                            <tr class="text-center">
-                                <th>{{$guest->id}}</th>
-                                <th class="text-capitalize">{{$guest->user->pic_name}}</th>
-                                <th>{{$guest->user->institution_name}}</th>
-                                <th>{{$guest->user->country->name}}</th>
-                                <th>
-                                    <div class="d-flex justify-content-around">
-                                        <a href="{{route('accommodation-guests.edit',$guest->id)}}" class="btn btn-primary me-2">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-
-                                        <form method="POST" action="{{ route('accommodation-guests.destroy', $guest->id) }}">
-                                            @method('DELETE')
-                                            <button class = "btn btn-warning me-2">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
-                                            @csrf
-                                        </form>
-
-                                        <form method="POST" action="{{ route('accommodation-guests.delete', $guest->id) }}">
-                                            @method('DELETE')
-                                            <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$guest->id}}">
-                                              <button class = "btn btn-danger" >
-                                                <i class="fa fa-close"></i>
-                                              </button>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped table-bordered dataTables"  >
+                        <thead class="text-center">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">PIC Name </th>
+                            <th scope="col">Room Type</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($guests as $guest)
+                                <tr class="text-center">
+                                    <th>{{$guest->id}}</th>
+                                    <th class="text-capitalize">{{$guest->user->pic_name}}</th>
+                                    <th>{{$guest->user->institution_name}}</th>
+                                    <th>{{$guest->user->country->name}}</th>
+                                    <th>
+                                        <div class="d-flex justify-content-around">
+                                            <a href="{{route('accommodation-guests.edit',$guest->id)}}" class="btn btn-primary me-2">
+                                                <i class="fa fa-edit"></i>
                                             </a>
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </th>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+
+                                            <form method="POST" action="{{ route('accommodation-guests.destroy', $guest->id) }}">
+                                                @method('DELETE')
+                                                <button class = "btn btn-warning me-2">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                                @csrf
+                                            </form>
+
+                                            <form method="POST" action="{{ route('accommodation-guests.delete', $guest->id) }}">
+                                                @method('DELETE')
+                                                <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$guest->id}}">
+                                                <button class = "btn btn-danger" >
+                                                    <i class="fa fa-close"></i>
+                                                </button>
+                                                </a>
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </th>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>
@@ -71,49 +73,51 @@
             <h3 class="text-uppercase fw-bold mb-4 text-gradient" style="letter-spacing: 0.1em">Recycle Bin (All Guests)</h3>
             @if ($trashed->count())
                 {{-- <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4">Download Participant</a> --}}
-                <table class="table table-striped table-bordered dataTables" id="">
-                    <thead class="text-center">
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">PIC Name </th>
-                        <th scope="col">Room Type</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @foreach ($trashed as $guest)
-                            <tr class="text-center">
-                                <th>{{$guest->id}}</th>
-                                <th class="text-capitalize">{{$guest->user->pic_name}}</th>
-                                <th>{{$guest->user->institution_name}}</th>
-                                <th>{{$guest->user->country->name}}</th>
-                                <th>
-                                    <div class="d-flex justify-content-around">
-                                        <a href="{{route('accommodation-guests.edit',$guest->id)}}" class="btn btn-primary me-2">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <form method="get" action="{{ route('accommodation-guests.restore', $guest->id) }}">
-                                            <button class = "btn btn-info me-2">
-                                                <i class="fa fa-repeat"></i>
-                                            </button>
-                                            @csrf
-                                        </form>
-                                        <form method="POST" action="{{ route('accommodation-guests.delete', $guest->id) }}">
-                                            @method('DELETE')
-                                            <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$guest->id}}">
-                                              <button class = "btn btn-danger" >
-                                                <i class="fa fa-close"></i>
-                                              </button>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped table-bordered dataTables" id="">
+                        <thead class="text-center">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">PIC Name </th>
+                            <th scope="col">Room Type</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($trashed as $guest)
+                                <tr class="text-center">
+                                    <th>{{$guest->id}}</th>
+                                    <th class="text-capitalize">{{$guest->user->pic_name}}</th>
+                                    <th>{{$guest->user->institution_name}}</th>
+                                    <th>{{$guest->user->country->name}}</th>
+                                    <th>
+                                        <div class="d-flex justify-content-around">
+                                            <a href="{{route('accommodation-guests.edit',$guest->id)}}" class="btn btn-primary me-2">
+                                                <i class="fa fa-edit"></i>
                                             </a>
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </th>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                                            <form method="get" action="{{ route('accommodation-guests.restore', $guest->id) }}">
+                                                <button class = "btn btn-info me-2">
+                                                    <i class="fa fa-repeat"></i>
+                                                </button>
+                                                @csrf
+                                            </form>
+                                            <form method="POST" action="{{ route('accommodation-guests.delete', $guest->id) }}">
+                                                @method('DELETE')
+                                                <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$guest->id}}">
+                                                <button class = "btn btn-danger" >
+                                                    <i class="fa fa-close"></i>
+                                                </button>
+                                                </a>
+                                                @csrf
+                                            </form>
+                                        </div>
+                                    </th>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else <hr><p class="text-center">No Data</p>
             @endif
         </x-card>

@@ -7,6 +7,7 @@
                 <i class="fa fa-plus" aria-hidden="true"></i> Create Media Partners
             </a>
            @if ($media_partners->count())
+           <div class="table-responsive py-2">
                 <table class="table table-bordered" id="MediaPartnerTable">
                     <thead class="table-info">
                         <tr>
@@ -59,6 +60,7 @@
                         @endforeach
                     </tbody>
                 </table>
+           </div>
             @else <hr> <p class="text-center"> No Data</p>
            @endif
         </x-card>

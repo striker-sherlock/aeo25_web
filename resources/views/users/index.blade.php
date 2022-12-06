@@ -3,7 +3,8 @@
         <x-card>
             <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">National PIC</h3>
             @if ($nationalPIC->count())
-                <table class="table table-striped  table-bordered dataTables" >
+            <div class="table-responsive py-2">
+                <table class="table table-striped table-bordered dataTables" >
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -33,13 +34,15 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             @else <p class="text-center">No Data</p>
             @endif
         </x-card>
         <x-card>
             <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">International PIC</h3>
             @if ($internationalPIC->count())
-                <table class="table table-striped  table-bordered dataTables" >
+            <div class="table-responsive py-2">
+                <table class="table table-striped table-bordered dataTables" >
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
@@ -69,6 +72,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             @else <p class="text-center">No Data</p>
             @endif
         </x-card>
