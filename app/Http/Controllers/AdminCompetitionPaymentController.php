@@ -17,6 +17,7 @@ class AdminCompetitionPaymentController extends Controller
 {
     public function __construct(){
         $this->middleware('IsAdmin')->only(['index']);
+        $this->middleware('Access:1')->only(['index']);
     }
     
     public function index($type){

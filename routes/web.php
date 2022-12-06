@@ -61,9 +61,11 @@ Route::resource('faqs', FaqController::class);
 Route::resource('lost-and-found', LostAndFoundController::class);
 Route::resource('countries', CountriesController::class);
 Route::resource('follow-up-types', FollowUpTypeController::class); 
-Route::resource('access-controls',AccessControlController::class);
 Route::resource('score-types', ScoreTypeController::class)->except('show');
 Route::resource('accesses', AccessController::class);
+Route::resource('access-controls',AccessControlController::class);
+Route::post('access-controls/department',[AccessControlController::class,'accessDepartment'])->name('access-controls.access-department');
+Route::post('access-controls/department-store',[AccessControlController::class,'departmentStore'])->name('access-controls.department-store');
 
 
 // PIC

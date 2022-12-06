@@ -17,6 +17,7 @@ class SlotRegistrationController extends Controller
     public function __construct(){
         $this->middleware('auth')->only(['create','store','destroy','createOthers']);
         $this->middleware('IsAdmin')->except(['create','update','store','destroy','createOthers']);
+        $this->middleware('Access:2')->except(['create','update','store','destroy','createOthers']);
         $this->middleware('IsShowed:ENV009');
     }
 

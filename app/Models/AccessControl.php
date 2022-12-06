@@ -16,16 +16,13 @@ class AccessControl extends Model
 
     public function access()
     {
-        return $this->hasOne('App\Models\Access', 'id', 'access_id');
+        return $this->belongsTo('App\Models\Access', 'id', 'access_id');
     }
 
-    public function user()
-    {
-        return $this->hasOne('App\Models\User', 'id', 'user_id');
-    }
+     
 
     public function admin()
     {
-        return $this->hasOne('App\Models\Admin', 'id', 'admin_id');
+        return $this->belongsTo('App\Models\Admin', 'id', 'admin_id');
     }
 }
