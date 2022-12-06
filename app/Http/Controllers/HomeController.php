@@ -22,11 +22,10 @@ class HomeController extends Controller
         return view('home', [
             'mediaPartners' => MediaPartner::all(),
             'sponsors' => Sponsor::all(),
-            'countries' => Countries::all(),
+            'countries' => Countries::orderBy('name')->get(),
             'competitions' => Competition::all(),
             'ambassadors' => Ambassador::all(),
             'faqs' => Faq::all(),
-            
         ]);
     }
 }

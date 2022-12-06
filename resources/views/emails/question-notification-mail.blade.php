@@ -3,10 +3,6 @@
 
 {!! $questionNotificationMail['body'] !!}
 
-@component('mail::button', ['url' => $questionNotificationMail['link'], 'color' => 'primary'])
-Go to Website
-@endcomponent
-
 Best Regards,<br>
 Email    :<br> 
 contact.aeointernational@gmail.com<br>
