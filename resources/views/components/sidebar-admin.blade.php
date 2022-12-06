@@ -91,6 +91,16 @@
                             <span class="ms-2">Slot Registration</span>
                         </a>
                     </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{route('questions.index')}}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fas fa-clipboard-question fa-stack-1x text-dark"></i>
+                            </span>
+                            <span class="ms-2">Question List</span>
+                        </a>
+                    </li>
                     <li class=" pb-1 side-item pb-1 sidebar-dropdown">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
                             <span class="fa-stack fa-sm ml-n1">
@@ -156,18 +166,6 @@
                         </div>
                     </li>
                 @endif
-
-                    {{-- <li class="side-item">
-                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                            href="#">
-                            <span class="fa-stack fa-sm ms-n1">
-                                <i class="fas fa-square fa-stack-2x"></i>
-                                <i class="fas fa-headset fa-stack-1x text-dark"></i>
-                            </span>
-                            <span class="ms-2">Question List</span>
-                        </a>
-                    </li> --}}
-        
                     
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 24)->first()))
                     <li class="pb-1 ps-3 header-menu">

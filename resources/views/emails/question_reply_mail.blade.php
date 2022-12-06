@@ -1,11 +1,11 @@
 @component('mail::message')
-# Dear {{ $questionNotificationMail['division'] }},
+# Dear, {{ $name }}
 
-{!! $questionNotificationMail['body'] !!}
-
-@component('mail::button', ['url' => $questionNotificationMail['link'], 'color' => 'primary'])
-Go to Website
-@endcomponent
+<b>Your Question:</b><br>
+{{ $question }}
+<br><br>
+<b>Answer:</b><br>
+{!! $body !!}
 
 Best Regards,<br>
 Email    :<br> 
