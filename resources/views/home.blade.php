@@ -2,7 +2,7 @@
     <style>
         span.position-absolute {
             top: -10px;
-            right: -20px;
+            right: -30px;
             width: 20px;
             height: 20px;
             cursor: pointer;
@@ -428,7 +428,7 @@
                     <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary">Drop
                         Your Question Here
                     </h1>
-                    <div class="card rounded-20 card-shadow border-0">
+                    <div class="card rounded-20   border-0">
                         <div class="card-body m-3">
                             <p class="text-muted mb-4">Please fill the form below, then we will answer your question
                                 via e-mail.
@@ -442,7 +442,7 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control " id="name" name="name"
+                                        <input class="form-control rounded-pill" id="name" name="name"
                                             value="{{ old('name') }}" required>
                                     </div>
                                 </div>
@@ -453,7 +453,7 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <select class="form-select " name="country_id">
+                                        <select class="form-select rounded-pill" name="country_id" id="country_id">
                                             <option selected class="d-none">Select your Country</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -472,9 +472,9 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="tel" class="form-control " id="phone_number"
+                                        <input type="tel" class="form-control rounded-pill" id="phone_number"
                                             name="phone_number" value="{{ old('phone_number') }}"
-                                            placeholder="812-345-678" required>
+                                             required>
                                     </div>
                                 </div>
 
@@ -484,22 +484,22 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control " id="email" name="email"
+                                        <input class="form-control rounded-pill" id="email" name="email"
                                             value="{{ old('email') }}" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group row mb-0 mb-sm-3">
-                                    <label for="question" class="col-sm-3 col-form-label text-sm-left">
+                                    <label for="question" class="col-sm-3 col-form-label text-sm-left rounded-pill">
                                         Question
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control " id="question" name="question" value="{{ old('question') }}" style="height: 100px"
+                                        <textarea class="form-control rounded-20" id="question" name="question" value="{{ old('question') }}" style="height: 100px"
                                             required>{{ old('question') }}</textarea>
                                     </div>
                                 </div>
-                                <div class="d-grid mt-5">
+                                <div class="d-grid mt-4">
                                     <button type="submit" class="btn btn-outline-1 rounded-20 btnSubmit"
                                         id="btn-submit">Submit</button>
                                 </div>

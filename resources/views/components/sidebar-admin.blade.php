@@ -1,8 +1,8 @@
 <style>
-        ::-webkit-scrollbar-thumb {
-            border-radius: 5px;
-            background-color: #767D7F !important;
-        }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #767D7F !important;
+    }
 </style>
 <nav id="sidebar-admin" class="sidebar-wrapper h-100 mh-100 fixed-top bg-gradient-blue pr-0">
     <div class="sidebar-content">
@@ -88,7 +88,13 @@
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fas fa-list-ol fa-stack-1x text-dark"></i>
                             </span>
-                            <span class="ms-2">Slot Registration</span>
+                            <div class="d-flex justify-content-between   w-100">
+                                <span class="ms-2">Slot Registration</span>
+                                @if (App\Models\CompetitionSlot::where('is_confirmed',0)->count() != 0)
+                                    <span class="p-2    rounded-circle d-inline d-flex justify-content-center align-items-center" style="width:20px; height:20px; color:red; border:1.5px solid white;">!</span>
+                                    
+                                @endif
+                            </div>
                         </a>
                     </li>
                     <li class="side-item">
@@ -98,7 +104,14 @@
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fas fa-clipboard-question fa-stack-1x text-dark"></i>
                             </span>
-                            <span class="ms-2">Question List</span>
+                            <div class="d-flex justify-content-between   w-100">
+
+                                <span class="ms-2">Question List</span>
+                                @if (App\Models\Question::where('is_responded',0)->count() != 0 )
+                                    <span class="p-2    rounded-circle d-inline d-flex justify-content-center align-items-center" style="width:20px; height:20px; color:red; border:1.5px solid white;">!</span>
+                                    
+                                @endif
+                            </div>
                         </a>
                     </li>
                     <li class=" pb-1 side-item pb-1 sidebar-dropdown">
