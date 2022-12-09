@@ -623,13 +623,13 @@ section {
 .carousel-inner .carousel-item-prev {
   display: flex;
 }
-.owl-nav{
+#home .owl-nav{
   display: flex;
   align-items: center;
   
 }
-button.owl-next,
-button.owl-prev{
+#home button.owl-next,
+#home button.owl-prev{
   display: flex;
   position: absolute;
   border: 2px solid #F175AD !important; 
@@ -639,16 +639,16 @@ button.owl-prev{
   justify-content: center;
   align-items: center;
 }
-button.owl-next:hover span{
+#home button.owl-next:hover span{
   font-size: 15px;
 }
-button.owl-prev:hover span{
+#home button.owl-prev:hover span{
   font-size: 15px;
 }
  
 
-button.owl-next span,
-button.owl-prev span{
+#home button.owl-next span,
+#home button.owl-prev span{
   transition: 0.5s;
   font-size:12px;
   margin: 0;
@@ -656,10 +656,10 @@ button.owl-prev span{
   color: #32649E;
 }
 
-button.owl-next{
+#home button.owl-next{
   right:0px;
 }
-button.owl-prev{
+#home button.owl-prev{
   left:0px;
 }
 
@@ -673,10 +673,10 @@ button.owl-prev{
   right: 0;
   bottom:-30px;
   padding: 0;
-  // text-align: center;
 }
-.owl-dots button.owl-dot.active span, 
-.owl-dots button.owl-dot:hover span {
+
+#home .owl-dots button.owl-dot.active span, 
+#home .owl-dots button.owl-dot:hover span {
   background-color: #32649E   ;
   border-radius: 50%;
   height: 130%;
@@ -688,7 +688,7 @@ button.owl-prev{
   padding: 0;
   margin: 0;
 }
-.owl-dots button.owl-dot{
+#home .owl-dots button.owl-dot{
   border: 1px solid #7FBCD2;
   background: white;
   border-radius: 50%;

@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
                 'created_by' => 'pic',
                 'pic_name' => 'pic',
                 'username' => 'pic',
-                'email' => 'stefanbondito@gmail.com',
+                'email' => 'gerenwidiarta477@gmail.com',
                 'pic_phone_number' => '12323',
                 'country_id' => 12,
                 'institution_name' => 'Bina Nusantara',

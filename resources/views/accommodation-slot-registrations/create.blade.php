@@ -131,7 +131,7 @@
                             </div>
                             <div class="text-center">
                                 <button type="button"
-                                    class="btn btn-success rounded-pill rounded-20 mb-4 px-4"
+                                    class="btn btn-outline-theme rounded-pill rounded-20 mb-4 px-4"
                                     data-bs-dismiss="modal">
                                     OK, I got it
                                 </button>
@@ -165,7 +165,7 @@
       </x-card>
   </div>
 
-  <script>
+  <script type="module">
     const quantity = document.querySelector('input[type="number"]')
     const button = document.querySelector('#confirm')
     button.addEventListener('click',function(){

@@ -166,7 +166,7 @@
                     </h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
 
-                    <div class="owl-carousel owl-theme d-flex mx-auto   ">
+                    <div class="owl-carousel owl-theme d-flex mx-auto   " id="home">
                         @foreach ($competitions as $competition)
                             @if ($competition->id == 'OBS' || $competition->id == 'IA')
                                 @continue
@@ -642,34 +642,41 @@
             </div>
         </div>
     </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        let owl = $('.owl-carousel');
-        owl.owlCarousel({
-            loop: true,
-            nav: true,
-            autoplay: true,
-            dots: true,
-            lazyLoad: true,
-            margin: 15,
-            center: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 2
-                },
-                1200: {
-                    items: 3
-                },
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+            integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            let owl = $('.owl-carousel');
+            $(document).ready(function(){
+                owl.owlCarousel({
+                    loop: true,
+                    nav: true,
+                    autoplay: true,
+                    dots: true,
+                    lazyLoad: true,
+                    margin: 15,
+                    center: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        400: {
+                            items: 2
+                        },
+                        1200: {
+                            items: 3
+                        },
+    
+                    }
+                });
+                $('.owl-next span').text('');
+                $('.owl-next span').addClass('fa-solid fa-arrow-right');
+                $('.owl-prev span').text('');
+                $('.owl-prev span').addClass('fa-solid fa-arrow-left');
 
-            }
-        });
-
+            })
+            
         let timer = function(date) {
             let timer = Math.round(new Date(date).getTime() / 1000) - Math.round(new Date().getTime() / 1000);
             let minutes, seconds;
@@ -694,11 +701,7 @@
             }, 1000);
         }
 
-        $('.owl-next span').text('');
-        $('.owl-next span').addClass('fa-solid fa-arrow-right');
-        $('.owl-prev span').text('');
-        $('.owl-prev span').addClass('fa-solid fa-arrow-left');
-
+        
         //using the function
         const tomorrow = new Date("January 13, 2023 18:00:00")
         timer(tomorrow);

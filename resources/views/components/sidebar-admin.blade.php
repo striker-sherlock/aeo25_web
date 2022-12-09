@@ -31,14 +31,17 @@
                         <span class="ms-2">Main Dashboard</span>
                     </a>
                 </li>
+
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                    href="{{route('admins.edit', Auth::guard('admin')->user()->id)}}">
+                        href="{{route('merchandises.index')}}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fa fa-cog fa-stack-1x text-dark"></i>
+                            <i class="fa-solid fa-cart-plus fa-stack-1x text-dark"></i>
+                            
                         </span>
-                        <span class="ms-2">Edit Account</span>
+                     
+                        <span class="ms-2">Merchandise</span>
                     </a>
                 </li>
 
@@ -232,7 +235,7 @@
                         </a>
                     </li>
                 @endif
-                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 26)->first()))
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 27)->first()))
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{ route('accommodation-guests.index') }}">
@@ -489,6 +492,16 @@
                                 <i class="fas fa-users-cog fa-stack-1x text-dark"></i>
                             </span>
                             <span class="ms-2">Access Control</span>
+                        </a>
+                    </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{ route('admins.index') }}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fas fa-users fa-stack-1x text-dark"></i>
+                            </span>
+                            <span class="ms-2"> Edit Admins</span>
                         </a>
                     </li>
                         <li class="side-item">

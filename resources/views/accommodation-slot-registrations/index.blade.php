@@ -14,7 +14,6 @@
                     <th scope="col">Check in Date</th>
                     <th scope="col">Check Out Date</th>
                     <th scope="col">Special Request</th>
-
                     <th scope="col">Total Room</th>
                     <th scope="col">Action </th>
                 </tr>

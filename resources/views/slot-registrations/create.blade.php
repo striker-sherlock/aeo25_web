@@ -97,9 +97,11 @@
                                             @endforeach
                                         @endif
                                         @if ($slot <= 0) 
-                                            <h5 class="fs-6 bg-danger text-white p-2 mx-auto fw-bold text-center" title="You have exceeded the slot limit or you do not have at least 2 confirmed debate slot registered" style="cursor:pointer">
+                                       
+
+                                            <a class="fs-6 bg-danger text-white p-2 mx-auto fw-bold text-center"   style="cursor:pointer" tabindex="0"  role="button" data-bs-toggle="popover" data-bs-trigger="focus" title="" data-bs-content="You have exceeded the slot limit or you do not have at least 2 confirmed debate slot registered">
                                                 Unable to select this slot
-                                            </h5>
+                                            </a>
                                             <input type="text" name="quantity[]-{{$independentAdju->id}}"
                                                 value="0" hidden>
                                         @endif
@@ -120,7 +122,7 @@
             data-bs-target="#modal">Register</a>
             {{-- modal confirmasi --}}
             <div class="modal fade p-5" id="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-            aria-labelledby="modal-title" aria-hidden="true">
+                aria-labelledby="modal-title" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content rounded-20 border-0 shadow p-5">
                     <div class="modal-headers mb-4">
@@ -154,10 +156,9 @@
        
 
  
- 
-
-
+     
     <script type="module">
+
         $(document).ready(function(){
             $('a.btn').click(function(){
                 const radio = document.querySelectorAll('input[name]:checked')

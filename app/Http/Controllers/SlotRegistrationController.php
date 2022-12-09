@@ -163,7 +163,7 @@ class SlotRegistrationController extends Controller
         for ($i= 0; $i < $len; $i++){
             if ($request->quantity[$i] != '0'){
                 CompetitionSlot::create([
-                    'created_by' => Auth::user()->pic_name,
+                    'created_by' => Auth::user()->username,
                     'pic_id' => Auth::user()->id,
                     'created_at' => Carbon::now(),
                     'competition_id' => $request->compet_id[$i],

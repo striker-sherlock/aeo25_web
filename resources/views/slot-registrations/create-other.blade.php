@@ -1,4 +1,4 @@
-<x-user title="Create Other Slot">
+    <x-user title="Create Other Slot">
     <div class="container mt-5">
         <div class="alert alert-primary border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
             <i class="fa-solid fa-triangle-exclamation me-1"></i> <b>Important rules!</b> <br>
