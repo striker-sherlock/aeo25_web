@@ -1,7 +1,8 @@
 import _ from 'lodash';
 window._ = _;
 
-import 'bootstrap';
+import * as bootstrap from 'bootstrap';
+window.bootstrap = bootstrap;
 
 import $ from 'jquery'
 window.$ = $;
@@ -61,3 +62,9 @@ $(document).ready(function () {
       
 
 });
+
+// Enable Popover
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
