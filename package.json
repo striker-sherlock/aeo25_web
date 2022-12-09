@@ -5,7 +5,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@popperjs/core": "^2.10.2",
+        "@popperjs/core": "^2.11.6",
         "axios": "^0.27",
         "bootstrap": "^5.2.1",
         "jquery": "^3.6.1",
@@ -20,7 +20,6 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.2.0",
-        "@popperjs/core": "^2.11.6",
         "@srexi/purecounterjs": "^1.5.0",
         "bootstrap": "^5.2.2",
         "chart.js": "^3.9.1",
