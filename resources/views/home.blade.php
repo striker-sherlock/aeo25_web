@@ -241,7 +241,7 @@
 
             <!-- ======= Ambassador Section ======= -->
 
-            {{-- @if ($ambassadors->count() != 0)
+            @if ($ambassadors->count() != 0)
                 <section id="ambassadors" class="bg-white mt-0">
                     <div class="ambassadors wow fadeIn">
                         <div class="container">
@@ -312,7 +312,7 @@
                     </div>
                 </section>
                 
-            @endif --}}
+            @endif
 
             <!-- End Ambassador Section -->
 
@@ -517,9 +517,6 @@
 
         <!-- ======= Footer ======= -->
         <x-footer></x-footer>
-
-
-
         <!-- End Footer -->
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
