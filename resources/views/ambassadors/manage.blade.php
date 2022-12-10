@@ -27,19 +27,19 @@
                    <td class="align-middle text-center">
                        <img src="/storage/images/ambassador/{{ $ambassador->photo }}"  width="75">
                    </td>
-                   <td class="d-flex "  >
-                       <a class ="btn btn-primary btn-sm mx-2" href="{{ route('ambassadors.edit', $ambassador->id) }}" title="Edit">
-                       <i class="fa fa-edit"></i>
-                       </a>
-                       <form method="POST" action="{{ route('ambassadors.destroy', $ambassador->id) }}">
-                        @csrf
-                       @method('delete')
-                       <button type="submit" class = "btn btn-sm  btn-danger mx-2" title="Delete" onclick="return confirm(&quot;Are you sure you want to delete this data?&quot;)">
-                       <i class="fa fa-trash"></i>
-                       </button>
-                     
+                   <td class="d-flex"  >
+                      <a class ="btn btn-primary btn-sm mx-2" href="{{ route('ambassadors.edit', $ambassador->id) }}" title="Edit">
+                      <i class="fa fa-edit"></i>
+                      </a>
+                      <form method="POST" action="{{ route('ambassadors.destroy', $ambassador->id) }}">
                        @csrf
-                       </form>
+                      @method('delete')
+                      <button type="submit" class = "btn btn-sm  btn-danger mx-2" title="Delete" onclick="return confirm(&quot;Are you sure you want to delete this data?&quot;)">
+                      <i class="fa fa-trash"></i>
+                      </button>
+                      @csrf
+                      </form>
+
 
                    </td>
                 </tr>

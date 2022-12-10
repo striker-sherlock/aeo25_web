@@ -42,11 +42,13 @@
                             <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br>
                                 Days</div>
                             <div class="col  bg-dark rounded me-2 p-2"><span id="cd-hours" class="fs-1 "></span>
-                                <br>Hours</div>
+                                <br>Hours
+                            </div>
                             <div class="col bg-dark rounded me-2 p-2"><span id="cd-minutes" class="fs-1 "></span><br>
                                 Minutes</div>
                             <div class="col bg-dark rounded me-2 p-2"><span id="cd-seconds" class="fs-1 "></span>
-                                <br>Seconds</div>
+                                <br>Seconds
+                            </div>
                             <div data-aos="fade-up" data-aos-delay="600">
                                 <div class="text-start text-lg-center ">
                                     <a href="{{ route('register') }}"
@@ -236,82 +238,105 @@
 
                 </div>
             </section>
-
             <!-- End How To Register Section -->
 
             <!-- ======= Ambassador Section ======= -->
 
             @if ($ambassadors->count() != 0)
                 <section id="ambassadors" class="bg-white mt-0">
-                    <div class="ambassadors wow fadeIn">
+                       <div class="ambassadors wow fadeIn">
                         <div class="container">
-                            <div class="title-line mx-auto"></div>
                             <div class="d-flex justify-content-center">
-                                <hr class="w-25 pink-line fw-bold">
+                                <div class="custom-border rounded  my-2"></div>
+                            </div>
+                            <h5 class="mt-3 fw-bold text-center heading-primary text-gradient-blue">OUR AMBASSADORS
+                            </h5>
+                            <h1 class="fw-bold mt-3 c-text-1 c-text-about text-gradient text-center mb-4 home_title">
+                                What they say about AEO</h1>
+                            <div class="d-sm-flex flex-column">
 
-                            </div>
-                            <h5 class="mt-3 fw-bold text-center heading-primary">OUR AMBASSADORS</h5>
-                            <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title"
-                                style="color: #32649E">What they say about AEO</h1>
-                            <div class="slider">
-                                @foreach ($ambassadors as $ambassador)
-                            @if ($loop->iteration == 1)
-                            <div class="slide active">
-                                <div class="left">
-                                    <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
-                                </div> 
-                                <div class="right">
-                                    <p class="text-justify fs-6">"{{$ambassador->testimony}}"</p>
-                                    <div class="client-info">
-                                        <small>
-                                            <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
-                                            <p class="text-muted mb-0">{{ $ambassador->institution }}</p>
-                                        </small>
+                                <div class="row">
+                                    <div class="slider card rounded-20  p-3 col-10">
+                                        @foreach ($ambassadors as $ambassador)
+                                        @if ($loop->iteration == 1)
+                                        
+                                        <div class="slide active">
+                                            <div class="left">
+                                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
+                                            </div> 
+                                            <div class="right">
+                                                <sup>
+                                                    <i class="fa-solid fa-quote-left fa-2x me-2"
+                                                        style="color: #80679E"></i>
+                                                </sup>
+                                                <p class="text-justify fs-6">{{ $ambassador->testimony }} <i
+                                                        class="fa-solid fa-quote-right fa-2x ms-2"
+                                                        style="color: #80679E"></i></p>
+                                                <div class="client-info">
+                                                    <small>
+                                                        <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
+                                                        <p class="text-muted mb-0">{{ $ambassador->institution }}
+                                                        </p>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>      
+                                        @else
+                                        <div class="slide">
+                                            <div class="left">
+                                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
+                                            </div>
+                                            <div class="right">
+                                                <sup>
+                                                    <i class="fa-solid fa-quote-left fa-2x me-2"
+                                                        style="color: #80679E"></i>
+                                                </sup>
+                                                <p class="text-justify fs-6">{{ $ambassador->testimony }} <i
+                                                        class="fa-solid fa-quote-right fa-2x ms-2"
+                                                        style="color: #80679E"></i></p>
+                                                <div class="client-info">
+                                                    <small>
+                                                        <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
+                                                        <p class="text-muted mb-0">{{ $ambassador->institution }}
+                                                        </p>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        @endif
+                                        @endforeach
                                     </div>
-                                </div>
-                            </div>      
-                            @else
-                            <div class="slide">
-                                <div class="left">
-                                    <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
-                                </div>
-                                <div class="right">
-                                    <p class="text-justify fs-6">"{{$ambassador->testimony}}"</p>
-                                    <div class="client-info">
-                                        <small>
-                                            <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
-                                            <p class="text-muted mb-0">{{ $ambassador->institution }}</p>
-                                        </small>
+                                    <div class="col-2  justify-content-center align-items-center">
+                                        
+                                        <div class="slider-indicator d-flex flex-column">
+                                            @foreach ($ambassadors as $ambassador)
+                                            @if ($loop->iteration == 1)
+                                            <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="active" alt="img" data-id="{{$ambassador->id}}">      
+                                            @else
+                                            <img src="/storage/images/ambassador/{{$ambassador->photo}}" alt="img" data-id="{{$ambassador->id}}">    
+                                            @endif
+                                            @endforeach
+                                            @php
+                                                $allAmbassadors = App\Models\Ambassador::all()->count();
+                                                $ambassadorCount = $allAmbassadors - count($ambassadors);
+                                            @endphp
+                                            @if ($ambassadorCount > 0)
+                                                <a href="/ambassadors" target="_blank">
+                                                    <button type="button" class="btn btn-lg opacity-25 rounded-circle">+{{ $ambassadorCount  }}</button>
+                                                </a>
+                                            @endif
+                                        </div>
                                     </div>
+    
                                 </div>
-                            </div> 
-                            @endif
-                            @endforeach
-                            </div>
-                            <div class="bottom d-flex justify-content-center align-items-center">
-                                <div class="slider-indicator">
-                                    @foreach ($ambassadors as $ambassador)
-                                @if ($loop->iteration == 1)
-                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="active" alt="img" data-id="{{$ambassador->id}}">      
-                                @else
-                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" alt="img" data-id="{{$ambassador->id}}">    
-                                @endif
-                                @endforeach
-                                @php
-                                    $allAmbassadors = App\Models\Ambassador::all()->count();
-                                    $ambassadorCount = $allAmbassadors - count($ambassadors);
-                                @endphp
-                                @if ($ambassadorCount > 0)
-                                    <a href="/ambassadors" target="_blank">
-                                        <button type="button" class="btn btn-lg opacity-25 rounded-circle">+{{ $ambassadorCount  }}</button>
-                                    </a>
-                                @endif
+                                <div class="d-flex justify-content-center text-center m-3 p-3">
+                                    <a href="{{ route('ambassadors.index') }}" class="btn btn-outline-1 d-inline-flex px-4 py-2  rounded-20 ">View More</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                
+
             @endif
 
             <!-- End Ambassador Section -->
@@ -702,7 +727,23 @@
 
         $('figure.table table').addClass('table-bordered mx-auto text-center w-100')
 
+        const slides = document.querySelector(".slider").children;
+        const indicatorImages = document.querySelector(".slider-indicator").children;
 
-       
+        for (let i = 0; i < indicatorImages.length - 1; i++) {
+            indicatorImages[i].addEventListener("click", function() {
+
+                for (let j = 0; j < indicatorImages.length; j++) {
+                    indicatorImages[j].classList.remove("active");
+                }
+                this.classList.add("active");
+                const id = this.getAttribute("data-id");
+
+                for (let j = 0; j < slides.length; j++) {
+                    slides[j].classList.remove("active");
+                }
+                slides[i].classList.add("active");
+            })
+        }
     </script>
 </x-layout>

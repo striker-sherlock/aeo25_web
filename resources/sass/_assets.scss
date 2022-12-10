@@ -101,6 +101,13 @@
     color: $dark-purple !important;
     border-color: $dark-purple !important;
     transition: .3s ease;
+
+    display: inline-block;
+    padding: 0.85rem 2rem;
+    border-radius: 2rem;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 .btn-outline-dark-purple:hover {

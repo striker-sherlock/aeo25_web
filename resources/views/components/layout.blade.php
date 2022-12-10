@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="/storage/assets/icon_web.webp" sizes="32x32 100x100"  />
     <title>The 2023 Asian Engllish Olympics</title>
     @vite(['resources/js/app.js'])
+    @vite(['resources/sass/app.scss'])
     @yield('scripts')
 
 </head>
