@@ -1249,4 +1249,65 @@ section {
   }
 }
 
+//   /*--------------------------------------------------------------
+//   # AMBASSADOR PAGE
+//   --------------------------------------------------------------*/
+
+
+.wrapper{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.wrapper .card{
+	position: relative;
+	width: 350px;
+	color: #4B5355;
+	margin: 20px 10px;
+	padding: 20px 20px;
+	border-radius: 3px;
+}
+.wrapper .card-body p{
+	color: #4B5355;
+	padding: 0 8px;
+	font-size: 16px;
+	opacity: 0.8;
+    text-align: justify  !important;
+}
+.wrapper .card .left{
+	font-size: 30px;
+	display: block;
+	text-align: left;
+	color: rgba(39, 93, 163, 0.65);	
+}
+
+.wrapper .profile{
+	min-height: 100px;
+	max-height: 100px;
+	display: flex;
+	align-items: center;
+	margin-left: 5%;
+}
+.wrapper img{
+    border-radius: 50%;
+    height:70px;
+	width: 70px;
+    object-fit: cover;
+}
+.wrapper .right{
+	margin-left: 5%;
+}
+.wrapper .right .name{
+	color: #000010;
+	font-size: 20px;
+	font-weight: 900;
+    text-align: left  !important;
+}
+
+.wrapper .right .institution{
+	color: #4b5355;
+	font-size: 16px;
+    text-align: left  !important;
+}
 
