@@ -40,7 +40,7 @@
                         <hr>
                         <div class="d-flex justify-content-between">
                             <h3 class="fw-bold">Grand Total</h3>
-                            <h4 class="fw-bold">{{ number_format($totalPrice, 2, ',', '.')}} IDR</h4>
+                            <h4 class="fw-bold">IDR {{ number_format($totalPrice, 2, ',', '.')}} </h4>
                         </div>
 
                     {{-- ini kondidi bila PIC ingin membayar slotnya 1 per 1  --}}

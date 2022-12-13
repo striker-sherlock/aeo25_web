@@ -8,10 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class MerchandiseController extends Controller
 {
-    public function _construct(){
+ 
+
+    public function __construct(){
         $this->middleware('IsShowed:ENV011');
         $this->middleware('IsAdmin');
     }
+
     public function index()
     {
         return view('merchandises.index',[

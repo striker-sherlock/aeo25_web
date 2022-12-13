@@ -1,3 +1,4 @@
+import "@popperjs/core"
 import "./bootstrap";
 import "../sass/app.scss";
 import "./script";
@@ -6,7 +7,9 @@ import "./toggle-password";
 import "./counter";
 import "owl.carousel";
 
- 
+
+
+
  
 window.jQuery = jquery;
 window.$ = jquery;
@@ -15,4 +18,3 @@ $(document).ready(function () {
     $(".owl-carousel").owlCarousel();
 });
 
- 

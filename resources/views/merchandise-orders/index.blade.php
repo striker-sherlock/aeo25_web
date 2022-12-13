@@ -1,15 +1,38 @@
 <x-layout>
+    <style>
+        .chat{
+            z-index:1000;
+            right: 80px;
+            top: 100px;
+            cursor: pointer;
+            color: #F175AD;
+            background-color:white;
+            box-shadow: 0 0 3px 1px #eee;
+            border-radius: 10px
+        }
+
+        @media (max-width: 576px) {
+            .chat {
+                right: 10px;
+                top: 80px
+            }
+        }
+
+    </style>
     <x-navbar></x-navbar>
     <div class="container mt-5 mb-5 ">
-        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Our Merchandise </h3>
-        <hr>
-
+        <h3 class="text-uppercase fw-bold  text-gradient mb-4" style="letter-spacing: 0.1em">Our Merchandise </h3>
+        <div class="chat position-fixed px-4 py-2  " >
+            <a href="https://api.whatsapp.com/send?phone=628113093815"
+                            class="text-reset text-decoration-none" target="_blank"><i
+                                class="fab fa-whatsapp me-2 fa-lg"></i>Chat Us</a>
+        </div>
         <div class="alert alert-primary border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
             <i class="fa-solid fa-triangle-exclamation me-1"></i> <b>Important info!</b> <br>
-            You may leave the number '0' if you don't wannt to buy the merchandise.
+            You may leave the number '0' if you don't want to buy the merchandise.
         </div>
 
-        <form action="{{route('merchandise-orders.store')}}" enctype="multipart/form-data" method="POST">
+        <form action="{{route('merchandise-orders.temp-store')}}" enctype="multipart/form-data" method="POST">
             @csrf
             @foreach ($merchandises->where('type','bundle') as $merchandise)
                 <div class="col-md-6 mb-3  ">
@@ -97,7 +120,7 @@
                     </div>
                 @endforeach
             </div>
-            <button type="button" id="submit" class="btn btn-outline-theme w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#merch-summary">Order Now </button>
+            <button type="button" id="submit" class="btn btn-outline-theme w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#merch-summary">Check Out Now  </button>
 
             <div class="modal fade p-5" id="merch-summary" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
                 aria-labelledby="modal-title" aria-hidden="true">
@@ -129,8 +152,10 @@
                 </div>
             </div>
         </form>
+
+      
     </div>
-    <x-footer></x-footer>
+    {{-- <x-footer></x-footer> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="

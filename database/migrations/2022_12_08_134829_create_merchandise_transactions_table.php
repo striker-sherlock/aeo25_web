@@ -20,18 +20,18 @@ return new class extends Migration
             $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->string('name');
+            $table->string('email');
             $table->string('institution')->nullable();
-            $table->mediumText('po_name');
+            $table->mediumText('address')->nullable();
             $table->string('phone_number');
             $table->integer('payment_provider_id');
             $table->string('account_name')->nullable();
             $table->string('account_number')->nullable();
-            $table->string('email')->nullable();
+            $table->string('payment_email')->nullable();
             $table->string('tracking_link')->nullable();
             $table->integer('amount');
             $table->boolean('is_confirmed');
             $table->string('payment_proof');
-            $table->mediumText('order_details')->nullable();
             
         });
     }

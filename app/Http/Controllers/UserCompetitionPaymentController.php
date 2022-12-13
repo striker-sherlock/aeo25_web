@@ -52,7 +52,7 @@ class UserCompetitionPaymentController extends Controller
             if($slot->payment)$isPaid = true;
         }
         
-        // if($totalPrice == 0 || $isPaid ) return redirect()->back()->with('error','Please wait the payment to be checked by admin ');
+      
 
         return view('competition-payments.create',[
             'totalPrice' =>$totalPrice,

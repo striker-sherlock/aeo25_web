@@ -98,7 +98,10 @@ Route::resource('ambassadors', AmbassadorController::class)->except('show');
 Route::resource('merchandises', MerchandiseController::class);
 
 //merchandise order
-Route::resource('merchandise-orders', MerchandiseOrderController::class);
+Route::resource('merchandise-orders', MerchandiseOrderController::class)->except(['create','show','edit','update','store']);
+Route::post('merchandise-orders/payment',[MerchandiseOrderController::class,'tempStore'])->name('merchandise-orders.temp-store');
+Route::post('merchandise-orders/store',[MerchandiseOrderController::class,'store'])->name('merchandise-orders.store');
+
 
 
 //competition 

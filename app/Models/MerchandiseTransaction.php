@@ -9,7 +9,7 @@ class MerchandiseTransaction extends Model
 {
     use HasFactory;
 
-    protected $table = 'merhandise_transactions';
+    protected $table = 'merchandise_transactions';
     protected $primaryKey = 'id';
     protected $guarded = [];
     public $timestamps = false;

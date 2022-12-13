@@ -379,7 +379,7 @@ class PDFController extends Controller
                                     </tr>
                                     <tr>
                                         <td>Bank Account Number</td>
-                                        <td>: 5271 848 871</td>
+                                        <td>: 5271 188 2077</td>
                                     </tr>
                                     <tr>
                                         <td>Bank Account Name</td>
@@ -1165,7 +1165,7 @@ class PDFController extends Controller
                                     </tr>
                                     <tr>
                                         <td>Bank Account Number</td>
-                                        <td>: 5271 848 871</td>
+                                        <td>: 5271 188 2077</td>
                                     </tr>
                                     <tr>
                                         <td>Bank Account Name</td>

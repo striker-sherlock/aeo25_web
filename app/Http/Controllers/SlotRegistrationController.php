@@ -53,6 +53,7 @@ class SlotRegistrationController extends Controller
         // hitung ada berapa slot debate
         $registeredDebate = CompetitionSlot::where('pic_id',Auth::user()->id)
             ->where('competition_id','DB')
+            ->where('is_confirmed',1)
             ->sum('quantity');
         return view('slot-registrations.create',[
             'competitions' => Competition::all(),

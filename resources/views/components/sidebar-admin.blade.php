@@ -31,7 +31,7 @@
                         <span class="ms-2">Main Dashboard</span>
                     </a>
                 </li>
-
+{{-- 
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{route('merchandises.index')}}">
@@ -43,7 +43,7 @@
                      
                         <span class="ms-2">Merchandise</span>
                     </a>
-                </li>
+                </li> --}}
 
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 1)->first()))
                     <li class="pb-1 ps-3 header-menu">

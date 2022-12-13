@@ -19,9 +19,10 @@ return new class extends Migration
             $table->timestamp('created_at')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('merhandise_id');
+            $table->integer('merchandise_id');
             $table->integer('quantity');
             $table->integer('transaction_id');
+            $table->mediumText('order_details')->nullable();    
         });
     }
 
