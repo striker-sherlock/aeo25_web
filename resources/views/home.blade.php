@@ -247,7 +247,7 @@
                        <div class="ambassadors wow fadeIn">
                         <div class="container">
                             <div class="d-flex justify-content-center">
-                                <div class="custom-border rounded  my-2"></div>
+                                <div class="  rounded  my-2"></div>
                             </div>
                             <h5 class="mt-3 fw-bold text-center heading-primary text-gradient-blue">OUR AMBASSADORS
                             </h5>
@@ -256,7 +256,7 @@
                             <div class="d-sm-flex flex-column">
 
                                 <div class="row">
-                                    <div class="slider card rounded-20  p-3 col-10">
+                                    <div class="slider card border-0 rounded-20  p-3 col-10" style="box-shadow: 0 0 4px 2px #eee">
                                         @foreach ($ambassadors as $ambassador)
                                         @if ($loop->iteration == 1)
                                         
@@ -279,6 +279,7 @@
                                                         </p>
                                                     </small>
                                                 </div>
+                                               
                                             </div>
                                         </div>      
                                         @else
@@ -732,10 +733,9 @@
 
         const slides = document.querySelector(".slider").children;
         const indicatorImages = document.querySelector(".slider-indicator").children;
-
+        console.log(indicatorImages);
         for (let i = 0; i < indicatorImages.length - 1; i++) {
             indicatorImages[i].addEventListener("click", function() {
-
                 for (let j = 0; j < indicatorImages.length; j++) {
                     indicatorImages[j].classList.remove("active");
                 }
