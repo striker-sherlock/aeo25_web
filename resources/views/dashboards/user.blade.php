@@ -163,62 +163,64 @@
         <x-card>
             <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Slots Registration Summary</h3>
             @if ($allSlotRegistration->count())
-                <table class="table table-bordered">
-                    <thead class="text-center">
-                    <tr>
-                        <th scope="col">Competition Field</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Slot Status</th>
-                        <th scope="col">Payment Status</th>
-                        <th scope="col">Participant</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @foreach ($allSlotRegistration as $slot)
-                        <tr class="text-center ">
-                            <th >{{$slot->competition->name}}</th>
-                            <th > {{$slot->quantity}} Slot(s)</th>
-                            <th>
-                                @if ($slot->is_confirmed == 0)
-                                    <span class="text-warning fw-bold">Wait for Confirmation </span>
-                                    @elseif ($slot->is_confirmed == 1)
-                                    <span class="text-success fw-bold ">Confirmed {{\Carbon\Carbon::parse($slot->confirmed_at)->diffForHumans()}}</span>
-                                    @else <span class="text-danger fw-bold">Rejected (check email for the reason)</span>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                        <tr>
+                            <th scope="col">Competition Field</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Slot Status</th>
+                            <th scope="col">Payment Status</th>
+                            <th scope="col">Participant</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($allSlotRegistration as $slot)
+                            <tr class="text-center ">
+                                <th >{{$slot->competition->name}}</th>
+                                <th > {{$slot->quantity}} Slot(s)</th>
+                                <th>
+                                    @if ($slot->is_confirmed == 0)
+                                        <span class="text-warning fw-bold">Wait for Confirmation </span>
+                                        @elseif ($slot->is_confirmed == 1)
+                                        <span class="text-success fw-bold ">Confirmed {{\Carbon\Carbon::parse($slot->confirmed_at)->diffForHumans()}}</span>
+                                        @else <span class="text-danger fw-bold">Rejected (check email for the reason)</span>
+                                        @endif
+                                    </th>
+                                    
+                                    <th>
+                                        @if ($slot->payment == NULL)
+                                            @if ($slot->is_confirmed == 1)
+                                                <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-success rounded-20">Make Payment</a>
+                                            @endif
+                                        @else 
+                                            @if ($slot->payment->is_confirmed == 0)
+                                                <span class="text-warning fw-bold">Wait for Confirmation</span>
+                                            @elseif($slot->payment->is_confirmed == 1)
+                                                {{-- kasi payment Receipt nya disini --}}
+                                                <a href="{{route('payments.paid-invoice', $slot->payment->id)}}" class="btn btn-outline-info rounded-pill mt-2" target="_BLANK"> View Receipt</a>
+                                            @else
+                                                <span class="text-danger fw-bold">Rejected</span>
+                                            @endif    
+                                        @endif
+                                    </th>
+                                <th> 
+                                    @if ($slot->competitionParticipants->count() > 0)
+                                            <a href="{{route('competition-participants.show',[Auth::user()->id,$slot->competition->id])}}" class="btn btn-outline-info rounded-pill mt-2">View Participant</a>
+                                    @else
+                                        @if ($slot->payment != NULL)
+                                           @if ($slot->payment->is_confirmed == 1)
+                                           <a href="{{route('competition-participants.create',$slot->id)}}" class="btn btn-outline-success rounded-pill mt-2">Add Participant</a>    
+                                           @endif
+                                        @endif
                                     @endif
                                 </th>
                                 
-                                <th>
-                                    @if ($slot->payment == NULL)
-                                        @if ($slot->is_confirmed == 1)
-                                            <a href="{{route('dashboard.step',2)}}" class="btn btn-outline-success rounded-20">Make Payment</a>
-                                        @endif
-                                    @else 
-                                        @if ($slot->payment->is_confirmed == 0)
-                                            <span class="text-warning fw-bold">Wait for Confirmation</span>
-                                        @elseif($slot->payment->is_confirmed == 1)
-                                            {{-- kasi payment Receipt nya disini --}}
-                                            <a href="{{route('payments.paid-invoice', $slot->payment->id)}}" class="btn btn-outline-info rounded-pill mt-2" target="_BLANK"> View Receipt</a>
-                                        @else
-                                            <span class="text-danger fw-bold">Rejected</span>
-                                        @endif    
-                                    @endif
-                                </th>
-                            <th> 
-                                @if ($slot->competitionParticipants->count() > 0)
-                                        <a href="{{route('competition-participants.show',[Auth::user()->id,$slot->competition->id])}}" class="btn btn-outline-info rounded-pill mt-2">View Participant</a>
-                                @else
-                                    @if ($slot->payment != NULL)
-                                       @if ($slot->payment->is_confirmed == 1)
-                                       <a href="{{route('competition-participants.create',$slot->id)}}" class="btn btn-outline-success rounded-pill mt-2">Add Participant</a>    
-                                       @endif
-                                    @endif
-                                @endif
-                            </th>
-                            
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             <p class="text-danger fw-bold">*Note : You must finish the payments D+10 days after the slot confirmed </p>
             @else <hr> 
                 <p class="text-center fs-4">No Slot Registered Yet</p>
@@ -231,29 +233,31 @@
         <x-card>
             <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Participants List</h3>
             @if ($totalParticipants)
-                <table class="table table-bordered dataTables  t" >
-                    <thead class="text-center">
-                        <tr>
-                            <th scope="col">Participant Name</th>
-                            <th scope="col">Competition Field</th>
-                            <th scope="col">Email</th>
+                <div class="table-responsive">
+                    <table class="table table-bordered dataTables " >
+                        <thead class="text-center">
+                            <tr>
+                                <th scope="col">Participant Name</th>
+                                <th scope="col">Competition Field</th>
+                                <th scope="col">Email</th>
 
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @foreach ($allParticipants as $participant)
-                            <tr class="text-center">
-                                <th>{{$participant->name}}</th>
-                                <th>{{$participant->competition->name}}
-                                    @if ($participant->competition->need_team)
-                                        <span>({{$participant->competitionTeam->name}})</span>
-                                    @endif
-                                </th>
-                                <th>{{$participant->email}}</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-            </table>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($allParticipants as $participant)
+                                <tr class="text-center">
+                                    <th>{{$participant->name}}</th>
+                                    <th>{{$participant->competition->name}}
+                                        @if ($participant->competition->need_team)
+                                            <span>({{$participant->competitionTeam->name}})</span>
+                                        @endif
+                                    </th>
+                                    <th>{{$participant->email}}</th>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else 
             <hr><p class="text-center fs-4" >No Participant Registered Yet</p>
             @endif

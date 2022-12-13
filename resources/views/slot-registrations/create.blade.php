@@ -40,8 +40,8 @@
                                         @endif
                                         @for ($i = 0; $i <= $slot; $i++)
                                             @if ($slot == 0)
-                                            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="You have exceeded the slot limit or you do not have at least 2 confirmed debate slot registered">
-                                                <button class="btn btn-lg btn-danger" type="button" >Unable to select this slot </button>
+                                            <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="You have exceeded the slot limit for each institution">
+                                                <button class="btn btn-danger" type="button" >Unable to select this slot </button>
                                               </span>
                                                         <input type="text" name="quantity[]-{{ $competition->id }}"
                                                             value="0" hidden>
@@ -61,9 +61,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
-            <hr>
-        </div>
+                @endforeach
+                <hr>
+            </div>
 
         {{-- Independent Adjudicator Registration Section --}}
         <h2 class="aeo-title fw-semibold mb-3">Would you also like to register an Independent Adjudicator?</h2>
@@ -74,11 +74,11 @@
             register (3-1) = 2 adjudicator)
 
         </div>
-        <div class="alert alert-primary border-0 shadow-sm mb-4" role="alert"
+        {{-- <div class="alert alert-primary border-0 shadow-sm mb-4" role="alert"
                 style="letter-spacing: .05em">
                 <i class="fa-solid fa-circle-question me-1"></i> <b>What is Independent Adjudicator?</b> <br>
                 Independent Adjudicator is Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea praesentium omnis deleniti.
-            </div>
+        </div> --}}
         <div class="row justify-content-start   align-items-center">
             @foreach ($competitions->where('id', 'IA') as $independentAdju)
                 <div class="col-md-4">
@@ -111,7 +111,7 @@
                                     @endif
                                     @if ($slot <= 0)
                                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="You have exceeded the slot limit or you do not have at least 2 confirmed debate slot registered">
-                                        <button class="btn btn-lg btn-danger" type="button" >Unable to select this slot </button>
+                                        <button class="btn btn-danger" type="button" >Unable to select this slot </button>
                                       </span>
                                       
                                    
@@ -168,20 +168,20 @@
                                     class="rounded-pill btn btn-outline-theme w-100">Submit</button>
                             </div>
                         </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-    </form>
-</div>
+        </form>
+    </div>
 
 
 
 
 
 
-<script type="module">
+    <script type="module">
         $(document).ready(function(){
             $('a.btn').click(function(){
                 const radio = document.querySelectorAll('input[name]:checked')
@@ -194,8 +194,6 @@
                 $('ul li').remove()
             })
         })
-
-     
- </script>
+    </script>
 
 </x-user>

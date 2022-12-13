@@ -3,7 +3,11 @@
     <div class="container">
         <div class="header">
             <h2 class="fw-bold ">Welcome back, {{Auth::guard('admin')->user()->name}} </h2>
-            <h5 class="text-muted text-capitalize">{{Auth::guard('admin')->user()->position}} of {{Auth::guard('admin')->user()->department}} </h5>
+            <h5 class="text-muted text-capitalize">{{Auth::guard('admin')->user()->position}} 
+                @if (Auth::guard('admin')->user()->department_id != 'SC')  
+                    <span class="text-lowercase">of</span> 
+                    {{Auth::guard('admin')->user()->division}} 
+                @endif </h5>
             <hr>
         </div>
         <div class="info">

@@ -49,9 +49,10 @@
                             <label for="division" class="col-form-label">Division <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="division" name="division" value="{{$admin->division}}" required>
                         </div>
+                       
                         <div class="form-group mb-3">
                             <label for="password" class="col-form-label">Password <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="password" name="password" placeholder="Enter your old password or create a new one" required>
+                            <input type="text" class="form-control" id="password" name="password" placeholder="Enter your old password or create a new one">
                         </div>
 
                     </div>

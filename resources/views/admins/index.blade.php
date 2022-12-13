@@ -9,8 +9,7 @@
                     <tr>
                         <th class= "align-middle text-center" scope="col">ID</th>
                         <th class= "align-middle text-center" scope="col">Name</th>
-                        <th class= "align-middle text-center" scope="col">Nim</th>
-                        <th class= "align-middle text-center" scope="col">Email</th>
+                        <th class= "align-middle text-center" scope="col">Department ID</th>
                         <th class= "align-middle text-center" scope="col">Position</th>
                         <th class= "align-middle text-center" scope="col">Department</th>
                         <th class= "align-middle text-center" scope="col">Division</th>
@@ -22,16 +21,18 @@
                         <tr>
                             <th>{{$admin->id}}</th>
                             <th>{{$admin->name}}</th>
-                            <th>{{$admin->nim}}</th>
-                            <th>{{$admin->email}}</th>
+                            <th>{{$admin->department_id}}</th>
                             <th>{{$admin->position}}</th>
                             <th>{{$admin->department}}</th>
                             <th>{{$admin->division}}</th>
                                 
-                            <th class="d-flex justify-content-center"> 
-                                <a href="{{route('admins.edit', $admin->id)}}" class="btn btn-primary btn-sm rounded me-2 " title="edit">
-                                    <i class="fa fa-edit"></i>
-                                </a>
+                            <th > 
+                                <div class="d-flex justify-content-center">
+
+                                    <a href="{{route('admins.edit', $admin->id)}}" class="btn btn-primary btn-sm rounded me-2 " title="edit">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </div>
                             </th>
                         </tr>
                             

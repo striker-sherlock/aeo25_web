@@ -2,7 +2,7 @@
     <style>
         span.position-absolute {
             top: -10px;
-            right: -20px;
+            right: -30px;
             width: 20px;
             height: 20px;
             cursor: pointer;
@@ -168,7 +168,7 @@
                     </h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
 
-                    <div class="owl-carousel owl-theme d-flex mx-auto   ">
+                    <div class="owl-carousel owl-theme d-flex mx-auto   " id="home">
                         @foreach ($competitions as $competition)
                             @if ($competition->id == 'OBS' || $competition->id == 'IA')
                                 @continue
@@ -247,7 +247,7 @@
                        <div class="ambassadors wow fadeIn">
                         <div class="container">
                             <div class="d-flex justify-content-center">
-                                <div class="custom-border rounded  my-2"></div>
+                                <div class="  rounded  my-2"></div>
                             </div>
                             <h5 class="mt-3 fw-bold text-center heading-primary text-gradient-blue">OUR AMBASSADORS
                             </h5>
@@ -256,7 +256,7 @@
                             <div class="d-sm-flex flex-column">
 
                                 <div class="row">
-                                    <div class="slider card rounded-20  p-3 col-10">
+                                    <div class="slider card border-0 rounded-20  p-3 col-10" style="box-shadow: 0 0 4px 2px #eee">
                                         @foreach ($ambassadors as $ambassador)
                                         @if ($loop->iteration == 1)
                                         
@@ -279,6 +279,7 @@
                                                         </p>
                                                     </small>
                                                 </div>
+                                               
                                             </div>
                                         </div>      
                                         @else
@@ -453,7 +454,7 @@
                     <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary">Drop
                         Your Question Here
                     </h1>
-                    <div class="card rounded-20 card-shadow border-0">
+                    <div class="card rounded-20   border-0">
                         <div class="card-body m-3">
                             <p class="text-muted mb-4">Please fill the form below, then we will answer your question
                                 via e-mail.
@@ -467,7 +468,7 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control " id="name" name="name"
+                                        <input class="form-control rounded-pill" id="name" name="name"
                                             value="{{ old('name') }}" required>
                                     </div>
                                 </div>
@@ -478,7 +479,7 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <select class="form-select " name="country_id">
+                                        <select class="form-select rounded-pill" name="country_id" id="country_id">
                                             <option selected class="d-none">Select your Country</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -497,9 +498,9 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="tel" class="form-control " id="phone_number"
+                                        <input type="tel" class="form-control rounded-pill" id="phone_number"
                                             name="phone_number" value="{{ old('phone_number') }}"
-                                            placeholder="812-345-678" required>
+                                             required>
                                     </div>
                                 </div>
 
@@ -509,22 +510,22 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control " id="email" name="email"
+                                        <input class="form-control rounded-pill" id="email" name="email"
                                             value="{{ old('email') }}" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group row mb-0 mb-sm-3">
-                                    <label for="question" class="col-sm-3 col-form-label text-sm-left">
+                                    <label for="question" class="col-sm-3 col-form-label text-sm-left rounded-pill">
                                         Question
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control " id="question" name="question" value="{{ old('question') }}" style="height: 100px"
+                                        <textarea class="form-control rounded-20" id="question" name="question" value="{{ old('question') }}" style="height: 100px"
                                             required>{{ old('question') }}</textarea>
                                     </div>
                                 </div>
-                                <div class="d-grid mt-5">
+                                <div class="d-grid mt-4">
                                     <button type="submit" class="btn btn-outline-1 rounded-20 btnSubmit"
                                         id="btn-submit">Submit</button>
                                 </div>
@@ -664,34 +665,41 @@
             </div>
         </div>
     </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        let owl = $('.owl-carousel');
-        owl.owlCarousel({
-            loop: true,
-            nav: true,
-            autoplay: true,
-            dots: true,
-            lazyLoad: true,
-            margin: 15,
-            center: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 2
-                },
-                1200: {
-                    items: 3
-                },
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+            integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            let owl = $('.owl-carousel');
+            $(document).ready(function(){
+                owl.owlCarousel({
+                    loop: true,
+                    nav: true,
+                    autoplay: true,
+                    dots: true,
+                    lazyLoad: true,
+                    margin: 15,
+                    center: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        400: {
+                            items: 2
+                        },
+                        1200: {
+                            items: 3
+                        },
+    
+                    }
+                });
+                $('.owl-next span').text('');
+                $('.owl-next span').addClass('fa-solid fa-arrow-right');
+                $('.owl-prev span').text('');
+                $('.owl-prev span').addClass('fa-solid fa-arrow-left');
 
-            }
-        });
-
+            })
+            
         let timer = function(date) {
             let timer = Math.round(new Date(date).getTime() / 1000) - Math.round(new Date().getTime() / 1000);
             let minutes, seconds;
@@ -716,11 +724,7 @@
             }, 1000);
         }
 
-        $('.owl-next span').text('');
-        $('.owl-next span').addClass('fa-solid fa-arrow-right');
-        $('.owl-prev span').text('');
-        $('.owl-prev span').addClass('fa-solid fa-arrow-left');
-
+        
         //using the function
         const tomorrow = new Date("January 13, 2023 18:00:00")
         timer(tomorrow);
@@ -729,10 +733,9 @@
 
         const slides = document.querySelector(".slider").children;
         const indicatorImages = document.querySelector(".slider-indicator").children;
-
+        console.log(indicatorImages);
         for (let i = 0; i < indicatorImages.length - 1; i++) {
             indicatorImages[i].addEventListener("click", function() {
-
                 for (let j = 0; j < indicatorImages.length; j++) {
                     indicatorImages[j].classList.remove("active");
                 }

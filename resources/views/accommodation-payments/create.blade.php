@@ -1,4 +1,4 @@
-<x-user title="Accommodation Payment">
+    <x-user title="Accommodation Payment">
     <div class="container mt-5">
         <a href="{{route('dashboard.accommodation-step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
         <div class="row">

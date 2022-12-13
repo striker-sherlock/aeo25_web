@@ -1,4 +1,4 @@
-<x-user title="Create Other Slot">
+    <x-user title="Create Other Slot">
     <div class="container mt-5">
         <div class="alert alert-primary border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
             <i class="fa-solid fa-triangle-exclamation me-1"></i> <b>Important rules!</b> <br>
@@ -44,11 +44,9 @@
                                             {{ number_format($competition->price, 0, ',', '.') }}</h5>
                                         <input type="text" name="compet_id[]" hidden value="{{$competition->id}}">
                                         @if($maxOBS <= 0)
-                                            {{-- <h5 class=" bg-danger text-white py-2 mx-auto fw-bold text-center" title="You have exceeded the slot limit or you do not have any confirmed slot" style="cursor:pointer">
-                                                Unable to select this slot
-                                            </h5> --}}
+                                             
                                             <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="You have exceeded the slot limit or you do not have any confirmed slot">
-                                                <button class="btn btn-lg btn-danger" type="button" >Unable to select this slot </button>
+                                                <button class="btn  btn-danger" type="button" >Unable to select this slot </button>
                                               </span>
                                             <input type="text" name="quantity[]-{{$competition->id}}"
                                                 value="0" hidden>

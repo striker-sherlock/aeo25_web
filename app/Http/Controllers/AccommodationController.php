@@ -32,9 +32,9 @@ class AccommodationController extends Controller
     {
         $request->validate([
             'room_type'=>'required|string',
-            'max_guests'=>'required|integer',
+            'max_guests'=>'required|numeric',
             'picture'=>'required|image',
-            'price'=>'required|integer',
+            'price'=>'required|numeric',
         ]);
         
         $name = $request->room_type;
@@ -59,7 +59,7 @@ class AccommodationController extends Controller
 
         foreach (Facility::all() as $facility) {
             AccommodationFacility::create([
-                'created_by' => "admin",
+                'created_by' => Auth::guard('admin')->user()->name,
                 'accommodation_id' => $newAccommodation->id,
                 'facility_id' => $facility->id,
                 'is_available' => (request($facility->id) ? 1 : 0) //! Ini buat cek kalo Facilitynya di centang berarti true
@@ -86,9 +86,9 @@ class AccommodationController extends Controller
     {
         $request->validate([
             'room_type'=>'required|string',
-            'max_guests'=>'required|int',
+            'max_guests'=>'required|numeric',
             'picture_new'=>'nullable|image',
-            'price'=>'required|int',
+            'price'=>'required|numeric',
         ]);
         
         $name = $request->room_type;
@@ -107,7 +107,7 @@ class AccommodationController extends Controller
         }
 
         $accommodation->update([
-            'updated_by'=>"qwerty",
+            'updated_by'=>Auth::guard('admin')->user()->name,
             'room_type'=>$request->room_type,
             'max_guests'=>$request->max_guests,
             'picture' => $fileName,
@@ -124,14 +124,14 @@ class AccommodationController extends Controller
         }else {
             foreach (Facility::all() as $facility) {
                 AccommodationFacility::create([
-                    'created_by' => "admin",
+                    'created_by' => Auth::guard('admin')->user()->name,
                     'accommodation_id' => $accommodation->id,
                     'facility_id' => $facility->id,
                     'is_available' => (request($facility->id) ? 1 : 0)
                 ]);
             }
         }
-        return redirect()->route('accommodations.index');// ->with('success','Succesfuly Added');
+        return redirect()->route('accommodations.index')->with('success','Accommodation has succesfuly updated');
     }
 
     public function destroy(Accommodation $accommodation)

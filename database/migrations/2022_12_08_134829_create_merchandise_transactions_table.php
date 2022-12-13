@@ -13,21 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('merchandise_transactions', function (Blueprint $table) {
             $table->id();
             $table->string('created_by');
             $table->timestamp('created_at')->nullable();
             $table->string('updated_by')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->string('name');
-            $table->string('phone_number');
             $table->string('email');
-            $table->longText('question');
-            $table->boolean('is_responded');
-            $table->unsignedBigInteger('country_id');
-            $table->foreign('country_id')->references('id')->on('countries')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('admin_id')->nullable();
-            $table->foreign('admin_id')->references('id')->on('admins')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('institution')->nullable();
+            $table->mediumText('address')->nullable();
+            $table->string('phone_number');
+            $table->integer('payment_provider_id');
+            $table->string('account_name')->nullable();
+            $table->string('account_number')->nullable();
+            $table->string('payment_email')->nullable();
+            $table->string('tracking_link')->nullable();
+            $table->integer('amount');
+            $table->boolean('is_confirmed');
+            $table->string('payment_proof');
+            
         });
     }
 
@@ -38,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('merchandise_transactions');
     }
 };

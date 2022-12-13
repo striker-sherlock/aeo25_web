@@ -61,14 +61,14 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-headers p-4 ">
-                    <h5 class="modal-title text-center fs-2" >Add Addictional Note to <span class="fw-bold text-info text-capitalize">{{$participant->name}}</span></h5>
+                    <h5 class="modal-title text-center fs-2" >Add Additional Note to <span class="fw-bold text-info text-capitalize">{{$participant->name}}</span></h5>
                 </div>
                 <form action="{{route('competition-participants.update',$participant->id)}}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
                         @method('PUT')
-                        <div class="form-gruop mb-3">
-                            <textarea class="form-control text-area" name="note"  id="note" rows="2">{{$participant->addictional_notes}}</textarea>
+                        <div class="form-group mb-3">
+                            <textarea class="form-control text-area" name="note"  id="note" rows="2">{{$participant->additional_notes}}</textarea>
                         </div>
                     </div>
                     <div class="modal-footers p-4">
@@ -77,7 +77,7 @@
                                 <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">Close</button>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-outline-theme w-100">Submit</button>
+                                <button type="submit" class="btn btn-outline-theme w-100">Save Changes</button>
                             </div>
                         </div>
                     </div>
