@@ -33,6 +33,7 @@ use App\Http\Controllers\AccessControlController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\AdminMerchandiseController;
 use App\Http\Controllers\MerchandiseOrderController;
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\FlightRegistrationController;
@@ -101,6 +102,24 @@ Route::resource('merchandises', MerchandiseController::class);
 Route::resource('merchandise-orders', MerchandiseOrderController::class)->except(['create','show','edit','update','store']);
 Route::post('merchandise-orders/payment',[MerchandiseOrderController::class,'tempStore'])->name('merchandise-orders.temp-store');
 Route::post('merchandise-orders/store',[MerchandiseOrderController::class,'store'])->name('merchandise-orders.store');
+
+//ADMIN MERCHANDISE ORDER
+Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders')->name('merchandise-orders.')->group(function () {
+    Route::put('{id}/update-payment', 'update')->name('update-payment');
+    Route::get('{id}/edit-payment', 'edit')->name('edit-payment');
+    Route::put('{id}/update', 'updateMerch')->name('update');
+    Route::get('{id}/edit', 'editMerch')->name('edit');
+    Route::get('manage', 'index')->name('index');
+    Route::get('manage/payments', 'payment')->name('payment');
+    Route::get('confirm/{id}', 'confirm')->name('confirm');
+    Route::get('pending/{id}', 'pending')->name('pending');
+    Route::post('reject', 'reject')->name('reject');
+    Route::get('cancel/{id}', 'cancel')->name('cancel');
+    // Route::get('export', 'export')->name('export');
+
+});
+
+
 
 
 

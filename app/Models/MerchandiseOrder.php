@@ -15,12 +15,12 @@ class MerchandiseOrder extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public function merhandise(){
+    public function merchandise(){
         return $this->belongsTo(Merchandise::class);
     }
 
-    public function merhandiseTransaction(){
-        return $this->belongsTo(MerchandiseTransaction::class);
+    public function merchandiseTransaction(){
+        return $this->belongsTo(MerchandiseTransaction::class,'transaction_id','id');
     }
 
 }

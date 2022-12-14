@@ -733,7 +733,6 @@
 
         const slides = document.querySelector(".slider").children;
         const indicatorImages = document.querySelector(".slider-indicator").children;
-        console.log(indicatorImages);
         for (let i = 0; i < indicatorImages.length - 1; i++) {
             indicatorImages[i].addEventListener("click", function() {
                 for (let j = 0; j < indicatorImages.length; j++) {

@@ -106,12 +106,7 @@ class AdminCompetitionPaymentController extends Controller
         $competitionPayment = CompetitionPayment::find($id);
         $competitionSlots = $competitionPayment->competitionSlot;
 
-        foreach ($competitionSlots as $competitionSlot) {
-            $competition = $competitionSlot->competition;
-            $competition->update([
-                'fixed_quota' => $competition->fixed_quota + $competitionSlot->quantity,
-            ]);
-        }
+ 
 
         $competitionPayment ->update([
             'is_confirmed' => 0,
