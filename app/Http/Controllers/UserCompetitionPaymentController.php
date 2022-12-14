@@ -154,12 +154,15 @@ class UserCompetitionPaymentController extends Controller
                 'transfer_proof_bank' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
                 'account_name' => 'required|string',
                 'account_number' => 'required|numeric',
+                
             ]);
         }
+
         elseif ($request->type == "Wise"){
             $request->validate([
                 'email' => 'required|string',
                 'track' => 'required|string',
+              
                 'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
             ]);
         }
@@ -185,6 +188,8 @@ class UserCompetitionPaymentController extends Controller
                 'account_name' => $request->account_name,
                 'account_number' => $request->account_number,
                 'payment_proof' => $fixedName,
+                'tracking_link' => null,
+                'email' => null,
                 'updated_by' => Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name  : Auth::user()->username,
             ]);
         }
@@ -204,6 +209,8 @@ class UserCompetitionPaymentController extends Controller
                 'email' => $request->email,
                 'tracking_link' => $request->track,
                 'payment_proof' => $fixedName,
+                'account_name' => null,
+                'account_number' => null,
                 'updated_by' => Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name  : Auth::user()->username,
             ]);
 

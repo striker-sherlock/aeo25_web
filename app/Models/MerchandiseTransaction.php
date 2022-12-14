@@ -14,7 +14,10 @@ class MerchandiseTransaction extends Model
     protected $guarded = [];
     public $timestamps = false;
     
-    public function merhandiseOrder(){
-        return $this->hasMany(MerchandiseOrder::class);
+    public function merchandiseOrder(){
+        return $this->hasMany(MerchandiseOrder::class,'transaction_id','id');
+    }
+    public function paymentProvider(){
+        return $this->belongsTo(PaymentProvider::class);
     }
 }

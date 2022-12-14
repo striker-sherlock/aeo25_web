@@ -31,7 +31,7 @@
                         <span class="ms-2">Main Dashboard</span>
                     </a>
                 </li>
-{{-- 
+
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{route('merchandises.index')}}">
@@ -43,7 +43,31 @@
                      
                         <span class="ms-2">Merchandise</span>
                     </a>
-                </li> --}}
+                </li>
+
+                <li class="side-item">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{route('merchandise-orders.index')}}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fa-solid fa-cash-register fa-stack-1x text-dark"></i>
+                            
+                        </span>
+                        <span class="ms-2">Merchandise Order</span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{route('merchandise-orders.payment')}}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fa-solid fa-credit-card fa-stack-1x text-dark"></i>
+                            
+                        </span>
+                        <span class="ms-2">Merchandise Payment</span>
+                    </a>
+                </li>
 
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 1)->first()))
                     <li class="pb-1 ps-3 header-menu">
@@ -168,7 +192,7 @@
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
                             <span class="fa-stack fa-sm ml-n1">
                                 <i class="fas fa-square fa-stack-2x"></i>
-                                <i class="fas fa-scroll fa-stack-1x text-dark"></i>
+                                <i class="fa-solid fa-school fa-stack-1x text-dark"></i>
                             </span>
                             <span class="ms-2">Institution Contacts</span>
                             <i class="fas fa-angle-right ms-auto"></i>

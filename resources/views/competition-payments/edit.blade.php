@@ -140,7 +140,7 @@
             document.querySelector('input[name="track"]').removeAttribute('required');
         })
         wise.addEventListener('click', function(){
-            type.value = "WISE";
+            type.value = "Wise";
             document.querySelector('input[name="payment_provider"]').value = "18";
             //set required untuk kolom inputan di wise dan remove required buat inputan yang di bank
             document.querySelector('input[name="email"]').setAttribute('required','');

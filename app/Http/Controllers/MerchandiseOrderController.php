@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\PaymentProvider;
 use App\Models\MerchandiseOrder;
 use App\Models\MerchandiseTransaction;
+use Illuminate\Support\Facades\Validator;
 
 class MerchandiseOrderController extends Controller
 {
@@ -62,15 +63,23 @@ class MerchandiseOrderController extends Controller
         $merchandise = explode(',',$request->merchandise);
         $notes = explode(',',$request->notes);
         $merch_id = explode(',',$request->merch_id);
-        $request->validate([
+
+        $validator =Validator::make($request->all(),[
             'name' => 'required|string',
             'institution' => 'nullable|string',
             'email' => 'required|string',
         ]);
+        if($validator->fails()){
+            return redirect()->route('merchandise-orders.index')->withErrors($validator)->withInput();
+        }
+
         if($request->shipping == 'delivery'){
-            $request->validate([
+            $validator =Validator::make($request->all(),[
                 'address' => 'required|string',
             ]);
+            if($validator->fails()){
+                return redirect()->route('merchandise-orders.index')->withErrors($validator)->withInput();
+            }
         }
         
         $name= $request->name;
@@ -80,12 +89,16 @@ class MerchandiseOrderController extends Controller
         $current = time();
         
         if($request->type == 'bank'){
-            $request->validate([
+            $validator =Validator::make($request->all(),[
                 'payment_provider' => 'required',
                 'account_name' => 'required|string',
                 'account_number' => 'required|numeric',
                 'transfer_proof_bank' => 'required|image|mimes:png,jpg,jpeg|max:1999'
             ]);
+
+            if($validator->fails()){
+                return redirect()->route('merchandise-orders.index')->withErrors($validator)->withInput();
+            }
             
             
             if($request->hasFile('transfer_proof_bank')){
@@ -96,7 +109,7 @@ class MerchandiseOrderController extends Controller
             
         }
         if($request->type == 'wise'){
-            $request->validate([
+            $validator =Validator::make($request->all(), [
                 'payment_email' => 'required|string',
                 'track' => 'required|numeric',
                 'transfer_proof_wise' => 'required|image|mimes:png,jpg,jpeg|max:1999'
