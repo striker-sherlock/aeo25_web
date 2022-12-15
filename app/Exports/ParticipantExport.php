@@ -9,9 +9,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class ParticipantExport implements FromCollection
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+
     public function __construct($competition){
         $this->competition = $competition;
     }
