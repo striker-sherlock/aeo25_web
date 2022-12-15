@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PicController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FollowUpController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
@@ -21,17 +22,19 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FacilitiesController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\EnvironmentController;
+use App\Http\Controllers\MerchandiseController;
 use App\Http\Controllers\RankingListController;
 use App\Http\Controllers\FlightTicketController;
 use App\Http\Controllers\FollowUpTypeController;
 use App\Http\Controllers\LostAndFoundController;
 use App\Http\Controllers\MediaPartnerController;
-// use Yajra\DataTables\DataTablesServiceProvider
 use App\Http\Controllers\UserAccommodationGuest;
 use App\Http\Controllers\AccessControlController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\AdminMerchandiseController;
+use App\Http\Controllers\MerchandiseOrderController;
 use App\Http\Controllers\SlotRegistrationController;
 use App\Http\Controllers\FlightRegistrationController;
 use App\Http\Controllers\InstitutionContactController;
@@ -43,7 +46,6 @@ use App\Http\Controllers\AdminAccommodationPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
-use App\Http\Controllers\QuestionController;
 
 // Auth routes
 Auth::routes(['verify'=>true]);
@@ -92,6 +94,33 @@ Route::resource('environments', EnvironmentController::class);
 // Ambassadors 
 Route::get('ambassadors/manage', [AmbassadorController::class, 'manage'])->name('ambassadors.manage');
 Route::resource('ambassadors', AmbassadorController::class)->except('show');
+
+//merchandise
+Route::resource('merchandises', MerchandiseController::class);
+
+//merchandise order
+Route::resource('merchandise-orders', MerchandiseOrderController::class)->except(['create','show','edit','update','store']);
+Route::post('merchandise-orders/payment',[MerchandiseOrderController::class,'tempStore'])->name('merchandise-orders.temp-store');
+Route::post('merchandise-orders/store',[MerchandiseOrderController::class,'store'])->name('merchandise-orders.store');
+
+//ADMIN MERCHANDISE ORDER
+Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders')->name('merchandise-orders.')->group(function () {
+    Route::put('{id}/update-payment', 'update')->name('update-payment');
+    Route::get('{id}/edit-payment', 'edit')->name('edit-payment');
+    Route::put('{id}/update', 'updateMerch')->name('update');
+    Route::get('{id}/edit', 'editMerch')->name('edit');
+    Route::get('manage', 'index')->name('index');
+    Route::get('manage/payments', 'payment')->name('payment');
+    Route::get('confirm/{id}', 'confirm')->name('confirm');
+    Route::get('pending/{id}', 'pending')->name('pending');
+    Route::post('reject', 'reject')->name('reject');
+    Route::get('cancel/{id}', 'cancel')->name('cancel');
+    // Route::get('export', 'export')->name('export');
+
+});
+
+
+
 
 
 //competition 

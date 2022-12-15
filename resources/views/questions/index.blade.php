@@ -143,7 +143,7 @@
                                         <div class="modal-body text-start">
                                             <div class="form-group row mb-0 mb-sm-3">
                                                 <label class="col-form-label text-sm-left">
-                                                    {{ $question->answer }}</label>
+                                                    {!! $question->answer !!}</label>
                                             </div>
                                         </div>
                                     </div>

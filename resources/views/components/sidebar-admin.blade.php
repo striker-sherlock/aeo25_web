@@ -1,8 +1,8 @@
 <style>
-        ::-webkit-scrollbar-thumb {
-            border-radius: 5px;
-            background-color: #767D7F !important;
-        }
+    ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background-color: #767D7F !important;
+    }
 </style>
 <nav id="sidebar-admin" class="sidebar-wrapper h-100 mh-100 fixed-top bg-gradient-blue pr-0">
     <div class="sidebar-content">
@@ -31,14 +31,41 @@
                         <span class="ms-2">Main Dashboard</span>
                     </a>
                 </li>
+
                 <li class="side-item">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                    href="{{route('admins.edit', Auth::guard('admin')->user()->id)}}">
+                        href="{{route('merchandises.index')}}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fa fa-cog fa-stack-1x text-dark"></i>
+                            <i class="fa-solid fa-cart-plus fa-stack-1x text-dark"></i>
+                            
                         </span>
-                        <span class="ms-2">Edit Account</span>
+                     
+                        <span class="ms-2">Merchandise</span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{route('merchandise-orders.index')}}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fa-solid fa-cash-register fa-stack-1x text-dark"></i>
+                            
+                        </span>
+                        <span class="ms-2">Merchandise Order</span>
+                    </a>
+                </li>
+
+                <li class="side-item">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{route('merchandise-orders.payment')}}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fa-solid fa-credit-card fa-stack-1x text-dark"></i>
+                            
+                        </span>
+                        <span class="ms-2">Merchandise Payment</span>
                     </a>
                 </li>
 
@@ -99,7 +126,13 @@
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fas fa-list-ol fa-stack-1x text-dark"></i>
                             </span>
-                            <span class="ms-2">Slot Registration</span>
+                            <div class="d-flex justify-content-between   w-100">
+                                <span class="ms-2">Slot Registration</span>
+                                @if (App\Models\CompetitionSlot::where('is_confirmed',0)->count() != 0)
+                                    <span class="p-2    rounded-circle d-inline d-flex justify-content-center align-items-center" style="width:20px; height:20px; color:red; border:1.5px solid white;">!</span>
+                                    
+                                @endif
+                            </div>
                         </a>
                     </li>
                     <li class="side-item">
@@ -109,7 +142,14 @@
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fas fa-clipboard-question fa-stack-1x text-dark"></i>
                             </span>
-                            <span class="ms-2">Question List</span>
+                            <div class="d-flex justify-content-between   w-100">
+
+                                <span class="ms-2">Question List</span>
+                                @if (App\Models\Question::where('is_responded',0)->count() != 0 )
+                                    <span class="p-2    rounded-circle d-inline d-flex justify-content-center align-items-center" style="width:20px; height:20px; color:red; border:1.5px solid white;">!</span>
+                                    
+                                @endif
+                            </div>
                         </a>
                     </li>
                     <li class=" pb-1 side-item pb-1 sidebar-dropdown">
@@ -152,7 +192,7 @@
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
                             <span class="fa-stack fa-sm ml-n1">
                                 <i class="fas fa-square fa-stack-2x"></i>
-                                <i class="fas fa-scroll fa-stack-1x text-dark"></i>
+                                <i class="fa-solid fa-school fa-stack-1x text-dark"></i>
                             </span>
                             <span class="ms-2">Institution Contacts</span>
                             <i class="fas fa-angle-right ms-auto"></i>
@@ -219,7 +259,7 @@
                         </a>
                     </li>
                 @endif
-                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 26)->first()))
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 27)->first()))
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{ route('accommodation-guests.index') }}">
@@ -476,6 +516,16 @@
                                 <i class="fas fa-users-cog fa-stack-1x text-dark"></i>
                             </span>
                             <span class="ms-2">Access Control</span>
+                        </a>
+                    </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{ route('admins.index') }}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fas fa-users fa-stack-1x text-dark"></i>
+                            </span>
+                            <span class="ms-2"> Edit Admins</span>
                         </a>
                     </li>
                         <li class="side-item">

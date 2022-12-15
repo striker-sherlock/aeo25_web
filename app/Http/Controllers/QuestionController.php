@@ -41,7 +41,7 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         $this->validateQuestion();
-
+        
         Question::create([
             'name' => $request->name,
             'phone_number' => $request->phone_number,
@@ -49,23 +49,21 @@ class QuestionController extends Controller
             'question' => $request->question,
             'is_responded' => false,
             'country_id' => $request->country_id,
-            'admin_id' => '1',
             'created_by' => $request->name,
-
+            
         ]);
-
+        
         $country = Countries::find($request->country_id);
-
+        
         $questionNotification = [
             'subject' => "New Question Notification",
             'division' => "MIT - Registration Department",
             'body' => "A new question from <b>" . $request->name . "</b> has been submitted! <br> Kindly reply it as soon as possible through AEO website by clicking the button bellow.",
             'link' => "http://aeo.mybnec.org/questions" 
         ];
-
+        
         $admins = Admin::where('department_id', 'MITR')->get();
         Mail::to($admins)->send(new QuestionNotificationMail($questionNotification));
-        
         return redirect()->route('home')->with('success', 'Question Submitted');
     }
 

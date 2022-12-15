@@ -2,7 +2,7 @@
     <style>
         span.position-absolute {
             top: -10px;
-            right: -20px;
+            right: -30px;
             width: 20px;
             height: 20px;
             cursor: pointer;
@@ -42,11 +42,13 @@
                             <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br>
                                 Days</div>
                             <div class="col  bg-dark rounded me-2 p-2"><span id="cd-hours" class="fs-1 "></span>
-                                <br>Hours</div>
+                                <br>Hours
+                            </div>
                             <div class="col bg-dark rounded me-2 p-2"><span id="cd-minutes" class="fs-1 "></span><br>
                                 Minutes</div>
                             <div class="col bg-dark rounded me-2 p-2"><span id="cd-seconds" class="fs-1 "></span>
-                                <br>Seconds</div>
+                                <br>Seconds
+                            </div>
                             <div data-aos="fade-up" data-aos-delay="600">
                                 <div class="text-start text-lg-center ">
                                     <a href="{{ route('register') }}"
@@ -166,7 +168,7 @@
                     </h1>
                     <p class=" mt-3 c-text-1  home_title">Please click the logo to see competition fields detail </p>
 
-                    <div class="owl-carousel owl-theme d-flex mx-auto   ">
+                    <div class="owl-carousel owl-theme d-flex mx-auto   " id="home">
                         @foreach ($competitions as $competition)
                             @if ($competition->id == 'OBS' || $competition->id == 'IA')
                                 @continue
@@ -236,83 +238,107 @@
 
                 </div>
             </section>
-
             <!-- End How To Register Section -->
 
             <!-- ======= Ambassador Section ======= -->
 
-            {{-- @if ($ambassadors->count() != 0)
+            @if ($ambassadors->count() != 0)
                 <section id="ambassadors" class="bg-white mt-0">
-                    <div class="ambassadors wow fadeIn">
+                       <div class="ambassadors wow fadeIn">
                         <div class="container">
-                            <div class="title-line mx-auto"></div>
                             <div class="d-flex justify-content-center">
-                                <hr class="w-25 pink-line fw-bold">
+                                <div class="  rounded  my-2"></div>
+                            </div>
+                            <h5 class="mt-3 fw-bold text-center heading-primary text-gradient-blue">OUR AMBASSADORS
+                            </h5>
+                            <h1 class="fw-bold mt-3 c-text-1 c-text-about text-gradient text-center mb-4 home_title">
+                                What they say about AEO</h1>
+                            <div class="d-sm-flex flex-column">
 
-                            </div>
-                            <h5 class="mt-3 fw-bold text-center heading-primary">OUR AMBASSADORS</h5>
-                            <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title"
-                                style="color: #32649E">What they say about AEO</h1>
-                            <div class="slider">
-                                @foreach ($ambassadors as $ambassador)
-                            @if ($loop->iteration == 1)
-                            <div class="slide active">
-                                <div class="left">
-                                    <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
-                                </div> 
-                                <div class="right">
-                                    <p class="text-justify fs-6">"{{$ambassador->testimony}}"</p>
-                                    <div class="client-info">
-                                        <small>
-                                            <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
-                                            <p class="text-muted mb-0">{{ $ambassador->institution }}</p>
-                                        </small>
+                                <div class="row">
+                                    <div class="slider card border-0 rounded-20  p-3 col-10" style="box-shadow: 0 0 4px 2px #eee">
+                                        @foreach ($ambassadors as $ambassador)
+                                        @if ($loop->iteration == 1)
+                                        
+                                        <div class="slide active">
+                                            <div class="left">
+                                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
+                                            </div> 
+                                            <div class="right">
+                                                <sup>
+                                                    <i class="fa-solid fa-quote-left fa-2x me-2"
+                                                        style="color: #80679E"></i>
+                                                </sup>
+                                                <p class="text-justify fs-6">{{ $ambassador->testimony }} <i
+                                                        class="fa-solid fa-quote-right fa-2x ms-2"
+                                                        style="color: #80679E"></i></p>
+                                                <div class="client-info">
+                                                    <small>
+                                                        <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
+                                                        <p class="text-muted mb-0">{{ $ambassador->institution }}
+                                                        </p>
+                                                    </small>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>      
+                                        @else
+                                        <div class="slide">
+                                            <div class="left">
+                                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
+                                            </div>
+                                            <div class="right">
+                                                <sup>
+                                                    <i class="fa-solid fa-quote-left fa-2x me-2"
+                                                        style="color: #80679E"></i>
+                                                </sup>
+                                                <p class="text-justify fs-6">{{ $ambassador->testimony }} <i
+                                                        class="fa-solid fa-quote-right fa-2x ms-2"
+                                                        style="color: #80679E"></i></p>
+                                                <div class="client-info">
+                                                    <small>
+                                                        <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
+                                                        <p class="text-muted mb-0">{{ $ambassador->institution }}
+                                                        </p>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        @endif
+                                        @endforeach
                                     </div>
-                                </div>
-                            </div>      
-                            @else
-                            <div class="slide">
-                                <div class="left">
-                                    <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="c-greetings-img">
-                                </div>
-                                <div class="right">
-                                    <p class="text-justify fs-6">"{{$ambassador->testimony}}"</p>
-                                    <div class="client-info">
-                                        <small>
-                                            <p class="mb-0 fw-bold">{{ $ambassador->name }},</p>
-                                            <p class="text-muted mb-0">{{ $ambassador->institution }}</p>
-                                        </small>
+                                    <div class="col-2  justify-content-center align-items-center">
+                                        
+                                        <div class="slider-indicator d-flex flex-column">
+                                            @foreach ($ambassadors as $ambassador)
+                                            @if ($loop->iteration == 1)
+                                            <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="active" alt="img" data-id="{{$ambassador->id}}">      
+                                            @else
+                                            <img src="/storage/images/ambassador/{{$ambassador->photo}}" alt="img" data-id="{{$ambassador->id}}">    
+                                            @endif
+                                            @endforeach
+                                            @php
+                                                $allAmbassadors = App\Models\Ambassador::all()->count();
+                                                $ambassadorCount = $allAmbassadors - count($ambassadors);
+                                            @endphp
+                                            @if ($ambassadorCount > 0)
+                                                <a href="/ambassadors" target="_blank">
+                                                    <button type="button" class="btn btn-lg opacity-25 rounded-circle">+{{ $ambassadorCount  }}</button>
+                                                </a>
+                                            @endif
+                                        </div>
                                     </div>
+    
                                 </div>
-                            </div> 
-                            @endif
-                            @endforeach
-                            </div>
-                            <div class="bottom d-flex justify-content-center align-items-center">
-                                <div class="slider-indicator">
-                                    @foreach ($ambassadors as $ambassador)
-                                @if ($loop->iteration == 1)
-                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="active" alt="img" data-id="{{$ambassador->id}}">      
-                                @else
-                                <img src="/storage/images/ambassador/{{$ambassador->photo}}" alt="img" data-id="{{$ambassador->id}}">    
-                                @endif
-                                @endforeach
-                                @php
-                                    $allAmbassadors = App\Models\Ambassador::all()->count();
-                                    $ambassadorCount = $allAmbassadors - count($ambassadors);
-                                @endphp
-                                @if ($ambassadorCount > 0)
-                                    <a href="/ambassadors" target="_blank">
-                                        <button type="button" class="btn btn-lg opacity-25 rounded-circle">+{{ $ambassadorCount  }}</button>
-                                    </a>
-                                @endif
+                                <div class="d-flex justify-content-center text-center m-3 p-3">
+                                    <a href="{{ route('ambassadors.index') }}" class="btn btn-outline-1 d-inline-flex px-4 py-2  rounded-20 ">View More</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                
-            @endif --}}
+
+            @endif
 
             <!-- End Ambassador Section -->
 
@@ -428,7 +454,7 @@
                     <h1 class="fw-bold mt-3 c-text-1 c-text-about text-center mb-4 home_title heading-primary">Drop
                         Your Question Here
                     </h1>
-                    <div class="card rounded-20 card-shadow border-0">
+                    <div class="card rounded-20   border-0">
                         <div class="card-body m-3">
                             <p class="text-muted mb-4">Please fill the form below, then we will answer your question
                                 via e-mail.
@@ -442,7 +468,7 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control " id="name" name="name"
+                                        <input class="form-control rounded-pill" id="name" name="name"
                                             value="{{ old('name') }}" required>
                                     </div>
                                 </div>
@@ -453,7 +479,7 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <select class="form-select " name="country_id">
+                                        <select class="form-select rounded-pill" name="country_id" id="country_id">
                                             <option selected class="d-none">Select your Country</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -472,9 +498,9 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input type="tel" class="form-control " id="phone_number"
+                                        <input type="tel" class="form-control rounded-pill" id="phone_number"
                                             name="phone_number" value="{{ old('phone_number') }}"
-                                            placeholder="812-345-678" required>
+                                             required>
                                     </div>
                                 </div>
 
@@ -484,22 +510,22 @@
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <input class="form-control " id="email" name="email"
+                                        <input class="form-control rounded-pill" id="email" name="email"
                                             value="{{ old('email') }}" required>
                                     </div>
                                 </div>
 
                                 <div class="form-group row mb-0 mb-sm-3">
-                                    <label for="question" class="col-sm-3 col-form-label text-sm-left">
+                                    <label for="question" class="col-sm-3 col-form-label text-sm-left rounded-pill">
                                         Question
                                         <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control " id="question" name="question" value="{{ old('question') }}" style="height: 100px"
+                                        <textarea class="form-control rounded-20" id="question" name="question" value="{{ old('question') }}" style="height: 100px"
                                             required>{{ old('question') }}</textarea>
                                     </div>
                                 </div>
-                                <div class="d-grid mt-5">
+                                <div class="d-grid mt-4">
                                     <button type="submit" class="btn btn-outline-1 rounded-20 btnSubmit"
                                         id="btn-submit">Submit</button>
                                 </div>
@@ -517,9 +543,6 @@
 
         <!-- ======= Footer ======= -->
         <x-footer></x-footer>
-
-
-
         <!-- End Footer -->
 
         <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -642,34 +665,41 @@
             </div>
         </div>
     </body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-        integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        let owl = $('.owl-carousel');
-        owl.owlCarousel({
-            loop: true,
-            nav: true,
-            autoplay: true,
-            dots: true,
-            lazyLoad: true,
-            margin: 15,
-            center: true,
-            responsive: {
-                0: {
-                    items: 1
-                },
-                600: {
-                    items: 2
-                },
-                1200: {
-                    items: 3
-                },
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+            integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            let owl = $('.owl-carousel');
+            $(document).ready(function(){
+                owl.owlCarousel({
+                    loop: true,
+                    nav: true,
+                    autoplay: true,
+                    dots: true,
+                    lazyLoad: true,
+                    margin: 15,
+                    center: true,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        400: {
+                            items: 2
+                        },
+                        1200: {
+                            items: 3
+                        },
+    
+                    }
+                });
+                $('.owl-next span').text('');
+                $('.owl-next span').addClass('fa-solid fa-arrow-right');
+                $('.owl-prev span').text('');
+                $('.owl-prev span').addClass('fa-solid fa-arrow-left');
 
-            }
-        });
-
+            })
+            
         let timer = function(date) {
             let timer = Math.round(new Date(date).getTime() / 1000) - Math.round(new Date().getTime() / 1000);
             let minutes, seconds;
@@ -694,18 +724,28 @@
             }, 1000);
         }
 
-        $('.owl-next span').text('');
-        $('.owl-next span').addClass('fa-solid fa-arrow-right');
-        $('.owl-prev span').text('');
-        $('.owl-prev span').addClass('fa-solid fa-arrow-left');
-
+        
         //using the function
         const tomorrow = new Date("January 13, 2023 18:00:00")
         timer(tomorrow);
 
         $('figure.table table').addClass('table-bordered mx-auto text-center w-100')
 
+        const slides = document.querySelector(".slider").children;
+        const indicatorImages = document.querySelector(".slider-indicator").children;
+        for (let i = 0; i < indicatorImages.length - 1; i++) {
+            indicatorImages[i].addEventListener("click", function() {
+                for (let j = 0; j < indicatorImages.length; j++) {
+                    indicatorImages[j].classList.remove("active");
+                }
+                this.classList.add("active");
+                const id = this.getAttribute("data-id");
 
-       
+                for (let j = 0; j < slides.length; j++) {
+                    slides[j].classList.remove("active");
+                }
+                slides[i].classList.add("active");
+            })
+        }
     </script>
 </x-layout>

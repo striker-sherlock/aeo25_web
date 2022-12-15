@@ -23,7 +23,7 @@
                     <div class="form-group mb-3">
                         <label for="ticket_proof" class="col-form-label">Ticket Proof <span class="text-danger">*</span></label>
                         <input type="file" class="form-control" name="ticket_proof[]" accept="image/png, image/jpeg, image/jpg" multiple>
-                        <small class="text-danger "  style="font-size: 0.7em">Type: png,jpg, jpeg max: 3MB</small>
+                        <small class="text-danger " style="font-size: 0.7em">Type: PNG, JPG, JPEG max: 3MB</small>
                     </div>
                     <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>                </form>
             </x-card>

@@ -25,14 +25,9 @@ $fa-font-path: "~fa/../webfonts";
 // Owl carousel
 @import 'owl.carousel/dist/assets/owl.carousel.css';
 
-// Intl tel-input
-@import 'intl-tel-input/build/css/intlTelInput.css';
-.iti__flag {background-image: url("/storage/assets/flags.png ");}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .iti__flag {background-image: url("/storage/assets/flags@2x.png");}
-}
 
 
 // External Style
 @import 'style';
 @import 'sidebar';
+@import 'merch';

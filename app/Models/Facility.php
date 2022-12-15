@@ -13,4 +13,6 @@ class Facility extends Model
     protected $primaryKey = 'id';
     protected $timestamp = 'true';
     protected $guarded = [];
+
+    
 }
