@@ -55,6 +55,19 @@
                             <h4 class="fw-bold">IDR {{ number_format($grandTotal, 2, ',', '.')}} </h4>
                         </div>
                     </x-card>
+                    <x-card>
+                        <h5 class="fw-bold text-capitalize text-center text-gradient">payment guideline</h5>
+                        
+                        <hr>
+                        <p>Please download the file below to see the payment guideline by clicking "Download Guideline" button. After that, please fill the form.</p>
+                        <div class="row">
+                            <div class="col">
+                                <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
+                                    class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fas fa-file-invoice"></i> Download Guideline
+                                </a>
+                            </div>
+                        </div>
+                    </x-card>
                 </div>
             </div>
             <x-card>
@@ -179,7 +192,7 @@
                         <div class="form-group mb-2">
                             <label for="payment_provider" class="col-form-label">Bank Name<span class="text-danger">*</span></label>
                             <select class="form-select"  name="payment_provider" id="payment_provider" >  
-                                <option selected class="d-none" disabled> select bank ... </option>
+                                <option selected class="d-none" disabled> Select Bank ... </option>
                                 @foreach ($paymentProviders as $paymentProvider)
                                     <option value="{{$paymentProvider->id}}" {{old('payment_provider') == $paymentProvider->id? 'selected' : ''}}>{{$paymentProvider->name}}</option>
                                 @endforeach
@@ -206,7 +219,7 @@
                         </div>        
                 
                         <div class="form-group mb-3">
-                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof<span class="text-danger">*</span> <small class="text-muted">Please transfer to BCA 527 188 2077 (Rahmadira F Herdiningtya)</small></label>
+                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof<span class="text-danger">*</span> <small class="text-muted">Please transfer to BCA 527 188 2077 (Rahmadira F Herdiningtyas)</small></label>
                             <input type="file" class="form-control"  name="transfer_proof_bank" id="transfer_proof_bank" accept="image/png,image/jpeg,image/jpg">    
                             <small class="text-danger"  style="font-size: 0.7em">Type : PNG, JPEG, JPG | Max : 2MB</small><br>
                             @if ($errors->has('transfer_proof_bank'))

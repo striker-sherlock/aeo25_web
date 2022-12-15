@@ -52,6 +52,7 @@
                     </div>
                 </div>
             </x-card>
+
             <x-card>
                 <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Payment Detail </h3>
                 <hr> 
@@ -67,7 +68,7 @@
                         <div class="form-group mb-2">
                             <label for="payment_provider" class="col-form-label">Bank Name<span class="text-danger">*</span></label>
                             <select class="form-select"  name="payment_provider" id="payment_provider" >  
-                                <option selected class="d-none" disabled> select bank ... </option>
+                                <option selected class="d-none" disabled> Select Bank ... </option>
                                 @foreach ($paymentProviders as $paymentProvider)
                                     <option value="{{$paymentProvider->id}}" {{$order->payment_provider_id == $paymentProvider->id? 'selected' : ''}}>{{$paymentProvider->name}}</option>
                                 @endforeach
@@ -94,7 +95,7 @@
                         </div>        
                 
                         <div class="form-group mb-3">
-                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof<span class="text-danger">*</span> <small class="text-muted">Please transfer to BCA 527 188 2077 (Rahmadira F Herdiningtya)</small></label>
+                            <label for="transfer_proof_bank" class="col-form-label">Transfer Proof<span class="text-danger">*</span> <small class="text-muted">Please transfer to BCA 527 188 2077 (Rahmadira F Herdiningtyas)</small></label>
                             <input type="file" class="form-control"  name="transfer_proof_bank" id="transfer_proof_bank" accept="image/png,image/jpeg,image/jpg">    
                             <small class="text-danger"  style="font-size: 0.7em">Type : PNG, JPEG, JPG | Max : 2MB</small><br>
                             @if ($errors->has('transfer_proof_bank'))
@@ -135,7 +136,7 @@
             </x-card>
         </form>
     </div>
-    <<script> 
+    <script> 
         let bank = document.querySelector('.bank');
         let wise = document.querySelector('.wise');
         let type = document.querySelector('input[name="type"]');

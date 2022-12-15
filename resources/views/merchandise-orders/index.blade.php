@@ -54,7 +54,7 @@
 
                         <div class="mt-4 w-50 ">
                             <h4 class="card-title aeo-title text-capitalize fw-bold mb-2">{{$merchandise->name}}</h4>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">{{ $merchandise->product_description }}</p>
                             <h5 class="mb-2 fw-bold "> Set quantity and notes</h5>
                             {{-- set quantity  --}}
                         
@@ -98,7 +98,7 @@
 
                             <div class="mt-4 w-50 ">
                                 <h4 class="card-title aeo-title text-capitalize fw-bold mb-2">{{$merchandise->name}}</h4>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <p class="card-text">{{ $merchandise->product_description }}</p>
                                 <h5 class="mb-2 fw-bold "> Set quantity and notes</h5>
                                 {{-- set quantity  --}}
                             
