@@ -330,9 +330,11 @@
                                     </div>
     
                                 </div>
+                                @if ( count($ambassadors) > 4)
                                 <div class="d-flex justify-content-center text-center m-3 p-3">
-                                    <a href="{{ route('ambassadors.index') }}" class="btn btn-outline-1 d-inline-flex px-4 py-2  rounded-20 ">View More</a>
+                                    <a href="{{ route('ambassadors.index') }}" class="btn btn-outline-1 d-inline-flex px-5 py-2  rounded-20 fs-4 ">View More</a>
                                 </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -733,7 +735,7 @@
 
         const slides = document.querySelector(".slider").children;
         const indicatorImages = document.querySelector(".slider-indicator").children;
-        for (let i = 0; i < indicatorImages.length - 1; i++) {
+        for (let i = 0; i < indicatorImages.length; i++) {
             indicatorImages[i].addEventListener("click", function() {
                 for (let j = 0; j < indicatorImages.length; j++) {
                     indicatorImages[j].classList.remove("active");

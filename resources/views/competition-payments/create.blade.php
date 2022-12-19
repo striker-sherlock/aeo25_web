@@ -87,7 +87,7 @@
                         <div class="form-group mb-2">
                             <label for="payment_provider" class="col-form-label">Bank Name<span class="text-danger">*</span></label>
                             <select class="form-select"  name="payment_provider" id="payment_provider" >  
-                                <option selected class="d-none" disabled> select bank ... </option>
+                                <option selected class="d-none" disabled> Select Bank ... </option>
                                 @foreach ($paymentProviders as $paymentProvider)
                                     <option value="{{$paymentProvider->id}}" {{old('payment_provider') == $paymentProvider->id? 'selected' : ''}}>{{$paymentProvider->name}}</option>
                                 @endforeach
