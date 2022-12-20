@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\CompetitionPartipant;
 use App\Models\CompetitionParticipant;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;

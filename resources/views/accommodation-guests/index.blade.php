@@ -17,14 +17,14 @@
 
             @endif
             @if ($guests->count())
-                {{-- <a href="{{route('competition-participants.export',$competition->id)}}" class="btn btn-outline-success mb-4">Download Participant</a> --}}
+                <a href="{{route('accommodation-guests.export', $roomType)}}" class="btn btn-outline-success mb-4">Download Participant</a>
                 <div class="table-responsive py-2">
                     <table class="table table-striped table-bordered dataTables"  >
                         <thead class="text-center">
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">PIC Name </th>
-                            <th scope="col">Room Type</th>
+                            <th scope="col">Institution</th>
                             <th scope="col">Country</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -79,7 +79,7 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">PIC Name </th>
-                            <th scope="col">Room Type</th>
+                            <th scope="col">Institution</th>
                             <th scope="col">Country</th>
                             <th scope="col">Action</th>
                         </tr>

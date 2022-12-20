@@ -115,7 +115,8 @@ Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders
     Route::get('pending/{id}', 'pending')->name('pending');
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{id}', 'cancel')->name('cancel');
-    // Route::get('export', 'export')->name('export');
+    Route::get('export', 'export')->name('export');
+    Route::get('export-orders', 'exportOrder')->name('export-order');
 
 });
 
@@ -266,6 +267,7 @@ Route::controller(AdminAccommodationGuestController::class)->prefix('guests')->n
     Route::delete('destroy/{accommodationGuest}', 'destroy')->name('destroy');
     Route::delete('delete/{accommodationGuest}', 'delete')->name('delete');
     Route::get('restore/{accommodationGuest}', 'restore')->name('restore');
+    Route::get('export/{accommodationGuest}', 'export')->name('export');
 });
 
 // Institution Contact
