@@ -27,10 +27,7 @@
                             class="text-reset text-decoration-none" target="_blank"><i
                                 class="fab fa-whatsapp me-2 fa-lg"></i>Chat Us</a>
         </div>
-        <div class="alert alert-primary border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
-            <i class="fa-solid fa-triangle-exclamation me-1"></i> <b>Important info!</b> <br>
-            You may leave the number '0' if you don't want to buy the merchandise.
-        </div>
+        
 
         <form action="{{route('merchandise-orders.temp-store')}}" enctype="multipart/form-data" method="POST">
             @csrf
@@ -76,19 +73,21 @@
                     </div>
                 </div>
             @endforeach
+
+            
             <div class="row merchandise-card">
                 @foreach ($merchandises->where('type','piece') as $merchandise)
                     <input type="text" hidden name="merch_id[]" value="{{$merchandise->id}}">
                     <div class="col-md-6 mb-3  ">
                         <div class="d-flex justify-content-between mb-5 custom-card">
-                            <div class="owl-carousel owl-theme  w-50 me-2" data-image = "{{$merchandise->image}}" >
+                            <div class=" owl-carousel owl-theme  w-50 me-2" data-image = "{{$merchandise->image}}" >
                                 @foreach (explode('; ',$merchandise->image) as $image  )
                                     <div class="item mx-auto rounded-20 " style="width:100%;">
                                         <a>
-                                            <div class="d-flex justify-content-center p-2" style="box-sizing: border-box">
+                                            <div class="d-flex justify-content-center p-2" >
                                                 <img src="storage/merchandise/merchandise_photo/{{ $image }}"
-                                                    class="img-fluid  w-100" alt="{{ $merchandise->name }}'s image" loading="lazy"
-                                                    width="50" >
+                                                    class="img-fluid  w-100" alt="{{ $merchandise->name }}'s image" 
+                                                   p width="50" >
                                             </div>
                                             
                                         </a>

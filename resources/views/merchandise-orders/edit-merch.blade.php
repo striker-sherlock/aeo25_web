@@ -16,7 +16,7 @@
                 </div> 
                 <div class="form-group mb-3">
                     <label for="notes" class="col-form-label">Notes<span class="text-danger">*</span> </label>
-                    <textarea name="notes" id="notes"  rows="3" class="form-control">{{$order->notes}}</textarea>
+                    <textarea name="notes" id="notes"  rows="3" class="form-control">{{$order->order_details}}</textarea>
                 </div> 
                 <button type="submit" class="btn btn-outline-theme rounded-pill w-100">Save Changes</button>
             </form>

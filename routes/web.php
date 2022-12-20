@@ -110,12 +110,13 @@ Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders
     Route::get('{id}/edit-payment', 'edit')->name('edit-payment');
     Route::put('{id}/update', 'updateMerch')->name('update');
     Route::get('{id}/edit', 'editMerch')->name('edit');
-    Route::get('manage', 'index')->name('index');
+    Route::get('manage', 'index')->name('manage');
     Route::get('manage/payments', 'payment')->name('payment');
     Route::get('confirm/{id}', 'confirm')->name('confirm');
     Route::get('pending/{id}', 'pending')->name('pending');
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{id}', 'cancel')->name('cancel');
+    Route::delete('destroy/{id}', 'destroy')->name('destroy');
     // Route::get('export', 'export')->name('export');
 
 });

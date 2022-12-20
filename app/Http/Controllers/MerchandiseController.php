@@ -13,6 +13,7 @@ class MerchandiseController extends Controller
     public function __construct(){
         $this->middleware('IsShowed:ENV011');
         $this->middleware('IsAdmin');
+        $this->middleware('Access:28');
     }
 
     public function index()
