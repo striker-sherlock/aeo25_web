@@ -95,10 +95,13 @@
                                         <a href="{{route('merchandise-orders.cancel',$payment->id)}}" class="btn btn-warning me-2" title="cancel payment">
                                             <i class="fa fa-undo"></i>
                                         </a>
-
                                    
                                         <a href="#" class="btn btn-info me-2" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" title="view proof">
                                             <i class="fa-solid fa-receipt"></i>
+                                        </a>
+
+                                        <a href="{{ route('merchandise-receipt', $payment->id) }}" target="_blank" class="btn btn-success text-white"  title="view receipt">
+                                            <i class="fa-solid fa-file-invoice"></i>
                                         </a>
                                     </div>
                                 </th>

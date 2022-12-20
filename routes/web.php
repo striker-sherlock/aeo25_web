@@ -78,8 +78,6 @@ Route::prefix('questions')->name('questions.')->group(function () {
 });
 Route::resource('questions', QuestionController::class)->except('show', 'create');
 
-
-
 // PIC
 Route::resource('users',PicController::class)->except('show');
 Route::get('users/{id}/admin-edit',[PicController::class,'adminEdit'])->name('users.admin-edit');
@@ -103,6 +101,9 @@ Route::resource('merchandise-orders', MerchandiseOrderController::class)->except
 Route::post('merchandise-orders/payment',[MerchandiseOrderController::class,'tempStore'])->name('merchandise-orders.temp-store');
 Route::post('merchandise-orders/store',[MerchandiseOrderController::class,'store'])->name('merchandise-orders.store');
 
+// Merchandise Payment Receipt
+Route::get('manage/payments/view-receipt/{transaction}',[PDFController::class, 'merchandiseReceipt'])->name('merchandise-receipt');
+
 //ADMIN MERCHANDISE ORDER
 Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders')->name('merchandise-orders.')->group(function () {
     Route::put('{id}/update-payment', 'update')->name('update-payment');
@@ -119,9 +120,6 @@ Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders
     Route::get('export-orders', 'exportOrder')->name('export-order');
 
 });
-
-
-
 
 
 //competition 
