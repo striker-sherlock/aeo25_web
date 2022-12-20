@@ -28,6 +28,32 @@ class AdminSeeder extends Seeder
                     'division' => 'Project Manager',
                     'password' => Hash::make("AEO.PM2540123795")
                 ],
+                [
+                    'created_by' => 'admin',
+                    'name' =>  'Jevon Sebastian',
+                    'nim' =>  '2440027083',
+                    'email' => 'Jevonsebastian952@gmail.com',
+                    'position_id' => 2,
+                    'position' => 'Director',
+                    'department_id' => 'MIT',
+                    'department' => 'MIT',
+                    'division_id' => 'MIT',
+                    'division' => 'MIT',
+                    'password' => Hash::make("AEO.MIT2440027083")
+                ],
+                [
+                    'created_by' => 'admin',
+                    'name' =>  'Alan',
+                    'nim' =>  '2440007674',
+                    'email' => 'alansen.as25@gmail.com',
+                    'position_id' => 2,
+                    'position' => 'Director',
+                    'department_id' => 'MIT',
+                    'department' => 'MIT',
+                    'division_id' => 'MIT',
+                    'division' => 'MIT',
+                    'password' => Hash::make("AEO.MIT2440007674")
+                ],
 
                 [
                     'created_by' => 'admin',

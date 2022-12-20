@@ -23,7 +23,6 @@
                     <img src="/storage/images/accommodations/{{$selectedType->picture}}" alt="{{$selectedType->room_type}}" class="img-fluid mx-auto d-block w-100 rounded-20 shadow-sm" >
                   </div>
                   <div class="col">
-
                       {{-- form registrasi --}}
                       <button type="button" class="btn btn-outline-theme w-50 rounded mt-4 mb-3 rounded-pill {{ ($selectedType->facilities->count() > 0) ? '' : 'disabled' }}" data-bs-target="#viewFacility-{{ $selectedType->id }}" data-bs-toggle="modal" title="View Facilities">
                         View Facilities
@@ -58,7 +57,6 @@
                     </div>
 
                     <div class="row">
-                
                       <div class="col">
                         <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>
                       </div>
@@ -88,7 +86,7 @@
                               </div>
                           </div>
                       </div>  
-                  </div> 
+                    </div> 
 
                   {{-- View Facility Modal --}}
                   <div class="modal fade" id="viewFacility-{{$selectedType->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">

@@ -11,9 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class CompetitionPaymentExport implements FromCollection, WithHeadings
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+
     public function collection()
     {
         $data = DB::table('competition_payments')
@@ -27,6 +25,6 @@ class CompetitionPaymentExport implements FromCollection, WithHeadings
     }
 
     public function headings():array{
-        return ['ID', 'Amount','Account_number', 'PIC', 'PIC Email', 'Contact'];
+        return ['ID', 'Amount','Account Number', 'PIC', 'PIC Email', 'Contact'];
     }
 }

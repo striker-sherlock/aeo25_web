@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\RejectionMail;
 use Illuminate\Http\Request;
 use App\Mail\ConfirmedSlotMail;
+use App\Exports\AccommodationPaymentExport;
+
 
 class AdminAccommodationPaymentController extends Controller
 {
@@ -76,7 +78,7 @@ class AdminAccommodationPaymentController extends Controller
     }
 
     public function export(){
-        return Excel::download(new CompetitionPaymentExport, 'competition-payments.xlsx');
+        return Excel::download(new AccommodationPaymentExport, 'accommodation-payments.xlsx');
     }
 
     public function reject(Request $request){

@@ -1,4 +1,4 @@
-<x-admin>
+<x-user title="Flight Tickets">
   <div class="container mt-4">
     <x-card>
       <h1>Flights List</h1>
@@ -204,7 +204,7 @@
       </div>  
   </div>  
 @endforeach
-</x-admin>
+</x-user>
 
 
 

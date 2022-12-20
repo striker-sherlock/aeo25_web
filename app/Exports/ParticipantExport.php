@@ -2,16 +2,13 @@
 
 namespace App\Exports;
 
-use App\Models\CompetitionPartipant;
 use App\Models\CompetitionParticipant;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class ParticipantExport implements FromCollection
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+
     public function __construct($competition){
         $this->competition = $competition;
     }

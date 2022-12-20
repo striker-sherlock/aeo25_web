@@ -3,7 +3,7 @@
         <x-card>
             <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Merchandise Order Lists</h3>
             @if ($merchandises->count())
-                <a href="" class="btn btn-outline-theme mb-3">Download Excel</a>
+                <a href="{{route('merchandise-orders.export-order')}}" class="btn btn-outline-theme mb-3">Download Excel</a>
                 <div class="table-responsive py-2">
                     <table class="table table-striped table-bordered" id="dataTables">
                         <thead class="text-center">
