@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Accommodation;
+use App\Models\AccommodationSlot;
 use App\Models\AccommodationGuest;
+use App\Exports\AccommodationGuestExport;
+use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminAccommodationGuestController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsAdmin')->only(['index']);
+        $this->middleware('IsAdmin')->only(['index', 'edit']);
     }
 
     public function index($roomType = NULL){
@@ -69,5 +73,9 @@ class AdminAccommodationGuestController extends Controller
     {
         AccommodationGuest::where('id', $id)->restore();
         return redirect()->back();
+    }
+    public function export($room){
+        $roomDetails = Accommodation::find($room);
+        return Excel::download(new AccommodationGuestExport($room), $roomDetails.'Guest.xlsx');
     }
 }

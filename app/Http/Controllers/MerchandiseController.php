@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class MerchandiseController extends Controller
 {
  
-
     public function __construct(){
         $this->middleware('IsShowed:ENV011');
         $this->middleware('IsAdmin');

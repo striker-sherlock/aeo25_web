@@ -116,8 +116,8 @@ Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders
     Route::get('pending/{id}', 'pending')->name('pending');
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{id}', 'cancel')->name('cancel');
-    Route::delete('destroy/{id}', 'destroy')->name('destroy');
-    // Route::get('export', 'export')->name('export');
+    Route::get('export', 'export')->name('export');
+    Route::get('export-orders', 'exportOrder')->name('export-order');
 
 });
 
@@ -162,7 +162,7 @@ Route::controller(SlotRegistrationController::class)->prefix('slot-registrations
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
     Route::get('create-others', 'createOthers')->name('create-other');
-});
+});         
 Route::resource('slot-registrations',SlotRegistrationController::class);
 
 //Flight Registrations
@@ -175,8 +175,10 @@ Route::resource('flight-registrations', FlightRegistrationController::class);
 Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name('flight-tickets.')->group(function() {
     Route::get('{flightTickets}/restore', 'restore')->name('restore');
     Route::delete('{flightTickets}/delete', 'delete')->name('delete');
+    Route::get('/manage', 'manage')->name('manage');
+    Route::get('show/{user}', 'show')->name('show');
 });
-Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy']]);
+Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy', 'show']]);
 
 //Admin Privileges - Competition Payment
 Route::get('/{type}/payments', [AdminCompetitionPaymentController::class, 'index'])->name('competition-payments.index');
@@ -185,7 +187,7 @@ Route::controller(AdminCompetitionPaymentController::class)->prefix('payments')-
     Route::get('pending/{competitionSlot}', 'pending')->name('pending');
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
-    Route::get('export', 'export')->name('export');
+    Route::get('export/{type}', 'export')->name('export');
 });
 
 //COMPETITION PAYMENT USER
@@ -263,6 +265,7 @@ Route::controller(AdminAccommodationGuestController::class)->prefix('guests')->n
     Route::delete('destroy/{accommodationGuest}', 'destroy')->name('destroy');
     Route::delete('delete/{accommodationGuest}', 'delete')->name('delete');
     Route::get('restore/{accommodationGuest}', 'restore')->name('restore');
+    Route::get('export/{accommodationGuest}', 'export')->name('export');
 });
 
 // Institution Contact

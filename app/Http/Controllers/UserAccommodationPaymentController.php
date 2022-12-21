@@ -164,7 +164,7 @@ class UserAccommodationPaymentController extends Controller
                 'transfer_proof_wise' => 'nullable|image|max:1999|mimes:jpg,png,jpeg',
             ]);
         }
-        $pic = User::find($accommodationPayment->user->id);
+        $pic = User::find($accommodationPayment->user->id)->username;
         $fileName = str_replace(' ', '-', $pic );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
         $fileName = str_replace('-', '_', $fileName);
@@ -181,11 +181,13 @@ class UserAccommodationPaymentController extends Controller
                 $fixedName = $request->transfer_proof_old;
             }
             $accommodationPayment->update([
-                'payment_provider_id' => 12,
+                'payment_provider_id' => $request->payment_provider,
                 'account_name' => $request->account_name,
                 'account_number' => $request->account_number,
                 'payment_proof' => $fixedName,
-                'updated_by' => $pic->username,
+                'updated_by' => Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name  : Auth::user()->username,
+                'email' => $request->email,
+                'tracking_link' => $request->track,
             ]);
             if(!Auth::guard('admin')->check()){
                 $accommodationPayment->update([
@@ -210,7 +212,9 @@ class UserAccommodationPaymentController extends Controller
                 'email' => $request->email,
                 'tracking_link' => $request->track,
                 'payment_proof' => $fixedName,
-                'updated_by' => $pic->username,
+                'account_name' => null,
+                'account_number' => null,
+                'updated_by' =>Auth::guard('admin')->check() ? Auth::guard('admin')->user()->name  : Auth::user()->username,
             ]);
             
             if(!Auth::guard('admin')->check()){

@@ -203,7 +203,7 @@
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 29)->first()))
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                            href="{{route('merchandise-orders.index')}}">
+                            href="{{route('merchandise-orders.manage')}}">
                             <span class="fa-stack fa-sm ms-n1">
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fa-solid fa-cash-register fa-stack-1x text-dark"></i>

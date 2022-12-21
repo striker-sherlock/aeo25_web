@@ -11,7 +11,9 @@ use Maatwebsite\Excel\Facades\Excel;
 class FlightTicketController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsShowed:ENV001')->only(['index', 'edit']);    
+        $this->middleware('IsShowed:ENV001')->only(['index', 'edit']); 
+        $this->middleware(['auth', 'verified'])->only(['show', 'edit']);
+        $this->middleware(['IsAdmin'])->only(['manage', 'edit']);
     }
 
     public function index()
@@ -23,9 +25,24 @@ class FlightTicketController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function manage()
     {
-        //
+        $trashed = FlightTicket::onlyTrashed()->get();
+        return view('flight-tickets.manage', [
+            'trashed'=>$trashed,
+            'flights'=>FlightTicket::all(),
+        ]);
+    }
+
+    public function show($user)
+    {
+        $ticket = FlightTicket::All();
+        $flightTickets = FlightTicket::where('pic_id', $user);
+                                    
+        
+        return view('flight-tickets.show',[
+            'flightTickets' => $flightTickets->get(),
+        ]);
     }
 
     public function edit(FlightTicket $flight_ticket)

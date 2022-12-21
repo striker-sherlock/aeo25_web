@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\RejectionMail;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Mail\ConfirmedSlotMail;
 use App\Models\PaymentProvider;
 use App\Models\MerchandiseOrder;
@@ -12,7 +12,8 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\MerchandiseTransaction;
-use App\Exports\CompetitionPaymentExport;
+use App\Exports\MerchandiseTransactionExport;
+use App\Exports\MerchandiseOrderExport;
 
 class AdminMerchandiseController extends Controller
 {
@@ -196,9 +197,13 @@ class AdminMerchandiseController extends Controller
 
  
 
-    // public function export(){
-    //     return Excel::download(new CompetitionPaymentExport, 'competition-payments.xlsx');
-    // }
+    public function export(){
+        return Excel::download(new MerchandiseTransactionExport, 'merchandise-transactions.xlsx');
+    }
+
+    public function exportOrder(){
+        return Excel::download(new MerchandiseOrderExport, 'merchandise-orders.xlsx');
+    }
 
     public function reject(Request $request){
         $merchandisePayment= MerchandiseTransaction::find($request->payment);

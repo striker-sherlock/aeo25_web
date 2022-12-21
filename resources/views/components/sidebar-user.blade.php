@@ -128,6 +128,17 @@
                         <span class="ms-2">Accommodation Guest  </span>
                     </a>
                 </li>
+
+                <li class="side-item text-white">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{ route('flight-tickets.show', Auth::user()->id) }}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fas fa-bed fa-stack-1x text-dark"></i> 
+                        </span>
+                        <span class="ms-2">Flight Tickets</span>
+                    </a>
+                </li>
                 {{-- <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{ route('schedules.index') }}">

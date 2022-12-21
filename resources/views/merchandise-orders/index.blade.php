@@ -86,8 +86,7 @@
                                         <a>
                                             <div class="d-flex justify-content-center p-2" >
                                                 <img src="storage/merchandise/merchandise_photo/{{ $image }}"
-                                                    class="img-fluid  w-100" alt="{{ $merchandise->name }}'s image" 
-                                                   p width="50" >
+                                                    class="img-fluid  w-100" alt="{{ $merchandise->name }}'s image" width="50" >
                                             </div>
                                             
                                         </a>

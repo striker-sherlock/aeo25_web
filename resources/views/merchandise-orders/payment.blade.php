@@ -59,6 +59,7 @@
         {{-- Confirmed --}}
         <x-card>
             <h2 class="text-success fw-bold">Confirmed Merchandise Payment </h2>
+            <a href="{{route('merchandise-orders.export')}}" class="btn btn-outline-theme mb-3">Download Excel</a>
             @if ($confirmed->count())
             <div class="table-responsive py-2">
                 <table class="table table-striped table-bordered dataTables" >
