@@ -131,10 +131,10 @@
 
                 <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{ route('flight-tickets.show', Auth::user()->id) }}">
+                        href="{{ route('flight-tickets.index') }}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fas fa-bed fa-stack-1x text-dark"></i> 
+                            <i class="fa-solid fa-plane fa-stack-1x text-dark"></i> 
                         </span>
                         <span class="ms-2">Flight Tickets</span>
                     </a>

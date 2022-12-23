@@ -167,18 +167,18 @@ Route::resource('slot-registrations',SlotRegistrationController::class);
 
 //Flight Registrations
 Route::controller(FlightRegistrationController::class)->prefix('flight-registrations')->name('flight-registrations.')->group(function() {
-    Route::post('{flightRegistrations}/store', 'store')->name('store');
+    Route::post('store', 'store')->name('store');
 });
-Route::resource('flight-registrations', FlightRegistrationController::class);
+Route::resource('flight-registrations', FlightRegistrationController::class, ['only'=>['create']]);
 
 //Flight Tickets
 Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name('flight-tickets.')->group(function() {
     Route::get('{flightTickets}/restore', 'restore')->name('restore');
     Route::delete('{flightTickets}/delete', 'delete')->name('delete');
     Route::get('/manage', 'manage')->name('manage');
-    Route::get('show/{user}', 'show')->name('show');
+    Route::get('/export/{type}', 'export')->name('export');
 });
-Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy', 'show']]);
+Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy']]);
 
 //Admin Privileges - Competition Payment
 Route::get('/{type}/payments', [AdminCompetitionPaymentController::class, 'index'])->name('competition-payments.index');

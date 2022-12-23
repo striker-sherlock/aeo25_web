@@ -1,9 +1,9 @@
 <x-user title="Flight Tickets">
-    <div class="container mt-4">
+    <div class="container mt-5">
       <x-card>
-        <h1>Flights List</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Flight List</h3>
+        <a href="{{ route('flight-registrations.create') }}" class="btn btn-primary btn-rounded mb-3">Create Flight Registration</a>
         @if($flightTickets->count())
-          <a href="{{ route('flight-registrations.create') }}" class="btn btn-primary btn-rounded mb-3">Create Flight Registration</a>
             <div class="table-responsive py-2">
               <table class="table table-sm table-striped table-bordered no-footer" id="dataTables">
                 <thead class="table-info">
@@ -51,8 +51,8 @@
               </table>
             </div>
             @else
+              <hr>
                 <p class="text-center">No Data</p>
-                <a href="{{ route('flight-registrations.create') }}" class="btn btn-primary btn-rounded mb-3">Create Flight Registration</a>
             @endif
       </x-card>
     </div>

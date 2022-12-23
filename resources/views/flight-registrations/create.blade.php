@@ -11,6 +11,8 @@
                         <label for="DEPARTURE">Departure</label>
                         <input type="radio" name="type" id="ARRIVAL" value="ARRIVAL">
                         <label for="ARRIVAL">Arrival</label>
+                        <br><small class="text-danger " style="font-size: 0.7em">Departure = Departure from Jakarta</small>
+                        <br><small class="text-danger " style="font-size: 0.7em">Arrival = Arrival in Jakarta</small>
                     </div>
                     <div class="form-group mb-3">
                         <label for="airline_name" class="col-form-label">Airline Name <span class="text-danger">*</span></label>
@@ -22,10 +24,11 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="ticket_proof" class="col-form-label">Ticket Proof <span class="text-danger">*</span></label>
+                        <small class="text-danger " style="font-size: 0.7em">(You can upload more than one file)</small>
                         <input type="file" class="form-control" name="ticket_proof[]" accept="image/png, image/jpeg, image/jpg" multiple>
                         <small class="text-danger " style="font-size: 0.7em">Type: PNG, JPG, JPEG max: 3MB</small>
                     </div>
-                    <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>                </form>
+                    <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>   
             </x-card>
     </div>
     <div class="modal fade p-5" id="confirmation" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
@@ -53,5 +56,5 @@
             </div>
         </div>  
       </div> 
-
+    </form>
 </x-user>

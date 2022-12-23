@@ -18,10 +18,11 @@ class FlightTicketController extends Controller
 
     public function index()
     {
-        $trashed = FlightTicket::onlyTrashed()->get();
-        return view('flight-tickets.index', [
-            'trashed'=>$trashed,
-            'flights'=>FlightTicket::all(),
+        $ticket = FlightTicket::All();
+        $flightTickets = FlightTicket::where('pic_id', Auth::user()->id);
+                                    
+        return view('flight-tickets.index',[
+            'flightTickets' => $flightTickets->get(),
         ]);
     }
 
@@ -34,15 +35,9 @@ class FlightTicketController extends Controller
         ]);
     }
 
-    public function show($user)
+    public function show() // nunjukkin tabel user doang
     {
-        $ticket = FlightTicket::All();
-        $flightTickets = FlightTicket::where('pic_id', $user);
-                                    
-        
-        return view('flight-tickets.show',[
-            'flightTickets' => $flightTickets->get(),
-        ]);
+    
     }
 
     public function edit(FlightTicket $flight_ticket)
@@ -91,6 +86,10 @@ class FlightTicketController extends Controller
             'ticket_proof'=> implode('; ', $ticket_proof_new),
         ]);
         return redirect()->route('flight-tickets.index');
+    }
+
+    public function export($type){
+        return Excel::download(new FlightTicketExport($type), 'flight-tickets.xlsx');
     }
 
     public function destroy(FlightTicket $flightTicket) // SOFT DELETE

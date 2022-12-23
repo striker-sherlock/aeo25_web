@@ -10,13 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class FlightRegistrationController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsShowed:ENV002')->only(['index', 'create', 'edit']);   
-        
-    }
-
-    public function index()
-    {
-
+        $this->middleware('IsShowed:ENV002')->only(['create']);   
+        $this->middleware(['auth', 'verified'])->only(['create', 'store']);
     }
 
     public function create()
@@ -61,29 +56,5 @@ class FlightRegistrationController extends Controller
         ]);
 
         return redirect()->route('flight-tickets.index');
-    }
-
-   
-    public function show($id)
-    {
-        //
-    }
-
-    public function destroy(FlightRegistration $flightRegistration) // SOFT DELETE
-    {
-        $flightRegistration->delete();
-        return redirect()->back();
-    }
-
-    public function delete($id) // HARD DELETE
-    {
-        FlightRegistration::where('id', $id)->forceDelete();
-        return redirect()->back();
-    }
-
-    public function restore($id)
-    {
-        FlightRegistration::where('id', $id)->restore();
-        return redirect()->back();
     }
 }
