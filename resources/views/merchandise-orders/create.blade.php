@@ -18,6 +18,13 @@
                 <div class="col-md">
                     <x-card>
                         <h3 class="text-uppercase fw-bold  text-gradient fs-2 mb-3 text-center" style="letter-spacing: 0.1em">Order Summary </h3>
+                        <div class="row">
+                            <div class="col">
+                                <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
+                                    class="btn btn-outline-theme rounded-pill px-4 w-100 mb-4 "><i class="fas fa-file-invoice"></i> Download Payment Guideline
+                                </a>
+                            </div>
+                        </div>
                         @for ($i = 0; $i < $len; $i++)
                             @php($image = explode('; ',$merchandise[$i]->image)[0])
                             <div class="row  mb-4  align-items-center   rounded-20 order-summary">
@@ -38,6 +45,7 @@
                 <div class="col-md">
                     <x-card>
                         <h3 class="text-uppercase fw-bold  text-gradient fs-2 mb-3 text-center" style="letter-spacing: 0.1em">Receipt Summary </h3>
+                        
                         <div class="d-flex justify-content-between">
                             <h4>Items</h4>
                             <h4>Price</h4>
@@ -55,19 +63,7 @@
                             <h4 class="fw-bold">IDR {{ number_format($grandTotal, 2, ',', '.')}} </h4>
                         </div>
                     </x-card>
-                    <x-card>
-                        <h5 class="fw-bold text-capitalize text-center text-gradient">payment guideline</h5>
-                        
-                        <hr>
-                        <p>Please download the file below to see the payment guideline by clicking "Download Guideline" button. After that, please fill the form.</p>
-                        <div class="row">
-                            <div class="col">
-                                <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
-                                    class="btn btn-outline-theme rounded-pill px-4 w-100 "><i class="fas fa-file-invoice"></i> Download Guideline
-                                </a>
-                            </div>
-                        </div>
-                    </x-card>
+                 
                 </div>
             </div>
             <x-card>

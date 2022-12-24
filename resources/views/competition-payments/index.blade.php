@@ -60,7 +60,7 @@
         <x-card>
             <h2 class="mb-3 text-success fw-bold">Confirmed Competition Payment </h2>
             @if ($confirmed->count())
-                <a href="{{route('competition-payments.export')}}" class="btn btn-outline-theme mb-3">Download Excel</a>
+                <a href="{{route('competition-payments.export',$type)}}" class="btn btn-outline-theme mb-3 text-capitalize">Download Excel ({{ $type}} Payment)</a>
                 <div class="table-responsive py-2">
                     <table class="table table-striped table-bordered dataTables" id="dataTables">
                         <thead class="text-center">

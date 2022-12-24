@@ -37,7 +37,7 @@ class AccessControlController extends Controller
         }
  
         return view("access-controls.show",[
-            "accesses" => Access::all(),
+            "accesses" => Access::orderBy('id')->get(),
             "user" => Admin::find($id),
             "access_id" => $access_ids
         ]);
@@ -56,7 +56,7 @@ class AccessControlController extends Controller
         return view('access-controls.department-access-control',[
             'admins' => $admins,
             'departmentID' => $request->department_id,
-            "accesses" => Access::all(),
+            "accesses" => Access::orderBy('id')->get(),
             'department' => $admins[0]->department,
         ]);
     }

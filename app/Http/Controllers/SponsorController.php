@@ -93,28 +93,28 @@ class SponsorController extends Controller
             'is_showed' => 'required'
         ]);
  
-        $sponsor= $request->nama;
-        $fileName = str_replace(' ', '-', $sponsor);
+        $sponsorName = $request->nama;
+        $fileName = str_replace(' ', '-', $sponsorName );
         $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
         $fileName = str_replace('-', '_', $fileName);
         $current = time();
 
         if ($request->hasFile('logo_new')){
-            $extension = $request->file('logo')->getClientOriginalExtension();
+            $extension = $request->file('logo_new')->getClientOriginalExtension();
             $fixedName = $fileName.'_'.$current.'.'.$extension;
-            $path = $request->file("logo")->storeAs("public/sponsor/logo",$fixedName);
+            $path = $request->file("logo_new")->storeAs("public/sponsor/logo",$fixedName);
         }
         else{
             $fixedName = $request->logo_old;
         }
 
         $sponsor->update([
-            'updated_by' => 'admin',
+            'updated_by' => Auth::guard('admin')->user()->name,
             'name' => $request->nama,
             'logo' => $fixedName,
             'is_showed' => $request->is_showed,
         ]);
-        return redirect()->route('sponsors.index');
+        return redirect()->route('sponsors.index')->with('success','Sponsor has successfuly updated');
 
     }
 
