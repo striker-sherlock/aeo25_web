@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class FlightRegistrationController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsShowed:ENV002')->only(['index', 'create', 'edit']);   
+        $this->middleware('IsShowed:ENV002')->only(['index', 'create', 'edit']);  
         
     }
 

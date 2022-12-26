@@ -45,6 +45,7 @@ class AdminCompetitionPaymentController extends Controller
             'pending' => $pending,
             'confirmed' => $confirmed,
             'rejected' => $rejected,
+            'type' => $type
         ]);
     }
 
@@ -117,8 +118,8 @@ class AdminCompetitionPaymentController extends Controller
         return redirect()->back()->with('success', 'The payment has successfully moved to pending');
     }
 
-    public function export(){
-        return Excel::download(new CompetitionPaymentExport, 'competition-payments.xlsx');
+    public function export($type){
+        return Excel::download(new CompetitionPaymentExport($type), 'competition-payments.xlsx');
     }
 
     public function reject(Request $request){
