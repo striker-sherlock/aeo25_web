@@ -213,7 +213,7 @@ $(document).ready(function () {
 });
 
 
-  // Home Animation 
+  // Home Animation Script 
   document.addEventListener("DOMContentLoaded", function(event) {
     document.addEventListener("scroll", function(event) {
         const animatedBoxes = document.getElementsByClassName("animated-box");
