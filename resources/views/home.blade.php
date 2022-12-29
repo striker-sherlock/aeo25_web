@@ -26,7 +26,7 @@
         <section id="hero" class="hero d-flex align-items-center mx-auto">
             <div class="container mt-5">
                 <div class="row d-flex justify-content-center text-center text-md-start">
-                    <div class=" col-md-6 px-3">
+                    <div class=" col-md-6 px-3 animate__animated animate__lightSpeedInLeft">
                         <div class="d-flex justify-content-center justify-content-md-start ">
                             <div class=" custom-border rounded  my-2"></div>
                         </div>
@@ -34,7 +34,7 @@
                         <h1 data-bs-aos="fade-up" class='aeo-theme  mb-4 display-5' style="letter-spacing:0.1em;">UNVEIL
                             YOUR SPARK</h1>
                     </div>
-                    <div class="col-11 col-md-6 text-start rounded-20 "
+                    <div class="col-11 col-md-6 text-start rounded-20 animate__animated animate__lightSpeedInRight "
                         style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
                         <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
                         <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">January 13, 2023 </h4>
@@ -77,8 +77,7 @@
 
                 <div class="container" data-aos="fade-up">
 
-                    <div class=" d-flex align-items-center flex-column justify-content-center" data-aos="fade-up"
-                        data-aos-delay="200">
+                    <div class=" d-flex align-items-center flex-column justify-content-center slide-left" >
                         <div class="content">
                             <div class="d-flex justify-content-center justify-content-md-start ">
                                 <div class=" custom-border rounded  my-2"></div>
@@ -111,7 +110,7 @@
 
             <!-- ======= Why Join Section ====== -->
             <div id="why-join">
-                <div class="container text-center wow fadeInUp">
+                <div class="container text-center slide-right">
                     <div class="title-line mx-auto"></div>
                     <div class="d-flex justify-content-center">
                         <div class="custom-border rounded  my-2"></div>
@@ -156,7 +155,7 @@
 
             <!-- ======= Competition Fields Section ======= -->
             <section class='competition-fields' id='competition-fields'>
-                <div class="container text-center my-3">
+                <div class="container text-center my-3 animated-box">
                     <div class="d-flex justify-content-center">
                         <div class="custom-border rounded my-2"></div>
                     </div>
@@ -198,7 +197,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <div class="row justify-content-center align-items-center">
+                                <div class="row justify-content-center align-items-center animated-box">
                                     <div class="col-11  ">
                                         <div class="custom-divider mx-auto"></div>
                                         <h5 class="fw-bold aeo-title" style="letter-spacing: 0.1em">Competition Field
@@ -256,7 +255,7 @@
                             <div class="d-sm-flex flex-column">
 
                                 <div class="row">
-                                    <div class="slider card border-0 rounded-20  p-3 col-10" style="box-shadow: 0 0 4px 2px #eee">
+                                    <div class="slider card card-responsive border-0 rounded-20  p-3 col-10" style="box-shadow: 0 0 4px 2px #eee">
                                         @foreach ($ambassadors as $ambassador)
                                         @if ($loop->iteration == 1)
                                         

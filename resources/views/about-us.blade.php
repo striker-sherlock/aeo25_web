@@ -4,12 +4,11 @@
     <!-- ======= About Section ======= -->
     <section id="about" class="about d-flex align-items-center mx-auto mt-md-3    pt-sm-4 pt-md-4 pt-lg-4  pt-xl-4  text-md-left text-sm-left">
 
-        <div class="container" data-aos="fade-up">
+        <div class="container animate__animated animate__slideInLeft" data-aos="fade-up">
 
             <div class=" d-flex align-items-center flex-column justify-content-center " data-aos="fade-up"
                 data-aos-delay="200">
                 <div class="content">
-
                   <br>
                   <br>
                   <br>
@@ -49,7 +48,7 @@
 
     <!-- ======= Why Join Section ====== -->
     <section id="why-join">
-        <div class="container text-center wow fadeInUp">
+        <div class="container text-center slide-right">
             <div class="title-line mx-auto"></div>
             <div class="d-flex justify-content-center">
                 <div class="custom-border rounded  my-2"></div>
@@ -93,7 +92,7 @@
 
     <!-- ======= Greeting Section ====== -->
     <section id="greetings" class="mt-0">
-        <div class="container wow fadeIn ">
+        <div class="container animated-box ">
             <div class="d-flex justify-content-center">
                 <div class=" custom-border rounded  "></div>
             </div>
@@ -128,7 +127,7 @@
 
     <!-- ======= Theme Section ====== -->
     <section id="theme">
-        <div class="container wow fadeIn">
+        <div class="container animated-box">
             <div class="d-flex justify-content-center ">
                 <div class="custom-border rounded  my-2"></div>
             </div>
@@ -168,8 +167,8 @@
        <!-- End Theme Section -->
 
     <!-- ======= Previous AEO Section ====== -->
-     <section id="previous-aeo">
-        <div class="d-flex justify-content-center ">
+     <section id="previous-aeo" class="animated-box">
+        <div class="d-flex justify-content-center">
             <div class="custom-border rounded  my-2"></div>
         </div>
         <h5 class="mt-3 my-5 fw-bold aeo-purple   text-center " style="font-size: 1.8em">PREVIOUS ASIAN ENGLISH OLYMPICS</h5>

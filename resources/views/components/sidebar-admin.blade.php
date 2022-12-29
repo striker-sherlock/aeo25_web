@@ -32,42 +32,7 @@
                     </a>
                 </li>
 
-                <li class="side-item">
-                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{route('merchandises.index')}}">
-                        <span class="fa-stack fa-sm ms-n1">
-                            <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fa-solid fa-cart-plus fa-stack-1x text-dark"></i>
-                            
-                        </span>
-                     
-                        <span class="ms-2">Merchandise</span>
-                    </a>
-                </li>
-
-                <li class="side-item">
-                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{route('merchandise-orders.index')}}">
-                        <span class="fa-stack fa-sm ms-n1">
-                            <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fa-solid fa-cash-register fa-stack-1x text-dark"></i>
-                            
-                        </span>
-                        <span class="ms-2">Merchandise Order</span>
-                    </a>
-                </li>
-
-                <li class="side-item">
-                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                        href="{{route('merchandise-orders.payment')}}">
-                        <span class="fa-stack fa-sm ms-n1">
-                            <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fa-solid fa-credit-card fa-stack-1x text-dark"></i>
-                            
-                        </span>
-                        <span class="ms-2">Merchandise Payment</span>
-                    </a>
-                </li>
+                
 
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 1)->first()))
                     <li class="pb-1 ps-3 header-menu">
@@ -217,7 +182,51 @@
                         </div>
                     </li>
                 @endif
-                    
+
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 28)->first()))
+                    <li class="pb-1 ps-3 header-menu">
+                        <span class="fw-bold">Merchandise</span>
+                    </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{route('merchandises.index')}}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fa-solid fa-cart-plus fa-stack-1x text-dark"></i>
+                                
+                            </span>
+                        
+                            <span class="ms-2">Manage Merchandise</span>
+                        </a>
+                    </li>
+                @endif
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 29)->first()))
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{route('merchandise-orders.manage')}}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fa-solid fa-cash-register fa-stack-1x text-dark"></i>
+                                
+                            </span>
+                            <span class="ms-2">Merchandise Order</span>
+                        </a>
+                    </li>
+                @endif
+                @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 30)->first()))    
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                            href="{{route('merchandise-orders.payment')}}">
+                            <span class="fa-stack fa-sm ms-n1">
+                                <i class="fas fa-square fa-stack-2x"></i>
+                                <i class="fa-solid fa-credit-card fa-stack-1x text-dark"></i>
+                                
+                            </span>
+                            <span class="ms-2">Merchandise Payment</span>
+                        </a>
+                    </li>
+                @endif
+
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 24)->first()))
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Accommodations</span>

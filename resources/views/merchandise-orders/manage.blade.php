@@ -81,5 +81,40 @@
             </div>
         </div> 
     @endforeach
+
+    @foreach ($merchandises as $merchandise)
+      <div class="modal fade p-5" id="modal{{$merchandise->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered ">
+              <div class="modal-content rounded-20 border-0 shadow p-5">
+                  <div class="modal-headers mb-4">
+                  <span class="fa-stack fa-4x d-block mx-auto" >
+                      <i class="fas fa-circle fa-stack-2x text-danger"></i>
+                      <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
+                  </span>
+                  </div>
+                  <div class="body mb-3">
+                  <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete <span class="fw-bolder text-danger text-capitalize">{{$merchandise->merchandiseTransaction->name}}'s</span> order? </h1>
+                  <p class="text-warning"> note: this action can't be undone  </p>
+                  </div>
+                  <div class="footers">
+                      <div class="row">
+                      <div class="col">
+                          <button type="button" class="btn btn-secondary w-100 rounded-pill"  data-bs-dismiss="modal">Back</button>
+                      </div>
+                      <div class="col">
+                          <form method="POST" action="{{route('merchandise-orders.destroy',$merchandise->id)}}">
+                          <input type="hidden" name="_method" value = "DELETE">
+                              <button class="btn btn-danger rounded-pill w-100" title="delete">
+                              Delete
+                              </button>
+                          @csrf
+                          </form>
+                      </div>
+                      </div>  
+                  </div>
+              </div>
+          </div>  
+      </div>  
+    @endforeach
     
 </x-admin>

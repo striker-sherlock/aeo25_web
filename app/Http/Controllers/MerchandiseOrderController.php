@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Merchandise;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use App\Models\PaymentProvider;
 use App\Models\MerchandiseOrder;
@@ -23,19 +24,30 @@ class MerchandiseOrderController extends Controller
     {
         //
     }
-
-   public function tempStore(Request $request){
+    public function isEmpty($array){
+        $result = true;
+        foreach ($array as $item) {
+            if ($item != 0 ) $result = false;
+        }
+        return $result;
+    }
+    public function tempStore(Request $request){
         $len = count($request->quantity);
+        if ($this->isEmpty($request->quantity)) return redirect()->back()->with('error','You have to select the item first ');
         $filters = array('merch_id'=>[],'merchandise' =>[] ,'quantity' => [] , 'notes'=> []); 
         $grandTotal = 0; 
+        
         for ($i =0 ; $i < $len ; $i++){
             if ($request->quantity[$i] != 0){
                 $filters['merch_id'][] = $request->merch_id[$i];
                 $filters['merchandise'][] = Merchandise::find($request->merch_id[$i]);
                 $filters['quantity'][] = $request->quantity[$i];
                 $filters['notes'][] = $request->notes[$i];
-                $grandTotal += $request->quantity[$i] * $filters['merchandise'][$i]->price;
             }
+        }
+        
+        foreach ($filters['merchandise'] as $index=>$key) {
+            $grandTotal = $key->price * $filters['quantity'][$index];
         }
         
         return view('merchandise-orders.create',[
@@ -111,7 +123,6 @@ class MerchandiseOrderController extends Controller
                 $path = $request->file("transfer_proof_wise")->storeAs("public/merchandise/transfer_proof",$fixedName);
             }
         }
-        // dd($request->all());
         $transaction = MerchandiseTransaction::create([
             'created_by' => '[USER]-Merchandise',
             'name' => $request->name,

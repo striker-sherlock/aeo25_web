@@ -30,9 +30,9 @@
                     </div>
                     <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>   
             </x-card>
-    </div>
-    <div class="modal fade p-5" id="confirmation" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered ">
+        </div>
+        <div class="modal fade p-5" id="confirmation" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content rounded-20 border-0 shadow p-5">
                 <div class="modal-headers mb-4">
                     <span class="fa-stack fa-4x d-block mx-auto" >
@@ -49,7 +49,7 @@
                             <button type="button" class="btn btn-outline-secondary w-100 rounded-pill"  data-bs-dismiss="modal">Back</button>
                         </div>
                         <div class="col">
-                          <button type="submit" class="btn btn-outline-theme w-100 rounded-pill">Submit</button>
+                            <button type="submit" class="btn btn-outline-theme w-100 rounded-pill">Submit</button>
                         </div>
                     </div>  
                 </div>

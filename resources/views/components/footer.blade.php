@@ -81,18 +81,18 @@
         
 
         <div class="row justify-content-center align-items-center">
-            <div class="col-3 order-3 text-center ">
+            <div class="col  order-2 text-center ">
                 <h6 id="organized-by" class=" fw-bold mb-3">Organized By:</h6>
                 <a href="https://mybnec.org/" target="_blank">
                     <img src="/storage/assets/bnecLogoOriginal.webp" width="80%"
                         >
                 </a>
             </div>
-            <div class=" col-3 order-2 text-center  mx-5 ">
+            <div class=" col  order-3 text-center  mx-5 ">
                 <img src="/storage/assets/AEO 2023Colored.webp" width="80%"
                     >
             </div>
-            <div class="col-3 order-1 text-center ">
+            <div class="col  order-1 text-center ">
                 <img src="/storage/assets/AEO_Phoenix.webp" width="80%"
                     >
             </div>

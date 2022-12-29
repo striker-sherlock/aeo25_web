@@ -19,6 +19,8 @@ class AdminMerchandiseController extends Controller
 {
     public function __construct(){
         $this->middleware('IsAdmin');
+        $this->middleware('Access:29')->only(['index']);
+        $this->middleware('Access:30')->only(['payment']);
     }
 
     public function index(){
@@ -68,7 +70,7 @@ class AdminMerchandiseController extends Controller
         $merchandise = MerchandiseOrder::find($id);
         $request->validate([
             'quantity' =>'required|numeric',
-            'notes' =>'required|string',
+            'notes' =>'nullable|string',
         ]);
         $merchandise->update([
             'quantity' => $request->quantity,
@@ -168,13 +170,13 @@ class AdminMerchandiseController extends Controller
             'is_confirmed' => 1,
             'updated_by' => Auth::guard('admin')->user()->name,
         ]);
-
+        // dd($merchandisePayment);
         $confirmedMail = [
             'subject' =>"Confirmed Merchandise Order",
-            'name'=>$merchandisePayment->payment,
+            'name'=>$merchandisePayment->name,
             'body1' => 'With this email, your Merchandise Order has been confirmed.', 
-            'body2' => 'We also like to inform you to continue to the Participant Registration step by clicking this link below.', 
-            'url' => 'http://aeo.mybnec.org/dashboard/step-3'
+            'body2' => '', 
+            'url' => route('merchandise-receipt', $merchandisePayment->id)  ,
         ];
 
         Mail::to($merchandisePayment->email)->send(new ConfirmedSlotMail($confirmedMail));
@@ -212,15 +214,21 @@ class AdminMerchandiseController extends Controller
         ]);
 
         $rejectMail = [
-            'subject' => "Competition Payment Rejection",
+            'subject' => "Merchandise Order Rejection",
             'name'=>$merchandisePayment->name,
-            'body1'=>'We are regretful to inform you that your payment for competition slot has been rejected with the reason below: ',
-            'body2'=>'You can edit your payment again by going into the payment step on our website.',
+            'body1'=>'We are regretful to inform you that your merchandise order has been rejected with the reason below: ',
+            'body2'=>'',
             'reason' => $request->reason,
             'url' => 'http://aeo.mybnec.org/dashboard/step-2',
         ];
         Mail::to($merchandisePayment->email)->send(new RejectionMail($rejectMail));
         
         return redirect()->back()->with('success', 'Payment is Successfuly rejected');
+    }
+
+    public function destroy($id){
+        $merchandiseOrder = MerchandiseOrder::find($id);
+        $merchandiseOrder->delete();
+        return redirect()->back()->with('success','Merchandise order has successfuly deleted');
     }
 }

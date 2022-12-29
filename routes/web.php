@@ -110,7 +110,7 @@ Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders
     Route::get('{id}/edit-payment', 'edit')->name('edit-payment');
     Route::put('{id}/update', 'updateMerch')->name('update');
     Route::get('{id}/edit', 'editMerch')->name('edit');
-    Route::get('manage', 'index')->name('index');
+    Route::get('manage', 'index')->name('manage');
     Route::get('manage/payments', 'payment')->name('payment');
     Route::get('confirm/{id}', 'confirm')->name('confirm');
     Route::get('pending/{id}', 'pending')->name('pending');
@@ -162,7 +162,7 @@ Route::controller(SlotRegistrationController::class)->prefix('slot-registrations
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
     Route::get('create-others', 'createOthers')->name('create-other');
-});
+});         
 Route::resource('slot-registrations',SlotRegistrationController::class);
 
 //Flight Registrations
@@ -187,7 +187,7 @@ Route::controller(AdminCompetitionPaymentController::class)->prefix('payments')-
     Route::get('pending/{competitionSlot}', 'pending')->name('pending');
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
-    Route::get('export', 'export')->name('export');
+    Route::get('export/{type}', 'export')->name('export');
 });
 
 //COMPETITION PAYMENT USER
