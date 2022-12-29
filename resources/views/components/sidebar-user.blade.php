@@ -129,12 +129,25 @@
                     </a>
                 </li>
 
+                <li class="pb-1 ps-3 header-menu side-item text-white fs-5">
+                    <span class="fw-bold aeo-title">Flights </span>
+                </li>
+                <li class="side-item text-white">
+                    <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{ route('flight-registrations.create') }}">
+                        <span class="fa-stack fa-sm ms-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fa-solid fa-plane fa-stack-1x text-dark"></i> 
+                        </span>
+                        <span class="ms-2">Flight Registrations</span>
+                    </a>
+                </li>
                 <li class="side-item text-white">
                     <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                         href="{{ route('flight-tickets.index') }}">
                         <span class="fa-stack fa-sm ms-n1">
                             <i class="fas fa-square fa-stack-2x"></i>
-                            <i class="fa-solid fa-plane fa-stack-1x text-dark"></i> 
+                            <i class="fa-solid fa-plane-departure fa-stack-1x text-dark"></i> 
                         </span>
                         <span class="ms-2">Flight Tickets</span>
                     </a>

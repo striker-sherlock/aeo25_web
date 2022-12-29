@@ -26,6 +26,9 @@
                         <a class ="btn btn-sm btn-primary me-2" href="{{ route('flight-tickets.edit', $flightTicket->id) }}" title="Edit">
                           <i class="fa fa-edit"></i>
                         </a>
+                        <a href="#" class="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#ticket{{$flightTicket->id}}" >
+                          <i class="fa-solid fa-receipt"></i>
+                        </a>
                         <form method="POST" action="{{ route('flight-tickets.delete', $flightTicket->id) }}">
                           @method('DELETE')
                           <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$flightTicket->id}}">
@@ -47,6 +50,26 @@
           @endif
     </x-card>
   </div>
+
+{{-- modal untuk proof --}}
+@foreach ($flightTickets as $flight)
+  <div class="modal fade p-4" id="ticket{{$flight->id}}" tabindex="-1" role="dialog" >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        @foreach (explode('; ',$flight->ticket_proof) as $image  )
+          <div class="item mx-auto rounded-20 " style="width:100%;">
+            <a>
+                <div class="d-flex justify-content-center p-2" style="box-sizing: border-box">
+                    <img src="/storage/images/flight-tickets/{{$image}}" class="img-fluid  w-100" alt="{{ $flight->userPIC->pic_name }}'s tickets" loading="lazy" width="50" >
+                </div>                       
+            </a>
+          </div>
+        @endforeach
+          {{-- <img src="/public/images/flight-tickets/{{$flight->ticket_proof}}" class="img-fluid" alt="ticket_proof"> --}}
+      </div>
+      </div>
+  </div>
+@endforeach
 
  {{-- delete confirmation (for $flight) --}}
  @foreach ($flightTickets as $flightTicket)

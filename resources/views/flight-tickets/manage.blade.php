@@ -41,7 +41,7 @@
                             </a>
                             @csrf
                           </form>
-                          <a href="#" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#ticket{{$flight->id}}" >
+                          <a href="#" class="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#ticket{{$flight->id}}" >
                             <i class="fa-solid fa-receipt"></i>
                           </a>
                           <form method="POST" action="{{ route('flight-tickets.delete', $flight->id) }}">
@@ -116,12 +116,21 @@
       </x-card>
     </div>
   
-{{-- modal untuk payment proof --}}
+{{-- modal untuk proof --}}
 @foreach ($flights as $flight)
   <div class="modal fade p-4" id="ticket{{$flight->id}}" tabindex="-1" role="dialog" >
       <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-          <img src="/public/images/flight-tickets/{{$flight->ticket_proof}}" class="img-fluid" alt="ticket_proof">
+        @foreach (explode('; ',$flight->ticket_proof) as $image  )
+          <div class="item mx-auto rounded-20 " style="width:100%;">
+            <a>
+                <div class="d-flex justify-content-center p-2" style="box-sizing: border-box">
+                    <img src="/storage/images/flight-tickets/{{$image}}" class="img-fluid  w-100" alt="{{ $flight->userPIC->pic_name }}'s tickets" loading="lazy" width="50" >
+                </div>                       
+            </a>
+          </div>
+        @endforeach
+          {{-- <img src="/public/images/flight-tickets/{{$flight->ticket_proof}}" class="img-fluid" alt="ticket_proof"> --}}
       </div>
       </div>
   </div>

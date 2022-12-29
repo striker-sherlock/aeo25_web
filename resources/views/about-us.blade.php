@@ -137,24 +137,23 @@
                 <div class="card rounded-20 px-4 w-100">
                     <div class="card-body">
                         <h5 class="my-3 fw-bold text-gradient-blue display-6 text-center text-uppercase ">Unveil Your Spark</h5>
-                        <p>     In the third quarter of 2022 precisely in August this year, Kementrian Kesehatan (Kemenkes) announce that the number of Covid-19 has decreased substantially down to 399,583 cases (sehatnegriku, 2022). It is also stated by the World Health Organization (WHO) that most of the countries in the world are in their best state and capable of dealing with the coronavirus and the pandemic are nearing the finish line.</p>
+                        <p >Since the pandemic began, we have had to adapt and learn how to live in isolation. But now, we are ready to go back to our normal daily lives and we must unveil the potential within ourselves. </p>
     
-                        <p>     Seeing the ray light of hope, we believe that the realization of The 2023 AEO can be held hybrid or both online and offline based on the competition. Despite the change currently happening in our mother earth, without a doubt, youngsters like us are capable of adapting to the changes that press us and can grow as well as explore ourselves to spark and eventually be the finest version of us. Thus, the theme for the 2023 Asian English Olympics is “Unveil Your Spark”
+                        <p >Hence, that’s why this year’s AEO theme is called “Unveil Your Spark,” which means to reveal the hidden spark of Asian  Youths through AEO. 
                         </p>
     
-                        <p>     After 2 years of adjusting to the pandemic life, now we are ready to get back to our daily life before the pandemic. Hence, without any doubt, Asian youths must unveil their biggest potential within themselves. According to Merriam-Webster dictionary, unveil can be defined as removing a veil or covering from; discover, disclose, or reveal. The word “Unveil” means to expose the hidden talent that Asian youths have. The word “Your” refers to Asian youths, committees, and all Asian English Olympics entities since they have their spark.
-
+                        <p>     
+                          The word "Unveil" means to expose, reveal, and discover the hidden talents of Asian Youths. 
                         </p>
-                        <p>
-                          Hence, without any doubt asian youths must unveil their biggest potential
-                          within themselves. According to Merriam-Webster dictionary, unveil can be defined as to remove a
-                          veil or covering from; discover, disclose, or reveal. The word “Unveil” means to expose the
-                          hidden talent that asian youths have. The word “Your” refers to Asian youths, committees, and
-                          all Asian English Olympics entities since they have their own spark.
+                        <p > 
+                          The word "Your" refers to Asian Youths, committees, and all Asian English Olympics entities since they have their own sparks. 
+                        </p>
+                        <p >
+                          We believe that “Spark” is the perfect word to describe every individual's motivation because It is amazing to see what we can accomplish in life from a strong motivation.
                         </p>
     
-                        <p>
-                          We are sure that “Spark” is the perfect word to portray each individual's motivation. Based on Merriam-Webster Dictionary, ‘spark’ can be interpreted as a small particle of a burning substance thrown out by a body in combustion or remaining when combustion is nearly completed. From the motivation they have, they can achieve something meaningful alongside their life journey. Like a spark that can turn into flame, that achievement doesn’t have to be a huge one but can start from small things that matter in their life. From a little spark, you can make yourself sparkle even in the darkest night. The 2023 Asian English Olympics shall be their milestone to unveil their hidden spark.
+                        <p >
+                          From a little spark, you can make yourself sparkle even on the darkest night. The 2023 Asian English Olympics can be your milestone to unveil your hidden spark. So, are you ready to unveil your spark?
                         </p>
     
                     </div>
