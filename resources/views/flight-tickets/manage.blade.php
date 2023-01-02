@@ -1,13 +1,17 @@
 <x-admin>
     <div class="container mt-4">
       <x-card>
-        <h1>Flights List</h1>
-          <a href="{{ route('flight-registrations.create') }}" class="btn btn-primary btn-rounded mb-3">Create Flight Registration</a>
-            <div class="table-responsive py-2">
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Flight List</h3>
+        <a href="{{route('flight-tickets.export', 'DEPARTURE')}}" class="btn btn-outline-theme mb-3">Download Departure Excel</a>
+        <a href="{{route('flight-tickets.export', 'ARRIVAL')}}" class="btn btn-outline-theme mb-3">Download Arrival Excel</a>
+          <div class="table-responsive py-2">
               <table class="table table-sm table-striped table-bordered no-footer" id="dataTables">
                 <thead class="table-info">
                   <tr>
                     <th class="align-middle text-center">ID</th>
+                    <th class="align-middle text-center">Name</th>
+                    <th class="align-middle text-center">Contact</th>
+                    <th class="align-middle text-center">Email</th>
                     <th class="align-middle text-center">Type</th>
                     <th class="align-middle text-center">Airline Name</th>
                     <th class="align-middle text-center">Flight Time</th>
@@ -18,6 +22,9 @@
                     @foreach ($flights as $flight)
                       <tr class="align-middle text-center">
                         <td>{{$flight->id}}</td>
+                        <td>{{$flight->userPIC->pic_name}}</td>
+                        <td>{{$flight->userPIC->pic_phone_number}}</td>
+                        <td>{{$flight->userPIC->email}}</td>
                         <td>{{$flight->type}}</td>
                         <td>{{$flight->airline_name}}</td>
                         <td>{{date("F j, Y G:i ", strtotime($flight->flight_time))}}</td>
@@ -34,6 +41,9 @@
                             </a>
                             @csrf
                           </form>
+                          <a href="#" class="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#ticket{{$flight->id}}" >
+                            <i class="fa-solid fa-receipt"></i>
+                          </a>
                           <form method="POST" action="{{ route('flight-tickets.delete', $flight->id) }}">
                             @method('DELETE')
                             <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$flight->id}}">
@@ -59,15 +69,23 @@
               <thead class="thead-light">
                 <tr>
                   <th class="align-middle text-center">ID</th>
-                  <th class="align-middle text-center">Airline Name</th>
-                  <th class="align-middle text-center">Flight Time</th>
-                  <th class="align-middle text-center">Action</th>
+                    <th class="align-middle text-center">Name</th>
+                    <th class="align-middle text-center">Contact</th>
+                    <th class="align-middle text-center">Email</th>
+                    <th class="align-middle text-center">Type</th>
+                    <th class="align-middle text-center">Airline Name</th>
+                    <th class="align-middle text-center">Flight Time</th>
+                    <th class="align-middle text-center">Action</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($trashed as $trash)
                   <tr class="align-middle text-center">
                     <td>{{$trash->id}}</td>
+                    <td>{{$flight->userPIC->pic_name}}</td>
+                    <td>{{$flight->userPIC->pic_phone_number}}</td>
+                    <td>{{$flight->userPIC->email}}</td>
+                    <td>{{$flight->type}}</td>
                     <td>{{$trash->airline_name}}</td>
                     <td>{{date("F j, Y G:i ", strtotime($trash->flight_time))}}</td>
                     <td class="d-flex justify-content-center">
@@ -82,7 +100,7 @@
                       </form>
                       <form method="POST" action="{{ route('flight-tickets.delete', $trash->id) }}">
                         @method('DELETE')
-                          <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$flight->id}}">
+                          <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$trash->id}}">
                             <button class = "btn btn-sm btn-danger" title="Delete">
                               <i class="fa fa-close"></i>
                             </button>
@@ -98,6 +116,26 @@
       </x-card>
     </div>
   
+{{-- modal untuk proof --}}
+@foreach ($flights as $flight)
+  <div class="modal fade p-4" id="ticket{{$flight->id}}" tabindex="-1" role="dialog" >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        @foreach (explode('; ',$flight->ticket_proof) as $image  )
+          <div class="item mx-auto rounded-20 " style="width:100%;">
+            <a>
+                <div class="d-flex justify-content-center p-2" style="box-sizing: border-box">
+                    <img src="/storage/images/flight-tickets/{{$image}}" class="img-fluid  w-100" alt="{{ $flight->userPIC->pic_name }}'s tickets" loading="lazy" width="50" >
+                </div>                       
+            </a>
+          </div>
+        @endforeach
+          {{-- <img src="/public/images/flight-tickets/{{$flight->ticket_proof}}" class="img-fluid" alt="ticket_proof"> --}}
+      </div>
+      </div>
+  </div>
+@endforeach
+
   {{-- RECYCLE BIN MOVE CONFIRMATION --}}
   @foreach ($flights as $flight)
   <div class="modal fade p-5" id="move{{$flight->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">

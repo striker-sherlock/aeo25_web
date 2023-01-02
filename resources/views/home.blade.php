@@ -37,7 +37,7 @@
                     <div class="col-11 col-md-6 text-start rounded-20 animate__animated animate__lightSpeedInRight "
                         style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
                         <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
-                        <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">13 January 2023 </h4>
+                        <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">January 13, 2023 </h4>
                         <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
                             <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br>
                                 Days</div>

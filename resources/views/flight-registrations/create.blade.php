@@ -1,31 +1,34 @@
 <x-user title="Create Flight Registration">
-    <form action="{{route('flight-registrations.store')}}" method="POST" enctype="multipart/form-data">
-        <div class="container mt-5">
-            <x-card>
-                <h3 class="text-uppercase fw-bold text-gradient mb-4" style="letter-spacing: 0.1em">Create Flight Registration</h3>
-                @csrf
-                <div class="form-group mb-3">
-                    <label class="col-form-label" for="type">Type <span class="text-danger">*</span></label><br>
-                    <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
-                    <input type="radio" name="type" id="DEPARTURE" value="DEPARTURE">
-                    <label for="DEPARTURE">Departure</label>
-                    <input type="radio" name="type" id="ARRIVAL" value="ARRIVAL">
-                    <label for="ARRIVAL">Arrival</label>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="airline_name" class="col-form-label">Airline Name <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control" name="airline_name" placeholder="Enter Airline Name" value="{{old('airline_name')}}">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="flight_time" class="col-form-label">Flight Time <span class="text-danger">*</span></label>
-                    <input type="datetime-local" class="form-control" id="flight_time" placeholder="Enter Flight Time" name="flight_time" required value="{{old('flight_time')}}">
-                </div>
-                <div class="form-group mb-3">
-                    <label for="ticket_proof" class="col-form-label">Ticket Proof <span class="text-danger">*</span></label>
-                    <input type="file" class="form-control" name="ticket_proof[]" accept="image/png, image/jpeg, image/jpg" multiple>
-                    <small class="text-danger " style="font-size: 0.7em">Type: PNG, JPG, JPEG max: 3MB</small>
-                </div>
-                <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>
+    <div class="container mt-5">
+        <x-card>
+            <h3 class="text-uppercase fw-bold text-gradient mb-4" style="letter-spacing: 0.1em">Create Flight Registration</h3>
+                <form action="{{route('flight-registrations.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group mb-3">
+                        <label class="col-form-label" for="type">Type <span class="text-danger">*</span></label><br>
+                        <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+                        <input type="radio" name="type" id="DEPARTURE" value="DEPARTURE">
+                        <label for="DEPARTURE">Departure</label>
+                        <input type="radio" name="type" id="ARRIVAL" value="ARRIVAL">
+                        <label for="ARRIVAL">Arrival</label>
+                        <br><small class="text-danger " style="font-size: 0.7em">Departure = Departure from Jakarta</small>
+                        <br><small class="text-danger " style="font-size: 0.7em">Arrival = Arrival in Jakarta</small>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="airline_name" class="col-form-label">Airline Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="airline_name" placeholder="Enter Airline Name" value="{{old('airline_name')}}">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="flight_time" class="col-form-label">Flight Time <span class="text-danger">*</span></label>
+                        <input type="datetime-local" class="form-control" id="flight_time" placeholder="Enter Flight Time" name="flight_time" required value="{{old('flight_time')}}">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="ticket_proof" class="col-form-label">Ticket Proof <span class="text-danger">*</span></label>
+                        <small class="text-danger " style="font-size: 0.7em">(You can upload more than one file)</small>
+                        <input type="file" class="form-control" name="ticket_proof[]" accept="image/png, image/jpeg, image/jpg" multiple>
+                        <small class="text-danger " style="font-size: 0.7em">Type: PNG, JPG, JPEG max: 3MB</small>
+                    </div>
+                    <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>   
             </x-card>
         </div>
         <div class="modal fade p-5" id="confirmation" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
@@ -51,7 +54,7 @@
                     </div>  
                 </div>
             </div>
-            </div>  
-        </div> 
+        </div>  
+      </div> 
     </form>
 </x-user>
