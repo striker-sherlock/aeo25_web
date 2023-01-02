@@ -34,10 +34,10 @@ class FlightTicketController extends Controller
         ]);
     }
 
-    public function show($user)
+    public function show()
     {
         $ticket = FlightTicket::All();
-        $flightTickets = FlightTicket::where('pic_id', $user);
+        $flightTickets = FlightTicket::where('pic_id', Auth::user()->id);
                                     
         
         return view('flight-tickets.show',[

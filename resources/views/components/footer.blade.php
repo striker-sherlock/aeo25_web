@@ -92,7 +92,7 @@
                 <img src="/storage/assets/AEO 2023Colored.webp" width="80%"
                     >
             </div>
-            <div class="col  order-1 text-center ">
+            <div class="col order-1 text-center ">
                 <img src="/storage/assets/AEO_Phoenix.webp" width="80%"
                     >
             </div>

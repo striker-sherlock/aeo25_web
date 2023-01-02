@@ -176,7 +176,7 @@ Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name
     Route::get('{flightTickets}/restore', 'restore')->name('restore');
     Route::delete('{flightTickets}/delete', 'delete')->name('delete');
     Route::get('/manage', 'manage')->name('manage');
-    Route::get('show/{user}', 'show')->name('show');
+    Route::get('show', 'show')->name('show');
 });
 Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy', 'show']]);
 
