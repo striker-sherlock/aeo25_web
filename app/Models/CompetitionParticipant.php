@@ -38,4 +38,9 @@ class CompetitionParticipant extends Model
     {
         return $this->hasOne(ParticipantRank::class, 'id', 'rank_id');
     }
+
+    public function achievements ()
+    {
+        return $this->hasMany(SideAchievement::class);
+    }
 }

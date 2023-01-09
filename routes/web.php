@@ -46,6 +46,7 @@ use App\Http\Controllers\AdminAccommodationPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
+use App\Http\Controllers\SideAchievementController;
 
 // Auth routes
 Auth::routes(['verify'=>true]);
@@ -121,6 +122,10 @@ Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders
 
 });
 
+// Side Achievement
+Route::delete('side-achievements/delete/{sideAchievement}', [SideAchievementController::class, 'delete'])->name('side-achievements.delete');
+Route::get('side-achievements/create/{initial}', [SideAchievementController::class, 'create'])->name('side-achievements.create');
+Route::resource('side-achivements', SideAchievementController::class, ['except' => ['create']]);
 
 //competition 
 Route::resource('competitions', CompetitionController::class);
