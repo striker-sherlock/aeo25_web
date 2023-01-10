@@ -146,6 +146,29 @@ class DashboardController extends Controller
 
             ]);
         }
+
+        if ($step == 4) {
+            $confirmedSlot = CompetitionSlot::orderBy('payment_id','desc')->where('pic_id',Auth::user()->id)->get();
+            if ($confirmedSlot->count() == 0) return redirect()->back()->with('error','You have to make slot registration first');
+
+            $confirmedSlot = $confirmedSlot->where('is_confirmed',1);
+            if ($confirmedSlot ->count() == 0) return redirect()->back()->with('error','Please Wait your slot registration to be confirmed by admin');
+
+            $radioDramaSlot =  $confirmedSlot->where('competition_id','RD');
+            $sswSlot = $confirmedSlot->where('competition_id','SSW');
+
+            if ($radioDramaSlot->count() === 0 && $sswSlot->count() === 0) return redirect()->back()->with('error','You can only access this page when you have a confirmed slot in radio drama or short story writing');
+            
+
+            $competitionSlots = CompetitionSlot::where('pic_id',Auth::user()->id)->get()->where('is_confirmed',1);
+            $competitionParticipant  = CompetitionParticipant::where('pic_id', Auth::user()->id)->get();
+            
+            
+            return view('dashboards.step-four',[
+                'competitionSlots' => $competitionSlots,
+                'competitionParticipant' => $competitionParticipant,    
+            ]);
+        }
     }
     
     public function accommodationStep($step){

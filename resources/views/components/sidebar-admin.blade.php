@@ -32,8 +32,6 @@
                     </a>
                 </li>
 
-                
-
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 1)->first()))
                     <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Treasury</span>
@@ -370,34 +368,34 @@
                 @endif
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 7)->first()))
                     {{-- submission --}}
-                    {{-- <li class=" pb-1 side-item pb-1 sidebar-dropdown">
+                    <li class=" pb-1 side-item pb-1 sidebar-dropdown">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
                                 <span class="fa-stack fa-sm ml-n1">
                                     <i class="fas fa-square fa-stack-2x"></i>
                                     <i class="fas fa-scroll fa-stack-1x text-dark"></i>
                                 </span>
-                                <span class="ms-2">Submissions</span>
+                                <span class="ms-2">Competition Submissions</span>
                                 <i class="fas fa-angle-right ms-auto"></i>
                             </a>
                         <div class="sidebar-submenu">
                             <ul class="fa-ul">
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="#" style="display: block">
-                                            <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                            href="{{ route('competition-submissions.index', 'RD') }}" style="display: block">
+                                            <span class="fa-li"><i class="fas fa-arrow-right"></i></span>   
                                             Radio Drama
                                         </a>
                                     </li>
                                     <li class="mb-1">
                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                            href="#" style="display: block">
+                                            href="{{ route('competition-submissions.index', 'SSW')  }}" style="display: block">
                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
                                             Short Story Writing
                                         </a>
                                     </li>
                             </ul>
                         </div>
-                    </li> --}}
+                    </li>
                 @endif
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 8)->first()))
                     {{-- score ranking  --}}

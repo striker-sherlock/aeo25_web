@@ -32,5 +32,6 @@ class CompetitionSlot extends Model
     public function competitionParticipants(){
         return $this-> hasMany(CompetitionParticipant::class);
     }
+
  
 }
