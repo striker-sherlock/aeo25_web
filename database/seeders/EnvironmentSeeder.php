@@ -52,6 +52,10 @@ class EnvironmentSeeder extends Seeder
                 'env_code' => 'ENV010',
                 'env_name' => 'Accommodation Slot Registration',
             ],
+            [
+                'env_code' => 'ENV011',
+                'env_name' => 'User Competition Submission',
+            ],
             
         ]);
     }

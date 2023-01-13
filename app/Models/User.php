@@ -56,4 +56,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function country(){
         return $this-> hasOne(Countries::class,'id','country_id');
     } 
+
+    public function confirmedSlotExist()
+    {
+        return $this->hasMany(CompetitionSlot::class)->where('is_confirmed', '=', 1);
+    }
+
+    public function competitionSlotDetail()
+    {
+        return $this->hasMany(CompetitionSlot::class,'id','pic_id');
+
+    }
+
+
 }

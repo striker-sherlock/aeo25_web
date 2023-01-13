@@ -16,7 +16,7 @@
                     @foreach ($confirmedSlots as $competition)
                         <div class="row border p-2 mx-1 mb-3 rounded-20 align-items-center shadow-sm">
                             <div class="col-md-4">
-                                <img src="/storage/competition_logo/{{$competition->competition->logo}}" class="img-fluid" alt="{{$competition->competition->name}} logo">
+                                <img src= "/storage/competition_logo/{{$competition->competition->logo}}" class="img-fluid" alt="{{$competition->competition->name}} logo">
                             </div>
                             <div class="col-md-8 ">
                                 <h5> {{$competition->competition->name}}: {{$competition->quantity}} {{$competition->competition->need_team == 0 ? 'Person(s)' : 'Team(s)'}}</h5>

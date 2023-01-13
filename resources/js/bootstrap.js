@@ -68,3 +68,18 @@ var popoverTriggerList = [].slice.call(
 var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl);
 });
+
+$("#btnConfirmSubmit").on("click", function () {
+    let submissionLink = $("#submission_link").val();
+    $("#confirmLink").attr("href", submissionLink);
+  })
+  $(document).ready(function () {
+    $("#sendSubmission").prop("disabled", true);
+    $("#confirmLink").on("click", function () {
+      $("#sendSubmission").prop("disabled", false);
+    })
+  })
+  function submit() {
+    $("#form").submit();
+  }
+  $('.modal').insertAfter($('section'));

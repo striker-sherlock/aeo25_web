@@ -17,6 +17,17 @@ class EnvironmentController extends Controller
         ]);
     }
 
+    public function validateRequest($request)
+    {
+        $request->validate([
+            'env_code' => 'required|string',
+            'env_name' => 'required|string',
+            'start_time' => 'nullable|date_format:d-m-Y H:i',
+            'end_time' => 'nullable|date_format:d-m-Y H:i'
+        ]);
+     
+    }
+
     public function create()
     {
         return view("environments.create");
@@ -24,19 +35,17 @@ class EnvironmentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            "env_name" => 'required|string',
-            "env_code" => 'required|string',
-            "start" => 'nullable',
-            "end" => 'nullable|after:start',
-        ]);
+      $this->validateRequest($request);
 
         Environment::create([
             'created_by' => 'PIC',
             "env_name" => $request->env_name,
             "env_code" => $request->env_code,
+            "start_time" => $request->start_time,
+            "end_time" => $request->end_time,
         ]);
-        return redirect()->route("environments.index");
+
+        return redirect()->route("environments.index")->with('Success',"Environment Created Successfully!");
     }
 
     public function updateVisibility(Environment $environment){
@@ -52,19 +61,24 @@ class EnvironmentController extends Controller
             return redirect()->route('environments.index')->with("success", $environment->env_name." is hidden");
         }
     }
-    public function show($id)
+    public function edit (Environment $environment)
     {
-        //
+        return view('environments.edit', [
+            'env' => $environment
+        ]);
     }
 
-    public function edit($id)
+    public function update(Request $request, Environment $environment)
     {
-        //
-    }
+        $this->validateRequest($request, FALSE);
 
-    public function update(Request $request, $id)
-    {
-        //
+        $environment->update([
+            'env_name' => $request->env_name,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time
+        ]);
+
+        return redirect()->route('environments.index')->with('success','Environment Updated Successfully!');
     }
 
     public function destroy(Environment $environment)
@@ -72,4 +86,6 @@ class EnvironmentController extends Controller
         $environment->delete();
         return redirect()->back()->with("success","Environment ".$environment->env_name." Successfuly Deleted");
     }
+
+    
 }

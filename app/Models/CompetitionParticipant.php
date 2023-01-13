@@ -34,6 +34,11 @@ class CompetitionParticipant extends Model
         return $this->belongsTo(CompetitionSlot::class);
     }
 
+    public function participantSubmission ()
+    {
+        return $this->hasOne(CompetitionSubmissions::class, 'submitter_id', 'id');
+    }
+
     public function rank ()
     {
         return $this->hasOne(ParticipantRank::class, 'id', 'rank_id');

@@ -46,47 +46,50 @@ use App\Http\Controllers\AdminAccommodationPaymentController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
+use App\Http\Controllers\AdminCompetitionSubmissionController;
+use App\Http\Controllers\UserCompetitionSubmissionController;
 
 // Auth routes
-Auth::routes(['verify'=>true]);
+Auth::routes(['verify' => true]);
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // About Us
-Route::get('/about-us', function() {
-    return view('about-us');
-}
+Route::get(
+    '/about-us',
+    function () {
+        return view('about-us');
+    }
 );
 
 // Masters
 Route::resource('faqs', FaqController::class);
 Route::resource('lost-and-found', LostAndFoundController::class);
 Route::resource('countries', CountriesController::class);
-Route::resource('follow-up-types', FollowUpTypeController::class); 
+Route::resource('follow-up-types', FollowUpTypeController::class);
 Route::resource('score-types', ScoreTypeController::class)->except('show');
 Route::resource('accesses', AccessController::class);
-Route::resource('access-controls',AccessControlController::class);
-Route::post('access-controls/department',[AccessControlController::class,'accessDepartment'])->name('access-controls.access-department');
-Route::post('access-controls/department-store',[AccessControlController::class,'departmentStore'])->name('access-controls.department-store');
+Route::resource('access-controls', AccessControlController::class);
+Route::post('access-controls/department', [AccessControlController::class, 'accessDepartment'])->name('access-controls.access-department');
+Route::post('access-controls/department-store', [AccessControlController::class, 'departmentStore'])->name('access-controls.department-store');
 
 Route::prefix('questions')->name('questions.')->group(function () {
     Route::get('viewreply/{question}', [QuestionController::class, 'viewreply'])->name('viewreply');
     Route::post('reply/{question}', [QuestionController::class, 'reply'])->name('reply');
     Route::get('confirm/{question}', [QuestionController::class, 'confirm'])->name('confirm');
-
 });
 Route::resource('questions', QuestionController::class)->except('show', 'create');
 
 // PIC
-Route::resource('users',PicController::class)->except('show');
-Route::get('users/{id}/admin-edit',[PicController::class,'adminEdit'])->name('users.admin-edit');
+Route::resource('users', PicController::class)->except('show');
+Route::get('users/{id}/admin-edit', [PicController::class, 'adminEdit'])->name('users.admin-edit');
 
 // Admin
-Route::resource('admins',AdminController::class)->except('show');
+Route::resource('admins', AdminController::class)->except('show');
 
 // Environments
-Route::get('environments/{environment}/update-visibility',[EnvironmentController::class,'updateVisibility'])->name('environments.update-visibility');
+Route::get('environments/{environment}/update-visibility', [EnvironmentController::class, 'updateVisibility'])->name('environments.update-visibility');
 Route::resource('environments', EnvironmentController::class);
 
 // Ambassadors 
@@ -97,12 +100,12 @@ Route::resource('ambassadors', AmbassadorController::class)->except('show');
 Route::resource('merchandises', MerchandiseController::class);
 
 //merchandise order
-Route::resource('merchandise-orders', MerchandiseOrderController::class)->except(['create','show','edit','update','store']);
-Route::post('merchandise-orders/payment',[MerchandiseOrderController::class,'tempStore'])->name('merchandise-orders.temp-store');
-Route::post('merchandise-orders/store',[MerchandiseOrderController::class,'store'])->name('merchandise-orders.store');
+Route::resource('merchandise-orders', MerchandiseOrderController::class)->except(['create', 'show', 'edit', 'update', 'store']);
+Route::post('merchandise-orders/payment', [MerchandiseOrderController::class, 'tempStore'])->name('merchandise-orders.temp-store');
+Route::post('merchandise-orders/store', [MerchandiseOrderController::class, 'store'])->name('merchandise-orders.store');
 
 // Merchandise Payment Receipt
-Route::get('manage/payments/view-receipt/{transaction}',[PDFController::class, 'merchandiseReceipt'])->name('merchandise-receipt');
+Route::get('manage/payments/view-receipt/{transaction}', [PDFController::class, 'merchandiseReceipt'])->name('merchandise-receipt');
 
 //ADMIN MERCHANDISE ORDER
 Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders')->name('merchandise-orders.')->group(function () {
@@ -118,7 +121,6 @@ Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders
     Route::get('cancel/{id}', 'cancel')->name('cancel');
     Route::get('export', 'export')->name('export');
     Route::get('export-orders', 'exportOrder')->name('export-order');
-
 });
 
 
@@ -131,7 +133,7 @@ Route::get('/sponsors/update-visibility/{sponsor}', [SponsorController::class, '
 
 //Media Partner
 Route::resource('media-partners', MediaPartnerController::class)->except('show');
-Route::get('media-partners/{media_partner}/update-visibility',[MediaPartnerController::class,'updateVisibility'])->name('media-partners.update-visibility');
+Route::get('media-partners/{media_partner}/update-visibility', [MediaPartnerController::class, 'updateVisibility'])->name('media-partners.update-visibility');
 
 // Institution Contact
 Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy']);
@@ -162,23 +164,23 @@ Route::controller(SlotRegistrationController::class)->prefix('slot-registrations
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
     Route::get('create-others', 'createOthers')->name('create-other');
-});         
-Route::resource('slot-registrations',SlotRegistrationController::class);
+});
+Route::resource('slot-registrations', SlotRegistrationController::class);
 
 //Flight Registrations
-Route::controller(FlightRegistrationController::class)->prefix('flight-registrations')->name('flight-registrations.')->group(function() {
+Route::controller(FlightRegistrationController::class)->prefix('flight-registrations')->name('flight-registrations.')->group(function () {
     Route::post('store', 'store')->name('store');
 });
-Route::resource('flight-registrations', FlightRegistrationController::class, ['only'=>['create']]);
+Route::resource('flight-registrations', FlightRegistrationController::class, ['only' => ['create']]);
 
 //Flight Tickets
-Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name('flight-tickets.')->group(function() {
+Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name('flight-tickets.')->group(function () {
     Route::get('{flightTickets}/restore', 'restore')->name('restore');
     Route::delete('{flightTickets}/delete', 'delete')->name('delete');
     Route::get('/manage', 'manage')->name('manage');
     Route::get('/export/{type}', 'export')->name('export');
 });
-Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy']]);
+Route::resource('flight-tickets', FlightTicketController::class, ['only' => ['index', 'edit', 'update', 'destroy']]);
 
 //Admin Privileges - Competition Payment
 Route::get('/{type}/payments', [AdminCompetitionPaymentController::class, 'index'])->name('competition-payments.index');
@@ -215,8 +217,25 @@ Route::controller(AdminCompetitionParticipantController::class)->prefix('partici
     Route::delete('destroy/{competitionParticipant}', 'destroy')->name('destroy');
     Route::delete('delete/{competitionParticipant}', 'delete')->name('delete');
     Route::get('restore/{competitionParticipant}', 'restore')->name('restore');
+});
+
+//  User Privileges - Competition Submissions
+Route::controller(UserCompetitionSubmissionController::class)->prefix('submissions')->name('competition-submissions.')->group(function () {
+    Route::get('create/{id}', 'create')->name('create');
+    Route::post('store','store')->name('store');
 
 });
+
+//  Admin Privileges - Competition Submissions
+Route::controller(AdminCompetitionSubmissionController::class)->prefix('submissions')->name('competition-submissions.')->group(function () {
+    Route::get('{competition}',  'index')->name('index');
+    Route::get('restore/{submission}', 'restore')->name('restore');
+    Route::delete('destroy/{submission}', 'destroy')->name('destroy');
+    Route::delete('delete/{submission}', 'delete')->name('delete');
+    Route::get('show-submission/{submission}', 'show')->name('show');
+    Route::get('export/{submission}',  'export')->name('export');
+});
+
 
 // Facilities
 Route::resource('facilities', FacilityController::class);
@@ -225,22 +244,22 @@ Route::resource('facilities', FacilityController::class);
 Route::resource('accommodations', AccommodationController::class);
 
 // Accommodation Slot
-Route::controller(AccommodationSlotRegistrationController::class)->prefix('accommodation-slot-registrations')->name('accommodation-slot-registrations.')->group(function(){
+Route::controller(AccommodationSlotRegistrationController::class)->prefix('accommodation-slot-registrations')->name('accommodation-slot-registrations.')->group(function () {
     Route::get('{accommodationSlot}/confirm', 'confirm')->name('confirm');
     Route::post('/reject', 'reject')->name('reject');
     Route::get('{accommodationSlot}/cancel', 'cancel')->name('cancel');
     Route::get('create/{accommodation?}', 'create')->name('create');
 });
-Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only'=>['index', 'destroy', 'store', 'edit', 'update']]);
+Route::resource('accommodation-slot-registrations', AccommodationSlotRegistrationController::class, ['only' => ['index', 'destroy', 'store', 'edit', 'update']]);
 
 //USER ACCOMMODATION PAYMENT
-    Route::get('/paid-accommodation-invoice/{payment}', [PDFController::class, 'paidAccommodationInvoice'])->name('payments.paid-accommodation-invoice');
-    Route::get('/invoice/{user}/{id}', [PDFController::class, 'accommodationInvoice'])->name('accommodation-payments.invoice');
-    Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
-    Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
-    Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');
-    Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
-    Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
+Route::get('/paid-accommodation-invoice/{payment}', [PDFController::class, 'paidAccommodationInvoice'])->name('payments.paid-accommodation-invoice');
+Route::get('/invoice/{user}/{id}', [PDFController::class, 'accommodationInvoice'])->name('accommodation-payments.invoice');
+Route::get('/accommodation-payments/create/{id}', [UserAccommodationPaymentController::class, 'create'])->name('accommodation-payments.create');
+Route::post('/accommodation-payments/store', [UserAccommodationPaymentController::class, 'store'])->name('accommodation-payments.store');
+Route::get('/accommodation-payments/{accommodationPayment}/edit', [UserAccommodationPaymentController::class, 'edit'])->name('accommodation-payments.edit');
+Route::put('/accommodation-payments/{accommodationPayment}/update', [UserAccommodationPaymentController::class, 'update'])->name('accommodation-payments.update');
+Route::delete('/accommodation-payments/{accommodationPayment}/destroy', [UserAccommodationPaymentController::class, 'destroy'])->name('accommodation-payments.destroy');
 
 // Admin Privileges - Accommodation Payment
 Route::controller(AdminAccommodationPaymentController::class)->prefix('accommodation-payments')->name('accommodation-payments.')->group(function () {
@@ -270,26 +289,25 @@ Route::controller(AdminAccommodationGuestController::class)->prefix('guests')->n
 
 // Institution Contact
 Route::controller()->prefix('')->name('.')->group(function () {
-
 });
 Route::controller(InstitutionContactController::class)->prefix('institution-contacts')->name('institution-contacts.')->group(function () {
     Route::get('/manage/{type}', 'index')->name('index');
     Route::get('/{type}/create', 'create')->name('create');
     Route::get('/{type}/{id}/edit', 'edit')->name('edit');
 });
-Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy','index','create','edit']);
+Route::resource('institution-contacts', InstitutionContactController::class)->except(['show', 'destroy', 'index', 'create', 'edit']);
 
 // Follow Up
 Route::controller(FollowUpController::class)->prefix('follow-ups')->name('follow-ups.')->group(function () {
     Route::get('/manage/{type}', 'index')->name('index');
     Route::get('/{type}/{id}/edit', 'edit')->name('edit');
     Route::put('assign-pic/{followUp}', 'assignPIC')->name('assign-pic');
-    Route::put('/update-status/{followUp}','updateStatus')->name('update-status');
+    Route::put('/update-status/{followUp}', 'updateStatus')->name('update-status');
     Route::get('/{type}/create', 'create')->name('create');
     Route::get('delete/{id}', 'delete')->name('delete');
     Route::get('restore/{id}', 'restore')->name('restore');
-}); 
-Route::resource('follow-ups', FollowUpController::class, ['except' => ['index','create']]);
+});
+Route::resource('follow-ups', FollowUpController::class, ['except' => ['index', 'create']]);
 
 // Ranking List
 Route::controller(RankingListController::class)->prefix('ranking-lists')->name('ranking-lists.')->group(function () {
@@ -300,3 +318,4 @@ Route::controller(RankingListController::class)->prefix('ranking-lists')->name('
     Route::get('update-debate-type/{competitionTeam}', 'updateDebateType')->name('update-debate-type');
 });
 Route::resource('ranking-lists', RankingListController::class)->only('index');
+
