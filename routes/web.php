@@ -9,6 +9,7 @@ use App\Http\Controllers\PicController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\PickUpController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FollowUpController;
@@ -167,18 +168,22 @@ Route::resource('slot-registrations',SlotRegistrationController::class);
 
 //Flight Registrations
 Route::controller(FlightRegistrationController::class)->prefix('flight-registrations')->name('flight-registrations.')->group(function() {
-    Route::post('{flightRegistrations}/store', 'store')->name('store');
+    Route::post('store', 'store')->name('store');
 });
-Route::resource('flight-registrations', FlightRegistrationController::class);
+Route::resource('flight-registrations', FlightRegistrationController::class, ['only'=>['create']]);
 
 //Flight Tickets
 Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name('flight-tickets.')->group(function() {
     Route::get('{flightTickets}/restore', 'restore')->name('restore');
     Route::delete('{flightTickets}/delete', 'delete')->name('delete');
     Route::get('/manage', 'manage')->name('manage');
-    Route::get('show', 'show')->name('show');
+    Route::get('/export/{type}', 'export')->name('export');
 });
-Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy', 'show']]);
+Route::resource('flight-tickets', FlightTicketController::class, ['only'=>['index','edit', 'update', 'destroy']]);
+
+//pick up schedule
+Route::resource('pick-up-schedules', PickUpController::class);
+
 
 //Admin Privileges - Competition Payment
 Route::get('/{type}/payments', [AdminCompetitionPaymentController::class, 'index'])->name('competition-payments.index');

@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Mail\RejectionMail;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Carbon;
 use App\Mail\ConfirmedSlotMail;
 use App\Models\PaymentProvider;
 use App\Models\MerchandiseOrder;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\MerchandiseTransaction;
-use App\Exports\MerchandiseTransactionExport;
 use App\Exports\MerchandiseOrderExport;
+use App\Exports\MerchandiseTransactionExport;
 
 class AdminMerchandiseController extends Controller
 {
@@ -127,6 +128,7 @@ class AdminMerchandiseController extends Controller
                 'payment_email' => null,
                 'tracking_link' =>null,
                 'updated_by' =>   Auth::guard('admin')->user()->name,
+                'updated_at' => Carbon::now(), 
             ]);
         }
 
@@ -148,6 +150,7 @@ class AdminMerchandiseController extends Controller
                 'account_name' => null,
                 'account_number' => null,
                 'updated_by' =>   Auth::guard('admin')->user()->name,
+                'updated_at' => Carbon::now(),
             ]);
             
         }

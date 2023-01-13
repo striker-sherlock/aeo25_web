@@ -65,16 +65,20 @@ class CompetitionPaymentExport implements FromCollection, WithHeadings
                     'payment_providers.name as payment_provider',
                     'competition_payments.id',
                     'competitions.name as competition_name',
+                    'competition_slot_details.quantity',
                     'competition_payments.amount' ,
                     
                     )
                 ->get();
+            foreach ($data as $amount){
+                $amount->amount = number_format($amount->amount);
+            }
             return $data;
         }
         // return redirect()->back();
     }
 
     public function headings():array{
-        return ['PIC', 'PIC Email', 'Institution', 'Institution Email', 'Country', 'Contact', 'Payment Provider','Payment ID' , 'Field', 'Amount'];
+        return ['PIC', 'PIC Email', 'Institution', 'Institution Email', 'Country', 'Contact', 'Payment Provider','Payment ID' , 'Field',"Quantity", 'Amount'];
     }
 }

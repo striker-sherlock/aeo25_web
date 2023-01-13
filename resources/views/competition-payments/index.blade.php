@@ -35,7 +35,7 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                        <a href="#" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#confirm{{$payment->id}}" title="confirm ">
+                                        <a href="#" class="btn btn-success me-2 " data-bs-toggle="modal" data-bs-target="#confirm{{$payment->id}}" title="confirm ">
                                             <i class="fas fa-check-circle"></i>
                                         </a>
                                         <a href="{{route('competition-payments.reject')}}" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" title="reject " >
@@ -90,7 +90,7 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                        <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-warning me-2" title="cancel payment" title="move to pending">
+                                        <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-warning me-2 cancel" title="cancel payment" title="move to pending">
                                             <i class="fas fa-undo"></i>
                                         </a>
                                         <a href="{{route('payments.paid-invoice', $payment->id)}}" class="btn btn-success me-2" title="View Invoice" target="_blank" title="view invoice">
@@ -233,7 +233,7 @@
                             <button type="button" class="btn btn-outline-secondary w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
                         </div>
                         <div class="col">
-                            <a href="{{route('competition-payments.confirm',$competition->id)}}" class="btn btn-outline-success w-100 rounded-pill" >
+                            <a href="{{route('competition-payments.confirm',$competition->id)}}" class="btn btn-outline-success w-100 rounded-pill confirm" >
                                 Confirm 
                             </a>
                         </div>

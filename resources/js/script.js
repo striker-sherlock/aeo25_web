@@ -3,16 +3,31 @@ import * as bootstrap from "bootstrap";
 
 
 $(document).ready(function () {
-    //  Show Modal
-    var myModal = new bootstrap.Modal(document.getElementById("alert"));
-    myModal.show();
-    
-    //popover
-  
-    (function () {
-        "use strict";
+  $("body").on("click",".confirm, .cancel",function() {
+    $(this).css({"pointer-events": "none"});
+    $(this).html(` <i class="spinner fa-solid fa-spinner"></i> Please Wait...`);
+  });
 
-    /**
+  // disable multiple form submission 
+  $("body").on("submit", "form", function() {
+    $('button[type="submit"]').attr('disabled',true);
+    $('button[type="submit"]').html(` <i class="spinner fa-solid fa-spinner"></i> Please Wait...`);
+
+    $(this).submit(function() {
+        return false;
+    });
+    return true;
+  });
+  //  Show Modal
+  var myModal = new bootstrap.Modal(document.getElementById("alert"));
+  myModal.show();
+    
+  //popover
+
+  (function () {
+      "use strict";
+
+  /**
      * Easy selector helper function
      */
     const select = (el, all = false) => {
@@ -211,6 +226,63 @@ $(document).ready(function () {
 
   })();
 
+
 });
+
+
+  // Home Animation Script 
+  document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("scroll", function(event) {
+        const animatedBoxes = document.getElementsByClassName("animated-box");
+        const windowOffsetTop = window.innerHeight + window.scrollY;
+
+        Array.prototype.forEach.call(animatedBoxes, (animatedBox) => {
+            const animatedBoxOffsetTop = animatedBox.offsetTop;
+
+            if (windowOffsetTop >= animatedBoxOffsetTop) {
+                addClass(animatedBox, "animate__animated animate__fadeInUp"); 
+          
+            }
+        });
+    });
+
+  document.addEventListener("scroll", function(event) {
+    const slideRight = document.getElementsByClassName("slide-right");
+    const windowOffsetTop = window.innerHeight + window.scrollY;
+
+    Array.prototype.forEach.call(slideRight, (slideRight) => {
+        const animatedBoxOffsetTop = slideRight.offsetTop;
+
+        if (windowOffsetTop >= animatedBoxOffsetTop) {
+            addClass(slideRight, "animate__animated animate__slideInRight"); 
+      
+        }
+    });
+});
+
+document.addEventListener("scroll", function(event) {
+  const slideLeft = document.getElementsByClassName("slide-left");
+  const windowOffsetTop = window.innerHeight + window.scrollY;
+
+  Array.prototype.forEach.call(slideLeft, (slideLeft) => {
+      const animatedBoxOffsetTop = slideLeft.offsetTop;
+
+      if (windowOffsetTop >= animatedBoxOffsetTop) {
+          addClass(slideLeft, "animate__animated animate__slideInLeft"); 
+    
+      }
+  });
+});
+
+
+
+});
+
+function addClass(element, className) {
+    const arrayClasses = element.className.split(" ");
+    if (arrayClasses.indexOf(className) === -1) {
+        element.className += " " + className;
+    }
+}
 
 

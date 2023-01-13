@@ -44,6 +44,7 @@ class CompetitionController extends Controller
             'need_submission'=>'required|numeric',
             'need_team'=>'required|numeric',
             'max_people'=>'required|numeric',
+            'whatsapp_group'=>'required|string',
         ]);
 
         $logoName = $request->name;
@@ -71,6 +72,7 @@ class CompetitionController extends Controller
             'need_submission'=>$request->need_submission,
             'need_team'=>$request->need_team,
             'max_people'=>$request->max_people,
+            'whatsapp_group'=>$request->whatsapp_group,
         ]);
 
         return redirect()->route('competitions.index')->with('success','competition is successfuly updated');

@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\FlightTicket;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
+use App\Models\PickUpSchedule;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FlightRegistrationController extends Controller
 {
     public function __construct(){
-        $this->middleware('IsShowed:ENV002')->only(['index', 'create', 'edit']);  
-        
-    }
-
-    public function index()
-    {
-
+        $this->middleware('IsShowed:ENV002')->only(['create']);   
+        $this->middleware(['auth', 'verified'])->only(['create', 'store']);
     }
 
     public function create()
     {
-        return view('flight-registrations.create');
+        return view('flight-registrations.create',[
+            'schedules' => PickUpSchedule::orderBy('schedule','asc')->get(),
+        ]);
     }
 
     public function store(Request $request)
@@ -31,8 +29,9 @@ class FlightRegistrationController extends Controller
             'airline_name'=>'required|string',
             'flight_time'=>'required',
             'ticket_proof'=>'required',
+            'people' => 'required | numeric',
+            'schedule' => 'required'
         ]);
-        // dd($request->all());
         $ticket_proof = array();
         if($files = $request->file('ticket_proof')){
             $i = 1;
@@ -58,32 +57,10 @@ class FlightRegistrationController extends Controller
             'airline_name'=>$request->airline_name,
             'flight_time'=>$request->flight_time,
             'ticket_proof'=> implode('; ', $ticket_proof),
-        ]);
+            'schedule_id' => $request->schedule,
+            'number_of_people' => $request->people
+        ]); 
 
-        return redirect()->route('flight-tickets.index');
-    }
-
-   
-    public function show($id)
-    {
-        //
-    }
-
-    public function destroy(FlightRegistration $flightRegistration) // SOFT DELETE
-    {
-        $flightRegistration->delete();
-        return redirect()->back();
-    }
-
-    public function delete($id) // HARD DELETE
-    {
-        FlightRegistration::where('id', $id)->forceDelete();
-        return redirect()->back();
-    }
-
-    public function restore($id)
-    {
-        FlightRegistration::where('id', $id)->restore();
-        return redirect()->back();
+        return redirect()->route('flight-tickets.index')->with('success','Flight Ticket has successfuly added');
     }
 }

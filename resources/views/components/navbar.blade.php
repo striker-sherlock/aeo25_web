@@ -18,10 +18,10 @@
                 <li class="nav-item active m-1">
                     <a href="/about-us" class="btn btn-block px-3 nav-text nav-btn text-white">About Us</a>
                 </li>
-
+{{-- 
                 <li class="nav-item active m-1">
                     <a href="{{route('merchandise-orders.index')}}" class="btn btn-block px-3 nav-text nav-btn text-white">Merchandise</a>
-                </li>
+                </li> --}}
                 @php
                     $ambassadors = App\Models\Ambassador::all()->count();
                 @endphp

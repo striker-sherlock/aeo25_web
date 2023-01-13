@@ -13,6 +13,13 @@
                 </thead>
                 <tbody class="text-center">
                     <tr>
+                        <th>Initial Slot</th>
+                        @foreach ($competitions as $competition)
+                            <th> {{$competition->temp_quota + $registeredSlot[$competition->name]}}</th>
+                        @endforeach
+                    </tr>
+                    
+                    <tr>
                         <th>Remaining Slot (Temp)</th>
                         @foreach ($competitions as $competition)
                             <th> {{$competition->temp_quota}}</th>
@@ -24,6 +31,7 @@
                             <th> {{$registeredSlot[$competition->name]}}</th>
                         @endforeach
                     </tr>
+              
                 </tbody>
             </table>
         </x-card>
@@ -76,7 +84,7 @@
             @endif
         </x-card>
 
-        {{-- confirmed --}}
+        {{-- confirmed (unpaid)  --}}
         <x-card>
             <h2 class="mb-3 text-success fw-bold">Confirmed Slot Registration (Unpaid) </h2>
             @if ($confirmed->count())
@@ -86,10 +94,10 @@
                     <tr>
                         <th scope="col">Competition Field</th>
                         <th scope="col">PIC Name</th>
+                        <th scope="col">Institution</th>
                         <th scope="col">Contact</th>
                         <th scope="col">Country</th>
                         <th scope="col">Expired</th>
-                        <th scope="col">Payment Status</th>
                         <th scope="col">Total Slot</th>
                         <th scope="col">Action </th>
                         
@@ -100,22 +108,61 @@
                             <tr>
                                 <th>{{$competition->competition->name}}</th>
                                 <th>{{$competition->user->pic_name}}</th>
+                                <th>{{$competition->user->institution_name}}</th>
                                 <th>{{$competition->user->pic_phone_number}}</th>
                                 <th>{{$competition->user->country->name}}</th>
                                 @php($diff = \Carbon\Carbon::parse( now() )->diffInDays( $competition->confirmed_at ))
                                 <th class="{{$diff > 2 ? 'text-danger' : 'text-success'}}">H + {{$diff}} Days</th>
-                                <th class="{{$competition->payment_id == NULL ? 'text-danger' : 'text-warning'}}">{{$competition->payment_id == NULL ? 'No Payment Yet' : 'Payment is on progress'}}</th>
+                                 
                                 <th>{{$competition->quantity}}</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex justify-content-center">
                                         <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn  btn-primary me-2">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="{{route('slot-registrations.cancel',$competition->id)}}" class="btn btn-warning ">
+                                        <a href="{{route('slot-registrations.cancel',$competition->id)}}" class="btn btn-warning cancel">
                                             <i class="fas fa-undo" ></i>
                                         </a>
                                     </div>
                                 </th>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @else <hr><p class="text-center">No Data</p>
+            @endif
+        </x-card>
+
+        {{-- confirmed (paid)  --}}
+        <x-card>
+            <h2 class="mb-3 text-success fw-bold">Confirmed Slot Registration (Paid) </h2>
+            @if ($confirmedPaid->count())
+            <div class="table-responsive py-2">
+                <table class="table table-striped table-bordered dataTables" id="">
+                    <thead class="text-center">
+                    <tr>
+                        <th scope="col">Competition Field</th>
+                        <th scope="col">PIC Name</th>
+                        <th scope="col">Institution</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Country</th>
+                        <th scope="col">Total Slot</th>
+                       
+                        
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        @foreach ($confirmedPaid as $competition)
+                            <tr>
+                                <th>{{$competition->competition->name}}</th>
+                                <th>{{$competition->user->pic_name}}</th>
+                                <th>{{$competition->user->institution_name}}</th>
+                                <th>{{$competition->user->pic_phone_number}}</th>
+                                <th>{{$competition->user->country->name}}</th>
+                                
+                                <th>{{$competition->quantity}}</th>
+                
                             </tr>
                         @endforeach
                     </tbody>
@@ -224,7 +271,7 @@
                             <button type="button" class="btn btn-outline-secondary w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
                         </div>
                         <div class="col">
-                            <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-outline-success w-100 rounded-pill" >
+                            <a href="{{route('slot-registrations.confirm',$competition->id)}}" class="btn btn-outline-success w-100 rounded-pill confirm" >
                                 Confirm 
                             </a>
                         </div>
@@ -241,7 +288,8 @@
 </x-admin>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
-<script>
+<script type="module">
+
     let textArea = document.querySelectorAll(".text-area");
     console.log(textArea);
     textArea.forEach( el => {

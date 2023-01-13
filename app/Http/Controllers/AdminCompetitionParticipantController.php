@@ -56,13 +56,14 @@ class AdminCompetitionParticipantController extends Controller
             $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
             $fileName = str_replace('-', '_', $fileName);
             $current = time();
-    
+            
             if($request->hasFile('profile_picture')){
                 $extension = $request->file('profile_picture')->getClientOriginalExtension();
                 $fixedName = $fileName.'_'.$current.'.'.$extension;
                 $path = $request->file("profile_picture")->storeAs("public/profile_picture/".$request->competition_id,$fixedName);
             }
             else $fixedName = $request->profile_picture_old;
+            // dd($competitionParticipant);
             $competitionParticipant->update([
                 'name' => $request->nama,
                 'email' => $request->email,
@@ -71,6 +72,8 @@ class AdminCompetitionParticipantController extends Controller
                 'phone_number' => $request->phone,
                 'profile_picture' => $fixedName,
                 'additional_notes' => $request->notes,
+                'is_vegetarian' => $request->vegetarian,
+                // 'food_allergic' => $request->food_allergic,
             ]);
 
         }
