@@ -20,14 +20,14 @@
                                 <div class="card-body text-center">
                                     <h4 class="card-title fw-bold">{{ $slot->competition->name }}</h4>
                                     <p class="text-center">Submission Opens at: <br> <span
-                                            class="c-text-1 fw-bold">{{ date('M j, Y g:i A', strtotime($slot->start_time)) }}
+                                            class="c-text-1 fw-bold">{{ date('M j, Y g:i A', strtotime($env->start_time)) }}
                                             GMT+7</span></p>
                                     <p class="text-center">Submission Closes at: <br> <span
-                                            class="text-danger fw-bold">{{ date('M j, Y g:i A', strtotime($slot->end_time)) }}
+                                            class="text-danger fw-bold">{{ date('M j, Y g:i A', strtotime($env->end_time)) }}
                                             GMT+7</span></p>
                                     @if ($slot->is_confirmed == 1)
-                                        @if (Carbon\Carbon::now() <= $slot->end_time && Carbon\Carbon::now() > $slot->start_time)
-                                            <a href="{{ route('user-competition-submissions.create', Crypt::encryptString($slot->id)) }}"
+                                        @if (time() <= strtotime($env->end_time) && time()  > strtotime($env->start_time))
+                                            <a href="{{ route('competition-submissions.create', $slot->id) }}"
                                                 class="btn btn-outline-1  my-3 px-3 dashboard_3_compete_button"><i
                                                     class="fas fa-copy me-2"></i>Add Submissions</a>
                                         @else

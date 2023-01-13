@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompetitionParticipant;
 use App\Models\AccommodationGuest;
+use App\Models\Environment;
 use Exception;
 
 class DashboardController extends Controller
@@ -162,11 +163,13 @@ class DashboardController extends Controller
 
             $competitionSlots = CompetitionSlot::where('pic_id',Auth::user()->id)->get()->where('is_confirmed',1);
             $competitionParticipant  = CompetitionParticipant::where('pic_id', Auth::user()->id)->get();
+            $env = Environment::where('env_code','ENV012')->first();
             
             
             return view('dashboards.step-four',[
                 'competitionSlots' => $competitionSlots,
-                'competitionParticipant' => $competitionParticipant,    
+                'competitionParticipant' => $competitionParticipant, 
+                'env' =>  $env,  
             ]);
         }
     }

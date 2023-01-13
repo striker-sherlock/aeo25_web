@@ -1,55 +1,60 @@
 <x-admin>
     <div class="container mt-4">
-      <div class="card border-0 overflow-hidden shadow rounded-20 mb-5" style="border-radius:20px">
-          <div class="card-header bg-secondary"></div>
-          <div class="card-body my-3">
-            <h1>Environment List</h1>
-              <a href="{{ route('environments.create') }}" class="btn btn-primary btn-rounded mb-3">Create New Environment</a>
-                <div class="table-responsive py-2">
-                    <table class="table table-sm table-striped table-bordered no-footer">
-                      <thead class="thead-light">
-                        <tr>
-                            <th class="align-middle text-center">Code</th>
-                            <th class="align-middle text-center">Name</th>
-                            <th class="align-middle text-center">Status</th>
-                            <th class="align-middle text-center">Updated At</th>
-                            <th class="align-middle text-center">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach ($environments as $environment)
-                          <tr class="align-middle text-center">
-                            <td>{{$environment->env_code}}</td>
-                            <td>{{$environment->env_name}}</td>
-                            <td class="align-middle text-center">{{$environment->is_showed ? "Visible":"Hidden"}}</td>
-                            <td class="align-middle text-center">{{$environment->updated_at ? $environment->updated_at : "-"}}</td>
-                            <td class="d-flex justify-content-center">
-                            @if($environment->is_showed)
-                                <a class="btn btn-sm btn-info me-2" href="{{ route('environments.update-visibility', $environment->id) }}" title="Hide">
-                                    <i class="fa-solid fa-eye"></i>
-                                </a>
-                            @else
-                                <a class="btn btn-sm btn-danger me-2" href="{{ route('environments.update-visibility', $environment->id) }}" title="Show">
-                                    <i class="fa fa-eye-slash"></i>
-                                </a>
-                            @endif
-                            <form method="POST" action="{{route('environments.destroy',$environment->id)}}">
-                                <input  type="hidden" name="_method" value = "DELETE">
-                                <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$environment->id}}">
-                                <button title="delete" class="btn btn-sm btn-danger" >
-                                    <i class="fa fa-close"></i>
-                                </button>
-                                </a>
-                                @csrf
-                            </form>
-                            </td> 
+            <x-card>
+              <h1 class="text-gradient">Environment List</h1>
+                <a href="{{ route('environments.create') }}" class="btn btn-primary btn-rounded mb-3">Create New Environment</a>
+                  <div class="table-responsive py-2">
+                      <table class="table table-sm table-striped table-bordered no-footer">
+                        <thead class="thead-light">
+                          <tr>
+                              <th class="align-middle text-center">Code</th>
+                              <th class="align-middle text-center">Name</th>
+                              <th class="align-middle text-center">Status</th>
+                              <th class="align-middle text-center">Updated At</th>
+                              <th class="align-middle text-center">Start Time</th>
+                              <th class="align-middle text-center">End Time</th>
+                              <th class="align-middle text-center">Action</th>
                           </tr>
-                        @endforeach
-                      </tbody>
-                    </table>
-                  </div>
-          </div>
-      </div>
+                        </thead>
+                        <tbody>
+                          @foreach ($environments as $environment)
+                            <tr class="align-middle text-center">
+                              <td>{{$environment->env_code}}</td>
+                              <td>{{$environment->env_name}}</td>
+                              <td class="align-middle text-center">{{$environment->is_showed ? "Visible":"Hidden"}}</td>
+                              <td class="align-middle text-center">{{$environment->updated_at ? $environment->updated_at : "-"}}</td>
+                              <td>{{$environment->start_time}}</td>
+                              <td>{{$environment->end_time}}</td>
+                              <td class="d-flex justify-content-center">
+                              @if($environment->is_showed)
+                                  <a class="btn btn-sm btn-info me-2" href="{{ route('environments.update-visibility', $environment->id) }}" title="Hide">
+                                      <i class="fa-solid fa-eye"></i>
+                                  </a>
+                              @else
+                                  <a class="btn btn-sm btn-danger me-2" href="{{ route('environments.update-visibility', $environment->id) }}" title="Show">
+                                      <i class="fa fa-eye-slash"></i>
+                                  </a>
+                              @endif
+                              <a class="btn btn-sm btn-warning me-2" href="{{ route('environments.edit', $environment->id) }}" title="Edit">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                              <form method="POST" action="{{route('environments.destroy',$environment->id)}}">
+                                  <input  type="hidden" name="_method" value = "DELETE">
+                                  <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$environment->id}}">
+                                  <button title="delete" class="btn btn-sm btn-danger" >
+                                      <i class="fa fa-close"></i>
+                                  </button>
+                                  </a>
+                                  @csrf
+                              </form>
+                              </td> 
+                            </tr>
+                          @endforeach
+                        </tbody>
+                      </table>
+                    </div>
+
+            </x-card>
     </div>
     @foreach ($environments as $environment)
     <div class="modal fade p-5" id="modal{{$environment->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
