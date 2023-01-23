@@ -18,4 +18,11 @@ class CompetitionTeam extends Model
     public function competitionParticipant(){
         return $this->hasMany(CompetitionParticipant::class,'team_id','id');
     }
+
+    public function teamSubmission () 
+    {
+        return $this->hasOne(CompetitionSubmissions::class, 'submitter_id', 'id')
+            ->join('competitions', 'competitions.id', 'competition_submissions.competition_id')
+            ->where('competitions.id', 'RD');
+    }
 }

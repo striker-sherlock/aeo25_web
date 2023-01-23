@@ -423,29 +423,116 @@
                         </li> --}}
 
 
-                        {{-- schedule  --}}
-                        {{-- <li class=" pb-1 side-item pb-1 sidebar-dropdown">
-                            <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
-                                <span class="fa-stack fa-sm ml-n1">
-                                    <i class="fas fa-square fa-stack-2x"></i>
-                                    <i class="fas fa-calendar-plus fa-stack-1x text-dark"></i>
-                                </span>
-                                <span class="ms-2">Competition Schedule</span>
-                                <i class="fas fa-angle-right ms-auto"></i>
-                            </a>
-                            <div class="sidebar-submenu">
-                                <ul class="fa-ul">
-                                        <li class="mb-1">
-                                            <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
-                                                href="#">
-                                                <span class="fa-li"> <i class="fas fa-arrow-right"></i></span>
-                                                Competition Name
-                                            </a>
-                                        </li>
-                                </ul>
-                            </div>
-                        </li> --}}
+                       
                     @endif
+
+                     {{-- competition schedule  --}}
+                     @php
+                     if (Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT") || Auth::guard('admin')->user()->division_id == "MITR"|| (Auth::guard('admin')->user()->division_id == "CP")) {
+                         $competitions = App\Models\Competition::all();
+                     }else if (Auth::guard('admin')->user()->division_id == "OC") {
+                         $competitions = App\Models\Competition::where('id', 'RD')->orWhere('id', 'SSW')->get();
+                     }else {
+                         $competitions = App\Models\Competition::where('id', Auth::guard('admin')->user()->division_id)->get();
+                     }
+                 @endphp
+                     <li class="pb-1 side-item pb-1 sidebar-dropdown">
+                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
+                             <span class="fa-stack fa-sm ml-n1">
+                                 <i class="fas fa-square fa-stack-2x"></i>
+                                 <i class="fas fa-calendar-plus fa-stack-1x text-dark"></i>
+                             </span>
+                             <span class="ms-2">Competition Schedule</span>
+                             <i class="fas fa-angle-right ms-auto"></i>
+                         </a>
+                         <div class="sidebar-submenu">
+                                 <ul class="fa-ul">
+                                     @if (Auth::guard('admin')->user()->division_id == "DB" || Auth::guard('admin')->user()->division_id == "CP")
+                                     <li class="mb-1">
+                                         <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark w-100"
+                                             href="{{ route('schedules.manage', 'DB') }}">
+                                             <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                             Debate
+                                         </a>
+                                     </li>
+                                        
+                                    @endif
+
+                                    @if (Auth::guard('admin')->user()->department_id == "CP" || Auth::guard('admin')->user()->division_id == "CP")
+                                    <li class="mb-1">
+                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark w-100"
+                                            href="{{ route('schedules.manage', 'IA') }}">
+                                            <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                            Ind.Adjudicator
+                                        </a>
+                                    </li>
+                                    
+                                   @endif
+
+                                   @if (Auth::guard('admin')->user()->division_id == "NC" || Auth::guard('admin')->user()->division_id == "CP")
+                                   <li class="mb-1">
+                                    <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                        href="{{ route('schedules.manage', 'NC') }}" style="display: block">
+                                        <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                        Newscasting
+                                    </a>
+                                </li>
+                                  @endif
+
+                                  @if (Auth::guard('admin')->user()->division_id == "SP" || Auth::guard('admin')->user()->division_id == "CP")
+                                  <li class="mb-1">
+                                      <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                          href="{{ route('schedules.manage', 'SP') }}" style="display: block">
+                                          <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                          Speech
+                                      </a>
+                                  </li>
+                                 @endif
+
+                                 @if (Auth::guard('admin')->user()->division_id == "ST" || Auth::guard('admin')->user()->division_id == "CP")
+                                 <li class="mb-1">
+                                     <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                         href="{{ route('schedules.manage', 'ST') }}" style="display: block">
+                                         <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                         Storytelling
+                                     </a>
+                                 </li>
+                                 
+                                @endif
+
+                                @if (Auth::guard('admin')->user()->division_id == "SB" || Auth::guard('admin')->user()->division_id == "CP")
+                                
+                                <li class="mb-1">
+                                    <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                        href="{{ route('schedules.manage', 'SB') }}" style="display: block">
+                                        <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                        Spelling bee
+                                    </a>
+                                </li>
+                               @endif
+
+                               @if (Auth::guard('admin')->user()->division_id == "OC" || Auth::guard('admin')->user()->division_id == "CP")
+                               <li class="mb-1">
+                                <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                    href="{{ route('schedules.manage', 'RD') }}" style="display: block">
+                                    <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                    Radio Drama
+                                </a>
+                            </li>
+                            <li class="mb-1">
+                                <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
+                                    href="{{ route('schedules.manage', 'SSW') }}" style="display: block">
+                                    <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
+                                    Short Story Writing
+                                </a>
+                            </li>
+                              
+                              @endif
+                             </ul>
+                         </div>
+                     </li>
+
+
                     @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 11)->first()))
                         <li class="pb-1 ps-3 header-menu">
                             <span class="fw-bold">Ambassador</span>
@@ -462,19 +549,20 @@
                         </li>
                     @endif
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 16)->first()))
-                    {{-- <li class="pb-1 ps-3 header-menu">
+                    <li class="pb-1 ps-3 header-menu">
                         <span class="fw-bold">Event</span>
                     </li>
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                            href="#">
+                        href="{{ route('schedules.manage', "EV") }}">
                             <span class="fa-stack fa-sm ms-n1">
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fas fa-calendar-alt fa-stack-1x text-dark"></i>
                             </span>
                             <span class="ms-2">Main Event Schedule</span>
                         </a>
-                    </li> --}}
+                    </li>
+    
                 @endif
 
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 12)->first()))
