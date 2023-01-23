@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\PickUpSchedule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FlightTicket extends Model
 {
@@ -17,6 +18,10 @@ class FlightTicket extends Model
     
     public function userPic(){
         return $this->belongsTo(User::class, 'pic_id', 'id');
+    }
+
+    public function pickUpSchedule(){
+        return $this->belongsTo(PickUpSchedule::class,'schedule_id','id');
     }
 }
 

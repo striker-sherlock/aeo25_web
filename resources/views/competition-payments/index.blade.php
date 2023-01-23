@@ -10,6 +10,7 @@
                         <tr class="text-center">
                             <th scope="col">ID</th>
                             <th scope="col">Institution Name</th>
+                            <th scope="col">Competition Slots</th>
                             <th scope="col">PIC Name</th>
                             <th scope="col">Contact</th>
                             <th scope="col">Country</th>
@@ -23,8 +24,11 @@
                             <tr class="text-center">
                                 <th>{{$payment->id}}</th>
                                 <th>{{$payment->institution_name}}</th>
+                                <th>
+                                    <a href="" class="btn btn-outline-theme w-100 rounded-pill" data-bs-target="#slots-{{$payment->id}}" data-bs-toggle="modal"> View Slots</a>
+                                </th>
                                 <th>{{$payment->pic_name}}</th>
-                                <th>{{$payment->pic_phone_number}}</th>
+                                <th>{{chunk_split($payment->pic_phone_number,3,' ')}}</th>
                                 <th>{{$payment->name}}</th>
                                 <th>IDR {{ number_format($payment->amount)}} </th>
                                  
@@ -35,7 +39,7 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                        <a href="#" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#confirm{{$payment->id}}" title="confirm ">
+                                        <a href="#" class="btn btn-success me-2 " data-bs-toggle="modal" data-bs-target="#confirm{{$payment->id}}" title="confirm ">
                                             <i class="fas fa-check-circle"></i>
                                         </a>
                                         <a href="{{route('competition-payments.reject')}}" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" title="reject " >
@@ -60,13 +64,14 @@
         <x-card>
             <h2 class="mb-3 text-success fw-bold">Confirmed Competition Payment </h2>
             @if ($confirmed->count())
-                <a href="{{route('competition-payments.export',$type)}}" class="btn btn-outline-theme mb-3 text-capitalize">Download Excel ({{ $type}} Payment)</a>
+                <a href="{{route('competition-payments.export',$type)}}" class="btn btn-outline-theme mb-3 text-capitalize"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> Download Excel ({{ $type}} Payment)</a>
                 <div class="table-responsive py-2">
                     <table class="table table-striped table-bordered dataTables" id="dataTables">
                         <thead class="text-center">
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Institution Name</th>
+                            <th scope="col">Competition Slots</th>
                             <th scope="col">PIC Name</th>
                             <th scope="col">Contact</th>
                             <th scope="col">Country</th>
@@ -80,8 +85,11 @@
                             <tr class="text-center">
                                 <th>{{$payment->id}}</th>
                                 <th>{{$payment->institution_name}}</th>
+                                <th>
+                                    <a href="" class="btn btn-outline-theme w-100 rounded-pill" data-bs-target="#slots-{{$payment->id}}" data-bs-toggle="modal"> View Slots</a>
+                                </th>
                                 <th>{{$payment->pic_name}}</th>
-                                <th>{{$payment->pic_phone_number}}</th>
+                                <th>{{chunk_split($payment->pic_phone_number,3,' ')}}</th>
                                 <th>{{$payment->name}}</th>
                                 <th>IDR {{ number_format($payment->amount)}}</th>
                                 <th>
@@ -90,7 +98,7 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                        <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-warning me-2" title="cancel payment" title="move to pending">
+                                        <a href="{{route('competition-payments.cancel',$payment->id)}}" class="btn btn-warning me-2 cancel" title="cancel payment" title="move to pending">
                                             <i class="fas fa-undo"></i>
                                         </a>
                                         <a href="{{route('payments.paid-invoice', $payment->id)}}" class="btn btn-success me-2" title="View Invoice" target="_blank" title="view invoice">
@@ -133,7 +141,7 @@
                             <th>{{$payment->id}}</th>
                             <th>{{$payment->institution_name}}</th>
                             <th>{{$payment->pic_name}}</th>
-                            <th>{{$payment->pic_phone_number}}</th>
+                            <th>{{chunk_split($payment->pic_phone_number,3,' ')}}</th>
                             <th>{{$payment->name}}</th>
                             <th>IDR {{ number_format($payment->amount)}}</th>
                             <th>{{$payment->created_at}}</th>
@@ -205,9 +213,10 @@
         </div>
     @endforeach
 
+    
     {{-- modal untuk confirm --}}
     @foreach ($pending as $competition)
-    <div class="modal fade p-4" id="confirm{{$competition->id}}" tabindex="-1" role="dialog" >
+        <div class="modal fade p-4" id="confirm{{$competition->id}}" tabindex="-1" role="dialog" >
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-headers p-4 "></div>
@@ -233,10 +242,57 @@
                             <button type="button" class="btn btn-outline-secondary w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
                         </div>
                         <div class="col">
-                            <a href="{{route('competition-payments.confirm',$competition->id)}}" class="btn btn-outline-success w-100 rounded-pill" >
+                            <a href="{{route('competition-payments.confirm',$competition->id)}}" class="btn btn-outline-success w-100 rounded-pill confirm" >
                                 Confirm 
                             </a>
                         </div>
+                    </div>
+                </div>
+                
+            </div>
+            </div>
+        </div>
+    @endforeach
+    
+    @foreach ($competitionPayment as $competition)
+        <div class="modal fade p-4" id="slots-{{$competition->id}}" tabindex="-1" role="dialog" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-headers p-4 ">
+                    <h2 class="text-gradient text-capitalize fw-bold">{{$competition->user->pic_name}}'s slot competition</h2>
+                    <hr>
+                </div>
+                <div class="body px-4">
+                    <div class="table-responsive">
+                        <table class="table table-striped text-center">
+                            <thead>
+                                <tr>
+                                    <th>Slots</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                </tr>
+                                
+                            </thead>
+                            <tbody>
+                                @foreach ($competition->competitionSlot as $slot)
+                                    <tr >
+                                        <th>{{$slot->competition->name}}</th>
+                                        <th>{{$slot->quantity}}</th>
+                                        <th>IDR {{number_format($slot->quantity * $slot->competition->price)}}</th>
+
+                                    </tr>
+                                    
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footers p-4 mb-5   ">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <button type="button" class="btn btn-outline-secondary w-100 rounded-pill" data-bs-dismiss="modal">Close</button>
+                        </div>
+                     
                     </div>
                 </div>
                 

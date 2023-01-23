@@ -37,35 +37,35 @@
                                 </div>   
                                 {{-- {{old('gender') ? dd(old('gender.0')):''}} --}}
                                 <div class="form-group mb-2">
-                                    <label for="gender{{$i}}" class="col-form-label">Gender<span class="text-danger">*</span></label>
-                                    <select class="form-select"  name="gender[]" required id="gender{{$i}}">
+                                    <label for="gender{{$i-1}}" class="col-form-label">Gender<span class="text-danger">*</span></label>
+                                    <select class="form-select"  name="gender[]" required id="gender{{$i-1}}">
                                         <option class="d-none">Select participant's gender</option>
                                         <option value="Male" {{old('gender.'.$i-1) == 'Male' ? 'selected':''}}>Male</option>
                                         <option value="Female" {{old('gender.'.$i-1) == 'Female' ? 'selected':''}}>Female</option>
                                     </select>
                                 </div>  
                                 <div class="form-group mb-3">
-                                    <label for="additional_notes{{$i}}" class="col-form-label">Additional Notes</label>
-                                    <textarea class="form-control text-area"  name="additional_notes[]"  id="additional_notes{{$i}}" rows="2">{{old('additional_notes.'.$i)}}</textarea>
+                                    <label for="additional_notes{{$i-1}}" class="col-form-label">Additional Notes</label>
+                                    <textarea class="form-control text-area"  name="additional_notes[]"  id="additional_notes{{$i-1}}" rows="2">{{old('additional_notes.'.$i-1)}}</textarea>
 
-                                    @if ($errors->has('additional_notes.'.$i))
+                                    @if ($errors->has('additional_notes.'.$i-1))
                                         <span class="invalid feedback text-danger"role="alert">
                                             <strong>*{{ $errors->first('additional_notes.*') }}.</strong>
                                         </span>
                                     @endif 
-                                </div>     
- 
-                            </div>   
-                            <div class="col">
+                                </div>
                                 <div class="form-group mb-3">
                                     <label for="phone{{$i}}" class="col-form-label">Phone Number (WA)<span class="text-danger">*</span></label>
                                     <input type="text"  class="form-control"  name="phone[]" id="phone{{$i}}" value="{{old('phone.'.$i-1)}}" placeholder="" required>
                                     @if ($errors->has('phone.'.$i-1))
-                                    <span class="invalid feedback text-danger"role="alert">
-                                        <strong>*{{ $errors->first('phone.*') }}.</strong>
-                                    </span>
-                                @endif 
-                                </div> 
+                                        <span class="invalid feedback text-danger"role="alert">
+                                            <strong>*{{ $errors->first('phone.*') }}.</strong>
+                                        </span>
+                                    @endif 
+                                </div>     
+                            </div>   
+                            <div class="col">
+                       
 
                                 <div class="form-group mb-3">
                                     <label for="birth{{$i}}" class="col-form-label">Date of Birth <span class="text-danger">*</span> <span class="text-muted">(yyyy-mm-dd)</span></label>
@@ -75,14 +75,24 @@
                                         <strong>*{{ $errors->first('birth.*') }}.</strong>
                                     </span>
                                 @endif
+
                                 </div> 
                                 <div class="form-group mb-2">
                                     <label for="vegetarian{{$i}}" class="col-form-label">Is This Participant Vegetarian ? <span class="text-danger">*</span></label>
                                     <select class="form-select"  name="vegetarian[]" id="vegetarian{{$i}}" required>
                                         <option selected class="d-none">choose...</option>
-                                        <option value="1" {{old('vegetarian.'.$i) == '1' ? 'selected':''}}>Vegetarian</option>
-                                        <option value="0" {{old('vegetarian.'.$i) == '0' ? 'selected':''}}>Non-Vegetarian</option>
+                                        <option value="1" {{old('vegetarian.'.$i-1) == '1' ? 'selected':''}}>Vegetarian</option>
+                                        <option value="0" {{old('vegetarian.'.$i-1) == '0' ? 'selected':''}}>Non-Vegetarian</option>
                                     </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="food_allergic{{$i}}" class="col-form-label">Does this participant have food allergic ? <span class="text-muted">(optional)</span></label>
+                                    <input type="text"  class="form-control"  name="food_allergic[]" id="food_allergic{{$i}}" value="{{old('food_allergic.'.$i-1)}}" >
+                                    @if ($errors->has('food_allergic.'.$i-1))
+                                        <span class="invalid feedback text-danger"role="alert">
+                                            <strong>*{{ $errors->first('food_allergic.*') }}.</strong>
+                                        </span>
+                                    @endif 
                                 </div>    
 
                                 <div class="form-group mb-3">

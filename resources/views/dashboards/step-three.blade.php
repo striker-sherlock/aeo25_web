@@ -19,7 +19,21 @@
                                 <h5>Status:
                                     @if ($competitionSlot->competitionParticipants->count() > 0)
                                         <span class="fw-bold text-primary">Registered</span> <br>
-                                        <a href="{{route('competition-participants.show',[Auth::user()->id,$competitionSlot->competition->id])}}" class="btn btn-outline-info rounded-pill mt-2">View Participant</a>
+                                
+                                       <div class="row">
+                                            <div class="col">
+                                                <a href="{{route('competition-participants.show',[Auth::user()->id,$competitionSlot->competition->id])}}" class="btn btn-outline-info rounded-pill mt-2 mb-2 w-100" style="font-size: 0.7em"> <i class="fa fa-eye "></i> View Participant</a>  
+                                            </div>
+                                            
+                                            @if ($competitionSlot->competition->whatsapp_group != NULL)
+                                                <div class="col">
+                                                    <a href="{{$competitionSlot->competition->whatsapp_group}}" class="btn btn-outline-success rounded-pill mt-2 w-100" style="font-size: 0.7em"> <i
+                                                        class="fab fa-whatsapp me-2 fa-lg"></i> Join Group </a>  
+
+                                                </div>
+                                            @endif
+                                       </div>
+
                                         
                                     @elseif($competitionSlot->payment == NULL)
                                         <span class="fw-bold text-danger">Not Eligible (No Payment Yet)</span>

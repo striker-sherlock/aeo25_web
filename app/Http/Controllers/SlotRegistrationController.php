@@ -11,12 +11,14 @@ use App\Mail\ConfirmedSlotMail;
 use App\Models\CompetitionSlot;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CompetitionSlotExport;
 
 class SlotRegistrationController extends Controller
 {
     public function __construct(){
         $this->middleware('auth')->only(['create','store','destroy','createOthers']);
-        $this->middleware('IsAdmin')->except(['create','update','store','destroy','createOthers']);
+        $this->middleware('IsAdmin')->except(['create','update','store','destroy','createOthers','export']);
         $this->middleware('Access:2')->except(['create','update','store','destroy','createOthers']);
         $this->middleware('IsShowed:ENV009');
     }
@@ -38,15 +40,25 @@ class SlotRegistrationController extends Controller
             ->Where('competition_slot_details.payment_id', NULL)
             ->select('competition_slot_details.*')
             ->get();
+
+        $confirmedPaid = CompetitionSlot::leftJoin('competition_payments','competition_slot_details.payment_id','competition_payments.id')
+            ->where('competition_slot_details.is_confirmed',1)
+            ->Where('competition_slot_details.payment_id','!=', NULL)
+            ->select('competition_slot_details.*')
+            ->get();
         $rejected = CompetitionSlot::where('is_confirmed',-1)->get();
         
         return view('slot-registrations.index',[
             'competitions' =>$competitions,
             'pending' => $pending,
             'confirmed' => $confirmed,
+            'confirmedPaid' => $confirmedPaid,
             'rejected' => $rejected,
             'registeredSlot' => $count,
         ]);
+    }
+    public function export(){
+        return Excel::download(new CompetitionSlotExport(),'competition-slot.xlsx');
     }
 
     public function create(){
@@ -188,12 +200,13 @@ class SlotRegistrationController extends Controller
     public function confirm(CompetitionSlot $competitionSlot){
          if ($competitionSlot->competition->temp_quota < $competitionSlot->quantity) return redirect()->back()->with('error',"Confirmation failed, this slot's temporary quota is not enough");
 
-        $competitionSlot ->update([
-            'updated_by' => Auth::guard('admin')->user()->name,
-            'is_confirmed' => 1,
-            'confirmed_at' => Carbon::now()
-        ]);
-
+         
+         $competitionSlot ->update([
+             'updated_by' => Auth::guard('admin')->user()->name,
+             'is_confirmed' => 1,
+             'confirmed_at' => Carbon::now()
+            ]);
+       
         $remainedParticipant =$competitionSlot ->competition->temp_quota;
         $competitionSlot->competition -> update([
             'temp_quota' => $remainedParticipant - $competitionSlot->quantity,

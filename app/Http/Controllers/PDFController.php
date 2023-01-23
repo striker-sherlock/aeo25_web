@@ -289,7 +289,7 @@ class PDFController extends Controller
                 <div id="details" class="clearfix" style="margin-top:20px">
                     <div id="client">
                     <div class="to">INVOICE TO:</div>
-                    <h2 class="name">' . $user->institution_name . '</h2>
+                    <h2 style="font-size:1em; margin:0;">' . $user->institution_name . '</h2>
                     <div class="address">' . $user->pic_name . '</div>
                     <div class="address">' . $user->country->name . '</div>';
         if ($user->country->name != 'Indonesia') {
@@ -380,7 +380,7 @@ class PDFController extends Controller
                                     </tr>
                                     <tr>
                                         <td>Bank Account Number</td>
-                                        <td>: 5271 188 2077</td>
+                                        <td>: 527 188 2077</td>
                                     </tr>
                                     <tr>
                                         <td>Bank Account Name</td>
@@ -460,10 +460,10 @@ class PDFController extends Controller
             ';
         if ($user->country->name != 'Indonesia') {
             $output .= '
-                <title>Invoice - ' . $user->institution_name . ' - 01' . '</title>';
+                <title>Receipt - ' . $user->institution_name . ' - 01' . '</title>';
         } else {
             $output .= '
-                <title>Invoice - ' . $user->institution_name . ' - 02' . '</title>';
+                <title>Receipt - ' . $user->institution_name . ' - 02' . '</title>';
         }
         '<link rel="preconnect" href="https://fonts.googleapis.com">';
         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
@@ -694,8 +694,8 @@ class PDFController extends Controller
                 <main>
                 <div id="details" class="clearfix" style="margin-top:20px">
                     <div id="client">
-                    <div class="to">INVOICE TO:</div>
-                    <h2 class="name">' . $user->institution_name . '</h2>
+                    <div class="to">RECEIPT TO:</div>
+                    <h2 style="font-size:1em; margin:0;">' . $user->institution_name . '</h2>
                     <div class="address">' . $user->pic_name . '</div>
                     <div class="address">' . $user->country->name . '</div>';
         if ($user->country->name != 'Indonesia') {
@@ -732,9 +732,9 @@ class PDFController extends Controller
             $output .= '
                          <tr>
                              <td class="desc" colspan="2"><h3>' . $slot->name . '</h3></td>
-                             <td class="unit"> IDR ' . $slot->price . '</td>
+                             <td class="unit"> IDR ' . number_format($slot->price) . '</td>
                              <td class="qty">' . $slot->quantity . ' ' . $participant . ' </td>
-                             <td class="total"> IDR ' . ($slot->quantity * $slot->price) . '</td>
+                             <td class="total"> IDR ' . number_format(($slot->quantity * $slot->price)) . '</td>
                          </tr>';
             $grandTotal += ($slot->quantity * $slot->price);
         }
@@ -748,7 +748,7 @@ class PDFController extends Controller
                     <tr>
                         <td colspan="2"></td>
                         <td colspan="2"><h3>GRAND TOTAL</h3></td>
-                        <td>IDR ' . $grandTotal . '</td>
+                        <td>IDR ' . number_format($grandTotal) . '</td>
                     </tr>';
 
         if ($user->country->name != 'Indonesia') {
@@ -790,9 +790,9 @@ class PDFController extends Controller
         $dompdf->render();
 
         if ($user->country->name != 'Indonesia') {
-            $dompdf->stream("Invoice - " . $user->institution_name . " - " . $invoiceCode . " - 01.pdf", array('Attachment' => false));
+            $dompdf->stream("Receipt - " . $user->institution_name . " - " . $invoiceCode . " - 01.pdf", array('Attachment' => false));
         } else {
-            $dompdf->stream("Invoice - " . $user->institution_name . " - " . $invoiceCode . " - 02.pdf", array('Attachment' => false));
+            $dompdf->stream("Receipt - " . $user->institution_name . " - " . $invoiceCode . " - 02.pdf", array('Attachment' => false));
         }
     }
 
@@ -916,15 +916,15 @@ class PDFController extends Controller
                 }
 
                 h2.name {
-                font-size: 1em;
-                font-weight: normal;
-                font-family: "Roboto";
-                margin: 0;
+                    font-size: 1em;
+                    font-weight: normal;
+                    font-family: "Roboto";
+                    margin: 0;
                 }
 
                 #invoice {
-                float: right;
-                text-align: right;
+                    float: right;
+                    text-align: right;
                 }
 
                 #invoice h1 {
@@ -1077,7 +1077,6 @@ class PDFController extends Controller
                 <div id="details" class="clearfix" style="margin-top:20px">
                     <div id="client">
                     <div class="to">INVOICE TO:</div>
-                    <h2 class="name">' . $user->institution_name . '</h2>
                     <div class="address">' . $user->pic_name . '</div>
                     <div class="address">' . $user->country->name . '</div>';
         if ($user->country->name != 'Indonesia') {
@@ -1107,12 +1106,12 @@ class PDFController extends Controller
             $output .= '
                          <tr>
                              <td class="desc" colspan="2"><h3>' . $slot->room_type . '</h3></td>
-                             <td class="unit" > IDR ' . $slot->price . '</td>
-                             <td class="date">' . Carbon::parse($slot->check_in_date)->format('d-m-Y H:i') . ' ' . '</td>
-                             <td class="date">' . Carbon::parse($slot->check_out_date)->format('d-m-Y H:i') . ' ' . '</td>
-                             <td class="total" colspan="2"> IDR ' . ($slot->quantity * $slot->price) . '</td>
+                             <td class="unit" > IDR ' . number_format($slot->price) . '</td>
+                             <td class="date">' . Carbon::parse($slot->check_in_date)->format('d-m-Y  ') . ' ' . '</td>
+                             <td class="date">' . Carbon::parse($slot->check_out_date)->format('d-m-Y ') . ' ' . '</td>
+                             <td class="total" colspan="2"> IDR ' . number_format(($slot->quantity * $slot->price *  Carbon::parse($slot->check_in_date)->diffInDays(Carbon::parse($slot->check_out_date)))) . '</td>
                          </tr>';
-            $grandTotal += ($slot->quantity * $slot->price);
+            $grandTotal += ($slot->quantity * $slot->price *  Carbon::parse($slot->check_in_date)->diffInDays(Carbon::parse($slot->check_out_date)));
         }
 
         $output .= '
@@ -1124,7 +1123,7 @@ class PDFController extends Controller
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="2"><h3>GRAND TOTAL</h3></td>
-                        <td >IDR ' . $grandTotal . '</td>
+                        <td >IDR ' . number_format($grandTotal) . '</td>
                     </tr>';
 
         if ($user->country->name != 'Indonesia') {
@@ -1163,7 +1162,7 @@ class PDFController extends Controller
                                     </tr>
                                     <tr>
                                         <td>Bank Account Number</td>
-                                        <td>: 5271 188 2077</td>
+                                        <td>: 527 188 2077</td>
                                     </tr>
                                     <tr>
                                         <td>Bank Account Name</td>
@@ -1476,7 +1475,7 @@ class PDFController extends Controller
                 <div id="details" class="clearfix" style="margin-top:20px">
                     <div id="client">
                     <div class="to">INVOICE TO:</div>
-                    <h2 class="name">' . $user->institution_name . '</h2>
+                    <h2 style="font-size:1em; margin:0;">' . $user->institution_name . '</h2>
                     <div class="address">' . $user->pic_name . '</div>
                     <div class="address">' . $user->country->name . '</div>';
         if ($user->country->name != 'Indonesia') {
@@ -1514,12 +1513,12 @@ class PDFController extends Controller
             $output .= '
                          <tr>
                              <td class="desc" colspan="2"><h3>' . $slot->room_type . '</h3></td>
-                             <td class="unit"> IDR ' . $slot->price . '</td>
-                             <td class="date">' . Carbon::parse($slot->check_in_date)->format('d-m-Y H:i') . ' ' . '</td>
-                             <td class="date">' . Carbon::parse($slot->check_out_date)->format('d-m-Y H:i') . ' ' . '</td>
-                             <td class="total"> IDR ' . ($slot->quantity * $slot->price) . '</td>
+                             <td class="unit"> IDR ' . number_format($slot->price) . '</td>
+                             <td class="date">' . Carbon::parse($slot->check_in_date)->format('d-m-Y') . ' ' . '</td>
+                             <td class="date">' . Carbon::parse($slot->check_out_date)->format('d-m-Y') . ' ' . '</td>
+                             <td class="total"> IDR ' . number_format(($slot->quantity * $slot->price *  Carbon::parse($slot->check_in_date)->diffInDays(Carbon::parse($slot->check_out_date)))) . '</td>
                          </tr>';
-            $grandTotal += ($slot->quantity * $slot->price);
+            $grandTotal += ($slot->quantity * $slot->price *  Carbon::parse($slot->check_in_date)->diffInDays(Carbon::parse($slot->check_out_date)) );
         }
 
         $output .= '
@@ -1531,7 +1530,7 @@ class PDFController extends Controller
                     <tr>
                         <td colspan="3"></td>
                         <td colspan="2"><h3>GRAND TOTAL</h3></td>
-                        <td>IDR ' . $grandTotal . '</td>
+                        <td>IDR ' . number_format($grandTotal) . '</td>
                     </tr>';
 
         if ($user->country->name != 'Indonesia') {
@@ -1573,9 +1572,9 @@ class PDFController extends Controller
         $dompdf->render();
 
         if ($user->country->name != 'Indonesia') {
-            $dompdf->stream("Invoice - " . $user->institution_name . " - " . $invoiceCode . " - 01.pdf", array('Attachment' => false) );
+            $dompdf->stream("Receipt - " . $user->institution_name . " - " . $invoiceCode . " - 01.pdf", array('Attachment' => false) );
         } else {
-            $dompdf->stream("Invoice - " . $user->institution_name . " - " . $invoiceCode . " - 02.pdf", array('Attachment' => false));
+            $dompdf->stream("Receipt - " . $user->institution_name . " - " . $invoiceCode . " - 02.pdf", array('Attachment' => false));
         }
     }
 
@@ -1862,7 +1861,7 @@ class PDFController extends Controller
                              <td class="desc"><h3>' . $slot->name . '</h3></td>
                              <td class="unit" > IDR ' . $slot->price . '</td>
                              <td class="qty">' . $slot->quantity . '</td>
-                             <td class="total" colspan="2"> IDR ' . ($slot->quantity * $slot->price) . '</td>
+                             <td class="total" colspan="2"> IDR ' . number_format(($slot->quantity * $slot->price)) . '</td>
                          </tr>';
 
             $grandTotal += ($slot->quantity * $slot->price);

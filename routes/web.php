@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\PicController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\PickUpController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FollowUpController;
@@ -43,12 +45,11 @@ use App\Http\Controllers\AdminAccommodationGuestController;
 use App\Http\Controllers\AdminCompetitionPaymentController;
 use App\Http\Controllers\UserAccommodationPaymentController;
 use App\Http\Controllers\AdminAccommodationPaymentController;
+use App\Http\Controllers\UserCompetitionSubmissionController;
+use App\Http\Controllers\AdminCompetitionSubmissionController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
-use App\Http\Controllers\AdminCompetitionSubmissionController;
-use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\UserCompetitionSubmissionController;
 
 // Auth routes
 Auth::routes(['verify' => true]);
@@ -176,6 +177,7 @@ Route::controller(SlotRegistrationController::class)->prefix('slot-registrations
     Route::post('reject', 'reject')->name('reject');
     Route::get('cancel/{competitionSlot}', 'cancel')->name('cancel');
     Route::get('create-others', 'createOthers')->name('create-other');
+    Route::get('export', 'export')->name('export');
 });
 Route::resource('slot-registrations', SlotRegistrationController::class);
 
@@ -193,6 +195,10 @@ Route::controller(FlightTicketController::class)->prefix('flight-tickets')->name
     Route::get('/export/{type}', 'export')->name('export');
 });
 Route::resource('flight-tickets', FlightTicketController::class, ['only' => ['index', 'edit', 'update', 'destroy']]);
+
+//pick up schedule
+Route::resource('pick-up-schedules', PickUpController::class);
+
 
 //Admin Privileges - Competition Payment
 Route::get('/{type}/payments', [AdminCompetitionPaymentController::class, 'index'])->name('competition-payments.index');
@@ -330,4 +336,13 @@ Route::controller(RankingListController::class)->prefix('ranking-lists')->name('
     Route::get('update-debate-type/{competitionTeam}', 'updateDebateType')->name('update-debate-type');
 });
 Route::resource('ranking-lists', RankingListController::class)->only('index');
+
+// Food Coupon 
+Route::get('food-coupons', [FoodController::class, 'index'])->name('food-coupons.index');
+Route::get('food-coupons/show/{day}/{type}', [FoodController::class, 'show'])->name('food-coupons.show');
+Route::get('food-coupons/create/{id}/{day?}', [FoodController::class, 'create'])->name('food-coupons.create');
+Route::get('food-coupons/send-Qr-Code/{id}', [FoodController::class, 'sendFoodQR'])->name('food-coupons.sendQR');
+Route::get('food-coupons/view-qr-code/{id}', [FoodController::class, 'viewQRCode'])->name('food-coupons.view-qr-code');
+Route::post('food-coupons/store', [FoodController::class, 'store'])->name('food-coupons.store');
+
 

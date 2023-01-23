@@ -38,6 +38,7 @@
                                 </h5>
                                 @if (!$accommodation->payment_id)
                                     <a href="{{route('accommodation-payments.create', $accommodation->id)}}" class="btn btn-outline-theme rounded-20">Pay This Slot Only</a>
+                                    {{-- <p class=" text-danger">Accommodation payment is not available yet. Sorry for the inconvenience.</p> --}}
                                 @endif
                             </div>
                         </div>

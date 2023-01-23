@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\FoodCoupon;
 use App\Models\CompetitionSlot;
 use App\Models\CompetitionTeam;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CompetitionParticipant extends Model
 {
@@ -42,5 +43,9 @@ class CompetitionParticipant extends Model
     public function rank ()
     {
         return $this->hasOne(ParticipantRank::class, 'id', 'rank_id');
+    }
+
+    public function foodCoupon(){
+        return $this->hasMany(FoodCoupon::class,'participant_id','id');
     }
 }

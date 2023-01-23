@@ -47,7 +47,7 @@
                         </div> 
                         <div class="form-group mb-3">
                             <label class="col-form-label">Vegetarian </label>
-                            <input type="text"  class="form-control" value="{{$participant->is_vegetarian == 1? 'vegetarian':'Non Vegetarian'}}" disabled>
+                            <input type="text"  class="form-control" value="{{$participant->is_vegetarian == 1 ? 'vegetarian':'Non Vegetarian'}}" disabled>
                         </div> 
                         
                     </div>

@@ -56,6 +56,7 @@ class UserCompetitionSubmissionController extends Controller
             ]);
         } else {
             $participants = CompetitionParticipant::where('competition_slot_id', $competitionSlotDetail->id)->pluck('id');
+            if ($participants->count() == 0 ) return redirect()->back()->with('error','You have to register the participant first');
             return view('competition-submissions.create', [
                 'competition' => $competition,
                 'submitters' => CompetitionParticipant::where('competition_slot_id', $competitionSlotDetail->id)->latest('created_at')->get(),

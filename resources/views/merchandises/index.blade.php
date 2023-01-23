@@ -4,7 +4,7 @@
             <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Merchandises List </h3>
             <a href="{{route('merchandises.create')}}" class="btn btn-success mb-3"><i class="fa-solid fa-plus"></i> Add new Merchandise</a>
             @if ($merchandises->count())
-            <div class="table-responsive py-2">
+                <div class="table-responsive py-2">
                 <table class="table table-striped table-bordered" id="dataTables">
                     <thead class="text-center">
                     <tr>
@@ -42,8 +42,8 @@
                     @endforeach
                     </tbody>
                 </table>
-            </div>
-              @else <hr> <p class="text-center"> No Data</p>
+                </div>
+            @else <hr> <p class="text-center"> No Data</p>
             @endif    
         </x-card>
     </div>

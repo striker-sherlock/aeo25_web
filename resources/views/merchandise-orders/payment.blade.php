@@ -9,6 +9,7 @@
                     <thead>
                         <tr class="text-center">
                             <th scope="col">ID</th>
+                            <th scope="col">Paid at </th>
                             <th scope="col">Customer</th>
                             <th scope="col">Items</th>
                             <th scope="col">Contact</th>
@@ -20,7 +21,9 @@
                         @foreach ($pending as $payment)
                             <tr class="text-center">
                                 <th>{{$payment->id}}</th>
+                                <th>{{date('d M h:i', strtotime($payment->created_at))}}</th>
                                 <th>{{$payment->name}}</th>
+
                                 <th>
                                     <a href="#" class="btn btn-outline-theme rounded-pill me-2" data-bs-toggle="modal" data-bs-target="#items{{$payment->id}}">
                                        View  Items
@@ -66,6 +69,7 @@
                     <thead>
                         <tr class="text-center">
                             <th scope="col">ID</th>
+                            <th scope="col">Paid at </th>
                             <th scope="col">Customer</th>
                             <th scope="col">Items</th>
                             <th scope="col">Contact</th>
@@ -77,6 +81,7 @@
                         @foreach ($confirmed as $payment)
                             <tr class="text-center">
                                 <th>{{$payment->id}}</th>
+                                <th>{{date('d M h:i', strtotime($payment->created_at))}}</th>
                                 <th>{{$payment->name}}</th>
                                 <th>
                                     <a href="#" class="btn btn-outline-theme rounded-pill me-2" data-bs-toggle="modal" data-bs-target="#items{{$payment->id}}">
@@ -124,6 +129,7 @@
                     <thead>
                         <tr class="text-center">
                             <th scope="col">ID</th>
+                            <th scope="col">Paid At</th>
                             <th scope="col">Customer</th>
                             <th scope="col">Items</th>
                             <th scope="col">Contact</th>
@@ -135,6 +141,7 @@
                         @foreach ($rejected as $payment)
                             <tr class="text-center">
                                 <th>{{$payment->id}}</th>
+                                <th>{{date('d M h:i', strtotime($payment->created_at))}}</th>
                                 <th>{{$payment->name}}</th>
                                 <th>
                                     <a href="#" class="btn btn-outline-theme rounded-pill me-2" data-bs-toggle="modal" data-bs-target="#items{{$payment->id}}">
@@ -150,9 +157,10 @@
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                        <a href="#" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#confirm{{$payment->id}}" title="confirm ">
-                                            <i class="fas fa-check-circle"></i>
+                                        <a href="{{route('merchandise-orders.cancel',$payment->id)}}" class="btn btn-warning me-2" title="cancel payment">
+                                            <i class="fa fa-undo"></i>
                                         </a>
+                                   
                                         <a href="{{route('merchandise-orders.reject')}}" class="btn btn-danger me-2" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" title="reject " >
                                             <i class="fas fa-times"></i>
                                         </a>
@@ -197,7 +205,7 @@
                                 <button type="button" class="btn btn-outline-secondary w-100" data-bs-dismiss="modal">Close</button>
                             </div>
                             <div class="col">
-                                <button type="submit" class="btn btn-outline-danger w-100">Reject</button>
+                                <button type="submit" class="btn btn-outline-danger w-100">   Reject</button>
                             </div>
                         </div>
                     </div>
@@ -223,38 +231,38 @@
     @endforeach
 
     {{-- modal untuk lihat items apa saja yang dipesan --}}
-    @foreach ($allMerch as $payment)
-        <div class="modal fade p-4" id="items{{$payment->id}}" tabindex="-1" role="dialog" >
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content px-3 py-4">
-                    <div class="modal-header mb-3">
-                        <h3 class="text-uppercase fw-bold text-gradient" style="letter-spacing: 0.1em"> {{$payment->name}}'s Order </h3>
-                    </div>
-                    <div class="table-responsive py-2">
-                        <table class="table table-striped table-bordered " >
-                            <thead>
-                                <tr class="text-center">
-                                    <th scope="col">Item</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($payment->merchandiseOrder as $order)
+        @foreach ($allMerch as $payment)
+            <div class="modal fade p-4" id="items{{$payment->id}}" tabindex="-1" role="dialog" >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content px-3 py-4">
+                        <div class="modal-header mb-3">
+                            <h3 class="text-uppercase fw-bold text-gradient" style="letter-spacing: 0.1em"> {{$payment->name}}'s Order </h3>
+                        </div>
+                        <div class="table-responsive py-2">
+                            <table class="table table-striped table-bordered " >
+                                <thead>
                                     <tr class="text-center">
-                                        <th>{{$order->merchandise->name}}</th>
-                                        <th>{{$order->quantity}}</th>
-                                        <th>{{$order->merchandise->price}}</th>
+                                        <th scope="col">Item</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
                                     </tr>
-                                @endforeach
-                                
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach ($payment->merchandiseOrder as $order)
+                                        <tr class="text-center">
+                                            <th>{{$order->merchandise->name}}</th>
+                                            <th>{{$order->quantity}}</th>
+                                            <th>{{$order->merchandise->price}}</th>
+                                        </tr>
+                                    @endforeach
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
 
     {{-- modal untuk confirm --}}
     @foreach ($pending as $merchandise)
@@ -297,7 +305,8 @@
 </x-admin>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/35.2.1/classic/ckeditor.js"></script>
-<script>
+<script type="module">
+
     let textArea = document.querySelectorAll(".text-area");
     textArea.forEach( el => {
         ClassicEditor

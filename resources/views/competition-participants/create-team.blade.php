@@ -81,7 +81,7 @@
                                     </div>  
                                     
                                     <div class="form-group mb-3">
-                                        <label for="additional_notes{{$j}}{{$i}}" class="col-form-label">Additional Notes</label>
+                                        <label for="additional_notes{{$j}}{{$i}}" class="col-form-label">Additional Notes <span class="text-muted">(optional)</span></label>
                                         <textarea class="form-control text-area"  name="additional_notes[]"  id="additional_notes{{$j}}{{$i}}" rows="2">{{old('additional_notes.'.$j+($i-$totalTeams)*$maxPeople)}}</textarea>
 
                                         @if ($errors->has('additional_notes.'.$j+($i-$totalTeams)*$maxPeople))
@@ -89,10 +89,8 @@
                                                 <strong>*{{ $errors->first('additional_notes.*') }}.</strong>
                                             </span>
                                         @endif 
-                                    </div>   
-    
-                                </div>   
-                                <div class="col">
+                                    </div>  
+
                                     <div class="form-group mb-3">
                                         <label for="phone{{$j}}{{$i}}" class="col-form-label">Phone Number (WA)<span class="text-danger">*</span></label>
                                         <input type="text"  class="form-control"  name="phone[]" id="phone{{$j}}{{$i}}" value="{{old('phone.'.$j+($i-$totalTeams)*$maxPeople)}}" placeholder="" required >
@@ -102,6 +100,10 @@
                                         </span>
                                     @endif 
                                     </div> 
+                                </div>   
+                                <div class="col">
+                                
+                          
     
                                     <div class="form-group mb-3">
                                         <label for="birth{{$j}}{{$i}}" class="col-form-label">Date of Birth <span class="text-danger">*</span> <span class="text-muted">(yyyy-mm-dd)</span></label>
@@ -120,7 +122,19 @@
                                             <option value="1" {{old('vegetarian.'.$j+($i-$totalTeams)*$maxPeople) == '1' ? 'selected':''}}>Vegetarian</option>
                                             <option value="0" {{old('vegetarian.'.$j+($i-$totalTeams)*$maxPeople) == '0' ? 'selected':''}}>Non-Vegetarian</option>
                                         </select>
-                                    </div>     
+                                    </div> 
+                                    
+                                    <div class="form-group mb-3">
+                                        <label for="food_allergic{{$j}}{{$i}}" class="col-form-label">Does this participant have a food allergic ? <span class="text-muted">(optional)</span></label>
+                                        <input type="text"  class="form-control"  name="food_allergic[]" id="food_allergic{{$j}}{{$i}}" value="{{old('food_allergic.'.$j+($i-$totalTeams)*$maxPeople)}}" placeholder="">
+                                        @if ($errors->has('food_allergic.'.$j+($i-$totalTeams)*$maxPeople))
+                                        <span class="invalid feedback text-danger"role="alert">
+                                            <strong>*{{ $errors->first('food_allergic.*') }}.</strong>
+                                        </span>
+                                    @endif 
+                                    </div> 
+
+                                       
     
                                     <div class="form-group mb-3">
                                         <label for="profile_picture{{$j}}{{$i}}" class="col-form-label">Profile Picture<span class="text-danger">*</span></label>
