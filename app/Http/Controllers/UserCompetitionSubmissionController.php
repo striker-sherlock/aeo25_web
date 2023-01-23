@@ -31,17 +31,17 @@ class UserCompetitionSubmissionController extends Controller
         if (time() < strtotime($competition->submission_start)) return redirect()->back()->with('error', 'Submission time is not started yet!');
         
 
-        if ($competition->competition_init == "RD") {
-            $teams = CompetitionTeam::join('participants', 'participants.team_id', 'competition_teams.id')
-                ->join('competition_slot_details', 'competition_slot_details.id', 'participants.competition_slot_id')
+        if ($competition->id == "RD") {
+            $teams = CompetitionTeam::join('competition_participants', 'competition_participants.team_id', 'competition_teams.id')
+                ->join('competition_slot_details', 'competition_slot_details.id', 'competition_participants.competition_slot_id')
                 ->select(
                     'competition_teams.id as id',
                     'competition_teams.name as name',
-                    'participants.name as member_name',
-                    'participants.team_id as team_id',
-                    'participants.gender as gender',
-                    'participants.email as email',
-                    'participants.phone_number as phone'
+                    'competition_participants.name as member_name',
+                    'competition_participants.team_id as team_id',
+                    'competition_participants.gender as gender',
+                    'competition_participants.email as email',
+                    'competition_participants.phone_number as phone'
                 )
                 ->where('competition_teams.competition_id', $competition->id)
                 ->where('competition_slot_id', $competitionSlotDetail->id)
@@ -50,15 +50,15 @@ class UserCompetitionSubmissionController extends Controller
             return view('competition-submissions.create', [
                 'quantity' => $competitionSlotDetail->quantity,
                 'competition' => $competition,
-                'submitters' => $teams->unique(),
+                'submitters' => $teams,
                 'members' => $teams,
-                'submissionCounter' => CompetitionSubmissions::whereIn('submitter_id', $teams->unique()->pluck('id'))->where('competition_id', $competition->id)->count()
+                'submissionCounter' => CompetitionSubmissions::whereIn('submitter_id', $teams->pluck('id'))->where('competition_id', $competition->id)->count()
             ]);
         } else {
             $participants = CompetitionParticipant::where('competition_slot_id', $competitionSlotDetail->id)->pluck('id');
             return view('competition-submissions.create', [
                 'competition' => $competition,
-                'submitters' => CompetitionParticipant::where('competition_slot_id', $competitionSlotDetail->id)->with('participantSubmission')->get(),
+                'submitters' => CompetitionParticipant::where('competition_slot_id', $competitionSlotDetail->id)->latest('created_at')->get(),
                 'submissionCounter' => CompetitionSubmissions::whereIn('submitter_id', $participants)->where('competition_id', $competition->id)->count()
             ]);
         }

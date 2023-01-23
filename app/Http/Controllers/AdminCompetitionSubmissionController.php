@@ -131,6 +131,7 @@ class AdminCompetitionSubmissionController extends Controller
                             'users.institution_name as institution_name',
                             'countries.name as country_name',
                             'competition_submissions.id as submission_id',
+                            'competition_submissions.title as submission_title',
                             'competition_submissions.created_at as created_at',
                         )
                         ->get(),
