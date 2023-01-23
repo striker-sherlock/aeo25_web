@@ -38,8 +38,8 @@ class CompetitionPaymentExport implements FromCollection, WithHeadings
                     'payment_providers.name as payment_provider',
                     'competition_payments.id',
                     'competitions.name as competition_name',
+                    'competition_slot_details.quantity',
                     'competition_payments.amount' ,
-                    
                     )
                 ->get();
             return $data;

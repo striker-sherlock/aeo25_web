@@ -11,12 +11,14 @@ use App\Mail\ConfirmedSlotMail;
 use App\Models\CompetitionSlot;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CompetitionSlotExport;
 
 class SlotRegistrationController extends Controller
 {
     public function __construct(){
         $this->middleware('auth')->only(['create','store','destroy','createOthers']);
-        $this->middleware('IsAdmin')->except(['create','update','store','destroy','createOthers']);
+        $this->middleware('IsAdmin')->except(['create','update','store','destroy','createOthers','export']);
         $this->middleware('Access:2')->except(['create','update','store','destroy','createOthers']);
         $this->middleware('IsShowed:ENV009');
     }
@@ -54,6 +56,9 @@ class SlotRegistrationController extends Controller
             'rejected' => $rejected,
             'registeredSlot' => $count,
         ]);
+    }
+    public function export(){
+        return Excel::download(new CompetitionSlotExport(),'competition-slot.xlsx');
     }
 
     public function create(){

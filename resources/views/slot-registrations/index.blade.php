@@ -59,7 +59,7 @@
                                 <th>{{$competition->competition->name}}</th>
                                 <th>{{$competition->user->institution_name}}</th>
                                 <th>{{$competition->user->pic_name}}</th>
-                                <th>{{$competition->user->pic_phone_number}}</th>
+                                <th>{{chunk_split($competition->user->pic_phone_number,3,' ')}}</th>
                                 <th>{{$competition->quantity}}</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex  justify-content-center">
@@ -87,6 +87,7 @@
         {{-- confirmed (unpaid)  --}}
         <x-card>
             <h2 class="mb-3 text-success fw-bold">Confirmed Slot Registration (Unpaid) </h2>
+            <a href="{{route('slot-registrations.export')}}" class="btn btn-outline-theme rounded-pill" style="min-width: 200px"> <i class="fa fa-file-excel" aria-hidden="true"></i> Export Excel</a>
             @if ($confirmed->count())
             <div class="table-responsive py-2">
                 <table class="table table-striped table-bordered dataTables" id="">
@@ -109,10 +110,10 @@
                                 <th>{{$competition->competition->name}}</th>
                                 <th>{{$competition->user->pic_name}}</th>
                                 <th>{{$competition->user->institution_name}}</th>
-                                <th>{{$competition->user->pic_phone_number}}</th>
+                                <th>{{chunk_split($competition->user->pic_phone_number,3,' ')}}</th>
                                 <th>{{$competition->user->country->name}}</th>
                                 @php($diff = \Carbon\Carbon::parse( now() )->diffInDays( $competition->confirmed_at ))
-                                <th class="{{$diff > 2 ? 'text-danger' : 'text-success'}}">H + {{$diff}} Days</th>
+                                <th class="{{$diff > 9 ? 'text-danger' : 'text-success'}}">{{$diff}}</th>
                                  
                                 <th>{{$competition->quantity}}</th>
                                 <th class="m-auto"> 
@@ -158,7 +159,7 @@
                                 <th>{{$competition->competition->name}}</th>
                                 <th>{{$competition->user->pic_name}}</th>
                                 <th>{{$competition->user->institution_name}}</th>
-                                <th>{{$competition->user->pic_phone_number}}</th>
+                                <th>{{chunk_split($competition->user->pic_phone_number,3,' ')}}</th>
                                 <th>{{$competition->user->country->name}}</th>
                                 
                                 <th>{{$competition->quantity}}</th>
@@ -195,7 +196,7 @@
                                     <th>{{$competition->competition->name}}</th>
                                     <th>{{$competition->user->institution_name}}</th>
                                     <th>{{$competition->user->pic_name}}</th>
-                                    <th>{{$competition->user->pic_phone_number}}</th>
+                                    <th>{{chunk_split($competition->user->pic_phone_number,3,' ')}}</th>
                                     <th>{{$competition->created_at}}</th>
                                     <th>{{$competition->quantity}}</th>
                                 </tr>

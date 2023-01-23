@@ -36,8 +36,9 @@
                     </div>
                     <div class="col-11 col-md-6 text-start rounded-20 animate__animated animate__lightSpeedInRight "
                         style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
-                        <h2 class="fs-3 m-0 mb-2 aeo-theme ">Open Registration Until: </h2>
-                        <h4 class="m-0 mb-3 fw-bold display-6 aeo-title">January 13, 2023 </h4>
+                        <h2 class="fs-3 m-0 mb-2 aeo-theme ">Extended Registration Until : </h2>
+                        <h4 class="m-0 mb-3 fw-bold display-6 aeo-title text-uppercase">February 4, 2023
+                        </h4>
                         <div class="count-down mx-auto row text-center text-white fw-bold d-flex">
                             <div class="col bg-dark rounded me-2 p-2"><span id="cd-days" class="fs-1 "></span> <br>
                                 Days</div>
@@ -58,6 +59,12 @@
                                     </a>
                                 </div>
                             </div>
+
+                            <p class="text-start m-0" style="font-size:0.9em; color:#ff99c7; ">
+                                Extended Registration & Submission Deadline for Radio Drama and Short Story Writing: <br>
+                               <span class="aeo-title"> February 2, 2023  at 11:59 PM (GMT + 07:00)</span>
+
+                            </p>
                         </div>
 
                     </div>
@@ -727,7 +734,7 @@
 
         
         //using the function
-        const tomorrow = new Date("January 13, 2023 18:00:00")
+        const tomorrow = new Date("February 4, 2023 23:59:00")
         timer(tomorrow);
 
         $('figure.table table').addClass('table-bordered mx-auto text-center w-100')

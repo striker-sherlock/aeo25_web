@@ -1,6 +1,32 @@
 <x-layout>
- 
+    
     <x-navbar></x-navbar>
+
+    <div class="modal fade p-5" id="alert" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered ">
+            <div class="modal-content rounded-20 border-0 shadow p-5">
+                <div class="modal-headers mb-4">
+                    <span class="fa-stack fa-4x d-block mx-auto" >
+                        <i class="fas fa-circle fa-stack-2x text-danger"></i>
+                        <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
+                    </span>
+                </div>
+                <div class="body mb-3">
+                    <h1 class="text-capitalize text-warning text-center fw-bold aeo-title">Merchandise will be opening soon </h1>
+                     
+                     
+                </div>
+                <div class="modals-footer">
+                    <div class="row">
+                        <div class="col">
+                            <a href="/" class="btn btn-outline-secondary w-100 rounded-pill"   >Back to home </a>
+                        </div>
+                         
+                    </div>  
+                </div>
+            </div>
+        </div>  
+    </div> 
     <div class="container mt-5 mb-5 ">
         <h3 class="text-uppercase fw-bold  text-gradient mb-4" style="letter-spacing: 0.1em">Our Merchandise </h3>
         <div class="chat position-fixed px-4 py-2  " >

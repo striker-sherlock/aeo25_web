@@ -222,7 +222,7 @@ class AdminMerchandiseController extends Controller
             'body1'=>'We are regretful to inform you that your merchandise order has been rejected with the reason below: ',
             'body2'=>'',
             'reason' => $request->reason,
-            'url' => 'http://aeo.mybnec.org/dashboard/step-2',
+            'url' => 'http://aeo.mybnec.org/merchandise-orders',
         ];
         Mail::to($merchandisePayment->email)->send(new RejectionMail($rejectMail));
         
