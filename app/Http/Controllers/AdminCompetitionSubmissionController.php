@@ -12,8 +12,12 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AdminCompetitionSubmissionController extends Controller
 {
-    public function index (Competition $competition)
-    {
+    public function __construct(){
+        $this->middleware('IsAdmin')->only(['index']);
+        $this->middleware('Access:7')->only(['index']);
+    }
+
+    public function index (Competition $competition){
         if ($competition->need_submission) {
             if ($competition->id == "SSW") {
                 $unpaidSubmissions = CompetitionParticipant::join('competition_submissions', 'competition_submissions.submitter_id', 'competition_participants.id')

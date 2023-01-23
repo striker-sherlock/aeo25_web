@@ -257,7 +257,9 @@
     </div>
     <x-footer></x-footer>
 
-    <script type="module"> 
+    <script type="module">
+ 
+ 
         let bank = document.querySelector('.bank');
         let wise = document.querySelector('.wise');
         let type = document.querySelector('input[name="type"]');

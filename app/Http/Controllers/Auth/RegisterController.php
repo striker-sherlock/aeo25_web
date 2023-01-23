@@ -37,7 +37,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'institution_name' => ['required', 'string', 'unique:users'],
+            'institution_name' => ['required', 'string' ],
             'institution_type' => ['required', 'string'],
             'institution_logo' => ['image', 'required', 'max:1999', 'mimes:jpg,png,jpeg'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

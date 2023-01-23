@@ -2,13 +2,61 @@
     <div class="container mt-5">
       <h1 class="aeo-title">Step 1</h1>
       <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Select Your Room Type</h3>
+
       <div class="row  justify-content-center">
         @foreach ($accommodations as $accommodation)
           <div class="col-6 col-md-3 mb-4  ">
             <a href="{{route('accommodation-slot-registrations.create',$accommodation->id)}}" class="btn btn-outline-primary w-100 rounded-pill {{$selectedType->id == $accommodation->id ? 'active':''}}">{{$accommodation->room_type}}</a>
           </div>
+          
         @endforeach
       </div>
+
+      <x-card>
+        <div class="table-responsive">
+          <table  class="table table-sm table-bordered text-center">
+            <thead>
+              <tr >
+                <th style="font-size: 0.9em" class="fw-normal">Room</th>
+                @foreach ($accommodations as $accommodation)
+                  <th style="font-size: 0.9em" class="{{$selectedType->id == $accommodation->id ? "bg-primary text-white" : ""}}">{{$accommodation->room_type}}</th>
+                @endforeach
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Max People</th>
+                @foreach ($accommodations as $accommodation)
+                  <th class="{{$selectedType->id == $accommodation->id ? "bg-primary text-white" : ""}}">{{$accommodation->max_guests}} Peoples</th>
+                @endforeach
+              </tr>
+              <tr>
+                <th>Price</th>
+                @foreach ($accommodations as $accommodation)
+                  <th class="{{$selectedType->id == $accommodation->id ? "bg-primary text-white" : ""}}">IDR {{number_format($accommodation->price)}} per night </th>
+                @endforeach
+              </tr>
+              <tr>
+                <th>Facilities</th>
+                @foreach ($accommodations as $accommodation)
+                  <th class="{{$selectedType->id == $accommodation->id ? "bg-primary text-white" : ""}}">
+                    <button type="button" 
+                      class="btn  w-100 rounded-pill {{ ($accommodation->facilities->count() > 0) ? '' : 'disabled' }} {{$selectedType->id == $accommodation->id ? "btn-primary text-white" : "btn-outline-theme"}}"
+                      data-bs-target="#viewFacility-{{ $accommodation->id }}" 
+                      data-bs-toggle="modal" 
+                      title="View Facilities" 
+                      style="font-size:0.8em;">
+                      View Facilities
+                    </button>
+                  </th>
+                @endforeach
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </x-card>
+      
       @if ($selectedType)
         <div class="row  justify-content-center">
           <div class="col-md-12">
@@ -23,14 +71,18 @@
                     <img src="/storage/images/accommodations/{{$selectedType->picture}}" alt="{{$selectedType->room_type}}" class="img-fluid mx-auto d-block w-100 rounded-20 shadow-sm" >
                   </div>
                   <div class="col">
-                      {{-- form registrasi --}}
-                      <button type="button" class="btn btn-outline-theme w-50 rounded mt-4 mb-3 rounded-pill {{ ($selectedType->facilities->count() > 0) ? '' : 'disabled' }}" data-bs-target="#viewFacility-{{ $selectedType->id }}" data-bs-toggle="modal" title="View Facilities">
-                        View Facilities
-                      </button>
+                    {{-- form registrasi --}}
+                    <div class="form-group mb-3">
+                      <label for="check_in_date" class="col-form-label">Room Type</label>
+                      <input type="text" class="form-control" value="{{$selectedType->room_type}}" disabled>
+                      
+                    </div>
 
                     <div class="form-group mb-3">
                       <label for="check_in_date" class="col-form-label">Check In Date <span class="text-danger">*</span> <span style="font-size:0.8em;" class="text-muted">Checked in at 1 PM (GMT + 7)</span></label>
-                      <input type="date" class="form-control" id="check_in_date"    name="check_in_date" required value="{{old('check_in_date')}}">
+                      <input type="date" class="form-control" id="check_in_date"    name="check_in_date" required value="{{old('check_in_date')}}"  min="2023-02-10" max="2023-02-12">
+                      <span style="font-size:0.8em;" class="text-danger fw-bold">NB: Check in date must be between 10 - 12 February 2023
+                      </span>
                       @if ($errors->has('check_in_date'))
                         <span class="invalid feedback text-danger fw-bold"role="alert">
                           *{{ $errors->first('check_in_date') }}.
@@ -40,7 +92,9 @@
           
                     <div class="form-group mb-3">
                       <label for="check_out_date" class="col-form-label">Check Out Date <span class="text-danger">*</span> <span style="font-size:0.8em;" class="text-muted">Checked out at 12 PM (GMT + 7)</span></label>
-                      <input type="date" class="form-control" id="check_out_date" placeholder="Enter Check Out Date" name="check_out_date" required value="{{old('check_out_date')}}">
+                      <input type="date" class="form-control" id="check_out_date" name="check_out_date" required  value="2023-02-19" min="2023-02-19" max="2023-02-19">
+                      <span style="font-size:0.8em;" class="text-danger fw-bold">NB:Check-Out date is at February 19, 2023 (If you check out later than this, you might be charged with the standard rates of our accommodation provider)
+                      </span>
                       @if ($errors->has('check_out_date'))
                         <span class="invalid feedback text-danger fw-bold"role="alert">
                           *{{ $errors->first('check_out_date') }}
@@ -49,7 +103,7 @@
                     </div>
                     <div class="form-group mb-3">
                       <label class="col-form-label" for="special_req">Special Request <small class="text-muted">(Optional)</small></label>
-                      <textarea class="form-control" name="special_req" id="special_req" rows="2">{{old('special_req')}}</textarea>
+                      <textarea class="form-control" name="special_req" id="special_req" rows="1">{{old('special_req')}}</textarea>
                     </div>
                     <div class="form-group mb-3">
                       <label class="col-form-label" for="quantity">Number of Room <span class="text-danger">*</span></label>
@@ -89,54 +143,56 @@
                     </div> 
 
                   {{-- View Facility Modal --}}
-                  <div class="modal fade" id="viewFacility-{{$selectedType->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content rounded-20 border-0 shadow">
-                            <div class="modal-header border-bottom-0">
-                              <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                  aria-label="Close">
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              <h4 class="text-gradient fw-bold text-center">{{ $selectedType->room_type }} - Room Facility</h4>
-                              <hr>
-                              <div class="table-responsive">
-                                <table class="table table-hover">
-                                  <thead class="bg-light">
-                                    <th class="align-middle text-center">#</th>
-                                    <th class="align-middle text-center">Facility</th>
-                                    <th class="align-middle text-center">Availability</th>
-                                  </thead>
-                                  <tbody>
-                                    @foreach ($selectedType->facilities->sortByDesc('is_available') as $accommFacility)
-                                      <tr class="align-middle text-center">
-                                        <td>
-                                          {{ $loop->iteration }}
-                                        </td>
-                                        <td>
-                                          {{ $accommFacility->facility->name }}
-                                        </td>
-                                        <td>
-                                          <span class="{{ ($accommFacility->is_available) ? 'text-success' : 'text-danger' }}">
-                                            {{ ($accommFacility->is_available) ? 'Available' : 'Not Available' }}
-                                          </span>
-                                        </td>
-                                      </tr>
-                                    @endforeach
-                                  </tbody>
-                                </table>
-                              </div>
-                            </div>
-                            <div class="text-center">
-                                <button type="button"
-                                    class="btn btn-outline-theme rounded-pill rounded-20 mb-4 px-4"
-                                    data-bs-dismiss="modal">
-                                    OK, I got it
+                  @foreach ($accommodations as $accommodation)
+                    <div class="modal fade" id="viewFacility-{{$accommodation->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                          <div class="modal-content rounded-20 border-0 shadow">
+                              <div class="modal-header border-bottom-0">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
                                 </button>
-                            </div>
-                        </div>
+                              </div>
+                              <div class="modal-body">
+                                <h4 class="text-gradient fw-bold text-center">{{ $accommodation->room_type }} - Room Facility</h4>
+                                <hr>
+                                <div class="table-responsive">
+                                  <table class="table table-hover">
+                                    <thead class="bg-light">
+                                      <th class="align-middle text-center">#</th>
+                                      <th class="align-middle text-center">Facility</th>
+                                      <th class="align-middle text-center">Availability</th>
+                                    </thead>
+                                    <tbody>
+                                      @foreach ($accommodation->facilities->sortByDesc('is_available') as $accommFacility)
+                                        <tr class="align-middle text-center">
+                                          <td>
+                                            {{ $loop->iteration }}
+                                          </td>
+                                          <td>
+                                            {{ $accommFacility->facility->name }}
+                                          </td>
+                                          <td>
+                                            <span class="{{ ($accommFacility->is_available) ? 'text-success' : 'text-danger' }}">
+                                              {{ ($accommFacility->is_available) ? 'Available' : 'Not Available' }}
+                                            </span>
+                                          </td>
+                                        </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                              <div class="text-center">
+                                  <button type="button"
+                                      class="btn btn-outline-theme rounded-pill rounded-20 mb-4 px-4"
+                                      data-bs-dismiss="modal">
+                                      OK, I got it
+                                  </button>
+                              </div>
+                          </div>
+                      </div>  
                     </div>  
-                  </div>  
+                  @endforeach
               </form>
             </x-card>
           </div>

@@ -63,7 +63,7 @@
       
         {{-- TRASHED --}}
       <x-card>
-        <h1>Recycle Bin</h1>
+        <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Recycle Bin</h3>
           <div class="table-responsive py-2">
             <table class="table table-sm table-striped table-bordered no-footer" id="trashed">
               <thead class="thead-light">

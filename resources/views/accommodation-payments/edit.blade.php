@@ -36,7 +36,9 @@
                     @foreach ($paidSlot as $accommodationSlot)
              
                         <div class="d-flex justify-content-between">
-                            <h6>{{$accommodationSlot->accommodation->room_type}} x {{$accommodationSlot->quantity}}</h6>
+                            @php($start = Carbon\Carbon::parse($accommodationSlot->check_in_date))
+                            @php($end = Carbon\Carbon::parse($accommodationSlot->check_out_date))
+                            <h6>{{$accommodationSlot->accommodation->room_type}} x {{$accommodationSlot->quantity}} room(s) x {{$start->diffInDays($end)}} Nights </h6>
                             <h6>{{ number_format($accommodationSlot->accommodation->price, 2, ',', '.')}} IDR</h6>
                         </div>
                         

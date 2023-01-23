@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Merchandise;
 use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Models\PaymentProvider;
 use App\Models\MerchandiseOrder;
 use App\Models\MerchandiseTransaction;
@@ -31,6 +32,7 @@ class MerchandiseOrderController extends Controller
         }
         return $result;
     }
+
     public function tempStore(Request $request){
         $len = count($request->quantity);
         if ($this->isEmpty($request->quantity)) return redirect()->back()->with('error','You have to select the item first ');
@@ -117,6 +119,7 @@ class MerchandiseOrderController extends Controller
                 'track' => 'required|numeric',
                 'transfer_proof_wise' => 'required|image|mimes:png,jpg,jpeg|max:1999'
             ]);
+            $request->payment_provider = 18;
             if($request->hasFile('transfer_proof_wise')){
                 $extension = $request->file('transfer_proof_wise')->getClientOriginalExtension();
                 $fixedName = $fileName.'_'.$current.'.'.$extension;
@@ -138,12 +141,14 @@ class MerchandiseOrderController extends Controller
             'payment_proof' => $fixedName,
             'amount' => $request->amount,
             'is_confirmed' => 0,
+            'created_at' => Carbon::now(), 
         ]);
-
+        
         $len = count($quantity);
         // dd($merch_id);
         for ($i = 0 ; $i < $len; $i++) { 
             MerchandiseOrder::create([
+                'created_at' => Carbon::now(), 
                 'created_by' => '[USER]-Merchandise',
                 'merchandise_id' => $merch_id[$i],
                 'quantity' => $quantity[$i],

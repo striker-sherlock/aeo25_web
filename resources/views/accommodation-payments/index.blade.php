@@ -12,6 +12,7 @@
                             <th scope="col">Institution Name</th>
                             <th scope="col">Room Type</th>
                             <th scope="col">PIC Name</th>
+                            <th scope="col">PIC Email</th>
                             <th scope="col">Grand Total</th>
                             <th scope="col">Created At</th>
                             <th scope="col">Action</th>
@@ -22,24 +23,28 @@
                             <tr class="text-center">
                                 <th>{{$payment->id}}</th>
                                 <th>{{$payment->institution_name}}</th>
-                                <th>{{$payment->room_type}}</th>
+                                <th>
+                                    <a href="#" class="btn btn-outline-theme rounded-pill" data-bs-target="#accommodation-{{$payment->id}}" data-bs-toggle="modal" >
+                                        View rooms
+                                    </a>
+                                </th>
                                 <th>{{$payment->user->pic_name}}</th>
-                                <th>{{$payment->amount}}</th>
-                                 
-                                <th>{{$payment->created_at}}</th>
+                                <th>{{$payment->user->email}}</th>
+                                <th>{{number_format($payment->amount)}}</th>
+                                <th>{{ $payment->created_at->diffForHumans() }}</th>
                                 <th>
                                     <div class="d-flex justify-content-around">
 
-                                        <a href="{{route('competition-payments.edit',$payment->id)}}" class="btn btn-primary">
+                                        <a href="{{route('competition-payments.edit',$payment->id)}}" class="btn btn-primary me-1">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#confirm{{$payment->id}}">
+                                        <a href="#" class="btn btn-success me-1" data-bs-toggle="modal" data-bs-target="#confirm{{$payment->id}}">
                                             <i class="fas fa-check-circle"></i>
                                         </a>
-                                        <a href="#" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >
+                                        <a href="#" class="btn btn-info me-1" data-bs-toggle="modal" data-bs-target="#proof{{$payment->id}}" >
                                             <i class="fa-solid fa-receipt"></i>
                                         </a>
-                                        <a href="{{route('accommodation-payments.reject')}}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >
+                                        <a href="{{route('accommodation-payments.reject')}}" class="btn btn-danger me-1" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >
                                             <i class="fas fa-times"></i>
                                         </a>
                                     </div>
@@ -65,9 +70,11 @@
                         <tr>
                             <th scope="col">ID</th>
                             <th scope="col">Institution Name</th>
-                            <th scope="col">PIC Name</th>
                             <th scope="col">Room Type</th>
+                            <th scope="col">PIC Name</th>
+                            <th scope="col">PIC Email</th>
                             <th scope="col">Grand Total</th>
+                            <th scope="col">Created At</th>
                             <th scope="col">Action</th>
                         
                         </tr>
@@ -77,22 +84,28 @@
                             <tr class="text-center">
                                 <th>{{$payment->id}}</th>
                                 <th>{{$payment->institution_name}}</th>
-                                <th>{{$payment->pic_name}}</th>
-                                <th>{{$payment->room_type}}</th>
-                                <th>{{$payment->amount}}</th>
+                                <th>
+                                    <a href="#" class="btn btn-outline-theme rounded-pill" data-bs-target="#accommodation-{{$payment->id}}" data-bs-toggle="modal" >
+                                        View rooms
+                                    </a>
+                                </th>
+                                <th>{{$payment->user->pic_name}}</th>
+                                <th>{{$payment->user->email}}</th>
+                                <th>{{number_format($payment->amount)}}</th>
+                                <th>{{ $payment->created_at->diffForHumans() }}</th>
                                 <th>
                                     <div class="d-flex justify-content-around">
-                                        <a href="{{route('accommodation-payments.edit',$payment->id)}}" class="btn btn-primary" title="edit payment">
+                                        <a href="{{route('accommodation-payments.edit',$payment->id)}}" class="btn btn-primary me-1" title="edit payment">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn btn-warning" title="cancel payment">
+                                        <a href="{{route('accommodation-payments.cancel',$payment->id)}}" class="btn me-1 btn-warning" title="cancel payment">
                                             <i class="fas fa-undo"></i>
                                         </a>
-                                        <a href="{{route('payments.paid-accommodation-invoice', $payment->id)}}" class="btn btn-success " title="View Invoice" target="_blank">
+                                        <a href="{{route('payments.paid-accommodation-invoice', $payment->id)}}" class="btn me-1 btn-success " title="View Invoice" target="_blank">
                                             <i class="fas fa-file-invoice"></i>
                                         </a>
 
-                                        {{-- <a href="{{route('competition-payments.reject')}}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#reason{{$payment->id}}" >R</a> --}}
+                                        
                                     </div>
                                 </th>
                             </tr>
@@ -113,12 +126,13 @@
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Institution Name</th>
-                        <th scope="col">PIC Name</th>
-                        <th scope="col">Room Type</th>
-                        <th scope="col">Grand Total</th>
-                        <th scope="col">Created At</th>
-                        <th scope="col">Action</th>
+                            <th scope="col">Institution Name</th>
+                            <th scope="col">Room Type</th>
+                            <th scope="col">PIC Name</th>
+                            <th scope="col">PIC Email</th>
+                            <th scope="col">Grand Total</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Action</th>
                         
                     </tr>
                     </thead>
@@ -127,10 +141,15 @@
                         <tr class="text-center">
                             <th>{{$payment->id}}</th>
                             <th>{{$payment->institution_name}}</th>
-                            <th>{{$payment->pic_name}}</th>
-                            <th>{{$payment->room_type}}</th>
-                            <th>{{$payment->amount}}</th>
-                            <th>{{$payment->created_at}}</th>
+                            <th>
+                                <a href="#" class="btn btn-outline-theme rounded-pill" data-bs-target="#accommodation-{{$payment->id}}" data-bs-toggle="modal" >
+                                    View rooms
+                                </a>
+                            </th>
+                            <th>{{$payment->user->pic_name}}</th>
+                            <th>{{$payment->user->email}}</th>
+                            <th>{{number_format($payment->amount)}}</th>
+                            <th>{{ $payment->created_at->diffForHumans() }}</th>
                         
                             <th>
                                 <div class="d-flex justify-content-around">
@@ -231,6 +250,45 @@
                 </div>
                 
             </div>
+            </div>
+        </div>
+    @endforeach
+    
+    {{-- modal untuk apa saja room yang didaftar --}}
+    @foreach ($accommodationPayments as $payment)
+        <div class="modal modal-lg fade p-4" id="accommodation-{{$payment->id}}" tabindex="-1" role="dialog" >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content px-3 py-4">
+                    <div class="modal-header mb-3">
+                        <h3 class="text-uppercase fw-bold text-gradient" style="letter-spacing: 0.1em"> {{$payment->user->pic_name}}'s Room Order </h3>
+                    </div>
+                    <div class="table-responsive py-2">
+                        <table class="table table-striped table-bordered " >
+                            <thead>
+                                <tr class="text-center">
+                                    <th scope="col">Room Type</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Night</th>
+                                    <th scope="col">Check In </th>
+                                    <th scope="col">Check Out </th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($payment->accommodationSlot as $accommodationSlot)
+                                    <tr class="text-center">
+                                        <th>{{$accommodationSlot->accommodation->room_type}}</th>
+                                        <th>{{$accommodationSlot->quantity}} room(s)</th>
+                                        <th>{{Carbon\Carbon::parse($accommodationSlot->check_in_date)->diffInDays(Carbon\Carbon::parse($accommodationSlot->check_out_date))}} days</th>
+                                        <th>{{date('d M',strtotime($accommodationSlot->check_in_date))}}</th>
+                                        <th>{{date('d M',strtotime($accommodationSlot->check_out_date))}}</th>
+                                    </tr>
+                                @endforeach
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     @endforeach

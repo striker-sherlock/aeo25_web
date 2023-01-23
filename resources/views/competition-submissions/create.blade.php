@@ -4,8 +4,6 @@
       <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">
           {{ $competition->name }} Submission</h3>
 
-
-
       @if ($submissionCounter > 0)
             <x-card>
               <div class="row justify-content-center">
@@ -105,7 +103,7 @@
                                   <label for="submitter_id" class="form-label">Participant Name<span
                                           class="text-danger">*</span></label>
                                   <select class="form-select " name="submitter_id" required>
-                                      <option selected="0">Select participant</option>
+                                      <option selected="0" disabled>Select participant</option>
                                       @foreach ($submitters as $submitter)
                                           @if ($submitter->participantSubmission)
                                               @continue

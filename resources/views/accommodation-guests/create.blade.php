@@ -25,6 +25,8 @@
                 <button type="submit" class="d-none btn btn-outline-theme w-100 rounded-pill">Submit</button>
             </form>
         </x-card>
+ 
+
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="module">
@@ -60,6 +62,12 @@
                                 <option value="F">Female</option>
                             </select>
                         </div>      
+                        <div class="form-group mb-3">
+                            <label for="vaccination_proof" class="col-form-label"> Vaccination Proof <span class="text-danger">*</span></label>
+                            <small class="text-muted " style="font-size: 0.9em"> (Please upload your 3 vaccination proof. You can upload more than one file by pressing ctrl while choosing picture)</small>
+                            <input type="file" class="form-control" name="vaccination_proof[]" accept="image/png, image/jpeg, image/jpg" multiple>
+                            <small class="text-danger " style="font-size: 0.7em">Type: PNG, JPG, JPEG max: 3MB</small>
+                        </div>     
                     </div>`);
                 }
             });

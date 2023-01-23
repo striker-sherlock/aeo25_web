@@ -26,15 +26,22 @@ class AccommodationPaymentExport implements FromCollection, WithHeadings
             'users.pic_phone_number',
             'accommodation_payments.account_number',
             'accommodation_payments.amount',
+            'accommodation_slot_details.check_in_date',
+            'accommodation_slot_details.check_out_date',
+            'accommodation_slot_details.quantity',
         )->get();
         foreach ($data as $accountNumber) {
             if ($accountNumber->account_number == null )$accountNumber->account_number = 'Wise';
-        }
+        }   
+        foreach ($data as $date) {
+            $date->check_in_date = date("d M",strtotime($date->check_in_date ));
+            $date->check_out_date = date("d M",strtotime($date->check_out_date ));
+        }   
         return $data;
     }
 
     public function headings():array{
-        return ["ID", "PIC Name","Room Type","PIC Email", "Contact","Account Number", "Amount"];
+        return ["ID", "PIC Name","Room Type","PIC Email", "Contact","Account Number", "Amount","Check In Date", "Check Out Date", "Room Quantity"];
     }
 
 }

@@ -1,5 +1,40 @@
     <x-user title="Accommodation Payment">
     <div class="container mt-5">
+        <div class="modal fade p-5" id="alert" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content rounded-20 border-0 shadow p-5">
+                    <div class="modal-headers mb-4">
+                        <span class="fa-stack fa-4x d-block mx-auto" >
+                            <i class="fas fa-circle fa-stack-2x text-danger"></i>
+                            <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </div>
+                    <div class="body mb-3">
+                        <h1 class="text-uppercase text-danger text-center fw-bold">important !</h1>
+                        <div class="text-center">
+                            <p >
+                                Due to internal miscommunication from our committee, the price calculation of accommodations was mistaken. 
+                            </p>
+                            <p>
+                                Now the price calculation of accommodations has been adjusted. Please kindly re-download your invoice.
+                            </p>
+                            <p>
+                                We apologize for the inconvenience. If you haven’t registered for accommodation or downloaded the invoice, please ignore this message. Thank you!
+                            </p>
+    
+                        </div>
+                    </div>
+                    <div class="modals-footer">
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-outline-secondary w-100 rounded-pill"  data-bs-dismiss="modal">Ok, I got it </button>
+                            </div>
+                             
+                        </div>  
+                    </div>
+                </div>
+            </div>  
+        </div> 
         <a href="{{route('dashboard.accommodation-step',2)}}" class="btn btn-outline-theme rounded-pill mb-3">Go Back</a>
         <div class="row">
             <div class="col-md-6">
@@ -33,9 +68,12 @@
                     {{-- ini jika pic ingin membayar semua sekaligus --}}
                     @if ($payAll == 1)
                         @foreach ($allAccommodations as $accommodation)
+                            @php($start = Carbon\Carbon::parse($accommodation->check_in_date))
+                            @php($end = Carbon\Carbon::parse($accommodation->check_out_date))
                             <div class="d-flex justify-content-between">
-                                <h6>{{$accommodation->accommodation->room_type}} x {{$accommodation->quantity}}</h6>
-                                <h6>{{ number_format($accommodation->accommodation->price * $accommodation->quantity, 2, ',', '.')}} IDR</h6>
+                                <h6>{{$accommodation->accommodation->room_type}} x {{$accommodation->quantity}} room(s) x {{$start->diffInDays($end)}} Night(s)
+                                </h6>
+                                <h6>IDR {{ number_format($accommodation->accommodation->price * $accommodation->quantity * $start->diffInDays($end))}}</h6>
                             </div>
                         @endforeach
                         <hr>
@@ -46,8 +84,9 @@
 
                     {{-- ini kondidi bila PIC ingin membayar slotnya 1 per 1  --}}
                     @else
+                    {{-- {{dd($days)}} --}}
                         <div class="d-flex justify-content-between">
-                            <h6>{{$accommodationSlot->accommodation->room_type}} x {{$accommodationSlot->quantity}} </h6>
+                            <h6>{{$accommodationSlot->accommodation->room_type}} x {{$accommodationSlot->quantity}} room(s) x {{$days}} Night</h6>
                             <h6>IDR{{ number_format($total, 2, ',', '.')}} </h6>
                         </div>
 
@@ -171,7 +210,7 @@
             </form>
         </x-card>
     </div>
-    <script> 
+    <script type="module">
         let bank = document.querySelector('.bank');
         let wise = document.querySelector('.wise');
         let type = document.querySelector('input[name="type"]');

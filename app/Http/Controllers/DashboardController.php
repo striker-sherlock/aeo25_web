@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\User;
-use App\Models\Accommodation;
 use App\Models\Competition;
 use Illuminate\Http\Request;
-use App\Models\AccommodationSlot;
+use App\Models\Accommodation;
 use App\Models\CompetitionSlot;
-use App\Models\AccommodationPayment;
+use App\Models\AccommodationSlot;
+use App\Models\AccommodationGuest;
 use App\Models\CompetitionPayment;
 use App\Models\CompetitionSummary;
 use Illuminate\Support\Facades\DB;
+use App\Models\AccommodationPayment;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CompetitionParticipant;
-use App\Models\AccommodationGuest;
+use App\Models\MerchandiseTransaction;
 use App\Models\Environment;
-use Exception;
 
 class DashboardController extends Controller
 {   
@@ -256,9 +257,20 @@ class DashboardController extends Controller
             ->distinct('countries.name')
             ->count();
 
-        $totalInstitutions = DB::table('users')->distinct('institution_name')->count();
-        // dd($totalInstitutions);
+        $totalInstitutions = DB::table('users')
+            ->join('competition_slot_details','competition_slot_details.pic_id','users.id')
+            ->join('competition_payments','competition_payments.id','competition_slot_details.payment_id')
+            ->where('competition_payments.is_confirmed',1)
+            ->distinct('institution_name')    
+            ->count();
+        
 
+        // REVENUE 
+        $competitionRevenue = CompetitionPayment::where('is_confirmed',1)->sum('amount');
+        $accommodationRevenue = AccommodationPayment::where('is_confirmed',1)->sum('amount');
+        $merchandiseRevenue = MerchandiseTransaction::where('is_confirmed',1)->sum('amount');
+
+        // dd($competitionRevenue, $accommodationRevenue, $merchandiseRevenue);
         $competitions = Competition::all();
         $count = [];
         foreach ($competitions as $competition){
@@ -267,6 +279,7 @@ class DashboardController extends Controller
                                 ->where('competition_slot_details.is_confirmed',1)
                                 ->where('competition_payments.is_confirmed',1)
                                 ->sum('quantity');
+                                ;
             $count = array_add($count,$competition->name, $competitionSlot);
         };
 
@@ -277,7 +290,10 @@ class DashboardController extends Controller
             'totalInternationalParticipants' => $totalInternationalParticipants,
             'totalCountries' => $totalCountries,
             'totalInstitutions' => $totalInstitutions,
-            'registeredSlot' => $count
+            'registeredSlot' => $count,
+            'competitionRevenue' => $competitionRevenue,
+            'accommodationRevenue' => $accommodationRevenue,
+            'merchandiseRevenue' => $merchandiseRevenue,
         ]);
     }
 

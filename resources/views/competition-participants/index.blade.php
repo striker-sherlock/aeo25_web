@@ -16,8 +16,12 @@
                         <thead class="text-center">
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">{{$competition->need_team == 1 ? 'Team' : ''}}</th>
+                            @if ($competition->need_team == 1)
+                                <th scope="col">Team</th>
+                            @endif
                             <th scope="col">Participant Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contact</th>
                             <th scope="col">Institution Name</th>
                             <th scope="col">Country</th>
                             <th scope="col">PIC Name </th>
@@ -28,8 +32,13 @@
                             @foreach ($competitionParticipants as $participant)
                             <tr class="text-center">
                                 <th>{{$participant->id}}</th>
-                                <th>{{$participant->competition->need_team == 1 ? $participant->competitionTeam->name : ''}}</th>
+                                @if ($participant->competition->need_team == 1)
+                                    <th>{{ $participant->competitionTeam->name}}</th>
+                                    
+                                @endif
                                 <th>{{ $participant->name}}</th>
+                                <th>{{ $participant->email}}</th>
+                                <th>{{ $participant->phone_number}}</th>
                                 <th>{{$participant->user->institution_name}}</th>
                                 <th>{{$participant->user->country->name}}</th>
                                 <th>{{$participant->user->pic_name}}</th>

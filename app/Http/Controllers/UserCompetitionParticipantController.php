@@ -80,9 +80,10 @@ class UserCompetitionParticipantController extends Controller
             'phone.*.numeric' => 'Phone number must be numeric',
             'phone.*.distinct' => "phone number field must be distinct",
             'profile_picture.*.image' => 'The profile picture must be an image ',
-            'profile_picture.*.max' => 'The profile picture size must less than 2MB '
+            'profile_picture.*.max' => 'The profile picture size must less than 2MB ',
+            'profile_picture.*.mimes' => 'The profile picture must be type of : JPEG,JPG, PNG'
         ]);
-        // dd($request->need_teams);
+         
         $competition = Competition::find($request->competition_id);    
         $len = $request->quantity;
         if($request->need_teams){
@@ -128,7 +129,8 @@ class UserCompetitionParticipantController extends Controller
                         'phone_number' =>$request->phone[$index],
                         'birth_date' =>$request->birth[$index],
                         'profile_picture' =>$fixedName,
-                        'is_vegetarian' =>0,
+                        'is_vegetarian' => $request->vegetarian[$index],
+                        'food_allergic' => $request->food_allergic[$index],
                         'is_attend' => 0,
                     ]);
                     if ($newParticipant) {
@@ -168,7 +170,8 @@ class UserCompetitionParticipantController extends Controller
                     'phone_number' =>$request->phone[$i],
                     'birth_date' =>$request->birth[$i],
                     'profile_picture' =>$fixedName,
-                    'is_vegetarian' =>0,
+                    'is_vegetarian' =>$request->vegetarian[$i],
+                    'food_allergic' =>$request->food_allergic[$i],
                     'is_attend' => 0,
                 ]);
 
