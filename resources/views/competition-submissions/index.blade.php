@@ -11,10 +11,11 @@
                 <table class="table table-bordered table-sm table-striped no-footer dataTables" id="submissions">
                   <thead class="thead-light">
                     <tr class="text-center">
-                      @if (!$competition->is_team)
+                      @if (!$competition->need_team)
                         <th scope="col" class="align-middle text-nowrap">Participant ID</th>
                       @endif
-                      <th scope="col" class="align-middle text-nowrap">{{ ($competition->is_team) ? 'Team Name' : 'Participant Name' }}</th>
+                      <th scope="col" class="align-middle text-nowrap">{{ ($competition->need_team) ? 'Team Name' : 'Participant Name' }}</th>
+                      <th scope="col" class="align-middle text-nowrap">Submission Title</th>
                       <th scope="col" class="align-middle text-nowrap">Institution Name</th>
                       <th scope="col" class="align-middle text-nowrap">Country</th>
                       <th scope="col" class="align-middle text-nowrap">Submitted At</th>
@@ -24,10 +25,11 @@
                   <tbody>
                     @foreach ($submittedParticipants as $submission)
                       <tr class="text-center">
-                        @if (!$competition->is_team)
+                        @if (!$competition->need_team)
                           <td class="align-middle text-nowrap">{{ $submission->participant_id }}</td>
                         @endif
                         <td class="align-middle text-nowrap">{{ $submission->name }}</td>
+                        <td class="align-middle text-nowrap">{{ $submission->submission_title }}</td>
                         <td class="align-middle text-nowrap">{{ $submission->institution_name }}</td>
                         <td class="align-middle text-nowrap">{{ $submission->country_name }}</td>
                         <td class="align-middle text-nowrap">{{ $submission->created_at }}</td>
@@ -79,7 +81,7 @@
                       <tr class="text-center">
                         <th scope="col" class="align-middle text-nowrap">Institution ID</th>
                         <th scope="col" class="align-middle text-nowrap">Institution Name</th>
-                        <th scope="col" class="align-middle text-nowrap">{{ ($competition->is_team) ? 'Team Name' : 'Participant Name' }}</th>
+                        <th scope="col" class="align-middle text-nowrap">{{ ($competition->need_team) ? 'Team Name' : 'Participant Name' }}</th>
                         <th scope="col" class="align-middle text-nowrap">PIC Name</th>
                         <th scope="col" class="align-middle text-nowrap">PIC Email</th>
                         <th scope="col" class="align-middle text-nowrap">PIC Phone Number</th>
@@ -118,10 +120,10 @@
               <table class="table table-bordered table-sm table-striped no-footer dataTables" id="noSubmissions">
                 <thead class="thead-light">
                   <tr class="text-center">
-                    @if (!$competition->is_team)
+                    @if (!$competition->need_team)
                       <th class="align-middle text-nowrap">Participant ID</th>
                     @endif
-                    <th scope="col" class="align-middle text-nowrap">{{ ($competition->is_team) ? 'Team Name' : 'Participant Name' }}</th>
+                    <th scope="col" class="align-middle text-nowrap">{{ ($competition->need_team) ? 'Team Name' : 'Participant Name' }}</th>
                     <th scope="col" class="align-middle text-nowrap">PIC Name</th>
                     <th scope="col" class="align-middle text-nowrap">Institution Name</th>
                     <th scope="col" class="align-middle text-nowrap">Country</th>
@@ -131,7 +133,7 @@
                 <tbody>
                   @foreach ($notSubmittedParticipants as $participant)
                     <tr class="text-center">
-                      @if (!$competition->is_team)
+                      @if (!$competition->need_team)
                         <td class="align-middle text-nowrap">{{ $participant->participant_id }}</td>
                       @endif
                       <td class="align-middle text-nowrap">{{ $participant->name }}</td>
@@ -141,7 +143,7 @@
                       <td class="align-middle text-nowrap">
                         <div class="btn-toolbar flex-nowrap justify-content-center" role="toolbar" aria-label="Toolbar">
                           <div class="btn-group">
-                            @if ($competition->is_team)
+                            @if ($competition->need_team)
                               <a class="btn btn-sm btn-warning text-white" href="{{ route('competition-participants.edit', $participant->id) }}" title="Edit Team" target="_blank"> <span class="fas fa-user-edit"></span></a>
                             @else
                               <a class="btn btn-sm btn-warning text-white" href="{{ route('competition-participants.edit', $participant->id) }}" title="Edit Participant" target="_blank"> <span class="fas fa-user-edit"></span></a>
@@ -175,7 +177,7 @@
                 <table class="table table-bordered table-sm table-striped no-footer dataTables" id="deletedSubmissions">
                   <thead class="thead-light">
                     <tr class="text-center">
-                      <th scope="col" class="align-middle text-nowrap">{{ ($competition->is_team) ? 'Team Name' : 'Participant Name' }}</th>
+                      <th scope="col" class="align-middle text-nowrap">{{ ($competition->need_team) ? 'Team Name' : 'Participant Name' }}</th>
                       <th scope="col" class="align-middle text-nowrap">PIC Name</th>
                       <th scope="col" class="align-middle text-nowrap">Institution Name</th>
                       <th scope="col" class="align-middle text-nowrap">Country</th>

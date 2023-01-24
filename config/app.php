@@ -214,6 +214,10 @@ return [
 
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Carbon' => Carbon\Carbon::class,
     ])->toArray(),
+
+
+
 
 ];

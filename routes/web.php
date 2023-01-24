@@ -94,6 +94,17 @@ Route::resource('admins', AdminController::class)->except('show');
 Route::get('environments/{environment}/update-visibility', [EnvironmentController::class, 'updateVisibility'])->name('environments.update-visibility');
 Route::resource('environments', EnvironmentController::class);
 
+//Schedules
+Route::controller(ScheduleController::class)->prefix('schedules')->name('schedules.')->group(function () {
+    Route::get('restore/{id}', [ScheduleController::class, 'restore'])->name('restore');
+    Route::delete('delete/{id}', [ScheduleController::class, 'delete'])->name('delete');
+    Route::get('manage/{type}', [ScheduleController::class, 'manage'])->name('manage');
+    Route::get('competition-schedule/{schedule}', [ScheduleController::class, 'show'])->where('schedule', '^[a-zA-Z]+$')->name('show');
+
+
+});
+Route::resource('schedules', ScheduleController::class)->except('show');
+
 // Ambassadors 
 Route::get('ambassadors/manage', [AmbassadorController::class, 'manage'])->name('ambassadors.manage');
 Route::resource('ambassadors', AmbassadorController::class)->except('show');
