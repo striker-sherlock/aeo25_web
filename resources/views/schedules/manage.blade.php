@@ -1,7 +1,7 @@
 <x-admin>
     <div class="container mt-4">
         <x-card>
-            <h3 class="fw-bold my-3 c-text-1 text-gradient">Schedule List</h3>
+            <h3 class="fw-bold my-3 c-text-1 text-gradient"> {{$competition->name}} Schedule List</h3>
             <hr>
             <a class="btn btn-md my-2   btn-outline-1" href="{{ route('schedules.create') }}"><i
                     class="fas fa-plus me-2"></i>Insert New Schedule</a>
@@ -22,8 +22,8 @@
                             @foreach ($schedules as $schedule)
                                 @php
                                     
-                                    $startTime = Carbon::parse($schedule->start_time);
-                                    $endTime =  Carbon::parse($schedule->end_time);
+                                    $startTime = \Carbon\Carbon::parse($schedule->start_time);
+                                    $endTime =  \Carbon\Carbon::parse($schedule->end_time);
                                     $duration = $startTime->longAbsoluteDiffForHumans($endTime);
                                     
                                 @endphp
@@ -66,7 +66,7 @@
 
         </x-card>
         <x-card>
-            <h3 class="fw-bold my-3 c-text-1 text-gradient">Deleted Schedule List</h3>
+            <h3 class="fw-bold my-3 c-text-1 text-gradient">Deleted {{$competition->name}} fSchedule List</h3>
             <hr>
             @if ($deletedSchedules->count() > 0)
                 <div class="table-responsive py-2">

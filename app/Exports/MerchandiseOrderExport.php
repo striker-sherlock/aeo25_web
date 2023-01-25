@@ -2,14 +2,15 @@
 
 namespace App\Exports;
 
-use App\Models\MerchandiseOrder;
 use App\Models\Merchandise;
+use App\Models\MerchandiseOrder;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class MerchandiseOrderExport implements FromCollection, WithHeadings
+class MerchandiseOrderExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     
     public function collection()

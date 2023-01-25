@@ -35,6 +35,7 @@
                     <div class="form-group mb-2">
                         <label for="schedule" class="col-form-label">Pick Up Schedule<span class="text-danger">*</span></label>
                         <select class="form-select"  name="schedule" id="schedule" >  
+                            <option selected class="d-none" disabled id="first-option"> Please select the pick up schedule </option>
                             @foreach ($schedules as $schedule)
                                 <option value="{{$schedule->id}}" {{$flight->schedule_id == $schedule->id? 'selected' : ''}} >{{date('D, d M Y h:i',strtotime($schedule->schedule))}} (GMT + 7)</option>
                             @endforeach

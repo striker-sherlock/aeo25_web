@@ -66,16 +66,14 @@ class UserCompetitionParticipantController extends Controller
             'email.*' => 'nullable|string|unique:competition_participants,email|distinct',
             'gender.*' => 'nullable',
             'phone.*' => 'nullable|numeric|distinct',
-            'birth.*' => 'nullable|date_format:Y-m-d|after:-23 years|before:-15years',
             'profile_picture.*' => 'nullable|image|max:1999|mimes:jpeg,jpg,png',
+            'birth.*' => 'nullable|date_format:Y-m-d|',
         ],
         // customize error
         [
             'nama.*.distinct' => "Participant's name field must be distinct",
             'email.*.unique' => 'Duplicated Email Found',
             'email.*.distinct' => "Participant's email field must be distinct",
-            'birth.*.before' => 'Participant must be at least 15 years old',
-            'birth.*.after' => 'Participant must not be older than 23 years old',
             'birth.*.date_format' => 'The date format must be yyyy-mm-dd',
             'phone.*.numeric' => 'Phone number must be numeric',
             'phone.*.distinct' => "phone number field must be distinct",
@@ -83,7 +81,16 @@ class UserCompetitionParticipantController extends Controller
             'profile_picture.*.max' => 'The profile picture size must less than 2MB ',
             'profile_picture.*.mimes' => 'The profile picture must be type of : JPEG,JPG, PNG'
         ]);
-         
+        
+        if($request->competition_id != 'OBS'){
+            $request->validate([
+                'birth.*' => 'after:-23 years|before:-15years',
+            ],[
+                'birth.*.before' => 'Participant must be at least 15 years old',
+                'birth.*.after' => 'Participant must not be older than 23 years old',
+            ]);
+        } 
+            
         $competition = Competition::find($request->competition_id);    
         $len = $request->quantity;
         if($request->need_teams){

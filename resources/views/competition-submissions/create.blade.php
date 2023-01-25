@@ -18,67 +18,18 @@
                         </thead>
                         <tbody>
                             @foreach ($submitters as $team)
+                        
                                 <tr class="text-center">
                                     <td class="align-middle text-center">{{ $team->name }}</td>
                                     <td class="align-middle text-center">
                                         <div class="btn-toolbar flex-nowrap justify-content-center" role="toolbar"
                                             aria-label="Toolbar">
                                             <div class="btn-group me-2" role="group" aria-label="link">
-                                                <button class="btn btn-sm btn-info text-white"
-                                                    data-bs-target="#viewTeam-{{ $team->id }}"
-                                                    data-bs-toggle="modal" title="View Details"> <span
-                                                        class="fa fa-eye"></span></button>
+                                                <a class="btn btn-sm btn-info text-white"
+                                                    href="{{route('competition-participants.show',[Auth::user()->id,'RD'])}}" title="View Details"> <span
+                                                        class="fa fa-eye"></span></a>
                                             </div>
-                                            <div class="modal fade pr-0" id="viewTeam-{{ $team->id }}"
-                                                tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg modal-dialog-centered"
-                                                    role="document">
-                                                    <div class="modal-content rounded-20 p-2">
-                                                        <div class="modal-header border-bottom-0">
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="title-line mx-auto"></div>
-                                                            <h2 class="my-3 fw-bold text-center c-text-1">
-                                                                {{ ucwords(strtolower($team->name)) }} Member Details
-                                                            </h2>
-                                                            <div class="table-responsive py-2">
-                                                                <table class="table table-sm table-hover">
-                                                                    <thead class="bg-blue-gradient text-white">
-                                                                        <tr class="text-center">
-                                                                            <th scope="col" class="align-middle">
-                                                                                Member Name</th>
-                                                                            <th scope="col" class="align-middle">
-                                                                                Gender</th>
-                                                                            <th scope="col" class="align-middle">
-                                                                                Member Email</th>
-                                                                            <th scope="col" class="align-middle">
-                                                                                Member Phone</th>
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        @foreach ($members as $member)
-                                                                            <tr class="text-center">
-                                                                                @if ($member->team_id == $team->id)
-                                                                                    <td class="align-middle">
-                                                                                        {{ $member->member_name }}</td>
-                                                                                    <td class="align-middle">
-                                                                                        {{ $member->gender }}</td>
-                                                                                    <td class="align-middle">
-                                                                                        {{ $member->email }}</td>
-                                                                                    <td class="align-middle">
-                                                                                        {{ $member->phone }}</td>
-                                                                                @endif
-                                                                            </tr>
-                                                                        @endforeach
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                     </td>
                                 </tr>
                             @endforeach
@@ -91,61 +42,61 @@
         @endif
 
 
-            <x-card>
-                <form action="{{ route('competition-submissions.store') }}" method="POST"
-                    enctype="multipart/form-data" id="form"
-                    onsubmit="return confirm('You can only submit your work once! Are you sure you want to send your submission?');">
-                    <input type="hidden" value="{{ $competition->id }}" name="competition_id">
-                    @csrf
-                    @method('POST')
-                    <h3 class="text-uppercase fw-bold text-gradient" style="letter-spacing: 0.1em">
-                        {{ $competition->name }} Participant
-                    </h3>
-                    <hr>
-                    <div class="form-group">
-                        @if ($competition->need_team)
-                            <div class="mb-3">
-                                <label for="submitter_id" class="form-label">Team Name<span
-                                        class="text-danger">*</span></label>
-                                <select class="form-select " name="submitter_id" required>
-                                    <option selected="0">Select Team</option>
-                                    @foreach ($submitters as $submitter)
-                                            <option value="{{ $submitter->id }}" class="" name="submitter_id"
-                                                required>{{ $submitter->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @else
-                            <div class="mb-3">
-                                <label for="submitter_id" class="form-label">Participant Name<span
-                                        class="text-danger">*</span></label>
-                                <select class="form-select " name="submitter_id" required>
-                                    <option selected="0">Select participant</option>
-                                    @foreach ($submitters as $submitter)
-                                            <option value="{{ $submitter->id }}" class="" name="submitter_id"
-                                                required>{{ $submitter->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endif
+        <x-card>
+            <form action="{{ route('competition-submissions.store') }}" method="POST"
+                enctype="multipart/form-data" id="form"
+                onsubmit="return confirm('You can only submit your work once! Are you sure you want to send your submission?');">
+                <input type="hidden" value="{{ $competition->id }}" name="competition_id">
+                @csrf
+                @method('POST')
+                <h3 class="text-uppercase fw-bold text-gradient" style="letter-spacing: 0.1em">
+                    {{ $competition->name }} Participant
+                </h3>
+                <hr>
+                <div class="form-group">
+                    @if ($competition->need_team)
                         <div class="mb-3">
-                            <label for="title" class="form-label">Title<span class="text-danger">*</span></label>
-                            <input class="form-control " type="text" name="title" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="submission_link" class="form-label">Submission Link<span
+                            <label for="submitter_id" class="form-label">Team Name<span
                                     class="text-danger">*</span></label>
-                            <input class="form-control " type="url"
-                                placeholder="e.g. https://docs.google.com/document/d/1_gq4pRAMxL63"
-                                id="submission_link"name="submission_link" required>
+                            <select class="form-select " name="submitter_id" required>
+                                <option selected="0">Select Team</option>
+                                @foreach ($submitters as $submitter)
+                                        <option value="{{ $submitter->id }}"  class="" name="submitter_id"
+                                            required {{$submitter->teamSubmission ? 'disabled' :''}}>{{ $submitter->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <div class="d-grid my-4">
-                            <button type="submit" id="btnConfirmSubmit" class="btn c-button-1">Send
-                                Submission</button>
+                    @else
+                        <div class="mb-3">
+                            <label for="submitter_id" class="form-label">Participant Name<span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select " name="submitter_id" required>
+                                <option selected="0">Select participant</option>
+                                @foreach ($submitters as $submitter)
+                                        <option value="{{ $submitter->id }}" class="" name="submitter_id"
+                                            required {{$submitter->participantSubmission ? 'disabled' : ''}}>{{ $submitter->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
+                    @endif
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title<span class="text-danger">*</span></label>
+                        <input class="form-control " type="text" name="title" required>
                     </div>
-                </form>
-            </x-card>
+                    <div class="mb-3">
+                        <label for="submission_link" class="form-label">Submission Link<span
+                                class="text-danger">*</span></label>
+                        <input class="form-control " type="url"
+                            placeholder="e.g. https://docs.google.com/document/d/1_gq4pRAMxL63"
+                            id="submission_link"name="submission_link" required>
+                    </div>
+                    <div class="d-grid my-4">
+                        <button type="submit" id="btnConfirmSubmit" class="btn c-button-1">Send
+                            Submission</button>
+                    </div>
+                </div>
+            </form>
+        </x-card>
 
 
         @if ($submissionCounter > 0)
@@ -214,7 +165,9 @@
         @endif
 
 
-
+       
+            
+     
         <div class="modal fade show pr-0" style="z-index: 9999;" id="confirmSubmission" tabindex="-1"
             role="dialog" aria-labelledby="alertTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -255,6 +208,43 @@
                 </div>
             </div>
         </div>
+
+        @foreach ($submitters as $team)
+            <div class="modal fade p-5" id="team-{{$team->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered ">
+                {{-- <div class="modal-content rounded-20 border-0 shadow p-5">
+                    <div class="modal-headers mb-4">
+                    <span class="fa-stack fa-4x d-block mx-auto" >
+                        <i class="fas fa-circle fa-stack-2x text-danger"></i>
+                        <i class="fas fa-exclamation fa-stack-1x fa-inverse"></i>
+                    </span>
+                    </div>
+                    <div class="body mb-3">
+                    <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$team->name}}</span>"? </h1>
+                    <p class="text-warning"> note: this action can't be undone  </p>
+                    </div>
+                    <div class="footers">
+                        <div class="row">
+                        <div class="col">
+                            <button type="button" class="btn btn-secondary w-100"  data-bs-dismiss="modal">Back</button>
+                        </div>
+                        <div class="col">
+                            <form method="POST" action="{{route('teams.destroy',$team->id)}}">
+                            <input type="hidden" name="_method" value = "DELETE">
+                                <button class="btn btn-danger rounded w-100" title="delete">
+                                Delete
+                                </button>
+                            @csrf
+                            </form>
+                        </div>
+                        </div>  
+                    </div>
+                </div> --}}
+            </div>  
+        </div>  
+            
+        @endforeach
+
         <script>
             $("#btnConfirmSubmit").on("click", function() {
                 let submissionLink = $("#submission_link").val();

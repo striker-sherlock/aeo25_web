@@ -17,6 +17,7 @@ class CompetitionParticipant extends Model
     protected $primaryKey = 'id';
     protected $timestamp = true;
     protected $guarded = [];
+    protected $with = ['competition','user', 'competitionTeam','competitionSlot'];
     
     public function competition(){
         return $this->belongsTo(Competition::class);

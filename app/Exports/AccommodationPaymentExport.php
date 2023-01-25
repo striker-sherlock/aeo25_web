@@ -2,13 +2,14 @@
 
 namespace App\Exports;
 
-use App\Models\AccommodationPayment;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use App\Models\AccommodationPayment;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class AccommodationPaymentExport implements FromCollection, WithHeadings
+class AccommodationPaymentExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     public function collection()
     {

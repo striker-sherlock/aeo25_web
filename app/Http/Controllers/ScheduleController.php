@@ -34,11 +34,13 @@ class ScheduleController extends Controller
             $deletedSchedules = Schedule::where('schedule_type', 'CP')->where('event_init', $type)->onlyTrashed()->get();
         }
         
+        $competition = Competition::where('id',$type)->first();
+        
         return view('schedules.manage', [
             'deletedSchedules' => $deletedSchedules,
             'schedules' => $schedules,
             'type' => $type,
-
+            'competition'=>$competition
         ]);
     }
 
@@ -54,7 +56,6 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $this->validateSchedule($request);
-
         Schedule::create([
             'schedule_type' => Auth::guard('admin')->user()->department_id,
             'event_init' => $request->event_init,

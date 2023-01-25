@@ -259,9 +259,11 @@
                                     </th>
                                     <th>{{$participant->email}}</th>
                                     <th>
-                                        <div class="visible-print text-center">
-                                            {!! QrCode::format('svg')->size(50)->generate(route('food-coupons.create',$participant->id)); !!}
-                                        </div>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#QR-code{{$participant->id}}">
+                                            <div class="visible-print text-center" title="view bigger" style="cursor: pointer" >
+                                                {!! QrCode::format('svg')->size(50)->generate(route('food-coupons.create',$participant->id)); !!}
+                                            </div>
+                                        </a>
                                     </th>
                                     <th>
                                         <a href="{{route('food-coupons.sendQR',$participant->id)}}" class="btn btn-outline-theme rounded-pill confirm">Send food coupon</a>
@@ -276,6 +278,24 @@
             @endif
 
         </x-card>
- 
     </div>
+
+    @foreach ($allParticipants as $participant)
+      <div class="modal fade modal-lg" id="QR-code{{$participant->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered ">
+              <div class="modal-content rounded-20 border-0 shadow p-5">
+                  <div class="modal-headers mb-4">
+                    <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">{{$participant->name}}'s Food Qr Code </h3> 
+                    <hr>
+                  </div>
+                  <div class="body mb-3 text-center">
+                        {!! QrCode::format('svg')->size(300)->generate(route('food-coupons.create',$participant->id)); !!}
+                  </div>
+                  <div class="footers">
+                     
+                  </div>
+              </div>
+          </div>  
+      </div>  
+    @endforeach
 </x-user>

@@ -100,6 +100,16 @@
                     </li>
                     <li class="side-item">
                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                        href="{{ route('re-regists.index') }}">
+                        <span class="fa-stack fa-sm ml-n1">
+                            <i class="fas fa-square fa-stack-2x"></i>
+                            <i class="fas fa-users fa-stack-1x text-dark"></i>
+                        </span>
+                        <span class="ms-2">Re-registration</span>
+                        </a>
+                    </li>
+                    <li class="side-item">
+                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
                             href="{{route('questions.index')}}">
                             <span class="fa-stack fa-sm ms-n1">
                                 <i class="fas fa-square fa-stack-2x"></i>
@@ -365,6 +375,8 @@
                             </ul>
                         </div>
                     </li>
+               
+                    
                 @endif
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 7)->first()))
                     {{-- submission --}}
@@ -447,7 +459,7 @@
                          </a>
                          <div class="sidebar-submenu">
                                  <ul class="fa-ul">
-                                     @if (Auth::guard('admin')->user()->division_id == "DB" || Auth::guard('admin')->user()->division_id == "CP")
+                                     @if (Auth::guard('admin')->user()->division_id == "DB" || Auth::guard('admin')->user()->division_id == "CP" ||Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT"))
                                      <li class="mb-1">
                                          <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark w-100"
                                              href="{{ route('schedules.manage', 'DB') }}">
@@ -458,18 +470,7 @@
                                         
                                     @endif
 
-                                    @if (Auth::guard('admin')->user()->department_id == "CP" || Auth::guard('admin')->user()->division_id == "CP")
-                                    <li class="mb-1">
-                                        <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark w-100"
-                                            href="{{ route('schedules.manage', 'IA') }}">
-                                            <span class="fa-li"><i class="fas fa-arrow-right"></i></span>
-                                            Ind.Adjudicator
-                                        </a>
-                                    </li>
-                                    
-                                   @endif
-
-                                   @if (Auth::guard('admin')->user()->division_id == "NC" || Auth::guard('admin')->user()->division_id == "CP")
+                                   @if (Auth::guard('admin')->user()->division_id == "NC" || Auth::guard('admin')->user()->division_id == "CP"||Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT"))
                                    <li class="mb-1">
                                     <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
                                         href="{{ route('schedules.manage', 'NC') }}" style="display: block">
@@ -479,7 +480,7 @@
                                 </li>
                                   @endif
 
-                                  @if (Auth::guard('admin')->user()->division_id == "SP" || Auth::guard('admin')->user()->division_id == "CP")
+                                  @if (Auth::guard('admin')->user()->division_id == "SP" || Auth::guard('admin')->user()->division_id == "CP"||Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT"))
                                   <li class="mb-1">
                                       <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
                                           href="{{ route('schedules.manage', 'SP') }}" style="display: block">
@@ -489,7 +490,7 @@
                                   </li>
                                  @endif
 
-                                 @if (Auth::guard('admin')->user()->division_id == "ST" || Auth::guard('admin')->user()->division_id == "CP")
+                                 @if (Auth::guard('admin')->user()->division_id == "ST" || Auth::guard('admin')->user()->division_id == "CP" ||Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT"))
                                  <li class="mb-1">
                                      <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
                                          href="{{ route('schedules.manage', 'ST') }}" style="display: block">
@@ -500,7 +501,7 @@
                                  
                                 @endif
 
-                                @if (Auth::guard('admin')->user()->division_id == "SB" || Auth::guard('admin')->user()->division_id == "CP")
+                                @if (Auth::guard('admin')->user()->division_id == "SB" || Auth::guard('admin')->user()->division_id == "CP"||Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT"))
                                 
                                 <li class="mb-1">
                                     <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
@@ -511,7 +512,7 @@
                                 </li>
                                @endif
 
-                               @if (Auth::guard('admin')->user()->division_id == "OC" || Auth::guard('admin')->user()->division_id == "CP")
+                               @if (Auth::guard('admin')->user()->division_id == "OC" || Auth::guard('admin')->user()->division_id == "CP"||Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT"))
                                <li class="mb-1">
                                 <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark"
                                     href="{{ route('schedules.manage', 'RD') }}" style="display: block">

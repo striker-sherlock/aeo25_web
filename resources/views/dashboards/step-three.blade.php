@@ -38,8 +38,8 @@
                                     @elseif($competitionSlot->payment == NULL)
                                         <span class="fw-bold text-danger">Not Eligible (No Payment Yet)</span>
 
-                                    @elseif($competitionSlot->payment->is_confirmed != 1)
-                                        <span class="fw-bold text-danger">Not Eligible (Wait for payment confirmation)</span>
+                                    {{-- @elseif($competitionSlot->payment->is_confirmed != 1)
+                                        <span class="fw-bold text-danger">Not Eligible (Wait for payment confirmation)</span> --}}
                                         
                                     @else
                                         <span class="fw-bold text-success">Eligible</span>

@@ -20,12 +20,12 @@
                                  class="form-control " value="{{ $schedule->event_name }}" required autofocus>
                              </div>
                              <div class="form-group mb-3">
-                                 <label class="col-form-label" for="start_time">Event Start <span class="text-danger">*</span></label>
+                                 <label class="col-form-label" for="start_time">Event Start <span class="text-danger">*</span><small class="text-muted"> format : dd-mm-yyyy H:i</small></label>
                                  <input type="text" id="start_time" name="start_time"
                                  class="form-control " value="{{ $schedule->start_time }}" required autofocus placeholder="dd-mm-yyyy H:i">
                              </div>
                              <div class="form-group mb-3">
-                                 <label class="col-form-label" for="end_time">Event End <span class="text-danger">*</span></label>
+                                 <label class="col-form-label" for="end_time">Event End <span class="text-danger">*</span><small class="text-muted"> format : dd-mm-yyyy H:i</small></label>
                                  <input type="text" id="end_time" name="end_time"
                                  class="form-control " value="{{ $schedule->end_time }}" required autofocus placeholder="dd-mm-yyyy H:i">
                              </div>

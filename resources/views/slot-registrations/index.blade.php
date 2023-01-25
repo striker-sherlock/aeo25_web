@@ -118,9 +118,9 @@
                                 <th>{{$competition->quantity}}</th>
                                 <th class="m-auto"> 
                                     <div class="d-flex justify-content-center">
-                                        <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn  btn-primary me-2">
+                                        {{-- <a href="{{route('slot-registrations.edit',$competition->id)}}"class="btn  btn-primary me-2">
                                             <i class="fa fa-edit"></i>
-                                        </a>
+                                        </a> --}}
                                         <a href="{{route('slot-registrations.cancel',$competition->id)}}" class="btn btn-warning cancel">
                                             <i class="fas fa-undo" ></i>
                                         </a>

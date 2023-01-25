@@ -30,7 +30,7 @@
                     </div>
             </x-card>
             <x-card>
-                <h3 class="text-uppercase fw-bold text-gradient mb-4" style="letter-spacing: 0.1em">Select Pick Up Schedule</h3>
+                <h3 class="text-uppercase fw-bold text-gradient mb-4" style="letter-spacing: 0.1em">Select Pick Up Schedule (OPTIONAL)</h3>
                 
                 <div class="form-group mb-2">
                     <label for="schedule" class="col-form-label">Pick Up Schedule<span class="text-danger">*</span></label>
