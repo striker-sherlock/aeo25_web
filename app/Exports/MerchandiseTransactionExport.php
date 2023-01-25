@@ -2,13 +2,14 @@
 
 namespace App\Exports;
 
-use App\Models\MerchandiseTransaction;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\MerchandiseTransaction;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class MerchandiseTransactionExport implements FromCollection, WithHeadings
+class MerchandiseTransactionExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     public function collection()
     {

@@ -9,7 +9,7 @@ $(document).ready(function () {
   });
 
   // disable multiple form submission 
-  $("body").on("submit", "form", function() {
+  $("html").on("submit", "form", function() {
     $('button[type="submit"]').attr('disabled',true);
     $('button[type="submit"]').html(` <i class="spinner fa-solid fa-spinner"></i> Please Wait...`);
 

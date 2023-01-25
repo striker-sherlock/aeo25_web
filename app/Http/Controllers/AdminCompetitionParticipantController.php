@@ -14,9 +14,22 @@ class AdminCompetitionParticipantController extends Controller
     public function __construct(){
         $this->middleware('IsAdmin')->only(['edit','index']);
     }
-
+    public function pageValidation($competition){
+        if(Auth::guard('admin')->user()->division_id != $competition){
+            if(Auth::guard('admin')->user()->division_id == 'OC' 
+            && ($competition == 'SSW' || $competition == 'RD')) return false;          
+            if(Auth::guard('admin')->user()->division_id == 'CP') return false ;
+            if(Auth::guard('admin')->user()->department_id != 'CP') return false;
+            return true;
+        } 
+        
+        
+        
+    }
+ 
     public function index($competition){
-        // dd($competition); 
+        if($this->pageValidation($competition)) return redirect()->back()->with('error','you are not authorized for this page');
+        
         return view('competition-participants.index',[
             'competitionParticipants'=> CompetitionParticipant::where('competition_id',$competition)->get(),
             'competition' => Competition::find($competition),
@@ -42,8 +55,9 @@ class AdminCompetitionParticipantController extends Controller
             'profile_picture' => 'nullable|image|max:1999|mimes:jpeg,jpg,png',
             'note' => 'nullable|string '
         ]);
-        // dd(Auth::user()->pic_name);
+
         $competitionParticipant = CompetitionParticipant::find($id);
+        $competitionID = $competitionParticipant->competition->id;
         if (!Auth::guard('admin')->check()){
             $competitionParticipant->update([
                 'additional_notes' => $request->note,
@@ -57,10 +71,10 @@ class AdminCompetitionParticipantController extends Controller
             $fileName = str_replace('-', '_', $fileName);
             $current = time();
             
-            if($request->hasFile('profile_picture')){
-                $extension = $request->file('profile_picture')->getClientOriginalExtension();
+            if($request->hasFile('profile_picture_new')){
+                $extension = $request->file('profile_picture_new')->getClientOriginalExtension();
                 $fixedName = $fileName.'_'.$current.'.'.$extension;
-                $path = $request->file("profile_picture")->storeAs("public/profile_picture/".$request->competition_id,$fixedName);
+                $path = $request->file("profile_picture_new")->storeAs("public/profile_picture/".$competitionID,$fixedName);
             }
             else $fixedName = $request->profile_picture_old;
             // dd($competitionParticipant);

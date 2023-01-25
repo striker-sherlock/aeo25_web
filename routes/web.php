@@ -15,6 +15,7 @@ use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FollowUpController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\AccessControlController;
 use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ReregistrationControler;
 use App\Http\Controllers\AdminMerchandiseController;
 use App\Http\Controllers\MerchandiseOrderController;
 use App\Http\Controllers\SlotRegistrationController;
@@ -302,7 +304,7 @@ Route::controller(AdminAccommodationGuestController::class)->prefix('guests')->n
     Route::delete('destroy/{accommodationGuest}', 'destroy')->name('destroy');
     Route::delete('delete/{accommodationGuest}', 'delete')->name('delete');
     Route::get('restore/{accommodationGuest}', 'restore')->name('restore');
-    Route::get('export/{accommodationGuest}', 'export')->name('export');
+    Route::get('accommodation/export/{accommodationGuest?}', 'export')->name('export');
 });
 
 // Institution Contact
@@ -344,5 +346,9 @@ Route::get('food-coupons/create/{id}/{day?}', [FoodController::class, 'create'])
 Route::get('food-coupons/send-Qr-Code/{id}', [FoodController::class, 'sendFoodQR'])->name('food-coupons.sendQR');
 Route::get('food-coupons/view-qr-code/{id}', [FoodController::class, 'viewQRCode'])->name('food-coupons.view-qr-code');
 Route::post('food-coupons/store', [FoodController::class, 'store'])->name('food-coupons.store');
+
+//re registration 
+Route::resource('re-regists', ReregistrationControler::class)->only(['index','update']);
+Route::get('re-regists/{id}/cancel', [ReregistrationControler::class, 'unConfirm'])->name('re-regists.unconfirm');
 
 

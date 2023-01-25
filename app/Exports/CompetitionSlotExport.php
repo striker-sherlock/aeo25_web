@@ -6,8 +6,9 @@ use App\Models\CompetitionSlot;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class CompetitionSlotExport implements FromCollection, WithHeadings
+class CompetitionSlotExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection

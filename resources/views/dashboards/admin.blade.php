@@ -10,7 +10,10 @@
                 @endif </h5>
             <hr>
         </div>
-        @if (Auth::guard('admin')->user()->position != 'Staff')
+        @if (Auth::guard('admin')->user()->position != 'Staff'
+            && Auth::guard('admin')->user()->department_id != 'CP'
+            || Auth::guard('admin')->user()->division_id == 'CP'
+        )
             <div class="info">
                 <div class="row justify-content-center">
                     <div class="col-md-4 col-sm-6">
@@ -84,14 +87,16 @@
             </div>
             <hr>
         @endif
-
-        @if (Auth::guard('admin')->user()->position != 'Staff')
+        @if ( (Auth::guard('admin')->user()->position != 'Staff'
+            && Auth::guard('admin')->user()->department_id != 'CP')
+            ||  Auth::guard('admin')->user()->division_id == 'CP'
+        )
         <h1 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">Revenue</h1>
             <div class="row revenue">
                 <div class="col-md-4 col-sm-6">
                     <x-card>
                         <h4 class="fs-3 text-gradient fw-bold">Competition</h4>
-                        <h2 class="fw-bold fs-1">IDR {{number_format($competitionRevenue)}}</h2>
+                        <h2 class="fw-bold fs-3">IDR {{number_format($competitionRevenue)}}</h2>
                         
                      
                          
@@ -100,13 +105,13 @@
                 <div class="col-md-4 col-sm-6">
                     <x-card>
                         <h4 class="fs-3 text-gradient fw-bold">Accommodation</h4>
-                        <h2 class="fw-bold fs-1">IDR {{number_format($accommodationRevenue)}}</h2>
+                        <h2 class="fw-bold fs-3">IDR {{number_format($accommodationRevenue)}}</h2>
                     </x-card>
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <x-card>
                         <h4 class="fs-3 text-gradient fw-bold ">Merchandise</h4>
-                        <h2 class="fw-bold fs-1">IDR {{number_format($merchandiseRevenue)}}</h2>
+                        <h2 class="fw-bold fs-3">IDR {{number_format($merchandiseRevenue)}}</h2>
                    
                     </x-card>
                 </div>

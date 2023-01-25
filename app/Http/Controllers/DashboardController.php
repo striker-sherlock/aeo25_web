@@ -136,9 +136,6 @@ class DashboardController extends Controller
             // dd($competitionPayment->count());
             if ($competitionPayment->count() == 0 )return redirect()->back()->with('error','Please make a payment first');
             
-            $competitionPayment = $competitionPayment->where('is_confirmed',1);
-            if ($competitionPayment->count() == 0 )return redirect()->back()->with('error','Please wait your payment to be confirmed');
-            
             $competitionSlots = CompetitionSlot::where('pic_id',Auth::user()->id)->get()->where('is_confirmed',1);
             $competitionParticipant  = CompetitionParticipant::where('pic_id', Auth::user()->id)->get();
              

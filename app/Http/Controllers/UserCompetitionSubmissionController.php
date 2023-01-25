@@ -30,7 +30,7 @@ class UserCompetitionSubmissionController extends Controller
 
         if (time() < strtotime($competition->submission_start)) return redirect()->back()->with('error', 'Submission time is not started yet!');
         
-
+        
         if ($competition->id == "RD") {
             $teams = CompetitionTeam::join('competition_participants', 'competition_participants.team_id', 'competition_teams.id')
                 ->join('competition_slot_details', 'competition_slot_details.id', 'competition_participants.competition_slot_id')
@@ -46,11 +46,10 @@ class UserCompetitionSubmissionController extends Controller
                 ->where('competition_teams.competition_id', $competition->id)
                 ->where('competition_slot_id', $competitionSlotDetail->id)
                 ->get();
-            
             return view('competition-submissions.create', [
                 'quantity' => $competitionSlotDetail->quantity,
                 'competition' => $competition,
-                'submitters' => $teams,
+                'submitters' => $teams->unique(),
                 'members' => $teams,
                 'submissionCounter' => CompetitionSubmissions::whereIn('submitter_id', $teams->pluck('id'))->where('competition_id', $competition->id)->count()
             ]);

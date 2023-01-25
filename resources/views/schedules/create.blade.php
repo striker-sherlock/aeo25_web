@@ -8,7 +8,7 @@
                         <form action="{{ route('schedules.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
-                            @if (Auth::guard('admin')->user()->department_id == "CP")
+                            @if (Auth::guard('admin')->user()->department_id == "CP"  ||Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT"))
                                  @php
                                      $competitions = App\Models\Competition::all();
                                  @endphp
@@ -33,11 +33,11 @@
                                  <input type="text" name="event_name" id="event_name" class="form-control " value="{{ old('event_name') }}" required autofocus>
                              </div>
                              <div class="form-group mb-3">
-                                 <label class="col-form-label" for="start_time">Event Start<span class="text-danger"> *</span></label>
+                                 <label class="col-form-label" for="start_time">Event Start<span class="text-danger"> *</span><small class="text-muted"> format : dd-mm-yyyy H:i</small></label>
                                  <input type="text" name="start_time" id="start_time" class="form-control " value="{{ old('start_time') }}" placeholder="dd-mm-yyyy H:i" required autofocus>
                              </div>
                              <div class="form-group mb-3">
-                                 <label class="col-form-label" for="end_time">Event End<span class="text-danger"> *</span></label>
+                                 <label class="col-form-label" for="end_time">Event End<span class="text-danger"> *</span> <small class="text-muted"> format : dd-mm-yyyy H:i</small> </label>
                                  <input type="text" name="end_time" id="end_time" class="form-control " value="{{ old('end_time') }}" placeholder="dd-mm-yyyy H:i" required autofocus>
                              </div>
                             <div class="form-group my-4">

@@ -4,12 +4,13 @@ namespace App\Exports;
 
 use App\Models\CompetitionPayment;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
 
-class CompetitionPaymentExport implements FromCollection, WithHeadings
+class CompetitionPaymentExport implements FromCollection, WithHeadings,ShouldAutoSize
 {
      
     public function __construct ($type){
@@ -42,6 +43,9 @@ class CompetitionPaymentExport implements FromCollection, WithHeadings
                     'competition_payments.amount' ,
                     )
                 ->get();
+            foreach ($data as $paymentName) {
+                if($paymentName->payment_provider == NULL) $paymentName->payment_provider = 'WISE';
+            }
             return $data;
         }
 

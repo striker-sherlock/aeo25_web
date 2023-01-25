@@ -26,15 +26,13 @@ class CompetitionSubmissionExport implements FromCollection, WithHeadings, Shoul
     
     public function collection()
     {
-               if ($this->getCompetition()->is_team) {
+        if ($this->getCompetition()->need_team) {
             $result = CompetitionSubmissions::join('competition_teams', 'competition_teams.id', 'competition_submissions.submitter_id')
                 ->join('competition_participants', 'competition_participants.team_id', 'competition_teams.id')
                 ->join('competition_slot_details', 'competition_slot_details.id', 'competition_participants.competition_slot_id')
-                ->join('users', 'users.id', 'competition_slot_details.user_id')
+                ->join('users', 'users.id', 'competition_slot_details.pic_id')
                 ->where('competition_submissions.competition_id', $this->getCompetition()->id)
                 ->whereNull('competition_submissions.deleted_at')
-                ->whereNull('competition_teams.deleted_at')
-                ->whereNull('competition_slot_details.deleted_at')
                 ->select(
                     'competition_submissions.submitter_id',
                     'competition_teams.name as team_name',
@@ -72,7 +70,7 @@ class CompetitionSubmissionExport implements FromCollection, WithHeadings, Shoul
 
     public function headings(): array
     {
-        if ($this->getCompetition()->is_team) {
+        if ($this->getCompetition()->need_team) {
             return ["Team ID", "Team Name", "Institution Name", "Member Name", "Submission Title", "Submission Link", "Submitted At"];
         }else {
             return ["Participant ID", "Institution Name", "Participant Name", "Submission Title", "Submission Link", "Submitted At"];

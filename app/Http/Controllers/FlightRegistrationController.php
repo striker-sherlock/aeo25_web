@@ -29,8 +29,7 @@ class FlightRegistrationController extends Controller
             'airline_name'=>'required|string',
             'flight_time'=>'required',
             'ticket_proof'=>'required',
-            'people' => 'required | numeric',
-            'schedule' => 'required'
+             
         ]);
         $ticket_proof = array();
         if($files = $request->file('ticket_proof')){
@@ -58,7 +57,7 @@ class FlightRegistrationController extends Controller
             'flight_time'=>$request->flight_time,
             'ticket_proof'=> implode('; ', $ticket_proof),
             'schedule_id' => $request->schedule,
-            'number_of_people' => $request->people
+            'number_of_people' => $request->people ? $request->people : 0 
         ]); 
 
         return redirect()->route('flight-tickets.index')->with('success','Flight Ticket has successfuly added');
