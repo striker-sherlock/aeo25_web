@@ -13,6 +13,7 @@ class CompetitionParticipant extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    
     protected $table = 'competition_participants';
     protected $primaryKey = 'id';
     protected $timestamp = true;
