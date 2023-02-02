@@ -168,7 +168,7 @@
             @if ($allSlotRegistration->count())
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                        <thead class="text-center">
+                        <thead class="text-center align-middle">
                         <tr>
                             <th scope="col">Competition Field</th>
                             <th scope="col">Quantity</th>
@@ -179,7 +179,7 @@
                         </thead>
                         <tbody class="text-center">
                             @foreach ($allSlotRegistration as $slot)
-                            <tr class="text-center ">
+                            <tr class="text-center align-middle">
                                 <th >{{$slot->competition->name}}</th>
                                 <th > {{$slot->quantity}} Slot(s)</th>
                                 <th>
@@ -240,17 +240,22 @@
                     <table class="table table-striped table-bordered dataTables " >
                         <thead class="text-center">
                             <tr>
-                                <th scope="col">Participant Name</th>
-                                <th scope="col">Competition Field</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Food Coupon Code</th>
-                                <th scope="col">Send Food Coupon</th>
+                                <th scope="col align-middle ">Participant Name</th>
+                                <th scope="col align-middle">Competition Field</th>
+                                <th scope="col align-middle">Email</th>
+                                
+                                <th scope="col align-middle text-center">
+                                    Food Coupon Code 
+                                    <br><small style="font-size:0.7em;" class="m-0 p-0 text-info">Click the QR code to see the bigger view</small>
+                                </th>
+
+                                <th scope="col align-middle">Send Food Coupon</th>
 
                             </tr>
                         </thead>
                         <tbody class="text-center">
                             @foreach ($allParticipants as $participant)
-                                <tr class="text-center">
+                                <tr class="text-center align-middle">
                                     <th>{{$participant->name}}</th>
                                     <th>{{$participant->competition->name}}
                                         @if ($participant->competition->need_team)
@@ -261,12 +266,15 @@
                                     <th>
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#QR-code{{$participant->id}}">
                                             <div class="visible-print text-center" title="view bigger" style="cursor: pointer" >
-                                                {!! QrCode::format('svg')->size(50)->generate(route('food-coupons.create',$participant->id)); !!}
+                                                {!! QrCode::format('svg')->size(70)->generate(route('food-coupons.create',$participant->id)); !!}
                                             </div>
                                         </a>
                                     </th>
                                     <th>
-                                        <a href="{{route('food-coupons.sendQR',$participant->id)}}" class="btn btn-outline-theme rounded-pill confirm">Send food coupon</a>
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Send QR to the participant through their email">
+                                            <a href="{{route('food-coupons.sendQR',$participant->id)}}" class="btn btn-outline-theme rounded-pill confirm">Send food coupon</a>
+                                        </span>
+                                        
                                     </th>
                                 </tr>
                             @endforeach
@@ -298,4 +306,5 @@
           </div>  
       </div>  
     @endforeach
+ 
 </x-user>

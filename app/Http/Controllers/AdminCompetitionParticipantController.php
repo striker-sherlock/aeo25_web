@@ -94,9 +94,12 @@ class AdminCompetitionParticipantController extends Controller
         return redirect()->route('competition-participants.index',$competitionParticipant->competition->id)->with('success','Participant has successfully updated');
     } 
 
-    public function export($competition){
-        $competitionName = Competition::find($competition)->name;
-        return Excel::download(new ParticipantExport($competition), $competitionName.'Participant.xlsx');
+    public function export($competition = NULL ){
+        if($competition != 'ALL'){
+            $competitionName = Competition::find($competition)->name;
+            return Excel::download(new ParticipantExport($competition), $competitionName.'Participant.xlsx');
+        }
+        return Excel::download(new ParticipantExport('ALL'),'Participant.xlsx');
     }
 
     public function destroy(CompetitionParticipant $competitionParticipant) // SOFT DELETE

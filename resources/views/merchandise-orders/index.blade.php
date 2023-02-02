@@ -57,11 +57,11 @@
             @endforeach
 
             
-            <div class="row merchandise-card">
+            <div class="row merchandise-card ">
                 @foreach ($merchandises->where('type','piece') as $merchandise)
                     <input type="text" hidden name="merch_id[]" value="{{$merchandise->id}}">
                     <div class="col-md-6 mb-3  ">
-                        <div class="d-flex justify-content-between mb-3 custom-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3 custom-card">
                             <div class=" owl-carousel owl-theme  w-50 me-2" data-image = "{{$merchandise->image}}" >
                                 @foreach (explode('; ',$merchandise->image) as $image  )
                                     <div class="item mx-auto rounded-20 ">
@@ -77,13 +77,14 @@
                             </div>
 
                             <div class="mt-4 w-50 ">
-                                <h4 class="card-title aeo-title text-capitalize fw-bold mb-2">{{$merchandise->name}}</h4>
+                                <h5 class="card-title aeo-title text-capitalize fw-bold mb-2">{{$merchandise->name}}</h5>
+                                <h6 class="fw-bold fs-4" style="color: #F175AD">IDR {{number_format($merchandise->price)}}</h6>
                                 <p class="card-text">
                                     {!! nl2br(e($merchandise->product_description)) !!}
                                 </p>
                                 <h5 class="mb-2 fw-bold "> Set quantity and notes</h5>
+
                                 {{-- set quantity  --}}
-                            
                                 <div class="form-input border w-50 d-flex justify-content-between rounded-20 px-2 ">
                                     <button type="button"  class="border-0  btnDecrement">-</button>
                                     <input type="text"   class="input-spinner counter" step="1"
@@ -102,7 +103,7 @@
                     </div>
                 @endforeach
             </div>
-            <button type="button" id="submit" class="btn btn-outline-theme w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#merch-summary">Check Out Now  </button>
+            <button type="button" id="submit" class="btn btn-outline-theme w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#merch-summary">Checkout Now  </button>
 
             <div class="modal fade p-5" id="merch-summary" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
                 aria-labelledby="modal-title" aria-hidden="true">
@@ -137,7 +138,7 @@
 
       
     </div>
-    {{-- <x-footer></x-footer> --}}
+    <x-footer></x-footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="

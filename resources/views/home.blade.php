@@ -260,7 +260,6 @@
                             <h1 class="fw-bold mt-3 c-text-1 c-text-about text-gradient text-center mb-4 home_title">
                                 What they say about AEO</h1>
                             <div class="d-sm-flex flex-column">
-
                                 <div class="row">
                                     <div class="slider card card-responsive border-0 rounded-20  p-3 col-10" style="box-shadow: 0 0 4px 2px #eee">
                                         @foreach ($ambassadors as $ambassador)
@@ -314,24 +313,26 @@
                                         @endforeach
                                     </div>
                                     <div class="col-2  justify-content-center align-items-center">
-                                        
                                         <div class="slider-indicator d-flex flex-column">
                                             @foreach ($ambassadors as $ambassador)
-                                            @if ($loop->iteration == 1)
-                                            <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="active" alt="img" data-id="{{$ambassador->id}}">      
-                                            @else
-                                            <img src="/storage/images/ambassador/{{$ambassador->photo}}" alt="img" data-id="{{$ambassador->id}}">    
-                                            @endif
+                                                @if ($loop->iteration == 1)
+                                                    <img src="/storage/images/ambassador/{{$ambassador->photo}}" class="active" alt="img" data-id="{{$ambassador->id}}">      
+                                                @else
+                                                    <img src="/storage/images/ambassador/{{$ambassador->photo}}" alt="img" data-id="{{$ambassador->id}}">  
+                                                @endif
+                                                @if ($loop->iteration == 5)
+                                                    @break
+                                                @endif
                                             @endforeach
-                                            @php
-                                                $allAmbassadors = App\Models\Ambassador::all()->count();
-                                                $ambassadorCount = $allAmbassadors - count($ambassadors);
-                                            @endphp
-                                            @if ($ambassadorCount > 0)
-                                                <a href="/ambassadors" target="_blank">
-                                                    <button type="button" class="btn btn-lg opacity-25 rounded-circle">+{{ $ambassadorCount  }}</button>
-                                                </a>
-                                            @endif
+                                                @php
+                                                    $allAmbassadors = App\Models\Ambassador::all()->count();
+                                                    $ambassadorCount = $allAmbassadors - count($ambassadors);
+                                                @endphp
+                                                @if ($ambassadorCount > 0)
+                                                    <a href="/ambassadors" target="_blank">
+                                                        <button type="button" class="btn btn-lg opacity-25 rounded-circle">+{{ $ambassadorCount  }}</button>
+                                                    </a>
+                                                @endif
                                         </div>
                                     </div>
     

@@ -22,13 +22,17 @@
                         <div class="form-group mb-3">
                             <label for="phone" class="col-form-label">Phone Number<span class="text-danger">*</span> </label>
                             <input type="text"  class="form-control"  name="phone" id="phone" value="{{$order->phone_number}}" required>
-                        
                         </div> 
                         
                         
                     </div>
 
                     <div class="col-md">
+                        <div class="form-group mb-3">
+                            <label for="amount" class="col-form-label">Grand Total  </label>
+                            <input type="text"  class="form-control"  name="amount" id="amount" value="{{$order->amount}}" required>
+                        
+                        </div> 
                         <div class="form-group mb-3">
                             <label for="email" class="col-form-label">Email <i class="fa-solid fa-triangle-exclamation me-1" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="This email is used to give you the payment reciept soon" ></i>
                                     

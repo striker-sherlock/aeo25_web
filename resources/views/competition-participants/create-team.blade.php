@@ -32,7 +32,6 @@
 
                         <input type="radio" class="btn-check" name="people{{$i}}" id="5peeps{{$i}}" autocomplete="off"   value="5">
                         <label class="btn btn-outline-info mb-3" for="5peeps{{$i}}" value="5">5 people</label>
-                        
                     @endif
 
                     <input type="text" value="{{$competitionSlot->competition->id}}" name="competition_id" hidden>

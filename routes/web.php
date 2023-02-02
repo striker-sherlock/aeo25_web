@@ -233,7 +233,7 @@ Route::get('/edit-participant/{competitionParticipant}', [AdminCompetitionPartic
 Route::controller(AdminCompetitionParticipantController::class)->prefix('participants')->name('competition-participants.')->group(function () {
     Route::get('{competition}', 'index')->name('index');
     Route::put('update/{id}', 'update')->name('update');
-    Route::get('export/{competitionParticipant}', 'export')->name('export');
+    Route::get('export/{competitionParticipant?}', 'export')->name('export');
     Route::delete('destroy/{competitionParticipant}', 'destroy')->name('destroy');
     Route::delete('delete/{competitionParticipant}', 'delete')->name('delete');
     Route::get('restore/{competitionParticipant}', 'restore')->name('restore');

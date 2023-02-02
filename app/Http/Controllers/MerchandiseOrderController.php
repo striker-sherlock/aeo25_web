@@ -36,6 +36,7 @@ class MerchandiseOrderController extends Controller
     public function tempStore(Request $request){
         $len = count($request->quantity);
         if ($this->isEmpty($request->quantity)) return redirect()->back()->with('error','You have to select the item first ');
+        
         $filters = array('merch_id'=>[],'merchandise' =>[] ,'quantity' => [] , 'notes'=> []); 
         $grandTotal = 0; 
         
@@ -49,9 +50,9 @@ class MerchandiseOrderController extends Controller
         }
         
         foreach ($filters['merchandise'] as $index=>$key) {
-            $grandTotal = $key->price * $filters['quantity'][$index];
+            $grandTotal += $key->price * $filters['quantity'][$index];
         }
-        
+      
         return view('merchandise-orders.create',[
             'merchID' => $filters['merch_id'],
             'merchandise' => $filters['merchandise'],
