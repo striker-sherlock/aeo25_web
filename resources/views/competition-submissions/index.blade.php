@@ -1,4 +1,5 @@
 <x-admin >
+  {{-- {{dd($notSubmittedParticipants)}} --}}
     <div class="container my-4">
         <x-card>
             <h3 class="fw-bold my-3 c-text-1 text-gradient">{{ $competition->name }} - Submitted List</h3>
@@ -136,16 +137,17 @@
                       @if (!$competition->need_team)
                         <td class="align-middle text-nowrap">{{ $participant->participant_id }}</td>
                       @endif
-                      <td class="align-middle text-nowrap">{{ $participant->name }}</td>
+                      
+                      <td class="align-middle text-nowrap">{{  $competition->need_team ? $participant->team_name : $participant->participant_name }}</td>
+
+
                       <td class="align-middle text-nowrap">{{ $participant->pic_name }}</td>
                       <td class="align-middle text-nowrap">{{ $participant->institution_name }}</td>
                       <td class="align-middle text-nowrap">{{ $participant->country_name }}</td>
                       <td class="align-middle text-nowrap">
                         <div class="btn-toolbar flex-nowrap justify-content-center" role="toolbar" aria-label="Toolbar">
                           <div class="btn-group">
-                            @if ($competition->need_team)
-                              <a class="btn btn-sm btn-warning text-white" href="{{ route('competition-participants.edit', $participant->id) }}" title="Edit Team" target="_blank"> <span class="fas fa-user-edit"></span></a>
-                            @else
+                            @if (!$competition->need_team)
                               <a class="btn btn-sm btn-warning text-white" href="{{ route('competition-participants.edit', $participant->id) }}" title="Edit Participant" target="_blank"> <span class="fas fa-user-edit"></span></a>
                             @endif
                         </div>
