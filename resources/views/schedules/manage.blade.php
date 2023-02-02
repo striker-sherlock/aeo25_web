@@ -66,7 +66,7 @@
 
         </x-card>
         <x-card>
-            <h3 class="fw-bold my-3 c-text-1 text-gradient">Deleted {{$competition->name}} fSchedule List</h3>
+            <h3 class="fw-bold my-3 c-text-1 text-gradient">Deleted {{$competition->name}} Schedule List</h3>
             <hr>
             @if ($deletedSchedules->count() > 0)
                 <div class="table-responsive py-2">
