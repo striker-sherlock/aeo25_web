@@ -28,7 +28,7 @@
                         @if (!$competition->need_team)
                           <td class="align-middle text-nowrap">{{ $submission->participant_id }}</td>
                         @endif
-                        <td class="align-middle text-nowrap">{{ $submission->name }}</td>
+                        <td class="align-middle text-nowrap">{{  ($competition->need_team) ? $submission->team_name : $submission->participant_name }}</td>
                         <td class="align-middle text-nowrap">{{ $submission->submission_title }}</td>
                         <td class="align-middle text-nowrap">{{ $submission->institution_name }}</td>
                         <td class="align-middle text-nowrap">{{ $submission->country_name }}</td>
@@ -188,7 +188,7 @@
                   <tbody>
                     @foreach ($deletedSubmissions as $deleted)
                       <tr class="text-center">
-                        <td class="align-middle text-nowrap">{{ $deleted->name }}</td>
+                        <td class="align-middle text-nowrap">{{ ($competition->need_team) ? $deleted->team_name : $deleted->participant_name }}</td>
                         <td class="align-middle text-nowrap">{{ $deleted->pic_name }}</td>
                         <td class="align-middle text-nowrap">{{ $deleted->institution_name }}</td>
                         <td class="align-middle text-nowrap">{{ $deleted->country_name }}</td>
@@ -295,7 +295,15 @@
   @endif
 
   @foreach ($submittedParticipants as $submission)
-  <div class="modal fade p-5" id="move{{$submission->participant_id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+  @php
+      if ($competition->need_team) {
+        $submittedId = $submission->team_id;
+
+      }else {
+        $submittedId = $submission->participant_id;
+      }
+  @endphp
+  <div class="modal fade p-5" id="move{{$submittedId}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered ">
           <div class="modal-content rounded-20 border-0 shadow p-5">
               <div class="modal-headers mb-4">
@@ -313,7 +321,7 @@
                       <button type="button" class="btn btn-outline-secondary w-100  rounded-pill "  data-bs-dismiss="modal">Back</button>
                   </div>
                   <div class="col">
-                      <form method="POST" action="{{route('competition-submissions.destroy',$submission->participant_id)}}">
+                      <form method="POST" action="{{route('competition-submissions.destroy',$submittedId )}}">
                       <input type="hidden" name="_method" value = "DELETE">
                           <button class="btn btn-outline-danger  rounded-pill w-100 " title="delete">
                           Move

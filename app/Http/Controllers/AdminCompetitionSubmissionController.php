@@ -55,7 +55,7 @@ class AdminCompetitionSubmissionController extends Controller
                         ->get();
             }
 
-            if ($competition->is_team) {
+            if ($competition->id === 'RD') {
                 return view('competition-submissions.index', [
                     'competition' => $competition,
                     'unpaidSubmissions' => $unpaidSubmissions ?? NULL,
@@ -70,12 +70,14 @@ class AdminCompetitionSubmissionController extends Controller
                         ->whereNotNull('competition_slot_details.payment_id')
                         ->where('competition_payments.is_confirmed', 1)
                         ->select(
-                            'competition_teams.name as name',
+                            'competition_teams.id as team_id',
+                            'competition_teams.name as team_name',
                             'users.pic_name as pic_name',
                             'users.institution_name as institution_name',
                             'countries.name as country_name',
                             'competition_submissions.id as submission_id',
                             'competition_submissions.created_at as created_at',
+                            'competition_submissions.title as submission_title',
                         )
                         ->distinct()
                         ->get(),
@@ -89,8 +91,8 @@ class AdminCompetitionSubmissionController extends Controller
                         ->withoutTrashed()
                         ->where ('competition_slot_details.competition_id', $competition->id)
                         ->select(
-                            'competition_teams.name as name',
-                            'competition_teams.id as id',
+                            'competition_teams.name as team_name',
+                            'competition_teams.id as team_id',
                             'users.pic_name as pic_name',
                             'users.institution_name as institution_name',
                             'countries.name as country_name'
@@ -105,17 +107,19 @@ class AdminCompetitionSubmissionController extends Controller
                         ->where('competition_submissions.competition_id', $competition->id)
                         ->where('competition_submissions.deleted_at', '<>' ,NULL)
                         ->select(
-                            'competition_teams.name as name',
+                            'competition_teams.id as team_id',
+                            'competition_teams.name as team_name',
                             'users.pic_name as pic_name',
                             'users.institution_name as institution_name',
                             'countries.name as country_name',
                             'competition_submissions.id as submission_id',
                             'competition_submissions.created_at as created_at',
+                            'competition_submissions.title as submission_title',
                         )
                         ->distinct()
                         ->get(),
                 ]);
-            }else {
+            }else if($competition->id === 'SSW') {
                 return view('competition-submissions.index', [
                     'competition' => $competition,
                     'unpaidSubmissions' => $unpaidSubmissions ?? NULL,
@@ -130,7 +134,7 @@ class AdminCompetitionSubmissionController extends Controller
                         ->where('competition_payments.is_confirmed', 1)
                         ->select(
                             'competition_participants.id as participant_id',
-                            'competition_participants.name as name',
+                            'competition_participants.name as participant_name',
                             'users.pic_name as pic_name',
                             'users.institution_name as institution_name',
                             'countries.name as country_name',
@@ -149,7 +153,7 @@ class AdminCompetitionSubmissionController extends Controller
                         ->where('competition_slot_details.competition_id', $competition->id)
                         ->select(
                             'competition_participants.id as participant_id',
-                            'competition_participants.name as name',
+                            'competition_participants.name as participant_name',
                             'competition_participants.id as id',
                             'users.pic_name as pic_name',
                             'users.institution_name as institution_name',
@@ -163,7 +167,7 @@ class AdminCompetitionSubmissionController extends Controller
                         ->where('competition_submissions.competition_id', $competition->id)
                         ->where('competition_submissions.deleted_at', '<>' ,NULL)
                         ->select(
-                            'competition_participants.name as name',
+                            'competition_participants.name as participant_name',
                             'users.pic_name as pic_name',
                             'users.institution_name as institution_name',
                             'countries.name as country_name',
