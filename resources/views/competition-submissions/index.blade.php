@@ -144,10 +144,10 @@
                         <div class="btn-toolbar flex-nowrap justify-content-center" role="toolbar" aria-label="Toolbar">
                           <div class="btn-group">
                             @if ($competition->need_team)
-                              <a class="btn btn-sm btn-warning text-white" href="{{ route('competition-participants.edit', $participant->id) }}" title="Edit Team" target="_blank"> <span class="fas fa-user-edit"></span></a>
-                            @else
-                              <a class="btn btn-sm btn-warning text-white" href="{{ route('competition-participants.edit', $participant->id) }}" title="Edit Participant" target="_blank"> <span class="fas fa-user-edit"></span></a>
-                            @endif
+                            <a class="btn btn-sm btn-warning text-white" href="{{ route('competition-participants.edit', $participant->team_id) }}" title="Edit Team" target="_blank"> <span class="fas fa-user-edit"></span></a>
+                          @else
+                            <a class="btn btn-sm btn-warning text-white" href="{{ route('competition-participants.edit', $participant->participant_id) }}" title="Edit Participant" target="_blank"> <span class="fas fa-user-edit"></span></a>
+                          @endif
                         </div>
                         </div>
                       </td>
