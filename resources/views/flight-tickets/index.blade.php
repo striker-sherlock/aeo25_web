@@ -21,7 +21,7 @@
                       <td>{{$flightTicket->id}}</td>
                       <td>{{$flightTicket->type}}</td>
                       <td>{{$flightTicket->airline_name}}</td>
-                      <td>{{date("F j, Y G:i ", strtotime($flightTicket->flight_time))}}</td>
+                      <td>{{date("F j, Y H:i ", strtotime($flightTicket->flight_time))}}</td>
                       <td class="d-flex justify-content-center">
                         <a class ="btn btn-sm btn-primary me-2" href="{{ route('flight-tickets.edit', $flightTicket->id) }}" title="Edit">
                           <i class="fa fa-edit"></i>

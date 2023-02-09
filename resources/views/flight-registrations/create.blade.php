@@ -37,7 +37,7 @@
                     <select class="form-select"  name="schedule" id="schedule" >  
                         <option selected class="d-none" disabled id="first-option"> Please fill the flight time first </option>
                         @foreach ($schedules as $schedule)
-                            <option value="{{$schedule->id}}" {{old('schedule') == $schedule->id? 'selected' : ''}} data-date="{{$schedule->schedule}}" class="schedules">{{date('D, d M Y h:i',strtotime($schedule->schedule))}} (GMT + 7)</option>
+                            <option value="{{$schedule->id}}" {{old('schedule') == $schedule->id? 'selected' : ''}} data-date="{{$schedule->schedule}}" class="schedules">{{date('D, d M Y H:i',strtotime($schedule->schedule))}} (GMT + 7)</option>
                         @endforeach
                     </select>
                 </div>

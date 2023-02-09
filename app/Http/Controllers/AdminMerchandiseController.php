@@ -125,7 +125,6 @@ class AdminMerchandiseController extends Controller
                 'account_name' => $request->account_name,
                 'account_number' => $request->account_number,
                 'payment_proof' => $fixedName,
-                
                 'payment_email' => null,
                 'tracking_link' =>null,
                 'updated_by' =>   Auth::guard('admin')->user()->name,
@@ -163,6 +162,7 @@ class AdminMerchandiseController extends Controller
             'email' => $request->email,
             'address' => $request->address,
             'amount' => $request->amount,
+            'updated_at' => Carbon::now(),
             'updated_by' =>   Auth::guard('admin')->user()->name,
         ]);
 
@@ -174,6 +174,7 @@ class AdminMerchandiseController extends Controller
         $merchandisePayment ->update([
             'is_confirmed' => 1,
             'updated_by' => Auth::guard('admin')->user()->name,
+            'updated_at' => Carbon::now()
         ]);
         // dd($merchandisePayment);
         $confirmedMail = [

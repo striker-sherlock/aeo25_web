@@ -11,13 +11,13 @@
                                 <th scope="col">Schedule Time</th>
                                 <th scope="col">Expected People</th>
                                 <th scope="col">PIC</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Action</th> 
                             </tr>
                         </thead>
                         <tbody class="text-center">
                             @foreach ($schedules as $schedule)
                                 <tr>
-                                    <td>{{date('d M h:i',strtotime($schedule->schedule))}}</td>
+                                    <td>{{date('d M H:i',strtotime($schedule->schedule))}}</td>
                                     <td>{{$expectedPeople[$schedule->id]}} people(s)</td>
                                     <td>
                                         <a href="" data-bs-target="#viewPIC-{{$schedule->id}}" data-bs-toggle="modal" class="btn btn-outline-theme rounded-pill w-100"> View PICs

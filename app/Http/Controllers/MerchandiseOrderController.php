@@ -17,7 +17,7 @@ class MerchandiseOrderController extends Controller
     public function index()
     {
         return view('merchandise-orders.index',[
-            'merchandises' => Merchandise::all()
+            'merchandises' => Merchandise::latest()->get(),
         ]);
     }
 
@@ -154,6 +154,7 @@ class MerchandiseOrderController extends Controller
                 'merchandise_id' => $merch_id[$i],
                 'quantity' => $quantity[$i],
                 'transaction_id' => $transaction->id,
+                'order_details'=> $notes[$i],
             ]);
         }
 

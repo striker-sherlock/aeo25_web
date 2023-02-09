@@ -28,9 +28,10 @@ class AccommodationSlotRegistrationController extends Controller
             ->Where('accommodation_slot_details.payment_id', NULL)
             ->select('accommodation_slot_details.*')
             ->get();
+
         $confirmedPaid = AccommodationSlot::leftJoin('accommodation_payments','accommodation_slot_details.payment_id','accommodation_payments.id')
             ->where('accommodation_slot_details.is_confirmed',1)
-            ->Where('accommodation_slot_details.payment_id', 1)
+            ->Where('accommodation_slot_details.payment_id','!=' ,NULL)
             ->select('accommodation_slot_details.*')
             ->get();
         $rejected = AccommodationSlot::where('is_confirmed', -1)->get();

@@ -114,7 +114,7 @@
                                         <th scope="col" class="align-middle">
                                             {{ $competition->need_team ? 'Team Name' : 'Submitter Name' }} </th>
                                         <th scope="col" class="align-middle">Title</th>
-                                        <th scope="col" class="align-middle">Submitted At</th>
+                                        {{-- <th scope="col" class="align-middle">Submitted At</th> --}}
                                         <th scope="col" class="align-middle">Submission</th>
                                     </tr>
                                 </thead>
@@ -126,9 +126,9 @@
                                                     <td class="align-middle text-center">{{ $submitter->name }}</td>
                                                     <td class="align-middle text-center">
                                                         {{ $submitter->teamSubmission->title }}</td>
-                                                    <td class="align-middle text-center">
+                                                    {{-- <td class="align-middle text-center">
                                                         {{ date('M j, Y g:i a', strtotime($submitter->teamSubmission->created_at)) }}
-                                                    </td>
+                                                    </td> --}}
                                                     <td class="align-middle text-center">
                                                         <a href="{{ $submitter->teamSubmission->submission_link }}"
                                                             class="btn btn-outline-1 rounded-pill " target="_blank"

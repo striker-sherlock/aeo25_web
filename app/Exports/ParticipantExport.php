@@ -31,7 +31,7 @@ class ParticipantExport implements FromCollection, WithHeadings,ShouldAutoSize
                 'competition_participants.birth_date',
                 'phone_number' 
             )
-            ->orderBy('competitions.id')
+            ->orderBy('competition_participants.is_vegetarian')
             ->get(); 
         }
         else{
