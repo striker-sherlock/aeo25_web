@@ -11,9 +11,65 @@ use Illuminate\Http\Request;
 
 class RankingListController extends Controller
 {
-    public function index()
+    public function index(Competition $competition, $scoreTypeName)
     {
-        //
+        $scoreType = $this->getScoreType($scoreTypeName);
+
+        if ($competition->need_team) {
+            $rankingLists = CompetitionScore::join('competition_participants', 'competition_participants.id', 'competition_scores.participant_id')
+                ->join('competition_teams', 'competition_teams.id', 'competition_participants.team_id')
+                ->join('competition_slot_details', 'competition_participants.competition_slot_id', 'competition_slot_details.id')
+                ->join('users', 'users.id', 'competition_slot_details.pic_id')
+                ->where('competition_participants.competition_id', $competition->id)
+                ->where('competition_scores.score_type_id', $scoreType->id)
+                ->whereNull('competition_participants.deleted_at') //! jgn lupa di uncomment kalo column deleted_at udah dibuat
+                ->select(
+                    'competition_scores.id',
+                    'competition_participants.team_id',
+                    'competition_participants.id as participant_id',
+                    'competition_teams.name as team_name',
+                    'competition_participants.name as participant_name',
+                    'users.institution_name',
+                    'competition_scores.score_type_id as participant_score_type_id',
+                    'competition_participants.rank_id as participant_rank_id',
+                    'competition_participants.is_novice_debater',
+                    'competition_scores.score'
+                )
+                ->orderby('score', 'DESC')
+                ->get()
+                ->groupBy('team_id');
+            foreach ($rankingLists as $rankingList) {
+                foreach ($rankingList as $ranking) {
+                    $ranking->participant_name .= '<br>';
+                }
+            }
+        }else {
+            $rankingLists = CompetitionScore::join('competition_participants', 'competition_participants.id', 'competition_scores.participant_id')
+                ->join('competition_slot_details', 'competition_participants.competition_slot_id', 'competition_slot_details.id')
+                ->join('users', 'users.id', 'competition_slot_details.pic_id')
+                ->where('competition_participants.competition_id', $competition->id)
+                ->where('competition_scores.score_type_id', $scoreType->id)
+                ->whereNull('competition_participants.deleted_at') //! jgn lupa di uncomment kalo column deleted_at udah dibuat
+                ->select(
+                    'competition_scores.id',
+                    'competition_participants.id as participant_id',
+                    'competition_participants.name as participant_name',
+                    'users.institution_name',
+                    'competition_scores.score_type_id as participant_score_type_id',
+                    'competition_participants.rank_id as participant_rank_id',
+                    'competition_scores.score'
+                )
+                ->orderby('score', 'DESC')
+                ->get();
+            
+        }
+        return view('ranking-lists.index', [
+            'rankingLists' => $rankingLists,
+            'selectedField' => $competition,
+            'selectedType' => $scoreType,
+            'scoreTypes' => $this->getScoreTypeNames(),
+            'competitions' => Competition::where('id' , '<>', 'IA')->orderby('name')->get()
+        ]); 
     }
 
     public function manage (Competition $competition, $scoreTypeName)

@@ -299,9 +299,9 @@ Route::resource('follow-ups', FollowUpController::class, ['except' => ['index','
 // Ranking List
 Route::controller(RankingListController::class)->prefix('ranking-lists')->name('ranking-lists.')->group(function () {
     Route::get('manage/{competition}/{scoreType}', 'manage')->name('manage');
+    Route::get('{competition}/{scoreType}', 'index')->name('index');
     Route::put('update-score/{competitionScore}', 'updateScore')->name('update-score');
     Route::get('update-score-type/{competitionScore}/{type}', 'updateScoreType')->name('update-score-type');
     Route::get('update-team-score-type/{competitionScore}/{competitionTeam}/{type}', 'updateTeamScoreType')->name('update-team-score-type');
     Route::get('update-debate-type/{competitionTeam}', 'updateDebateType')->name('update-debate-type');
 });
-Route::resource('ranking-lists', RankingListController::class)->only('index');
