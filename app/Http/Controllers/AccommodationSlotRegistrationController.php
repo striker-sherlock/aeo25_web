@@ -23,10 +23,14 @@ class AccommodationSlotRegistrationController extends Controller
     public function index()
     {
         $pending = AccommodationSlot::where('is_confirmed', 0)->get();
-        $confirmed = AccommodationSlot::where('is_confirmed', 1)->get();
         $confirmed = AccommodationSlot::leftJoin('accommodation_payments','accommodation_slot_details.payment_id','accommodation_payments.id')
             ->where('accommodation_slot_details.is_confirmed',1)
             ->Where('accommodation_slot_details.payment_id', NULL)
+            ->select('accommodation_slot_details.*')
+            ->get();
+        $confirmedPaid = AccommodationSlot::leftJoin('accommodation_payments','accommodation_slot_details.payment_id','accommodation_payments.id')
+            ->where('accommodation_slot_details.is_confirmed',1)
+            ->Where('accommodation_slot_details.payment_id', 1)
             ->select('accommodation_slot_details.*')
             ->get();
         $rejected = AccommodationSlot::where('is_confirmed', -1)->get();
@@ -35,6 +39,7 @@ class AccommodationSlotRegistrationController extends Controller
             'accommodations' => AccommodationSlot::with('accommodation')->get(),
             'pending' => $pending,
             'confirmed' => $confirmed,
+            'confirmedPaid' => $confirmedPaid,
             'rejected' => $rejected,
         ]);
     }
@@ -51,8 +56,8 @@ class AccommodationSlotRegistrationController extends Controller
     {
         $request->validate([
             'accommodation_id'=>'required', 
-            'check_in_date'=>'required | after_or_equal:2023-02-01',
-            'check_out_date'=>'required|after:check_in_date|before:2023-02-28',
+            'check_in_date'=>'required |after_or_equal:2023-02-10|before:2023-02-13',
+            'check_out_date'=>'required|after:2023-02-18',
             'special_req'=>'nullable|string',
             'quantity'=>'required',
         ]);
@@ -67,7 +72,7 @@ class AccommodationSlotRegistrationController extends Controller
             'quantity' => $request->quantity,
             'is_confirmed' => 0,
         ]);
-        return redirect()->route('accommodation-slot-registrations.index');
+        return redirect()->route('dashboard.accommodation-step',1)->with('success', "Accommodation registration successfully updated!");
     }
 
 

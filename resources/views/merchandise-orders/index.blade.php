@@ -1,25 +1,7 @@
 <x-layout>
-    <style>
-        .chat{
-            z-index:1000;
-            right: 80px;
-            top: 100px;
-            cursor: pointer;
-            color: #F175AD;
-            background-color:white;
-            box-shadow: 0 0 3px 1px #eee;
-            border-radius: 10px
-        }
-
-        @media (max-width: 576px) {
-            .chat {
-                right: 10px;
-                top: 80px
-            }
-        }
-
-    </style>
+    
     <x-navbar></x-navbar>
+ 
     <div class="container mt-5 mb-5 ">
         <h3 class="text-uppercase fw-bold  text-gradient mb-4" style="letter-spacing: 0.1em">Our Merchandise </h3>
         <div class="chat position-fixed px-4 py-2  " >
@@ -79,14 +61,14 @@
                 @foreach ($merchandises->where('type','piece') as $merchandise)
                     <input type="text" hidden name="merch_id[]" value="{{$merchandise->id}}">
                     <div class="col-md-6 mb-3  ">
-                        <div class="d-flex justify-content-between mb-5 custom-card">
+                        <div class="d-flex justify-content-between mb-3 custom-card">
                             <div class=" owl-carousel owl-theme  w-50 me-2" data-image = "{{$merchandise->image}}" >
                                 @foreach (explode('; ',$merchandise->image) as $image  )
-                                    <div class="item mx-auto rounded-20 " style="width:100%;">
+                                    <div class="item mx-auto rounded-20 ">
                                         <a>
-                                            <div class="d-flex justify-content-center p-2" >
+                                            <div class="d-flex justify-content-center p-2 " >
                                                 <img src="storage/merchandise/merchandise_photo/{{ $image }}"
-                                                    class="img-fluid  w-100" alt="{{ $merchandise->name }}'s image" width="50" >
+                                                    class="img-fluid mb-5 rounded-20" alt="{{ $merchandise->name }}'s image"   >
                                             </div>
                                             
                                         </a>
@@ -96,7 +78,9 @@
 
                             <div class="mt-4 w-50 ">
                                 <h4 class="card-title aeo-title text-capitalize fw-bold mb-2">{{$merchandise->name}}</h4>
-                                <p class="card-text">{{ $merchandise->product_description }}</p>
+                                <p class="card-text">
+                                    {!! nl2br(e($merchandise->product_description)) !!}
+                                </p>
                                 <h5 class="mb-2 fw-bold "> Set quantity and notes</h5>
                                 {{-- set quantity  --}}
                             

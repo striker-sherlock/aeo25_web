@@ -25,6 +25,8 @@
                 <button type="submit" class="d-none btn btn-outline-theme w-100 rounded-pill">Submit</button>
             </form>
         </x-card>
+ 
+
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="module">
@@ -60,6 +62,7 @@
                                 <option value="F">Female</option>
                             </select>
                         </div>      
+                        
                     </div>`);
                 }
             });

@@ -64,8 +64,17 @@
                                 <option value="Male" {{$participant->gender == 'Male' ? 'selected':''}}>Male</option>
                                 <option value="Female" {{$participant->gender == 'Female' ? 'selected':''}}>Female</option>
                             </select>
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="vegetarian" class="col-form-label">Vegetarian<span class="text-danger">*</span></label>
+                            <select class="form-select"  name="vegetarian" required id="vegetarian">
+                                <option value="1" {{$participant->is_vegetarian == '1' ? 'selected':''}}>Vegetarian </option>
+                                <option value="0" {{$participant->is_vegetarian == '0' ? 'selected':''}}>Non-Vegetarian </option>  
+                            </select>
                         </div>  
                     </div>  
+
                     <div class="col-md-6">
                         <div class="form-group mb-3">
                             <label for="birth" class="col-form-label">Date Of Birth <span class="text-muted">(yyyy-mm-dd)</span></label>
@@ -83,6 +92,16 @@
                             @if ($errors->has('phone'))
                             <span class="invalid feedback text-danger"role="alert">
                                 <strong>*{{ $errors->first('phone') }}.</strong>
+                            </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="food_allergic" class="col-form-label">Food Allergic</label>
+                            <input type="text"  class="form-control "  name="food_allergic" id="food_allergic" value="{{$participant->food_allergic}}">
+                            @if ($errors->has('food_allergic'))
+                            <span class="invalid feedback text-danger"role="alert">
+                                <strong>*{{ $errors->first('food_allergic') }}.</strong>
                             </span>
                             @endif
                         </div>

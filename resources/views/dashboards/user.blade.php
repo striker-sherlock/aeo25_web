@@ -4,6 +4,9 @@
             width: 100%;
         }
     </style>
+   
+
+
     <div class="container mt-5 mb-5">
         <div class="">
             <h2 class="fw-bold text-capitalize text-gradient">Welcome back, {{Auth::user()->pic_name}} </h2>
@@ -234,12 +237,14 @@
             <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Participants List</h3>
             @if ($totalParticipants)
                 <div class="table-responsive">
-                    <table class="table table-bordered dataTables " >
+                    <table class="table table-striped table-bordered dataTables " >
                         <thead class="text-center">
                             <tr>
                                 <th scope="col">Participant Name</th>
                                 <th scope="col">Competition Field</th>
                                 <th scope="col">Email</th>
+                                <th scope="col">Food Coupon Code</th>
+                                <th scope="col">Send Food Coupon</th>
 
                             </tr>
                         </thead>
@@ -253,6 +258,16 @@
                                         @endif
                                     </th>
                                     <th>{{$participant->email}}</th>
+                                    <th>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#QR-code{{$participant->id}}">
+                                            <div class="visible-print text-center" title="view bigger" style="cursor: pointer" >
+                                                {!! QrCode::format('svg')->size(50)->generate(route('food-coupons.create',$participant->id)); !!}
+                                            </div>
+                                        </a>
+                                    </th>
+                                    <th>
+                                        <a href="{{route('food-coupons.sendQR',$participant->id)}}" class="btn btn-outline-theme rounded-pill confirm">Send food coupon</a>
+                                    </th>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -263,6 +278,24 @@
             @endif
 
         </x-card>
- 
     </div>
+
+    @foreach ($allParticipants as $participant)
+      <div class="modal fade modal-lg" id="QR-code{{$participant->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered ">
+              <div class="modal-content rounded-20 border-0 shadow p-5">
+                  <div class="modal-headers mb-4">
+                    <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">{{$participant->name}}'s Food Qr Code </h3> 
+                    <hr>
+                  </div>
+                  <div class="body mb-3 text-center">
+                        {!! QrCode::format('svg')->size(300)->generate(route('food-coupons.create',$participant->id)); !!}
+                  </div>
+                  <div class="footers">
+                     
+                  </div>
+              </div>
+          </div>  
+      </div>  
+    @endforeach
 </x-user>

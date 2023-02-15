@@ -38,24 +38,29 @@
                     </div>
                     <div class="form-group mb-3">
                       <label class="col-form-label" for="type">Need Submission <span class="text-danger">*</span></label><br>
-                      <input type="radio" name="need_submission" id="1" value="1"{{ $competition->need_submission == "1" ? 'checked' : '' }}>
-                      <label for="1">Yes</label>
-                      <input type="radio" name="need_submission" id="0" value="0"{{ $competition->need_submission == "0" ? 'checked' : '' }}>
-                      <label for="0">No</label>
+                      <input type="radio" name="need_submission" id="need" value="1"{{ $competition->need_submission == "1" ? 'checked' : '' }}>
+                      <label for="need">Yes</label>
+                      <input type="radio" name="need_submission" id="no_need" value="0"{{ $competition->need_submission == "0" ? 'checked' : '' }}>
+                      <label for="no_need">No</label>
                   </div>
                   <div class="form-group mb-3">
                       <label class="col-form-label" for="type">Need Team <span class="text-danger">*</span></label><br>
                       <input type="radio" name="need_team" id="1" value="1"{{ $competition->need_team == "1" ? 'checked' : '' }}>
-                      <label for="DEPARTURE">Yes</label>
+                      <label for="1">Yes</label>
                       <input type="radio" name="need_team" id="0" value="0"{{ $competition->need_team == "0" ? 'checked' : '' }}>
-                      <label for="DEPARTURE">No</label>
+                      <label for="0">No</label>
                   </div>
                   <div class="form-group mb-3">
                       <label class="col-form-label" for="max_people">Max People <span class="text-danger">*</span></label>
                       <input type="number" class="form-control" name="max_people" id="max_people" placeholder="Enter Max People" value="{{$competition->max_people}}">
-                    </div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                      <label class="col-form-label" for="whatsapp_group">Whatsapp Group <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" name="whatsapp_group" id="whatsapp_group"   value="{{$competition->whatsapp_group}}">
                   </div>
                 </div>
+              </div>
                 
                 <div class="row my-4">
                   <div class="col">

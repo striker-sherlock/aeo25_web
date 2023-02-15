@@ -27,7 +27,7 @@ class AdminAccommodationGuestController extends Controller
                 ->get();
             
         }
-
+         
         return view('accommodation-guests.index',[
             'guests' => $guests,
             'accommodations' => Accommodation::all(),
@@ -74,8 +74,13 @@ class AdminAccommodationGuestController extends Controller
         AccommodationGuest::where('id', $id)->restore();
         return redirect()->back();
     }
-    public function export($room){
-        $roomDetails = Accommodation::find($room);
-        return Excel::download(new AccommodationGuestExport($room), $roomDetails.'Guest.xlsx');
+    public function export($room = NULL){
+        if($room){
+            $roomDetails = Accommodation::where('room_type',$room)->first();
+            return Excel::download(new AccommodationGuestExport($roomDetails->id), $roomDetails->room_type.'Guest.xlsx');
+        }
+        else{
+            return Excel::download(new AccommodationGuestExport($room),'All-Guest.xlsx');
+        }
     }
 }

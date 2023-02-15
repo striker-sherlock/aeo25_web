@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\FlightTicket;
+use Illuminate\Http\Request;
+use App\Models\PickUpSchedule;
 use App\Exports\FlightTicketExport;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,8 +13,8 @@ class FlightTicketController extends Controller
 {
     public function __construct(){
         $this->middleware('IsShowed:ENV001')->only(['index', 'edit']); 
-        $this->middleware(['auth', 'verified'])->only(['show', 'edit']);
-        $this->middleware(['IsAdmin'])->only(['manage', 'edit']);
+        $this->middleware(['auth', 'verified'])->only(['index','show', 'edit']);
+        $this->middleware(['IsAdmin'])->only(['manage']);
     }
 
     public function index()
@@ -44,6 +45,7 @@ class FlightTicketController extends Controller
     {
         return view('flight-tickets.edit', [
             'flight'=>$flight_ticket,
+            'schedules' => PickUpSchedule::orderBy('schedule')->get()
         ]);
     }
 
@@ -53,10 +55,9 @@ class FlightTicketController extends Controller
             'type'=>'required|string',
             'airline_name'=>'required|string',
             'flight_time'=>'required',
-            'ticket_proof_new'=>'required',
+            'ticket_proof_new.*'=>'nullable|image|mimes:jpeg,jpg,png',
         ]);
-        // dd($request->all());
-        $ticket_proof = array();
+        $ticketProofNew = array();
         if($files = $request->file('ticket_proof_new')){
             $i = 1;
             $flight_airline = $request->airline_name;
@@ -70,22 +71,32 @@ class FlightTicketController extends Controller
                 $current = time();
                 $fileName = $newName.'_'.$current.'_'.$i.'.'.$extension;
                 $file->storeAs('public/images/flight-tickets', $fileName);
-                $ticket_proof_new[] = $fileName;
+                $ticketProofNew[] = $fileName;
                 $i++;
             }
         }
         else{
-            $ticket_proof_new[] = $request->ticket_proof_old;
+            $ticketProofOld =implode('; ', $request->ticket_proof_old); 
         }
+ 
         $flightTicket->update([
             'pic_id'=>Auth::user()->id,
             'created_by'=>Auth::user()->username,
             'type'=>$request->type,
             'airline_name'=>$request->airline_name,
             'flight_time'=>$request->flight_time,
-            'ticket_proof'=> implode('; ', $ticket_proof_new),
+            'ticket_proof'=> empty($ticketProofNew) ? $ticketProofOld : implode('; ',$ticketProofNew),
+           
         ]);
-        return redirect()->route('flight-tickets.index');
+        if(Auth::guard('admin')->check()){
+            $flightTicket->update([
+                'schedule_id' => $request->schedule,
+                'number_of_people' => $request->people
+            ]);
+            return redirect()->route('flight-tickets.manage')->with('success','Ticket has successfuly updated');
+            
+        }   
+        return redirect()->route('flight-tickets.index')->with('success','Ticket has successfuly updated');
     }
 
     public function export($type){

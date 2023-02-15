@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Accommodation;
 use Illuminate\Http\Request;
-use App\Models\AccommodationSlot;
+use App\Models\Accommodation;
+use Illuminate\Support\Carbon;
 use App\Models\PaymentProvider;
+use App\Models\AccommodationSlot;
+use Illuminate\Support\Facades\DB;
 use App\Models\AccommodationPayment;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class UserAccommodationPaymentController extends Controller
 {
@@ -24,28 +25,35 @@ class UserAccommodationPaymentController extends Controller
             ->get();
     }
 
+    public function calculateNight(String $start,String $end){
+        $start = Carbon::createFromDate($start);
+        $end = Carbon::createFromDate($end);
+        return $start->diffInDays($end);
+    }
 
-    public function create($id)
-    {
+    public function create($id){
         $slot = AccommodationSlot::find($id);
         $accommodation = NULL;
         $payAll = 0;
         $allAccommodation = NULL;
         $isPaid = false;
+        $days = NULL;
 
         if($slot == NULL){
             $payAll = 1;
             $allAccommodation = $this->getAllSlotRegistered(Auth::user()->id);
             $total = 0;
             foreach($allAccommodation as $accommodationSlot){
-                $total += $accommodationSlot->quantity *  $accommodationSlot->accommodation->price;
+                $days = $this->calculateNight($accommodationSlot->check_in_date,$accommodationSlot->check_out_date);
+                $total += $accommodationSlot->quantity *  $accommodationSlot->accommodation->price  * $days;
 
             }
         }
 
         else{
+            $days = $this->calculateNight($slot->check_in_date,$slot->check_out_date);
             $accommodation = Accommodation::where('id', $slot->accommodation_id)->first();
-            $total = $slot->quantity * $accommodation->price;
+            $total = $slot->quantity * $accommodation->price * $days;
             if($slot->accommodationPayment){
                 $isPaid = true;
             }
@@ -59,6 +67,7 @@ class UserAccommodationPaymentController extends Controller
             'paymentProviders' => PaymentProvider::orderBy('name')->where('type','BANK')->get(),
             'user' => Auth::user(),
             'slotId' => $id,
+            'days' => $days  
 
 
         ]);
@@ -135,6 +144,7 @@ class UserAccommodationPaymentController extends Controller
     public function edit(AccommodationPayment $accommodationPayment)
     {
         $paidSlot= AccommodationSlot::where('payment_id', $accommodationPayment->id )->get();
+        // $this->calculateNight($paidSlot[0]->check_in_date,$paidSlot[0]->check_out_date);
         return view('accommodation-payments.edit',[
             'accommodationPayment' => $accommodationPayment,
             'paymentProviders' => PaymentProvider::orderBy('name')->where('type','BANK')->get(),

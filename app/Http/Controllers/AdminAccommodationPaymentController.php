@@ -23,15 +23,15 @@ class AdminAccommodationPaymentController extends Controller
 
     public function index()
     {
-        $accommodationPayment = AccommodationPayment::join('accommodation_slot_details', 'accommodation_payments.id', '=', 'accommodation_slot_details.payment_id')
-        ->join('users', 'accommodation_slot_details.pic_id', '=', 'users.id')
-        ->join('accommodations', 'accommodation_slot_details.accommodation_id', '=', 'accommodations.id')
+        $accommodationPayment = AccommodationPayment::
+        join('users', 'accommodation_payments.pic_id', '=', 'users.id')
+        ->join('countries', 'users.country_id', '=', 'countries.id')
         ->select(
             'accommodation_payments.*', 
             'users.*',
             'accommodation_payments.created_at',
             'accommodation_payments.id as id', 
-            'accommodations.room_type',
+            // 'accommodations.room_type',
             'payment_proof')
         ->get();
 
@@ -44,6 +44,7 @@ class AdminAccommodationPaymentController extends Controller
             'pending' => $pending,
             'confirmed' => $confirmed,
             'rejected' => $rejected,
+            'accommodationPayments' => $accommodationPayment
         ]);
     }
 

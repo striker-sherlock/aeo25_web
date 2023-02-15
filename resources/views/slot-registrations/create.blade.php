@@ -99,12 +99,13 @@
                                         {{ number_format($independentAdju->price, 0, ',', '.') }}</h5>
                                     <input type="text" name="compet_id[]" hidden
                                         value="{{ $independentAdju->id }}">
-                                    @php($slot = $registeredDebate - 1)
+                                        
+                                    @php($slot = $registeredDebate-1 )
                                     @if ($independentAdju->temp_quota < $slot)
                                         @php($slot = $independentAdju->temp_quota)
                                     @else
                                         @foreach ($competitionSlots as $competitionSlot)
-                                            @if ($competitionSlot->competition_id == $competition->id)
+                                            @if ($competitionSlot->competition_id == 'IA' && $competitionSlot->is_confirmed == 1)
                                                 @php($slot -= $competitionSlot->quantity)
                                             @endif
                                         @endforeach
@@ -113,8 +114,6 @@
                                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="You have exceeded the slot limit or you do not have at least 2 confirmed debate slot registered">
                                         <button class="btn btn-danger" type="button" >Unable to select this slot </button>
                                       </span>
-                                      
-                                   
                                         <input type="text" name="quantity[]-{{ $independentAdju->id }}"
                                             value="0" hidden>
                                     @endif
@@ -183,6 +182,8 @@
 
     <script type="module">
         $(document).ready(function(){
+           
+
             $('a.btn').click(function(){
                 const radio = document.querySelectorAll('input[name]:checked')
                  

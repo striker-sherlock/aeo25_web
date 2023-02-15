@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Mail\RejectionMail;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Carbon;
 use App\Mail\ConfirmedSlotMail;
 use App\Models\PaymentProvider;
 use App\Models\MerchandiseOrder;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\MerchandiseTransaction;
-use App\Exports\MerchandiseTransactionExport;
 use App\Exports\MerchandiseOrderExport;
+use App\Exports\MerchandiseTransactionExport;
 
 class AdminMerchandiseController extends Controller
 {
@@ -127,6 +128,7 @@ class AdminMerchandiseController extends Controller
                 'payment_email' => null,
                 'tracking_link' =>null,
                 'updated_by' =>   Auth::guard('admin')->user()->name,
+                'updated_at' => Carbon::now(), 
             ]);
         }
 
@@ -148,6 +150,7 @@ class AdminMerchandiseController extends Controller
                 'account_name' => null,
                 'account_number' => null,
                 'updated_by' =>   Auth::guard('admin')->user()->name,
+                'updated_at' => Carbon::now(),
             ]);
             
         }
@@ -219,7 +222,7 @@ class AdminMerchandiseController extends Controller
             'body1'=>'We are regretful to inform you that your merchandise order has been rejected with the reason below: ',
             'body2'=>'',
             'reason' => $request->reason,
-            'url' => 'http://aeo.mybnec.org/dashboard/step-2',
+            'url' => 'http://aeo.mybnec.org/merchandise-orders',
         ];
         Mail::to($merchandisePayment->email)->send(new RejectionMail($rejectMail));
         

@@ -1,16 +1,33 @@
 import * as bootstrap from "bootstrap";
 
-$(document).ready(function () {
-    //  Show Modal
-    var myModal = new bootstrap.Modal(document.getElementById("alert"));
-    myModal.show();
-    
-    //popover
-  
-    (function () {
-        "use strict";
 
-    /**
+
+$(document).ready(function () {
+  $("body").on("click",".confirm, .cancel",function() {
+    $(this).css({"pointer-events": "none"});
+    $(this).html(` <i class="spinner fa-solid fa-spinner"></i> Please Wait...`);
+  });
+
+  // disable multiple form submission 
+  $("html").on("submit", "form", function() {
+    $('button[type="submit"]').attr('disabled',true);
+    $('button[type="submit"]').html(` <i class="spinner fa-solid fa-spinner"></i> Please Wait...`);
+
+    $(this).submit(function() {
+        return false;
+    });
+    return true;
+  });
+  //  Show Modal
+  var myModal = new bootstrap.Modal(document.getElementById("alert"));
+  myModal.show();
+    
+  //popover
+
+  (function () {
+      "use strict";
+
+  /**
      * Easy selector helper function
      */
     const select = (el, all = false) => {
@@ -267,5 +284,9 @@ function addClass(element, className) {
         element.className += " " + className;
     }
 }
+
+
+
+
 
 

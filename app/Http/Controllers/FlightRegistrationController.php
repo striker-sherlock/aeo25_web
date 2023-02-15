@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\FlightTicket;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
+use App\Models\PickUpSchedule;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FlightRegistrationController extends Controller
 {
@@ -16,7 +17,9 @@ class FlightRegistrationController extends Controller
 
     public function create()
     {
-        return view('flight-registrations.create');
+        return view('flight-registrations.create',[
+            'schedules' => PickUpSchedule::orderBy('schedule','asc')->get(),
+        ]);
     }
 
     public function store(Request $request)
@@ -26,8 +29,8 @@ class FlightRegistrationController extends Controller
             'airline_name'=>'required|string',
             'flight_time'=>'required',
             'ticket_proof'=>'required',
+             
         ]);
-        // dd($request->all());
         $ticket_proof = array();
         if($files = $request->file('ticket_proof')){
             $i = 1;
@@ -53,8 +56,10 @@ class FlightRegistrationController extends Controller
             'airline_name'=>$request->airline_name,
             'flight_time'=>$request->flight_time,
             'ticket_proof'=> implode('; ', $ticket_proof),
-        ]);
+            'schedule_id' => $request->schedule,
+            'number_of_people' => $request->people ? $request->people : 0 
+        ]); 
 
-        return redirect()->route('flight-tickets.index');
+        return redirect()->route('flight-tickets.index')->with('success','Flight Ticket has successfuly added');
     }
 }

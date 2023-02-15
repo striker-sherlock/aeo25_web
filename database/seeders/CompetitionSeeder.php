@@ -27,7 +27,8 @@ class CompetitionSeeder extends Seeder
                 'logo' => 'logoDB.webp',
                 'need_submission' => 0,
                 'need_team' => 1,
-                'max_people' => 2
+                'max_people' => 2,
+                'whatsapp_group' => "https://chat.whatsapp.com/EJPqoqBI6CP6IhhXVZqMli",
             ],
             [
                 'created_by' => 'Admin-IT',
@@ -40,7 +41,8 @@ class CompetitionSeeder extends Seeder
                 'logo' => 'logoNC.webp',
                 'need_submission' => 0,
                 'need_team' => 0,
-                'max_people' => 2
+                'max_people' => 2,
+                'whatsapp_group' => "https://chat.whatsapp.com/EOYvPWtqj4h21OFvkodPJL",
             ],
             [
                 'created_by' => 'Admin-IT',
@@ -53,7 +55,8 @@ class CompetitionSeeder extends Seeder
                 'logo' => 'logoSB.webp',
                 'need_submission' => 0,
                 'need_team' => 0,
-                'max_people' => 2
+                'max_people' => 2,
+                'whatsapp_group' => "https://chat.whatsapp.com/GMjwAjc0PkFLbqSK1z5Wik",
             ],
             [
                 'created_by' => 'Admin-IT',
@@ -66,7 +69,9 @@ class CompetitionSeeder extends Seeder
                 'logo' => 'logoIA.webp',
                 'need_submission' => 0,
                 'need_team' => 0,
-                'max_people' => 1
+                'max_people' => 1,
+                'whatsapp_group' => NULL,
+                 
             ],
             [
                 'created_by' => 'Admin-IT',
@@ -79,12 +84,13 @@ class CompetitionSeeder extends Seeder
                 'logo' => 'logoSP.webp',
                 'need_submission' => 0,
                 'need_team' => 0,
-                'max_people' => 1
+                'max_people' => 1,
+                'whatsapp_group' => "https://chat.whatsapp.com/Ej17xfmVtoy1XHGbMRjDZG",
             ],
             [
                 'created_by' => 'Admin-IT',
                 'id' => 'ST',
-                'name' => 'Story Telling',
+                'name' => 'Storytelling',
                 'fixed_quota' => 70,
                 'temp_quota' => 70,
                 'price' => 650000,
@@ -92,7 +98,8 @@ class CompetitionSeeder extends Seeder
                 'logo' => 'logoST.webp',
                 'need_submission' => 0,
                 'need_team' => 0,
-                'max_people' => 1
+                'max_people' => 1,
+                'whatsapp_group' => "https://chat.whatsapp.com/LYDFCc42VKXDcGU5SJBDcQ",
             ],
             [
                 'created_by' => 'Admin-IT',
@@ -105,7 +112,8 @@ class CompetitionSeeder extends Seeder
                 'logo' => 'logoRD.webp',
                 'need_submission' => 1,
                 'need_team' => 1,
-                'max_people' => 5
+                'max_people' => 5,
+                'whatsapp_group' => "https://chat.whatsapp.com/EErcl8iDpHE9vHRH9KRjL8",
             ],
             [
                 'created_by' => 'Admin-IT',
@@ -118,7 +126,9 @@ class CompetitionSeeder extends Seeder
                 'logo' => 'logoOBS.webp',
                 'need_submission' => 0,
                 'need_team' => 0,
-                'max_people' => 1
+                'max_people' => 1,
+                'whatsapp_group' => NULL,
+                 
             ],
             [
                 'created_by' => 'Admin-IT',
@@ -131,7 +141,8 @@ class CompetitionSeeder extends Seeder
                 'logo' => 'logoSSW.webp',
                 'need_submission' => 0,
                 'need_team' => 0,
-                'max_people' => 1
+                'max_people' => 1,
+                'whatsapp_group' => "https://chat.whatsapp.com/I5ByahfSlPoAGGEa7wZyuB",
             ],
         ]);
     }

@@ -20,7 +20,6 @@ class access
     {
         $get_access= AccessControl::where("admin_id",Auth::guard('admin')->user()->id)
                                     ->where("access_id",$control_id)->get();
-        
         if(count($get_access) == 0){
             return redirect()->back()->with("error","You are not authorized");
         }
