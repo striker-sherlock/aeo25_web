@@ -1166,7 +1166,7 @@ class PDFController extends Controller
                                     </tr>
                                     <tr>
                                         <td>Bank Account Name</td>
-                                        <td>: Rahmadira Febi Herdiningtyas</td>
+                                        <td>: Rahmadira F. Herdiningtyas</td>
                                     </tr>';
         if ($user->country->name != 'INDONESIA') {
             $output .= '
