@@ -72,7 +72,7 @@ class AmbassadorController extends Controller
             'name' => 'required|string',
             'institution' => 'required|string',
             'testimony' => 'required|string',
-            'photo_new' => 'image|nullable|max:1999|mimes:jpg,png,jpeg',
+            'photo_new' => 'image|nullable|max:2999|mimes:jpg,png,jpeg',
         ]);
 
         if ($request->hasFile('photo_new')) {
@@ -107,7 +107,7 @@ class AmbassadorController extends Controller
             'name' => 'required|string',
             'institution' => 'required|string',
             'testimony' => 'required|string',
-            'photo' => 'image|required|max:1999|mimes:jpg,png,jpeg',
+            'photo' => 'image|required|max:2999|mimes:jpg,png,jpeg',
         ]);
     }
 }

@@ -52,6 +52,7 @@ use App\Http\Controllers\AdminCompetitionSubmissionController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
+use App\Http\Controllers\SideAchievementController;
 
 // Auth routes
 Auth::routes(['verify' => true]);
@@ -146,6 +147,10 @@ Route::controller(AdminMerchandiseController::class)->prefix('merchandise-orders
     Route::get('export-orders', 'exportOrder')->name('export-order');
 });
 
+// Side Achievement
+Route::delete('side-achievements/delete/{sideAchievement}', [SideAchievementController::class, 'delete'])->name('side-achievements.delete');
+Route::get('side-achievements/create/{initial}', [SideAchievementController::class, 'create'])->name('side-achievements.create');
+Route::resource('side-achivements', SideAchievementController::class, ['except' => ['create']]);
 
 //competition 
 Route::resource('competitions', CompetitionController::class);
@@ -340,13 +345,12 @@ Route::resource('follow-ups', FollowUpController::class, ['except' => ['index', 
 // Ranking List
 Route::controller(RankingListController::class)->prefix('ranking-lists')->name('ranking-lists.')->group(function () {
     Route::get('manage/{competition}/{scoreType}', 'manage')->name('manage');
+    Route::get('{competition}/{scoreType}', 'index')->name('index');
     Route::put('update-score/{competitionScore}', 'updateScore')->name('update-score');
     Route::get('update-score-type/{competitionScore}/{type}', 'updateScoreType')->name('update-score-type');
     Route::get('update-team-score-type/{competitionScore}/{competitionTeam}/{type}', 'updateTeamScoreType')->name('update-team-score-type');
     Route::get('update-debate-type/{competitionTeam}', 'updateDebateType')->name('update-debate-type');
 });
-Route::resource('ranking-lists', RankingListController::class)->only('index');
-
 // Food Coupon 
 Route::get('food-coupons', [FoodController::class, 'index'])->name('food-coupons.index');
 Route::get('food-coupons/show/{day}/{type}', [FoodController::class, 'show'])->name('food-coupons.show');

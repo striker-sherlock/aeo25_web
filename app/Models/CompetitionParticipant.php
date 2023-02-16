@@ -50,4 +50,9 @@ class CompetitionParticipant extends Model
     public function foodCoupon(){
         return $this->hasMany(FoodCoupon::class,'participant_id','id');
     }
+
+    public function achievements ()
+    {
+        return $this->hasMany(SideAchievement::class);
+    }
 }
