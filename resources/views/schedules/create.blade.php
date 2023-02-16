@@ -33,7 +33,7 @@
                                  <input type="text" name="event_name" id="event_name" class="form-control " value="{{ old('event_name') }}" required autofocus>
                              </div>
                              <div class="form-group mb-3">
-                                 <label class="col-form-label" for="start_time">Event Start<span class="text-danger"> *</span><small class="text-muted"> format : dd-mm-yyyy H:i</small></label>
+                                 <label class="col-form-label" for="start_time">Event Start<span class="text-danger"> *</span><small class="text-muted"> phpformat : dd-mm-yyyy H:i</small></label>
                                  <input type="text" name="start_time" id="start_time" class="form-control " value="{{ old('start_time') }}" placeholder="dd-mm-yyyy H:i" required autofocus>
                              </div>
                              <div class="form-group mb-3">

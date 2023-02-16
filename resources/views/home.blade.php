@@ -25,16 +25,32 @@
         <!-- ======= Header Section ======= -->
         <section id="hero" class="hero d-flex align-items-center mx-auto">
             <div class="container mt-5">
-                <div class="row d-flex justify-content-center text-center text-md-start">
+                <div class="row d-flex justify-content-center text-center ">
                     <div class=" col-md-6 px-3 animate__animated animate__lightSpeedInLeft">
-                        <div class="d-flex justify-content-center justify-content-md-start ">
+                        <div class="d-flex justify-content-center   ">
                             <div class=" custom-border rounded  my-2"></div>
                         </div>
                         <h3 data-bs-aos="fade-up" class="aeo-title fs-2 mb-3">The 2023 Asian English Olympics</h3>
                         <h1 data-bs-aos="fade-up" class='aeo-theme  mb-4 display-5' style="letter-spacing:0.1em;">UNVEIL
                             YOUR SPARK</h1>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="/aeo-overview"
+                                    class="btn action scrollto d-inline-flex align-items-center justify-content-center align-self-center text-center text-white text-decoration-none rounded-pill my-3 px-5 py-2 w-100 ">
+                                    <span class="fs-5 text-uppercase">AEO Overview</span>
+                                    
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/about-us"
+                                    class="btn action scrollto d-inline-flex align-items-center justify-content-center align-self-center text-center text-white text-decoration-none rounded-pill my-3 px-5 py-2 w-100">
+                                    <span class="fs-5 text-uppercase">About Us</span>
+                                    
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-11 col-md-6 text-start rounded-20 animate__animated animate__lightSpeedInRight "
+                    {{-- <div class="col-11 col-md-6 text-start rounded-20 animate__animated animate__lightSpeedInRight "
                         style="padding:2em;box-shadow: 0 0 10px 2px #7fbcd2;">
                         <h2 class="fs-3 m-0 mb-2 aeo-theme ">Extended Registration Until : </h2>
                         <h4 class="m-0 mb-3 fw-bold display-6 aeo-title text-uppercase">February 4, 2023
@@ -60,14 +76,10 @@
                                 </div>
                             </div>
 
-                            <p class="text-start m-0" style="font-size:0.9em; color:#ff99c7; ">
-                                Extended Registration & Submission Deadline for Radio Drama and Short Story Writing: <br>
-                               <span class="aeo-title"> February 2, 2023  at 11:59 PM (GMT + 07:00)</span>
-
-                            </p>
+                    
                         </div>
 
-                    </div>
+                    </div> --}}
 
                 </div>
             </div>

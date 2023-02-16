@@ -67,6 +67,14 @@ Route::get(
     }
 );
 
+// AEO Overview
+Route::get(
+    '/aeo-overview',
+    function () {
+        return view('aeo-overview');
+    }
+);
+
 // Masters
 Route::resource('faqs', FaqController::class);
 Route::resource('lost-and-found', LostAndFoundController::class);

@@ -1,7 +1,11 @@
 <x-admin>
     <div class="container mt-4">
         <x-card>
+            @if ($type != 'EV')
             <h3 class="fw-bold my-3 c-text-1 text-gradient"> {{$competition->name}} Schedule List</h3>
+            @else
+            <h3 class="fw-bold my-3 c-text-1 text-gradient"> Event Schedule List</h3>
+            @endif
             <hr>
             <a class="btn btn-md my-2   btn-outline-1" href="{{ route('schedules.create') }}"><i
                     class="fas fa-plus me-2"></i>Insert New Schedule</a>
@@ -66,7 +70,11 @@
 
         </x-card>
         <x-card>
-            <h3 class="fw-bold my-3 c-text-1 text-gradient">Deleted {{$competition->name}} Schedule List</h3>
+            @if ($type != 'EV')
+            <h3 class="fw-bold my-3 c-text-1 text-gradient"> {{$competition->name}} Schedule List</h3>
+            @else
+            <h3 class="fw-bold my-3 c-text-1 text-gradient"> Event Schedule List</h3>
+            @endif
             <hr>
             @if ($deletedSchedules->count() > 0)
                 <div class="table-responsive py-2">

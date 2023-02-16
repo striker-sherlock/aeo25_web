@@ -120,6 +120,10 @@
         
         
         {{-- registration summary --}}
+        @if ( (Auth::guard('admin')->user()->position != 'Staff'
+        && Auth::guard('admin')->user()->department_id != 'CP')
+        ||  Auth::guard('admin')->user()->division_id == 'CP'
+        )
         <x-card>
             <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">Registration summary</h3>
             <table class="table table-striped table-bordered">
@@ -154,6 +158,7 @@
                 </tbody>
             </table>
         </x-card>
+        @endif
     </div>
     @section('scripts')
     @endsection
