@@ -19,21 +19,19 @@ class SideAchievementController extends Controller
     public function index()
     {
         return view('side-achievements.index', [
-            'achievements' => SideAchievement::all()
+            'sideAchievements' => SideAchievement::all()
         ]);
     }
 
-    public function create($fieldName)
+    public function create($initial)
     {
-        $selectedField = Competition::where('competition_name', $fieldName)->first();
+        $selectedField = Competition::where('id', '!=', "IA")->where('id', $initial)->first();
         if(!$selectedField){
-            return redirect()->back()
-            // ->with('error', 'Field Not Available')
-            ;
+            return redirect()->back()->with('error', 'Field Not Available');
         }
 
         return view('side-achievements.create', [
-            'competitions' => Competition::where('name', '<>', 'Adjudicator')->orderby('name')->get(),
+            'competitions' => Competition::where('name', '<>', 'Adjudicator')->where('id', '!=', 'IA')->orderby('name')->get(),
             'competitionParticipants' => DB::table('competition_participants')
                 ->join('competition_slot_details', 'competition_participants.competition_slot_id', '=', 'competition_slot_details.id')
                 ->join('competitions', 'competition_slot_details.competition_id', '=', 'competitions.id')
