@@ -71,7 +71,9 @@
                                         @endif
                                         @if ($selectedField->id === "RD")
                                             <td>
-                                                <form method="POST" action="{{route('ranking-lists.update-score', $competitionScoreId)}}" class="mb-0">
+                                                <form method="POST"
+                                                    action="{{route('ranking-lists.update-team-score', [$ranking[0]->team_id, $ranking[0]->participant_score_type_id])}}"
+                                                    class="mb-0">
                                                     @csrf
                                                     @method("PUT")
                                                     <div class="d-inline-flex">
@@ -86,18 +88,24 @@
                                             <div class="btn-toolbar flex-nowrap justify-content-center">
                                                 @if (!str_contains($ranking->status, 'Passed to') && $ranking[0]->participant_rank_id < 8)
                                                     <div class="btn-group me-2">
-                                                        <a class="btn btn-sm btn-danger text-white" href="{{ route('ranking-lists.update-team-score-type', [$competitionScoreId, $ranking[0]->team_id, "down"]) }}" title="Status Down">
+                                                        <a class="btn btn-sm btn-danger text-white"
+                                                            href="{{ route('ranking-lists.update-team-score-type', [$ranking[0]->team_id, $ranking[0]->participant_score_type_id, "down"]) }}"
+                                                            title="Status Down">
                                                             <span class="fas fa-arrow-down"></span>
                                                         </a>
                                                     </div>
                                                     <div class="btn-group">
-                                                        <a class="btn btn-sm btn-success text-white" href="{{ route('ranking-lists.update-team-score-type', [$competitionScoreId, $ranking[0]->team_id, "up"]) }}" title="Status Up">
+                                                        <a class="btn btn-sm btn-success text-white"
+                                                            href="{{ route('ranking-lists.update-team-score-type', [$ranking[0]->team_id, $ranking[0]->participant_score_type_id, "up"]) }}"
+                                                            title="Status Up">
                                                             <span class="fas fa-arrow-up"></span>
                                                         </a>
                                                     </div>
                                                 @elseif ($ranking[0]->participant_rank_id == 8)
                                                     <div class="btn-group me-2">
-                                                        <a class="btn btn-sm btn-danger text-white" href="{{ route('ranking-lists.update-team-score-type', [$competitionScoreId, $ranking[0]->team_id, "down"]) }}" title="Status Down">
+                                                        <a class="btn btn-sm btn-danger text-white"
+                                                            href="{{ route('ranking-lists.update-team-score-type', [$ranking[0]->team_id, $ranking[0]->participant_score_type_id, "down"]) }}"
+                                                            title="Status Down">
                                                             <span class="fas fa-arrow-down"></span>
                                                         </a>
                                                     </div>
