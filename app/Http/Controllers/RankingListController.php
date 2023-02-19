@@ -210,44 +210,51 @@ class RankingListController extends Controller
         return redirect()->back()->with('success', 'Participant status updated successfully!');
     }
 
-    public function updateTeamScoreType (CompetitionScore $competitionScore, CompetitionTeam $competitionTeam, $type) 
+    public function updateTeamScoreType (CompetitionTeam $competitionTeam, ScoreType $scoreType, $type) 
     {
-        $competitionParticipants = CompetitionParticipant::where('team_id', $competitionTeam->id)->get();
+        //! ambil dulu ID participant yg ada di team yang mau diupdate scorenya
+        $competitionParticipants = CompetitionParticipant::where('team_id', $competitionTeam->id)->get(); 
+        $currentRank = $competitionParticipants[0]->rank_id;
+
+        //! ambil data score participant yg sesuai dengan ID participant yg udh diambil dan sesuai dengan Score Type yg mau diupdate
+        $competitionScores = CompetitionScore::whereIn('participant_id', $competitionParticipants->pluck('id'))->where('score_type_id', $scoreType->id)->get(); 
         
         if (strtolower($type) === "down") {
-            if ($competitionScore->score_type_id == 1) return redirect()->back()->with('error', 'Participant already in Preliminary Round!');
+            if ($scoreType->id == 1) return redirect()->back()->with('error', 'Participant already in Preliminary Round!');
             
-            foreach ($competitionParticipants as $competitionParticipant) {
-                if ($competitionParticipant->rank_id <= 5) {
+            foreach ($competitionScores as $competitionScore) {
+                if($currentRank <= 5) {
                     $competitionScore->delete();
                 }
     
-                if ($competitionParticipant->competition_id === "DB" && $competitionScore->score_type_id == 3) {
+                if ($competitionTeam->competition_id === "DB" && $competitionScore->score_type_id == 3) {
                     $decrementRank = 1;
                 }else if ($competitionScore->score_type_id == 3) {
                     $decrementRank = 3;
                 }else if ($competitionScore->score_type_id != 3) {
                     $decrementRank = 1;
                 }
-    
-                $competitionParticipant->update([
-                    'updated_by' => 'Admin',
-                    'rank_id' => $competitionParticipant->rank_id - $decrementRank
-                ]);
+
+                foreach($competitionParticipants as $competitionParticipant) {
+                    $competitionParticipant->update([
+                        'updated_by' => 'Admin',
+                        'rank_id' => $currentRank - $decrementRank
+                    ]);
+                }
             }
 
             return redirect()->back()->with('success', 'Participant status updated successfully!');
         }
 
-        if ($competitionTeam->competition_id === "DB" && $competitionScore->score_type_id == 1) {
+        if ($competitionTeam->competition_id === "DB" && $scoreType->id == 1) {
             $amount = 1;
-        }else if($competitionScore->score_type_id == 1) {
+        }else if($scoreType->id == 1) {
             $amount = 2;
-        }else if ($competitionScore->score_type_id > 1) {
+        }else if ($scoreType->id > 1) {
             $amount = 1;
         }
 
-        $newScoreType = ScoreType::find($competitionScore->score_type_id + $amount);
+        $newScoreType = ScoreType::find($scoreType->id + $amount);
 
         if ($newScoreType) {
             foreach ($competitionParticipants as $competitionParticipant) {
@@ -256,27 +263,48 @@ class RankingListController extends Controller
                     
                     CompetitionScore::create([
                         'created_by' => 'Admin',
-                        'participant_id' => $competitionScore->participant_id,
+                        'participant_id' => $competitionParticipant->id,
                         'score_type_id' => $newScoreType->id
                     ]);
                     $competitionParticipant->update([
                         'updated_by' => 'Admin',
                         'rank_id' => $newScoreType->id
                     ]);
-            }
+                }
+                return redirect()->back()->with('success', 'Team status updated successfully!');
         }else {
             foreach($competitionParticipants as $competitionParticipant) {
                 if ($competitionParticipant->rank_id >= 5) {
+                    $currentRank = $competitionParticipant->rank_id;
                     $competitionParticipant->update([
                         'updated_by' => 'Admin',
-                        'rank_id' => $competitionParticipant->rank_id + 1
+                        'rank_id' => $currentRank + 1
                     ]);
-                    return redirect()->back()->with('success', 'Participant status updated successfully!');
                 }
             }
-            return redirect()->back()->with('error', 'Undefined Score Type!');
+            return redirect()->back()->with('success', 'Team status updated successfully!');
         }
-        return redirect()->back()->with('success', 'Participant status updated successfully!');
+    }
+
+    public function updateTeamScore (Request $request, CompetitionTeam $competitionTeam, ScoreType $scoreType)
+    {
+        //! ambil dulu ID participant yg ada di team yang mau diupdate scorenya
+        $competitionParticipantIds = CompetitionParticipant::where('team_id', $competitionTeam->id)->pluck('id'); 
+
+        //! ambil data score participant yg sesuai dengan ID participant yg udh diambil dan sesuai dengan Score Type yg mau diupdate
+        $competitionScores = CompetitionScore::whereIn('participant_id', $competitionParticipantIds)->where('score_type_id', $scoreType->id)->get(); 
+
+        $request->validate([
+            'score' => 'required|numeric'
+        ]);
+
+        foreach($competitionScores as $competitionScore) {
+            $competitionScore->update([
+                'updated_by' => 'Admin',
+                'score' => $request->score
+            ]);
+        }
+        return redirect()->back()->with('success', 'Team score updated successfully!');
     }
 
     public function updateScore (Request $request, CompetitionScore $competitionScore)
