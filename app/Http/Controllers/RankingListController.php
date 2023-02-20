@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 
 class RankingListController extends Controller
 {
+   
+
     public function index(Competition $competition, $scoreTypeName)
     {
         $scoreType = $this->getScoreType($scoreTypeName);

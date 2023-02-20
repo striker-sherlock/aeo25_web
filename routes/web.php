@@ -76,6 +76,14 @@ Route::get(
     }
 );
 
+//Winner
+Route::get(
+    '/online-winner',
+    function () {
+        return view('online-winner');
+    }
+);
+
 // Masters
 Route::resource('faqs', FaqController::class);
 Route::resource('lost-and-found', LostAndFoundController::class);

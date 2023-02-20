@@ -2,6 +2,7 @@
     <div class="container mt-4">
         <div class="d-flex justify-content-center align-items-center flex-wrap">
             @foreach ($competitions as $competition)
+                @if ($competition->id == 'OBS')@continue @endif
                 <div class="btn btn-outline-theme {{ $selectedField->id == $competition->id ? 'bg-primary text-white' : '' }} mx-2 mb-3 p-2">
                     <a class="text-decoration-none text-reset" href="{{route('ranking-lists.manage', [$competition->id, "preliminary"])}}">
                         {{ $competition->id }}
@@ -9,10 +10,8 @@
                 </div>
             @endforeach
         </div>
-      <div class="card border-0 overflow-hidden shadow rounded-20 mb-5" style="border-radius:20px">
-          <div class="card-header bg-secondary"></div>
-          <div class="card-body my-3">
-            <h1>{{ $selectedField->name }} - Ranking List - {{ $selectedType->type_name }}</h1>
+        <x-card>
+            <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">{{ $selectedField->name }} - Ranking List - {{ $selectedType->type_name }}</h3>
             @foreach ($scoreTypes as $scoreType)
                 @if ($selectedField->id !== "DB" && $scoreType->id == 2)
                     @continue
@@ -149,7 +148,6 @@
             @else
                 <p class="text-center">No Data.</p>
             @endif
-          </div>
-      </div>
+        </x-card>
     </div>
 </x-admin>
