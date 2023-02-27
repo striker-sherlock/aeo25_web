@@ -380,6 +380,7 @@ class RankingListController extends Controller
         }
 
         if($currentScoreTypeId == 5){
+            // dd($competitionParticipant->rank);
             $status = $competitionParticipant->rank->rank_name;
         }
 

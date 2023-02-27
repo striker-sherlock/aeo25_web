@@ -1,5 +1,6 @@
  <x-admin>
     {{-- <section id="admin-dashboard"> --}}
+     
     <div class="container">
         <div class="header">
             <h2 class="fw-bold ">Welcome back, {{Auth::guard('admin')->user()->name}} </h2>

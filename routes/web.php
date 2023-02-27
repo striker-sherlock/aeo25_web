@@ -60,29 +60,6 @@ Auth::routes(['verify' => true]);
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// About Us
-Route::get(
-    '/about-us',
-    function () {
-        return view('about-us');
-    }
-);
-
-// AEO Overview
-Route::get(
-    '/aeo-overview',
-    function () {
-        return view('aeo-overview');
-    }
-);
-
-//Winner
-Route::get(
-    '/online-winner',
-    function () {
-        return view('online-winner');
-    }
-);
 
 // Masters
 Route::resource('faqs', FaqController::class);
@@ -370,5 +347,34 @@ Route::post('food-coupons/store', [FoodController::class, 'store'])->name('food-
 //re registration 
 Route::resource('re-regists', ReregistrationControler::class)->only(['index','update']);
 Route::get('re-regists/{id}/cancel', [ReregistrationControler::class, 'unConfirm'])->name('re-regists.unconfirm');
+
+
+Route::get('/receipt-judge-template', [PDFController::class, 'receiptJudge'])->name('receipt-judge');
+
+
+// About Us
+Route::get(
+    '/about-us',
+    function () {
+        return view('about-us');
+    }
+);
+
+// AEO Overview
+Route::get(
+    '/aeo-overview',
+    function () {
+        return view('aeo-overview');
+    }
+);
+
+//Winner
+Route::get(
+    '/online-winner',
+    function () {
+        return view('online-winner');
+    }
+);
+
 
 

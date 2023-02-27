@@ -378,6 +378,8 @@
                
                     
                 @endif
+
+           
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 7)->first()))
                     {{-- submission --}}
                     <li class=" pb-1 side-item pb-1 sidebar-dropdown">
@@ -411,16 +413,16 @@
                 @endif
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 8)->first()))
                     {{-- score ranking  --}}
-                        {{-- <li class="side-item">
+                        <li class="side-item">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                                href="#">
+                                href="{{route('ranking-lists.manage', ["DB","preliminary"])}} ">
                                 <span class="fa-stack fa-sm ms-n1">
                                     <i class="fas fa-square fa-stack-2x"></i>
                                     <i class="fas fa-trophy fa-stack-1x text-dark"></i>
                                 </span>
                                 <span class="ms-2">Score & Ranking</span>
                             </a>
-                        </li> --}}
+                        </li>
 
                         {{-- side achievement  --}}
                         {{-- <li class="side-item">

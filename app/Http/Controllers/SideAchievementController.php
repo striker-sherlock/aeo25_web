@@ -25,10 +25,12 @@ class SideAchievementController extends Controller
 
     public function create($fieldName)
     {
-        $selectedField = Competition::where('competition_name', $fieldName)->first();
+        // dd($fieldName);
+        $selectedField = Competition::find($fieldName);
+        // dd($selectedField);
         if(!$selectedField){
             return redirect()->back()
-            // ->with('error', 'Field Not Available')
+            ->with('error', 'Field Not Available')
             ;
         }
 

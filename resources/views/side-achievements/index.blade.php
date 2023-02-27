@@ -3,7 +3,7 @@
         <x-card>
             <h3 class="text-uppercase fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Side Achievement List </h3>
             <a href="{{route('side-achievements.create', "db")}}" class="btn btn-success mb-3"><i class="fa-solid fa-plus"></i> Add new Side Achievement</a>
-            @if ($sideAchivements->count())
+            @if ($achievements->count())
             <div class="table-responsive py-2">
                 <table class="table table-striped table-bordered" id="dataTables">
                     <thead class="text-center">
@@ -16,7 +16,7 @@
                     </tr>
                     </thead>
                     <tbody class="text-center">
-                    @foreach ($sideAchievements as $key => $sideAchievement)
+                    @foreach ($achievements as $key => $sideAchievement)
                         <tr>
                             <td class="align-middle text-center">{{ $key + 1}}</td>
                             <td class="align-middle text-center">{{ $sideAchievement->participant_id}}</td>
@@ -44,7 +44,7 @@
             @endif    
         </x-card>
     </div>
-    @foreach ($sideAchievements as $sideAchievement)
+    @foreach ($achievements as $sideAchievement)
         <div class="modal fade p-5" id="modal{{$sideAchievement->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
                 <div class="modal-content rounded-20 border-0 shadow p-5">
