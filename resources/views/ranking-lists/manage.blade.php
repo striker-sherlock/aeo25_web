@@ -13,9 +13,8 @@
         <x-card>
             <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">{{ $selectedField->name }} - Ranking List - {{ $selectedType->type_name }}</h3>
             @foreach ($scoreTypes as $scoreType)
-                @if ($selectedField->id !== "DB" && $scoreType->id == 2)
-                    @continue
-                @endif
+                @if ($selectedField->id !== "DB" && $scoreType->id == 2)  @continue @endif
+                @if ($selectedField->id == "DB" && $scoreType->id == 3) @continue @endif
                 <a class="btn {{ ($selectedType->id == $scoreType->id) ? 'btn-primary' : 'btn-outline-theme' }} me-2" href="{{ route('ranking-lists.manage', [$selectedField->id, $scoreType->scoreTypeName]) }}">{{ $scoreType->typeName }}</a>
             @endforeach
             @if ($rankingLists->count() > 0)

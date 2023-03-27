@@ -13,29 +13,25 @@ class SideAchievementController extends Controller
 
     public function __construct()
     {
-        
+        $this->middleware('IsAdmin');
     }
 
     public function index()
     {
         return view('side-achievements.index', [
-            'achievements' => SideAchievement::all()
+            'sideAchievements' => SideAchievement::all()
         ]);
     }
 
-    public function create($fieldName)
+    public function create($initial)
     {
-        // dd($fieldName);
-        $selectedField = Competition::find($fieldName);
-        // dd($selectedField);
+        $selectedField = Competition::where('id', '!=', "IA")->where('id', $initial)->first();
         if(!$selectedField){
-            return redirect()->back()
-            ->with('error', 'Field Not Available')
-            ;
+            return redirect()->back()->with('error', 'Field Not Available');
         }
 
         return view('side-achievements.create', [
-            'competitions' => Competition::where('name', '<>', 'Adjudicator')->orderby('name')->get(),
+            'competitions' => Competition::where('name', '<>', 'Adjudicator')->where('id', '!=', 'IA')->orderby('name')->get(),
             'competitionParticipants' => DB::table('competition_participants')
                 ->join('competition_slot_details', 'competition_participants.competition_slot_id', '=', 'competition_slot_details.id')
                 ->join('competitions', 'competition_slot_details.competition_id', '=', 'competitions.id')
@@ -43,7 +39,9 @@ class SideAchievementController extends Controller
                     'competition_participants.id',
                     'competition_participants.name',
                 )
-                ->where('competitions.id', '=', $selectedField->id)->get(),
+                ->where('competitions.id', '=', $selectedField->id)
+                ->orderBy('name')
+                ->get(),
             'selectedField' => $selectedField
         ]);
     }

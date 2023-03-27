@@ -20,6 +20,7 @@ class ParticipantExport implements FromCollection, WithHeadings,ShouldAutoSize
             $participants = CompetitionParticipant::join('users','competition_participants.pic_id','users.id')
             ->join('competitions','competition_participants.competition_id','competitions.id')
             ->select(
+                'competition_participants.id as participant_ID',
                 'competitions.id as competition_id',
                 'users.pic_name',
                 'competition_participants.name as nama',
@@ -40,6 +41,7 @@ class ParticipantExport implements FromCollection, WithHeadings,ShouldAutoSize
             ->join('competitions','competition_participants.competition_id','competitions.id')
             ->where('competition_participants.competition_id',$this->competition)
             ->select(
+                'competition_participants.id as participant_ID',
                 'competitions.id as competition_id',
                 'users.pic_name',
                 'competition_participants.name as nama',
@@ -67,7 +69,7 @@ class ParticipantExport implements FromCollection, WithHeadings,ShouldAutoSize
         return $participants;
     }
     public function headings():array{
-        return ['Compet ID', "PIC", "Name", "Field", "Institution" ,"Email", "Vegetarian Status", "Food Allergic", "Gender", "Birth Date", "Phone Number", 'Profile Picture'];
+        return ['Partis ID','Compet ID', "PIC", "Name", "Field", "Institution" ,"Email", "Vegetarian Status", "Food Allergic", "Gender", "Birth Date", "Phone Number", 'Profile Picture'];
     }
 
 }

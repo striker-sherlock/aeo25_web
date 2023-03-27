@@ -43,7 +43,7 @@ class CompetitionParticipant extends Model
         return $this->hasOne(CompetitionSubmissions::class, 'submitter_id', 'id');
     }
 
-    public function rank ()
+    public function rank()
     {
         return $this->hasOne(ParticipantRank::class, 'id', 'rank_id');
     }

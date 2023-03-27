@@ -39,8 +39,8 @@
                         class="btn btn-block px-3 nav-text nav-btn text-white">Terms and Conditions</a>
                 </li> --}}
                 <li class="nav-item active m-1">
-                    <a href="/online-winner" target="_blank"
-                        class="btn btn-block px-3 nav-text nav-btn text-white">Winner</a>
+                    <a href="{{route('ranking-lists.index',["DB","preliminary"])}}" target="_blank"
+                        class="btn btn-block px-3 nav-text nav-btn text-white">Score & Ranking</a>
                 </li>
 
             </ul>

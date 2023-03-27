@@ -3,6 +3,9 @@
         .page-content {
             min-height: 100vh;
         }
+        .bg-theme{
+            background-color:#7fbcd2;
+        }
     </style>
         <x-navbar></x-navbar>
         <main id="page-toggled" class="page-wrapper">
@@ -11,9 +14,9 @@
                     <div class="d-flex justify-content-center align-items-center flex-wrap" style="margin-top: 80px">
                         @foreach ($competitions as $competition)
                             @if ($competition->id == 'OBS')@continue @endif
-                               <div class="btn btn-outline-theme {{ $selectedField->id == $competition->id ? 'bg-primary text-white' : '' }} mx-2 mb-3 p-2">
+                            <div class="btn btn-outline-theme {{ $selectedField->id == $competition->id ? 'bg-theme text-white' : '' }} mx-2 mb-3 p-2 rounded-circle">
                                 <a class="text-decoration-none text-reset" href="{{route('ranking-lists.index', [$competition->id, "preliminary"])}}">
-                                    {{ $competition->id }}
+                                    <img src="/storage/competition_logo/{{ $competition->logo }}" alt="" class="img-fluid" width="50">
                                 </a>
                             </div>
                         @endforeach
@@ -22,17 +25,20 @@
                     <x-card>
                         <h3 class="text-uppercase fw-bold   text-gradient mb-4" style="letter-spacing: 0.1em">{{ $selectedField->name }} - Ranking List - {{ $selectedType->type_name }}</h3>
                         @foreach ($scoreTypes as $scoreType)
-                            @if ($selectedField->id !== "DB" && $scoreType->id == 2)
-                                @continue
-                            @endif
-                            <a class="btn {{ ($selectedType->id == $scoreType->id) ? 'btn-primary' : 'btn-outline-theme' }} me-2" href="{{ route('ranking-lists.manage', [$selectedField->id, $scoreType->scoreTypeName]) }}">{{ $scoreType->typeName }}</a>
+                            @if ($selectedField->id !== "DB" && $scoreType->id == 2  ) @continue @endif
+                            @if ($selectedField->id == "DB" && $scoreType->id == 3) @continue @endif
+                            <a class="btn {{ ($selectedType->id == $scoreType->id) ? 'btn-primary' : 'btn-outline-theme' }} me-2 mb-3" href="{{ route('ranking-lists.index', [$selectedField->id, $scoreType->scoreTypeName]) }}">{{ $scoreType->typeName }}</a>
                         @endforeach
                         @if ($rankingLists->count() > 0)
                             <div class="table-responsive py-2">
                                 <table class="table table-sm table-striped table-bordered no-footer" id="dataTables">
                                     <thead class="thead-light">
                                     <tr>
-                                        <th class="align-middle text-center">Rank</th>
+                                        @if ($selectedField->id == 'DB')
+                                            <th class="align-middle text-center">Status</th>                                    
+                                        @else
+                                            <th class="align-middle text-center">Rank</th>
+                                        @endif
                                         @if ($selectedField->need_team)
                                             <th class="align-middle text-center">Team</th>
                                         @endif
@@ -49,12 +55,17 @@
                                         @foreach ($rankingLists as $ranking)
                                             @php
                                                 if ($selectedField->need_team)
+                                                    
                                                     $competitionScoreId = $ranking[0]->id;
                                                 else
                                                     $competitionScoreId = $ranking->id;
                                             @endphp
                                                 <tr class="align-middle text-center">
-                                                    <td>{{ $loop->iteration }}</td>
+                                                    @if ($selectedField->id == 'DB')
+                                                        <td>{{$ranking[0]->rank_name}}</td>
+                                                    @else
+                                                        <td>{{ $loop->iteration }}</td>
+                                                    @endif
                                                     @if ($selectedField->need_team)
                                                         <td>{{ $ranking[0]->team_name }}</td>
                                                         <td class="text-nowrap">
@@ -75,7 +86,8 @@
                                                         @if ($selectedField->id === "RD")
                                                             <td>
                                                                 <div class="d-inline-flex">
-                                                                    <input type="text" name="score" value="{{ $ranking[0]->score }}" class="form-control rounded-50"required>
+                                                                    <p>{{ $ranking[0]->score }}</p>
+                                                                    {{-- <input type="text" name="score" value="" class="form-control rounded-50 "required readonly > --}}
                                                                 </div>
                                                             </td>
                                                         @endif

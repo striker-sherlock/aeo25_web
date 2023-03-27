@@ -18,7 +18,33 @@ class RankingListController extends Controller
         $scoreType = $this->getScoreType($scoreTypeName);
 
         if ($competition->need_team) {
-            $rankingLists = CompetitionScore::join('competition_participants', 'competition_participants.id', 'competition_scores.participant_id')
+            if ($competition->id == "DB"){
+                $rankingLists = CompetitionScore::join('competition_participants', 'competition_participants.id', 'competition_scores.participant_id')
+                ->join('competition_teams', 'competition_teams.id', 'competition_participants.team_id')
+                ->join('competition_slot_details', 'competition_participants.competition_slot_id', 'competition_slot_details.id')
+                ->join('users', 'users.id', 'competition_slot_details.pic_id')
+                ->leftJoin('participant_ranks',"competition_participants.rank_id",'participant_ranks.id')
+                ->where('competition_participants.competition_id', $competition->id)
+                ->where('competition_scores.score_type_id', $scoreType->id)
+                ->whereNull('competition_participants.deleted_at') //! jgn lupa di uncomment kalo column deleted_at udah dibuat
+                ->select(
+                    'competition_scores.id',
+                    'competition_participants.team_id',
+                    'competition_participants.id as participant_id',
+                    'competition_teams.name as team_name',
+                    'competition_participants.name as participant_name',
+                    'users.institution_name',
+                    'competition_scores.score_type_id as participant_score_type_id',
+                    'competition_participants.rank_id as participant_rank_id',
+                    'competition_participants.is_novice_debater',
+                    'competition_scores.score',
+                    'participant_ranks.rank_name'
+                )
+                ->orderby('participant_ranks.id', 'DESC')
+                ->get()
+                ->groupBy('team_id');
+            } else{
+                $rankingLists = CompetitionScore::join('competition_participants', 'competition_participants.id', 'competition_scores.participant_id')
                 ->join('competition_teams', 'competition_teams.id', 'competition_participants.team_id')
                 ->join('competition_slot_details', 'competition_participants.competition_slot_id', 'competition_slot_details.id')
                 ->join('users', 'users.id', 'competition_slot_details.pic_id')
@@ -40,12 +66,14 @@ class RankingListController extends Controller
                 ->orderby('score', 'DESC')
                 ->get()
                 ->groupBy('team_id');
+            }
+            
             foreach ($rankingLists as $rankingList) {
                 foreach ($rankingList as $ranking) {
                     $ranking->participant_name .= '<br>';
                 }
             }
-        }else {
+        } else {
             $rankingLists = CompetitionScore::join('competition_participants', 'competition_participants.id', 'competition_scores.participant_id')
                 ->join('competition_slot_details', 'competition_participants.competition_slot_id', 'competition_slot_details.id')
                 ->join('users', 'users.id', 'competition_slot_details.pic_id')
@@ -65,6 +93,7 @@ class RankingListController extends Controller
                 ->get();
             
         }
+
         return view('ranking-lists.index', [
             'rankingLists' => $rankingLists,
             'selectedField' => $competition,
@@ -229,8 +258,8 @@ class RankingListController extends Controller
                     $competitionScore->delete();
                 }
     
-                if ($competitionTeam->competition_id === "DB" && $competitionScore->score_type_id == 3) {
-                    $decrementRank = 1;
+                if ($competitionTeam->competition_id === "DB" && $competitionScore->score_type_id == 4) {
+                    $decrementRank = 2;
                 }else if ($competitionScore->score_type_id == 3) {
                     $decrementRank = 3;
                 }else if ($competitionScore->score_type_id != 3) {
@@ -248,16 +277,25 @@ class RankingListController extends Controller
             return redirect()->back()->with('success', 'Participant status updated successfully!');
         }
 
+        // ini yang up
         if ($competitionTeam->competition_id === "DB" && $scoreType->id == 1) {
-            $amount = 1;
-        }else if($scoreType->id == 1) {
-            $amount = 2;
-        }else if ($scoreType->id > 1) {
             $amount = 1;
         }
 
-        $newScoreType = ScoreType::find($scoreType->id + $amount);
+        elseif ($competitionTeam->competition_id === 'DB' && $scoreType->id == 2){
+            $amount = 2;
+        }
 
+        else if($scoreType->id == 1) {
+            $amount = 2;
+        }
+        
+        else if ($scoreType->id > 1) {
+            $amount = 1;
+        }
+    
+       
+        $newScoreType = ScoreType::find($scoreType->id + $amount);
         if ($newScoreType) {
             foreach ($competitionParticipants as $competitionParticipant) {
                 if (CompetitionScore::where([['participant_id', $competitionParticipant->id], ['score_type_id', $newScoreType->id]])->first()) 

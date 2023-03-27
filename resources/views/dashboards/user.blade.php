@@ -27,22 +27,80 @@
                 </div>
             </div>
         </div>
-        @if ($confirmedSlotRegistration->count() > 0)
-            <div class="alert alert-info border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
-                <div class="row">
-                    <div class="col-lg">
-                        <i class="fas fa-bullhorn"></i>
-                        Want to watch the thrill of our competitions? Let's register as <b>Spectators</b>!
-                    </div>
-                    <div class="col-lg text-lg-end text-start">
-                        <a href="{{route('slot-registrations.create-other')}}" class="text-reset text-decoration-none">
-                            Register now
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
+         {{-- participant list --}}
+         <x-card>
+            <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Participants List</h3>
+            @if ($totalParticipants)
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered dataTables " >
+                        <thead class="text-center">
+                            <tr>
+                                <th scope="col align-middle ">Participant Name</th>
+                                <th scope="col align-middle">Competition Field</th>
+                                <th scope="col align-middle">Email</th>
+                                
+                                {{-- <th scope="col align-middle text-center">
+                                    Food Coupon Code 
+                                    <br><small style="font-size:0.7em;" class="m-0 p-0 text-info">Click the QR code to see the bigger view</small>
+                                </th> --}}
+
+                                {{-- <th scope="col align-middle">Send Food Coupon</th> --}}
+                                <th scope="col align-middle">Claim Certificate</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach ($allParticipants as $participant)
+                                <tr class="text-center align-middle">
+                                    <th>{{$participant->name}}</th>
+                                    <th>{{$participant->competition->name}}
+                                        @if ($participant->competition->need_team)
+                                            <span>({{$participant->competitionTeam->name}})</span>
+                                        @endif
+                                    </th>
+                                    <th>{{$participant->email}}</th>
+                                    {{-- <th>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#QR-code{{$participant->id}}">
+                                            <div class="visible-print text-center" title="view bigger" style="cursor: pointer" >
+                                                {!! QrCode::format('svg')->size(70)->generate(route('food-coupons.create',$participant->id)); !!}
+                                            </div>
+                                        </a>
+                                    </th> --}}
+                                    {{-- <th>
+                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Send QR to the participant through their email">
+                                            <a href="{{route('food-coupons.sendQR',$participant->id)}}" class="btn btn-outline-theme rounded-pill confirm">Send food coupon</a>
+                                        </span>
+                                        
+                                    </th> --}}
+                                    <th>
+                                        <a href="{{route('certificate.show',Crypt::encrypt($participant->id))}}" class="btn btn-outline-theme rounded-pill confirm"> Claim Certificate </a>
+                                    </th>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else 
+            <hr><p class="text-center fs-4" >No Participant Registered Yet</p>
+            @endif
+
+        </x-card>
+            {{-- @if ($confirmedSlotRegistration->count() > 0)
+                <div class="alert alert-info border-0 shadow-sm mb-3" role="alert" style="letter-spacing: .05em">
+                    <div class="row">
+                        <div class="col-lg">
+                            <i class="fas fa-bullhorn"></i>
+                            Want to watch the thrill of our competitions? Let's register as <b>Spectators</b>!
+                        </div>
+                        <div class="col-lg text-lg-end text-start">
+                            <a href="{{route('slot-registrations.create-other')}}" class="text-reset text-decoration-none">
+                                Register now
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endif
+            @endif --}}
         {{-- competition step  --}}
         <div class="step-by-step-compet row">
             <h3 class="text-uppercase fw-bold my-4 text-gradient" style="letter-spacing: 0.1em">Competition Step by step Registration</h3>
@@ -232,60 +290,7 @@
 
         </x-card>
 
-        {{-- participant list --}}
-        <x-card>
-            <h3 class="text-uppercase fw-bold mb-3 text-gradient" style="letter-spacing: 0.1em">Your Participants List</h3>
-            @if ($totalParticipants)
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered dataTables " >
-                        <thead class="text-center">
-                            <tr>
-                                <th scope="col align-middle ">Participant Name</th>
-                                <th scope="col align-middle">Competition Field</th>
-                                <th scope="col align-middle">Email</th>
-                                
-                                <th scope="col align-middle text-center">
-                                    Food Coupon Code 
-                                    <br><small style="font-size:0.7em;" class="m-0 p-0 text-info">Click the QR code to see the bigger view</small>
-                                </th>
-
-                                <th scope="col align-middle">Send Food Coupon</th>
-
-                            </tr>
-                        </thead>
-                        <tbody class="text-center">
-                            @foreach ($allParticipants as $participant)
-                                <tr class="text-center align-middle">
-                                    <th>{{$participant->name}}</th>
-                                    <th>{{$participant->competition->name}}
-                                        @if ($participant->competition->need_team)
-                                            <span>({{$participant->competitionTeam->name}})</span>
-                                        @endif
-                                    </th>
-                                    <th>{{$participant->email}}</th>
-                                    <th>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#QR-code{{$participant->id}}">
-                                            <div class="visible-print text-center" title="view bigger" style="cursor: pointer" >
-                                                {!! QrCode::format('svg')->size(70)->generate(route('food-coupons.create',$participant->id)); !!}
-                                            </div>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Send QR to the participant through their email">
-                                            <a href="{{route('food-coupons.sendQR',$participant->id)}}" class="btn btn-outline-theme rounded-pill confirm">Send food coupon</a>
-                                        </span>
-                                        
-                                    </th>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @else 
-            <hr><p class="text-center fs-4" >No Participant Registered Yet</p>
-            @endif
-
-        </x-card>
+       
     </div>
 
     @foreach ($allParticipants as $participant)

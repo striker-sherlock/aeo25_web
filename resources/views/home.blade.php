@@ -194,7 +194,7 @@
                             <div class="item border border-1 mx-auto rounded-20 shadow-sm" style="width:90%;">
                                 <a>
                                     <div class="d-flex justify-content-center">
-                                        <img src="storage/competition_logo/{{ $competition->logo }}"
+                                        <img src="  "
                                             class="img-fluid w-50" alt="{{ $competition->logo }}" loading="lazy"
                                             width="50" data-bs-toggle="modal"
                                             data-bs-target="#competition{{ $competition->id }}">

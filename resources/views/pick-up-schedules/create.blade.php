@@ -1,4 +1,4 @@
-<x-admin>
+    <x-admin>
     <div class="container mt-4">
         <x-card>
             <h1 class="text-uppercase fw-bold text-gradient mb-4" style="letter-spacing: 0.1em">Create New Schedule </h1>
