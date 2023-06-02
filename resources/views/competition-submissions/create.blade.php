@@ -91,7 +91,7 @@
                             id="submission_link"name="submission_link" required>
                     </div>
                     <div class="d-grid my-4">
-                        <button type="submit" id="btnConfirmSubmit" class="btn c-button-1">Send
+                        <button type="submit" id="btnConfirmSubmit" class="btn   btn-outline-theme rounded-pill">Send
                             Submission</button>
                     </div>
                 </div>
@@ -114,7 +114,7 @@
                                         <th scope="col" class="align-middle">
                                             {{ $competition->need_team ? 'Team Name' : 'Submitter Name' }} </th>
                                         <th scope="col" class="align-middle">Title</th>
-                                        <th scope="col" class="align-middle">Submitted At</th>
+                                        {{-- <th scope="col" class="align-middle">Submitted At</th> --}}
                                         <th scope="col" class="align-middle">Submission</th>
                                     </tr>
                                 </thead>
@@ -126,12 +126,12 @@
                                                     <td class="align-middle text-center">{{ $submitter->name }}</td>
                                                     <td class="align-middle text-center">
                                                         {{ $submitter->teamSubmission->title }}</td>
-                                                    <td class="align-middle text-center">
+                                                    {{-- <td class="align-middle text-center">
                                                         {{ date('M j, Y g:i a', strtotime($submitter->teamSubmission->created_at)) }}
-                                                    </td>
+                                                    </td> --}}
                                                     <td class="align-middle text-center">
                                                         <a href="{{ $submitter->teamSubmission->submission_link }}"
-                                                            class="btn btn-outline-1 " target="_blank"
+                                                            class="btn btn-outline-1 rounded-pill " target="_blank"
                                                             rel="noreferrer">View Submission</a>
                                                     </td>
                                                 </tr>
@@ -147,7 +147,7 @@
                                                     </td>
                                                     <td class="align-middle text-center">
                                                         <a href="{{ $submitter->participantSubmission->submission_link }}"
-                                                            class="btn btn-outline-1 " target="_blank">View
+                                                            class="btn btn-outline-1 rounded-pill" target="_blank">View
                                                             Submission</a>
                                                         {{-- <button type="button" data-bs-toggle="modal" data-bs-target="#view-{{ $submitter->id }}" class="btn btn-outline-1  my-3">View Submission</button> --}}
                                                     </td>

@@ -10,6 +10,8 @@
                             <th scope="col">Participant ID</th>
                             <th scope="col">Participant Name</th>
                             <th scope="col">Institution Name</th>
+                            <th scope="col">PIC Name</th>
+                            <th scope="col">Competition Field</th>
                             <th scope="col">Country</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -20,6 +22,8 @@
                                 <th>{{$participant->id}}</th>
                                 <th>{{ $participant->name}}</th>
                                 <th>{{$participant->user->institution_name}}</th>
+                                <th>{{$participant->user->pic_name}}</th>
+                                <th>{{$participant->competition->name}}</th>
                                 <th>{{$participant->user->country->name}}</th>
                                 <th>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modal{{$participant->id}}" class ="btn btn-primary me-2" title="confirm attendance">
@@ -47,6 +51,8 @@
                             <th scope="col">Participant ID</th>
                             <th scope="col">Participant Name</th>
                             <th scope="col">Institution Name</th>
+                            <th scope="col">PIC Name</th>
+                            <th scope="col">Competition Field</th>
                             <th scope="col">Country</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -57,6 +63,8 @@
                                 <th>{{$participant->id}}</th>
                                 <th>{{ $participant->name}}</th>
                                 <th>{{$participant->user->institution_name}}</th>
+                                <th>{{$participant->user->pic_name}}</th>
+                                <th>{{$participant->competition->name}}</th>
                                 <th>{{$participant->user->country->name}}</th>
                                 <th>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#cancel{{$participant->id}}" class ="btn btn-danger me-2" title="cancel attendance">

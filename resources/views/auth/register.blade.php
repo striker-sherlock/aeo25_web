@@ -90,13 +90,16 @@
                             
                         </div>
 
-                        <button type="submit" class="btn btn-outline-theme w-100 rounded-pill" >
+                        {{-- <button type="submit" class="btn btn-outline-theme w-100 rounded-pill" >
                             {{ __('Register') }}
                         </button>
-                        <span class="d-block mx-auto text-center mt-3">Already Have an Account ? <a href="/login" class="" >  Login</a></span>
+                        <span class="d-block mx-auto text-center mt-3">Already Have an Account ? <a href="/login" class="" > Login</a></span> --}}
                         
                         
                     </form>
+                </x-card>
+                <x-card>
+                    <h3 class="text-center text-capitalize fw-bold display-6 text-gradient mb-4" style="letter-spacing: 0.1em">Registration Closed </h3>
                 </x-card>
             </div>
         </div>
@@ -106,7 +109,7 @@
 
 <style>
     .card-header {
-        background-color: #3f3b74;
+        background-color: #3f3b74;p
     }
 </style>
  

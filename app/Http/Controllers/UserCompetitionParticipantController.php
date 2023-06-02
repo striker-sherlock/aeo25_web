@@ -35,7 +35,7 @@ class UserCompetitionParticipantController extends Controller
         
     public function create(CompetitionSlot $competitionParticipant){
         if ($competitionParticipant->payment == NULL)return redirect()->back()->with('error','Please make payment first');
-        if($competitionParticipant->payment->is_confirmed != 1 )return redirect()->back()->with('error','Please wait for the confirmation to be confirmed');
+  
         if ($competitionParticipant->competition->need_team){
             $totalTeams = CompetitionSlot::join('competition_participants', 'competition_participants.competition_slot_id', 'competition_slot_details.id')
                 ->join('competitions', 'competitions.id', 'competition_slot_details.competition_id')
@@ -82,9 +82,10 @@ class UserCompetitionParticipantController extends Controller
             'profile_picture.*.mimes' => 'The profile picture must be type of : JPEG,JPG, PNG'
         ]);
         
+    
         if($request->competition_id != 'OBS'){
             $request->validate([
-                'birth.*' => 'after:-23 years|before:-15years',
+                'birth.*' => 'nullable|after:-24years|before:-15years',
             ],[
                 'birth.*.before' => 'Participant must be at least 15 years old',
                 'birth.*.after' => 'Participant must not be older than 23 years old',

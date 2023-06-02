@@ -83,23 +83,32 @@
                     <thead class="text-center">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">{{$competition->need_team == 1 ? 'Team' : ''}}</th>
-                        <th scope="col">Participant Name</th>
-                        <th scope="col">Institution Name</th>
-                        <th scope="col">Country</th>
-                        <th scope="col">PIC Name </th>
-                        <th scope="col">Action</th>
+                            @if ($competition->need_team == 1)
+                                <th scope="col">Team</th>
+                            @endif
+                            <th scope="col">Participant Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Institution Name</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">PIC Name </th>
+                            <th scope="col">Action</th>
                     </tr>
                     </thead>
                     <tbody class="text-center">
                         @foreach ($trashed as $participant)
                         <tr class="text-center">
                             <th>{{$participant->id}}</th>
-                            <th>{{$participant->competition->need_team == 1 ? $participant->competitionTeam->name : ''}}</th>
-                            <th>{{$participant->name}}</th>
-                            <th>{{$participant->user->institution_name}}</th>
-                            <th>{{$participant->user->country->name}}</th>
-                            <th>{{$participant->user->pic_name}}</th>
+                                @if ($participant->competition->need_team == 1)
+                                    <th>{{ $participant->competitionTeam->name}}</th>
+                                    
+                                @endif
+                                <th>{{ $participant->name}}</th>
+                                <th>{{ $participant->email}}</th>
+                                <th>{{ $participant->phone_number}}</th>
+                                <th>{{$participant->user->institution_name}}</th>
+                                <th>{{$participant->user->country->name}}</th>
+                                <th>{{$participant->user->pic_name}}</th>
                             <th>
                                 <div class="d-flex justify-content-around">
                                     <a class ="btn  btn-primary me-2" href="{{route('competition-participants.edit',$participant->id)}}" title="Edit">
@@ -111,7 +120,7 @@
                                         </button>
                                         @csrf
                                     </form>
-                                    {{-- <form method="POST" action="{{ route('competition-participants.delete', $participant->id) }}">
+                                    <form method="POST" action="{{ route('competition-participants.delete', $participant->id) }}">
                                         @method('DELETE')
                                         <a href="#" data-bs-toggle ="modal" data-bs-target="#modal{{$participant->id}}">
                                         <button class = "btn  btn-danger" >
@@ -119,7 +128,7 @@
                                         </button>
                                         </a>
                                         @csrf
-                                    </form> --}}
+                                    </form>
                                 </div>
                             </th>
                         </tr>
@@ -168,7 +177,7 @@
 @endforeach
 
 {{-- delete confirmation (for $participants) --}}
-@foreach ($competitionParticipants as $participant)
+{{-- @foreach ($competitionParticipants as $participant)
 <div class="modal fade p-5" id="modal{{$participant->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered ">
         <div class="modal-content rounded-20 border-0 shadow p-5">
@@ -201,10 +210,10 @@
         </div>
     </div>  
 </div>  
-@endforeach
+@endforeach --}}
 
 {{-- delete confirmation (for $trashed) --}}
-  {{-- @foreach ($trashed as $participant)
+  @foreach ($trashed as $participant)
   <div class="modal fade p-5" id="modal{{$participant->id}}" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered ">
           <div class="modal-content rounded-20 border-0 shadow p-5">
@@ -215,7 +224,7 @@
               </span>
               </div>
               <div class="body mb-3">
-              <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$participant->user->pic_name}}</span>"? </h1>
+              <h1 class="fw-bold fs-3 text-center" > Are you sure want to delete "<span class="fw-bolder text-danger">{{$participant->name}}</span>"? </h1>
               <p class="text-warning"> note: this action can't be undone  </p>
               </div>
               <div class="modal-footers">
@@ -237,5 +246,5 @@
           </div>
       </div>  
   </div>  
-@endforeach --}}
+@endforeach
 </x-admin>

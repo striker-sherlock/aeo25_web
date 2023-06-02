@@ -84,7 +84,7 @@ class AdminMerchandiseController extends Controller
         $merchandise = MerchandiseTransaction::find($id); 
         $request->validate([
             'name' => 'required|string',
-            'institution' => 'required|string',
+            'institution' => 'nullable|string',
             'phone' => 'required|numeric',
             'email' => 'required|string',
         ]);
@@ -161,6 +161,8 @@ class AdminMerchandiseController extends Controller
             'phone_number' => $request->phone,
             'email' => $request->email,
             'address' => $request->address,
+            'amount' => $request->amount,
+            'updated_at' => Carbon::now(),
             'updated_by' =>   Auth::guard('admin')->user()->name,
         ]);
 
@@ -172,13 +174,14 @@ class AdminMerchandiseController extends Controller
         $merchandisePayment ->update([
             'is_confirmed' => 1,
             'updated_by' => Auth::guard('admin')->user()->name,
+            'updated_at' => Carbon::now()
         ]);
         // dd($merchandisePayment);
         $confirmedMail = [
             'subject' =>"Confirmed Merchandise Order",
             'name'=>$merchandisePayment->name,
             'body1' => 'With this email, your Merchandise Order has been confirmed.', 
-            'body2' => '', 
+            'body2' => 'Please go to the link bellow to see your payment receipt', 
             'url' => route('merchandise-receipt', $merchandisePayment->id)  ,
         ];
 

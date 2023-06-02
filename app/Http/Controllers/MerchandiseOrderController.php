@@ -17,7 +17,7 @@ class MerchandiseOrderController extends Controller
     public function index()
     {
         return view('merchandise-orders.index',[
-            'merchandises' => Merchandise::all()
+            'merchandises' => Merchandise::latest()->get(),
         ]);
     }
 
@@ -36,6 +36,7 @@ class MerchandiseOrderController extends Controller
     public function tempStore(Request $request){
         $len = count($request->quantity);
         if ($this->isEmpty($request->quantity)) return redirect()->back()->with('error','You have to select the item first ');
+        
         $filters = array('merch_id'=>[],'merchandise' =>[] ,'quantity' => [] , 'notes'=> []); 
         $grandTotal = 0; 
         
@@ -49,9 +50,9 @@ class MerchandiseOrderController extends Controller
         }
         
         foreach ($filters['merchandise'] as $index=>$key) {
-            $grandTotal = $key->price * $filters['quantity'][$index];
+            $grandTotal += $key->price * $filters['quantity'][$index];
         }
-        
+      
         return view('merchandise-orders.create',[
             'merchID' => $filters['merch_id'],
             'merchandise' => $filters['merchandise'],
@@ -153,6 +154,7 @@ class MerchandiseOrderController extends Controller
                 'merchandise_id' => $merch_id[$i],
                 'quantity' => $quantity[$i],
                 'transaction_id' => $transaction->id,
+                'order_details'=> $notes[$i],
             ]);
         }
 

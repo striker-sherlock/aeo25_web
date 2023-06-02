@@ -1,6 +1,9 @@
 <x-user title="Create Flight Registration">
     <div class="container mt-5">
         <x-card>
+            <h1 class="aeo-title text-center">Regitration Closed</h1>
+        </x-card>
+        <x-card>
             <h3 class="text-uppercase fw-bold text-gradient " style="letter-spacing: 0.1em">Create Flight Registration</h3>
                 <form action="{{route('flight-registrations.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -35,9 +38,9 @@
                 <div class="form-group mb-2">
                     <label for="schedule" class="col-form-label">Pick Up Schedule<span class="text-danger">*</span></label>
                     <select class="form-select"  name="schedule" id="schedule" >  
-                        <option selected class="d-none" disabled id="first-option"> Please fill the flight time first </option>
+                        <option selected class="d-none" disabled id="first-option"> Please fill the pick up schedule </option>
                         @foreach ($schedules as $schedule)
-                            <option value="{{$schedule->id}}" {{old('schedule') == $schedule->id? 'selected' : ''}} data-date="{{$schedule->schedule}}" class="schedules">{{date('D, d M Y h:i',strtotime($schedule->schedule))}} (GMT + 7)</option>
+                            <option value="{{$schedule->id}}" {{old('schedule') == $schedule->id? 'selected' : ''}} data-date="{{$schedule->schedule}}" class="schedules">{{date('D, d M Y H:i',strtotime($schedule->schedule))}} (GMT + 7)</option>
                         @endforeach
                     </select>
                 </div>
@@ -48,8 +51,10 @@
                 </div>
 
 
-                <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>   
+                {{-- <button id="confirm" type="button" data-bs-toggle ="modal" data-bs-target="#confirmation "class="btn btn-outline-primary w-100 rounded mb-4 rounded-pill">Submit</button>    --}}
             </x-card>
+
+           
         </div>
         <div class="modal fade p-5" id="confirmation" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered ">
@@ -82,26 +87,26 @@
             return date1 < date2 ? true : false
         }
 
-        $(document).ready(function(){
-            if ($('#flight_time').val() == '')$('#schedule').attr('disabled',true)
-            else {$('#schedule').attr('disabled',false)}
+        // $(document).ready(function(){
+        //     if ($('#flight_time').val() == '')$('#schedule').attr('disabled',true)
+        //     else {$('#schedule').attr('disabled',false)}
 
-            $('#flight_time').change(function(){
-                $('#schedule').attr('disabled',false)
-                $('#first-option').text('Please choose the pick up time here ....')
-                $('.schedules').attr('disabled',false)
+        //     $('#flight_time').change(function(){
+        //         $('#schedule').attr('disabled',false)
+        //         $('#first-option').text('Please choose the pick up time here ....')
+        //         $('.schedules').attr('disabled',false)
                 
-                let date2 = $(this).val();
-                console.log(date2)
-                let schedules = document.querySelectorAll('.schedules');
-                schedules.forEach(element => {
-                    let date1 = element.dataset.date
-                    console.log(date1);
-                    if (checkDate(date1,date2))element.setAttribute('disabled',true)
+        //         let date2 = $(this).val();
+        //         console.log(date2)
+        //         let schedules = document.querySelectorAll('.schedules');
+        //         schedules.forEach(element => {
+        //             let date1 = element.dataset.date
+        //             console.log(date1);
+        //             if (checkDate(date1,date2))element.setAttribute('disabled',true)
                      
-                });
+        //         });
 
-            })
-        })
+        //     })
+        // })
     </script>
 </x-user>

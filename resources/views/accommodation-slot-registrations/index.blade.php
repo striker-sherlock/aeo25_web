@@ -135,7 +135,7 @@
                     </tr>
                     </thead>
                     <tbody class="text-center">
-                        @foreach ($confirmed as $accommodation)
+                        @foreach ($confirmedPaid as $accommodation)
                             <tr>
                                 <th>{{$accommodation->user->institution_name}}</th>
                                 <th>{{$accommodation->user->pic_name}}</th>

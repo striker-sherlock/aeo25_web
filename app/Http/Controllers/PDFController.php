@@ -1907,4 +1907,329 @@ class PDFController extends Controller
 
         $dompdf->stream("Receipt - ".$transaction->name. " - ". $invoiceCode. ".pdf", array('Attachment' => false));
     }
+
+
+
+    public function receiptJudge()
+    {
+         
+
+        $output = '<!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="utf-8">
+            ';
+        
+            $output .= '
+                <title>Receipt Judge    </title>';
+        
+            
+         
+        $output .= '
+                <style>
+                @import url(https://fonts.bunny.net/css?family=roboto:500);
+
+                @page{
+                margin-top: 0;
+                margin-left: 1.2cm;
+                width: 21cm;
+                height: 29.7cm;
+                }
+                
+                .clearfix:after {
+                content: "";
+                display: table;
+                clear: both;
+                }
+
+                a {
+                color: #0087C3;
+                text-decoration: none;
+                }
+
+                body {
+                position: relative;
+                width: 21cm;
+                height: 29.7cm;
+                margin: 0 1px 0 1px;
+                color: #555555;
+                background: #FFFFFF;
+                font-family: "Roboto", sans-serif;
+                font-size: 13px;
+                }
+
+                header {
+                width: 94%;
+                }
+
+                .signText{
+                margin-top: 50px;
+                margin-right: 15%;
+                text-align: center;
+                }
+
+                #logo
+                float: left;
+                }
+
+                #logo img {
+                width: 100.2%
+                }
+
+                #details {
+                margin-bottom: 20px;
+                }
+
+                #client {
+                padding-left: 3px;
+                border-left: 5px solid #F175AD;
+                float: left;
+                }
+
+                #client .to {
+                color: #777777;
+                }
+
+                h2.name {
+                font-size: 1em;
+                font-weight: normal;
+                font-family: "Roboto";
+                margin: 0;
+                }
+
+                #invoice {
+                float: right;
+                text-align: right;
+                }
+
+                #invoice h1 {
+                color: #0087C3;
+                font-size: 1.6em;
+                line-height: 1em;
+                font-weight: normal;
+                margin: 0  0 8px 0;
+                }
+
+                #invoice .date {
+                font-size: 1em;
+                color: #777777;
+                }
+
+                table {
+                width: 90%;
+                border-collapse: collapse;
+                border-spacing: 0;
+                margin-bottom: 1px;
+                }
+
+                table th,
+                table td {
+                padding: 3px;
+                background: #EEEEEE;
+                text-align: center;
+                border-bottom: 1px solid #FFFFFF;
+                }
+
+                table th {
+                font-weight: normal;
+                }
+
+                table td {
+                text-align: left;
+                }
+
+                table td h3{
+                color: #777777;
+                font-size: 1.2em;
+                font-weight: normal;
+                margin: 0 0 0.2em 0;
+                }
+
+                table .no {
+                color: #FFFFFF;
+                font-size: 1em;
+                background: #DDDDDD;
+                }
+
+                table .desc {
+                text-align: left;
+                width:100%;
+
+                }
+
+                table .unit {
+                background: #7FBCD2;
+                color: #FFFFFF;
+                }
+
+                table .total {
+                background: #80679e;
+                color: #FFFFFF;
+
+                }
+
+                table td.unit,
+                table td.qty,
+                table td.total {
+                font-size: 1em;
+                height:20px;
+                }
+
+                table tbody tr:last-child td {
+                border: none;
+                }
+
+                #signature {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    width: 25%;
+                }
+
+                table tfoot td {
+                padding: 2px 5px;
+                background: #FFFFFF;
+                border-bottom: none;
+                font-size: 1em;
+                white-space: nowrap;
+                border-top: 1px solid #9fcfe6;
+                }
+
+                footer {
+                    color: #777777;
+                    width: 90%;
+                    height: 20px;
+                    position: absolute;
+                    bottom: 0;
+                    padding: 5px 0;
+                    text-align: center;
+                }
+
+                table tfoot tr:first-child td {
+                border-top: none;
+                }
+
+                table tfoot tr:last-child td {
+                color: #0095CC;
+                font-size: 1.2em;
+                border-top: 1px solid #275DA3
+
+                }
+
+                table tfoot tr td:first-child {
+                border: none;
+                }
+
+                #thanks{
+                font-size: 2em;
+                margin-bottom: 50px;
+                }
+
+                #notices{
+                page-break-before: always;
+                margin-top: 40px;
+                padding-left: 5px;
+                }
+
+                #notices {
+                font-size: 1.1em;
+                }
+                #notices li{
+                margin: 8px 0px;
+                }
+                </style>';
+
+        $output .= ' 
+            </head>
+            <header class="clearfix">
+                <div id="logo">
+                <img src="https://aeo.mybnec.org/storage/assets/letterhead-aeo-fixed.png">
+                </div>
+            </header>
+            <body>
+                <main>
+                <div id="details" class="clearfix" style="margin-top:20px">
+                    <div id="client">
+                    <div class="to">RECEIPT TO:</div>
+                    <br>
+                    <br>
+                    ';
+        
+      
+         
+        $output .= '
+                    <div class="email"> </div>
+                    </div>
+                </div>
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                    <tr>
+                        <th class="desc" colspan="3" style="text-align:center;">Description</th>
+                        
+                    
+                        <th colspan="2" class="total">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>';
+       $output .= ' 
+        <tr>
+            <td class="desc" colspan="3" style="text-align:center;"></td>
+            
+        
+            <td colspan="2" class="total"></th>
+        </tr>
+        <tr>
+            <td class="desc" colspan="3" style="text-align:center;"></td>
+            
+        
+            <td colspan="2" class="total"></th>
+        </tr>
+       ';
+         
+
+        $output .= '
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                    <td style="padding-bottom: 10px;"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td colspan="2"><h3>GRAND TOTAL</h3></td>
+                        <td>IDR </td>
+                    </tr>'; 
+
+                    
+
+            
+        $output .= '
+                    </tfoot>
+                </table>';
+      
+
+        $output .= '
+                <div class="signText">
+                Approved By, <br>
+                <img id="signature" src="https://aeo.mybnec.org/storage/assets/pm-signature.png" ><br>
+                <b>Michelle Natasya</b><br>
+                Project Manager<br>
+                The 2023 Asian English Olympics
+                </div>';
+
+        $output .= '
+                </main>
+            </body>
+            </html>';
+
+        $dompdf = new Dompdf();
+        $options = $dompdf->getOptions();
+        $options->setIsRemoteEnabled(true);
+        $dompdf->setOptions($options);
+        $dompdf->loadHtml($output);
+        $dompdf->setPaper('A4', 'potrait');
+        $dompdf->render();
+
+        $dompdf->stream("receipt-judge.pdf", array('Attachment' => false));
+    }
 }
+

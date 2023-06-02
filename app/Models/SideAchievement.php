@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\CompetitionParticipant;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SideAchievement extends Model
 {
@@ -14,6 +15,6 @@ class SideAchievement extends Model
     protected $guarded = [];
 
     public function competitionParticipant(){
-        return $this ->hasOne(competitionParticipant::class, 'id', 'participant_id');
+        return $this ->hasOne(CompetitionParticipant::class, 'id', 'participant_id');
     }
 }

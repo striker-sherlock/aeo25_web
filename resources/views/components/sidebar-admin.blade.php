@@ -378,6 +378,8 @@
                
                     
                 @endif
+
+           
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 7)->first()))
                     {{-- submission --}}
                     <li class=" pb-1 side-item pb-1 sidebar-dropdown">
@@ -411,16 +413,16 @@
                 @endif
                 @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 8)->first()))
                     {{-- score ranking  --}}
-                        {{-- <li class="side-item">
+                        <li class="side-item">
                             <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
-                                href="#">
+                                href="{{route('ranking-lists.manage', ["DB","preliminary"])}} ">
                                 <span class="fa-stack fa-sm ms-n1">
                                     <i class="fas fa-square fa-stack-2x"></i>
                                     <i class="fas fa-trophy fa-stack-1x text-dark"></i>
                                 </span>
                                 <span class="ms-2">Score & Ranking</span>
                             </a>
-                        </li> --}}
+                        </li>
 
                         {{-- side achievement  --}}
                         {{-- <li class="side-item">
@@ -448,18 +450,18 @@
                          $competitions = App\Models\Competition::where('id', Auth::guard('admin')->user()->division_id)->get();
                      }
                  @endphp
-                     <li class="pb-1 side-item pb-1 sidebar-dropdown">
-                         <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
-                             <span class="fa-stack fa-sm ml-n1">
-                                 <i class="fas fa-square fa-stack-2x"></i>
-                                 <i class="fas fa-calendar-plus fa-stack-1x text-dark"></i>
-                             </span>
-                             <span class="ms-2">Competition Schedule</span>
-                             <i class="fas fa-angle-right ms-auto"></i>
-                         </a>
                          <div class="sidebar-submenu">
-                                 <ul class="fa-ul">
-                                     @if (Auth::guard('admin')->user()->division_id == "DB" || Auth::guard('admin')->user()->division_id == "CP" ||Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT"))
+                             <ul class="fa-ul">
+                                 @if (Auth::guard('admin')->user()->division_id == "DB" || Auth::guard('admin')->user()->division_id == "CP" ||Auth::guard('admin')->user()->department_id == "SC" || (Auth::guard('admin')->user()->division_id == "MIT"))
+                                    <li class="pb-1 side-item pb-1 sidebar-dropdown">
+                                        <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset">
+                                            <span class="fa-stack fa-sm ml-n1">
+                                                <i class="fas fa-square fa-stack-2x"></i>
+                                                <i class="fas fa-calendar-plus fa-stack-1x text-dark"></i>
+                                            </span>
+                                            <span class="ms-2">Competition Schedule</span>
+                                            <i class="fas fa-angle-right ms-auto"></i>
+                                        </a>
                                      <li class="mb-1">
                                          <a class="btn btn-light btn-block border text-decoration-none text-reset text-left text-dark w-100"
                                              href="{{ route('schedules.manage', 'DB') }}">
@@ -574,6 +576,18 @@
                                     <i class="fa-solid fa-bus  fa-stack-1x text-dark"></i> 
                                 </span>
                                 <span class="ms-2">Pick Up Schedule</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (!empty(Auth::guard('admin')->user()->accessControls->where('access_id', 32)->first()))
+                        <li class="side-item text-white">
+                            <a class="d-flex align-items-center text-decoration-none position-relative py-1 px-0 text-reset"
+                                href="{{ route('food-coupons.index') }}">
+                                <span class="fa-stack fa-sm ms-n1">
+                                    <i class="fas fa-square fa-stack-2x"></i>
+                                    <i class="fa-solid fa-utensils  fa-stack-1x text-dark"></i> 
+                                </span>
+                                <span class="ms-2">Food Coupon</span>
                             </a>
                         </li>
                     @endif

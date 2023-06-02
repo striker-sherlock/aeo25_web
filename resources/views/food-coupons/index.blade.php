@@ -2,6 +2,8 @@
    <div class="container mt-4">
         <x-card>
             <h3 class="text-uppercase fw-bold  text-gradient mb-4" style="letter-spacing: 0.1em">Lunch Food Coupon Summary </h3>
+            <a href="{{route('competition-participants.export','ALL')}}" class="btn btn-outline-success mb-4"> <i class="fas fa-file-export" aria-hidden="true"></i> Download Participant</a>
+
             <div class="table-responsive py-2">
                 <table class="table  table-bordered">
                     <thead class="text-center">

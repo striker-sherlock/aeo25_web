@@ -8,7 +8,7 @@
                 <table class="table table-striped table-bordered" id="dataTables">
                     <thead class="text-center">
                     <tr>
-                        <th scope="col" class="align-middle text-center">No</th>
+                        {{-- <th scope="col" class="align-middle text-center">No</th> --}}
                         <th scope="col" class="align-middle text-center">Participant ID</th>
                         <th scope="col" class="align-middle text-center">Name</th>
                         <th scope="col" class="align-middle text-center">Title</th>
@@ -16,9 +16,9 @@
                     </tr>
                     </thead>
                     <tbody class="text-center">
-                    @foreach ($sideAchievements as $key => $sideAchievement)
+                    @foreach ($sideAchievements as $sideAchievement)
                         <tr>
-                            <td class="align-middle text-center">{{ $key + 1}}</td>
+                            {{-- <td class="align-middle text-center">{{ $key + 1}}</td> --}}
                             <td class="align-middle text-center">{{ $sideAchievement->participant_id}}</td>
                             <td class="align-middle text-center">{{ $sideAchievement->competitionParticipant->name }}</td>
                             <td class="align-middle text-center">{{ $sideAchievement->name }}</td>

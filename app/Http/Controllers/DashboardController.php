@@ -133,7 +133,6 @@ class DashboardController extends Controller
         if ($step == 3){
             // validate eligibility
             $competitionPayment = CompetitionPayment::where('pic_id', Auth::user()->id)->get();
-            // dd($competitionPayment->count());
             if ($competitionPayment->count() == 0 )return redirect()->back()->with('error','Please make a payment first');
             
             $competitionSlots = CompetitionSlot::where('pic_id',Auth::user()->id)->get()->where('is_confirmed',1);

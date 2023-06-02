@@ -23,6 +23,7 @@ use App\Http\Controllers\ScoreTypeController;
 use App\Http\Controllers\AmbassadorController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FacilitiesController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\MerchandiseController;
@@ -37,6 +38,7 @@ use App\Http\Controllers\AccommodationController;
 use App\Http\Controllers\AccomodationsController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ReregistrationControler;
+use App\Http\Controllers\SideAchievementController;
 use App\Http\Controllers\AdminMerchandiseController;
 use App\Http\Controllers\MerchandiseOrderController;
 use App\Http\Controllers\SlotRegistrationController;
@@ -52,7 +54,6 @@ use App\Http\Controllers\AdminCompetitionSubmissionController;
 use App\Http\Controllers\UserCompetitionParticipantController;
 use App\Http\Controllers\AdminCompetitionParticipantController;
 use App\Http\Controllers\AccommodationSlotRegistrationController;
-use App\Http\Controllers\SideAchievementController;
 
 // Auth routes
 Auth::routes(['verify' => true]);
@@ -60,13 +61,6 @@ Auth::routes(['verify' => true]);
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// About Us
-Route::get(
-    '/about-us',
-    function () {
-        return view('about-us');
-    }
-);
 
 // Masters
 Route::resource('faqs', FaqController::class);
@@ -238,7 +232,7 @@ Route::get('/edit-participant/{competitionParticipant}', [AdminCompetitionPartic
 Route::controller(AdminCompetitionParticipantController::class)->prefix('participants')->name('competition-participants.')->group(function () {
     Route::get('{competition}', 'index')->name('index');
     Route::put('update/{id}', 'update')->name('update');
-    Route::get('export/{competitionParticipant}', 'export')->name('export');
+    Route::get('export/{competitionParticipant?}', 'export')->name('export');
     Route::delete('destroy/{competitionParticipant}', 'destroy')->name('destroy');
     Route::delete('delete/{competitionParticipant}', 'delete')->name('delete');
     Route::get('restore/{competitionParticipant}', 'restore')->name('restore');
@@ -336,13 +330,15 @@ Route::resource('follow-ups', FollowUpController::class, ['except' => ['index', 
 
 // Ranking List
 Route::controller(RankingListController::class)->prefix('ranking-lists')->name('ranking-lists.')->group(function () {
+    Route::get('update-debate-type/{competitionTeam}', 'updateDebateType')->name('update-debate-type');
+    Route::get('{competition}/{scoreType}', 'index')->name('index');
     Route::get('manage/{competition}/{scoreType}', 'manage')->name('manage');
     Route::put('update-score/{competitionScore}', 'updateScore')->name('update-score');
     Route::put('update-team-score/{competitionTeam}/{scoreType}', 'updateTeamScore')->name('update-team-score');
     Route::get('update-score-type/{competitionScore}/{type}', 'updateScoreType')->name('update-score-type');
     Route::get('update-team-score-type/{competitionTeam}/{scoreType}/{type}', 'updateTeamScoreType')->name('update-team-score-type');
-    Route::get('update-debate-type/{competitionTeam}', 'updateDebateType')->name('update-debate-type');
 });
+ 
 // Food Coupon 
 Route::get('food-coupons', [FoodController::class, 'index'])->name('food-coupons.index');
 Route::get('food-coupons/show/{day}/{type}', [FoodController::class, 'show'])->name('food-coupons.show');
@@ -355,4 +351,36 @@ Route::post('food-coupons/store', [FoodController::class, 'store'])->name('food-
 Route::resource('re-regists', ReregistrationControler::class)->only(['index','update']);
 Route::get('re-regists/{id}/cancel', [ReregistrationControler::class, 'unConfirm'])->name('re-regists.unconfirm');
 
+// certificate
+Route::get('certificate/{id}', [CertificateController::class, 'show'])->name('certificate.show');
+Route::get('certificate/generate/{type}/{participant}/{achievement?}', [CertificateController::class, 'generate'])->name('certificates.generate');
 
+Route::get('/receipt-judge-template', [PDFController::class, 'receiptJudge'])->name('receipt-judge');
+
+
+// About Us
+Route::get(
+    '/about-us',
+    function () {
+        return view('about-us');
+    }
+);
+
+// AEO Overview
+Route::get(
+    '/aeo-overview',
+    function () {
+        return view('aeo-overview');
+    }
+);
+
+//Winner
+Route::get(
+    '/online-winner',
+    function () {
+        return view('online-winner');
+    }
+);
+
+
+ 

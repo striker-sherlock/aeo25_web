@@ -14,7 +14,7 @@
 
       <x-card>
         <div class="table-responsive">
-          <table  class="table table-sm table-bordered text-center">
+          <table  class="table table-sm table-bordered text-center align-middle ">
             <thead>
               <tr >
                 <th style="font-size: 0.9em" class="fw-normal">Room</th>

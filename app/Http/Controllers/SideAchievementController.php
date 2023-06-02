@@ -13,7 +13,7 @@ class SideAchievementController extends Controller
 
     public function __construct()
     {
-        
+        $this->middleware('IsAdmin');
     }
 
     public function index()
@@ -39,7 +39,9 @@ class SideAchievementController extends Controller
                     'competition_participants.id',
                     'competition_participants.name',
                 )
-                ->where('competitions.id', '=', $selectedField->id)->get(),
+                ->where('competitions.id', '=', $selectedField->id)
+                ->orderBy('name')
+                ->get(),
             'selectedField' => $selectedField
         ]);
     }

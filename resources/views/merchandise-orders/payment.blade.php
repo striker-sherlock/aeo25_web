@@ -13,6 +13,7 @@
                             <th scope="col">Customer</th>
                             <th scope="col">Items</th>
                             <th scope="col">Contact</th>
+                            <th scope="col"> Shipping </th>
                             <th scope="col">Grand Total</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -30,6 +31,7 @@
                                     </a>
                                 </th>
                                 <th>{{$payment->phone_number}}</th>
+                                <th>{{$payment->address ? 'Delivery' : 'Pick up at binus' }}</th>
                                 <th>IDR {{ number_format($payment->amount)}} </th>
                                  
                                 <th>
@@ -73,6 +75,7 @@
                             <th scope="col">Customer</th>
                             <th scope="col">Items</th>
                             <th scope="col">Contact</th>
+                            <th scope="col">Shipping</th>
                             <th scope="col">Grand Total</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -90,12 +93,11 @@
                                 </th>
                                 <th>{{$payment->phone_number}}</th>
                                 <th>IDR {{ number_format($payment->amount)}} </th>
+                                <th>{{$payment->address ? 'Delivery' : 'Pick up at binus' }}</th>
                                  
                                 <th>
                                     <div class="d-flex justify-content-center">
-                                        <a href="{{route('merchandise-orders.edit-payment',$payment->id)}}" class="btn btn-primary me-2" title="edit payment">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
+                                 
 
                                         <a href="{{route('merchandise-orders.cancel',$payment->id)}}" class="btn btn-warning me-2" title="cancel payment">
                                             <i class="fa fa-undo"></i>
@@ -245,6 +247,7 @@
                                         <th scope="col">Item</th>
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Price</th>
+                                        <th scope="col">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -253,6 +256,11 @@
                                             <th>{{$order->merchandise->name}}</th>
                                             <th>{{$order->quantity}}</th>
                                             <th>{{$order->merchandise->price}}</th>
+                                            <th>
+                                                <a href="{{route('merchandise-orders.edit', $order->id)}}" class="btn btn-primary btn-sm rounded me-2 " title="edit">
+                                                    <i class="fa fa-edit"> </i>
+                                                </a>
+                                            </th>
                                         </tr>
                                     @endforeach
                                     

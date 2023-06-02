@@ -20,7 +20,7 @@
                         <h3 class="text-uppercase fw-bold  text-gradient fs-2 mb-3 text-center" style="letter-spacing: 0.1em">Order Summary </h3>
                         <div class="row">
                             <div class="col">
-                                <a href="https://drive.google.com/file/d/1WHgLGWbyIHAXWJwbdGquc3i-RMQKgXUO/view" target="_blank"
+                                <a href="https://drive.google.com/file/d/1XCYaxqvCBbmmGyse1neE37BPaRaguckN/view?usp=share_link" target="_blank"
                                     class="btn btn-outline-theme rounded-pill px-4 w-100 mb-4 "><i class="fas fa-file-invoice"></i> Download Payment Guideline
                                 </a>
                             </div>

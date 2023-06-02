@@ -9,5 +9,8 @@ class ParticipantRank extends Model
 {
     use HasFactory;
 
+    protected $table = 'participant_ranks';
+    protected $primaryKey = 'id';
+    protected $timestamp = true;
     protected $guarded = [];
 }

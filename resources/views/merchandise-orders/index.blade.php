@@ -13,55 +13,14 @@
 
         <form action="{{route('merchandise-orders.temp-store')}}" enctype="multipart/form-data" method="POST">
             @csrf
-            @foreach ($merchandises->where('type','bundle') as $merchandise)
-                <div class="col-md-6 mb-3  ">
-                    <div class="d-flex justify-content-between mb-5 custom-card">
-                        <div class="owl-carousel owl-theme  w-50 me-2" data-image = "{{$merchandise->image}}" >
-                            @foreach (explode('; ',$merchandise->image) as $image  )
-                                <div class="item mx-auto rounded-20 " style="width:100%;">
-                                    <a>
-                                        <div class="d-flex justify-content-center p-2" style="box-sizing: border-box">
-                                            <img src="storage/merchandise/merchandise_photo/{{ $image }}"
-                                                class="img-fluid  w-100" alt="{{ $merchandise->name }}'s image" loading="lazy"
-                                                width="50" >
-                                        </div>
-                                        
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <div class="mt-4 w-50 ">
-                            <h4 class="card-title aeo-title text-capitalize fw-bold mb-2">{{$merchandise->name}}</h4>
-                            <p class="card-text">{{ $merchandise->product_description }}</p>
-                            <h5 class="mb-2 fw-bold "> Set quantity and notes</h5>
-                            {{-- set quantity  --}}
-                        
-                            <div class="form-input border w-50 d-flex justify-content-between rounded-20 px-2 ">
-                                <button type="button"  class="border-0  btnDecrement">-</button>
-                                <input type="text"   class="input-spinner counter" step="1"
-                                    name="quantity[]-{{$merchandise->id}}" value="0" min="0"
-                                    max="10" style="text-align: center; border: 0; background:
-                                    transparent; padding: 0; max-width: 3rem" readonly/>
-                                <button type="button" class="border-0  btnIncrement">+</button>
-                            </div>
-                            <div class="form-group mb-3 mt-2 d-none">
-                                <label for="name " class="col-form-label ">Notes <small class="text-muted">(e.g color, size)</small></label>
-                                <textarea type="text" class="form-control "  name="notes[]-{{$merchandise->id}}"  > </textarea>
-                            </div>
-
-                            <div class="fw-bold text-primary add_notes mt-3" style="cursor: pointer"><i class="fa fa-edit"></i> Add Notes</div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+            
 
             
-            <div class="row merchandise-card">
-                @foreach ($merchandises->where('type','piece') as $merchandise)
+            <div class="row merchandise-card ">
+                @foreach ($merchandises as $merchandise)
                     <input type="text" hidden name="merch_id[]" value="{{$merchandise->id}}">
                     <div class="col-md-6 mb-3  ">
-                        <div class="d-flex justify-content-between mb-3 custom-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3 custom-card">
                             <div class=" owl-carousel owl-theme  w-50 me-2" data-image = "{{$merchandise->image}}" >
                                 @foreach (explode('; ',$merchandise->image) as $image  )
                                     <div class="item mx-auto rounded-20 ">
@@ -77,13 +36,14 @@
                             </div>
 
                             <div class="mt-4 w-50 ">
-                                <h4 class="card-title aeo-title text-capitalize fw-bold mb-2">{{$merchandise->name}}</h4>
+                                <h5 class="card-title aeo-title text-capitalize fw-bold mb-2">{{$merchandise->name}}</h5>
+                                <h6 class="fw-bold fs-4" style="color: #F175AD">IDR {{number_format($merchandise->price)}}</h6>
                                 <p class="card-text">
                                     {!! nl2br(e($merchandise->product_description)) !!}
                                 </p>
                                 <h5 class="mb-2 fw-bold "> Set quantity and notes</h5>
+
                                 {{-- set quantity  --}}
-                            
                                 <div class="form-input border w-50 d-flex justify-content-between rounded-20 px-2 ">
                                     <button type="button"  class="border-0  btnDecrement">-</button>
                                     <input type="text"   class="input-spinner counter" step="1"
@@ -102,7 +62,7 @@
                     </div>
                 @endforeach
             </div>
-            <button type="button" id="submit" class="btn btn-outline-theme w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#merch-summary">Check Out Now  </button>
+            <button type="button" id="submit" class="btn btn-outline-theme w-100 rounded-pill" data-bs-toggle="modal" data-bs-target="#merch-summary">Checkout Now  </button>
 
             <div class="modal fade p-5" id="merch-summary" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
                 aria-labelledby="modal-title" aria-hidden="true">
@@ -137,7 +97,7 @@
 
       
     </div>
-    {{-- <x-footer></x-footer> --}}
+    <x-footer></x-footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
