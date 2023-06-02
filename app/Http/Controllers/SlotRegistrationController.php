@@ -75,22 +75,22 @@ class SlotRegistrationController extends Controller
     }
 
     public function createOthers(){
-        $competitions = Competition::where('id','OBS')->get();
-        $competSlot = CompetitionSlot::where('pic_id',Auth::user()->id)
-            ->join('competitions','competitions.id','competition_slot_details.competition_id')
-            ->where('competitions.id','!=', 'OBS')
-            ->where('competitions.id','!=', 'IA')
-            ->where('competition_slot_details.is_confirmed',1)
-            ->distinct('competitions.id')
-            ->count();
-        $registeredSpectators = CompetitionSlot::where('pic_id', Auth::user()->id)->where('competition_id','OBS')->sum('quantity');
-        
-        
-        
-        return view('slot-registrations.create-other',[
-            'competitions' => $competitions,
-            'maxOBS' => $competSlot - $registeredSpectators
-        ]);
+            $competitions = Competition::where('id','OBS')->get();
+            $competSlot = CompetitionSlot::where('pic_id',Auth::user()->id)
+                ->join('competitions','competitions.id','competition_slot_details.competition_id')
+                ->where('competitions.id','!=', 'OBS')
+                ->where('competitions.id','!=', 'IA')
+                ->where('competition_slot_details.is_confirmed',1)
+                ->distinct('competitions.id')
+                ->count();
+            $registeredSpectators = CompetitionSlot::where('pic_id', Auth::user()->id)->where('competition_id','OBS')->sum('quantity');
+            
+            
+            
+            return view('slot-registrations.create-other',[
+                'competitions' => $competitions,
+                'maxOBS' => $competSlot - $registeredSpectators
+            ]);
     }
     
     public function checkSlotAvailability(int $slot, $competitionID,$id){

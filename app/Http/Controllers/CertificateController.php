@@ -178,7 +178,7 @@ class CertificateController extends Controller
           </head>
           <header class="clearfix">
             <div id="logo">
-              <img src="https://aeo.mybnec.org/storage/assets/certificate.jpg">
+              <img src="https://aeo.mybnec.org/storage/assets/certif.jpg">
             </div>
           </header>
 
