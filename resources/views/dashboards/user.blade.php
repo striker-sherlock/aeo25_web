@@ -302,7 +302,7 @@
                     <hr>
                   </div>
                   <div class="body mb-3 text-center">
-                        {!! QrCode::format('svg')->size(300)->generate(route('food-coupons.create',$participant->id)); !!}
+                        {!! QrCode::format('svg')->size(300)->generate(route('food-coupons.create',$participant->id)) !!}
                   </div>
                   <div class="footers">
                      
